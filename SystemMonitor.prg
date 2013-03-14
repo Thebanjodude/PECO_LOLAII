@@ -1,5 +1,7 @@
 #include "Globals.INC"
 
+'This comment is just to test that git is working!
+
 Function SystemMonitor()
 	
 Boolean InMagInterlockFlag, OutMagInterlockFlag, ReturnFromEstopFlag, safeGuardInputFlag
