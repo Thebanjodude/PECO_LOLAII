@@ -1,0 +1,204 @@
+'NOTE: Replace all direct inputs and outputs with var names in IOTable. They are IO so I can test. 
+#include "Globals.INC"
+
+Function InMagControl
+
+#define StatePartPresent 0
+#define StatePartRemoved 1
+#define StatePresentNextPart 2
+#define StateLowering 3
+#define StateWaitingUser 4
+
+Integer CurrentState, NextState
+
+CurrentState = StateLowering ' When we power on the magazine it goes to the home position
+
+Do While True
+	
+	Select CurrentState
+		Case StatePartPresent
+			
+			' Don't leave state unless part is removed or user commands magazine home
+			Do Until Sw(inMagPanelRdyH) = False Or inMagGoHome = True
+				Wait .1 ' Do nothing
+			Loop
+			
+			If inMagGoHome = True Then ' Determine which state to go to next
+				NextState = StateLowering
+				inMagGoHome = False 'Clear Flag
+			Else
+				NextState = StatePartRemoved
+			EndIf
+
+		Case StatePartRemoved
+					
+			WaitSig InMagRobotClearSignal ' Wait for main program to move robot out of the way
+			NextState = StatePresentNextPart
+			
+		Case StatePresentNextPart
+			
+			'Don't leave state until panel is in position or EOT is reached
+			Do Until Sw(inMagPanelRdyH) = True Or Sw(inMagUpperLimH) = True
+			'	Off (inMagMtrDirH) 'set direction to UP
+			'	On (inMagMtrH)
+			Loop
+			
+			Off (inMagMtrH)
+			
+			If Sw(inMagUpperLimH) = True Then 'If upper limit is reached then the magazine is out of panels 
+				NextState = StateLowering
+				erInMagEmpty = True
+			Else
+				NextState = StatePartPresent
+				Signal InMagPickUpSignal
+			EndIf
+			
+		Case StateLowering
+		
+			Do Until Sw(inMagLowerLimH) = True ' Don't leave state until magazine has reached lower limit (home)
+			'	On (inMagMtrDirH) 'Set direction to DOWN
+			'	On (inMagMtrH)
+			Loop
+			
+			Off (inMagMtrH)
+			
+			NextState = StateWaitingUser
+			
+		Case StateWaitingUser
+			
+			Do Until inMagLoaded = True
+				' Send message to HMI "waiting for user to load more panels"
+			Loop
+			
+			erInMagEmpty = False ' the user has ack'ed that they loaded the input magazine
+			NextState = StatePresentNextPart
+			inMagLoaded = False 'Clear Flag
+			
+		Default
+			Print "Current State is Null" ' We should NEVER get here...
+			erUnknown = True
+	Send
+	
+CurrentState = NextState 'Set next state to current state after we break from case statment
+
+Loop
+
+Fend
+Function OutMagControl
+
+#define StateReadyToReceive 0
+#define StateOutMagPartPresent 1
+#define StateOutMagLowering 2
+#define StateOutMagWaitingUser 3
+#define StateRaising 4
+#define StateGoHome 5
+
+Integer NextState, CurrentState
+
+CurrentState = StateReadyToReceive ' On start up go to home position
+
+Do While True
+				
+	Select CurrentState
+		Case StateReadyToReceive
+		
+			' Don't leave state unless panel is detected Or user specifies go home
+			Do Until Sw(outMagPanelRdyH) = False Or outMagGoHome = True
+				Wait .1 ' Do nothing
+			Loop
+			
+			If outMagGoHome = True Then ' Determine which state to go to next
+				NextState = StateGoHome
+				outMagGoHome = False ' Reset Flag
+			Else
+				NextState = StateOutMagPartPresent
+			EndIf
+			
+		Case StateOutMagPartPresent
+			
+			WaitSig OutputMagSignal ' Wait for main program to move robot out of the way
+			NextState = StateOutMagLowering
+			
+		Case StateOutMagLowering
+			
+			Do Until Sw(outMagPanelRdyH) = True Or Sw(outMagLowerLimH) = True
+				On (outMagMtrDirH) 'Set direction to DOWN
+				On (outMagMtrH)
+			Loop
+			
+			Off (outMagMtrH)
+			
+            If Sw(outMagLowerLimH) = True Then 'Determine which state to go to next
+				NextState = StateOutMagWaitingUser
+				erOutMagFull = True
+			Else
+				NextState = StateReadyToReceive
+				Signal OutMagDropOffSignal
+			EndIf
+	
+		Case StateOutMagWaitingUser
+						
+			Do Until outMagUnloaded = True ' Don't leave state until magazine has been unloaded
+				Wait .1
+			Loop
+			
+			erOutMagFull = False ' The user has ack'ed that they unloaded the output mag.
+			outMagUnloaded = False ' Reset Flag
+			NextState = StateRaising
+			
+		Case StateRaising
+			
+			WaitSig OutMagRobotClearSignal
+			
+			Do Until Sw(outMagUpperLimH) = True ' Move magazine up until we hit the upper limit
+				Off (outMagMtrDirH) 'Set direction to UP 
+				On (outMagMtrH)
+			Loop
+			
+			Off (outMagMtrH)
+	
+			NextState = StateReadyToReceive
+			
+		Case StateGoHome
+			
+			Do Until Sw(outMagLowerLimH) = True
+				On (outMagMtrDirH) 'Set direction to DOWN
+				On (outMagMtrH)
+			Loop
+					
+			outMagGoHome = False 'Clear Flag
+			
+			NextState = StateOutMagWaitingUser
+			
+		Default
+			erUnknown = True
+	Send
+
+CurrentState = NextState 'Set next state to current state after we break from case statment
+
+Loop
+	
+Fend
+Function MagTorqueErrorISR
+
+InMagTorqueLim = 12345 ' Empirically define this limit
+OutMagTorqueLim = -12345 ' Empirically define this limit
+	
+	If InMagTorqueLim > PTRQ(Zaxis) Then
+		Off (suctionCupsH) ' Stop attempt at picking up a panel
+		Jump ScanCenter LimZ Zlimit ' Go to a safe place
+		erInMagCrowding = True
+		' Get user ack before leaving ISR	
+	EndIf
+
+		If OutMagTorqueLim < PTRQ(Zaxis) Then
+		On (suctionCupsH) ' Double check suction cups are on
+		Jump ScanCenter LimZ Zlimit ' Go to a safe place
+		erOutMagCrowding = True
+		' Get user ack before leaving ISR	
+	EndIf
+	
+	PTCLR Zaxis ' Clear peak torque zaxis value
+
+Fend
+
