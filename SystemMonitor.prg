@@ -22,6 +22,7 @@ Do While True
 		Halt InMagControl
 		erInMagOpenInterlock = True
 		InMagInterlockFlag = True ' Set flag
+'		inMagCurrentState = StatePaused
 	ElseIf inMagIntLockAck = True And InMagInterlockFlag = True Then
 		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False

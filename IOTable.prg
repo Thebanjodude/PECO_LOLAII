@@ -3,7 +3,7 @@
 Function IOTable ' This is just a sample IOTable, it needs to be populated with Actual DIO 
 
 'Xqt IntComTest ' This just toggles bits and increments integers to test the HMI Comms
-
+OnErr GoTo errHandler ' Define where to go when a controller error occurs
 Do While True
 	
 'Inputs
@@ -17,9 +17,9 @@ outMagLowerLim = IOTableBooleans(Sw(outMagLowerLimH), MemSw(outMagLowerLimFV), M
 outMagInt = IOTableBooleans(Sw(outMagIntH), MemSw(outMagIntFV), MemSw(outMagIntF))
 flashPnlPrsnt = IOTableBooleans(Sw(FlashPnlPrsntH), MemSw(FlashPnlPrsntFV), MemSw(FlashPnlPrsntF))
 hsPanelPresnt = IOTableBooleans(Sw(HSPanelPresntH), MemSw(hsPanelPresntFV), MemSw(hsPanelPresntF))
-leftInterlock = IOTableBooleans(Sw(LeftInterlockH), MemSw(leftInterlockFV), MemSw(leftInterlockF))
+leftInterlock = IOTableBooleans(Sw(leftInterlockH), MemSw(leftInterlockFV), MemSw(leftInterlockF))
 rightInterlock = IOTableBooleans(Sw(rightInterlockH), MemSw(rightInterlockFV), MemSw(rightInterlockF))
-frontInterlock = IOTableBooleans(Sw(FrontInterlockH), MemSw(frontInterlockFV), MemSw(frontInterlockF))
+frontInterlock = IOTableBooleans(Sw(frontInterlockH), MemSw(frontInterlockFV), MemSw(frontInterlockF))
 airPressHigh = IOTableBooleans(Sw(AirPressHighH), MemSw(airPressHighFV), MemSw(airPressHighF))
 airPressLow = IOTableBooleans(Sw(AirPressLowH), MemSw(airPressLowFV), MemSw(airPressLowF))
 cbMonHeatStake = IOTableBooleans(Sw(cbMonHeatStakeH), MemSw(cbMonHeatStakeFV), MemSw(cbMonHeatStakeF))
@@ -34,79 +34,98 @@ cbMonSafety = IOTableBooleans(Sw(cbMonSafetyH), MemSw(cbMonSafetyFV), MemSw(cbMo
 cbMonPAS24vdc = IOTableBooleans(Sw(cbMonPAS24vdcH), MemSw(cbMonPAS24vdcFV), MemSw(cbMonPAS24vdcF))
 
 'Outputs
-inMagMtr = IOTableBooleans(inMagMtr, MemSw(inMagMtrFV), MemSw(inMagMtrF))
+inMagMtr = IOTableBooleans(inMagMtrCC, MemSw(inMagMtrFV), MemSw(inMagMtrF))
 If inMagMtr = True Then
         On (inMagMtrH)
     Else
         Off (inMagMtrH)
     EndIf
-inMagMtrDir = IOTableBooleans(inMagMtrDir, MemSw(inMagMtrDirFV), MemSw(inMagMtrDirF))
+inMagMtrDir = IOTableBooleans(inMagMtrDirCC, MemSw(inMagMtrDirFV), MemSw(inMagMtrDirF))
 If inMagMtrDir = True Then
         On (inMagMtrDirH)
     Else
         Off (inMagMtrDirH)
     EndIf
-outMagMtr = IOTableBooleans(outMagMtr, MemSw(outMagMtrFV), MemSw(outMagMtrF))
+outMagMtr = IOTableBooleans(outMagMtrCC, MemSw(outMagMtrFV), MemSw(outMagMtrF))
 If outMagMtr = True Then
         On (outMagMtrH)
     Else
         Off (outMagMtrH)
     EndIf
-outMagMtrDir = IOTableBooleans(outMagMtrDir, MemSw(outMagMtrDirFV), MemSw(outMagMtrDirF))
+outMagMtrDir = IOTableBooleans(outMagMtrDirCC, MemSw(outMagMtrDirFV), MemSw(outMagMtrDirF))
 If outMagMtrDir = True Then
         On (outMagMtrDirH)
     Else
         Off (outMagMtrDirH)
     EndIf
-flashMtr = IOTableBooleans(flashMtr, MemSw(flashMtrFV), MemSw(flashMtrF))
+flashMtr = IOTableBooleans(flashMtrCC, MemSw(flashMtrFV), MemSw(flashMtrF))
 If flashMtr = True Then
         On (flashMtrH)
     Else
         Off (flashMtrH)
     EndIf
-flashCyc = IOTableBooleans(flashCyc, MemSw(flashCycFV), MemSw(flashCycF))
+flashCyc = IOTableBooleans(flashCycCC, MemSw(flashCycFV), MemSw(flashCycF))
 If flashCyc = True Then
         On (flashCycH)
     Else
         Off (flashCycH)
     EndIf
-suctionCups = IOTableBooleans(suctionCups, MemSw(suctionCupsFV), MemSw(suctionCupsF))
+suctionCups = IOTableBooleans(suctionCupsCC, MemSw(suctionCupsFV), MemSw(suctionCupsF))
 If suctionCups = True Then
         On (suctionCupsH)
     Else
         Off (suctionCupsH)
     EndIf
-debrisMtr = IOTableBooleans(debrisMtr, MemSw(debrisMtrFV), MemSw(debrisMtrF))
+debrisMtr = IOTableBooleans(debrisMtrCC, MemSw(debrisMtrFV), MemSw(debrisMtrF))
 If debrisMtr = True Then
         On (debrisMtrH)
     Else
         Off (debrisMtrH)
     EndIf
-stackLightRed = IOTableBooleans(stackLightRed, MemSw(stackLightRedFV), MemSw(stackLightRedF))
+stackLightRed = IOTableBooleans(stackLightRedCC, MemSw(stackLightRedFV), MemSw(stackLightRedF))
 If stackLightRed = True Then
         On (stackLightRedH)
     Else
         Off (stackLightRedH)
     EndIf
-stackLightYel = IOTableBooleans(stackLightYel, MemSw(stackLightYelFV), MemSw(stackLightYelF))
+stackLightYel = IOTableBooleans(stackLightYelCC, MemSw(stackLightYelFV), MemSw(stackLightYelF))
 If stackLightYel = True Then
         On (stackLightYelH)
     Else
         Off (stackLightYelH)
     EndIf
-stackLightGrn = IOTableBooleans(stackLightGrn, MemSw(stackLightGrnFV), MemSw(stackLightGrnF))
+stackLightGrn = IOTableBooleans(stackLightGrnCC, MemSw(stackLightGrnFV), MemSw(stackLightGrnF))
 If stackLightGrn = True Then
         On (stackLightGrnH)
     Else
         Off (stackLightGrnH)
     EndIf
-stackLightAlrm = IOTableBooleans(stackLightAlrm, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
+stackLightAlrm = IOTableBooleans(stackLightAlrmCC, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
 If stackLightAlrm = True Then
         On (stackLightAlrmH)
     Else
         Off (stackLightAlrmH)
     EndIf
 Loop
+
+	errHandler:
+		
+		'Assign things of interest to var names
+		ctrlrErrMsg$ = ErrMsg$(Err)
+	 	ctrlrLineNumber = Erl
+		ctrlrTaskNumber = Ert
+	 	ctrlrErrAxisNumber = Era
+	 	ctrlrErrorNum = Err
+	 	
+	 	' Print error for testing/troubleshooting
+	 	Print "Error Message:", ctrlrErrMsg$
+		Print "Error Line Number:", ctrlrLineNumber
+		Print "Error Task Number:", ctrlrTaskNumber
+		Print "Error AxisNumber:", ctrlrErrAxisNumber
+		Print "Error Number:", ctrlrErrorNum
+		
+		SystemPause()
+	EResume
 Fend
 Function IOTableBooleans(CtrlCodeValue As Boolean, HMIForceValue As Boolean, HMIForceFlag As Boolean) As Boolean
 		
@@ -185,6 +204,8 @@ Print #201, "{", Chr$(&H22) + "outMagLowerLim" + Chr$(&H22), ":", Str$(outMagLow
 Print #201, "{", Chr$(&H22) + "outMagInt" + Chr$(&H22), ":", Str$(outMagInt), "}"
 Print #201, "{", Chr$(&H22) + "flashMtr" + Chr$(&H22), ":", Str$(flashMtr), "}"
 Print #201, "{", Chr$(&H22) + "flashCyc" + Chr$(&H22), ":", Str$(flashCyc), "}"
+Print "unplug now"
+Wait 2
 Print #201, "{", Chr$(&H22) + "flashPnlPrsnt" + Chr$(&H22), ":", Str$(FlashPnlPrsnt), "}"
 Print #201, "{", Chr$(&H22) + "hsPanelPresnt" + Chr$(&H22), ":", Str$(hsPanelPresnt), "}"
 Print #201, "{", Chr$(&H22) + "leftInterlock" + Chr$(&H22), ":", Str$(leftInterlock), "}"

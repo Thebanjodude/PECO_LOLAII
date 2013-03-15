@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/03/15 14:34:37:460,DS:0000002841,CS:14641,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/15 21:11:09:966,DS:0000002850,CS:12813,MA:6C-F0-49-E2-45-75,EI:           
 sActiveChild="Run"
 bMdiMaximized=False
 ProgramFile1 {
@@ -6,10 +6,10 @@ ProgramFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-1
-		nTop=250
-		nWidth=899
-		nHeight=490
+		nLeft=499
+		nTop=42
+		nWidth=897
+		nHeight=486
 	}
 }
 ProgramFile2 {
@@ -26,23 +26,23 @@ ProgramFile2 {
 ProgramFile3 {
 	sName="IOTable.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=28
-		nTop=70
-		nWidth=1223
-		nHeight=707
+		nLeft=40
+		nTop=312
+		nWidth=1024
+		nHeight=588
 	}
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=88
-		nTop=85
-		nWidth=1119
-		nHeight=573
+		nLeft=9
+		nTop=6
+		nWidth=1117
+		nHeight=566
 	}
 }
 ProgramFile5 {
@@ -63,8 +63,8 @@ ProgramFile6 {
 	Window {
 		nLeft=-12
 		nTop=-8
-		nWidth=1126
-		nHeight=527
+		nWidth=1124
+		nHeight=523
 	}
 }
 ProgramFile7 {
@@ -125,13 +125,13 @@ ProgramFile11 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=1
 	Window {
-		nLeft=49
-		nTop=19
-		nWidth=1280
-		nHeight=578
+		nLeft=-12
+		nTop=-11
+		nWidth=1276
+		nHeight=571
 	}
 }
 nPointFileCount=1
@@ -160,38 +160,38 @@ CmdWindow {
 RunWindow {
 	bOpened=True
 	Window {
-		nLeft=543
-		nTop=-9
-		nWidth=881
-		nHeight=484
+		nLeft=263
+		nTop=33
+		nWidth=550
+		nHeight=569
 	}
 }
 IOLabelEditor {
 	bOpened=False
 	Window {
-		nLeft=196
-		nTop=128
-		nWidth=1055
-		nHeight=583
+		nLeft=220
+		nTop=118
+		nWidth=1053
+		nHeight=579
 	}
 	nWinState=0
 }
 IOMonitor {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=601
-		nTop=118
+		nLeft=357
+		nTop=218
 		nWidth=520
-		nHeight=580
+		nHeight=539
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=619
+		nTop=400
+		nWidth=821
+		nHeight=278
 	}
 }
 Macros {

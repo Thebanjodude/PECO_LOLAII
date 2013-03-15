@@ -8,6 +8,7 @@ Function InMagControl
 #define StatePresentNextPart 2
 #define StateLowering 3
 #define StateWaitingUser 4
+#define StatePaused 6
 
 Integer NextState
 
@@ -39,11 +40,11 @@ Do While True
 			
 			'Don't leave state until panel is in position or EOT is reached
 			Do Until inMagPnlRdy = True Or inMagUpperLim = True
-				inMagMtrDir = False 'set direction to UP
-				inMagMtr = True
+				inMagMtrDirCC = False 'set direction to UP
+				inMagMtrCC = True
 			Loop
 			
-			inMagMtr = False
+			inMagMtrCC = False
 			
 			If inMagUpperLim = True Then 'If upper limit is reached then the magazine is out of panels 
 				NextState = StateLowering
@@ -56,11 +57,11 @@ Do While True
 		Case StateLowering
 		
 			Do Until inMagLowerLim = True ' Don't leave state until magazine has reached lower limit (home)
-				inMagMtrDir = True 'set direction to DOWN
-				inMagMtr = True
+				inMagMtrDirCC = True 'set direction to DOWN
+				inMagMtrCC = True
 			Loop
 			
-			inMagMtr = False
+			inMagMtrCC = False
 			
 			NextState = StateWaitingUser
 			
@@ -92,6 +93,7 @@ Function OutMagControl
 #define StateOutMagWaitingUser 3
 #define StateRaising 4
 #define StateGoHome 5
+'#define StatePaused 6
 
 Integer NextState
 
@@ -122,11 +124,11 @@ Do While True
 		Case StateOutMagLowering
 			
 			Do Until outMagPanelRdy = True Or outMagLowerLim = True
-				outMagMtrDir = True 'Set direction to Down
-				outMagMtr = True
+				outMagMtrDirCC = True 'Set direction to Down
+				outMagMtrCC = True
 			Loop
 			
-			outMagMtr = False
+			outMagMtrCC = False
 			
             If outMagLowerLim = True Then 'Determine which state to go to next
 				NextState = StateOutMagWaitingUser
@@ -151,22 +153,22 @@ Do While True
 		'	WaitSig OutMagRobotClearSignal
 			
 			Do Until outMagUpperLim = True ' Move magazine up until we hit the upper limit
-				outMagMtrDir = False 'Set direction to UP 
-				outMagMtr = True
+				outMagMtrDirCC = False 'Set direction to UP 
+				outMagMtrCC = True
 			Loop
 			
-			outMagMtr = False
+			outMagMtrCC = False
 	
 			NextState = StateReadyToReceive
 			
 		Case StateGoHome
 			
 			Do Until outMagLowerLim = True
-				outMagMtrDir = True 'Set direction to DOWN
-				outMagMtr = True
+				outMagMtrDirCC = True 'Set direction to DOWN
+				outMagMtrCC = True
 			Loop
 			
-			outMagMtr = False
+			outMagMtrCC = False
 					
 			outMagGoHome = False 'Clear Flag
 			

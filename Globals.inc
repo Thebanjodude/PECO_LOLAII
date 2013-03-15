@@ -3,7 +3,7 @@
 #define Zlimit -135 ' Zlimit is the highest position the z-axis can go without hitting anything.
 Global Integer SystemSpeed, SystemSpeedDef, SystemSpeedFV
 Global Integer jobNumPanelsDone, hsProbeTemp, hmiStatus, systemStatus
-Global Boolean suctionCups, sftyFrmIlockAck, robStop, robPause
+Global Boolean suctionCups, sftyFrmIlockAck, robStop, robPause, suctionCupsCC
 Global Boolean robResume
 #define SystemAccel 30 ' Percent acceleration the arm uses during regular opperation
 #define ScanSpeed 35 ' Percent Speed the arm moves during the scanning process
@@ -24,6 +24,7 @@ Global Boolean InMagRobotClearSignal ' Signal robot is out of the way,OK to move
 Global Boolean InMagPickUpSignal ' Signal robot it can pick up a panel from inmag
 Global Real InMagTorqueLim
 Global Integer inMagCurrentState
+Global Boolean inMagMtrCC, inMagMtrDirCC
 
 ' Output Magazine Global Vars
 Global Boolean outMagGoHome, outMagUnloaded, OutputMagSignal, outMagMtr 'DIO to run the output magazine
@@ -33,6 +34,7 @@ Global Real OutMagTorqueLim
 Global Boolean OutMagDropOffSignal ' Signal robot it can Drop Off a panel to outmag
 Global Boolean OutMagRobotClearSignal ' Signal robot is out of the way,OK to move outmag
 Global Integer outMagCurrentState
+Global Boolean outMagMtrCC, outMagMtrDirCC
 
 'Inspection Station Global Vars
 'Global Real ScanOffset ' Distance the arm needs to move to keep the edge of the panel under the scanner
@@ -43,6 +45,7 @@ Global Boolean cbMonHeatStake, cbMonBowlFeder, cbMonInMag
 Global Boolean cbMonOutMag, cbMonFlashRmv, cbMonDebrisRmv
 Global Boolean dcPwrOk, cbMonPnumatic, cbMonSafety, cbMonPAS24vdc
 Global Boolean stackLightRed, stackLightYel, stackLightGrn, stackLightAlrm
+Global Boolean stackLightRedCC, stackLightYelCC, stackLightGrnCC, stackLightAlrmCC
 Global Boolean airPressHigh, airPressLow
 Global Boolean backInterlock, frontInterlock, leftInterlock, rightInterlock
 Global Boolean backInterlockACK, frontInterlockACK, leftInterlockACK, rightInterlockACK
@@ -54,6 +57,7 @@ Global Real AnvilZlimit, AnvilZlimitDef, AnvilZlimitFV ' Hard limit for anvil
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean flashMtr, flashCyc, FlashPnlPrsnt, debrisMtr
+Global Boolean flashMtrCC, flashCycCC, debrisMtrCC
 
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas
@@ -150,7 +154,6 @@ Global Boolean joint1Status, joint2Status, joint3Status, joint4Status, safeGuard
 #define Joint3StatusBitNum 9
 #define Joint4StatusBitNum 8
 #define SafeGuardBitNum 22
-
 
 #define MotorOnStatusMask &H10
 #define MotorPowerStatusMask &H40
