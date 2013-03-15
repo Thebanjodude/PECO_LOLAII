@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/03/13 17:43:18:078,DS:0000008583,CS:28991,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/14 18:04:23:026,DS:0000008651,CS:13097,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=36
@@ -190,53 +190,58 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=10
+	nNumberOfLabels=11
 	Label1 {
+		nBit=6
+		sLabel="EstopReset"
+		sDescription=""
+	}
+	Label2 {
 		nBit=8
 		sLabel="HMI_connected"
 		sDescription=""
 	}
-	Label2 {
+	Label3 {
 		nBit=9
 		sLabel="suctionCupsH"
 		sDescription=""
 	}
-	Label3 {
+	Label4 {
 		nBit=10
 		sLabel="inMagMtrH"
 		sDescription=""
 	}
-	Label4 {
+	Label5 {
 		nBit=11
 		sLabel="inMagMtrDirH"
 		sDescription=""
 	}
-	Label5 {
+	Label6 {
 		nBit=12
 		sLabel="outMagMtrH"
 		sDescription=""
 	}
-	Label6 {
+	Label7 {
 		nBit=13
 		sLabel="outMagMtrDirH"
 		sDescription=""
 	}
-	Label7 {
+	Label8 {
 		nBit=14
 		sLabel="flashMtrH"
 		sDescription=""
 	}
-	Label8 {
+	Label9 {
 		nBit=15
 		sLabel="LaserP1"
 		sDescription=""
 	}
-	Label9 {
+	Label10 {
 		nBit=64
 		sLabel="flashCycH"
 		sDescription=""
 	}
-	Label10 {
+	Label11 {
 		nBit=65
 		sLabel="hsInstallInsrtH"
 		sDescription=""

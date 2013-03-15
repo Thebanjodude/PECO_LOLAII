@@ -2,9 +2,8 @@
 
 Function main
 
-SetInitialValues()
 PowerOnSequence()
-CheckInitialValues()
+
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 Do While True
@@ -46,6 +45,10 @@ Loop
 		
 Fend
 Function PowerOnSequence()
+	
+	Reset
+	SetInitialValues()
+	CheckInitialValues()
 	
 	Motor On
 	Power High

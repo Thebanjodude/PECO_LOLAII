@@ -26,6 +26,7 @@ Global Boolean inMagLowerLim, inMagUpperLim, inMagInterlock, inMagIntLockAck
 Global Boolean InMagRobotClearSignal ' Signal robot is out of the way,OK to move Inmag
 Global Boolean InMagPickUpSignal ' Signal robot it can pick up a panel from inmag
 Global Real InMagTorqueLim
+Global Integer inMagCurrentState
 
 ' Output Magazine Global Vars
 Global Boolean outMagGoHome, outMagUnloaded, OutputMagSignal, outMagMtr 'DIO to run the output magazine
@@ -34,6 +35,7 @@ Global Boolean outMagLowerLim, outMagInt, outMagIntLockAck
 Global Real OutMagTorqueLim
 Global Boolean OutMagDropOffSignal ' Signal robot it can Drop Off a panel to outmag
 Global Boolean OutMagRobotClearSignal ' Signal robot is out of the way,OK to move outmag
+Global Integer outMagCurrentState
 
 'Inspection Station Global Vars
 'Global Real ScanOffset ' Distance the arm needs to move to keep the edge of the panel under the scanner
@@ -65,6 +67,7 @@ Global Real recZDropOff, recInsertDepth, recPanelThickness, recTemp, recMinorDim
 
 'Interlocks
 Global Boolean backInterlock, frontInterlock, leftInterlock, rightInterlock
+Global Boolean backInterlockACK, frontInterlockACK, leftInterlockACK, rightInterlockACK
 
 'Error Vars
 Global Boolean erPanelFailedInspection, erFrontSafetyFrameOpen, erBackSafetyFrameOpen

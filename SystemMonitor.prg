@@ -4,6 +4,8 @@
 
 Function SystemMonitor()
 	
+OnErr GoTo errHandler ' Define where to go when a controller error occurs	
+	
 Boolean InMagInterlockFlag, OutMagInterlockFlag, ReturnFromEstopFlag, safeGuardInputFlag
 Boolean frontInterlockFlag, backInterlockFlag, LeftInterlockFlag, RightInterlockFlag
 Boolean airPressHighFlag, cbMonHeatStakeFlag, cbMonBowlFederFlag, airPressLowFlag
@@ -20,7 +22,7 @@ Do While True
 		Halt InMagControl
 		erInMagOpenInterlock = True
 		InMagInterlockFlag = True ' Set flag
-	ElseIf inMagInterlock = False And InMagInterlockFlag = True Then
+	ElseIf inMagIntLockAck = True And InMagInterlockFlag = True Then
 		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False
 		InMagInterlockFlag = False ' Reset flag
@@ -30,7 +32,7 @@ Do While True
 		Halt OutMagControl
 		erOutMagOpenInterlock = True
 		OutMagInterlockFlag = True ' Set flag
-	ElseIf outMagInt = False And OutMagInterlockFlag = True Then
+	ElseIf outMagIntLockAck = True And OutMagInterlockFlag = True Then
 	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
 	 	erOutMagOpenInterlock = False
 	 	OutMagInterlockFlag = False ' Reset flag
@@ -40,7 +42,7 @@ Do While True
 		SystemPause()
 		erFrontSafetyFrameOpen = True
 		frontInterlockFlag = True ' Set flag
-	ElseIf frontInterlock = False And frontInterlockFlag = True Then
+	ElseIf frontInterlockACK = True And frontInterlockFlag = True Then
 	 	SystemUnPause()
 	 	erFrontSafetyFrameOpen = False
 	 	frontInterlockFlag = False ' Reset flag
@@ -50,7 +52,7 @@ Do While True
 		SystemPause()
 		erBackSafetyFrameOpen = True
 		backInterlockFlag = True ' Set flag
-	ElseIf backInterlock = False And backInterlockFlag = True Then
+	ElseIf backInterlockACK = True And backInterlockFlag = True Then
 	 	SystemUnPause()
 	 	erBackSafetyFrameOpen = False
 	 	backInterlockFlag = False ' Reset flag
@@ -60,7 +62,7 @@ Do While True
 		SystemPause()
 		erLeftSafetyFrameOpen = True
 		LeftInterlockFlag = True ' Set flag
-	ElseIf leftInterlock = False And LeftInterlockFlag = True Then
+	ElseIf leftInterlockACK = True And LeftInterlockFlag = True Then
 	 	SystemUnPause()
 	 	erLeftSafetyFrameOpen = False
 	 	LeftInterlockFlag = False ' Reset flag
@@ -70,7 +72,7 @@ Do While True
 		SystemPause()
 		erRightSafetyFrameOpen = True
 		RightInterlockFlag = True ' Set flag
-	ElseIf rightInterlock = False And RightInterlockFlag = True Then
+	ElseIf rightInterlockACK = True And RightInterlockFlag = True Then
 	 	SystemUnPause()
 	 	erRightSafetyFrameOpen = False
 	 	RightInterlockFlag = False ' Reset flag
@@ -214,11 +216,37 @@ Do While True
 	If EStopOn = True Then
 		erEstop = True
 		ReturnFromEstopFlag = True ' Set flag
-	Else
-		erEstop = False
 	EndIf
-
+	
+	If robResume = True And ReturnFromEstopFlag = True Then
+		erEstop = False
+		Print "resetting"
+		On (EstopReset), Forced
+	EndIf
+	
+	Print robResume
+	Print ReturnFromEstopFlag
+	Wait .25
 Loop
+
+	errHandler:
+		
+		'Assign things of interest to var names
+		ctrlrErrMsg$ = ErrMsg$(Err)
+	 	ctrlrLineNumber = Erl
+		ctrlrTaskNumber = Ert
+	 	ctrlrErrAxisNumber = Era
+	 	ctrlrErrorNum = Err
+	 	
+	 	' Print error for testing/troubleshooting
+	 	Print "Error Message:", ctrlrErrMsg$
+		Print "Error Line Number:", ctrlrLineNumber
+		Print "Error Task Number:", ctrlrTaskNumber
+		Print "Error AxisNumber:", ctrlrErrAxisNumber
+		Print "Error Number:", ctrlrErrorNum
+		
+		SystemPause()
+	EResume
 
 Fend
 Function SystemPause() ' We might just be able to use the pause command instead of this function

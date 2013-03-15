@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/03/14 13:20:20:296,DS:0000002827,CS:31052,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="SystemMonitor.prg"
+ENVT0100,LM:2013/03/15 12:44:56:054,DS:0000002875,CS:17508,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InMagOutMagStateMachines.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=31
-		nTop=23
-		nWidth=1072
-		nHeight=590
+		nLeft=532
+		nTop=287
+		nWidth=900
+		nHeight=493
 	}
 }
 ProgramFile2 {
@@ -26,12 +26,12 @@ ProgramFile2 {
 ProgramFile3 {
 	sName="IOTable.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=40
-		nTop=32
-		nWidth=1189
-		nHeight=721
+		nLeft=11
+		nTop=37
+		nWidth=1225
+		nHeight=714
 	}
 }
 ProgramFile4 {
@@ -39,10 +39,10 @@ ProgramFile4 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=-3
+		nTop=-5
+		nWidth=1246
+		nHeight=576
 	}
 }
 ProgramFile5 {
@@ -61,10 +61,10 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=69
-		nTop=102
-		nWidth=1071
-		nHeight=587
+		nLeft=7
+		nTop=212
+		nWidth=1182
+		nHeight=534
 	}
 }
 ProgramFile7 {
@@ -113,25 +113,25 @@ ProgramFile10 {
 }
 ProgramFile11 {
 	sName="UnitTests.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=245
-		nTop=149
-		nWidth=1060
-		nHeight=578
+		nLeft=332
+		nTop=72
+		nWidth=1059
+		nHeight=575
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=12
+		nTop=73
+		nWidth=1223
+		nHeight=582
 	}
 }
 nPointFileCount=1
@@ -160,38 +160,38 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=207
-		nTop=96
-		nWidth=743
-		nHeight=413
+		nLeft=684
+		nTop=-2
+		nWidth=809
+		nHeight=447
 	}
 }
 IOLabelEditor {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=329
+		nTop=76
+		nWidth=1060
+		nHeight=600
 	}
 	nWinState=0
 }
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=1150
-		nTop=201
+		nLeft=2475
+		nTop=128
 		nWidth=520
-		nHeight=639
+		nHeight=542
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=1784
+		nTop=143
+		nWidth=465
+		nHeight=278
 	}
 }
 Macros {
@@ -206,10 +206,10 @@ Macros {
 RobotMgr {
 	bOpened=False
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=191
+		nTop=173
+		nWidth=751
+		nHeight=485
 	}
 }
 UserErrorEditor {
