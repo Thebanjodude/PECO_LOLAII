@@ -13,15 +13,12 @@ Global Boolean robResume
 Global Integer x, z, xhFV, xh ' Increment for P(x) to define edge
 
 'Commands from HMI
-Global Boolean hmiPause, startJob, robStart, hmiStopJob
+Global Boolean hmiPause, startJob, robStart, hmiStopJob, jobDone
 Global Boolean HmiPauseFlag
 Global Integer jobNumPanels
 
-'System Monitor Vars
-Global Boolean airPressLow, airPressHigh
-
 ' Input Magazine Global Vars
-Global Boolean inMagGoHome, inMagLoaded, inMagPanelRdy, inMagMtr, inMagMtrDir ' DIO to run intput the magazine
+Global Boolean inMagGoHome, inMagLoaded, inMagPnlRdy, inMagMtr, inMagMtrDir ' DIO to run intput the magazine
 Global Boolean inMagLowerLim, inMagUpperLim, inMagInterlock, inMagIntLockAck
 Global Boolean InMagRobotClearSignal ' Signal robot is out of the way,OK to move Inmag
 Global Boolean InMagPickUpSignal ' Signal robot it can pick up a panel from inmag
@@ -45,13 +42,18 @@ Global Boolean PanelPassedInspection ' Indicates if the panel passes inspection
 Global Boolean cbMonHeatStake, cbMonBowlFeder, cbMonInMag
 Global Boolean cbMonOutMag, cbMonFlashRmv, cbMonDebrisRmv
 Global Boolean dcPwrOk, cbMonPnumatic, cbMonSafety, cbMonPAS24vdc
+Global Boolean stackLightRed, stackLightYel, stackLightGrn, stackLightAlrm
+Global Boolean airPressHigh, airPressLow
+Global Boolean backInterlock, frontInterlock, leftInterlock, rightInterlock
+Global Boolean backInterlockACK, frontInterlockACK, leftInterlockACK, rightInterlockACK
+
 
 'Hot Stake and Flash Removal Global Vars
 Global Real Theta, r ', PanelArray(0, 0)
 Global Real AnvilZlimit, AnvilZlimitDef, AnvilZlimitFV ' Hard limit for anvil
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
-Global Boolean flashMtr, flashCyc, FlashPnlPrsnt
+Global Boolean flashMtr, flashCyc, FlashPnlPrsnt, debrisMtr
 
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas
@@ -63,11 +65,8 @@ Global Boolean flashMtr, flashCyc, FlashPnlPrsnt
 #define StainlessInsert 2
 Global Integer recNumberOfHoles, recInsertType
 Global Boolean recFlashRequired
-Global Real recZDropOff, recInsertDepth, recPanelThickness, recTemp, recMinorDim, recMajorDim, recBossHeight
-
-'Interlocks
-Global Boolean backInterlock, frontInterlock, leftInterlock, rightInterlock
-Global Boolean backInterlockACK, frontInterlockACK, leftInterlockACK, rightInterlockACK
+Global Real recZDropOff, recInsertDepth, recPanelThickness
+Global Real recTemp, recMinorDim, recMajorDim, recBossHeight
 
 'Error Vars
 Global Boolean erPanelFailedInspection, erFrontSafetyFrameOpen, erBackSafetyFrameOpen

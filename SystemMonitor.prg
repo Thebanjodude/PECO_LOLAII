@@ -224,9 +224,6 @@ Do While True
 		On (EstopReset), Forced
 	EndIf
 	
-	Print robResume
-	Print ReturnFromEstopFlag
-	Wait .25
 Loop
 
 	errHandler:

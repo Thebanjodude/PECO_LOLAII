@@ -19,7 +19,7 @@ Do While True
 		Case StatePartPresent
 			
 			' Don't leave state unless part is removed or user commands magazine home
-			Do Until inMagPanelRdy = False Or inMagGoHome = True
+			Do Until inMagPnlRdy = False Or inMagGoHome = True
 				Wait .1 ' Do nothing
 			Loop
 			
@@ -38,7 +38,7 @@ Do While True
 		Case StatePresentNextPart
 			
 			'Don't leave state until panel is in position or EOT is reached
-			Do Until inMagPanelRdy = True Or inMagUpperLim = True
+			Do Until inMagPnlRdy = True Or inMagUpperLim = True
 				inMagMtrDir = False 'set direction to UP
 				inMagMtr = True
 			Loop
@@ -116,12 +116,12 @@ Do While True
 			
 		Case StateOutMagPartPresent
 			
-			WaitSig OutputMagSignal ' Wait for main program to move robot out of the way
+			'WaitSig OutputMagSignal ' Wait for main program to move robot out of the way
 			NextState = StateOutMagLowering
 			
 		Case StateOutMagLowering
 			
-			Do Until outMagPanelRdy = True Or Sw(outMagLowerLimH) = True
+			Do Until outMagPanelRdy = True Or outMagLowerLim = True
 				outMagMtrDir = True 'Set direction to Down
 				outMagMtr = True
 			Loop
@@ -148,7 +148,7 @@ Do While True
 			
 		Case StateRaising
 			
-			WaitSig OutMagRobotClearSignal
+		'	WaitSig OutMagRobotClearSignal
 			
 			Do Until outMagUpperLim = True ' Move magazine up until we hit the upper limit
 				outMagMtrDir = False 'Set direction to UP 

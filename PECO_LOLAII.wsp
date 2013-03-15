@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/03/15 12:44:56:054,DS:0000002875,CS:17508,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="InMagOutMagStateMachines.prg"
+ENVT0100,LM:2013/03/15 14:34:37:460,DS:0000002841,CS:14641,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Run"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=532
-		nTop=287
-		nWidth=900
-		nHeight=493
+		nLeft=-1
+		nTop=250
+		nWidth=899
+		nHeight=490
 	}
 }
 ProgramFile2 {
@@ -26,12 +26,12 @@ ProgramFile2 {
 ProgramFile3 {
 	sName="IOTable.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=11
-		nTop=37
-		nWidth=1225
-		nHeight=714
+		nLeft=28
+		nTop=70
+		nWidth=1223
+		nHeight=707
 	}
 }
 ProgramFile4 {
@@ -39,10 +39,10 @@ ProgramFile4 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-3
-		nTop=-5
-		nWidth=1246
-		nHeight=576
+		nLeft=88
+		nTop=85
+		nWidth=1119
+		nHeight=573
 	}
 }
 ProgramFile5 {
@@ -61,10 +61,10 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=7
-		nTop=212
-		nWidth=1182
-		nHeight=534
+		nLeft=-12
+		nTop=-8
+		nWidth=1126
+		nHeight=527
 	}
 }
 ProgramFile7 {
@@ -125,13 +125,13 @@ ProgramFile11 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=12
-		nTop=73
-		nWidth=1223
-		nHeight=582
+		nLeft=49
+		nTop=19
+		nWidth=1280
+		nHeight=578
 	}
 }
 nPointFileCount=1
@@ -158,40 +158,40 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=684
-		nTop=-2
-		nWidth=809
-		nHeight=447
+		nLeft=543
+		nTop=-9
+		nWidth=881
+		nHeight=484
 	}
 }
 IOLabelEditor {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=329
-		nTop=76
-		nWidth=1060
-		nHeight=600
+		nLeft=196
+		nTop=128
+		nWidth=1055
+		nHeight=583
 	}
 	nWinState=0
 }
 IOMonitor {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=2475
-		nTop=128
+		nLeft=601
+		nTop=118
 		nWidth=520
-		nHeight=542
+		nHeight=580
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=1784
-		nTop=143
-		nWidth=465
-		nHeight=278
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
 	}
 }
 Macros {
