@@ -17,7 +17,7 @@ Boolean cbMonFlashRmvFlag, cbMonSafetyFlag, cbMonDebrisRmvFlag, cbMonPnumaticFla
 Do While True
 	
 	StateOfHealth()
-	
+
 	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine
 		Halt InMagControl
 		erInMagOpenInterlock = True

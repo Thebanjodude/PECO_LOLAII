@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/03/15 21:11:09:966,DS:0000002850,CS:12813,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Run"
+ENVT0100,LM:2013/03/20 17:47:50:807,DS:0000002580,CS:31092,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="I/O Label Editor"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=499
-		nTop=42
-		nWidth=897
-		nHeight=486
+		nLeft=191
+		nTop=1
+		nWidth=1199
+		nHeight=626
 	}
 }
 ProgramFile2 {
@@ -28,21 +28,21 @@ ProgramFile3 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=40
-		nTop=312
-		nWidth=1024
-		nHeight=588
+		nLeft=70
+		nTop=81
+		nWidth=1126
+		nHeight=655
 	}
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
 		nLeft=9
 		nTop=6
-		nWidth=1117
-		nHeight=566
+		nWidth=1115
+		nHeight=559
 	}
 }
 ProgramFile5 {
@@ -50,10 +50,10 @@ ProgramFile5 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=153
-		nTop=171
-		nWidth=1072
-		nHeight=590
+		nLeft=141
+		nTop=55
+		nWidth=1071
+		nHeight=587
 	}
 }
 ProgramFile6 {
@@ -61,10 +61,10 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-12
-		nTop=-8
-		nWidth=1124
-		nHeight=523
+		nLeft=-4
+		nTop=-7
+		nWidth=1120
+		nHeight=611
 	}
 }
 ProgramFile7 {
@@ -100,38 +100,16 @@ ProgramFile9 {
 		nHeight=0
 	}
 }
-ProgramFile10 {
-	sName="IOTEST.prg"
-	bOpened=False
-	nWinState=0
-	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
-	}
-}
-ProgramFile11 {
-	sName="UnitTests.prg"
-	bOpened=False
-	nWinState=0
-	Window {
-		nLeft=332
-		nTop=72
-		nWidth=1059
-		nHeight=575
-	}
-}
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=-12
-		nTop=-11
-		nWidth=1276
-		nHeight=571
+		nLeft=111
+		nTop=17
+		nWidth=1274
+		nHeight=621
 	}
 }
 nPointFileCount=1
@@ -160,19 +138,19 @@ CmdWindow {
 RunWindow {
 	bOpened=True
 	Window {
-		nLeft=263
-		nTop=33
+		nLeft=785
+		nTop=-1
 		nWidth=550
-		nHeight=569
+		nHeight=666
 	}
 }
 IOLabelEditor {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=220
-		nTop=118
-		nWidth=1053
-		nHeight=579
+		nLeft=331
+		nTop=12
+		nWidth=1051
+		nHeight=576
 	}
 	nWinState=0
 }
@@ -188,10 +166,10 @@ IOMonitor {
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=619
-		nTop=400
-		nWidth=821
-		nHeight=278
+		nLeft=2
+		nTop=145
+		nWidth=820
+		nHeight=275
 	}
 }
 Macros {

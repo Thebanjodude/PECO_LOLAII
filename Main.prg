@@ -10,7 +10,11 @@ Do While True
 
 	SystemStatus = Idle
 	
-	If robStart = True Then
+	CheckInitialValues()
+	CheckRecipeInitialization()
+	
+Do While False
+	If jobStart = True And RecEntryMissing = False Then
 		Print "doing a job"
 		Wait 1
 '		PopPanel() ' Go to input magazine and pick up a panel
@@ -21,7 +25,7 @@ Do While True
 '		PushPanel() ' Take Panel to output magazine and drop it off
 '		Pause
 	EndIf
-	
+Loop
 Loop
 
 	errHandler:
@@ -64,7 +68,7 @@ Function PowerOnSequence()
 	Xqt 4, iotransfer, NoEmgAbort
 	Xqt 5, HmiListen, NoEmgAbort
 	Xqt 6, InMagControl, Normal ' First state is lowering 
-	Xqt 7, OutMagControl, Normal ' First state is raising 
+	Xqt 7, OutMagControl, Normal ' First state is raising \
 	
 	' Define interupts
 '	Trap 2 MemSw(MagTorqueLimF) Call MagTorqueErrorISR
@@ -75,12 +79,65 @@ Fend
 Function SetInitialValues
 	' This is going to be OBS-the HMI will initialize the vars and I will check that
 	'they get initialized
-'	SystemSpeed = 50
+	SystemSpeed = 50
 	AnvilZlimit = -150.00
 Fend
 Function CheckInitialValues()
-	'this is where I will check to make sure all the parameters are initialized
-	'if not then throw an error
+	
+	Print "AnvilZlimit:", AnvilZlimit
+	Print "SystemSpeed:", SystemSpeed
+
+	If AnvilZlimit = 0.0 Then
+		ParamEntryMissing = True
+	ElseIf SystemSpeed = 0 Then
+		ParamEntryMissing = True
+	Else
+		ParamEntryMissing = False
+	EndIf
+	
+	If ParamEntryMissing = True Then
+		erParamEntryMissing = True
+	Else
+		erParamEntryMissing = False
+	EndIf
+	
+	Print "erParamEntryMissing", erParamEntryMissing
+	Wait .5
+	
 Fend
+Function CheckRecipeInitialization()
+	
+	Print "recBossHeight:", recBossHeight
+	Print "recInsertDepth:", recInsertDepth
+	Print "recMajorDim:", recMajorDim
+	Print "recMinorDim:", recMinorDim
+	Print "recZDropOff:", recZDropOff
+	Print "recInsertType:", recInsertType
+	Print "recNumberOfHoles:", recNumberOfHoles
+	
+	If recBossHeight = 0.0 Or recInsertDepth = 0.0 Then
+		RecEntryMissing = True
+	ElseIf recMajorDim = 0.0 Or recMinorDim = 0.0 Or recZDropOff = 0.0 Then
+		RecEntryMissing = True
+	ElseIf recInsertType = 0 Or recNumberOfHoles = 0 Then
+		RecEntryMissing = True
+	ElseIf recTemp = 0 Then
+		RecEntryMissing = True
+	Else
+		RecEntryMissing = False
+	EndIf
+	
+	If RecEntryMissing = True Then
+		erRecEntryMissing = True
+	Else
+		erRecEntryMissing = False
+	EndIf
+	
+	Print "erRecEntryMissing", erRecEntryMissing
+	Wait .5
+
+Fend
+
+	
 
 

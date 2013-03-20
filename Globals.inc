@@ -3,7 +3,7 @@
 #define Zlimit -135 ' Zlimit is the highest position the z-axis can go without hitting anything.
 Global Integer SystemSpeed, SystemSpeedDef, SystemSpeedFV
 Global Integer jobNumPanelsDone, hsProbeTemp, hmiStatus, systemStatus
-Global Boolean suctionCups, sftyFrmIlockAck, robStop, robPause, suctionCupsCC
+Global Boolean suctionCups, robPause, suctionCupsCC
 Global Boolean robResume
 #define SystemAccel 30 ' Percent acceleration the arm uses during regular opperation
 #define ScanSpeed 35 ' Percent Speed the arm moves during the scanning process
@@ -13,9 +13,20 @@ Global Boolean robResume
 Global Integer x, z, xhFV, xh ' Increment for P(x) to define edge
 
 'Commands from HMI
-Global Boolean hmiPause, startJob, robStart, hmiStopJob, jobDone
+Global Boolean jobDone
 Global Boolean HmiPauseFlag
 Global Integer jobNumPanels
+Global Boolean backInterlockACKBtn, frontInterlockACKBtn
+Global Boolean inMagGoHomeBtn, inMagIntLockAckBtn, inMagLoadedBtn
+Global Boolean jobPauseBtn, jobResumeBtn, jobStartBtn
+Global Boolean jobStopBtn, leftInterlockACKBtn, outMagGoHomeBtn
+Global Boolean outMagIntLockAckBtn, outMagUnloadedBtn, rightInterlockACKBtn, sftyFrmIlockAckBtn
+
+Global Boolean backInterlockACK, frontInterlockACK
+Global Boolean jobPause, jobResume, jobStart
+Global Boolean jobStop, leftInterlockACK
+Global Boolean rightInterlockACK, sftyFrmIlockAck
+
 
 ' Input Magazine Global Vars
 Global Boolean inMagGoHome, inMagLoaded, inMagPnlRdy, inMagMtr, inMagMtrDir ' DIO to run intput the magazine
@@ -48,8 +59,7 @@ Global Boolean stackLightRed, stackLightYel, stackLightGrn, stackLightAlrm
 Global Boolean stackLightRedCC, stackLightYelCC, stackLightGrnCC, stackLightAlrmCC
 Global Boolean airPressHigh, airPressLow
 Global Boolean backInterlock, frontInterlock, leftInterlock, rightInterlock
-Global Boolean backInterlockACK, frontInterlockACK, leftInterlockACK, rightInterlockACK
-
+Global Boolean heartBeat
 
 'Hot Stake and Flash Removal Global Vars
 Global Real Theta, r ', PanelArray(0, 0)
@@ -83,7 +93,8 @@ Global Boolean erLaserScanner, erDCPower, erDCPowerHeatStake
 Global Boolean erHeatStakeBreaker, erBowlFeederBreaker, erInMagBreaker
 Global Boolean erOutMagBreaker, erFlashBreaker, erDebrisRemovalBreaker
 Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180
-Global Boolean erUnknown, erEstop
+Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing
+Global Boolean RecEntryMissing, ParamEntryMissing
 
 
 ' Error Code array indexes, from IOT Excel MessageDB
@@ -120,7 +131,7 @@ Global Boolean erUnknown, erEstop
 
 
 'System State Numbers
-'Global Integer SystemStatus
+Global Integer SystemState
 #define Unknown 0
 #define Idle 1
 #define PickingPanel 3

@@ -7,33 +7,51 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 Do While True
 	
 'Inputs
-inMagPnlRdy = IOTableBooleans(Sw(inMagPnlRdyH), MemSw(inMagPnlRdyFV), MemSw(inMagPnlRdyF))
-inMagUpperLim = IOTableBooleans(Sw(inMagUpperLimH), MemSw(inMagUpperLimFV), MemSw(inMagUpperLimF))
-inMagLowerLim = IOTableBooleans(Sw(inMagLowerLimH), MemSw(inMagLowerLimFV), MemSw(inMagLowerLimF))
-inMagInterlock = IOTableBooleans(Sw(inMagInterlockH), MemSw(inMagInterlockFV), MemSw(inMagInterlockF))
-outMagPanelRdy = IOTableBooleans(Sw(outMagPanelRdyH), MemSw(outMagPanelRdyFV), MemSw(outMagPanelRdyF))
-outMagUpperLim = IOTableBooleans(Sw(outMagUpperLimH), MemSw(outMagUpperLimFV), MemSw(outMagUpperLimF))
-outMagLowerLim = IOTableBooleans(Sw(outMagLowerLimH), MemSw(outMagLowerLimFV), MemSw(outMagLowerLimF))
-outMagInt = IOTableBooleans(Sw(outMagIntH), MemSw(outMagIntFV), MemSw(outMagIntF))
-flashPnlPrsnt = IOTableBooleans(Sw(FlashPnlPrsntH), MemSw(FlashPnlPrsntFV), MemSw(FlashPnlPrsntF))
-hsPanelPresnt = IOTableBooleans(Sw(HSPanelPresntH), MemSw(hsPanelPresntFV), MemSw(hsPanelPresntF))
-leftInterlock = IOTableBooleans(Sw(leftInterlockH), MemSw(leftInterlockFV), MemSw(leftInterlockF))
-rightInterlock = IOTableBooleans(Sw(rightInterlockH), MemSw(rightInterlockFV), MemSw(rightInterlockF))
-frontInterlock = IOTableBooleans(Sw(frontInterlockH), MemSw(frontInterlockFV), MemSw(frontInterlockF))
 airPressHigh = IOTableBooleans(Sw(AirPressHighH), MemSw(airPressHighFV), MemSw(airPressHighF))
 airPressLow = IOTableBooleans(Sw(AirPressLowH), MemSw(airPressLowFV), MemSw(airPressLowF))
-cbMonHeatStake = IOTableBooleans(Sw(cbMonHeatStakeH), MemSw(cbMonHeatStakeFV), MemSw(cbMonHeatStakeF))
 cbMonBowlFeder = IOTableBooleans(Sw(cbMonBowlFederH), MemSw(cbMonBowlFederFV), MemSw(cbMonBowlFederF))
+cbMonDebrisRmv = IOTableBooleans(Sw(cbMonDebrisRmvH), MemSw(cbMonDebrisRmvFV), MemSw(cbMonDebrisRmvF))
+cbMonFlashRmv = IOTableBooleans(Sw(cbMonFlashRmvH), MemSw(cbMonFlashRmvFV), MemSw(cbMonFlashRmvF))
+cbMonHeatStake = IOTableBooleans(Sw(cbMonHeatStakeH), MemSw(cbMonHeatStakeFV), MemSw(cbMonHeatStakeF))
 cbMonInMag = IOTableBooleans(Sw(cbMonInMagH), MemSw(cbMonInMagFV), MemSw(cbMonInMagF))
 cbMonOutMag = IOTableBooleans(Sw(cbMonOutMagH), MemSw(cbMonOutMagFV), MemSw(cbMonOutMagF))
-cbMonFlashRmv = IOTableBooleans(Sw(cbMonFlashRmvH), MemSw(cbMonFlashRmvFV), MemSw(cbMonFlashRmvF))
-cbMonDebrisRmv = IOTableBooleans(Sw(cbMonDebrisRmvH), MemSw(cbMonDebrisRmvFV), MemSw(cbMonDebrisRmvF))
-dcPwrOk = IOTableBooleans(Sw(dcPwrOkH), MemSw(dcPwrOkFV), MemSw(dcPwrOkF))
+cbMonPAS24vdc = IOTableBooleans(Sw(cbMonPAS24vdcH), MemSw(cbMonPAS24vdcFV), MemSw(cbMonPAS24vdcF))
 cbMonPnumatic = IOTableBooleans(Sw(cbMonPnumaticH), MemSw(cbMonPnumaticFV), MemSw(cbMonPnumaticF))
 cbMonSafety = IOTableBooleans(Sw(cbMonSafetyH), MemSw(cbMonSafetyFV), MemSw(cbMonSafetyF))
-cbMonPAS24vdc = IOTableBooleans(Sw(cbMonPAS24vdcH), MemSw(cbMonPAS24vdcFV), MemSw(cbMonPAS24vdcF))
+dcPwrOk = IOTableBooleans(Sw(dcPwrOkH), MemSw(dcPwrOkFV), MemSw(dcPwrOkF))
+flashPnlPrsnt = IOTableBooleans(Sw(FlashPnlPrsntH), MemSw(FlashPnlPrsntFV), MemSw(FlashPnlPrsntF))
+frontInterlock = IOTableBooleans(Sw(frontInterlockH), MemSw(frontInterlockFV), MemSw(frontInterlockF))
+hsPanelPresnt = IOTableBooleans(Sw(HSPanelPresntH), MemSw(hsPanelPresntFV), MemSw(hsPanelPresntF))
+inMagInterlock = IOTableBooleans(Sw(inMagInterlockH), MemSw(inMagInterlockFV), MemSw(inMagInterlockF))
+inMagLowerLim = IOTableBooleans(Sw(inMagLowerLimH), MemSw(inMagLowerLimFV), MemSw(inMagLowerLimF))
+inMagPnlRdy = IOTableBooleans(Sw(inMagPnlRdyH), MemSw(inMagPnlRdyFV), MemSw(inMagPnlRdyF))
+inMagUpperLim = IOTableBooleans(Sw(inMagUpperLimH), MemSw(inMagUpperLimFV), MemSw(inMagUpperLimF))
+leftInterlock = IOTableBooleans(Sw(leftInterlockH), MemSw(leftInterlockFV), MemSw(leftInterlockF))
+outMagInt = IOTableBooleans(Sw(outMagIntH), MemSw(outMagIntFV), MemSw(outMagIntF))
+outMagLowerLim = IOTableBooleans(Sw(outMagLowerLimH), MemSw(outMagLowerLimFV), MemSw(outMagLowerLimF))
+outMagPanelRdy = IOTableBooleans(Sw(outMagPanelRdyH), MemSw(outMagPanelRdyFV), MemSw(outMagPanelRdyF))
+outMagUpperLim = IOTableBooleans(Sw(outMagUpperLimH), MemSw(outMagUpperLimFV), MemSw(outMagUpperLimF))
+rightInterlock = IOTableBooleans(Sw(rightInterlockH), MemSw(rightInterlockFV), MemSw(rightInterlockF))
 
 'Outputs
+debrisMtr = IOTableBooleans(debrisMtrCC, MemSw(debrisMtrFV), MemSw(debrisMtrF))
+If debrisMtr = True Then
+        On (debrisMtrH)
+    Else
+        Off (debrisMtrH)
+    EndIf
+flashCyc = IOTableBooleans(flashCycCC, MemSw(flashCycFV), MemSw(flashCycF))
+If flashCyc = True Then
+        On (flashCycH)
+    Else
+        Off (flashCycH)
+    EndIf
+flashMtr = IOTableBooleans(flashMtrCC, MemSw(flashMtrFV), MemSw(flashMtrF))
+If flashMtr = True Then
+        On (flashMtrH)
+    Else
+        Off (flashMtrH)
+    EndIf
 inMagMtr = IOTableBooleans(inMagMtrCC, MemSw(inMagMtrFV), MemSw(inMagMtrF))
 If inMagMtr = True Then
         On (inMagMtrH)
@@ -58,29 +76,17 @@ If outMagMtrDir = True Then
     Else
         Off (outMagMtrDirH)
     EndIf
-flashMtr = IOTableBooleans(flashMtrCC, MemSw(flashMtrFV), MemSw(flashMtrF))
-If flashMtr = True Then
-        On (flashMtrH)
+stackLightAlrm = IOTableBooleans(stackLightAlrmCC, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
+If stackLightAlrm = True Then
+        On (stackLightAlrmH)
     Else
-        Off (flashMtrH)
+        Off (stackLightAlrmH)
     EndIf
-flashCyc = IOTableBooleans(flashCycCC, MemSw(flashCycFV), MemSw(flashCycF))
-If flashCyc = True Then
-        On (flashCycH)
+stackLightGrn = IOTableBooleans(stackLightGrnCC, MemSw(stackLightGrnFV), MemSw(stackLightGrnF))
+If stackLightGrn = True Then
+        On (stackLightGrnH)
     Else
-        Off (flashCycH)
-    EndIf
-suctionCups = IOTableBooleans(suctionCupsCC, MemSw(suctionCupsFV), MemSw(suctionCupsF))
-If suctionCups = True Then
-        On (suctionCupsH)
-    Else
-        Off (suctionCupsH)
-    EndIf
-debrisMtr = IOTableBooleans(debrisMtrCC, MemSw(debrisMtrFV), MemSw(debrisMtrF))
-If debrisMtr = True Then
-        On (debrisMtrH)
-    Else
-        Off (debrisMtrH)
+        Off (stackLightGrnH)
     EndIf
 stackLightRed = IOTableBooleans(stackLightRedCC, MemSw(stackLightRedFV), MemSw(stackLightRedF))
 If stackLightRed = True Then
@@ -94,18 +100,13 @@ If stackLightYel = True Then
     Else
         Off (stackLightYelH)
     EndIf
-stackLightGrn = IOTableBooleans(stackLightGrnCC, MemSw(stackLightGrnFV), MemSw(stackLightGrnF))
-If stackLightGrn = True Then
-        On (stackLightGrnH)
+suctionCups = IOTableBooleans(suctionCupsCC, MemSw(suctionCupsFV), MemSw(suctionCupsF))
+If suctionCups = True Then
+        On (suctionCupsH)
     Else
-        Off (stackLightGrnH)
+        Off (suctionCupsH)
     EndIf
-stackLightAlrm = IOTableBooleans(stackLightAlrmCC, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
-If stackLightAlrm = True Then
-        On (stackLightAlrmH)
-    Else
-        Off (stackLightAlrmH)
-    EndIf
+    
 Loop
 
 	errHandler:
@@ -189,743 +190,122 @@ RetryConnection:
             ' write variable data to HMI
 '            Write #201, Chr$(12) 'this breaks the JSON interpreter
 
-			'Tx to HMI:
-Print #201, "{", Chr$(&H22) + "inMagMtr" + Chr$(&H22), ":", Str$(inMagMtr), "}"
-Print #201, "{", Chr$(&H22) + "inMagMtrDir" + Chr$(&H22), ":", Str$(inMagMtrDir), "}"
-Print #201, "{", Chr$(&H22) + "inMagPnlRdy" + Chr$(&H22), ":", Str$(inMagPnlRdy), "}"
-Print #201, "{", Chr$(&H22) + "inMagUpperLim" + Chr$(&H22), ":", Str$(inMagUpperLim), "}"
-Print #201, "{", Chr$(&H22) + "inMagLowerLim" + Chr$(&H22), ":", Str$(inMagLowerLim), "}"
-Print #201, "{", Chr$(&H22) + "inMagInterlock" + Chr$(&H22), ":", Str$(inMagInterlock), "}"
-Print #201, "{", Chr$(&H22) + "outMagMtr" + Chr$(&H22), ":", Str$(outMagMtr), "}"
-Print #201, "{", Chr$(&H22) + "outMagMtrDir" + Chr$(&H22), ":", Str$(outMagMtrDir), "}"
-Print #201, "{", Chr$(&H22) + "outMagPanelRdy" + Chr$(&H22), ":", Str$(outMagPanelRdy), "}"
-Print #201, "{", Chr$(&H22) + "outMagUpperLim" + Chr$(&H22), ":", Str$(outMagUpperLim), "}"
-Print #201, "{", Chr$(&H22) + "outMagLowerLim" + Chr$(&H22), ":", Str$(outMagLowerLim), "}"
-Print #201, "{", Chr$(&H22) + "outMagInt" + Chr$(&H22), ":", Str$(outMagInt), "}"
-Print #201, "{", Chr$(&H22) + "flashMtr" + Chr$(&H22), ":", Str$(flashMtr), "}"
-Print #201, "{", Chr$(&H22) + "flashCyc" + Chr$(&H22), ":", Str$(flashCyc), "}"
-Print "unplug now"
-Wait 2
-Print #201, "{", Chr$(&H22) + "flashPnlPrsnt" + Chr$(&H22), ":", Str$(FlashPnlPrsnt), "}"
-Print #201, "{", Chr$(&H22) + "hsPanelPresnt" + Chr$(&H22), ":", Str$(hsPanelPresnt), "}"
-Print #201, "{", Chr$(&H22) + "leftInterlock" + Chr$(&H22), ":", Str$(leftInterlock), "}"
-Print #201, "{", Chr$(&H22) + "rightInterlock" + Chr$(&H22), ":", Str$(rightInterlock), "}"
-Print #201, "{", Chr$(&H22) + "frontInterlock" + Chr$(&H22), ":", Str$(frontInterlock), "}"
-Print #201, "{", Chr$(&H22) + "airPressHigh" + Chr$(&H22), ":", Str$(airPressHigh), "}"
-Print #201, "{", Chr$(&H22) + "airPressLow" + Chr$(&H22), ":", Str$(airPressLow), "}"
-Print #201, "{", Chr$(&H22) + "hsInstallInsrt" + Chr$(&H22), ":", Str$(hsInstallInsrt), "}"
-Print #201, "{", Chr$(&H22) + "cbMonHeatStake" + Chr$(&H22), ":", Str$(cbMonHeatStake), "}"
-Print #201, "{", Chr$(&H22) + "cbMonBowlFeder" + Chr$(&H22), ":", Str$(cbMonBowlFeder), "}"
-Print #201, "{", Chr$(&H22) + "cbMonInMag" + Chr$(&H22), ":", Str$(cbMonInMag), "}"
-Print #201, "{", Chr$(&H22) + "cbMonOutMag" + Chr$(&H22), ":", Str$(cbMonOutMag), "}"
-Print #201, "{", Chr$(&H22) + "cbMonFlashRmv" + Chr$(&H22), ":", Str$(cbMonFlashRmv), "}"
-Print #201, "{", Chr$(&H22) + "cbMonDebrisRmv" + Chr$(&H22), ":", Str$(cbMonDebrisRmv), "}"
-Print #201, "{", Chr$(&H22) + "dcPwrOk" + Chr$(&H22), ":", Str$(dcPwrOk), "}"
-Print #201, "{", Chr$(&H22) + "cbMonPnumatic" + Chr$(&H22), ":", Str$(cbMonPnumatic), "}"
-Print #201, "{", Chr$(&H22) + "cbMonSafety" + Chr$(&H22), ":", Str$(cbMonSafety), "}"
-Print #201, "{", Chr$(&H22) + "cbMonPAS24vdc" + Chr$(&H22), ":", Str$(cbMonPAS24vdc), "}"
-Print #201, "{", Chr$(&H22) + "systemStatus" + Chr$(&H22), ":", Str$(systemStatus), "}"
-Print #201, "{", Chr$(&H22) + "jobNumPanelsDone" + Chr$(&H22), ":", Str$(jobNumPanelsDone), "}"
-'Print #201, "{", Chr$(&H22) + "jobNextPanel" + Chr$(&H22), ":", Str$(jobNextPanel), "}"
-Print #201, "{", Chr$(&H22) + "jobDone" + Chr$(&H22), ":", Str$(jobDone), "}"
-Print #201, "{", Chr$(&H22) + "hmiPause" + Chr$(&H22), ":", Str$(hmiPause), "}"
-'Print #201, "{", Chr$(&H22) + "hmiResume" + Chr$(&H22), ":", Str$(hmiResume), "}"
-Print #201, "{", Chr$(&H22) + "hsProbeTemp" + Chr$(&H22), ":", Str$(hsProbeTemp), "}"
-Print #201, "{", Chr$(&H22) + "suctionCups" + Chr$(&H22), ":", Str$(suctionCups), "}"
-Print #201, "{", Chr$(&H22) + "erUnknown" + Chr$(&H22), ":", Str$(erUnknown), "}"
-Print #201, "{", Chr$(&H22) + "erEstop" + Chr$(&H22), ":", Str$(erEstop), "}"
-Print #201, "{", Chr$(&H22) + "erPanelFailedInspection" + Chr$(&H22), ":", Str$(erPanelFailedInspection), "}"
-Print #201, "{", Chr$(&H22) + "erFrontSafetyFrameOpen" + Chr$(&H22), ":", Str$(erFrontSafetyFrameOpen), "}"
+heartBeat = Not heartBeat
+'Tx to HMI:
+Print #201, "{", Chr$(&H22) + "backInterlockACK" + Chr$(&H22), ":", Str$(backInterlockACK), "}"
+Print #201, "{", Chr$(&H22) + "frontInterlockACK" + Chr$(&H22), ":", Str$(frontInterlockACK), "}"
+Print #201, "{", Chr$(&H22) + "inMagGoHome" + Chr$(&H22), ":", Str$(inMagGoHome), "}"
+Print #201, "{", Chr$(&H22) + "inMagIntLockAck" + Chr$(&H22), ":", Str$(inMagIntLockAck), "}"
+Print #201, "{", Chr$(&H22) + "inMagLoaded" + Chr$(&H22), ":", Str$(inMagLoaded), "}"
+Print #201, "{", Chr$(&H22) + "jobPause" + Chr$(&H22), ":", Str$(jobPause), "}"
+Print #201, "{", Chr$(&H22) + "jobResume" + Chr$(&H22), ":", Str$(jobResume), "}"
+Print #201, "{", Chr$(&H22) + "jobStart" + Chr$(&H22), ":", Str$(jobStart), "}"
+Print #201, "{", Chr$(&H22) + "jobStop" + Chr$(&H22), ":", Str$(jobStop), "}"
+Print #201, "{", Chr$(&H22) + "leftInterlockACK" + Chr$(&H22), ":", Str$(leftInterlockACK), "}"
+Print #201, "{", Chr$(&H22) + "outMagGoHome" + Chr$(&H22), ":", Str$(outMagGoHome), "}"
+Print #201, "{", Chr$(&H22) + "outMagIntLockAck" + Chr$(&H22), ":", Str$(outMagIntLockAck), "}"
+Print #201, "{", Chr$(&H22) + "outMagUnloaded" + Chr$(&H22), ":", Str$(outMagUnloaded), "}"
+Print #201, "{", Chr$(&H22) + "rightInterlockACK" + Chr$(&H22), ":", Str$(rightInterlockACK), "}"
+Print #201, "{", Chr$(&H22) + "sftyFrmIlockAck" + Chr$(&H22), ":", Str$(sftyFrmIlockAck), "}"
 Print #201, "{", Chr$(&H22) + "erBackSafetyFrameOpen" + Chr$(&H22), ":", Str$(erBackSafetyFrameOpen), "}"
-Print #201, "{", Chr$(&H22) + "erLeftSafetyFrameOpen" + Chr$(&H22), ":", Str$(erLeftSafetyFrameOpen), "}"
-Print #201, "{", Chr$(&H22) + "erRightSafetyFrameOpen" + Chr$(&H22), ":", Str$(erRightSafetyFrameOpen), "}"
-Print #201, "{", Chr$(&H22) + "erLowPressure" + Chr$(&H22), ":", Str$(erLowPressure), "}"
-Print #201, "{", Chr$(&H22) + "erHighPressure" + Chr$(&H22), ":", Str$(erHighPressure), "}"
-Print #201, "{", Chr$(&H22) + "erPanelStatusUnknown" + Chr$(&H22), ":", Str$(erPanelStatusUnknown), "}"
-Print #201, "{", Chr$(&H22) + "erWrongPanelHoles" + Chr$(&H22), ":", Str$(erWrongPanelHoles), "}"
-Print #201, "{", Chr$(&H22) + "erWrongPanelDims" + Chr$(&H22), ":", Str$(erWrongPanelDims), "}"
-Print #201, "{", Chr$(&H22) + "erWrongPanel" + Chr$(&H22), ":", Str$(erWrongPanel), "}"
-Print #201, "{", Chr$(&H22) + "erWrongPanelInsert" + Chr$(&H22), ":", Str$(erWrongPanelInsert), "}"
-Print #201, "{", Chr$(&H22) + "erInMagEmpty" + Chr$(&H22), ":", Str$(erInMagEmpty), "}"
-Print #201, "{", Chr$(&H22) + "erInMagOpenInterlock" + Chr$(&H22), ":", Str$(erInMagOpenInterlock), "}"
-Print #201, "{", Chr$(&H22) + "erInMagCrowding" + Chr$(&H22), ":", Str$(erInMagCrowding), "}"
-Print #201, "{", Chr$(&H22) + "erOutMagFull" + Chr$(&H22), ":", Str$(erOutMagFull), "}"
-Print #201, "{", Chr$(&H22) + "erOutMagOpenInterlock" + Chr$(&H22), ":", Str$(erOutMagOpenInterlock), "}"
-Print #201, "{", Chr$(&H22) + "erOutMagCrowding" + Chr$(&H22), ":", Str$(erOutMagCrowding), "}"
-Print #201, "{", Chr$(&H22) + "erLaserScanner" + Chr$(&H22), ":", Str$(erLaserScanner), "}"
+Print #201, "{", Chr$(&H22) + "erBowlFeederBreaker" + Chr$(&H22), ":", Str$(erBowlFeederBreaker), "}"
 Print #201, "{", Chr$(&H22) + "erDCPower" + Chr$(&H22), ":", Str$(erDCPower), "}"
 Print #201, "{", Chr$(&H22) + "erDCPowerHeatStake" + Chr$(&H22), ":", Str$(erDCPowerHeatStake), "}"
-Print #201, "{", Chr$(&H22) + "erHeatStakeBreaker" + Chr$(&H22), ":", Str$(erHeatStakeBreaker), "}"
-Print #201, "{", Chr$(&H22) + "erBowlFeederBreaker" + Chr$(&H22), ":", Str$(erBowlFeederBreaker), "}"
-Print #201, "{", Chr$(&H22) + "erInMagBreaker" + Chr$(&H22), ":", Str$(erInMagBreaker), "}"
-Print #201, "{", Chr$(&H22) + "erOutMagBreaker" + Chr$(&H22), ":", Str$(erOutMagBreaker), "}"
-Print #201, "{", Chr$(&H22) + "erFlashBreaker" + Chr$(&H22), ":", Str$(erFlashBreaker), "}"
 Print #201, "{", Chr$(&H22) + "erDebrisRemovalBreaker" + Chr$(&H22), ":", Str$(erDebrisRemovalBreaker), "}"
+Print #201, "{", Chr$(&H22) + "erEstop" + Chr$(&H22), ":", Str$(erEstop), "}"
+Print #201, "{", Chr$(&H22) + "erFlashBreaker" + Chr$(&H22), ":", Str$(erFlashBreaker), "}"
+Print #201, "{", Chr$(&H22) + "erFrontSafetyFrameOpen" + Chr$(&H22), ":", Str$(erFrontSafetyFrameOpen), "}"
+Print #201, "{", Chr$(&H22) + "erHeatStakeBreaker" + Chr$(&H22), ":", Str$(erHeatStakeBreaker), "}"
+Print #201, "{", Chr$(&H22) + "erHighPressure" + Chr$(&H22), ":", Str$(erHighPressure), "}"
+Print #201, "{", Chr$(&H22) + "erInMagBreaker" + Chr$(&H22), ":", Str$(erInMagBreaker), "}"
+Print #201, "{", Chr$(&H22) + "erInMagCrowding" + Chr$(&H22), ":", Str$(erInMagCrowding), "}"
+Print #201, "{", Chr$(&H22) + "erInMagEmpty" + Chr$(&H22), ":", Str$(erInMagEmpty), "}"
+Print #201, "{", Chr$(&H22) + "erInMagOpenInterlock" + Chr$(&H22), ":", Str$(erInMagOpenInterlock), "}"
+Print #201, "{", Chr$(&H22) + "erLaserScanner" + Chr$(&H22), ":", Str$(erLaserScanner), "}"
+Print #201, "{", Chr$(&H22) + "erLeftSafetyFrameOpen" + Chr$(&H22), ":", Str$(erLeftSafetyFrameOpen), "}"
+Print #201, "{", Chr$(&H22) + "erLowPressure" + Chr$(&H22), ":", Str$(erLowPressure), "}"
+Print #201, "{", Chr$(&H22) + "erOutMagBreaker" + Chr$(&H22), ":", Str$(erOutMagBreaker), "}"
+Print #201, "{", Chr$(&H22) + "erOutMagCrowding" + Chr$(&H22), ":", Str$(erOutMagCrowding), "}"
+Print #201, "{", Chr$(&H22) + "erOutMagFull" + Chr$(&H22), ":", Str$(erOutMagFull), "}"
+Print #201, "{", Chr$(&H22) + "erOutMagOpenInterlock" + Chr$(&H22), ":", Str$(erOutMagOpenInterlock), "}"
+Print #201, "{", Chr$(&H22) + "erPanelFailedInspection" + Chr$(&H22), ":", Str$(erPanelFailedInspection), "}"
+Print #201, "{", Chr$(&H22) + "erPanelStatusUnknown" + Chr$(&H22), ":", Str$(erPanelStatusUnknown), "}"
 Print #201, "{", Chr$(&H22) + "erPnumaticsBreaker" + Chr$(&H22), ":", Str$(erPnumaticsBreaker), "}"
-Print #201, "{", Chr$(&H22) + "erSafetySystemBreaker" + Chr$(&H22), ":", Str$(erSafetySystemBreaker), "}"
 Print #201, "{", Chr$(&H22) + "erRC180" + Chr$(&H22), ":", Str$(erRC180), "}"
+Print #201, "{", Chr$(&H22) + "erRightSafetyFrameOpen" + Chr$(&H22), ":", Str$(erRightSafetyFrameOpen), "}"
+Print #201, "{", Chr$(&H22) + "erSafetySystemBreaker" + Chr$(&H22), ":", Str$(erSafetySystemBreaker), "}"
+Print #201, "{", Chr$(&H22) + "erUnknown" + Chr$(&H22), ":", Str$(erUnknown), "}"
+Print #201, "{", Chr$(&H22) + "erWrongPanel" + Chr$(&H22), ":", Str$(erWrongPanel), "}"
+Print #201, "{", Chr$(&H22) + "erWrongPanelDims" + Chr$(&H22), ":", Str$(erWrongPanelDims), "}"
+Print #201, "{", Chr$(&H22) + "erWrongPanelHoles" + Chr$(&H22), ":", Str$(erWrongPanelHoles), "}"
+Print #201, "{", Chr$(&H22) + "erWrongPanelInsert" + Chr$(&H22), ":", Str$(erWrongPanelInsert), "}"
+Print #201, "{", Chr$(&H22) + "erRecEntryMissing" + Chr$(&H22), ":", Str$(erRecEntryMissing), "}"
+Print #201, "{", Chr$(&H22) + "erParamEntryMissing" + Chr$(&H22), ":", Str$(erParamEntryMissing), "}"
+Print #201, "{", Chr$(&H22) + "airPressHigh" + Chr$(&H22), ":", Str$(airPressHigh), "}"
+Print #201, "{", Chr$(&H22) + "airPressLow" + Chr$(&H22), ":", Str$(airPressLow), "}"
+Print #201, "{", Chr$(&H22) + "cbMonBowlFeder" + Chr$(&H22), ":", Str$(cbMonBowlFeder), "}"
+Print #201, "{", Chr$(&H22) + "cbMonDebrisRmv" + Chr$(&H22), ":", Str$(cbMonDebrisRmv), "}"
+Print #201, "{", Chr$(&H22) + "cbMonFlashRmv" + Chr$(&H22), ":", Str$(cbMonFlashRmv), "}"
+Print #201, "{", Chr$(&H22) + "cbMonHeatStake" + Chr$(&H22), ":", Str$(cbMonHeatStake), "}"
+Print #201, "{", Chr$(&H22) + "cbMonInMag" + Chr$(&H22), ":", Str$(cbMonInMag), "}"
+Print #201, "{", Chr$(&H22) + "cbMonOutMag" + Chr$(&H22), ":", Str$(cbMonOutMag), "}"
+Print #201, "{", Chr$(&H22) + "cbMonPAS24vdc" + Chr$(&H22), ":", Str$(cbMonPAS24vdc), "}"
+Print #201, "{", Chr$(&H22) + "cbMonPnumatic" + Chr$(&H22), ":", Str$(cbMonPnumatic), "}"
+Print #201, "{", Chr$(&H22) + "cbMonSafety" + Chr$(&H22), ":", Str$(cbMonSafety), "}"
+Print #201, "{", Chr$(&H22) + "dcPwrOk" + Chr$(&H22), ":", Str$(dcPwrOk), "}"
+Print #201, "{", Chr$(&H22) + "flashPnlPrsnt" + Chr$(&H22), ":", Str$(FlashPnlPrsnt), "}"
+Print #201, "{", Chr$(&H22) + "frontInterlock" + Chr$(&H22), ":", Str$(frontInterlock), "}"
+Print #201, "{", Chr$(&H22) + "hsPanelPresnt" + Chr$(&H22), ":", Str$(hsPanelPresnt), "}"
+Print #201, "{", Chr$(&H22) + "inMagInterlock" + Chr$(&H22), ":", Str$(inMagInterlock), "}"
+Print #201, "{", Chr$(&H22) + "inMagLowerLim" + Chr$(&H22), ":", Str$(inMagLowerLim), "}"
+Print #201, "{", Chr$(&H22) + "inMagPnlRdy" + Chr$(&H22), ":", Str$(inMagPnlRdy), "}"
+Print #201, "{", Chr$(&H22) + "inMagUpperLim" + Chr$(&H22), ":", Str$(inMagUpperLim), "}"
+Print #201, "{", Chr$(&H22) + "leftInterlock" + Chr$(&H22), ":", Str$(leftInterlock), "}"
+Print #201, "{", Chr$(&H22) + "outMagInt" + Chr$(&H22), ":", Str$(outMagInt), "}"
+Print #201, "{", Chr$(&H22) + "outMagLowerLim" + Chr$(&H22), ":", Str$(outMagLowerLim), "}"
+Print #201, "{", Chr$(&H22) + "outMagPanelRdy" + Chr$(&H22), ":", Str$(outMagPanelRdy), "}"
+Print #201, "{", Chr$(&H22) + "outMagUpperLim" + Chr$(&H22), ":", Str$(outMagUpperLim), "}"
+Print #201, "{", Chr$(&H22) + "rightInterlock" + Chr$(&H22), ":", Str$(rightInterlock), "}"
+Print #201, "{", Chr$(&H22) + "debrisMtr" + Chr$(&H22), ":", Str$(debrisMtr), "}"
+Print #201, "{", Chr$(&H22) + "flashCyc" + Chr$(&H22), ":", Str$(flashCyc), "}"
+Print #201, "{", Chr$(&H22) + "flashMtr" + Chr$(&H22), ":", Str$(flashMtr), "}"
+Print #201, "{", Chr$(&H22) + "hsInstallInsrt" + Chr$(&H22), ":", Str$(hsInstallInsrt), "}"
+Print #201, "{", Chr$(&H22) + "inMagMtr" + Chr$(&H22), ":", Str$(inMagMtr), "}"
+Print #201, "{", Chr$(&H22) + "inMagMtrDir" + Chr$(&H22), ":", Str$(inMagMtrDir), "}"
+Print #201, "{", Chr$(&H22) + "outMagMtr" + Chr$(&H22), ":", Str$(outMagMtr), "}"
+Print #201, "{", Chr$(&H22) + "outMagMtrDir" + Chr$(&H22), ":", Str$(outMagMtrDir), "}"
+Print #201, "{", Chr$(&H22) + "stackLightAlrm" + Chr$(&H22), ":", Str$(stackLightAlrm), "}"
+Print #201, "{", Chr$(&H22) + "stackLightGrn" + Chr$(&H22), ":", Str$(stackLightGrn), "}"
+Print #201, "{", Chr$(&H22) + "stackLightRed" + Chr$(&H22), ":", Str$(stackLightRed), "}"
+Print #201, "{", Chr$(&H22) + "stackLightYel" + Chr$(&H22), ":", Str$(stackLightYel), "}"
+Print #201, "{", Chr$(&H22) + "suctionCups" + Chr$(&H22), ":", Str$(suctionCups), "}"
+Print #201, "{", Chr$(&H22) + "systemState" + Chr$(&H22), ":", Str$(SystemState), "}"
+Print #201, "{", Chr$(&H22) + "ctrlrErrAxisNumber" + Chr$(&H22), ":", Str$(ctrlrErrAxisNumber), "}"
+'Print #201, "{", Chr$(&H22) + "ctrlrErrMsg" + Chr$(&H22), ":", Str$(ctrlrErrMsg), "}"
+Print #201, "{", Chr$(&H22) + "ctrlrErrorNum" + Chr$(&H22), ":", Str$(ctrlrErrorNum), "}"
+Print #201, "{", Chr$(&H22) + "ctrlrLineNumber" + Chr$(&H22), ":", Str$(ctrlrLineNumber), "}"
+Print #201, "{", Chr$(&H22) + "ctrlrTaskNumber" + Chr$(&H22), ":", Str$(ctrlrTaskNumber), "}"
+Print #201, "{", Chr$(&H22) + "errorStatus" + Chr$(&H22), ":", Str$(errorStatus), "}"
+Print #201, "{", Chr$(&H22) + "eStopStatus" + Chr$(&H22), ":", Str$(eStopStatus), "}"
+Print #201, "{", Chr$(&H22) + "heartBeat" + Chr$(&H22), ":", Str$(heartBeat), "}"
 Print #201, "{", Chr$(&H22) + "homePositionStatus" + Chr$(&H22), ":", Str$(homePositionStatus), "}"
-Print #201, "{", Chr$(&H22) + "motorOnStatus" + Chr$(&H22), ":", Str$(motorOnStatus), "}"
-Print #201, "{", Chr$(&H22) + "motorPowerStatus" + Chr$(&H22), ":", Str$(motorPowerStatus), "}"
 Print #201, "{", Chr$(&H22) + "joint1Status" + Chr$(&H22), ":", Str$(joint1Status), "}"
 Print #201, "{", Chr$(&H22) + "joint2Status" + Chr$(&H22), ":", Str$(joint2Status), "}"
 Print #201, "{", Chr$(&H22) + "joint3Status" + Chr$(&H22), ":", Str$(joint3Status), "}"
 Print #201, "{", Chr$(&H22) + "joint4Status" + Chr$(&H22), ":", Str$(joint4Status), "}"
-Print #201, "{", Chr$(&H22) + "eStopStatus" + Chr$(&H22), ":", Str$(eStopStatus), "}"
-Print #201, "{", Chr$(&H22) + "errorStatus" + Chr$(&H22), ":", Str$(errorStatus), "}"
-Print #201, "{", Chr$(&H22) + "tasksRunningStatus" + Chr$(&H22), ":", Str$(tasksRunningStatus), "}"
+Print #201, "{", Chr$(&H22) + "motorOnStatus" + Chr$(&H22), ":", Str$(motorOnStatus), "}"
+Print #201, "{", Chr$(&H22) + "motorPowerStatus" + Chr$(&H22), ":", Str$(motorPowerStatus), "}"
 Print #201, "{", Chr$(&H22) + "pauseStatus" + Chr$(&H22), ":", Str$(pauseStatus), "}"
-Print #201, "{", Chr$(&H22) + "teachModeStatus" + Chr$(&H22), ":", Str$(teachModeStatus), "}"
 Print #201, "{", Chr$(&H22) + "safeGuardInput" + Chr$(&H22), ":", Str$(safeGuardInput), "}"
-'Print #201, "{", Chr$(&H22) + "ctrlrErrMsg" + Chr$(&H22), ":", Str$(ctrlrErrMsg), "}"
-Print #201, "{", Chr$(&H22) + "ctrlrLineNumber" + Chr$(&H22), ":", Str$(ctrlrLineNumber), "}"
-Print #201, "{", Chr$(&H22) + "ctrlrTaskNumber" + Chr$(&H22), ":", Str$(ctrlrTaskNumber), "}"
-Print #201, "{", Chr$(&H22) + "ctrlrErrAxisNumber" + Chr$(&H22), ":", Str$(ctrlrErrAxisNumber), "}"
-Print #201, "{", Chr$(&H22) + "ctrlrErrorNum" + Chr$(&H22), ":", Str$(ctrlrErrorNum), "}"
+Print #201, "{", Chr$(&H22) + "tasksRunningStatus" + Chr$(&H22), ":", Str$(tasksRunningStatus), "}"
+Print #201, "{", Chr$(&H22) + "teachModeStatus" + Chr$(&H22), ":", Str$(teachModeStatus), "}"
+Print #201, "{", Chr$(&H22) + "hsProbeTemp" + Chr$(&H22), ":", Str$(hsProbeTemp), "}"
 Print #201, "{", Chr$(&H22) + "inMagCurrentState" + Chr$(&H22), ":", Str$(inMagCurrentState), "}"
+Print #201, "{", Chr$(&H22) + "jobDone" + Chr$(&H22), ":", Str$(jobDone), "}"
+Print #201, "{", Chr$(&H22) + "jobNumPanelsDone" + Chr$(&H22), ":", Str$(jobNumPanelsDone), "}"
 Print #201, "{", Chr$(&H22) + "outMagCurrentState" + Chr$(&H22), ":", Str$(outMagCurrentState), "}"
-Print #201, "{", Chr$(&H22) + "debrisMtr" + Chr$(&H22), ":", Str$(debrisMtr), "}"
-Print #201, "{", Chr$(&H22) + "stackLightRed" + Chr$(&H22), ":", Str$(stackLightRed), "}"
-Print #201, "{", Chr$(&H22) + "stackLightYel" + Chr$(&H22), ":", Str$(stackLightYel), "}"
-Print #201, "{", Chr$(&H22) + "stackLightGrn" + Chr$(&H22), ":", Str$(stackLightGrn), "}"
-Print #201, "{", Chr$(&H22) + "stackLightAlrm" + Chr$(&H22), ":", Str$(stackLightAlrm), "}"
 
 '            	Print #201, "Laser Measurement = ", g_LaserMeasure
-        EndIf
-	Loop
-Fend
-' This task runs continuously in the background listening
-'   for input from the HMI and updating global variables
-Function HmiListen()
-                
-    Integer i, j, NumTokens
-    String Tokens$(0)
-    String response$
-    String outstring$
-    String match$
-                
-    ' define the connection to the HMI
-    SetNet #202, "10.22.251.68", 1503, CRLF, NONE, 0
-    
-    match$ = "{:} " + Chr$(&H22)
- 
-    Do While True 'g_io_xfr_on = 1
-
-        If ChkNet(202) < 0 Then ' If port is not open
-            OpenNet #202 As Server
-        Else
-            i = ChkNet(202)
-            If i > 0 Then
-            	Read #202, response$, i
-            	'numTokens = ParseStr(inputString, tokens$(), delimiters)
-				NumTokens = ParseStr(response$, Tokens$(), match$)
-				Print "Number of Tokens is: ", NumTokens
-				Print response$
-				Select Tokens$(0)
- 
- 
- 
- 'Rx from HMI:
-Case "inMagGoHome"
-   If Tokens$(1) = "true" Then
-       inMagGoHome = True
-   Else
-       inMagGoHome = False
-   EndIf
-   Print "inMagGoHome:", inMagGoHome
-Case "outMagGoHome"
-   If Tokens$(1) = "true" Then
-       outMagGoHome = True
-   Else
-       outMagGoHome = False
-   EndIf
-   Print "outMagGoHome:", outMagGoHome
-Case "inMagLoaded"
-   If Tokens$(1) = "true" Then
-       inMagLoaded = True
-   Else
-       inMagLoaded = False
-   EndIf
-   Print "inMagLoaded:", inMagLoaded
-Case "outMagUnloaded"
-   If Tokens$(1) = "true" Then
-       outMagUnloaded = True
-   Else
-       outMagUnloaded = False
-   EndIf
-   Print "outMagUnloaded:", outMagUnloaded
-Case "inMagMtrF"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagMtrF)
-    Else
-        MemOff (inMagMtrF)
-    EndIf
-Case "inMagMtrFV"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagMtrFV)
-    Else
-        MemOff (inMagMtrFV)
-    EndIf
-Case "inMagMtrDirF"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagMtrDirF)
-    Else
-        MemOff (inMagMtrDirF)
-    EndIf
-Case "inMagMtrDirFV"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagMtrDirFV)
-    Else
-        MemOff (inMagMtrDirFV)
-    EndIf
-Case "inMagPnlRdyF"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagPnlRdyF)
-    Else
-        MemOff (inMagPnlRdyF)
-    EndIf
-Case "inMagPnlRdyFV"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagPnlRdyFV)
-    Else
-        MemOff (inMagPnlRdyFV)
-    EndIf
-Case "inMagUpperLimF"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagUpperLimF)
-    Else
-        MemOff (inMagUpperLimF)
-    EndIf
-Case "inMagUpperLimFV"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagUpperLimFV)
-    Else
-        MemOff (inMagUpperLimFV)
-    EndIf
-Case "inMagLowerLimF"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagLowerLimF)
-    Else
-        MemOff (inMagLowerLimF)
-    EndIf
-Case "inMagLowerLimFV"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagLowerLimFV)
-    Else
-        MemOff (inMagLowerLimFV)
-    EndIf
-Case "inMagInterlockF"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagInterlockF)
-    Else
-        MemOff (inMagInterlockF)
-    EndIf
-Case "inMagInterlockFV"
-    If Tokens$(1) = "true" Then
-        MemOn (inMagInterlockFV)
-    Else
-        MemOff (inMagInterlockFV)
-    EndIf
-Case "inMagIntLockAck"
-   If Tokens$(1) = "true" Then
-       inMagIntLockAck = True
-   Else
-       inMagIntLockAck = False
-   EndIf
-   Print "inMagIntLockAck:", inMagIntLockAck
-Case "outMagMtrF"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagMtrF)
-    Else
-        MemOff (outMagMtrF)
-    EndIf
-Case "outMagMtrFV"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagMtrFV)
-    Else
-        MemOff (outMagMtrFV)
-    EndIf
-Case "outMagMtrDirF"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagMtrDirF)
-    Else
-        MemOff (outMagMtrDirF)
-    EndIf
-Case "outMagMtrDirFV"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagMtrDirFV)
-    Else
-        MemOff (outMagMtrDirFV)
-    EndIf
-Case "outMagPanelRdyF"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagPanelRdyF)
-    Else
-        MemOff (outMagPanelRdyF)
-    EndIf
-Case "outMagPanelRdyFV"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagPanelRdyFV)
-    Else
-        MemOff (outMagPanelRdyFV)
-    EndIf
-Case "outMagUpperLimF"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagUpperLimF)
-    Else
-        MemOff (outMagUpperLimF)
-    EndIf
-Case "outMagUpperLimFV"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagUpperLimFV)
-    Else
-        MemOff (outMagUpperLimFV)
-    EndIf
-Case "outMagLowerLimF"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagLowerLimF)
-    Else
-        MemOff (outMagLowerLimF)
-    EndIf
-Case "outMagLowerLimFV"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagLowerLimFV)
-    Else
-        MemOff (outMagLowerLimFV)
-    EndIf
-Case "outMagIntF"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagIntF)
-    Else
-        MemOff (outMagIntF)
-    EndIf
-Case "outMagIntFV"
-    If Tokens$(1) = "true" Then
-        MemOn (outMagIntFV)
-    Else
-        MemOff (outMagIntFV)
-    EndIf
-Case "outMagIntLockAck"
-   If Tokens$(1) = "true" Then
-       outMagIntLockAck = True
-   Else
-       outMagIntLockAck = False
-   EndIf
-   Print "outMagIntLockAck:", outMagIntLockAck
-Case "flashMtrF"
-    If Tokens$(1) = "true" Then
-        MemOn (flashMtrF)
-    Else
-        MemOff (flashMtrF)
-    EndIf
-Case "flashMtrFV"
-    If Tokens$(1) = "true" Then
-        MemOn (flashMtrFV)
-    Else
-        MemOff (flashMtrFV)
-    EndIf
-Case "flashCycF"
-    If Tokens$(1) = "true" Then
-        MemOn (flashCycF)
-    Else
-        MemOff (flashCycF)
-    EndIf
-Case "flashCycFV"
-    If Tokens$(1) = "true" Then
-        MemOn (flashCycFV)
-    Else
-        MemOff (flashCycFV)
-    EndIf
-Case "flashPnlPrsntF"
-    If Tokens$(1) = "true" Then
-        MemOn (FlashPnlPrsntF)
-    Else
-        MemOff (FlashPnlPrsntF)
-    EndIf
-Case "flashPnlPrsntFV"
-    If Tokens$(1) = "true" Then
-        MemOn (FlashPnlPrsntFV)
-    Else
-        MemOff (FlashPnlPrsntFV)
-    EndIf
-Case "hsPanelPresntF"
-    If Tokens$(1) = "true" Then
-        MemOn (hsPanelPresntF)
-    Else
-        MemOff (hsPanelPresntF)
-    EndIf
-Case "hsPanelPresntFV"
-    If Tokens$(1) = "true" Then
-        MemOn (hsPanelPresntFV)
-    Else
-        MemOff (hsPanelPresntFV)
-    EndIf
-Case "recNumberOfHoles"
-    recNumberOfHoles = Val(Tokens$(1))
-    Print "recNumberOfHoles:", recNumberOfHoles
-Case "recFlashRequired"
-    If Tokens$(1) = "true" Then
-        recFlashRequired = True
-    Else
-        recFlashRequired = False
-    EndIf
-    Print "recFlashRequired:", recFlashRequired
-Case "recZDropOff"
-    recZDropOff = Val(Tokens$(1))
-    Print "recZDropOff:", recZDropOff
-Case "recInsertType"
-    recInsertType = Val(Tokens$(1))
-    Print "recInsertType:", recInsertType
-Case "recInsertDepth"
-    recInsertDepth = Val(Tokens$(1))
-    Print "recInsertDepth:", recInsertDepth
-Case "recMajorDim"
-    recMajorDim = Val(Tokens$(1))
-    Print "recMajorDim:", recMajorDim
-Case "recMinorDim"
-    recMinorDim = Val(Tokens$(1))
-    Print "recMinorDim:", recMinorDim
-Case "sftyFrmIlockAck"
-   If Tokens$(1) = "true" Then
-       sftyFrmIlockAck = True
-   Else
-       sftyFrmIlockAck = False
-   EndIf
-   Print "sftyFrmIlockAck:", sftyFrmIlockAck
-Case "leftInterlockF"
-    If Tokens$(1) = "true" Then
-        MemOn (leftInterlockF)
-    Else
-        MemOff (leftInterlockF)
-    EndIf
-Case "leftInterlockFV"
-    If Tokens$(1) = "true" Then
-        MemOn (leftInterlockFV)
-    Else
-        MemOff (leftInterlockFV)
-    EndIf
-Case "leftInterlockACK"
-   If Tokens$(1) = "true" Then
-       leftInterlockACK = True
-   Else
-       leftInterlockACK = False
-   EndIf
-   Print "leftInterlockACK:", leftInterlockACK
-Case "rightInterlockF"
-    If Tokens$(1) = "true" Then
-        MemOn (rightInterlockF)
-    Else
-        MemOff (rightInterlockF)
-    EndIf
-Case "rightInterlockFV"
-    If Tokens$(1) = "true" Then
-        MemOn (rightInterlockFV)
-    Else
-        MemOff (rightInterlockFV)
-    EndIf
-Case "rightInterlockACK"
-   If Tokens$(1) = "true" Then
-       rightInterlockACK = True
-   Else
-       rightInterlockACK = False
-   EndIf
-   Print "rightInterlockACK:", rightInterlockACK
-Case "backInterlockACK"
-   If Tokens$(1) = "true" Then
-       backInterlockACK = True
-   Else
-       backInterlockACK = False
-   EndIf
-   Print "backInterlockACK:", backInterlockACK
-Case "frontInterlockF"
-    If Tokens$(1) = "true" Then
-        MemOn (frontInterlockF)
-    Else
-        MemOff (frontInterlockF)
-    EndIf
-Case "frontInterlockFV"
-    If Tokens$(1) = "true" Then
-        MemOn (frontInterlockFV)
-    Else
-        MemOff (frontInterlockFV)
-    EndIf
-Case "frontInterlockACK"
-   If Tokens$(1) = "true" Then
-       frontInterlockACK = True
-   Else
-       frontInterlockACK = False
-   EndIf
-   Print "frontInterlockACK:", frontInterlockACK
-Case "airPressHighF"
-    If Tokens$(1) = "true" Then
-        MemOn (airPressHighF)
-    Else
-        MemOff (airPressHighF)
-    EndIf
-Case "airPressHighFV"
-    If Tokens$(1) = "true" Then
-        MemOn (airPressHighFV)
-    Else
-        MemOff (airPressHighFV)
-    EndIf
-Case "airPressLowF"
-    If Tokens$(1) = "true" Then
-        MemOn (airPressLowF)
-    Else
-        MemOff (airPressLowF)
-    EndIf
-Case "airPressLowFV"
-    If Tokens$(1) = "true" Then
-        MemOn (airPressLowFV)
-    Else
-        MemOff (airPressLowFV)
-    EndIf
-Case "cbMonHeatStakeF"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonHeatStakeF)
-    Else
-        MemOff (cbMonHeatStakeF)
-    EndIf
-Case "cbMonHeatStakeFV"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonHeatStakeFV)
-    Else
-        MemOff (cbMonHeatStakeFV)
-    EndIf
-Case "cbMonBowlFederF"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonBowlFederF)
-    Else
-        MemOff (cbMonBowlFederF)
-    EndIf
-Case "cbMonBowlFederFV"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonBowlFederFV)
-    Else
-        MemOff (cbMonBowlFederFV)
-    EndIf
-Case "cbMonInMagF"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonInMagF)
-    Else
-        MemOff (cbMonInMagF)
-    EndIf
-Case "cbMonInMagFV"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonInMagFV)
-    Else
-        MemOff (cbMonInMagFV)
-    EndIf
-Case "cbMonOutMagF"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonOutMagF)
-    Else
-        MemOff (cbMonOutMagF)
-    EndIf
-Case "cbMonOutMagFV"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonOutMagFV)
-    Else
-        MemOff (cbMonOutMagFV)
-    EndIf
-Case "cbMonFlashRmvF"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonFlashRmvF)
-    Else
-        MemOff (cbMonFlashRmvF)
-    EndIf
-Case "cbMonFlashRmvFV"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonFlashRmvFV)
-    Else
-        MemOff (cbMonFlashRmvFV)
-    EndIf
-Case "cbMonDebrisRmvF"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonDebrisRmvF)
-    Else
-        MemOff (cbMonDebrisRmvF)
-    EndIf
-Case "cbMonDebrisRmvFV"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonDebrisRmvFV)
-    Else
-        MemOff (cbMonDebrisRmvFV)
-    EndIf
-Case "dcPwrOkF"
-    If Tokens$(1) = "true" Then
-        MemOn (dcPwrOkF)
-    Else
-        MemOff (dcPwrOkF)
-    EndIf
-Case "dcPwrOkFV"
-    If Tokens$(1) = "true" Then
-        MemOn (dcPwrOkFV)
-    Else
-        MemOff (dcPwrOkFV)
-    EndIf
-Case "cbMonPnumaticF"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonPnumaticF)
-    Else
-        MemOff (cbMonPnumaticF)
-    EndIf
-Case "cbMonPnumaticFV"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonPnumaticFV)
-    Else
-        MemOff (cbMonPnumaticFV)
-    EndIf
-Case "cbMonSafetyF"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonSafetyF)
-    Else
-        MemOff (cbMonSafetyF)
-    EndIf
-Case "cbMonSafetyFV"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonSafetyFV)
-    Else
-        MemOff (cbMonSafetyFV)
-    EndIf
-Case "cbMonPAS24vdcF"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonPAS24vdcF)
-    Else
-        MemOff (cbMonPAS24vdcF)
-    EndIf
-Case "cbMonPAS24vdcFV"
-    If Tokens$(1) = "true" Then
-        MemOn (cbMonPAS24vdcFV)
-    Else
-        MemOff (cbMonPAS24vdcFV)
-    EndIf
-Case "anvilZlimit"
-    AnvilZlimit = Val(Tokens$(1))
-    Print "anvilZlimit:", AnvilZlimit
-Case "systemSpeed"
-    SystemSpeed = Val(Tokens$(1))
-    Print "systemSpeed:", SystemSpeed
-Case "recTemp"
-    recTemp = Val(Tokens$(1))
-    Print "recTemp:", recTemp
-Case "jobNumPanels"
-Case "hmiStopJob"
-   If Tokens$(1) = "true" Then
-       hmiStopJob = True
-   Else
-       hmiStopJob = False
-   EndIf
-   Print "hmiStopJob:", hmiStopJob
-Case "robStart"
-   If Tokens$(1) = "true" Then
-       robStart = True
-   Else
-       robStart = False
-   EndIf
-   Print "robStart:", robStart
-Case "robStop"
-   If Tokens$(1) = "true" Then
-       robStop = True
-   Else
-       robStop = False
-   EndIf
-   Print "robStop:", robStop
-Case "robPause"
-   If Tokens$(1) = "true" Then
-       robPause = True
-   Else
-       robPause = False
-   EndIf
-   Print "robPause:", robPause
-Case "robResume"
-   If Tokens$(1) = "true" Then
-       robResume = True
-   Else
-       robResume = False
-   EndIf
-   Print "robResume:", robResume
-Case "recBossHeight"
-    recBossHeight = Val(Tokens$(1))
-    Print "recBossHeight:", recBossHeight
-Case "suctionCupsF"
-    If Tokens$(1) = "true" Then
-        MemOn (suctionCupsF)
-    Else
-        MemOff (suctionCupsF)
-    EndIf
-Case "suctionCupsFV"
-    If Tokens$(1) = "true" Then
-        MemOn (suctionCupsFV)
-    Else
-        MemOff (suctionCupsFV)
-    EndIf
-Case "debrisMtrF"
-    If Tokens$(1) = "true" Then
-        MemOn (debrisMtrF)
-    Else
-        MemOff (debrisMtrF)
-    EndIf
-Case "debrisMtrFV"
-    If Tokens$(1) = "true" Then
-        MemOn (debrisMtrFV)
-    Else
-        MemOff (debrisMtrFV)
-    EndIf
-Case "stackLightRedF"
-    If Tokens$(1) = "true" Then
-        MemOn (stackLightRedF)
-    Else
-        MemOff (stackLightRedF)
-    EndIf
-Case "stackLightRedFV"
-    If Tokens$(1) = "true" Then
-        MemOn (stackLightRedFV)
-    Else
-        MemOff (stackLightRedFV)
-    EndIf
-Case "stackLightYelF"
-    If Tokens$(1) = "true" Then
-        MemOn (stackLightYelF)
-    Else
-        MemOff (stackLightYelF)
-    EndIf
-Case "stackLightYelFV"
-    If Tokens$(1) = "true" Then
-        MemOn (stackLightYelFV)
-    Else
-        MemOff (stackLightYelFV)
-    EndIf
-Case "stackLightGrnF"
-    If Tokens$(1) = "true" Then
-        MemOn (stackLightGrnF)
-    Else
-        MemOff (stackLightGrnF)
-    EndIf
-Case "stackLightGrnFV"
-    If Tokens$(1) = "true" Then
-        MemOn (stackLightGrnFV)
-    Else
-        MemOff (stackLightGrnFV)
-    EndIf
-Case "stackLightAlrmF"
-    If Tokens$(1) = "true" Then
-        MemOn (stackLightAlrmF)
-    Else
-        MemOff (stackLightAlrmF)
-    EndIf
-Case "stackLightAlrmFV"
-    If Tokens$(1) = "true" Then
-        MemOn (stackLightAlrmFV)
-    Else
-        MemOff (stackLightAlrmFV)
-    EndIf
-
-				Default
-						' TMH for now print come back and do something useful
-						'Print "Invalid Token received"
-				Send
-            EndIf
         EndIf
 	Loop
 Fend
@@ -946,11 +326,716 @@ Function LS_cmd()
             i = ChkNet(203)
             If i > 0 Then
             	Read #203, response$, i
-            	NumTokens = ParseStr(response$, Tokens$(), ",")
+            	numTokens = ParseStr(response$, tokens$(), ",")
 '  				g_LaserMeasure = Val(Tokens$(1))
                 Print "Measurement: ", response$
             EndIf
 '	Loop
+Fend
+Function setVars(response$ As String)
+    Integer i, j, numTokens
+    String tokens$(0)
+    String outstring$
+    String match$
+    String prepend$
+
+    match$ = "{:} " + Chr$(&H22)
+    
+	numTokens = ParseStr(response$, tokens$(), match$)
+	If numTokens <> 2 Then ' TODO for ben, something is running too fast
+		Print "error---", response$, " -- ", numTokens
+	EndIf
+'	Print tokens$(0), " : ", tokens$(1)
+	
+	Select tokens$(0)
+ 'Rx from HMI:
+Case "backInterlockACKBtn"
+   If tokens$(1) = "true" Then
+       backInterlockACKBtn = True
+       backInterlockACK = True
+   Else
+       backInterlockACKBtn = False
+       backInterlockACK = False
+   EndIf
+   Print "backInterlockACKBtn:", backInterlockACKBtn
+Case "frontInterlockACKBtn"
+   If tokens$(1) = "true" Then
+       frontInterlockACKBtn = True
+       frontInterlockACK = True
+   Else
+       frontInterlockACKBtn = False
+       frontInterlockACK = False
+   EndIf
+   Print "frontInterlockACKBtn:", frontInterlockACKBtn
+Case "inMagGoHomeBtn"
+   If tokens$(1) = "true" Then
+       inMagGoHomeBtn = True
+       inMagGoHome = True
+   Else
+       inMagGoHomeBtn = False
+       inMagGoHome = False
+   EndIf
+   Print "inMagGoHomeBtn:", inMagGoHomeBtn
+Case "inMagIntLockAckBtn"
+   If tokens$(1) = "true" Then
+       inMagIntLockAckBtn = True
+       inMagIntLockAck = True
+   Else
+       inMagIntLockAckBtn = False
+       inMagIntLockAck = False
+   EndIf
+   Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
+Case "inMagLoadedBtn"
+   If tokens$(1) = "true" Then
+       inMagLoadedBtn = True
+       inMagLoaded = True
+   Else
+       inMagLoadedBtn = False
+       inMagLoaded = False
+   EndIf
+   Print "inMagLoadedBtn:", inMagLoadedBtn
+Case "jobPauseBtn"
+   If tokens$(1) = "true" Then
+       jobPauseBtn = True
+       jobPause = True
+   Else
+       jobPauseBtn = False
+       jobPause = False
+   EndIf
+   Print "jobPauseBtn:", jobPauseBtn
+Case "jobResumeBtn"
+   If tokens$(1) = "true" Then
+       jobResumeBtn = True
+       jobResume = True
+   Else
+       jobResumeBtn = False
+       jobResume = False
+   EndIf
+   Print "jobResumeBtn:", jobResumeBtn
+Case "jobStartBtn"
+   If tokens$(1) = "true" Then
+       jobStartBtn = True
+       jobStart = True
+   Else
+       jobStartBtn = False
+       jobStart = False
+   EndIf
+   Print "jobStartBtn:", jobStartBtn
+Case "jobStopBtn"
+   If tokens$(1) = "true" Then
+       jobStopBtn = True
+       jobStop = True
+   Else
+       jobStopBtn = False
+       jobStop = False
+   EndIf
+   Print "jobStopBtn:", jobStopBtn
+Case "leftInterlockACKBtn"
+   If tokens$(1) = "true" Then
+       leftInterlockACKBtn = True
+       leftInterlockACK = True
+   Else
+       leftInterlockACKBtn = False
+       leftInterlockACK = False
+   EndIf
+   Print "leftInterlockACKBtn:", leftInterlockACKBtn
+Case "outMagGoHomeBtn"
+   If tokens$(1) = "true" Then
+       outMagGoHomeBtn = True
+       outMagGoHome = True
+   Else
+       outMagGoHomeBtn = False
+       outMagGoHome = False
+   EndIf
+   Print "outMagGoHomeBtn:", outMagGoHomeBtn
+Case "outMagIntLockAckBtn"
+   If tokens$(1) = "true" Then
+       outMagIntLockAckBtn = True
+       outMagIntLockAck = True
+   Else
+       outMagIntLockAckBtn = False
+       outMagIntLockAck = False
+   EndIf
+   Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
+Case "outMagUnloadedBtn"
+   If tokens$(1) = "true" Then
+       outMagUnloadedBtn = True
+       outMagUnloaded = True
+   Else
+       outMagUnloadedBtn = False
+       outMagUnloaded = False
+   EndIf
+   Print "outMagUnloadedBtn:", outMagUnloadedBtn
+Case "rightInterlockACKBtn"
+   If tokens$(1) = "true" Then
+       rightInterlockACKBtn = True
+       rightInterlockACK = True
+   Else
+       rightInterlockACKBtn = False
+       rightInterlockACK = False
+   EndIf
+   Print "rightInterlockACKBtn:", rightInterlockACKBtn
+Case "sftyFrmIlockAckBtn"
+   If tokens$(1) = "true" Then
+       sftyFrmIlockAckBtn = True
+       sftyFrmIlockAck = True
+   Else
+       sftyFrmIlockAckBtn = False
+       sftyFrmIlockAck = False
+   EndIf
+   Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
+Case "airPressHighF"
+    If tokens$(1) = "true" Then
+        MemOn (airPressHighF)
+    Else
+        MemOff (airPressHighF)
+    EndIf
+Case "airPressHighFV"
+    If tokens$(1) = "true" Then
+        MemOn (airPressHighFV)
+    Else
+        MemOff (airPressHighFV)
+    EndIf
+Case "airPressLowF"
+    If tokens$(1) = "true" Then
+        MemOn (airPressLowF)
+    Else
+        MemOff (airPressLowF)
+    EndIf
+Case "airPressLowFV"
+    If tokens$(1) = "true" Then
+        MemOn (airPressLowFV)
+    Else
+        MemOff (airPressLowFV)
+    EndIf
+Case "cbMonBowlFederF"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonBowlFederF)
+    Else
+        MemOff (cbMonBowlFederF)
+    EndIf
+Case "cbMonBowlFederFV"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonBowlFederFV)
+    Else
+        MemOff (cbMonBowlFederFV)
+    EndIf
+Case "cbMonDebrisRmvF"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonDebrisRmvF)
+    Else
+        MemOff (cbMonDebrisRmvF)
+    EndIf
+Case "cbMonDebrisRmvFV"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonDebrisRmvFV)
+    Else
+        MemOff (cbMonDebrisRmvFV)
+    EndIf
+Case "cbMonFlashRmvF"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonFlashRmvF)
+    Else
+        MemOff (cbMonFlashRmvF)
+    EndIf
+Case "cbMonFlashRmvFV"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonFlashRmvFV)
+    Else
+        MemOff (cbMonFlashRmvFV)
+    EndIf
+Case "cbMonHeatStakeF"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonHeatStakeF)
+    Else
+        MemOff (cbMonHeatStakeF)
+    EndIf
+Case "cbMonHeatStakeFV"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonHeatStakeFV)
+    Else
+        MemOff (cbMonHeatStakeFV)
+    EndIf
+Case "cbMonInMagF"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonInMagF)
+    Else
+        MemOff (cbMonInMagF)
+    EndIf
+Case "cbMonInMagFV"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonInMagFV)
+    Else
+        MemOff (cbMonInMagFV)
+    EndIf
+Case "cbMonOutMagF"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonOutMagF)
+    Else
+        MemOff (cbMonOutMagF)
+    EndIf
+Case "cbMonOutMagFV"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonOutMagFV)
+    Else
+        MemOff (cbMonOutMagFV)
+    EndIf
+Case "cbMonPAS24vdcF"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonPAS24vdcF)
+    Else
+        MemOff (cbMonPAS24vdcF)
+    EndIf
+Case "cbMonPAS24vdcFV"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonPAS24vdcFV)
+    Else
+        MemOff (cbMonPAS24vdcFV)
+    EndIf
+Case "cbMonPnumaticF"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonPnumaticF)
+    Else
+        MemOff (cbMonPnumaticF)
+    EndIf
+Case "cbMonPnumaticFV"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonPnumaticFV)
+    Else
+        MemOff (cbMonPnumaticFV)
+    EndIf
+Case "cbMonSafetyF"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonSafetyF)
+    Else
+        MemOff (cbMonSafetyF)
+    EndIf
+Case "cbMonSafetyFV"
+    If tokens$(1) = "true" Then
+        MemOn (cbMonSafetyFV)
+    Else
+        MemOff (cbMonSafetyFV)
+    EndIf
+Case "dcPwrOkF"
+    If tokens$(1) = "true" Then
+        MemOn (dcPwrOkF)
+    Else
+        MemOff (dcPwrOkF)
+    EndIf
+Case "dcPwrOkFV"
+    If tokens$(1) = "true" Then
+        MemOn (dcPwrOkFV)
+    Else
+        MemOff (dcPwrOkFV)
+    EndIf
+Case "flashPnlPrsntF"
+    If tokens$(1) = "true" Then
+        MemOn (FlashPnlPrsntF)
+    Else
+        MemOff (FlashPnlPrsntF)
+    EndIf
+Case "flashPnlPrsntFV"
+    If tokens$(1) = "true" Then
+        MemOn (FlashPnlPrsntFV)
+    Else
+        MemOff (FlashPnlPrsntFV)
+    EndIf
+Case "frontInterlockF"
+    If tokens$(1) = "true" Then
+        MemOn (frontInterlockF)
+    Else
+        MemOff (frontInterlockF)
+    EndIf
+Case "frontInterlockFV"
+    If tokens$(1) = "true" Then
+        MemOn (frontInterlockFV)
+    Else
+        MemOff (frontInterlockFV)
+    EndIf
+Case "hsPanelPresntF"
+    If tokens$(1) = "true" Then
+        MemOn (hsPanelPresntF)
+    Else
+        MemOff (hsPanelPresntF)
+    EndIf
+Case "hsPanelPresntFV"
+    If tokens$(1) = "true" Then
+        MemOn (hsPanelPresntFV)
+    Else
+        MemOff (hsPanelPresntFV)
+    EndIf
+Case "inMagInterlockF"
+    If tokens$(1) = "true" Then
+        MemOn (inMagInterlockF)
+    Else
+        MemOff (inMagInterlockF)
+    EndIf
+Case "inMagInterlockFV"
+    If tokens$(1) = "true" Then
+        MemOn (inMagInterlockFV)
+    Else
+        MemOff (inMagInterlockFV)
+    EndIf
+Case "inMagLowerLimF"
+    If tokens$(1) = "true" Then
+        MemOn (inMagLowerLimF)
+    Else
+        MemOff (inMagLowerLimF)
+    EndIf
+Case "inMagLowerLimFV"
+    If tokens$(1) = "true" Then
+        MemOn (inMagLowerLimFV)
+    Else
+        MemOff (inMagLowerLimFV)
+    EndIf
+Case "inMagPnlRdyF"
+    If tokens$(1) = "true" Then
+        MemOn (inMagPnlRdyF)
+    Else
+        MemOff (inMagPnlRdyF)
+    EndIf
+Case "inMagPnlRdyFV"
+    If tokens$(1) = "true" Then
+        MemOn (inMagPnlRdyFV)
+    Else
+        MemOff (inMagPnlRdyFV)
+    EndIf
+Case "inMagUpperLimF"
+    If tokens$(1) = "true" Then
+        MemOn (inMagUpperLimF)
+    Else
+        MemOff (inMagUpperLimF)
+    EndIf
+Case "inMagUpperLimFV"
+    If tokens$(1) = "true" Then
+        MemOn (inMagUpperLimFV)
+    Else
+        MemOff (inMagUpperLimFV)
+    EndIf
+Case "leftInterlockF"
+    If tokens$(1) = "true" Then
+        MemOn (leftInterlockF)
+    Else
+        MemOff (leftInterlockF)
+    EndIf
+Case "leftInterlockFV"
+    If tokens$(1) = "true" Then
+        MemOn (leftInterlockFV)
+    Else
+        MemOff (leftInterlockFV)
+    EndIf
+Case "outMagIntF"
+    If tokens$(1) = "true" Then
+        MemOn (outMagIntF)
+    Else
+        MemOff (outMagIntF)
+    EndIf
+Case "outMagIntFV"
+    If tokens$(1) = "true" Then
+        MemOn (outMagIntFV)
+    Else
+        MemOff (outMagIntFV)
+    EndIf
+Case "outMagLowerLimF"
+    If tokens$(1) = "true" Then
+        MemOn (outMagLowerLimF)
+    Else
+        MemOff (outMagLowerLimF)
+    EndIf
+Case "outMagLowerLimFV"
+    If tokens$(1) = "true" Then
+        MemOn (outMagLowerLimFV)
+    Else
+        MemOff (outMagLowerLimFV)
+    EndIf
+Case "outMagPanelRdyF"
+    If tokens$(1) = "true" Then
+        MemOn (outMagPanelRdyF)
+    Else
+        MemOff (outMagPanelRdyF)
+    EndIf
+Case "outMagPanelRdyFV"
+    If tokens$(1) = "true" Then
+        MemOn (outMagPanelRdyFV)
+    Else
+        MemOff (outMagPanelRdyFV)
+    EndIf
+Case "outMagUpperLimF"
+    If tokens$(1) = "true" Then
+        MemOn (outMagUpperLimF)
+    Else
+        MemOff (outMagUpperLimF)
+    EndIf
+Case "outMagUpperLimFV"
+    If tokens$(1) = "true" Then
+        MemOn (outMagUpperLimFV)
+    Else
+        MemOff (outMagUpperLimFV)
+    EndIf
+Case "rightInterlockF"
+    If tokens$(1) = "true" Then
+        MemOn (rightInterlockF)
+    Else
+        MemOff (rightInterlockF)
+    EndIf
+Case "rightInterlockFV"
+    If tokens$(1) = "true" Then
+        MemOn (rightInterlockFV)
+    Else
+        MemOff (rightInterlockFV)
+    EndIf
+Case "debrisMtrF"
+    If tokens$(1) = "true" Then
+        MemOn (debrisMtrF)
+    Else
+        MemOff (debrisMtrF)
+    EndIf
+Case "debrisMtrFV"
+    If tokens$(1) = "true" Then
+        MemOn (debrisMtrFV)
+    Else
+        MemOff (debrisMtrFV)
+    EndIf
+Case "flashCycF"
+    If tokens$(1) = "true" Then
+        MemOn (flashCycF)
+    Else
+        MemOff (flashCycF)
+    EndIf
+Case "flashCycFV"
+    If tokens$(1) = "true" Then
+        MemOn (flashCycFV)
+    Else
+        MemOff (flashCycFV)
+    EndIf
+Case "flashMtrF"
+    If tokens$(1) = "true" Then
+        MemOn (flashMtrF)
+    Else
+        MemOff (flashMtrF)
+    EndIf
+Case "flashMtrFV"
+    If tokens$(1) = "true" Then
+        MemOn (flashMtrFV)
+    Else
+        MemOff (flashMtrFV)
+    EndIf
+Case "hsInstallInsrtF"
+    If tokens$(1) = "true" Then
+        MemOn (hsInstallInsrtF)
+    Else
+        MemOff (hsInstallInsrtF)
+    EndIf
+Case "hsInstallInsrtFV"
+    If tokens$(1) = "true" Then
+        MemOn (hsInstallInsrtFV)
+    Else
+        MemOff (hsInstallInsrtFV)
+    EndIf
+Case "inMagMtrF"
+    If tokens$(1) = "true" Then
+        MemOn (inMagMtrF)
+    Else
+        MemOff (inMagMtrF)
+    EndIf
+Case "inMagMtrFV"
+    If tokens$(1) = "true" Then
+        MemOn (inMagMtrFV)
+    Else
+        MemOff (inMagMtrFV)
+    EndIf
+Case "inMagMtrDirF"
+    If tokens$(1) = "true" Then
+        MemOn (inMagMtrDirF)
+    Else
+        MemOff (inMagMtrDirF)
+    EndIf
+Case "inMagMtrDirFV"
+    If tokens$(1) = "true" Then
+        MemOn (inMagMtrDirFV)
+    Else
+        MemOff (inMagMtrDirFV)
+    EndIf
+Case "outMagMtrF"
+    If tokens$(1) = "true" Then
+        MemOn (outMagMtrF)
+    Else
+        MemOff (outMagMtrF)
+    EndIf
+Case "outMagMtrFV"
+    If tokens$(1) = "true" Then
+        MemOn (outMagMtrFV)
+    Else
+        MemOff (outMagMtrFV)
+    EndIf
+Case "outMagMtrDirF"
+    If tokens$(1) = "true" Then
+        MemOn (outMagMtrDirF)
+    Else
+        MemOff (outMagMtrDirF)
+    EndIf
+Case "outMagMtrDirFV"
+    If tokens$(1) = "true" Then
+        MemOn (outMagMtrDirFV)
+    Else
+        MemOff (outMagMtrDirFV)
+    EndIf
+Case "stackLightAlrmF"
+    If tokens$(1) = "true" Then
+        MemOn (stackLightAlrmF)
+    Else
+        MemOff (stackLightAlrmF)
+    EndIf
+Case "stackLightAlrmFV"
+    If tokens$(1) = "true" Then
+        MemOn (stackLightAlrmFV)
+    Else
+        MemOff (stackLightAlrmFV)
+    EndIf
+Case "stackLightGrnF"
+    If tokens$(1) = "true" Then
+        MemOn (stackLightGrnF)
+    Else
+        MemOff (stackLightGrnF)
+    EndIf
+Case "stackLightGrnFV"
+    If tokens$(1) = "true" Then
+        MemOn (stackLightGrnFV)
+    Else
+        MemOff (stackLightGrnFV)
+    EndIf
+Case "stackLightRedF"
+    If tokens$(1) = "true" Then
+        MemOn (stackLightRedF)
+    Else
+        MemOff (stackLightRedF)
+    EndIf
+Case "stackLightRedFV"
+    If tokens$(1) = "true" Then
+        MemOn (stackLightRedFV)
+    Else
+        MemOff (stackLightRedFV)
+    EndIf
+Case "stackLightYelF"
+    If tokens$(1) = "true" Then
+        MemOn (stackLightYelF)
+    Else
+        MemOff (stackLightYelF)
+    EndIf
+Case "stackLightYelFV"
+    If tokens$(1) = "true" Then
+        MemOn (stackLightYelFV)
+    Else
+        MemOff (stackLightYelFV)
+    EndIf
+Case "suctionCupsF"
+    If tokens$(1) = "true" Then
+        MemOn (suctionCupsF)
+    Else
+        MemOff (suctionCupsF)
+    EndIf
+Case "suctionCupsFV"
+    If tokens$(1) = "true" Then
+        MemOn (suctionCupsFV)
+    Else
+        MemOff (suctionCupsFV)
+    EndIf
+Case "anvilZlimit"
+    AnvilZlimit = Val(tokens$(1))
+    Print "anvilZlimit:", AnvilZlimit
+Case "recBossHeight"
+    recBossHeight = Val(tokens$(1))
+    Print "recBossHeight:", recBossHeight
+Case "recFlashRequired"
+    If tokens$(1) = "true" Then
+        recFlashRequired = True
+    Else
+        recFlashRequired = False
+    EndIf
+    Print "recFlashRequired:", recFlashRequired
+Case "recInsertDepth"
+    recInsertDepth = Val(tokens$(1))
+    Print "recInsertDepth:", recInsertDepth
+Case "recInsertType"
+    recInsertType = Val(tokens$(1))
+    Print "recInsertType:", recInsertType
+Case "recMajorDim"
+    recMajorDim = Val(tokens$(1))
+    Print "recMajorDim:", recMajorDim
+Case "recMinorDim"
+    recMinorDim = Val(tokens$(1))
+    Print "recMinorDim:", recMinorDim
+Case "recNumberOfHoles"
+    recNumberOfHoles = Val(tokens$(1))
+    Print "recNumberOfHoles:", recNumberOfHoles
+Case "recTemp"
+    recTemp = Val(tokens$(1))
+    Print "recTemp:", recTemp
+Case "recZDropOff"
+    recZDropOff = Val(tokens$(1))
+    Print "recZDropOff:", recZDropOff
+Case "systemSpeed"
+    SystemSpeed = Val(tokens$(1))
+    Print "systemSpeed:", SystemSpeed
+Case "systemState"
+    SystemState = Val(tokens$(1))
+    Print "systemState:", SystemState
+
+Default
+			' TMH for now print come back and do something useful
+			'Print "Invalid Token received"
+Send
+	
+Fend
+Function HmiListen()
+                
+    Integer i, j, numTokens
+    String tokens$(0)
+    String response$
+    String outstring$
+    String match$
+    String prepend$
+    Integer ProcessLastToken
+     
+    ' define the connection to the HMI
+    SetNet #202, "10.22.251.68", 1503, CRLF, NONE, 0
+    
+    prepend$ = ""
+    
+    OpenNet #202 As Server
+ 
+    Do While True
+	    i = ChkNet(202)
+	    j = 0
+	    Select i
+	    	Case -3 'port is not open
+	    		OpenNet #202 As Server
+	    	Case < 1
+	    		prepend$ = ""
+	   		Case > 0
+				ProcessLastToken = 0
+				If i > 200 Then
+					i = 200
+				EndIf
+			   	Read #202, response$, i
+			   	response$ = prepend$ + response$
+			   	If Right$(response$, 1) = "}" Then 'the last token is ok, so process it
+			   		ProcessLastToken = 1
+			   	EndIf
+				numTokens = ParseStr(response$, tokens$(), "}")
+				numTokens = numTokens + ProcessLastToken
+
+				Do While j < numTokens - 1
+					setVars(tokens$(j))
+					j = j + 1
+				Loop
+				If ProcessLastToken Then
+					prepend$ = ""
+				Else
+					prepend$ = tokens$(numTokens - 1)
+				EndIf
+	    Send
+	Loop
 Fend
 Function IntComTest()
 	Do While True
@@ -1060,20 +1145,5 @@ Function IntComTest()
 	
 	Loop
 Fend
-'' How to use the IOT Functions with DIO and Vars
-'
-''	'Digital Inputs	
-''	InputVar0 = IOTableFunction(Sw(Input0), MemSw(HMIInput0), MemSw(ForceInput0))
-''	Print InputVar0 ' Print for troubleshooting
-'	
-''	'Digital Outputs	
-''	OutputVar0RealWorld = IOTableFunction(OutputVar0, MemSw(HMIOutput0), MemSw(ForceOutput0))
-''	If OutputVar0RealWorld = True Then
-''		On Output0
-''	Else
-''		Off Output0
-''	EndIf
- 'Parameters to run the system, Integers
-'	SystemSpeed = IOTableIntegers(SystemSpeedDef, SystemSpeedFV, MemSw(SystemSpeedF))
-'	' for testing
-'	x = IOTableIntegers(xh, xhFV, MemSw(xhF))
+
+
