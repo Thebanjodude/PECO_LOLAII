@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/03/20 17:47:50:807,DS:0000002580,CS:31092,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="I/O Label Editor"
+ENVT0100,LM:2013/03/20 21:35:36:077,DS:0000002591,CS:14156,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="SystemMonitor.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=191
-		nTop=1
-		nWidth=1199
-		nHeight=626
+		nLeft=179
+		nTop=109
+		nWidth=1197
+		nHeight=623
 	}
 }
 ProgramFile2 {
@@ -28,10 +28,10 @@ ProgramFile3 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=70
-		nTop=81
-		nWidth=1126
-		nHeight=655
+		nLeft=6
+		nTop=405
+		nWidth=1188
+		nHeight=651
 	}
 }
 ProgramFile4 {
@@ -39,10 +39,10 @@ ProgramFile4 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=9
-		nTop=6
-		nWidth=1115
-		nHeight=559
+		nLeft=284
+		nTop=-5
+		nWidth=1113
+		nHeight=555
 	}
 }
 ProgramFile5 {
@@ -61,10 +61,10 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-4
-		nTop=-7
-		nWidth=1120
-		nHeight=611
+		nLeft=-36
+		nTop=-11
+		nWidth=1119
+		nHeight=607
 	}
 }
 ProgramFile7 {
@@ -104,12 +104,12 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=111
-		nTop=17
-		nWidth=1274
-		nHeight=621
+		nLeft=74
+		nTop=154
+		nWidth=1273
+		nHeight=617
 	}
 }
 nPointFileCount=1
@@ -136,7 +136,7 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=785
 		nTop=-1
@@ -145,12 +145,12 @@ RunWindow {
 	}
 }
 IOLabelEditor {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=331
-		nTop=12
-		nWidth=1051
-		nHeight=576
+		nLeft=268
+		nTop=188
+		nWidth=1047
+		nHeight=566
 	}
 	nWinState=0
 }
