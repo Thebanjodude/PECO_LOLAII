@@ -36,7 +36,7 @@ Function PushPanel()
 		suctionCups = False
 		Wait .1 ' Give time for panel to relese from suction cups
 		erPanelFailedInspection = True
-		HmiPauseFlag = True 'Set flag
+		jobPauseFlag = True 'Set flag
 		SystemPause()
 	Else
 		retry:

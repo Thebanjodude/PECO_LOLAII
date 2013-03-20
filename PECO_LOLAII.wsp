@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/03/20 21:35:36:077,DS:0000002591,CS:14156,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="SystemMonitor.prg"
+ENVT0100,LM:2013/03/20 23:52:17:725,DS:0000002583,CS:01600,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Run"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=179
-		nTop=109
-		nWidth=1197
-		nHeight=623
+		nLeft=34
+		nTop=111
+		nWidth=1195
+		nHeight=619
 	}
 }
 ProgramFile2 {
@@ -25,24 +25,24 @@ ProgramFile2 {
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=6
-		nTop=405
-		nWidth=1188
-		nHeight=651
+		nLeft=-7
+		nTop=-3
+		nWidth=907
+		nHeight=737
 	}
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=284
+		nLeft=269
 		nTop=-5
-		nWidth=1113
-		nHeight=555
+		nWidth=1111
+		nHeight=552
 	}
 }
 ProgramFile5 {
@@ -61,10 +61,10 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-36
-		nTop=-11
-		nWidth=1119
-		nHeight=607
+		nLeft=23
+		nTop=34
+		nWidth=1116
+		nHeight=597
 	}
 }
 ProgramFile7 {
@@ -74,8 +74,8 @@ ProgramFile7 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1035
+		nHeight=602
 	}
 }
 ProgramFile8 {
@@ -103,13 +103,13 @@ ProgramFile9 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=74
-		nTop=154
-		nWidth=1273
-		nHeight=617
+		nLeft=20
+		nTop=118
+		nWidth=1271
+		nHeight=611
 	}
 }
 nPointFileCount=1
@@ -136,21 +136,21 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=785
-		nTop=-1
-		nWidth=550
-		nHeight=666
+		nLeft=793
+		nTop=-10
+		nWidth=599
+		nHeight=723
 	}
 }
 IOLabelEditor {
 	bOpened=False
 	Window {
-		nLeft=268
-		nTop=188
-		nWidth=1047
-		nHeight=566
+		nLeft=216
+		nTop=138
+		nWidth=1046
+		nHeight=563
 	}
 	nWinState=0
 }
@@ -164,12 +164,12 @@ IOMonitor {
 	}
 }
 TaskMgr {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=2
-		nTop=145
-		nWidth=820
-		nHeight=275
+		nLeft=2015
+		nTop=219
+		nWidth=980
+		nHeight=400
 	}
 }
 Macros {

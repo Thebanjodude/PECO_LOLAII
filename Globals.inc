@@ -3,18 +3,16 @@
 #define Zlimit -135 ' Zlimit is the highest position the z-axis can go without hitting anything.
 Global Integer SystemSpeed, SystemSpeedDef, SystemSpeedFV
 Global Integer jobNumPanelsDone, hsProbeTemp, hmiStatus, systemStatus
-Global Boolean suctionCups, robPause, suctionCupsCC
+Global Boolean suctionCups, suctionCupsCC
 Global Boolean robResume
 #define SystemAccel 30 ' Percent acceleration the arm uses during regular opperation
 #define ScanSpeed 35 ' Percent Speed the arm moves during the scanning process
 #define SuckTime .5 ' Time in seconds it takes for the EOAT to make a good suction on a panel
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
-#define NumOfUserDefinedErrors 40 ' Number of user defined errors
 Global Integer x, z, xhFV, xh ' Increment for P(x) to define edge
 
 'Commands from HMI
-Global Boolean jobDone
-Global Boolean HmiPauseFlag
+Global Boolean jobDone, jobPauseFlag
 Global Integer jobNumPanels
 Global Boolean backInterlockACKBtn, frontInterlockACKBtn
 Global Boolean inMagGoHomeBtn, inMagIntLockAckBtn, inMagLoadedBtn

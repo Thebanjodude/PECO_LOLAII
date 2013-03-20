@@ -199,12 +199,12 @@ Do While True
 	EndIf
 	
 	'Global Pause Initiated from HMI
-	If robPause = True Then
+	If jobPause = True Then
 		SystemPause()
-		HmiPauseFlag = True 'Set Flag	
-	ElseIf robPause = False And HmiPauseFlag = True Then ' Pick up exactly where we left off
+		jobPauseFlag = True 'Set Flag	
+	ElseIf jobPause = False And jobPauseFlag = True Then ' Pick up exactly where we left off
 		SystemUnPause()
-		HmiPauseFlag = False ' Reset flag	
+		jobPauseFlag = False ' Reset flag	
 	EndIf
 	
 	If safeGuardInput = True Then
@@ -219,11 +219,13 @@ Do While True
 		ReturnFromEstopFlag = True ' Set flag
 	EndIf
 	
-	If robResume = True And ReturnFromEstopFlag = True Then
-		erEstop = False
-		Print "resetting"
-		On (EstopReset), Forced
-	EndIf
+'	If jobResume = True And ReturnFromEstopFlag = True Then
+'		' this is where we would take the machine back to a poweron state
+'		' drop off a panel and go home
+'		erEstop = False
+'		Print "resetting"
+'		
+'	EndIf
 	
 Loop
 

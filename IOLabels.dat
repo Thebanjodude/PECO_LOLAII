@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/03/20 21:35:24:240,DS:0000009722,CS:08217,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/20 22:15:24:398,DS:0000010460,CS:08464,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
-	nNumberOfLabels=33
+	nNumberOfLabels=39
 	Label1 {
 		nBit=12
 		sLabel="outMagIntH"
@@ -89,27 +89,27 @@ InputBitLabels {
 	}
 	Label18 {
 		nBit=74
-		sLabel="holeDetected"
+		sLabel="holeDetectedT"
 		sDescription=""
 	}
 	Label19 {
 		nBit=75
-		sLabel="laserHi"
+		sLabel="laserHiT"
 		sDescription=""
 	}
 	Label20 {
 		nBit=76
-		sLabel="laserLo"
+		sLabel="laserLoT"
 		sDescription=""
 	}
 	Label21 {
 		nBit=77
-		sLabel="laserGo"
+		sLabel="laserGoT"
 		sDescription=""
 	}
 	Label22 {
 		nBit=78
-		sLabel="inspectionPass"
+		sLabel="inspectionPassT"
 		sDescription=""
 	}
 	Label23 {
@@ -138,31 +138,61 @@ InputBitLabels {
 		sDescription=""
 	}
 	Label28 {
+		nBit=99
+		sLabel="laserHi"
+		sDescription="Temp, move back to Board 1"
+	}
+	Label29 {
+		nBit=100
+		sLabel="laserLo"
+		sDescription="Temp, move back to Board 1"
+	}
+	Label30 {
+		nBit=101
+		sLabel="laserGo"
+		sDescription="Temp, move back to Board 1"
+	}
+	Label31 {
 		nBit=102
 		sLabel="inMagPnlRdyH"
 		sDescription=""
 	}
-	Label29 {
+	Label32 {
 		nBit=103
 		sLabel="inMagInterlockH"
 		sDescription=""
 	}
-	Label30 {
+	Label33 {
 		nBit=104
 		sLabel="outMagUpperLimH"
 		sDescription=""
 	}
-	Label31 {
+	Label34 {
+		nBit=105
+		sLabel="holeDetected"
+		sDescription="Temp, move back to Board 1"
+	}
+	Label35 {
 		nBit=106
 		sLabel="outMagLowerLimH"
 		sDescription=""
 	}
-	Label32 {
+	Label36 {
+		nBit=107
+		sLabel="inspectionPass"
+		sDescription="Temp, move back to Board 1"
+	}
+	Label37 {
+		nBit=108
+		sLabel=""
+		sDescription="Temp, move back to Board 1"
+	}
+	Label38 {
 		nBit=110
 		sLabel="outMagPanelRdyH"
 		sDescription=""
 	}
-	Label33 {
+	Label39 {
 		nBit=111
 		sLabel="outMagIntlockH"
 		sDescription=""
@@ -175,7 +205,7 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=13
+	nNumberOfLabels=15
 	Label1 {
 		nBit=8
 		sLabel="HMI_connected"
@@ -222,24 +252,34 @@ OutputBitLabels {
 		sDescription=""
 	}
 	Label10 {
+		nBit=104
+		sLabel="laserP1T"
+		sDescription=""
+	}
+	Label11 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label11 {
+	Label12 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label12 {
+	Label13 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label13 {
+	Label14 {
 		nBit=110
 		sLabel="stackLightAlrmH"
 		sDescription=""
+	}
+	Label15 {
+		nBit=127
+		sLabel="laserP1"
+		sDescription="Temp, but back in pin 29 2-1,bit 104"
 	}
 }
 OutputByteLabels {

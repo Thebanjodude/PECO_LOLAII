@@ -355,7 +355,6 @@ Case "backInterlockACKBtn"
        backInterlockACK = True
    Else
        backInterlockACKBtn = False
-       backInterlockACK = False
    EndIf
    Print "backInterlockACKBtn:", backInterlockACKBtn
 Case "frontInterlockACKBtn"
@@ -364,7 +363,6 @@ Case "frontInterlockACKBtn"
        frontInterlockACK = True
    Else
        frontInterlockACKBtn = False
-       frontInterlockACK = False
    EndIf
    Print "frontInterlockACKBtn:", frontInterlockACKBtn
 Case "inMagGoHomeBtn"
@@ -373,7 +371,6 @@ Case "inMagGoHomeBtn"
        inMagGoHome = True
    Else
        inMagGoHomeBtn = False
-       inMagGoHome = False
    EndIf
    Print "inMagGoHomeBtn:", inMagGoHomeBtn
 Case "inMagIntLockAckBtn"
@@ -382,7 +379,6 @@ Case "inMagIntLockAckBtn"
        inMagIntLockAck = True
    Else
        inMagIntLockAckBtn = False
-       inMagIntLockAck = False
    EndIf
    Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
 Case "inMagLoadedBtn"
@@ -391,52 +387,48 @@ Case "inMagLoadedBtn"
        inMagLoaded = True
    Else
        inMagLoadedBtn = False
-       inMagLoaded = False
    EndIf
    Print "inMagLoadedBtn:", inMagLoadedBtn
 Case "jobPauseBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobPauseBtn = True
        jobPause = True
    Else
        jobPauseBtn = False
-       jobPause = False
    EndIf
    Print "jobPauseBtn:", jobPauseBtn
 Case "jobResumeBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobResumeBtn = True
        jobResume = True
    Else
        jobResumeBtn = False
-       jobResume = False
    EndIf
    Print "jobResumeBtn:", jobResumeBtn
 Case "jobStartBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobStartBtn = True
        jobStart = True
+       jobStop = False
    Else
        jobStartBtn = False
-       jobStart = False
    EndIf
    Print "jobStartBtn:", jobStartBtn
 Case "jobStopBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobStopBtn = True
        jobStop = True
+       jobStart = False
    Else
        jobStopBtn = False
-       jobStop = False
    EndIf
    Print "jobStopBtn:", jobStopBtn
 Case "leftInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        leftInterlockACKBtn = True
        leftInterlockACK = True
    Else
        leftInterlockACKBtn = False
-       leftInterlockACK = False
    EndIf
    Print "leftInterlockACKBtn:", leftInterlockACKBtn
 Case "outMagGoHomeBtn"
@@ -445,7 +437,6 @@ Case "outMagGoHomeBtn"
        outMagGoHome = True
    Else
        outMagGoHomeBtn = False
-       outMagGoHome = False
    EndIf
    Print "outMagGoHomeBtn:", outMagGoHomeBtn
 Case "outMagIntLockAckBtn"
@@ -454,7 +445,6 @@ Case "outMagIntLockAckBtn"
        outMagIntLockAck = True
    Else
        outMagIntLockAckBtn = False
-       outMagIntLockAck = False
    EndIf
    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 Case "outMagUnloadedBtn"
@@ -463,7 +453,6 @@ Case "outMagUnloadedBtn"
        outMagUnloaded = True
    Else
        outMagUnloadedBtn = False
-       outMagUnloaded = False
    EndIf
    Print "outMagUnloadedBtn:", outMagUnloadedBtn
 Case "rightInterlockACKBtn"
@@ -472,7 +461,6 @@ Case "rightInterlockACKBtn"
        rightInterlockACK = True
    Else
        rightInterlockACKBtn = False
-       rightInterlockACK = False
    EndIf
    Print "rightInterlockACKBtn:", rightInterlockACKBtn
 Case "sftyFrmIlockAckBtn"
@@ -481,7 +469,6 @@ Case "sftyFrmIlockAckBtn"
        sftyFrmIlockAck = True
    Else
        sftyFrmIlockAckBtn = False
-       sftyFrmIlockAck = False
    EndIf
    Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
 Case "airPressHighF"
