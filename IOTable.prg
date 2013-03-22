@@ -374,7 +374,7 @@ Case "inMagGoHomeBtn"
    EndIf
    Print "inMagGoHomeBtn:", inMagGoHomeBtn
 Case "inMagIntLockAckBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        inMagIntLockAckBtn = True
        inMagIntLockAck = True
    Else
@@ -382,7 +382,7 @@ Case "inMagIntLockAckBtn"
    EndIf
    Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
 Case "inMagLoadedBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        inMagLoadedBtn = True
        inMagLoaded = True
    Else
@@ -393,6 +393,7 @@ Case "jobPauseBtn"
    If Tokens$(1) = "true" Then
        jobPauseBtn = True
        jobPause = True
+       jobResume = False
    Else
        jobPauseBtn = False
    EndIf
@@ -401,12 +402,13 @@ Case "jobResumeBtn"
    If Tokens$(1) = "true" Then
        jobResumeBtn = True
        jobResume = True
+       jobPause = False
    Else
        jobResumeBtn = False
    EndIf
    Print "jobResumeBtn:", jobResumeBtn
 Case "jobStartBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        jobStartBtn = True
        jobStart = True
        jobStop = False
@@ -415,7 +417,7 @@ Case "jobStartBtn"
    EndIf
    Print "jobStartBtn:", jobStartBtn
 Case "jobStopBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        jobStopBtn = True
        jobStop = True
        jobStart = False
@@ -424,7 +426,7 @@ Case "jobStopBtn"
    EndIf
    Print "jobStopBtn:", jobStopBtn
 Case "leftInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        leftInterlockACKBtn = True
        leftInterlockACK = True
    Else
@@ -967,10 +969,13 @@ Case "systemSpeed"
 Case "systemState"
     SystemState = Val(tokens$(1))
     Print "systemState:", SystemState
+Case "jobNumPanels"
+    jobNumPanels = Val(tokens$(1))
+    Print "jobNumPanels:", jobNumPanels
 
 Default
-			' TMH for now print come back and do something useful
-			'Print "Invalid Token received"
+	' TMH for now print come back and do something useful
+	Print "Invalid Token received"
 Send
 	
 Fend
@@ -1030,7 +1035,6 @@ Function IntComTest()
 	systemStatus = systemStatus + 1
 	jobNumPanelsDone = jobNumPanelsDone + 2
 	hsProbeTemp = hsProbeTemp + 3
-	hmiStatus = hmiStatus + 4
 	ctrlrLineNumber = ctrlrLineNumber + 1
 	ctrlrTaskNumber = ctrlrTaskNumber + 1
 	ctrlrErrAxisNumber = ctrlrErrAxisNumber + 1

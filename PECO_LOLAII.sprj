@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/03/20 23:48:42:032,DS:0000003800,CS:23559,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/21 22:22:31:399,DS:0000003654,CS:01353,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="3/20/2013 5:48:41 PM"
+	sLastModified="3/21/2013 12:18:02 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -25,12 +25,12 @@ UserErrorsFile {
 	sName="UserErrors.dat"
 	nChecksum=0
 }
-nProgramFileCount=9
+nProgramFileCount=8
 ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/20/2013 10:53:00 PM"
+	sTimeSavedInController="3/21/2013 6:02:18 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
@@ -42,7 +42,7 @@ ProgramFile3 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/20/2013 11:32:24 PM"
+	sTimeSavedInController="3/21/2013 6:18:02 PM"
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
@@ -60,31 +60,25 @@ ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/20/2013 11:48:41 PM"
+	sTimeSavedInController="3/21/2013 2:10:46 PM"
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/20/2013 10:48:10 PM"
+	sTimeSavedInController="3/21/2013 6:04:05 PM"
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/13/2013 2:16:33 PM"
-}
-ProgramFile9 {
-	sName="ScanPanelPrototype.prg"
-	bCompiled=True
-	bStoreInController=True
-	sTimeSavedInController="3/7/2013 2:12:33 PM"
+	sTimeSavedInController="3/21/2013 4:13:48 PM"
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="3/20/2013 10:49:22 PM"
+	sTimeSavedInController="3/21/2013 2:14:44 PM"
 }
 nPointFileCount=1
 PointFile1 {

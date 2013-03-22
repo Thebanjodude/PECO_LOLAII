@@ -198,6 +198,13 @@ Do While True
 		cbMonPAS24vdc = False
 	EndIf
 	
+	'Heat stake temp checking 
+		If 1.05 * recTemp <= hsProbeTemp <= .95 * recTemp Then 'temp must be within 5%
+			erHeatStakeTemp = False
+		Else
+			erHeatStakeTemp = True 'throw error because we are out of tolerance
+		EndIf
+	
 	'Global Pause Initiated from HMI
 	If jobPause = True Then
 		SystemPause()

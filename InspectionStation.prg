@@ -33,7 +33,7 @@ SpeedS 500
 AccelS 1000
 SpeedR 400
 AccelR 300
-Speed 2
+Speed 5
 Accel 10, 10
 
 Integer t
@@ -59,17 +59,17 @@ Fend
 Function TracePanelEdge()
 	
 x = 100 ' start edge points at 100
-Off (LaserP1) ' Change to laser profile 0
+Off (laserP1) ' Change to laser profile 0
 
 Go ScanCenter -Y(40) CP  ' Use CP so it's not jumpy
 Wait 1
 
-Go ScanCenter2 CP Till Sw(LaserGo)
+Go ScanCenter2 CP Till Sw(laserGo)
 Move Here -Y(1.2)
 P(x) = Here
 x = x + 1
 
-Trap 1 Sw(LaserHi) = True Or Sw(LaserLo) Call EdgeDetected
+Trap 1 Sw(laserHi) = True Or Sw(laserLo) Call EdgeDetected
 Print "Edge time start: ", Time$
 
 Do While CU(Here) < (480) 'Spin around 360 degrees
@@ -86,16 +86,16 @@ Print "Edge time end: ", Time$
 Fend
 Function EdgeDetected
 	
-	If Sw(LaserLo) = True Then
+	If Sw(laserLo) = True Then
 		Move Here +Y(1.2)
-	ElseIf Sw(LaserHi) = True Then
+	ElseIf Sw(laserHi) = True Then
 		Move Here -Y(1.2)
 	EndIf
 	
 	P(x) = Here
 	x = x + 1
 	
-	Trap 1 Sw(LaserHi) = True Or Sw(LaserLo) Call EdgeDetected
+	Trap 1 Sw(laserHi) = True Or Sw(laserLo) Call EdgeDetected
 		
 Fend
 Function FindHoles()
@@ -105,11 +105,11 @@ Accel 100, 100
 FirstHolePoint = 600 'start hole locations at 600	
 Integer i
 i = 100
-On (LaserP1) ' Change to laser profile 1	
+On (laserP1) ' Change to laser profile 1	
 
 Print "Scan time start: ", Time$
 Go P(100) +Y(23) +Z(3.5) CP
-Trap 2 Sw(HoleDetected) Xqt RecordTheta ' Arm Trap	
+Trap 2 Sw(holeDetected) Xqt RecordTheta ' Arm Trap	
 	For i = 100 To (x - 1)
 		Go P(i) +Y(23) +Z(3.5) CP
 	Next i
@@ -134,7 +134,7 @@ EndIf
 
 LastTheta = CurrentTheta
 
-Trap 2 Sw(HoleDetected) Xqt RecordTheta 'rearm trap
+Trap 2 Sw(holeDetected) Xqt RecordTheta 'rearm trap
 
 Fend
 Function GoToHoles()
@@ -163,5 +163,5 @@ Function LaserAlarm
 '	SetErrorArrayFlag(LaserAlarmError, True)
 '	SystemPause()
 Pause
-	Trap 3 Sw(LaserHi) = True And Sw(LaserLo) = True Call LaserAlarm
+	Trap 3 Sw(laserHi) = True And Sw(laserLo) = True Call LaserAlarm
 Fend

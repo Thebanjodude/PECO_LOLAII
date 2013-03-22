@@ -1,19 +1,17 @@
 
 ' System Global Vars and #defines
-#define Zlimit -135 ' Zlimit is the highest position the z-axis can go without hitting anything.
-Global Integer SystemSpeed, SystemSpeedDef, SystemSpeedFV
-Global Integer jobNumPanelsDone, hsProbeTemp, hmiStatus, systemStatus
+Global Integer SystemSpeed, SystemAccel
+Global Real suckTime ' Time in seconds it takes for the EOAT to make a good suction on a panel
 Global Boolean suctionCups, suctionCupsCC
-Global Boolean robResume
-#define SystemAccel 30 ' Percent acceleration the arm uses during regular opperation
+Global Integer systemStatus ' Integer that tells opperator what state the sytem is in-see State tab in IOT
+Global Real zLimit ' the highest the EOAT can move without hitting periphials
 #define ScanSpeed 35 ' Percent Speed the arm moves during the scanning process
-#define SuckTime .5 ' Time in seconds it takes for the EOAT to make a good suction on a panel
+
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
-Global Integer x, z, xhFV, xh ' Increment for P(x) to define edge
 
 'Commands from HMI
 Global Boolean jobDone, jobPauseFlag
-Global Integer jobNumPanels
+Global Integer jobNumPanels, jobNumPanelsDone
 Global Boolean backInterlockACKBtn, frontInterlockACKBtn
 Global Boolean inMagGoHomeBtn, inMagIntLockAckBtn, inMagLoadedBtn
 Global Boolean jobPauseBtn, jobResumeBtn, jobStartBtn
@@ -46,8 +44,8 @@ Global Integer outMagCurrentState
 Global Boolean outMagMtrCC, outMagMtrDirCC
 
 'Inspection Station Global Vars
-'Global Real ScanOffset ' Distance the arm needs to move to keep the edge of the panel under the scanner
 Global Boolean PanelPassedInspection ' Indicates if the panel passes inspection
+Global Integer x, z ' Increment for P(x) to define edge and num of holes found
 
 'system Monitor Vars
 Global Boolean cbMonHeatStake, cbMonBowlFeder, cbMonInMag
@@ -61,7 +59,7 @@ Global Boolean heartBeat
 
 'Hot Stake and Flash Removal Global Vars
 Global Real Theta, r ', PanelArray(0, 0)
-Global Real AnvilZlimit, AnvilZlimitDef, AnvilZlimitFV ' Hard limit for anvil
+Global Real AnvilZlimit, hsProbeTemp
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean flashMtr, flashCyc, FlashPnlPrsnt, debrisMtr
@@ -87,13 +85,12 @@ Global Boolean erHighPressure, erPanelStatusUnknown, erWrongPanelHoles
 Global Boolean erWrongPanelDims, erWrongPanel, erWrongPanelInsert
 Global Boolean erInMagEmpty, erInMagOpenInterlock, erOutMagCrowding
 Global Boolean erInMagCrowding, erOutMagFull, erOutMagOpenInterlock
-Global Boolean erLaserScanner, erDCPower, erDCPowerHeatStake
+Global Boolean erLaserScanner, erDCPower, erDCPowerHeatStake, erHeatStakeTemp
 Global Boolean erHeatStakeBreaker, erBowlFeederBreaker, erInMagBreaker
 Global Boolean erOutMagBreaker, erFlashBreaker, erDebrisRemovalBreaker
 Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180
 Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing
 Global Boolean RecEntryMissing, ParamEntryMissing
-
 
 ' Error Code array indexes, from IOT Excel MessageDB
 'Since we rolled these into the IOT and turned them into Bools, these are OBS

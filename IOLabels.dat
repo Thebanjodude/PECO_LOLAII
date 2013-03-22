@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/03/20 22:15:24:398,DS:0000010460,CS:08464,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/21 16:59:20:320,DS:0000010460,CS:11288,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -139,17 +139,17 @@ InputBitLabels {
 	}
 	Label28 {
 		nBit=99
-		sLabel="laserHi"
+		sLabel="laserLo"
 		sDescription="Temp, move back to Board 1"
 	}
 	Label29 {
 		nBit=100
-		sLabel="laserLo"
+		sLabel="laserGo"
 		sDescription="Temp, move back to Board 1"
 	}
 	Label30 {
 		nBit=101
-		sLabel="laserGo"
+		sLabel="laserHi"
 		sDescription="Temp, move back to Board 1"
 	}
 	Label31 {
@@ -277,7 +277,7 @@ OutputBitLabels {
 		sDescription=""
 	}
 	Label15 {
-		nBit=127
+		nBit=111
 		sLabel="laserP1"
 		sDescription="Temp, but back in pin 29 2-1,bit 104"
 	}

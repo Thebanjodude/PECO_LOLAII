@@ -16,7 +16,7 @@ Do While True
 	Print "jobStart ", jobStart
 	Wait 1
 
-	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False Then
+	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False Then
 		Print "doing a job"
 		Wait 1
 		PopPanel() ' Go to input magazine and pick up a panel
@@ -57,7 +57,7 @@ Function PowerOnSequence()
 	
 	Motor On
 	Power High
-	Speed 50
+	Speed 20
 	Accel 50, 50
 
 	' define the connection to the LASER
@@ -75,7 +75,7 @@ Function PowerOnSequence()
 	' Define interupts
 '	Trap 2 MemSw(MagTorqueLimF) Call MagTorqueErrorISR
 	
-	Jump ScanCenter LimZ Zlimit ' Go home
+	Jump ScanCenter LimZ zLimit ' Go home
 	
 Fend
 Function SetInitialValues
@@ -83,15 +83,21 @@ Function SetInitialValues
 	'they get initialized
 	SystemSpeed = 50
 	AnvilZlimit = -150.00
+	suckTime = .5
+	SystemAccel = 30
+	zLimit = -135
+'	jobNumPanelsDone = 0
+'	jobNumPanels = 0
 Fend
 Function CheckInitialValues()
+'check if the hmi has pushed all the parameter values to the controller, if not throw an error 
 	
-	Print "AnvilZlimit:", AnvilZlimit
-	Print "SystemSpeed:", SystemSpeed
+'	Print "AnvilZlimit:", AnvilZlimit
+'	Print "SystemSpeed:", SystemSpeed
 
-	If AnvilZlimit = 0.0 Then
+	If AnvilZlimit = 0.0 Or suckTime = 0.0 Then
 		ParamEntryMissing = True
-	ElseIf SystemSpeed = 0 Then
+	ElseIf SystemSpeed = 0 Or SystemAccel = 0 Then
 		ParamEntryMissing = True
 	Else
 		ParamEntryMissing = False
@@ -108,14 +114,15 @@ Function CheckInitialValues()
 	
 Fend
 Function CheckRecipeInitialization()
+'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
 	
-	Print "recBossHeight:", recBossHeight
-	Print "recInsertDepth:", recInsertDepth
-	Print "recMajorDim:", recMajorDim
-	Print "recMinorDim:", recMinorDim
-	Print "recZDropOff:", recZDropOff
-	Print "recInsertType:", recInsertType
-	Print "recNumberOfHoles:", recNumberOfHoles
+'	Print "recBossHeight:", recBossHeight
+'	Print "recInsertDepth:", recInsertDepth
+'	Print "recMajorDim:", recMajorDim
+'	Print "recMinorDim:", recMinorDim
+'	Print "recZDropOff:", recZDropOff
+'	Print "recInsertType:", recInsertType
+'	Print "recNumberOfHoles:", recNumberOfHoles
 	
 	If recBossHeight = 0.0 Or recInsertDepth = 0.0 Then
 		RecEntryMissing = True

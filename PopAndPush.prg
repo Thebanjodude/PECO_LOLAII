@@ -14,12 +14,12 @@ retry:
 '	WaitSig InMagPickUpSignal ' Wait for inmag to confirm a panel is ready to be picked up
 	
 	suctionCups = True
-	Jump InputMagCenter LimZ Zlimit Sense Sw(inMagInterlockH) = True
+	Jump InputMagCenter LimZ zLimit Sense Sw(inMagInterlockH) = True
 	
 	If JS = False Then ' Jump executed normally
-		Wait SuckTime ' Allow time for cups to seal on panel
+		Wait suckTime ' Allow time for cups to seal on panel
 		SystemStatus = MovingPanel
-		Jump ScanCenter LimZ Zlimit ' Collision Avoidance Waypoint
+		Jump ScanCenter LimZ zLimit ' Collision Avoidance Waypoint
 '		Signal InMagRobotClearSignal ' Give permission for input magazine to queue up next panel
 	Else
 		GoTo retry 'Interlock was opened during jump
@@ -47,18 +47,29 @@ Function PushPanel()
 		
 '		WaitSig OutMagDropOffSignal
 		
-		Jump OutputMagCenter LimZ Zlimit Sense Sw(outMagIntlockH) = True
+		Jump OutputMagCenter LimZ zLimit Sense Sw(outMagIntlockH) = True
 		
 		If JS = False Then
 			suctionCups = False
 			SystemStatus = MovingPanel
-			Jump ScanCenter LimZ Zlimit ' Collision Avoidance Waypoint
+			Jump ScanCenter LimZ zLimit ' Collision Avoidance Waypoint
 '			Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel
 		Else
 			GoTo retry
 		EndIf
 		
-		Jump ScanCenter LimZ Zlimit ' Go home
+		Print "jobNumPanelsDone", jobNumPanelsDone
+		Print "jobNumPanels", jobNumPanels
+		
+'		If jobNumPanelsDone = jobNumPanels Then
+'			jobDone = True ' We have finished the run, don't execute the main loop
+'		EndIf
+		
+		Print "jobdone", jobDone
+		
+		jobNumPanelsDone = jobNumPanelsDone + 1 ' Increments how many panels we have finished
+		
+		Jump ScanCenter LimZ zLimit ' Go Home
 		
 '		Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
 		
