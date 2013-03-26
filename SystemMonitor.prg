@@ -209,9 +209,13 @@ Do While True
 	If jobPause = True Then
 		SystemPause()
 		jobPauseFlag = True 'Set Flag	
-	ElseIf jobPause = False And jobPauseFlag = True Then ' Pick up exactly where we left off
+	ElseIf jobResume = True Then ' Pick up exactly where we left off
 		SystemUnPause()
 		jobPauseFlag = False ' Reset flag	
+	EndIf
+	
+	If jobStop = True Then
+	
 	EndIf
 	
 	If safeGuardInput = True Then

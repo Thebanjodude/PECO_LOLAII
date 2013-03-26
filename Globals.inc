@@ -46,6 +46,7 @@ Global Boolean outMagMtrCC, outMagMtrDirCC
 'Inspection Station Global Vars
 Global Boolean PanelPassedInspection ' Indicates if the panel passes inspection
 Global Integer x, z ' Increment for P(x) to define edge and num of holes found
+Global Real CurrentThetaHere
 
 'system Monitor Vars
 Global Boolean cbMonHeatStake, cbMonBowlFeder, cbMonInMag
@@ -58,7 +59,7 @@ Global Boolean backInterlock, frontInterlock, leftInterlock, rightInterlock
 Global Boolean heartBeat
 
 'Hot Stake and Flash Removal Global Vars
-Global Real Theta, r ', PanelArray(0, 0)
+Global Real Theta, r, PanelArray(25, 2)
 Global Real AnvilZlimit, hsProbeTemp
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
@@ -177,4 +178,4 @@ Global Boolean joint1Status, joint2Status, joint3Status, joint4Status, safeGuard
 
 ' Vars I needed while testing...will clean up and organize later!
 'Global Boolean Var0, Var1, InputVar0, InputVar1, OutputVar0, OutputVar0RealWorld
-Global Double PanelArray(15, 2) ' Change this back to 0,0
+

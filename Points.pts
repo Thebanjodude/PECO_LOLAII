@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/03/07 15:31:46:300,DS:0000002923,CS:17683,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/26 13:58:42:533,DS:0000003539,CS:31301,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=13
+nNumberOfPoints=16
 Point1 {
 	nNumber=0
 	sLabel="InputMagCenter"
@@ -201,6 +201,60 @@ Point11 {
 	bSimVisible=False
 }
 Point12 {
+	nNumber=12
+	sLabel="ScanCenter3"
+	sDescription=""
+	rX=0
+	rY=350
+	rZ=-64.5
+	rU=90
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point13 {
+	nNumber=13
+	sLabel="ScanCenter4"
+	sDescription=""
+	rX=0
+	rY=500
+	rZ=-64.5
+	rU=90
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point14 {
+	nNumber=14
+	sLabel="InspectionCenter"
+	sDescription=""
+	rX=0
+	rY=635
+	rZ=-64.5
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point15 {
 	nNumber=60
 	sLabel="RM0"
 	sDescription=""
@@ -218,7 +272,7 @@ Point12 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point13 {
+Point16 {
 	nNumber=61
 	sLabel="RM1"
 	sDescription=""
