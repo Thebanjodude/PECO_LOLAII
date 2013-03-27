@@ -19,10 +19,13 @@ TracePanelEdge()
 retrace:
 
 FindHoles()
+PrintPanelArray()
 
+For t = 0 To 1
 GoToHoles() ' Play back the holes we found
+Next t
 
-Inspection()
+'InspectionTest()
 
 Print "Adjust laser parameters now"
 Print "DoubleTriggered: ", DoubleTriggered
@@ -39,9 +42,9 @@ Fend
 Function EdgeDetected
 	
 	If Sw(laserLo) = True Then
-		Move Here +Y(1.2)
+		Move Here +Y(1.6)
 	ElseIf Sw(laserHi) = True Then
-		Move Here -Y(1.2)
+		Move Here -Y(1.6)
 	EndIf
 	
 	P(x) = Here
@@ -82,7 +85,7 @@ Fend
 Function FindHoles()
 	
 Speed 1
-Accel 100, 100
+Accel 20, 20
 FirstHolePoint = 600 'Start hole locations at 600	
 Integer i
 i = 100
@@ -105,11 +108,12 @@ Print "found holes:", z
 
 Fend
 Function RecordTheta
-
+	
 CurrentTheta = CU(CurPos)
+
 Print "called trap"
 	
-If CurrentTheta - LastTheta > 5 Or z = 0 Then ' need z=0 to see first hole
+If CurrentTheta - LastTheta > 6 Or z = 0 Then ' need z=0 to see first hole
 	r = 635 - CY(CurPos) '635mm is an eyeballed y coordinate of laser scannr
 	PanelArray(PanelArrayIndex, RadiusColumn) = r 'Assign r and theta to array
 	PanelArray(PanelArrayIndex, ThetaColumn) = CurrentTheta
@@ -120,7 +124,7 @@ If CurrentTheta - LastTheta > 5 Or z = 0 Then ' need z=0 to see first hole
 
 	z = z + 1 ' count num of holes found
 	LastTheta = CurrentTheta
-'TODO:add check to make sure we dont increment beyond bounds
+'TODO:add check to make sure we don't increment panelarray beyond bounds
 Else
 	DoubleTriggered = DoubleTriggered + 1
 EndIf
@@ -128,7 +132,45 @@ EndIf
 Trap 4 Sw(holeDetected) Xqt RecordTheta 'rearm trap
 
 Fend
-Function Inspection() As Boolean
+
+'Function RecordTheta
+'	
+'CurrentTheta = CU(CurPos)
+''Print "called trap"
+'	
+'If CurrentTheta - LastTheta < 5 Or z = 0 Then
+'	If z = 0 Then
+'		rAvg = CY(CurPos)
+'		thetaAvg = CU(CurPos)
+'		LastTheta = thetaAvg
+'	Else
+'		r = 635 - CY(CurPos) '635mm is an eyeballed y coordinate of laser scannr
+'		rAvg = (rAvg + r) /2  'Running average
+'		
+'		Theta = CU(CurPos)
+'		thetaAvg = (thetaAvg + Theta) /2
+'	EndIf
+'		
+'ElseIf CurrentTheta - LastTheta > 5 Then ' need z=0 to see first hole
+'
+'	PanelArray(PanelArrayIndex, RadiusColumn) = rAvg 'Assign r and theta to array
+'	PanelArray(PanelArrayIndex, ThetaColumn) = thetaAvg
+'
+'	PanelArrayIndex = PanelArrayIndex + 1
+'	z = z + 1 ' count num of holes found
+'	
+'	LastTheta = thetaAvg
+'	Print "found a hole"
+'	
+''	P(FirstHolePoint + z) = CurPos
+'	
+''TODO:add check to make sure we dont increment beyond bounds
+'EndIf
+'
+'Trap 4 Sw(holeDetected) Xqt RecordTheta 'rearm trap
+'
+'Fend
+Function InspectionTest() As Boolean
 	SystemStatus = InspectingPanel
 	
 	Boolean SkippedHole
@@ -137,16 +179,13 @@ Function Inspection() As Boolean
 	PanelArrayIndex = 0 ' Reset Index
 
 	GetThetaR()
-	Print "r", r
-	Print "theta", Theta
+'	On (laserP2) 'Switch to insert inspection profile
 	
 	For k = 0 To z - 1
 		
 		If k <> 0 Then
 			IncrementIndex()
 			GetThetaR()
-			Print "r", r
-			Print "theta", Theta
 			
 			If r = 0 Then
 				Print "r=0"
@@ -196,7 +235,7 @@ Accel 10, 10
 	
 	For j = 600 To 600 + z - 1
 		Go P(j)
-		Wait .5
+		Wait 2
   	Next j
   	
 	Skip:
@@ -216,3 +255,56 @@ Function PreInspection()
 	SystemStatus = MovingPanel
 	Go ScanCenter ' Collision Avoidance Waypoint
 Fend
+'Function Inspection() As Boolean
+'	SystemStatus = InspectingPanel
+'	
+'	Boolean SkippedHole
+'	Integer k
+'  	
+'	PanelArrayIndex = 0 ' Reset Index
+'	GetThetaR()
+'	
+'	Go waypoint1
+'	
+'	For k = 0 To z - 1
+'		
+'		If k <> 0 Then
+'			IncrementIndex()
+'			GetThetaR()
+'			
+'			If r = 0 Then
+'				Print "r=0"
+'				Pause
+'			EndIf
+'		EndIf
+'
+'		SkippedHole = False 'Reset flag
+'		
+'		If PanelArray(PanelArrayIndex, SkipFlagColumn) <> 0 Then ' When nonzero, don't populate the hole because we want to skip it
+'			SkippedHole = True 'Set flag
+'		EndIf
+'
+'		If SkippedHole = False Then 'If the flag is set then we have finished all holes		
+'			P23 = InspectionCenter -X(PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) - 90)
+'			Move P23 CP ROT
+'			Wait 1
+'			'Pass/fail stuff goes here
+'		EndIf
+'
+'	Next
+'	
+'	Go waypoint1
+	
+	'Return Pass/Fail, work with Scott on the logging aspect 
+'	If PanelPassedInspection = False Then
+'		erPanelFailedInspection = True
+'		SystemPause()
+'	Else
+'		erPanelFailedInspection = False
+'	EndIf
+	
+'	SystemStatus = MovingPanel
+'	Go ScanCenter3 ' Collision Avoidance Waypoint
+	
+'Fend
+

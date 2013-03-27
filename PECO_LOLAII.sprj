@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/03/26 19:21:02:160,DS:0000003654,CS:05719,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/27 20:17:24:401,DS:0000003655,CS:05736,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="3/26/2013 1:21:01 PM"
+	sLastModified="3/27/2013 2:17:23 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -72,18 +72,18 @@ ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/26/2013 7:21:01 PM"
+	sTimeSavedInController="3/27/2013 8:17:23 PM"
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="3/26/2013 3:15:52 PM"
+	sTimeSavedInController="3/26/2013 10:57:06 PM"
 }
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="3/26/2013 1:58:42 PM"
+	sTimeSavedInController="3/26/2013 8:23:14 PM"
 }
 OperatorSettings {
 	OperatorWindow {

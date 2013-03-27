@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/03/26 13:58:42:533,DS:0000003539,CS:31301,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/26 20:23:14:486,DS:0000003751,CS:27180,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=16
+nNumberOfPoints=17
 Point1 {
 	nNumber=0
 	sLabel="InputMagCenter"
@@ -206,7 +206,7 @@ Point12 {
 	sDescription=""
 	rX=0
 	rY=350
-	rZ=-64.5
+	rZ=-35
 	rU=90
 	rV=0
 	rW=0
@@ -224,7 +224,7 @@ Point13 {
 	sDescription=""
 	rX=0
 	rY=500
-	rZ=-64.5
+	rZ=-35
 	rU=90
 	rV=0
 	rW=0
@@ -242,7 +242,7 @@ Point14 {
 	sDescription=""
 	rX=0
 	rY=635
-	rZ=-64.5
+	rZ=-35
 	rU=0
 	rV=0
 	rW=0
@@ -255,6 +255,24 @@ Point14 {
 	bSimVisible=False
 }
 Point15 {
+	nNumber=15
+	sLabel="WayPoint1"
+	sDescription=""
+	rX=289.594
+	rY=355.303
+	rZ=-60.722
+	rU=88.888
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point16 {
 	nNumber=60
 	sLabel="RM0"
 	sDescription=""
@@ -272,7 +290,7 @@ Point15 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point16 {
+Point17 {
 	nNumber=61
 	sLabel="RM1"
 	sDescription=""

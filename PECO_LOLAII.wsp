@@ -1,5 +1,5 @@
-ENVT0100,LM:2013/03/26 19:21:05:176,DS:0000002457,CS:12650,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Run"
+ENVT0100,LM:2013/03/27 22:11:17:747,DS:0000002472,CS:07431,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InspectionStation.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
@@ -83,22 +83,22 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=199
-		nTop=12
-		nWidth=1209
-		nHeight=737
+		nLeft=549
+		nTop=8
+		nWidth=842
+		nHeight=547
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=1
 	Window {
-		nLeft=164
-		nTop=89
-		nWidth=1106
-		nHeight=593
+		nLeft=206
+		nTop=90
+		nWidth=1105
+		nHeight=590
 	}
 }
 nPointFileCount=1
@@ -125,12 +125,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=-1
-		nTop=0
+		nLeft=-6
+		nTop=-3
 		nWidth=550
-		nHeight=539
+		nHeight=635
 	}
 }
 IOLabelEditor {
@@ -144,21 +144,21 @@ IOLabelEditor {
 	nWinState=0
 }
 IOMonitor {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=1105
-		nTop=574
+		nLeft=229
+		nTop=717
 		nWidth=520
-		nHeight=489
+		nHeight=479
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=829
-		nTop=336
-		nWidth=676
-		nHeight=397
+		nLeft=261
+		nTop=224
+		nWidth=675
+		nHeight=394
 	}
 }
 Macros {
@@ -171,10 +171,10 @@ Macros {
 	}
 }
 RobotMgr {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=222
-		nTop=72
+		nLeft=563
+		nTop=281
 		nWidth=751
 		nHeight=485
 	}

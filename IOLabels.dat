@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/03/21 16:59:20:320,DS:0000010460,CS:11288,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/26 20:46:45:043,DS:0000010527,CS:25348,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -205,7 +205,7 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=15
+	nNumberOfLabels=16
 	Label1 {
 		nBit=8
 		sLabel="HMI_connected"
@@ -257,26 +257,31 @@ OutputBitLabels {
 		sDescription=""
 	}
 	Label11 {
+		nBit=106
+		sLabel="stackLightAlrmH"
+		sDescription=""
+	}
+	Label12 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label12 {
+	Label13 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label13 {
+	Label14 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label14 {
+	Label15 {
 		nBit=110
-		sLabel="stackLightAlrmH"
+		sLabel="laserP2"
 		sDescription=""
 	}
-	Label15 {
+	Label16 {
 		nBit=111
 		sLabel="laserP1"
 		sDescription="Temp, but back in pin 29 2-1,bit 104"
