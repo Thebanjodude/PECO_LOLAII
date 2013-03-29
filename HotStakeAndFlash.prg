@@ -31,7 +31,7 @@ Function HotStakePanel()
 
 		If SkippedHole = False Then 'If the flag is set then we have finished all holes
 		
-			P23 = HotStakeCenter2 -Y(Sin(45) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(45) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 135)
+            P23 = HotStakeCenter2 -Y(Sin(45) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(45) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 135)
 			Print P23
 			Jump P23 LimZ zLimit
 						
@@ -65,8 +65,8 @@ Function FlashRemoval()
 '	FindPickUpError()
 	
 'gross pickup
-	yOffset = 24.9001
-	xOffset = -28.1702
+'	yOffset = 24.9001
+'	xOffset = -28.1702
 
 'std pick up
 'yOffset = 1.1698
@@ -87,7 +87,7 @@ Function FlashRemoval()
 	zLimit = -135
 	PanelArrayIndex = 0 ' Reset index for IncrementArray Function
 	
-	GetPanelArray()
+'	GetPanelArray()
 	GetThetaR() ' Call function that assignes first r and theta
 	
 	For t = 0 To recNumberOfHoles - 1
@@ -136,43 +136,50 @@ Function FlashRemoval()
 '	Go ScanCenter ' Collision Avoidance Waypoint
 		
 Fend
-Function Derivetheta
+Function DerivethetaR()
+	
+'Do I need to sort the rows?
 	
 Real error1, theta1, theta2
 Integer CoordIndex, i
 
-GetPanelArray()
-GetPanelCoords()
-PrintCoordArray()
+'GetPanelArray()
+GetPanelCoords() ' load up the array with all the corrdinates
+'PrintCoordArray()
 	
-For i = 0 To 15
-	If PanelCoordinates(CoordIndex, 1) = 0 And PanelCoordinates(CoordIndex, 0) > 0 Then
-		theta1 = 0
-	ElseIf PanelCoordinates(CoordIndex, 0) = 0 And PanelCoordinates(CoordIndex, 1) > 0 Then
-		theta1 = 90
-	ElseIf PanelCoordinates(CoordIndex, 1) = 0 And PanelCoordinates(CoordIndex, 0) < 0 Then
-		theta1 = 180
-	ElseIf PanelCoordinates(CoordIndex, 0) = 0 And PanelCoordinates(CoordIndex, 1) < 0 Then
-		theta1 = 270
-	ElseIf PanelCoordinates(CoordIndex, 0) > 0 And PanelCoordinates(CoordIndex, 1) > 0 Then ' first quadrant, x and y are positive
- 		theta1 = RadToDeg(Atan(PanelCoordinates(CoordIndex, 1) / PanelCoordinates(CoordIndex, 0))) 'atan(y/x)
-	ElseIf PanelCoordinates(CoordIndex, 0) < 0 And PanelCoordinates(CoordIndex, 1) > 0 Then ' second quadrant, x is neg, y is pos
-		theta1 = 180 + RadToDeg(Atan(PanelCoordinates(CoordIndex, 1) / PanelCoordinates(CoordIndex, 0))) 'atan(y/x)
-	ElseIf PanelCoordinates(CoordIndex, 0) < 0 And PanelCoordinates(CoordIndex, 1) < 0 Then ' third quadrant, x and y are negitive
-		theta1 = 180 + RadToDeg(Atan(PanelCoordinates(CoordIndex, 1) / PanelCoordinates(CoordIndex, 0))) 'atan(y/x)
-	ElseIf PanelCoordinates(CoordIndex, 0) > 0 And PanelCoordinates(CoordIndex, 1) < 0 Then ' fourth quadrant, x is pos y is negitive
-		theta1 = 360 + RadToDeg(Atan(PanelCoordinates(CoordIndex, 1) / PanelCoordinates(CoordIndex, 0))) 'atan(y/x)
+For i = 0 To recNumberOfHoles - 1
 
+	If PanelCordinates(i, 1) = 0 And PanelCordinates(i, 0) > 0 Then
+		PanelArray(PanelArrayIndex, ThetaColumn) = 0
+	ElseIf PanelCordinates(i, 0) = 0 And PanelCordinates(i, 1) > 0 Then
+		PanelArray(PanelArrayIndex, ThetaColumn) = 90
+	ElseIf PanelCordinates(i, 1) = 0 And PanelCordinates(i, 0) < 0 Then
+		PanelArray(PanelArrayIndex, ThetaColumn) = 180
+	ElseIf PanelCordinates(i, 0) = 0 And PanelCordinates(i, 1) < 0 Then
+		PanelArray(PanelArrayIndex, ThetaColumn) = 270
+	ElseIf PanelCordinates(i, 0) > 0 And PanelCordinates(i, 1) > 0 Then ' first quadrant, x and y are positive
+ 		PanelArray(PanelArrayIndex, ThetaColumn) = RadToDeg(Atan(PanelCordinates(i, 1) / PanelCordinates(i, 0))) 'atan(y/x)
+	ElseIf PanelCordinates(i, 0) < 0 And PanelCordinates(i, 1) > 0 Then ' second quadrant, x is neg, y is pos
+		PanelArray(PanelArrayIndex, ThetaColumn) = 180 + RadToDeg(Atan(PanelCordinates(i, 1) / PanelCordinates(i, 0))) 'atan(y/x)
+	ElseIf PanelCordinates(i, 0) < 0 And PanelCordinates(i, 1) < 0 Then ' third quadrant, x and y are negitive
+		PanelArray(PanelArrayIndex, ThetaColumn) = 180 + RadToDeg(Atan(PanelCordinates(i, 1) / PanelCordinates(i, 0))) 'atan(y/x)
+	ElseIf PanelCordinates(i, 0) > 0 And PanelCordinates(i, 1) < 0 Then ' fourth quadrant, x is pos y is negitive
+		PanelArray(PanelArrayIndex, ThetaColumn) = 360 + RadToDeg(Atan(PanelCordinates(i, 1) / PanelCordinates(i, 0))) 'atan(y/x)
 	EndIf
 	
-'	Print theta1
-
-	theta2 = PanelArray(CoordIndex, 1)
-	CoordIndex = CoordIndex + 1
-	error1 = theta1 - theta2
-	Print error1
+	PanelArray(PanelArrayIndex, RadiusColumn) = Sqr(PanelCordinates(i, xCoord) * PanelCordinates(i, xCoord) + (PanelCordinates(i, yCoord) * (PanelCordinates(i, yCoord))))
+	
+	IncrementIndex()
 
 Next i
+	PrintPanelArray()
+	PanelArrayIndex = 0
+'	Print theta1
+'
+'	theta2 = PanelArray(CoordIndex, 1)
+'	CoordIndex = CoordIndex + 1
+'	error1 = theta1 - theta2
+'	Print error1
 	
 Fend
 Function IncrementIndex() ' Increment all the indexes
@@ -255,41 +262,87 @@ Function PrintPanelArray()
 	PrintArrayIndex = 0 	'Reset indexes
 	
 Fend
+Function InTomm(mm As Real) As Real
+	'1in=25.4mm	
+	InTomm = mm * 25.4
+Fend
 Function GetPanelCoords()
 	
-PanelCoordinates(0, 0) = 223.52
-PanelCoordinates(1, 0) = 200.584
-PanelCoordinates(2, 0) = 140.792
-PanelCoordinates(3, 0) = 71.1962
-PanelCoordinates(4, 0) = 0
-PanelCoordinates(5, 0) = -71.1962
-PanelCoordinates(6, 0) = -140.792
-PanelCoordinates(7, 0) = -200.584
-PanelCoordinates(8, 0) = -223.52
-PanelCoordinates(9, 0) = -200.584
-PanelCoordinates(10, 0) = -140.792
-PanelCoordinates(11, 0) = -71.1962
-PanelCoordinates(12, 0) = 0
-PanelCoordinates(13, 0) = 71.1962
-PanelCoordinates(14, 0) = 140.792
-PanelCoordinates(15, 0) = 200.584
+'88553
+recNumberOfHoles = 18
+Redim PanelCordinates(recNumberOfHoles - 1, 2)
+PanelCordinates(0, 0) = InTomm(8.6340)
+PanelCordinates(1, 0) = InTomm(7.1780)
+PanelCordinates(2, 0) = InTomm(4.9191)
+PanelCordinates(3, 0) = InTomm(2.4775)
+PanelCordinates(4, 0) = InTomm(0)
+PanelCordinates(5, 0) = InTomm(-2.4775)
+PanelCordinates(6, 0) = InTomm(-4.9191)
+PanelCordinates(7, 0) = InTomm(-7.1780)
+PanelCordinates(8, 0) = InTomm(-8.6340)
+PanelCordinates(9, 0) = InTomm(-8.6340)
+PanelCordinates(10, 0) = InTomm(-7.1780)
+PanelCordinates(11, 0) = InTomm(-4.9191)
+PanelCordinates(12, 0) = InTomm(-2.4775)
+PanelCordinates(13, 0) = InTomm(0)
+PanelCordinates(14, 0) = InTomm(2.4775)
+PanelCordinates(15, 0) = InTomm(4.9191)
+PanelCordinates(16, 0) = InTomm(7.1780)
+PanelCordinates(17, 0) = InTomm(8.6340)
 
-PanelCoordinates(0, 1) = 0
-PanelCoordinates(1, 1) = 65.8622
-PanelCoordinates(2, 1) = 103.276
-PanelCoordinates(3, 1) = 118.212
-PanelCoordinates(4, 1) = 121.92
-PanelCoordinates(5, 1) = 118.212
-PanelCoordinates(6, 1) = 103.276
-PanelCoordinates(7, 1) = 65.8622
-PanelCoordinates(8, 1) = 0
-PanelCoordinates(9, 1) = -65.8622
-PanelCoordinates(10, 1) = -103.276
-PanelCoordinates(11, 1) = -118.212
-PanelCoordinates(12, 1) = -121.92
-PanelCoordinates(13, 1) = -118.212
-PanelCoordinates(14, 1) = -103.276
-PanelCoordinates(15, 1) = -65.8622
+PanelCordinates(0, 1) = InTomm(1.2379)
+PanelCordinates(1, 1) = InTomm(3.2431)
+PanelCordinates(2, 1) = InTomm(4.2593)
+PanelCordinates(3, 1) = InTomm(4.6885)
+PanelCordinates(4, 1) = InTomm(4.8000)
+PanelCordinates(5, 1) = InTomm(4.6885)
+PanelCordinates(6, 1) = InTomm(4.2593)
+PanelCordinates(7, 1) = InTomm(3.2431)
+PanelCordinates(8, 1) = InTomm(1.2379)
+PanelCordinates(9, 1) = InTomm(-1.2379)
+PanelCordinates(10, 1) = InTomm(-3.2431)
+PanelCordinates(11, 1) = InTomm(-4.2593)
+PanelCordinates(12, 1) = InTomm(-4.6885)
+PanelCordinates(13, 1) = InTomm(-4.8000)
+PanelCordinates(14, 1) = InTomm(-4.6885)
+PanelCordinates(15, 1) = InTomm(-4.2593)
+PanelCordinates(16, 1) = InTomm(-3.2431)
+PanelCordinates(17, 1) = InTomm(-1.2379)
+	
+'88554	
+'PanelCordinates(0, 0) = 223.52
+'PanelCordinates(1, 0) = 200.584
+'PanelCordinates(2, 0) = 140.792
+'PanelCordinates(3, 0) = 71.1962
+'PanelCordinates(4, 0) = 0
+'PanelCordinates(5, 0) = -71.1962
+'PanelCordinates(6, 0) = -140.792
+'PanelCordinates(7, 0) = -200.584
+'PanelCordinates(8, 0) = -223.52
+'PanelCordinates(9, 0) = -200.584
+'PanelCordinates(10, 0) = -140.792
+'PanelCordinates(11, 0) = -71.1962
+'PanelCordinates(12, 0) = 0
+'PanelCordinates(13, 0) = 71.1962
+'PanelCordinates(14, 0) = 140.792
+'PanelCordinates(15, 0) = 200.584
+'
+'PanelCordinates(0, 1) = 0
+'PanelCordinates(1, 1) = 65.8622
+'PanelCordinates(2, 1) = 103.276
+'PanelCordinates(3, 1) = 118.212
+'PanelCordinates(4, 1) = 121.92
+'PanelCordinates(5, 1) = 118.212
+'PanelCordinates(6, 1) = 103.276
+'PanelCordinates(7, 1) = 65.8622
+'PanelCordinates(8, 1) = 0
+'PanelCordinates(9, 1) = -65.8622
+'PanelCordinates(10, 1) = -103.276
+'PanelCordinates(11, 1) = -118.212
+'PanelCordinates(12, 1) = -121.92
+'PanelCordinates(13, 1) = -118.212
+'PanelCordinates(14, 1) = -103.276
+'PanelCordinates(15, 1) = -65.8622
 	
 Fend
 Function PrintCoordArray()
@@ -297,7 +350,7 @@ Function PrintCoordArray()
 	Integer n, PrintArrayIndex
 
 	For n = 0 To 15
-		Print Str$(PanelCoordinates(PrintArrayIndex, 0)) + " " + Str$(PanelCoordinates(PrintArrayIndex, 1))
+		Print Str$(PanelCordinates(PrintArrayIndex, 0)) + " " + Str$(PanelCordinates(PrintArrayIndex, 1))
 		PrintArrayIndex = PrintArrayIndex + 1
 	Next
 	

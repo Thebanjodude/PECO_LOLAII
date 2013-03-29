@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/03/28 21:23:51:695,DS:0000004793,CS:21115,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/29 20:35:21:211,DS:0000006097,CS:07797,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=22
+nNumberOfPoints=28
 Point1 {
 	nNumber=0
 	sLabel="InputMagCenter"
@@ -259,9 +259,9 @@ Point15 {
 	sLabel="InspectionCenter"
 	sDescription=""
 	rX=0
-	rY=635
-	rZ=-35
-	rU=0
+	rY=633
+	rZ=-87.36
+	rU=90
 	rV=0
 	rW=0
 	nLocal=0
@@ -363,6 +363,114 @@ Point20 {
 	bSimVisible=False
 }
 Point21 {
+	nNumber=20
+	sLabel=""
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point22 {
+	nNumber=21
+	sLabel="InspectionTest"
+	sDescription=""
+	rX=65.373
+	rY=435.657
+	rZ=-88.698
+	rU=1212.232
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point23 {
+	nNumber=22
+	sLabel="InspectionTest2"
+	sDescription=""
+	rX=95.176
+	rY=489.712
+	rZ=-87.364
+	rU=1245.073
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point24 {
+	nNumber=23
+	sLabel="InspectHole2"
+	sDescription=""
+	rX=102.739
+	rY=499.259
+	rZ=-88.318
+	rU=167.295
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point25 {
+	nNumber=24
+	sLabel="InspectHole6"
+	sDescription=""
+	rX=-96.843
+	rY=496.811
+	rZ=-85.334
+	rU=191.352
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point26 {
+	nNumber=25
+	sLabel="InspectHole9"
+	sDescription=""
+	rX=-0.897
+	rY=406.786
+	rZ=-84.045
+	rU=276.064
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point27 {
 	nNumber=60
 	sLabel="RM0"
 	sDescription=""
@@ -380,7 +488,7 @@ Point21 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point22 {
+Point28 {
 	nNumber=61
 	sLabel="RM1"
 	sDescription=""

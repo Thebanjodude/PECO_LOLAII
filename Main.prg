@@ -12,9 +12,13 @@ Do While True
 	
 	CheckInitialValues()
 	CheckRecipeInitialization()
+
 	
-	Print "jobStart ", jobStart
-	Wait 1
+'	Print "jobStart ", jobStart
+'	Wait 1
+
+
+Wait 2
 
 	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False Then
 		Print "doing a job"
@@ -23,7 +27,7 @@ Do While True
 '		PreInspection() ' Take panel to scanner; compare recipe data and populate PanelArray with r's and theta's
 '		HotStakePanel() ' Take panel to hot stake machine; install all inserts
 '		FlashRemoval() ' Take panel to flash removal station, remove all flash as required
-'		Inspection() ' Take Panel to scanner returns pass/fail
+		Inspection() ' Take Panel to scanner returns pass/fail
 '		PushPanel() ' Take Panel to output magazine and drop it off
 '		Pause
 	EndIf

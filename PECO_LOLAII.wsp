@@ -1,26 +1,26 @@
-ENVT0100,LM:2013/03/29 00:39:20:920,DS:0000002468,CS:04434,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="HotStakeAndFlash.prg"
+ENVT0100,LM:2013/03/29 21:47:11:526,DS:0000002471,CS:23591,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InspectionStation.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=441
-		nTop=167
-		nWidth=930
-		nHeight=566
+		nLeft=723
+		nTop=14
+		nWidth=928
+		nHeight=676
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=180
-		nTop=87
-		nWidth=883
-		nHeight=600
+		nLeft=390
+		nTop=71
+		nWidth=1117
+		nHeight=751
 	}
 }
 ProgramFile3 {
@@ -28,10 +28,10 @@ ProgramFile3 {
 	bOpened=True
 	nWinState=1
 	Window {
-		nLeft=194
-		nTop=138
-		nWidth=1098
-		nHeight=555
+		nLeft=178
+		nTop=61
+		nWidth=1094
+		nHeight=578
 	}
 }
 ProgramFile4 {
@@ -50,10 +50,10 @@ ProgramFile5 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=58
-		nTop=56
-		nWidth=1069
-		nHeight=741
+		nLeft=107
+		nTop=43
+		nWidth=1067
+		nHeight=734
 	}
 }
 ProgramFile6 {
@@ -83,22 +83,22 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=692
-		nTop=9
-		nWidth=779
-		nHeight=707
+		nLeft=340
+		nTop=24
+		nWidth=1153
+		nHeight=700
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=460
-		nTop=77
-		nWidth=1101
-		nHeight=579
+		nLeft=459
+		nTop=102
+		nWidth=1097
+		nHeight=573
 	}
 }
 nPointFileCount=1
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=True
 	Window {
-		nLeft=185
-		nTop=271
+		nLeft=243
+		nTop=116
 		nWidth=751
 		nHeight=485
 	}

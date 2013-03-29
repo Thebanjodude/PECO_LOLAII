@@ -315,6 +315,7 @@ Function LS_cmd()
     String Tokens$(0)
     String response$
     String outstring$
+
                 
 '   Do While g_io_xfr_on = 1
    Print "Entered LS_CMD"
@@ -325,7 +326,7 @@ Function LS_cmd()
             i = ChkNet(203)
             If i > 0 Then
             	Read #203, response$, i
-            	NumTokens = ParseStr(response$, Tokens$(), ",")
+            	numTokens = ParseStr(response$, tokens$(), ",")
 '  				g_LaserMeasure = Val(Tokens$(1))
                 Print "Measurement: ", response$
             EndIf
@@ -337,7 +338,6 @@ Function setVars(response$ As String)
     String outstring$
     String match$
     String prepend$
-
     match$ = "{:} " + Chr$(&H22)
     
 	numTokens = ParseStr(response$, tokens$(), match$)
@@ -954,7 +954,7 @@ Case "recMinorDim"
     Print "recMinorDim:", recMinorDim
 Case "recNumberOfHoles"
     recNumberOfHoles = Val(tokens$(1))
-    Redim PanelCoordinates(recNumberOfHoles, 2)
+    Redim PanelCordinates(recNumberOfHoles, 2)
     Print "recNumberOfHoles:", recNumberOfHoles
 Case "recTemp"
     recTemp = Val(tokens$(1))
@@ -968,18 +968,99 @@ Case "systemSpeed"
 Case "systemState"
     SystemState = Val(tokens$(1))
     Print "systemState:", SystemState
+    
 Case "hole0X"
-	PanelCoordinates(0, 0) = Val(tokens$(1))
+    PanelCordinates(0, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole0Y"
-	PanelCoordinates(0, 1) = Val(tokens$(1))
+    PanelCordinates(0, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole1X"
-	PanelCoordinates(1, 0) = Val(tokens$(1))
+    PanelCordinates(1, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole1Y"
-	PanelCoordinates(1, 1) = Val(tokens$(1))
+    PanelCordinates(1, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole2X"
-	PanelCoordinates(2, 0) = Val(tokens$(1))
+    PanelCordinates(2, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole2Y"
-	PanelCoordinates(2, 1) = Val(tokens$(1))
+    PanelCordinates(2, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole3X"
+    PanelCordinates(3, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole3Y"
+    PanelCordinates(3, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole4X"
+    PanelCordinates(4, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole4Y"
+    PanelCordinates(4, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole5X"
+    PanelCordinates(5, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole5Y"
+    PanelCordinates(5, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole6X"
+    PanelCordinates(6, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole6Y"
+    PanelCordinates(6, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole7X"
+    PanelCordinates(7, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole7Y"
+    PanelCordinates(7, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole8X"
+    PanelCordinates(8, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole8Y"
+    PanelCordinates(8, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole9X"
+    PanelCordinates(9, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole9Y"
+    PanelCordinates(9, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole10X"
+    PanelCordinates(10, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole10Y"
+    PanelCordinates(10, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole11X"
+    PanelCordinates(11, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole11Y"
+    PanelCordinates(11, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole12X"
+    PanelCordinates(12, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole12Y"
+    PanelCordinates(12, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole13X"
+    PanelCordinates(13, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole13Y"
+    PanelCordinates(13, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole14X"
+    PanelCordinates(14, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole14Y"
+    PanelCordinates(14, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole15X"
+    PanelCordinates(15, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole15Y"
+    PanelCordinates(15, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole16X"
+    PanelCordinates(16, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole16Y"
+    PanelCordinates(16, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole17X"
+    PanelCordinates(17, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole17Y"
+    PanelCordinates(17, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole18X"
+    PanelCordinates(18, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole18Y"
+    PanelCordinates(18, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole19X"
+    PanelCordinates(19, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole19Y"
+    PanelCordinates(19, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole20X"
+    PanelCordinates(20, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole20Y"
+    PanelCordinates(20, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole21X"
+    PanelCordinates(21, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole21Y"
+    PanelCordinates(21, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole22X"
+    PanelCordinates(22, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+Case "hole22Y"
+    PanelCordinates(22, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Default
 	' TMH for now print come back and do something useful
 	Print "Invalid Token received"

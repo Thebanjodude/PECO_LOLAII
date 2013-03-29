@@ -7,7 +7,7 @@ Global Integer systemStatus ' Integer that tells opperator what state the sytem 
 Global Real zLimit ' the highest the EOAT can move without hitting periphials
 #define ScanSpeed 35 ' Percent Speed the arm moves during the scanning process
 Global Real xOffset, yOffset, thetaOffset
-Global Real PanelCoordinates(15, 1)
+Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
 
 'Commands from HMI
@@ -76,6 +76,8 @@ Global Boolean flashMtrCC, flashCycCC, debrisMtrCC
 #define InsertTypeUnknown 0
 #define AluminumInsert 1
 #define StainlessInsert 2
+#define xCoord 0
+#define YCoord 1
 Global Integer recNumberOfHoles, recInsertType
 Global Boolean recFlashRequired
 Global Real recZDropOff, recInsertDepth, recPanelThickness
@@ -180,4 +182,12 @@ Global Boolean joint1Status, joint2Status, joint3Status, joint4Status, safeGuard
 
 ' Vars I needed while testing...will clean up and organize later!
 'Global Boolean Var0, Var1, InputVar0, InputVar1, OutputVar0, OutputVar0RealWorld
+
+'Hole variables
+Global Real hole0Y, hole1X, hole1Y, hole2X, hole2Y, hole3X, hole3Y, hole4X, hole4Y
+Global Real hole5X, hole5Y, hole6X, hole6Y, hole7X, hole7Y, hole8X, hole8Y, hole9X, hole9Y
+Global Real hole10X, hole10Y, hole11X, hole11Y, hole12X, hole12Y, hole13X, hole13Y, hole14X, hole14Y
+Global Real hole15X, hole15Y, hole16X, hole16Y, hole17X, hole17Y, hole18X, hole18Y, hole19X, hole19Y
+Global Real hole20X, hole20Y, hole21X, hole21Y, hole22X, hole22Y
+
 
