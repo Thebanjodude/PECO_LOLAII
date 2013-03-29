@@ -14,124 +14,206 @@ Speed 10
 Accel 10, 10
 
 Integer t
-TracePanelEdge()
+
 
 retrace:
-
-FindHoles()
+GetPanelArray()
 PrintPanelArray()
 
-For t = 0 To 1
-GoToHoles() ' Play back the holes we found
-Next t
-
-'InspectionTest()
-
-Print "Adjust laser parameters now"
-Print "DoubleTriggered: ", DoubleTriggered
+FindPickUpError()
 
 Pause
-z = 0
-DoubleTriggered = 0
+
+
 PanelArrayIndex = 0
 'Trap 1 ' turn off trap
-Redim PanelArray(25, 2) ' Reinitialize panel array
+
 GoTo retrace
 
 Fend
-Function EdgeDetected
+Function FindPickUpError()
 	
-	If Sw(laserLo) = True Then
-		Move Here +Y(1.6)
-	ElseIf Sw(laserHi) = True Then
-		Move Here -Y(1.6)
-	EndIf
-	
-	P(x) = Here
-	x = x + 1
-	
-	Trap 1 Sw(laserHi) = True Or Sw(laserLo) Call EdgeDetected
-		
-Fend
-Function TracePanelEdge()
-	
-x = 100 ' start edge points at 100
-Off (laserP1) ' Change to laser profile 0
-
-Go ScanCenter3 CP  ' Use CP so it's not jumpy
-Wait .5
-
-Go ScanCenter4 CP Till Sw(laserGo)
-Move Here -Y(1.2)
-P(x) = Here
-x = x + 1
-
-Trap 1 Sw(laserHi) = True Or Sw(laserLo) Call EdgeDetected
-Print "Edge time start: ", Time$
-
-Do While CU(Here) < (490) 'Spin around 360 degrees
-
-     Move ScanCenter3 :U(485) CP ROT
-	
-If CU(Here) > 455 Then
-	Exit Do
-EndIf
-Loop
-
-Trap 1 ' turn off trap
-
-Print "Edge time end: ", Time$
-Fend
-Function FindHoles()
-	
-Speed 1
-Accel 20, 20
-FirstHolePoint = 600 'Start hole locations at 600	
+Real distance, error1, d1, d2
+Real yOffset1, yOffset2
 Integer i
-i = 100
-On (laserP1) ' Change to laser profile 1	
 
-Print "Scan time start: ", Time$
-Go P(100) +Y(23) +Z(3.5) CP ' go to the first point
+'recMajorDim = 247.142
+'recMinorDim = 143.764
 
-Trap 4 Sw(holeDetected) Xqt RecordTheta ' Arm Trap	
-
-	For i = 100 To (x - 1)
-		Go P(i) +Y(23) +Z(3.5) CP
-	Next i
+Speed 10 'slow it down so we get a better reading
+SpeedS 20
 	
-Trap 4 'turn off trap
-recNumberOfHoles = z
-PrintPanelArray()
-Print "Scan time end: ", Time$
-Print "found holes:", z
+	Go ScanCenter3 CP  ' Use CP so it's not jumpy
+	Wait .25
+	
+	Off (laserP1)
+	Move ScanCenter4 CP Till Sw(laserGo)
+	d1 = CY(CurPos)
+	On (laserP1)
+	
+	Go ScanCenter3 +U(180) CP  ' Use CP so it's not jumpy
+	Wait .25
+	
+	Off (laserP1)
+	Move ScanCenter4 +U(180) CP Till Sw(laserGo)
+	d2 = CY(CurPos)
+	On (laserP1)
+	yOffset = d1 - d2
+	
+	Print "yOffset", yOffset
+	
+	d1 = 0
+	d2 = 0
+	
+	Go ScanCenter3 +U(90) CP  ' Use CP so it's not jumpy
+	Wait .25
+	
+	Off (laserP1)
+	Move ScanCenter4 +U(90) CP Till Sw(laserGo)
+	d1 = CY(CurPos)
+	On (laserP1)
+	
+	Go ScanCenter3 +U(270) CP  ' Use CP so it's not jumpy
+	Wait .25
+	
+	Off (laserP1)
+	Move ScanCenter4 +U(270) CP Till Sw(laserGo)
+	d2 = CY(CurPos)
+	On (laserP1)
+	xOffset = d1 - d2
+	
+	Print "xOffset", xOffset
+	
+	d1 = 0
+	d2 = 0
+	
+'	thetaOffset = Asin(yOffset / xOffset)
+
+'	Move ScanCenter4 Till Sw(laserGo)
+'	distance = 635 - CY(CurPos) '635mm is an eyeballed y coordinate of laser scannr
+'	yOffset1 = recMajorDim - distance
+'
+'	Print "CY(CurPos)", CY(CurPos)
+'	Print "yoffset1:", yOffset1
+'	
+'	Move ScanCenter3 +U(180) ROT  ' Use CP so it's not jumpy, may need to be abs :U
+'	Wait .5
+'	
+'	Move ScanCenter4 +U(180) Till Sw(laserGo)
+'	distance = 635 - CY(CurPos) '635mm is an eyeballed y coordinate of laser scannr
+'	yOffset2 = recMajorDim - distance
+'	Print "yoffset2:", yOffset2
+'	
+'	error1 = yOffset1 - yOffset2
+'	
+'	Print "error1", error1
+		
+'	Move ScanCenter3 +U(90) CP   ' Use CP so it's not jumpy, may need to be abs :U
+'	Wait .5
+'	
+'	Move ScanCenter4 +U(90) CP Till Sw(laserGo)
+'	distance = 635 - CY(CurPos) '635mm is an eyeballed y coordinate of laser scannr
+'	xOffset = recMinorDim - distance
+''	Print "CY(CurPos)", CY(CurPos)
+'	Print "xoffset:", xOffset
+
+	Go Home1
 
 Fend
-Function RecordTheta
-	
-CurrentTheta = CU(CurPos)
 
-Print "called trap"
-	
-If CurrentTheta - LastTheta > 6 Or z = 0 Then ' need z=0 to see first hole
-	r = 635 - CY(CurPos) '635mm is an eyeballed y coordinate of laser scannr
-	PanelArray(PanelArrayIndex, RadiusColumn) = r 'Assign r and theta to array
-	PanelArray(PanelArrayIndex, ThetaColumn) = CurrentTheta
-	PanelArrayIndex = PanelArrayIndex + 1
 
-	Print "found a hole"
-	P(FirstHolePoint + z) = CurPos
+'Function EdgeDetected
+'	
+'	If Sw(laserLo) = True Then
+'		Move Here +Y(1.6)
+'	ElseIf Sw(laserHi) = True Then
+'		Move Here -Y(1.6)
+'	EndIf
+'	
+'	P(x) = Here
+'	x = x + 1
+'	
+'	Trap 1 Sw(laserHi) = True Or Sw(laserLo) Call EdgeDetected
+'		
+'Fend
+'Function TracePanelEdge()
+'	
+'x = 100 ' start edge points at 100
+'Off (laserP1) ' Change to laser profile 0
+'
 
-	z = z + 1 ' count num of holes found
-	LastTheta = CurrentTheta
-'TODO:add check to make sure we don't increment panelarray beyond bounds
-Else
-	DoubleTriggered = DoubleTriggered + 1
-EndIf
-
-Trap 4 Sw(holeDetected) Xqt RecordTheta 'rearm trap
-
-Fend
+'
+'Go ScanCenter4 CP Till Sw(laserGo)
+'Move Here -Y(1.2)
+'P(x) = Here
+'x = x + 1
+'
+'Trap 1 Sw(laserHi) = True Or Sw(laserLo) Call EdgeDetected
+'Print "Edge time start: ", Time$
+'
+'Do While CU(Here) < (490) 'Spin around 360 degrees
+'
+'     Move ScanCenter3 :U(485) CP ROT
+'	
+'If CU(Here) > 455 Then
+'	Exit Do
+'EndIf
+'Loop
+'
+'Trap 1 ' turn off trap
+'
+'Print "Edge time end: ", Time$
+'Fend
+'Function FindHoles()
+'	
+'Speed 1
+'Accel 20, 20
+'FirstHolePoint = 600 'Start hole locations at 600	
+'Integer i
+'i = 100
+'On (laserP1) ' Change to laser profile 1	
+'
+'Print "Scan time start: ", Time$
+'Go P(100) +Y(23) +Z(3.5) CP ' go to the first point
+'
+'Trap 4 Sw(holeDetected) Xqt RecordTheta ' Arm Trap	
+'
+'	For i = 100 To (x - 1)
+'		Go P(i) +Y(23) +Z(3.5) CP
+'	Next i
+'	
+'Trap 4 'turn off trap
+'recNumberOfHoles = z
+'PrintPanelArray()
+'Print "Scan time end: ", Time$
+'Print "found holes:", z
+'
+'Fend
+'Function RecordTheta
+'	
+'CurrentTheta = CU(CurPos)
+'
+'Print "called trap"
+'	
+'If CurrentTheta - LastTheta > 6 Or z = 0 Then ' need z=0 to see first hole
+'	r = 635 - CY(CurPos) '635mm is an eyeballed y coordinate of laser scannr
+'	PanelArray(PanelArrayIndex, RadiusColumn) = r 'Assign r and theta to array
+'	PanelArray(PanelArrayIndex, ThetaColumn) = CurrentTheta
+'	PanelArrayIndex = PanelArrayIndex + 1
+'
+'	Print "found a hole"
+'	P(FirstHolePoint + z) = CurPos
+'
+'	z = z + 1 ' count num of holes found
+'	LastTheta = CurrentTheta
+''TODO:add check to make sure we don't increment panelarray beyond bounds
+'Else
+'	DoubleTriggered = DoubleTriggered + 1
+'EndIf
+'
+'Trap 4 Sw(holeDetected) Xqt RecordTheta 'rearm trap
+'
+'Fend
 
 'Function RecordTheta
 '	
@@ -200,7 +282,7 @@ Function InspectionTest() As Boolean
 		EndIf
 
 		If SkippedHole = False Then 'If the flag is set then we have finished all holes		
-			P23 = InspectionCenter -Y(PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn))
+			P23 = InspectionCenter -Y(PanelArray(PanelArrayIndex, RadiusColumn) + yOffset) +X(xOffset) :U(PanelArray(PanelArrayIndex, ThetaColumn))
 			Move P23 CP ROT
 			Wait 1
 			'Pass/fail stuff goes here

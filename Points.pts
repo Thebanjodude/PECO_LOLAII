@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/03/26 20:23:14:486,DS:0000003751,CS:27180,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/03/28 21:23:51:695,DS:0000004793,CS:21115,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=17
+nNumberOfPoints=22
 Point1 {
 	nNumber=0
 	sLabel="InputMagCenter"
@@ -201,13 +201,13 @@ Point11 {
 	bSimVisible=False
 }
 Point12 {
-	nNumber=12
-	sLabel="ScanCenter3"
+	nNumber=11
+	sLabel="ScanCenter390"
 	sDescription=""
 	rX=0
-	rY=350
-	rZ=-35
-	rU=90
+	rY=362.735
+	rZ=-87.84
+	rU=0
 	rV=0
 	rW=0
 	nLocal=0
@@ -219,12 +219,12 @@ Point12 {
 	bSimVisible=False
 }
 Point13 {
-	nNumber=13
-	sLabel="ScanCenter4"
+	nNumber=12
+	sLabel="ScanCenter3"
 	sDescription=""
 	rX=0
-	rY=500
-	rZ=-35
+	rY=350
+	rZ=-87.84
 	rU=90
 	rV=0
 	rW=0
@@ -237,6 +237,24 @@ Point13 {
 	bSimVisible=False
 }
 Point14 {
+	nNumber=13
+	sLabel="ScanCenter4"
+	sDescription=""
+	rX=0
+	rY=500
+	rZ=-87.84
+	rU=90
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point15 {
 	nNumber=14
 	sLabel="InspectionCenter"
 	sDescription=""
@@ -254,7 +272,7 @@ Point14 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point15 {
+Point16 {
 	nNumber=15
 	sLabel="WayPoint1"
 	sDescription=""
@@ -272,7 +290,79 @@ Point15 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point16 {
+Point17 {
+	nNumber=16
+	sLabel="FlashCenter2"
+	sDescription=""
+	rX=-600
+	rY=0
+	rZ=-165
+	rU=90
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point18 {
+	nNumber=17
+	sLabel="Home1"
+	sDescription=""
+	rX=-519.504
+	rY=282.428
+	rZ=-165
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point19 {
+	nNumber=18
+	sLabel="HotStakeCenter2"
+	sDescription=""
+	rX=-600
+	rY=600
+	rZ=-165
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point20 {
+	nNumber=19
+	sLabel="FlashCenter3"
+	sDescription=""
+	rX=-600
+	rY=0
+	rZ=-165
+	rU=90
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point21 {
 	nNumber=60
 	sLabel="RM0"
 	sDescription=""
@@ -290,7 +380,7 @@ Point16 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point17 {
+Point22 {
 	nNumber=61
 	sLabel="RM1"
 	sDescription=""

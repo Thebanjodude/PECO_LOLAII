@@ -1,0 +1,3 @@
+> GetPanelCoords()
+!!Error: 2305, Cannot execute a Call statement from the command window.
+> 

@@ -325,7 +325,7 @@ Function LS_cmd()
             i = ChkNet(203)
             If i > 0 Then
             	Read #203, response$, i
-            	numTokens = ParseStr(response$, tokens$(), ",")
+            	NumTokens = ParseStr(response$, Tokens$(), ",")
 '  				g_LaserMeasure = Val(Tokens$(1))
                 Print "Measurement: ", response$
             EndIf
@@ -954,6 +954,7 @@ Case "recMinorDim"
     Print "recMinorDim:", recMinorDim
 Case "recNumberOfHoles"
     recNumberOfHoles = Val(tokens$(1))
+    Redim PanelCoordinates(recNumberOfHoles, 2)
     Print "recNumberOfHoles:", recNumberOfHoles
 Case "recTemp"
     recTemp = Val(tokens$(1))
@@ -967,8 +968,18 @@ Case "systemSpeed"
 Case "systemState"
     SystemState = Val(tokens$(1))
     Print "systemState:", SystemState
-
-
+Case "hole0X"
+	PanelCoordinates(0, 0) = Val(tokens$(1))
+Case "hole0Y"
+	PanelCoordinates(0, 1) = Val(tokens$(1))
+Case "hole1X"
+	PanelCoordinates(1, 0) = Val(tokens$(1))
+Case "hole1Y"
+	PanelCoordinates(1, 1) = Val(tokens$(1))
+Case "hole2X"
+	PanelCoordinates(2, 0) = Val(tokens$(1))
+Case "hole2Y"
+	PanelCoordinates(2, 1) = Val(tokens$(1))
 Default
 	' TMH for now print come back and do something useful
 	Print "Invalid Token received"
