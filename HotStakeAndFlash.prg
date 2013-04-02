@@ -172,7 +172,7 @@ For i = 0 To recNumberOfHoles - 1
 	IncrementIndex()
 
 Next i
-'	PrintPanelArray()
+	PrintPanelArray()
 	PanelArrayIndex = 0
 '	Print theta1
 '
@@ -407,7 +407,7 @@ Function FindSlope(pt1 As Integer, pt2 As Integer) As Real
 		Print "y2:", PanelCordinates(pt2, 1)
 		
 			If PanelCordinates(pt2, 0) = 0 Then
-				FindSlope = 99999
+				FindSlope = 9999999
 			Else
 				FindSlope = PanelCordinates(pt2, 1) / PanelCordinates(pt2, 0)
 			EndIf
@@ -416,7 +416,7 @@ Function FindSlope(pt1 As Integer, pt2 As Integer) As Real
 		Print "pts are the same"
 		FindSlope = 0
 	ElseIf PanelCordinates(pt2, 0) = PanelCordinates(pt1, 0) Then
-		FindSlope = 999999 'the slope is infinity
+		FindSlope = 9999999 'the slope is infinity
 	Else
 		Print "x1:", PanelCordinates(pt1, 0)
 		Print "y1:", PanelCordinates(pt1, 1)
@@ -427,98 +427,88 @@ Function FindSlope(pt1 As Integer, pt2 As Integer) As Real
 	
 Fend
 Function test
-	'Print "m=", FindSlope(1, 2)
-	Real beta, mu, theta5, theta6, theta4, m0, m1, m2, thetaguess, r1
+
+	Real beta, mu, theta5, theta6, theta4, theta9, m0, m1, m2, thetaguess, r1, phi
 	Integer hole, i
 	recNumberOfHoles = 18
 	
 	DerivethetaR()
+	
 	PrintCoordArray()
+	
 	hole = 0
 	
-For i = 0 To 16
+For i = 0 To 17
 	
 	Print "hole #", hole
 	
-	If hole = 0 Then
-		m0 = FindSlope(-99, hole)
-		m1 = FindSlope(recNumberOfHoles - 1, hole)
-		m2 = FindSlope(hole, hole + 1)
+	If hole = 0 Then ' Find the slopes of the lines that connect the holes
+'		m0 = FindSlope(-99, hole) 'from the origin to the hole
+		m1 = FindSlope(recNumberOfHoles - 1, hole) 'the last hole to the hole
+		m2 = FindSlope(hole, hole + 1) 'from the hole to the next hole
 	ElseIf hole = recNumberOfHoles - 1 Then
-		m0 = FindSlope(-99, hole)
-		m1 = FindSlope(hole - 1, hole)
-		m2 = FindSlope(hole, 0)
+'		m0 = FindSlope(-99, hole) 'from the origin to the hole
+		m1 = FindSlope(hole - 1, hole) 'from the hole before to the hole
+		m2 = FindSlope(hole, 0) ' from the last hole to the first hole
 	Else
-		m0 = FindSlope(-99, hole)
-		m1 = FindSlope(hole - 1, hole)
-		m2 = FindSlope(hole, hole + 1)
+'		m0 = FindSlope(-99, hole) 'from the origin to the hole
+		m1 = FindSlope(hole - 1, hole) 'from the hole before to the hole
+		m2 = FindSlope(hole, hole + 1) 'from the hole to the next hole
 	EndIf
 	
-	Print "m0:", m0
+'	Print "m0:", m0
 	Print "m1:", m1
 	Print "m2:", m2
 	
-	Theta = PanelArray(hole, ThetaColumn)
+	Theta = PanelArray(hole, ThetaColumn) 'get theta and r
 	r1 = PanelArray(hole, RadiusColumn)
 	Print "Theta", Theta
 	
-	If Theta = 90 Or Theta = 270 Then
-		beta = GetAngle(m1, m2)
-		mu = (180 - beta) / 2
-	Else
-		beta = GetAngle(m1, m2) + 90
-		mu = (180 - beta) / 2
-	EndIf
+	Print "beta Unchanged", GetAngle(m1, m2)
 	
-	theta5 = GetAngle(m1, m0)
-	theta6 = 180 - (GetAngle(m1, 0) + 90)
-	theta4 = 180 - theta5 - theta6
-'	thetaguess = GetAngle(m0, 0)
-	thetaguess = RadToDeg(Atan2(PanelCordinates(hole, 0), PanelCordinates(hole, 1)))
-	If thetaguess < 0 Then
-		thetaguess = thetaguess + 360 ' Atan2 returns negetive values in 3rd and 4th
+	Print 0 < Theta And Theta < 180
+	 
+	If (90 < Theta And Theta < 180) Or (Theta = 90) Or (Theta = 270) Then
+		beta = GetAngle(m1, m2) + 180 ' add 180 because its obtuse
+	ElseIf (270 < Theta Or Theta < 360) Or (0 < Theta Or Theta < 90) Or (180 < Theta And Theta < 270) Then
+		beta = GetAngle(m1, m2) + 90 'changed from 90
+	Else
+		Print " error"
+		Pause
 	EndIf
-'	phi = 90 + mu - theta4
+
+'	If 90 < Theta < 180 Then
+'		beta = GetAngle(m1, m2) + 180 'changed from 0
+'	ElseIf Theta = 90 Or Theta = 270 Then
+'		beta = GetAngle(m1, m2) + 180 ' add 180 because its obtuse
+'	ElseIf 270 < Theta < 360 Then
+'		beta = GetAngle(m1, m2) + 90 'changed from 90
+'	Else  0 < Theta < 90 Then
+'		beta = GetAngle(m1, m2) + 90
+'	EndIf
+		Print "Theta", Theta
+		mu = (180 - beta) / 2
+	
+	If 0 < Theta > 90 Or 270 < Theta > 360 Then
+		' If we are in the first or fourth quadrant then we need to move +x
+		phi = 90 - mu - Theta
+		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+	ElseIf 90 < Theta > 180 Then
+		phi = 90 + mu - Theta
+		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
+	Else
+		phi = 90 + mu - Theta
+		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
+	EndIf
 	
 	Print "beta=", beta
 	Print "mu=", mu
-	Print "Theta0=", theta5
-	Print "Theta1=", theta6
-	Print "Theta=", theta4
-'	Print "Phi=", phi
-	Print "Theta guess=", thetaguess
-	
-'if then
-
-
-	
-'	If Theta < 90 Then
-'		Print "ok"
-'	ElseIf 90 < Theta < 180 Then
-'		phi = phi + 90
-'	ElseIf 180 < Theta < 270 Then
-'		'phi = phi + 180
-'	ElseIf 270 < Theta < 360 Then
-'		'phi = phi + 270
-
-'	EndIf
-	
-'	Print "phi=", phi
-	If Theta > 90 Or Theta > 270 Then
-		phi = 90 + mu - thetaguess
-		Print "Phi=", phi
-		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
-	Else
-		phi = 90 - mu - thetaguess
-		Print "Phi=", phi
-		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
-	EndIf
+	Print "Phi=", phi
 	
 	Print P23
 	Wait 1
-	Move P23
+	Move P23 ROT CP
 	hole = hole + 1
-	
 Next i
 
 Fend

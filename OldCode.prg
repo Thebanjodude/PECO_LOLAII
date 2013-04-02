@@ -1424,3 +1424,101 @@
 '	Go ScanCenter3 ' Collision Avoidance Waypoint
 	
 'Fend
+
+'Function test
+'	'Print "m=", FindSlope(1, 2)
+'	Real beta, mu, theta5, theta6, theta4, m0, m1, m2, thetaguess, r1
+'	Integer hole, i
+'	recNumberOfHoles = 18
+'	
+'	DerivethetaR()
+'	PrintCoordArray()
+'	hole = 0
+'	
+'For i = 0 To 16
+'	
+'	Print "hole #", hole
+'	
+'	If hole = 0 Then
+'		m0 = FindSlope(-99, hole)
+'		m1 = FindSlope(recNumberOfHoles - 1, hole)
+'		m2 = FindSlope(hole, hole + 1)
+'	ElseIf hole = recNumberOfHoles - 1 Then
+'		m0 = FindSlope(-99, hole)
+'		m1 = FindSlope(hole - 1, hole)
+'		m2 = FindSlope(hole, 0)
+'	Else
+'		m0 = FindSlope(-99, hole)
+'		m1 = FindSlope(hole - 1, hole)
+'		m2 = FindSlope(hole, hole + 1)
+'	EndIf
+'	
+'	Print "m0:", m0
+'	Print "m1:", m1
+'	Print "m2:", m2
+'	
+'	Theta = PanelArray(hole, ThetaColumn)
+'	r1 = PanelArray(hole, RadiusColumn)
+'	Print "Theta", Theta
+'	
+'	If Theta = 90 Or Theta = 270 Then
+'		beta = GetAngle(m1, m2)
+'		mu = (180 - beta) / 2
+'	Else
+'		beta = GetAngle(m1, m2) + 90
+'		mu = (180 - beta) / 2
+'	EndIf
+'	
+'	theta5 = GetAngle(m1, m0)
+'	theta6 = 180 - (GetAngle(m1, 0) + 90)
+'	theta4 = 180 - theta5 - theta6
+''	thetaguess = GetAngle(m0, 0)
+'	thetaguess = RadToDeg(Atan2(PanelCordinates(hole, 0), PanelCordinates(hole, 1)))
+'	If thetaguess < 0 Then
+'		thetaguess = thetaguess + 360 ' Atan2 returns negetive values in 3rd and 4th
+'	EndIf
+''	phi = 90 + mu - theta4
+'	
+'	Print "beta=", beta
+'	Print "mu=", mu
+'	Print "Theta0=", theta5
+'	Print "Theta1=", theta6
+'	Print "Theta=", theta4
+''	Print "Phi=", phi
+'	Print "Theta guess=", thetaguess
+'	
+''if then
+'
+'
+'	
+''	If Theta < 90 Then
+''		Print "ok"
+''	ElseIf 90 < Theta < 180 Then
+''		phi = phi + 90
+''	ElseIf 180 < Theta < 270 Then
+''		'phi = phi + 180
+''	ElseIf 270 < Theta < 360 Then
+''		'phi = phi + 270
+'
+''	EndIf
+'	
+''	Print "phi=", phi
+'	If Theta > 90 Or Theta > 270 Then
+'		phi = 90 + mu - thetaguess
+'		Print "Phi=", phi
+'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
+'	Else
+'		phi = 90 - mu - thetaguess
+'		Print "Phi=", phi
+'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+'	EndIf
+'	
+'	Print P23
+'	Wait 1
+'	Move P23
+'	hole = hole + 1
+'	
+'Next i
+'
+'Fend
+

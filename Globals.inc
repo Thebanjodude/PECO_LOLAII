@@ -7,7 +7,7 @@ Global Integer systemStatus ' Integer that tells opperator what state the sytem 
 Global Real zLimit ' the highest the EOAT can move without hitting periphials
 #define ScanSpeed 35 ' Percent Speed the arm moves during the scanning process
 Global Real xOffset, yOffset, thetaOffset
-Global Real PanelCordinates(22, 1), phi
+Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
 
 'Commands from HMI
