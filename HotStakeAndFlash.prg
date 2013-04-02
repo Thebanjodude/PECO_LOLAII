@@ -172,7 +172,7 @@ For i = 0 To recNumberOfHoles - 1
 	IncrementIndex()
 
 Next i
-	PrintPanelArray()
+'	PrintPanelArray()
 	PanelArrayIndex = 0
 '	Print theta1
 '
@@ -191,64 +191,64 @@ Function GetThetaR()
 Fend
 Function GetPanelArray() ' Hardcoded Array for 88554
 	
-	recMajorDim = 247.142
-	recMinorDim = 143.764
-	recNumberOfHoles = 16
-	
-	PanelArray(0, 0) = 223.52
-	PanelArray(1, 0) = 211.125
-	PanelArray(2, 0) = 174.6
-	PanelArray(3, 0) = 137.998
-	PanelArray(4, 0) = 121.92
-	PanelArray(5, 0) = 137.998
-	PanelArray(6, 0) = 174.6
-	PanelArray(7, 0) = 211.125
-	PanelArray(8, 0) = 223.52
-	PanelArray(9, 0) = 211.125
-	PanelArray(10, 0) = 174.6
-	PanelArray(11, 0) = 137.998
-	PanelArray(12, 0) = 121.92
-	PanelArray(13, 0) = 137.998
-	PanelArray(14, 0) = 174.6
-	PanelArray(15, 0) = 211.125
-		
-	PanelArray(0, 1) = 0
-	PanelArray(1, 1) = 18.17728756
-	PanelArray(2, 1) = 36.26356586
-	PanelArray(3, 1) = 58.93929219
-	PanelArray(4, 1) = 90
-	PanelArray(5, 1) = 121.0591007
-	PanelArray(6, 1) = 143.7426597
-	PanelArray(7, 1) = 161.8183864
-	PanelArray(8, 1) = 180
-	PanelArray(9, 1) = 198.1816136
-	PanelArray(10, 1) = 216.2573403
-	PanelArray(11, 1) = 238.9408993
-	PanelArray(12, 1) = 270
-	PanelArray(13, 1) = 301.0591007
-	PanelArray(14, 1) = 323.7426597
-	PanelArray(15, 1) = 341.8183864
-
-	'Skip flags
-	PanelArray(0, 2) = 0
-	PanelArray(1, 2) = 0
-	PanelArray(2, 2) = 0
-	PanelArray(3, 2) = 0
-	PanelArray(4, 2) = 0
-	PanelArray(5, 2) = 0
-	PanelArray(6, 2) = 0
-	PanelArray(7, 2) = 0
-	PanelArray(8, 2) = 0
-	PanelArray(9, 2) = 0
-	PanelArray(10, 2) = 0
-	PanelArray(11, 2) = 0
-	PanelArray(12, 2) = 0
-	PanelArray(13, 2) = 0
-	PanelArray(14, 2) = 0
-	PanelArray(15, 2) = 0
-
-  	PrintPanelArray() ' Print for testing/troubleshooting
-  	
+'	recMajorDim = 247.142
+'	recMinorDim = 143.764
+'	recNumberOfHoles = 16
+'	
+'	PanelArray(0, 0) = 223.52
+'	PanelArray(1, 0) = 211.125
+'	PanelArray(2, 0) = 174.6
+'	PanelArray(3, 0) = 137.998
+'	PanelArray(4, 0) = 121.92
+'	PanelArray(5, 0) = 137.998
+'	PanelArray(6, 0) = 174.6
+'	PanelArray(7, 0) = 211.125
+'	PanelArray(8, 0) = 223.52
+'	PanelArray(9, 0) = 211.125
+'	PanelArray(10, 0) = 174.6
+'	PanelArray(11, 0) = 137.998
+'	PanelArray(12, 0) = 121.92
+'	PanelArray(13, 0) = 137.998
+'	PanelArray(14, 0) = 174.6
+'	PanelArray(15, 0) = 211.125
+'		
+'	PanelArray(0, 1) = 0
+'	PanelArray(1, 1) = 18.17728756
+'	PanelArray(2, 1) = 36.26356586
+'	PanelArray(3, 1) = 58.93929219
+'	PanelArray(4, 1) = 90
+'	PanelArray(5, 1) = 121.0591007
+'	PanelArray(6, 1) = 143.7426597
+'	PanelArray(7, 1) = 161.8183864
+'	PanelArray(8, 1) = 180
+'	PanelArray(9, 1) = 198.1816136
+'	PanelArray(10, 1) = 216.2573403
+'	PanelArray(11, 1) = 238.9408993
+'	PanelArray(12, 1) = 270
+'	PanelArray(13, 1) = 301.0591007
+'	PanelArray(14, 1) = 323.7426597
+'	PanelArray(15, 1) = 341.8183864
+'
+'	'Skip flags
+'	PanelArray(0, 2) = 0
+'	PanelArray(1, 2) = 0
+'	PanelArray(2, 2) = 0
+'	PanelArray(3, 2) = 0
+'	PanelArray(4, 2) = 0
+'	PanelArray(5, 2) = 0
+'	PanelArray(6, 2) = 0
+'	PanelArray(7, 2) = 0
+'	PanelArray(8, 2) = 0
+'	PanelArray(9, 2) = 0
+'	PanelArray(10, 2) = 0
+'	PanelArray(11, 2) = 0
+'	PanelArray(12, 2) = 0
+'	PanelArray(13, 2) = 0
+'	PanelArray(14, 2) = 0
+'	PanelArray(15, 2) = 0
+'
+'  	PrintPanelArray() ' Print for testing/troubleshooting
+'  	
  Fend
 Function PrintPanelArray()
 	
@@ -271,6 +271,45 @@ Function GetPanelCoords()
 '88553
 recNumberOfHoles = 18
 Redim PanelCordinates(recNumberOfHoles - 1, 2)
+'in inches
+'PanelCordinates(0, 0) = 8.6340
+'PanelCordinates(1, 0) = 7.1780
+'PanelCordinates(2, 0) = 4.9191
+'PanelCordinates(3, 0) = 2.4775
+'PanelCordinates(4, 0) = 0
+'PanelCordinates(5, 0) = -2.4775
+'PanelCordinates(6, 0) = -4.9191
+'PanelCordinates(7, 0) = -7.1780
+'PanelCordinates(8, 0) = -8.6340
+'PanelCordinates(9, 0) = -8.6340
+'PanelCordinates(10, 0) = -7.1780
+'PanelCordinates(11, 0) = -4.9191
+'PanelCordinates(12, 0) = -2.4775
+'PanelCordinates(13, 0) = 0
+'PanelCordinates(14, 0) = 2.4775
+'PanelCordinates(15, 0) = 4.9191
+'PanelCordinates(16, 0) = 7.1780
+'PanelCordinates(17, 0) = 8.6340
+'
+'PanelCordinates(0, 1) = 1.2379
+'PanelCordinates(1, 1) = 3.2431
+'PanelCordinates(2, 1) = 4.2593
+'PanelCordinates(3, 1) = 4.6885
+'PanelCordinates(4, 1) = 4.8000
+'PanelCordinates(5, 1) = 4.6885
+'PanelCordinates(6, 1) = 4.2593
+'PanelCordinates(7, 1) = 3.2431
+'PanelCordinates(8, 1) = 1.2379
+'PanelCordinates(9, 1) = -1.2379
+'PanelCordinates(10, 1) = -3.2431
+'PanelCordinates(11, 1) = -4.2593
+'PanelCordinates(12, 1) = -4.6885
+'PanelCordinates(13, 1) = -4.8000
+'PanelCordinates(14, 1) = -4.6885
+'PanelCordinates(15, 1) = -4.2593
+'PanelCordinates(16, 1) = -3.2431
+'PanelCordinates(17, 1) = -1.2379
+
 PanelCordinates(0, 0) = InTomm(8.6340)
 PanelCordinates(1, 0) = InTomm(7.1780)
 PanelCordinates(2, 0) = InTomm(4.9191)
@@ -349,11 +388,142 @@ Function PrintCoordArray()
 	
 	Integer n, PrintArrayIndex
 
-	For n = 0 To 15
-		Print Str$(PanelCordinates(PrintArrayIndex, 0)) + " " + Str$(PanelCordinates(PrintArrayIndex, 1))
+	For n = 0 To recNumberOfHoles - 1
+		Print Str$(n) + " " + Str$(PanelCordinates(PrintArrayIndex, 0)) + " " + Str$(PanelCordinates(PrintArrayIndex, 1))
 		PrintArrayIndex = PrintArrayIndex + 1
 	Next
 	
 	PrintArrayIndex = 0 	'Reset indexes
 	
 Fend
+Function FindSlope(pt1 As Integer, pt2 As Integer) As Real
+	
+	GetPanelCoords()
+		Print "pt1:", pt1
+		Print "pt2:", pt2
+		
+	If pt1 = -99 Then ' Find slope of a point from the origin
+		Print "x2:", PanelCordinates(pt2, 0)
+		Print "y2:", PanelCordinates(pt2, 1)
+		
+			If PanelCordinates(pt2, 0) = 0 Then
+				FindSlope = 99999
+			Else
+				FindSlope = PanelCordinates(pt2, 1) / PanelCordinates(pt2, 0)
+			EndIf
+		
+	ElseIf pt1 = pt2 Then
+		Print "pts are the same"
+		FindSlope = 0
+	ElseIf PanelCordinates(pt2, 0) = PanelCordinates(pt1, 0) Then
+		FindSlope = 999999 'the slope is infinity
+	Else
+		Print "x1:", PanelCordinates(pt1, 0)
+		Print "y1:", PanelCordinates(pt1, 1)
+		Print "x2:", PanelCordinates(pt2, 0)
+		Print "y2:", PanelCordinates(pt2, 1)
+	   	FindSlope = (PanelCordinates(pt2, 1) - PanelCordinates(pt1, 1)) /(PanelCordinates(pt2, 0) - PanelCordinates(pt1, 0))
+	EndIf
+	
+Fend
+Function test
+	'Print "m=", FindSlope(1, 2)
+	Real beta, mu, theta5, theta6, theta4, m0, m1, m2, thetaguess, r1
+	Integer hole, i
+	recNumberOfHoles = 18
+	
+	DerivethetaR()
+	PrintCoordArray()
+	hole = 0
+	
+For i = 0 To 16
+	
+	Print "hole #", hole
+	
+	If hole = 0 Then
+		m0 = FindSlope(-99, hole)
+		m1 = FindSlope(recNumberOfHoles - 1, hole)
+		m2 = FindSlope(hole, hole + 1)
+	ElseIf hole = recNumberOfHoles - 1 Then
+		m0 = FindSlope(-99, hole)
+		m1 = FindSlope(hole - 1, hole)
+		m2 = FindSlope(hole, 0)
+	Else
+		m0 = FindSlope(-99, hole)
+		m1 = FindSlope(hole - 1, hole)
+		m2 = FindSlope(hole, hole + 1)
+	EndIf
+	
+	Print "m0:", m0
+	Print "m1:", m1
+	Print "m2:", m2
+	
+	Theta = PanelArray(hole, ThetaColumn)
+	r1 = PanelArray(hole, RadiusColumn)
+	Print "Theta", Theta
+	
+	If Theta = 90 Or Theta = 270 Then
+		beta = GetAngle(m1, m2)
+		mu = (180 - beta) / 2
+	Else
+		beta = GetAngle(m1, m2) + 90
+		mu = (180 - beta) / 2
+	EndIf
+	
+	theta5 = GetAngle(m1, m0)
+	theta6 = 180 - (GetAngle(m1, 0) + 90)
+	theta4 = 180 - theta5 - theta6
+'	thetaguess = GetAngle(m0, 0)
+	thetaguess = RadToDeg(Atan2(PanelCordinates(hole, 0), PanelCordinates(hole, 1)))
+	If thetaguess < 0 Then
+		thetaguess = thetaguess + 360 ' Atan2 returns negetive values in 3rd and 4th
+	EndIf
+'	phi = 90 + mu - theta4
+	
+	Print "beta=", beta
+	Print "mu=", mu
+	Print "Theta0=", theta5
+	Print "Theta1=", theta6
+	Print "Theta=", theta4
+'	Print "Phi=", phi
+	Print "Theta guess=", thetaguess
+	
+'if then
+
+
+	
+'	If Theta < 90 Then
+'		Print "ok"
+'	ElseIf 90 < Theta < 180 Then
+'		phi = phi + 90
+'	ElseIf 180 < Theta < 270 Then
+'		'phi = phi + 180
+'	ElseIf 270 < Theta < 360 Then
+'		'phi = phi + 270
+
+'	EndIf
+	
+'	Print "phi=", phi
+	If Theta > 90 Or Theta > 270 Then
+		phi = 90 + mu - thetaguess
+		Print "Phi=", phi
+		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
+	Else
+		phi = 90 - mu - thetaguess
+		Print "Phi=", phi
+		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+	EndIf
+	
+	Print P23
+	Wait 1
+	Move P23
+	hole = hole + 1
+	
+Next i
+
+Fend
+Function GetAngle(Slope1 As Real, Slope2 As Real) As Real
+		
+		GetAngle = RadToDeg(Atan(Abs((Slope1 - Slope2) / (1 + Slope1 * Slope2))))
+Fend
+

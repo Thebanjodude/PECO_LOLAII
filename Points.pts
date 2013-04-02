@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/03/29 20:35:21:211,DS:0000006097,CS:07797,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/01 22:30:15:642,DS:0000006113,CS:21292,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=28
@@ -225,7 +225,7 @@ Point13 {
 	rX=0
 	rY=350
 	rZ=-87.84
-	rU=90
+	rU=0
 	rV=0
 	rW=0
 	nLocal=0
@@ -364,11 +364,11 @@ Point20 {
 }
 Point21 {
 	nNumber=20
-	sLabel=""
+	sLabel="ScanCenter5"
 	sDescription=""
 	rX=0
-	rY=0
-	rZ=0
+	rY=630
+	rZ=-87.5
 	rU=0
 	rV=0
 	rW=0

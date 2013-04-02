@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/03/29 21:10:29:031,DS:0000003654,CS:08021,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/02 02:01:47:564,DS:0000003652,CS:22029,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="3/29/2013 3:10:28 PM"
+	sLastModified="4/1/2013 8:01:46 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -36,7 +36,7 @@ ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/29/2013 7:03:03 PM"
+	sTimeSavedInController="4/2/2013 2:01:46 AM"
 }
 ProgramFile3 {
 	sName="IOTable.prg"
@@ -78,12 +78,12 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="3/29/2013 5:01:55 PM"
+	sTimeSavedInController="4/1/2013 11:19:32 PM"
 }
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="3/29/2013 8:35:21 PM"
+	sTimeSavedInController="4/1/2013 10:30:15 PM"
 }
 OperatorSettings {
 	OperatorWindow {
