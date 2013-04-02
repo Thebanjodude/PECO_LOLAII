@@ -138,8 +138,6 @@ Function FlashRemoval()
 Fend
 Function DerivethetaR()
 	
-'Do I need to sort the rows?
-	
 Real error1, theta1, theta2
 Integer CoordIndex, i
 
@@ -269,7 +267,7 @@ Fend
 Function GetPanelCoords()
 	
 '88553
-recNumberOfHoles = 18
+recNumberOfHoles = 16
 Redim PanelCordinates(recNumberOfHoles - 1, 2)
 'in inches
 'PanelCordinates(0, 0) = 8.6340
@@ -310,78 +308,78 @@ Redim PanelCordinates(recNumberOfHoles - 1, 2)
 'PanelCordinates(16, 1) = -3.2431
 'PanelCordinates(17, 1) = -1.2379
 
-PanelCordinates(0, 0) = InTomm(8.6340)
-PanelCordinates(1, 0) = InTomm(7.1780)
-PanelCordinates(2, 0) = InTomm(4.9191)
-PanelCordinates(3, 0) = InTomm(2.4775)
-PanelCordinates(4, 0) = InTomm(0)
-PanelCordinates(5, 0) = InTomm(-2.4775)
-PanelCordinates(6, 0) = InTomm(-4.9191)
-PanelCordinates(7, 0) = InTomm(-7.1780)
-PanelCordinates(8, 0) = InTomm(-8.6340)
-PanelCordinates(9, 0) = InTomm(-8.6340)
-PanelCordinates(10, 0) = InTomm(-7.1780)
-PanelCordinates(11, 0) = InTomm(-4.9191)
-PanelCordinates(12, 0) = InTomm(-2.4775)
-PanelCordinates(13, 0) = InTomm(0)
-PanelCordinates(14, 0) = InTomm(2.4775)
-PanelCordinates(15, 0) = InTomm(4.9191)
-PanelCordinates(16, 0) = InTomm(7.1780)
-PanelCordinates(17, 0) = InTomm(8.6340)
-
-PanelCordinates(0, 1) = InTomm(1.2379)
-PanelCordinates(1, 1) = InTomm(3.2431)
-PanelCordinates(2, 1) = InTomm(4.2593)
-PanelCordinates(3, 1) = InTomm(4.6885)
-PanelCordinates(4, 1) = InTomm(4.8000)
-PanelCordinates(5, 1) = InTomm(4.6885)
-PanelCordinates(6, 1) = InTomm(4.2593)
-PanelCordinates(7, 1) = InTomm(3.2431)
-PanelCordinates(8, 1) = InTomm(1.2379)
-PanelCordinates(9, 1) = InTomm(-1.2379)
-PanelCordinates(10, 1) = InTomm(-3.2431)
-PanelCordinates(11, 1) = InTomm(-4.2593)
-PanelCordinates(12, 1) = InTomm(-4.6885)
-PanelCordinates(13, 1) = InTomm(-4.8000)
-PanelCordinates(14, 1) = InTomm(-4.6885)
-PanelCordinates(15, 1) = InTomm(-4.2593)
-PanelCordinates(16, 1) = InTomm(-3.2431)
-PanelCordinates(17, 1) = InTomm(-1.2379)
+'PanelCordinates(0, 0) = InTomm(8.6340)
+'PanelCordinates(1, 0) = InTomm(7.1780)
+'PanelCordinates(2, 0) = InTomm(4.9191)
+'PanelCordinates(3, 0) = InTomm(2.4775)
+'PanelCordinates(4, 0) = InTomm(0)
+'PanelCordinates(5, 0) = InTomm(-2.4775)
+'PanelCordinates(6, 0) = InTomm(-4.9191)
+'PanelCordinates(7, 0) = InTomm(-7.1780)
+'PanelCordinates(8, 0) = InTomm(-8.6340)
+'PanelCordinates(9, 0) = InTomm(-8.6340)
+'PanelCordinates(10, 0) = InTomm(-7.1780)
+'PanelCordinates(11, 0) = InTomm(-4.9191)
+'PanelCordinates(12, 0) = InTomm(-2.4775)
+'PanelCordinates(13, 0) = InTomm(0)
+'PanelCordinates(14, 0) = InTomm(2.4775)
+'PanelCordinates(15, 0) = InTomm(4.9191)
+'PanelCordinates(16, 0) = InTomm(7.1780)
+'PanelCordinates(17, 0) = InTomm(8.6340)
+'
+'PanelCordinates(0, 1) = InTomm(1.2379)
+'PanelCordinates(1, 1) = InTomm(3.2431)
+'PanelCordinates(2, 1) = InTomm(4.2593)
+'PanelCordinates(3, 1) = InTomm(4.6885)
+'PanelCordinates(4, 1) = InTomm(4.8000)
+'PanelCordinates(5, 1) = InTomm(4.6885)
+'PanelCordinates(6, 1) = InTomm(4.2593)
+'PanelCordinates(7, 1) = InTomm(3.2431)
+'PanelCordinates(8, 1) = InTomm(1.2379)
+'PanelCordinates(9, 1) = InTomm(-1.2379)
+'PanelCordinates(10, 1) = InTomm(-3.2431)
+'PanelCordinates(11, 1) = InTomm(-4.2593)
+'PanelCordinates(12, 1) = InTomm(-4.6885)
+'PanelCordinates(13, 1) = InTomm(-4.8000)
+'PanelCordinates(14, 1) = InTomm(-4.6885)
+'PanelCordinates(15, 1) = InTomm(-4.2593)
+'PanelCordinates(16, 1) = InTomm(-3.2431)
+'PanelCordinates(17, 1) = InTomm(-1.2379)
 	
 '88554	
-'PanelCordinates(0, 0) = 223.52
-'PanelCordinates(1, 0) = 200.584
-'PanelCordinates(2, 0) = 140.792
-'PanelCordinates(3, 0) = 71.1962
-'PanelCordinates(4, 0) = 0
-'PanelCordinates(5, 0) = -71.1962
-'PanelCordinates(6, 0) = -140.792
-'PanelCordinates(7, 0) = -200.584
-'PanelCordinates(8, 0) = -223.52
-'PanelCordinates(9, 0) = -200.584
-'PanelCordinates(10, 0) = -140.792
-'PanelCordinates(11, 0) = -71.1962
-'PanelCordinates(12, 0) = 0
-'PanelCordinates(13, 0) = 71.1962
-'PanelCordinates(14, 0) = 140.792
-'PanelCordinates(15, 0) = 200.584
-'
-'PanelCordinates(0, 1) = 0
-'PanelCordinates(1, 1) = 65.8622
-'PanelCordinates(2, 1) = 103.276
-'PanelCordinates(3, 1) = 118.212
-'PanelCordinates(4, 1) = 121.92
-'PanelCordinates(5, 1) = 118.212
-'PanelCordinates(6, 1) = 103.276
-'PanelCordinates(7, 1) = 65.8622
-'PanelCordinates(8, 1) = 0
-'PanelCordinates(9, 1) = -65.8622
-'PanelCordinates(10, 1) = -103.276
-'PanelCordinates(11, 1) = -118.212
-'PanelCordinates(12, 1) = -121.92
-'PanelCordinates(13, 1) = -118.212
-'PanelCordinates(14, 1) = -103.276
-'PanelCordinates(15, 1) = -65.8622
+PanelCordinates(0, 0) = 223.52
+PanelCordinates(1, 0) = 200.584
+PanelCordinates(2, 0) = 140.792
+PanelCordinates(3, 0) = 71.1962
+PanelCordinates(4, 0) = 0
+PanelCordinates(5, 0) = -71.1962
+PanelCordinates(6, 0) = -140.792
+PanelCordinates(7, 0) = -200.584
+PanelCordinates(8, 0) = -223.52
+PanelCordinates(9, 0) = -200.584
+PanelCordinates(10, 0) = -140.792
+PanelCordinates(11, 0) = -71.1962
+PanelCordinates(12, 0) = 0
+PanelCordinates(13, 0) = 71.1962
+PanelCordinates(14, 0) = 140.792
+PanelCordinates(15, 0) = 200.584
+
+PanelCordinates(0, 1) = 0
+PanelCordinates(1, 1) = 65.8622
+PanelCordinates(2, 1) = 103.276
+PanelCordinates(3, 1) = 118.212
+PanelCordinates(4, 1) = 121.92
+PanelCordinates(5, 1) = 118.212
+PanelCordinates(6, 1) = 103.276
+PanelCordinates(7, 1) = 65.8622
+PanelCordinates(8, 1) = 0
+PanelCordinates(9, 1) = -65.8622
+PanelCordinates(10, 1) = -103.276
+PanelCordinates(11, 1) = -118.212
+PanelCordinates(12, 1) = -121.92
+PanelCordinates(13, 1) = -118.212
+PanelCordinates(14, 1) = -103.276
+PanelCordinates(15, 1) = -65.8622
 	
 Fend
 Function PrintCoordArray()
@@ -426,79 +424,115 @@ Function FindSlope(pt1 As Integer, pt2 As Integer) As Real
 	EndIf
 	
 Fend
+Function testtimer
+	
+	On (HMI_connected), 5, False
+	Print "waiting"
+	
+Fend
 Function test
 
 	Real beta, mu, theta5, theta6, theta4, theta9, m0, m1, m2, thetaguess, r1, phi
 	Integer hole, i
-	recNumberOfHoles = 18
+'	recNumberOfHoles = 16
+	
+	xOffset = -.384
+	yOffset = 1.168
 	
 	DerivethetaR()
-	
 	PrintCoordArray()
+'	FindPickUpError()
 	
 	hole = 0
 	
-For i = 0 To 17
+For i = 0 To recNumberOfHoles - 1
 	
 	Print "hole #", hole
 	
 	If hole = 0 Then ' Find the slopes of the lines that connect the holes
-'		m0 = FindSlope(-99, hole) 'from the origin to the hole
 		m1 = FindSlope(recNumberOfHoles - 1, hole) 'the last hole to the hole
 		m2 = FindSlope(hole, hole + 1) 'from the hole to the next hole
 	ElseIf hole = recNumberOfHoles - 1 Then
-'		m0 = FindSlope(-99, hole) 'from the origin to the hole
 		m1 = FindSlope(hole - 1, hole) 'from the hole before to the hole
 		m2 = FindSlope(hole, 0) ' from the last hole to the first hole
 	Else
-'		m0 = FindSlope(-99, hole) 'from the origin to the hole
 		m1 = FindSlope(hole - 1, hole) 'from the hole before to the hole
 		m2 = FindSlope(hole, hole + 1) 'from the hole to the next hole
 	EndIf
 	
-'	Print "m0:", m0
 	Print "m1:", m1
 	Print "m2:", m2
 	
 	Theta = PanelArray(hole, ThetaColumn) 'get theta and r
 	r1 = PanelArray(hole, RadiusColumn)
 	Print "Theta", Theta
-	
 	Print "beta Unchanged", GetAngle(m1, m2)
-	
-	Print 0 < Theta And Theta < 180
-	 
-	If (90 < Theta And Theta < 180) Or (Theta = 90) Or (Theta = 270) Then
-		beta = GetAngle(m1, m2) + 180 ' add 180 because its obtuse
+
+	If (Theta = 90) Then
+		beta = 180
+	ElseIf (Theta = 270) Then
+		beta = 0
+	ElseIf (90 < Theta And Theta < 180) Then
+ 		beta = GetAngle(m1, m2) + 180 ' add 180 because its obtuse
 	ElseIf (270 < Theta Or Theta < 360) Or (0 < Theta Or Theta < 90) Or (180 < Theta And Theta < 270) Then
 		beta = GetAngle(m1, m2) + 90 'changed from 90
 	Else
 		Print " error"
 		Pause
 	EndIf
-
-'	If 90 < Theta < 180 Then
-'		beta = GetAngle(m1, m2) + 180 'changed from 0
-'	ElseIf Theta = 90 Or Theta = 270 Then
-'		beta = GetAngle(m1, m2) + 180 ' add 180 because its obtuse
-'	ElseIf 270 < Theta < 360 Then
-'		beta = GetAngle(m1, m2) + 90 'changed from 90
-'	Else  0 < Theta < 90 Then
-'		beta = GetAngle(m1, m2) + 90
-'	EndIf
-		Print "Theta", Theta
-		mu = (180 - beta) / 2
 	
-	If 0 < Theta > 90 Or 270 < Theta > 360 Then
-		' If we are in the first or fourth quadrant then we need to move +x
-		phi = 90 - mu - Theta
+	mu = (180 - beta) / 2
+
+'	If (0 < Theta And Theta < 90) Or (270 < Theta And Theta < 360) Then
+'		' If we are in the first or fourth quadrant then we need to move +x
+'		phi = 90 - mu - Theta
+'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+'		Print "firt or fourth"
+'	Else '90 < Theta > 180 Then
+'		phi = 90 + mu - Theta
+'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
+'		Print "second or third"
+'	EndIf
+	
+'	If (0 < Theta And Theta < 90) Then
+'		' If we are in the first or fourth quadrant then we need to move +x
+'		phi = 90 - mu - Theta
+'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+'	ElseIf (90 < Theta And Theta < 180) Then
+'		phi = Theta - 90 - mu
+'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
+'	ElseIf (180 < Theta And Theta < 270) Then
+'		phi = Theta - 90 - mu
+'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
+'	ElseIf (270 < Theta And Theta < 360) Then
+'		phi = Theta - 90 - mu
+'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+'	Else
+'		Print "Error"
+'	EndIf 
+
+	If Theta = 0 Then
+		P23 = scancenter5 -Y(r1) :U(90)
+	ElseIf Theta = 90 Then
+		P23 = scancenter5 -Y(r1) :U(0)
+	ElseIf Theta = 180 Then
+		P23 = scancenter5 -Y(r1) :U(-90)
+	ElseIf Theta = 270 Then
+		P23 = scancenter5 -Y(r1) :U(-180)
+	ElseIf (0 < Theta And Theta < 90) Then
+		phi = 90 - Theta - mu
 		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
-	ElseIf 90 < Theta > 180 Then
-		phi = 90 + mu - Theta
+	ElseIf (90 < Theta And Theta < 180) Then
+		phi = 90 - Theta - mu
+		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+	ElseIf (180 < Theta And Theta < 270) Then
+		phi = 90 - Theta - mu
+		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+	ElseIf (270 < Theta And Theta < 360) Then
+		phi = 90 - Theta + mu
 		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
 	Else
-		phi = 90 + mu - Theta
-		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
+		Print "Error, theta is greater than 360"
 	EndIf
 	
 	Print "beta=", beta
@@ -506,8 +540,9 @@ For i = 0 To 17
 	Print "Phi=", phi
 	
 	Print P23
-	Wait 1
-	Move P23 ROT CP
+	Wait 2
+	Move P23 -X(xOffset) -Y(yOffset) ROT CP
+	
 	hole = hole + 1
 Next i
 

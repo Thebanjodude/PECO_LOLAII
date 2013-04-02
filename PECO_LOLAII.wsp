@@ -1,5 +1,5 @@
-ENVT0100,LM:2013/04/02 17:13:25:471,DS:0000002453,CS:21827,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Run"
+ENVT0100,LM:2013/04/02 23:47:45:808,DS:0000002471,CS:04713,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="HotStakeAndFlash.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
@@ -17,10 +17,10 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=768
-		nTop=36
-		nWidth=910
-		nHeight=640
+		nLeft=423
+		nTop=0
+		nWidth=1268
+		nHeight=772
 	}
 }
 ProgramFile3 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=1
 	Window {
-		nLeft=340
-		nTop=24
-		nWidth=1153
-		nHeight=700
+		nLeft=404
+		nTop=81
+		nWidth=1152
+		nHeight=697
 	}
 }
 nIncludeFileCount=1
@@ -127,29 +127,29 @@ CmdWindow {
 RunWindow {
 	bOpened=True
 	Window {
-		nLeft=20
-		nTop=51
-		nWidth=648
-		nHeight=456
+		nLeft=12
+		nTop=13
+		nWidth=670
+		nHeight=503
 	}
 }
 IOLabelEditor {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=3
-		nTop=163
-		nWidth=1044
-		nHeight=555
+		nLeft=160
+		nTop=106
+		nWidth=1043
+		nHeight=552
 	}
-	nWinState=0
+	nWinState=1
 }
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=119
-		nTop=289
+		nLeft=336
+		nTop=557
 		nWidth=520
-		nHeight=471
+		nHeight=468
 	}
 }
 TaskMgr {
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=True
 	Window {
-		nLeft=280
-		nTop=157
+		nLeft=797
+		nTop=262
 		nWidth=751
 		nHeight=485
 	}

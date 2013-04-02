@@ -117,8 +117,6 @@ SpeedS 20
 ''	Print "CY(CurPos)", CY(CurPos)
 '	Print "xoffset:", xOffset
 
-	Go Home1
-
 Fend
 Function Inspection() As Boolean
 	SystemStatus = InspectingPanel
@@ -211,7 +209,7 @@ Function LaserAlarm
 '	SetErrorArrayFlag(LaserAlarmError, True)
 '	SystemPause()
 Pause
-	Trap 3 Sw(laserHi) = True And Sw(laserLo) = True Call LaserAlarm
+'	Trap 3 Sw(laserHi) = True And Sw(laserLo) = True Call LaserAlarm
 Fend
 Function PreInspection()
 	SystemStatus = ScanningPanel
