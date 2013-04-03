@@ -19,17 +19,19 @@ retry:
 	If JS = False Then ' Jump executed normally
 		Wait suckTime ' Allow time for cups to seal on panel
 		SystemStatus = MovingPanel
-		Jump ScanCenter LimZ zLimit ' Collision Avoidance Waypoint
+'		Jump ScanCenter LimZ zLimit ' Collision Avoidance Waypoint
 '		Signal InMagRobotClearSignal ' Give permission for input magazine to queue up next panel
 	Else
 		GoTo retry 'Interlock was opened during jump
 	EndIf
+	
+	FindPickUpError() ' after we pick up a panel, find the pickup offsets
 
 Fend
 Function PushPanel()
 	
 	SystemStatus = DepositingPanel
-	PanelPassedInspection = True ' fake it for testing	
+'	PanelPassedInspection = True ' fake it for testing	
 	
 	If PanelPassedInspection = False Then
 	'	Jump PanelFailDropOffPoint LimZ Zlimit
@@ -58,18 +60,15 @@ Function PushPanel()
 			GoTo retry
 		EndIf
 		
-		Print "jobNumPanelsDone", jobNumPanelsDone
-		Print "jobNumPanels", jobNumPanels
-		
-'		If jobNumPanelsDone = jobNumPanels Then
-'			jobDone = True ' We have finished the run, don't execute the main loop
-'		EndIf
+		If jobNumPanelsDone = jobNumPanels Then
+			jobDone = True ' We have finished the run, don't execute the main loop
+		EndIf
 		
 		Print "jobdone", jobDone
 		
 		jobNumPanelsDone = jobNumPanelsDone + 1 ' Increments how many panels we have finished
 		
-		Jump ScanCenter LimZ zLimit ' Go Home
+'		Jump ScanCenter LimZ zLimit ' Go Home
 		
 '		Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
 		

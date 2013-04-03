@@ -227,16 +227,9 @@ Do While True
 
 	If EStopOn = True Then
 		erEstop = True
-		ReturnFromEstopFlag = True ' Set flag
+	Else
+		erEstop = False
 	EndIf
-	
-'	If jobResume = True And ReturnFromEstopFlag = True Then
-'		' this is where we would take the machine back to a poweron state
-'		' drop off a panel and go home
-'		erEstop = False
-'		Print "resetting"
-'		
-'	EndIf
 	
 Loop
 

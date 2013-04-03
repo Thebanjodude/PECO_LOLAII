@@ -63,18 +63,7 @@ Fend
 Function FlashRemoval()
 	
 '	FindPickUpError()
-	
-'gross pickup
-'	yOffset = 24.9001
-'	xOffset = -28.1702
 
-'std pick up
-'yOffset = 1.1698
-'xOffset = -0.480103
-
-'	thetaOffset = RadToDeg(Atan(yOffset / xOffset))
-'	Print "thetaOffset", thetaOffset
-	
 	SystemStatus = RemovingFlash
 	
 	recFlashRequired = True ' for testing
@@ -86,8 +75,7 @@ Function FlashRemoval()
 	
 	zLimit = -135
 	PanelArrayIndex = 0 ' Reset index for IncrementArray Function
-	
-'	GetPanelArray()
+
 	GetThetaR() ' Call function that assignes first r and theta
 	
 	For t = 0 To recNumberOfHoles - 1
@@ -117,11 +105,14 @@ Function FlashRemoval()
 '			Loop
 '			
 '			If FlashPnlPrsnt = True Then
-'				flashMtr = True
-'				flashCyc = True
-'				Wait .1 ' Instead of wait, this is where the feedback(gating) from the FR Station will be
-'				flashMtr = False
-'				flashCyc = False
+'				removeFlash = True
+
+			Do Until flashDone = True
+				'do nothing
+			Loop
+			
+ ' Instead of wait, this is where the feedback(gating) from the FR Station will be
+'				removeFlash = False
 '			Else
 '			erPanelStatusUnknown = True
 '				SystemPause()
@@ -138,12 +129,9 @@ Function FlashRemoval()
 Fend
 Function DerivethetaR()
 	
-Real error1, theta1, theta2
 Integer CoordIndex, i
 
-'GetPanelArray()
 GetPanelCoords() ' load up the array with all the corrdinates
-'PrintCoordArray()
 	
 For i = 0 To recNumberOfHoles - 1
 
@@ -165,19 +153,15 @@ For i = 0 To recNumberOfHoles - 1
 		PanelArray(PanelArrayIndex, ThetaColumn) = 360 + RadToDeg(Atan(PanelCordinates(i, 1) / PanelCordinates(i, 0))) 'atan(y/x)
 	EndIf
 	
+	'Does SPEL+ not have a x^2 function?
 	PanelArray(PanelArrayIndex, RadiusColumn) = Sqr(PanelCordinates(i, xCoord) * PanelCordinates(i, xCoord) + (PanelCordinates(i, yCoord) * (PanelCordinates(i, yCoord))))
 	
 	IncrementIndex()
 
 Next i
+
 	PrintPanelArray()
 	PanelArrayIndex = 0
-'	Print theta1
-'
-'	theta2 = PanelArray(CoordIndex, 1)
-'	CoordIndex = CoordIndex + 1
-'	error1 = theta1 - theta2
-'	Print error1
 	
 Fend
 Function IncrementIndex() ' Increment all the indexes
@@ -394,161 +378,22 @@ Function PrintCoordArray()
 	PrintArrayIndex = 0 	'Reset indexes
 	
 Fend
-Function FindSlope(pt1 As Integer, pt2 As Integer) As Real
-	
-	GetPanelCoords()
-		Print "pt1:", pt1
-		Print "pt2:", pt2
-		
-	If pt1 = -99 Then ' Find slope of a point from the origin
-		Print "x2:", PanelCordinates(pt2, 0)
-		Print "y2:", PanelCordinates(pt2, 1)
-		
-			If PanelCordinates(pt2, 0) = 0 Then
-				FindSlope = 9999999
-			Else
-				FindSlope = PanelCordinates(pt2, 1) / PanelCordinates(pt2, 0)
-			EndIf
-		
-	ElseIf pt1 = pt2 Then
-		Print "pts are the same"
-		FindSlope = 0
-	ElseIf PanelCordinates(pt2, 0) = PanelCordinates(pt1, 0) Then
-		FindSlope = 9999999 'the slope is infinity
-	Else
-		Print "x1:", PanelCordinates(pt1, 0)
-		Print "y1:", PanelCordinates(pt1, 1)
-		Print "x2:", PanelCordinates(pt2, 0)
-		Print "y2:", PanelCordinates(pt2, 1)
-	   	FindSlope = (PanelCordinates(pt2, 1) - PanelCordinates(pt1, 1)) /(PanelCordinates(pt2, 0) - PanelCordinates(pt1, 0))
-	EndIf
-	
-Fend
-Function testtimer
-	
-	On (HMI_connected), 5, False
-	Print "waiting"
-	
-Fend
-Function test
-
-	Real beta, mu, theta5, theta6, theta4, theta9, m0, m1, m2, thetaguess, r1, phi
-	Integer hole, i
-'	recNumberOfHoles = 16
-	
-	xOffset = -.384
-	yOffset = 1.168
-	
-	DerivethetaR()
-	PrintCoordArray()
-'	FindPickUpError()
-	
-	hole = 0
-	
-For i = 0 To recNumberOfHoles - 1
-	
-	Print "hole #", hole
-	
-	If hole = 0 Then ' Find the slopes of the lines that connect the holes
-		m1 = FindSlope(recNumberOfHoles - 1, hole) 'the last hole to the hole
-		m2 = FindSlope(hole, hole + 1) 'from the hole to the next hole
-	ElseIf hole = recNumberOfHoles - 1 Then
-		m1 = FindSlope(hole - 1, hole) 'from the hole before to the hole
-		m2 = FindSlope(hole, 0) ' from the last hole to the first hole
-	Else
-		m1 = FindSlope(hole - 1, hole) 'from the hole before to the hole
-		m2 = FindSlope(hole, hole + 1) 'from the hole to the next hole
-	EndIf
-	
-	Print "m1:", m1
-	Print "m2:", m2
-	
-	Theta = PanelArray(hole, ThetaColumn) 'get theta and r
-	r1 = PanelArray(hole, RadiusColumn)
-	Print "Theta", Theta
-	Print "beta Unchanged", GetAngle(m1, m2)
-
-	If (Theta = 90) Then
-		beta = 180
-	ElseIf (Theta = 270) Then
-		beta = 0
-	ElseIf (90 < Theta And Theta < 180) Then
- 		beta = GetAngle(m1, m2) + 180 ' add 180 because its obtuse
-	ElseIf (270 < Theta Or Theta < 360) Or (0 < Theta Or Theta < 90) Or (180 < Theta And Theta < 270) Then
-		beta = GetAngle(m1, m2) + 90 'changed from 90
-	Else
-		Print " error"
-		Pause
-	EndIf
-	
-	mu = (180 - beta) / 2
-
-'	If (0 < Theta And Theta < 90) Or (270 < Theta And Theta < 360) Then
-'		' If we are in the first or fourth quadrant then we need to move +x
-'		phi = 90 - mu - Theta
-'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
-'		Print "firt or fourth"
-'	Else '90 < Theta > 180 Then
-'		phi = 90 + mu - Theta
-'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
-'		Print "second or third"
-'	EndIf
-	
-'	If (0 < Theta And Theta < 90) Then
-'		' If we are in the first or fourth quadrant then we need to move +x
-'		phi = 90 - mu - Theta
-'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
-'	ElseIf (90 < Theta And Theta < 180) Then
-'		phi = Theta - 90 - mu
-'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
-'	ElseIf (180 < Theta And Theta < 270) Then
-'		phi = Theta - 90 - mu
-'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
-'	ElseIf (270 < Theta And Theta < 360) Then
-'		phi = Theta - 90 - mu
-'		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
-'	Else
-'		Print "Error"
-'	EndIf 
-
-	If Theta = 0 Then
-		P23 = scancenter5 -Y(r1) :U(90)
-	ElseIf Theta = 90 Then
-		P23 = scancenter5 -Y(r1) :U(0)
-	ElseIf Theta = 180 Then
-		P23 = scancenter5 -Y(r1) :U(-90)
-	ElseIf Theta = 270 Then
-		P23 = scancenter5 -Y(r1) :U(-180)
-	ElseIf (0 < Theta And Theta < 90) Then
-		phi = 90 - Theta - mu
-		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
-	ElseIf (90 < Theta And Theta < 180) Then
-		phi = 90 - Theta - mu
-		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
-	ElseIf (180 < Theta And Theta < 270) Then
-		phi = 90 - Theta - mu
-		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
-	ElseIf (270 < Theta And Theta < 360) Then
-		phi = 90 - Theta + mu
-		P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
-	Else
-		Print "Error, theta is greater than 360"
-	EndIf
-	
-	Print "beta=", beta
-	Print "mu=", mu
-	Print "Phi=", phi
-	
-	Print P23
-	Wait 2
-	Move P23 -X(xOffset) -Y(yOffset) ROT CP
-	
-	hole = hole + 1
-Next i
-
-Fend
 Function GetAngle(Slope1 As Real, Slope2 As Real) As Real
 		
 		GetAngle = RadToDeg(Atan(Abs((Slope1 - Slope2) / (1 + Slope1 * Slope2))))
 Fend
-
+Function FindSlope(pt1 As Integer, pt2 As Integer) As Real
+	
+	GetPanelCoords()
+	
+	If pt1 = pt2 Then
+		Print "pts are the same"
+		Pause
+		FindSlope = 0
+	ElseIf PanelCordinates(pt2, 0) = PanelCordinates(pt1, 0) Then
+		FindSlope = 9999999 'the slope is infinity
+	Else
+	   	FindSlope = (PanelCordinates(pt2, 1) - PanelCordinates(pt1, 1)) /(PanelCordinates(pt2, 0) - PanelCordinates(pt1, 0))
+	EndIf
+	
+Fend

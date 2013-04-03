@@ -1,40 +1,131 @@
 #include "Globals.INC"
-Global Integer FirstHolePoint, DoubleTriggered
-Global Real CurrentTheta, LastTheta
 
-Function ScanPanel() ' This code is just a place holder until we work out the edge following...
-
-Motor On
-Power Low
-SpeedS 500
-AccelS 1000
-SpeedR 400
-AccelR 300
-Speed 10
-Accel 10, 10
-
-Integer t
-
-
-retrace:
-GetPanelArray()
-PrintPanelArray()
-
-FindPickUpError()
-
-Pause
-
-
-PanelArrayIndex = 0
-'Trap 1 ' turn off trap
-
-GoTo retrace
-
-Fend
+'Function Inspection()
+'	
+''	SystemStatus = InspectingPanel
+'	
+'	Integer j
+'	Real beta, mu, m1, m2, r1, phi
+'  	
+'  	DerivethetaR()
+''  	PrintCoordArray()
+'	GetThetaR() 'get first r and theta
+''	On (laserP2) 'Switch to insert inspection profile
+'
+''	FindPickUpError()
+''	xOffset = -.384
+''	yOffset = 1.168	
+'
+'	For j = 0 To recNumberOfHoles - 1 'k is the hole # we are on
+'		
+'		If j <> 0 Then
+'			IncrementIndex()
+'			GetThetaR()
+'		EndIf
+'		
+'		If r = 0 Then
+'			Print "r=0"
+'			Pause
+'		EndIf
+'
+'		If j = 0 Then ' Find the slopes of the lines that connect the holes
+'			m1 = FindSlope(recNumberOfHoles - 1, j) 'the last hole to the hole
+'			m2 = FindSlope(j, j + 1) 'from the hole to the next hole
+'		ElseIf j = recNumberOfHoles - 1 Then
+'			m1 = FindSlope(j - 1, j) 'from the hole before to the hole
+'			m2 = FindSlope(j, 0) ' from the last hole to the first hole
+'		Else
+'			m1 = FindSlope(j - 1, j) 'from the hole before to the hole
+'			m2 = FindSlope(j, j + 1) 'from the hole to the next hole
+'		EndIf
+'	
+'	'	Print "m1:", m1
+'	'	Print "m2:", m2	
+'	'	Print "Theta", Theta
+'	'	Print "beta Unchanged", GetAngle(m1, m2)
+'	
+'		If (Theta = 90) Then
+'			beta = 180
+'		ElseIf (Theta = 270) Then
+'			beta = 0
+'		ElseIf (90 < Theta And Theta < 180) Then
+'	 		beta = GetAngle(m1, m2) + 180 ' add 180 because its obtuse
+'		ElseIf (270 < Theta Or Theta < 360) Or (0 < Theta Or Theta < 90) Or (180 < Theta And Theta < 270) Then
+'			beta = GetAngle(m1, m2) + 90 'changed from 90
+'		Else
+'			Print "error, theta is defined as < 360"
+'			Pause
+'		EndIf
+'		
+'		mu = (180 - beta) / 2
+'		
+'		rho = mu /2
+'	
+'		If Theta = 0 Then
+'			P23 = scancenter5 -Y(r1) :U(90)
+'		ElseIf Theta = 90 Then
+'			P23 = scancenter5 -Y(r1) :U(0)
+'		ElseIf Theta = 180 Then
+'			P23 = scancenter5 -Y(r1) :U(-90)
+'		ElseIf Theta = 270 Then
+'			P23 = scancenter5 -Y(r1) :U(-180)
+'		ElseIf (0 < Theta And Theta < 90) Then
+'			phi = 90 - Theta - mu
+'			P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+'		ElseIf (90 < Theta And Theta < 180) Then
+'			phi = 90 - Theta - mu
+'			P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+'		ElseIf (180 < Theta And Theta < 270) Then
+'			phi = 90 - Theta - mu
+'			P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) -X(r1 * Sin(DegToRad(mu)))
+'		ElseIf (270 < Theta And Theta < 360) Then
+'			phi = 90 - Theta + mu
+'			P23 = scancenter5 -Y(r1 * Cos(DegToRad(mu))) :U(phi) +X(r1 * Sin(DegToRad(mu)))
+'		Else
+'			Print "Error, theta is greater than 360"
+'		EndIf
+'		
+'	'	Print "beta=", beta
+'	'	Print "mu=", mu
+'	'	Print "Phi=", phi
+'		
+'	'	Print P23
+'		Wait 2
+'		Move P23 -X(xOffset) -Y(yOffset) ROT CP
+'		
+'		If HoleInspect = True Then
+'		'switch to right laser Profile
+'		'measure
+'		'switch to left
+'		'measure
+'		
+'		'data logging
+'	
+'		'Pass/fail stuff goes here
+'			'Return Pass/Fail, work with Scott on the logging aspect 
+'		'	If PanelPassedInspection = False Then
+'		'		erPanelFailedInspection = True
+'		'		SystemPause()
+'		'	Else
+'		'		erPanelFailedInspection = False
+'		'	EndIf
+'		
+'		Else
+'		'switch to correct laser Profile
+'		' This is where I will check the hole for pre-exisiting inserts
+'		'If there is an insert then set the flag high so it wont get inserted
+'		
+'		EndIf
+'
+'Next
+'	
+'	SystemStatus = MovingPanel
+'	Go ScanCenter3 ' Collision Avoidance Waypoint
+'	
+'Fend
 Function FindPickUpError()
 	
-Real distance, error1, d1, d2
-Real yOffset1, yOffset2
+Real d1, d2
 Integer i
 
 'recMajorDim = 247.142
@@ -87,136 +178,5 @@ SpeedS 20
 	d1 = 0
 	d2 = 0
 	
-'	thetaOffset = Asin(yOffset / xOffset)
-
-'	Move ScanCenter4 Till Sw(laserGo)
-'	distance = 635 - CY(CurPos) '635mm is an eyeballed y coordinate of laser scannr
-'	yOffset1 = recMajorDim - distance
-'
-'	Print "CY(CurPos)", CY(CurPos)
-'	Print "yoffset1:", yOffset1
-'	
-'	Move ScanCenter3 +U(180) ROT  ' Use CP so it's not jumpy, may need to be abs :U
-'	Wait .5
-'	
-'	Move ScanCenter4 +U(180) Till Sw(laserGo)
-'	distance = 635 - CY(CurPos) '635mm is an eyeballed y coordinate of laser scannr
-'	yOffset2 = recMajorDim - distance
-'	Print "yoffset2:", yOffset2
-'	
-'	error1 = yOffset1 - yOffset2
-'	
-'	Print "error1", error1
-		
-'	Move ScanCenter3 +U(90) CP   ' Use CP so it's not jumpy, may need to be abs :U
-'	Wait .5
-'	
-'	Move ScanCenter4 +U(90) CP Till Sw(laserGo)
-'	distance = 635 - CY(CurPos) '635mm is an eyeballed y coordinate of laser scannr
-'	xOffset = recMinorDim - distance
-''	Print "CY(CurPos)", CY(CurPos)
-'	Print "xoffset:", xOffset
-
 Fend
-Function Inspection() As Boolean
-	SystemStatus = InspectingPanel
-	
-	Boolean SkippedHole
-	Integer k
-	Real tanxOffset, tanThetaOffset, tanyOffset
-  	
-  	DerivethetaR()
-	GetThetaR() 'get first r and theta
-'	On (laserP2) 'Switch to insert inspection profile
-	Print xOffset
-	Print yOffset
-	
-	For k = 0 To recNumberOfHoles - 1
-		
-		If k <> 0 Then
-			IncrementIndex()
-			GetThetaR()
-			
-			If r = 0 Then
-				Print "r=0"
-				Pause
-			EndIf
-		EndIf
-
-		SkippedHole = False 'Reset flag
-		
-		If PanelArray(PanelArrayIndex, SkipFlagColumn) <> 0 Then ' When nonzero, don't populate the hole because we want to skip it
-			SkippedHole = True 'Set flag
-		EndIf
-
-		If SkippedHole = False Then 'If the flag is set then we have finished all holes		
-			
-		'	tanThetaOffset = 90 - PanelArray(PanelArrayIndex, ThetaColumn)
-			tanxOffset = PanelArray(PanelArrayIndex, RadiusColumn) * Sin(90 - PanelArray(PanelArrayIndex, ThetaColumn))
-			tanxOffset = PanelArray(PanelArrayIndex, RadiusColumn) * Cos(90 - PanelArray(PanelArrayIndex, ThetaColumn))
-			Print "tanThetaOffset", tanThetaOffset
-			Print "tanxOffset", tanxOffset
-			Print "tanyOffset", tanyOffset
-			
-			P23 = InspectionCenter -Y(PanelArray(PanelArrayIndex, RadiusColumn) + yOffset) +X(xOffset) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 90)
-			Print "P23", P23
-			'Pause
-			
-			Wait 1.5
-			Move P23 CP
-			P23 = InspectionCenter -Y(tanyOffset) +X(+tanxOffset) +U(tanThetaOffset)
-			
-			Wait 1.5
-			'Pass/fail stuff goes here
-				'Return Pass/Fail, work with Scott on the logging aspect 
-			'	If PanelPassedInspection = False Then
-			'		erPanelFailedInspection = True
-			'		SystemPause()
-			'	Else
-			'		erPanelFailedInspection = False
-			'	EndIf
-		EndIf
-
-	Next
-	
-	SystemStatus = MovingPanel
-	Go ScanCenter3 ' Collision Avoidance Waypoint
-	
-Fend
-Function GoToHoles()
-	
-Speed 50
-Accel 10, 10
-	Integer j
-	
-	Print "going to the holes I found: ", z
-	
-	If z = 0 Then
-		Print "Didnt Find Any holes"
-		GoTo skip
-	EndIf
-	
-	For j = 600 To 600 + z - 1
-		Go P(j)
-		Wait 2
-  	Next j
-  	
-	Skip:
-	
-Fend
-Function LaserAlarm
-	Print "Laser Alarm"
-'	SetErrorArrayFlag(LaserAlarmError, True)
-'	SystemPause()
-Pause
-'	Trap 3 Sw(laserHi) = True And Sw(laserLo) = True Call LaserAlarm
-Fend
-Function PreInspection()
-	SystemStatus = ScanningPanel
-	ScanPanel() ' During ScanPanel the scanner will write PanelArray in the IOTable
-	
-	SystemStatus = MovingPanel
-	Go ScanCenter ' Collision Avoidance Waypoint
-Fend
-
 

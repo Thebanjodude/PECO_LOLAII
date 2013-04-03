@@ -1,4 +1,3 @@
-
 ' System Global Vars and #defines
 Global Integer SystemSpeed, SystemAccel
 Global Real suckTime ' Time in seconds it takes for the EOAT to make a good suction on a panel
@@ -9,6 +8,8 @@ Global Real zLimit ' the highest the EOAT can move without hitting periphials
 Global Real xOffset, yOffset, thetaOffset
 Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
+#define Preinspection False
+#define Inspection True
 
 'Commands from HMI
 Global Boolean jobDone, jobPauseFlag

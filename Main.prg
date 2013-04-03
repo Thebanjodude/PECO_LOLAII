@@ -2,7 +2,7 @@
 
 Function main
 
-PowerOnSequence()
+PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
@@ -10,24 +10,20 @@ Do While True
 
 	SystemStatus = Idle
 	
-	CheckInitialValues()
+	CheckInitialValues() ' Has the hmi has given us all the parameters we need to do a job?
 	CheckRecipeInitialization()
-
 	
 '	Print "jobStart ", jobStart
 '	Wait 1
-
-
-Wait 2
 
 	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False Then
 		Print "doing a job"
 		Wait 1
 '		PopPanel() ' Go to input magazine and pick up a panel
-'		PreInspection() ' Take panel to scanner; compare recipe data and populate PanelArray with r's and theta's
+'		Inspection() 'Look for pre-existing inserts, set flags 
 '		HotStakePanel() ' Take panel to hot stake machine; install all inserts
 '		FlashRemoval() ' Take panel to flash removal station, remove all flash as required
-		Inspection() ' Take Panel to scanner returns pass/fail
+'		Inspection() ' Take Panel to scanner 
 '		PushPanel() ' Take Panel to output magazine and drop it off
 '		Pause
 	EndIf
@@ -56,9 +52,6 @@ Loop
 Fend
 Function PowerOnSequence()
 	
-	SetInitialValues()
-	CheckInitialValues()
-	
 	Motor On
 	Power High
 	Speed 20
@@ -74,15 +67,12 @@ Function PowerOnSequence()
 	Xqt 4, iotransfer, NoEmgAbort
 	Xqt 5, HmiListen, NoEmgAbort
 	Xqt 6, InMagControl, Normal ' First state is lowering 
-	Xqt 7, OutMagControl, Normal ' First state is raising \
+	Xqt 7, OutMagControl, Normal ' First state is raising 
 	
-	' Define interupts
-'	Trap 2 MemSw(MagTorqueLimF) Call MagTorqueErrorISR
-	
-	Jump ScanCenter LimZ zLimit ' Go home
+	' Jump ScanCenter LimZ zLimit ' Go home
 	
 Fend
-Function SetInitialValues
+Function SetInitialValues()
 	' This is going to be OBS-the HMI will initialize the vars and I will check that
 	'they get initialized
 	SystemSpeed = 50
@@ -114,7 +104,6 @@ Function CheckInitialValues()
 	EndIf
 	
 	Print "erParamEntryMissing", erParamEntryMissing
-	Wait .5
 	
 Fend
 Function CheckRecipeInitialization()
@@ -127,6 +116,8 @@ Function CheckRecipeInitialization()
 '	Print "recZDropOff:", recZDropOff
 '	Print "recInsertType:", recInsertType
 '	Print "recNumberOfHoles:", recNumberOfHoles
+
+	'add in check that panelarray is nonzero
 	
 	If recBossHeight = 0.0 Or recInsertDepth = 0.0 Then
 		RecEntryMissing = True

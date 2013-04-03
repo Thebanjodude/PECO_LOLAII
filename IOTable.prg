@@ -304,9 +304,67 @@ Print #201, "{", Chr$(&H22) + "jobDone" + Chr$(&H22), ":", Str$(jobDone), "}",
 Print #201, "{", Chr$(&H22) + "jobNumPanelsDone" + Chr$(&H22), ":", Str$(jobNumPanelsDone), "}",
 Print #201, "{", Chr$(&H22) + "outMagCurrentState" + Chr$(&H22), ":", Str$(outMagCurrentState), "}",
 
-'            	Print #201, "Laser Measurement = ", g_LaserMeasure
         EndIf
 	Loop
+Fend
+Function ChangeProfile(ProfileNumber$ As String) 'laser offset is in micrometers
+	'InsertDepth$ As String, outNumber As Integer          
+      
+    Integer i, NumTokens
+    String Tokens$(0)
+    String response$
+    
+    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
+    
+	If ChkNet(203) < 0 Then ' If port is not open
+		OpenNet #203 As Client
+		Print "Attempted Open TCP port to HMI"
+	EndIf
+	
+	Print #203, "SW" + "," + ProfileNumber$
+	Wait 1.0
+	
+    i = ChkNet(203)
+    Print i
+    If i > 0 Then
+    	Read #203, response$, i
+    	NumTokens = ParseStr(response$, Tokens$(), ",")
+    	
+	EndIf
+Fend
+
+Function ChangeOffset() 'laser offset is in micrometers
+	'InsertDepth$ As String, outNumber As Integer          
+      
+    Integer i, NumTokens, j
+    String Tokens$(0)
+    String response$
+    
+    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
+    
+	If ChkNet(203) < 0 Then ' If port is not open
+		OpenNet #203 As Client
+		Print "Attempted Open TCP port to HMI"
+	EndIf
+	
+	Print #203, "SW,OF,1,11,+2000.00"
+	
+	Wait 1.0
+	
+    i = ChkNet(203)
+    Print i
+    If i > 0 Then
+    	Read #203, response$, i
+    	NumTokens = ParseStr(response$, Tokens$(), ",")
+    	
+    	Print response$
+
+'	For j = 0 To i
+'		Print tokens$(j)
+'    Next
+    
+   EndIf
+
 Fend
 ' This task is used to query the laser measurement
 Function LS_cmd()
@@ -315,21 +373,31 @@ Function LS_cmd()
     String Tokens$(0)
     String response$
     String outstring$
-
+    
+	SetNet #203, "10.22.251.171", 7351, CRLF, NONE, 0
+    'SetNet #203, "10.22.2.30", 1502, CRLF, NONE, 0
+    
+	If ChkNet(203) < 0 Then ' If port is not open
+		OpenNet #203 As Client
+		Print "Attempted Open TCP port to HMI"
+	EndIf
                 
 '   Do While g_io_xfr_on = 1
-   Print "Entered LS_CMD"
+    Print "Entered LS_CMD"
 
-        	Print "Trying Laser..."
-        	Print #203, "MS,0,01"
-        	Wait 1.0
-            i = ChkNet(203)
-            If i > 0 Then
-            	Read #203, response$, i
-            	numTokens = ParseStr(response$, tokens$(), ",")
+	Print "Trying Laser..."
+'	Print #203, "MS,0,15"
+	Wait 1.0
+    i = ChkNet(203)
+    Print i
+    If i > 0 Then
+    	Read #203, response$, i
+'            	numTokens = ParseStr(response$, tokens$(), ",")
 '  				g_LaserMeasure = Val(Tokens$(1))
-                Print "Measurement: ", response$
-            EndIf
+        Print "Measurement: ", response$
+    EndIf
+            
+	Print "done"
 '	Loop
 Fend
 Function setVars(response$ As String)
