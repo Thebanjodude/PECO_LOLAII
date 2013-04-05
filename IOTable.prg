@@ -4,6 +4,7 @@ Function IOTable ' This is just a sample IOTable, it needs to be populated with 
 
 'Xqt IntComTest ' This just toggles bits and increments integers to test the HMI Comms
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
+
 Do While True
 	
 'Inputs
@@ -303,102 +304,55 @@ Print #201, "{", Chr$(&H22) + "inMagCurrentState" + Chr$(&H22), ":", Str$(inMagC
 Print #201, "{", Chr$(&H22) + "jobDone" + Chr$(&H22), ":", Str$(jobDone), "}",
 Print #201, "{", Chr$(&H22) + "jobNumPanelsDone" + Chr$(&H22), ":", Str$(jobNumPanelsDone), "}",
 Print #201, "{", Chr$(&H22) + "outMagCurrentState" + Chr$(&H22), ":", Str$(outMagCurrentState), "}",
+Print #201, "{", Chr$(&H22) + "hole0L" + Chr$(&H22), ":", Str$(hole0L), "}",
+Print #201, "{", Chr$(&H22) + "hole0R" + Chr$(&H22), ":", Str$(hole0R), "}",
+Print #201, "{", Chr$(&H22) + "hole10L" + Chr$(&H22), ":", Str$(hole10L), "}",
+Print #201, "{", Chr$(&H22) + "hole10R" + Chr$(&H22), ":", Str$(hole10R), "}",
+Print #201, "{", Chr$(&H22) + "hole11L" + Chr$(&H22), ":", Str$(hole11L), "}",
+Print #201, "{", Chr$(&H22) + "hole11R" + Chr$(&H22), ":", Str$(hole11R), "}",
+Print #201, "{", Chr$(&H22) + "hole12L" + Chr$(&H22), ":", Str$(hole12L), "}",
+Print #201, "{", Chr$(&H22) + "hole12R" + Chr$(&H22), ":", Str$(hole12R), "}",
+Print #201, "{", Chr$(&H22) + "hole13L" + Chr$(&H22), ":", Str$(hole13L), "}",
+Print #201, "{", Chr$(&H22) + "hole13R" + Chr$(&H22), ":", Str$(hole13R), "}",
+Print #201, "{", Chr$(&H22) + "hole14L" + Chr$(&H22), ":", Str$(hole14L), "}",
+Print #201, "{", Chr$(&H22) + "hole14R" + Chr$(&H22), ":", Str$(hole14R), "}",
+Print #201, "{", Chr$(&H22) + "hole15L" + Chr$(&H22), ":", Str$(hole15L), "}",
+Print #201, "{", Chr$(&H22) + "hole15R" + Chr$(&H22), ":", Str$(hole15R), "}",
+Print #201, "{", Chr$(&H22) + "hole16L" + Chr$(&H22), ":", Str$(hole16L), "}",
+Print #201, "{", Chr$(&H22) + "hole16R" + Chr$(&H22), ":", Str$(hole16R), "}",
+Print #201, "{", Chr$(&H22) + "hole17L" + Chr$(&H22), ":", Str$(hole17L), "}",
+Print #201, "{", Chr$(&H22) + "hole17R" + Chr$(&H22), ":", Str$(hole17R), "}",
+Print #201, "{", Chr$(&H22) + "hole18L" + Chr$(&H22), ":", Str$(hole18L), "}",
+Print #201, "{", Chr$(&H22) + "hole18R" + Chr$(&H22), ":", Str$(hole18R), "}",
+Print #201, "{", Chr$(&H22) + "hole19L" + Chr$(&H22), ":", Str$(hole19L), "}",
+Print #201, "{", Chr$(&H22) + "hole19R" + Chr$(&H22), ":", Str$(hole19R), "}",
+Print #201, "{", Chr$(&H22) + "hole1L" + Chr$(&H22), ":", Str$(hole1L), "}",
+Print #201, "{", Chr$(&H22) + "hole1R" + Chr$(&H22), ":", Str$(hole1R), "}",
+Print #201, "{", Chr$(&H22) + "hole20L" + Chr$(&H22), ":", Str$(hole20L), "}",
+Print #201, "{", Chr$(&H22) + "hole20R" + Chr$(&H22), ":", Str$(hole20R), "}",
+Print #201, "{", Chr$(&H22) + "hole21L" + Chr$(&H22), ":", Str$(hole21L), "}",
+Print #201, "{", Chr$(&H22) + "hole21R" + Chr$(&H22), ":", Str$(hole21R), "}",
+Print #201, "{", Chr$(&H22) + "hole22L" + Chr$(&H22), ":", Str$(hole22L), "}",
+Print #201, "{", Chr$(&H22) + "hole22R" + Chr$(&H22), ":", Str$(hole22R), "}",
+Print #201, "{", Chr$(&H22) + "hole2L" + Chr$(&H22), ":", Str$(hole2L), "}",
+Print #201, "{", Chr$(&H22) + "hole2R" + Chr$(&H22), ":", Str$(hole2R), "}",
+Print #201, "{", Chr$(&H22) + "hole3L" + Chr$(&H22), ":", Str$(hole3L), "}",
+Print #201, "{", Chr$(&H22) + "hole3R" + Chr$(&H22), ":", Str$(hole3R), "}",
+Print #201, "{", Chr$(&H22) + "hole4L" + Chr$(&H22), ":", Str$(hole4L), "}",
+Print #201, "{", Chr$(&H22) + "hole4R" + Chr$(&H22), ":", Str$(hole4R), "}",
+Print #201, "{", Chr$(&H22) + "hole5L" + Chr$(&H22), ":", Str$(hole5L), "}",
+Print #201, "{", Chr$(&H22) + "hole5R" + Chr$(&H22), ":", Str$(hole5R), "}",
+Print #201, "{", Chr$(&H22) + "hole6L" + Chr$(&H22), ":", Str$(hole6L), "}",
+Print #201, "{", Chr$(&H22) + "hole6R" + Chr$(&H22), ":", Str$(hole6R), "}",
+Print #201, "{", Chr$(&H22) + "hole7L" + Chr$(&H22), ":", Str$(hole7L), "}",
+Print #201, "{", Chr$(&H22) + "hole7R" + Chr$(&H22), ":", Str$(hole7R), "}",
+Print #201, "{", Chr$(&H22) + "hole8L" + Chr$(&H22), ":", Str$(hole8L), "}",
+Print #201, "{", Chr$(&H22) + "hole8R" + Chr$(&H22), ":", Str$(hole8R), "}",
+Print #201, "{", Chr$(&H22) + "hole9L" + Chr$(&H22), ":", Str$(hole9L), "}",
+Print #201, "{", Chr$(&H22) + "hole9R" + Chr$(&H22), ":", Str$(hole9R), "}",
 
         EndIf
 	Loop
-Fend
-Function ChangeProfile(ProfileNumber$ As String) 'laser offset is in micrometers
-	'InsertDepth$ As String, outNumber As Integer          
-      
-    Integer i, NumTokens
-    String Tokens$(0)
-    String response$
-    
-    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
-    
-	If ChkNet(203) < 0 Then ' If port is not open
-		OpenNet #203 As Client
-		Print "Attempted Open TCP port to HMI"
-	EndIf
-	
-	Print #203, "SW" + "," + ProfileNumber$
-	Wait 1.0
-	
-    i = ChkNet(203)
-    Print i
-    If i > 0 Then
-    	Read #203, response$, i
-    	NumTokens = ParseStr(response$, Tokens$(), ",")
-    	
-	EndIf
-Fend
-
-Function ChangeOffset() 'laser offset is in micrometers
-	'InsertDepth$ As String, outNumber As Integer          
-      
-    Integer i, NumTokens, j
-    String Tokens$(0)
-    String response$
-    
-    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
-    
-	If ChkNet(203) < 0 Then ' If port is not open
-		OpenNet #203 As Client
-		Print "Attempted Open TCP port to HMI"
-	EndIf
-	
-	Print #203, "SW,OF,1,11,+2000.00"
-	
-	Wait 1.0
-	
-    i = ChkNet(203)
-    Print i
-    If i > 0 Then
-    	Read #203, response$, i
-    	NumTokens = ParseStr(response$, Tokens$(), ",")
-    	
-    	Print response$
-
-'	For j = 0 To i
-'		Print tokens$(j)
-'    Next
-    
-   EndIf
-
-Fend
-' This task is used to query the laser measurement
-Function LS_cmd()
-                
-    Integer i, j, NumTokens
-    String Tokens$(0)
-    String response$
-    String outstring$
-    
-	SetNet #203, "10.22.251.171", 7351, CRLF, NONE, 0
-    'SetNet #203, "10.22.2.30", 1502, CRLF, NONE, 0
-    
-	If ChkNet(203) < 0 Then ' If port is not open
-		OpenNet #203 As Client
-		Print "Attempted Open TCP port to HMI"
-	EndIf
-                
-'   Do While g_io_xfr_on = 1
-    Print "Entered LS_CMD"
-
-	Print "Trying Laser..."
-'	Print #203, "MS,0,15"
-	Wait 1.0
-    i = ChkNet(203)
-    Print i
-    If i > 0 Then
-    	Read #203, response$, i
-'            	numTokens = ParseStr(response$, tokens$(), ",")
-'  				g_LaserMeasure = Val(Tokens$(1))
-        Print "Measurement: ", response$
-    EndIf
-            
-	Print "done"
-'	Loop
 Fend
 Function setVars(response$ As String)
     Integer i, j, numTokens

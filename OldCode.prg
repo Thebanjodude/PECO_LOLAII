@@ -1427,7 +1427,9 @@
 '
 ''Function test
 ''	'Print "m=", FindSlope(1, 2)
-''	Real beta, mu, theta5, theta6, theta4, m0, m1, m2, thetaguess, r1
+''	Real 
+
+', mu, theta5, theta6, theta4, m0, m1, m2, thetaguess, r1
 ''	Integer hole, i
 ''	recNumberOfHoles = 18
 ''	

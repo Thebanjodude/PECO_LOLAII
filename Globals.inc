@@ -25,7 +25,6 @@ Global Boolean jobPause, jobResume, jobStart
 Global Boolean jobStop, leftInterlockACK
 Global Boolean rightInterlockACK, sftyFrmIlockAck
 
-
 ' Input Magazine Global Vars
 Global Boolean inMagGoHome, inMagLoaded, inMagPnlRdy, inMagMtr, inMagMtrDir ' DIO to run intput the magazine
 Global Boolean inMagLowerLim, inMagUpperLim, inMagInterlock, inMagIntLockAck
@@ -49,8 +48,12 @@ Global Boolean outMagMtrCC, outMagMtrDirCC
 Global Boolean PanelPassedInspection ' Indicates if the panel passes inspection
 Global Integer x, z ' Increment for P(x) to define edge and num of holes found
 Global Real CurrentThetaHere, thetaAvg, rAvg
+Global Boolean PassFailArray(0, 0)
+Global Real InspectionArray(0, 0)
+#define RightSpotFace 0
+#define LeftSpotFace 1
 
-'system Monitor Vars
+'System Monitor Vars
 Global Boolean cbMonHeatStake, cbMonBowlFeder, cbMonInMag
 Global Boolean cbMonOutMag, cbMonFlashRmv, cbMonDebrisRmv
 Global Boolean dcPwrOk, cbMonPnumatic, cbMonSafety, cbMonPAS24vdc
@@ -130,7 +133,6 @@ Global Boolean RecEntryMissing, ParamEntryMissing
 #define PnumaticsCBTripped 42
 #define SafetySystemCBTripped 43
 
-
 'System State Numbers
 Global Integer SystemState
 #define Unknown 0
@@ -181,14 +183,19 @@ Global Boolean joint1Status, joint2Status, joint3Status, joint4Status, safeGuard
 #define Joint4StatusMask &H100
 #define SafeGuardMask &H400000
 
-' Vars I needed while testing...will clean up and organize later!
-'Global Boolean Var0, Var1, InputVar0, InputVar1, OutputVar0, OutputVar0RealWorld
-
-'Hole variables
+'Hole X,Y Coordinites, sent from HMI (center of panel is origin)
 Global Real hole0Y, hole1X, hole1Y, hole2X, hole2Y, hole3X, hole3Y, hole4X, hole4Y
 Global Real hole5X, hole5Y, hole6X, hole6Y, hole7X, hole7Y, hole8X, hole8Y, hole9X, hole9Y
 Global Real hole10X, hole10Y, hole11X, hole11Y, hole12X, hole12Y, hole13X, hole13Y, hole14X, hole14Y
 Global Real hole15X, hole15Y, hole16X, hole16Y, hole17X, hole17Y, hole18X, hole18Y, hole19X, hole19Y
 Global Real hole20X, hole20Y, hole21X, hole21Y, hole22X, hole22Y
+
+'Left and Right Spotface Measurements=> send to HMI
+Global Real hole0L, hole0R, hole1R, hole1L, hole2R, hole2L, hole3R, hole3L, hole4R, hole4L
+Global Real hole5R, hole5L, hole6R, hole6L, hole7R, hole7L, hole8R, hole8L, hole9R, hole9L
+Global Real hole10R, hole10L, hole11R, hole11L, hole12R, hole12L, hole13R, hole13L, hole14R, hole14L
+Global Real hole15R, hole15L, hole16R, hole16L, hole17R, hole17L, hole18R, hole18L, hole19R, hole19L
+Global Real hole20R, hole20L, hole21R, hole21L, hole22R, hole22L
+
 
 

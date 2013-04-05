@@ -64,7 +64,11 @@ Function FlashRemoval()
 	
 '	FindPickUpError()
 
+	Print "removing flash"
+
 	SystemStatus = RemovingFlash
+	
+	DerivethetaR()
 	
 	recFlashRequired = True ' for testing
 	If recFlashRequired = False Then GoTo SkipFlash
@@ -73,7 +77,7 @@ Function FlashRemoval()
 	Integer t, AnvilOffset
 	Double CurrentZ
 	
-	zLimit = -135
+	zLimit = -85
 	PanelArrayIndex = 0 ' Reset index for IncrementArray Function
 
 	GetThetaR() ' Call function that assignes first r and theta
@@ -107,9 +111,9 @@ Function FlashRemoval()
 '			If FlashPnlPrsnt = True Then
 '				removeFlash = True
 
-			Do Until flashDone = True
-				'do nothing
-			Loop
+'			Do Until flashDone = True
+'				'do nothing
+'			Loop
 			
  ' Instead of wait, this is where the feedback(gating) from the FR Station will be
 '				removeFlash = False
@@ -124,7 +128,7 @@ Function FlashRemoval()
 	SkipFlash:
 	
 	SystemStatus = MovingPanel
-'	Go ScanCenter ' Collision Avoidance Waypoint
+	Go ScanCenter3 ' Collision Avoidance Waypoint
 		
 Fend
 Function DerivethetaR()
@@ -251,8 +255,8 @@ Fend
 Function GetPanelCoords()
 	
 '88553
-recNumberOfHoles = 16
-Redim PanelCordinates(recNumberOfHoles - 1, 2)
+recNumberOfHoles = 18
+Redim PanelCordinates(recNumberOfHoles - 1, 1)
 'in inches
 'PanelCordinates(0, 0) = 8.6340
 'PanelCordinates(1, 0) = 7.1780
@@ -273,97 +277,97 @@ Redim PanelCordinates(recNumberOfHoles - 1, 2)
 'PanelCordinates(16, 0) = 7.1780
 'PanelCordinates(17, 0) = 8.6340
 '
-'PanelCordinates(0, 1) = 1.2379
-'PanelCordinates(1, 1) = 3.2431
-'PanelCordinates(2, 1) = 4.2593
-'PanelCordinates(3, 1) = 4.6885
-'PanelCordinates(4, 1) = 4.8000
-'PanelCordinates(5, 1) = 4.6885
-'PanelCordinates(6, 1) = 4.2593
-'PanelCordinates(7, 1) = 3.2431
-'PanelCordinates(8, 1) = 1.2379
-'PanelCordinates(9, 1) = -1.2379
-'PanelCordinates(10, 1) = -3.2431
-'PanelCordinates(11, 1) = -4.2593
-'PanelCordinates(12, 1) = -4.6885
-'PanelCordinates(13, 1) = -4.8000
-'PanelCordinates(14, 1) = -4.6885
-'PanelCordinates(15, 1) = -4.2593
-'PanelCordinates(16, 1) = -3.2431
-'PanelCordinates(17, 1) = -1.2379
+PanelCordinates(0, 1) = 1.2379
+PanelCordinates(1, 1) = 3.2431
+PanelCordinates(2, 1) = 4.2593
+PanelCordinates(3, 1) = 4.6885
+PanelCordinates(4, 1) = 4.8000
+PanelCordinates(5, 1) = 4.6885
+PanelCordinates(6, 1) = 4.2593
+PanelCordinates(7, 1) = 3.2431
+PanelCordinates(8, 1) = 1.2379
+PanelCordinates(9, 1) = -1.2379
+PanelCordinates(10, 1) = -3.2431
+PanelCordinates(11, 1) = -4.2593
+PanelCordinates(12, 1) = -4.6885
+PanelCordinates(13, 1) = -4.8000
+PanelCordinates(14, 1) = -4.6885
+PanelCordinates(15, 1) = -4.2593
+PanelCordinates(16, 1) = -3.2431
+PanelCordinates(17, 1) = -1.2379
 
-'PanelCordinates(0, 0) = InTomm(8.6340)
-'PanelCordinates(1, 0) = InTomm(7.1780)
-'PanelCordinates(2, 0) = InTomm(4.9191)
-'PanelCordinates(3, 0) = InTomm(2.4775)
-'PanelCordinates(4, 0) = InTomm(0)
-'PanelCordinates(5, 0) = InTomm(-2.4775)
-'PanelCordinates(6, 0) = InTomm(-4.9191)
-'PanelCordinates(7, 0) = InTomm(-7.1780)
-'PanelCordinates(8, 0) = InTomm(-8.6340)
-'PanelCordinates(9, 0) = InTomm(-8.6340)
-'PanelCordinates(10, 0) = InTomm(-7.1780)
-'PanelCordinates(11, 0) = InTomm(-4.9191)
-'PanelCordinates(12, 0) = InTomm(-2.4775)
-'PanelCordinates(13, 0) = InTomm(0)
-'PanelCordinates(14, 0) = InTomm(2.4775)
-'PanelCordinates(15, 0) = InTomm(4.9191)
-'PanelCordinates(16, 0) = InTomm(7.1780)
-'PanelCordinates(17, 0) = InTomm(8.6340)
-'
-'PanelCordinates(0, 1) = InTomm(1.2379)
-'PanelCordinates(1, 1) = InTomm(3.2431)
-'PanelCordinates(2, 1) = InTomm(4.2593)
-'PanelCordinates(3, 1) = InTomm(4.6885)
-'PanelCordinates(4, 1) = InTomm(4.8000)
-'PanelCordinates(5, 1) = InTomm(4.6885)
-'PanelCordinates(6, 1) = InTomm(4.2593)
-'PanelCordinates(7, 1) = InTomm(3.2431)
-'PanelCordinates(8, 1) = InTomm(1.2379)
-'PanelCordinates(9, 1) = InTomm(-1.2379)
-'PanelCordinates(10, 1) = InTomm(-3.2431)
-'PanelCordinates(11, 1) = InTomm(-4.2593)
-'PanelCordinates(12, 1) = InTomm(-4.6885)
-'PanelCordinates(13, 1) = InTomm(-4.8000)
-'PanelCordinates(14, 1) = InTomm(-4.6885)
-'PanelCordinates(15, 1) = InTomm(-4.2593)
-'PanelCordinates(16, 1) = InTomm(-3.2431)
-'PanelCordinates(17, 1) = InTomm(-1.2379)
+PanelCordinates(0, 0) = InTomm(8.6340)
+PanelCordinates(1, 0) = InTomm(7.1780)
+PanelCordinates(2, 0) = InTomm(4.9191)
+PanelCordinates(3, 0) = InTomm(2.4775)
+PanelCordinates(4, 0) = InTomm(0)
+PanelCordinates(5, 0) = InTomm(-2.4775)
+PanelCordinates(6, 0) = InTomm(-4.9191)
+PanelCordinates(7, 0) = InTomm(-7.1780)
+PanelCordinates(8, 0) = InTomm(-8.6340)
+PanelCordinates(9, 0) = InTomm(-8.6340)
+PanelCordinates(10, 0) = InTomm(-7.1780)
+PanelCordinates(11, 0) = InTomm(-4.9191)
+PanelCordinates(12, 0) = InTomm(-2.4775)
+PanelCordinates(13, 0) = InTomm(0)
+PanelCordinates(14, 0) = InTomm(2.4775)
+PanelCordinates(15, 0) = InTomm(4.9191)
+PanelCordinates(16, 0) = InTomm(7.1780)
+PanelCordinates(17, 0) = InTomm(8.6340)
+
+PanelCordinates(0, 1) = InTomm(1.2379)
+PanelCordinates(1, 1) = InTomm(3.2431)
+PanelCordinates(2, 1) = InTomm(4.2593)
+PanelCordinates(3, 1) = InTomm(4.6885)
+PanelCordinates(4, 1) = InTomm(4.8000)
+PanelCordinates(5, 1) = InTomm(4.6885)
+PanelCordinates(6, 1) = InTomm(4.2593)
+PanelCordinates(7, 1) = InTomm(3.2431)
+PanelCordinates(8, 1) = InTomm(1.2379)
+PanelCordinates(9, 1) = InTomm(-1.2379)
+PanelCordinates(10, 1) = InTomm(-3.2431)
+PanelCordinates(11, 1) = InTomm(-4.2593)
+PanelCordinates(12, 1) = InTomm(-4.6885)
+PanelCordinates(13, 1) = InTomm(-4.8000)
+PanelCordinates(14, 1) = InTomm(-4.6885)
+PanelCordinates(15, 1) = InTomm(-4.2593)
+PanelCordinates(16, 1) = InTomm(-3.2431)
+PanelCordinates(17, 1) = InTomm(-1.2379)
 	
 '88554	
-PanelCordinates(0, 0) = 223.52
-PanelCordinates(1, 0) = 200.584
-PanelCordinates(2, 0) = 140.792
-PanelCordinates(3, 0) = 71.1962
-PanelCordinates(4, 0) = 0
-PanelCordinates(5, 0) = -71.1962
-PanelCordinates(6, 0) = -140.792
-PanelCordinates(7, 0) = -200.584
-PanelCordinates(8, 0) = -223.52
-PanelCordinates(9, 0) = -200.584
-PanelCordinates(10, 0) = -140.792
-PanelCordinates(11, 0) = -71.1962
-PanelCordinates(12, 0) = 0
-PanelCordinates(13, 0) = 71.1962
-PanelCordinates(14, 0) = 140.792
-PanelCordinates(15, 0) = 200.584
-
-PanelCordinates(0, 1) = 0
-PanelCordinates(1, 1) = 65.8622
-PanelCordinates(2, 1) = 103.276
-PanelCordinates(3, 1) = 118.212
-PanelCordinates(4, 1) = 121.92
-PanelCordinates(5, 1) = 118.212
-PanelCordinates(6, 1) = 103.276
-PanelCordinates(7, 1) = 65.8622
-PanelCordinates(8, 1) = 0
-PanelCordinates(9, 1) = -65.8622
-PanelCordinates(10, 1) = -103.276
-PanelCordinates(11, 1) = -118.212
-PanelCordinates(12, 1) = -121.92
-PanelCordinates(13, 1) = -118.212
-PanelCordinates(14, 1) = -103.276
-PanelCordinates(15, 1) = -65.8622
+'PanelCordinates(0, 0) = 223.52
+'PanelCordinates(1, 0) = 200.584
+'PanelCordinates(2, 0) = 140.792
+'PanelCordinates(3, 0) = 71.1962
+'PanelCordinates(4, 0) = 0
+'PanelCordinates(5, 0) = -71.1962
+'PanelCordinates(6, 0) = -140.792
+'PanelCordinates(7, 0) = -200.584
+'PanelCordinates(8, 0) = -223.52
+'PanelCordinates(9, 0) = -200.584
+'PanelCordinates(10, 0) = -140.792
+'PanelCordinates(11, 0) = -71.1962
+'PanelCordinates(12, 0) = 0
+'PanelCordinates(13, 0) = 71.1962
+'PanelCordinates(14, 0) = 140.792
+'PanelCordinates(15, 0) = 200.584
+'
+'PanelCordinates(0, 1) = 0
+'PanelCordinates(1, 1) = 65.8622
+'PanelCordinates(2, 1) = 103.276
+'PanelCordinates(3, 1) = 118.212
+'PanelCordinates(4, 1) = 121.92
+'PanelCordinates(5, 1) = 118.212
+'PanelCordinates(6, 1) = 103.276
+'PanelCordinates(7, 1) = 65.8622
+'PanelCordinates(8, 1) = 0
+'PanelCordinates(9, 1) = -65.8622
+'PanelCordinates(10, 1) = -103.276
+'PanelCordinates(11, 1) = -118.212
+'PanelCordinates(12, 1) = -121.92
+'PanelCordinates(13, 1) = -118.212
+'PanelCordinates(14, 1) = -103.276
+'PanelCordinates(15, 1) = -65.8622
 	
 Fend
 Function PrintCoordArray()

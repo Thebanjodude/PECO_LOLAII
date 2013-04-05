@@ -10,20 +10,26 @@ Do While True
 
 	SystemStatus = Idle
 	
+	SetInitialValues()
 	CheckInitialValues() ' Has the hmi has given us all the parameters we need to do a job?
 	CheckRecipeInitialization()
 	
 '	Print "jobStart ", jobStart
 '	Wait 1
 
+	jobStart = True
+	RecEntryMissing = False
+	ParamEntryMissing = False
+
 	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False Then
 		Print "doing a job"
-		Wait 1
+'		Wait 1
 '		PopPanel() ' Go to input magazine and pick up a panel
-'		Inspection() 'Look for pre-existing inserts, set flags 
+'		FindPickUpError()
+		InspectPanel(True) 'Look for pre-existing inserts, set flags 
 '		HotStakePanel() ' Take panel to hot stake machine; install all inserts
 '		FlashRemoval() ' Take panel to flash removal station, remove all flash as required
-'		Inspection() ' Take Panel to scanner 
+'		InspectPanel(true) ' Take Panel to scanner 
 '		PushPanel() ' Take Panel to output magazine and drop it off
 '		Pause
 	EndIf
@@ -79,7 +85,7 @@ Function SetInitialValues()
 	AnvilZlimit = -150.00
 	suckTime = .5
 	SystemAccel = 30
-	zLimit = -135
+	zLimit = -85
 '	jobNumPanelsDone = 0
 '	jobNumPanels = 0
 Fend
@@ -103,7 +109,7 @@ Function CheckInitialValues()
 		erParamEntryMissing = False
 	EndIf
 	
-	Print "erParamEntryMissing", erParamEntryMissing
+'	Print "erParamEntryMissing", erParamEntryMissing
 	
 Fend
 Function CheckRecipeInitialization()
@@ -137,7 +143,7 @@ Function CheckRecipeInitialization()
 		erRecEntryMissing = False
 	EndIf
 	
-	Print "erRecEntryMissing", erRecEntryMissing
+'	Print "erRecEntryMissing", erRecEntryMissing
 	Wait .5
 
 Fend

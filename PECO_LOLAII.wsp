@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/04/03 22:41:15:868,DS:0000002484,CS:03399,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="HotStakeAndFlash.prg"
+ENVT0100,LM:2013/04/05 05:06:13:055,DS:0000002462,CS:13078,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Run"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=321
-		nTop=171
-		nWidth=1248
-		nHeight=735
+		nLeft=253
+		nTop=6
+		nWidth=1310
+		nHeight=601
 	}
 }
 ProgramFile2 {
@@ -17,10 +17,10 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=331
-		nTop=10
-		nWidth=1264
-		nHeight=685
+		nLeft=19
+		nTop=0
+		nWidth=1501
+		nHeight=679
 	}
 }
 ProgramFile3 {
@@ -28,10 +28,10 @@ ProgramFile3 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=80
-		nTop=9
-		nWidth=918
-		nHeight=680
+		nLeft=513
+		nTop=44
+		nWidth=964
+		nHeight=754
 	}
 }
 ProgramFile4 {
@@ -47,18 +47,18 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="OldCode.prg"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=597
-		nTop=17
-		nWidth=1060
-		nHeight=720
+		nLeft=523
+		nTop=91
+		nWidth=1057
+		nHeight=710
 	}
 }
 ProgramFile6 {
 	sName="SystemMonitor.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=1
 	Window {
 		nLeft=-13
@@ -69,36 +69,36 @@ ProgramFile6 {
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=498
-		nTop=247
-		nWidth=1192
-		nHeight=699
+		nLeft=483
+		nTop=82
+		nWidth=1089
+		nHeight=631
 	}
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=139
-		nTop=252
-		nWidth=1203
-		nHeight=713
+		nLeft=4
+		nTop=41
+		nWidth=1509
+		nHeight=707
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=450
-		nTop=122
-		nWidth=1089
-		nHeight=559
+		nLeft=95
+		nTop=106
+		nWidth=1084
+		nHeight=648
 	}
 }
 nPointFileCount=1
@@ -125,12 +125,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=949
-		nTop=21
-		nWidth=755
-		nHeight=545
+		nLeft=1001
+		nTop=64
+		nWidth=696
+		nHeight=645
 	}
 }
 IOLabelEditor {
@@ -171,10 +171,10 @@ Macros {
 	}
 }
 RobotMgr {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=797
-		nTop=262
+		nLeft=369
+		nTop=151
 		nWidth=751
 		nHeight=485
 	}
