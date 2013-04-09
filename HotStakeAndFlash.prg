@@ -12,7 +12,7 @@ Function HotStakePanel()
   	
 	PanelArrayIndex = 0 ' Reset Index
 
-	GetPanelArray()
+'	GetPanelArray()
 	GetThetaR()
 	zLimit = -135
 
@@ -27,31 +27,35 @@ Function HotStakePanel()
 		
 		If PanelArray(PanelArrayIndex, SkipFlagColumn) <> 0 Then ' When nonzero, don't populate the hole because we want to skip it
 			SkippedHole = True 'Set flag
+			Print "Skipped Hole"
 		EndIf
 
 		If SkippedHole = False Then 'If the flag is set then we have finished all holes
 		
-            P23 = HotStakeCenter2 -Y(Sin(45) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(45) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 135)
+         	P23 = HotStakeCenter2 -Y(Sin(45) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(45) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 135)
 			Print P23
 			Jump P23 LimZ zLimit
 						
 'Comment this out for testing						
-'			Do Until Sw(HSPanelPresntH) = True Or CurrentZ >= AnvilZlimit ' Move down until we touchoff on the anvil. 
-'				Move P23 -Z(AnvilOffset)
-'				AnvilOffset = AnvilOffset + 0.25
-'				CurrentZ = CZ(RealPos)
-'			Loop
-'				
-'			If Sw(HSPanelPresntH) = True Then
-'				hsInstallInsrt = True
-'			'	wait ? ' Wait for heatstake machine to receive the signal, time based or event based, im not sure yet
-'				hsInstallInsrt = False
-'			Else
-'                erPanelStatusUnknown = True
-'                SystemPause()
-'			EndIf
-		
-			Wait .4 ' Instead of wait, this is where the feedback from the HS Station will be
+'		Do Until HSPanelPresntCC = True Or CurrentZ >= AnvilZlimit ' Move down until we touchoff on the anvil. 
+'			Move P23 -Z(AnvilOffset)
+'			AnvilOffset = AnvilOffset + 0.25
+'			CurrentZ = CZ(RealPos)
+'		Loop
+'			
+'		If HSPanelPresntCC = True Then
+'			hsInstallInsrtCC = True
+'		'	wait ? ' Wait for heatstake machine to receive the signal, time based or event based, im not sure yet
+'			hsInstallInsrtCC = False
+'			stackLightYelCC = True
+'            stackLightAlrmCC = True
+'		Else
+'            erPanelStatusUnknown = True
+'            stackLightYelCC = True
+'            stackLightAlrmCC = True
+'            Pause
+'		EndIf
+'			Wait .4 ' Instead of wait, this is where the feedback from the HS Station will be
 		EndIf
 
 	Next
@@ -63,12 +67,15 @@ Fend
 Function FlashRemoval()
 	
 '	FindPickUpError()
-
+ 
 	Print "removing flash"
 
 	SystemStatus = RemovingFlash
 	
-	DerivethetaR()
+	PrintPanelArray()
+	Pause
+	
+'	DerivethetaR()
 	
 	recFlashRequired = True ' for testing
 	If recFlashRequired = False Then GoTo SkipFlash
@@ -83,47 +90,60 @@ Function FlashRemoval()
 	GetThetaR() ' Call function that assignes first r and theta
 	
 	For t = 0 To recNumberOfHoles - 1
-		
+			
 		If t <> 0 Then
 			IncrementIndex()
 			GetThetaR()
 		EndIf
-				
+		
+		Print PanelArrayIndex
+		Print t
+					
 		SkippedHole = False 'Reset flag
 		
 		If PanelArray(PanelArrayIndex, SkipFlagColumn) <> 0 Then ' When nonzero, don't populate the hole because we want to skip it
 			SkippedHole = True 'Set flag
+			Print "skipped hole"
+		Else
+			SkippedHole = False
+			Print "didnt skip hole"
 		EndIf
 
 		If SkippedHole = False Then 'If the flag is true then we have finished all holes
  		
-			P23 = FlashCenter2 +X(PanelArray(PanelArrayIndex, RadiusColumn) - xOffset) +Y(yOffset) :U(PanelArray(PanelArrayIndex, ThetaColumn) + thetaOffset)
-'			Print CU(P23)
+			P23 = FlashCenter2 +X(PanelArray(PanelArrayIndex, RadiusColumn) - xOffset) +Y(yOffset) :U(-PanelArray(PanelArrayIndex, ThetaColumn) + 180)
+			Print CU(P23)
 			Jump P23 LimZ zLimit ' Limit the jump hight
 			
 'comment this out for testing
-'			Do Until FlashPnlPrsnt = True Or CurrentZ >= AnvilZlimit ' Move down until we touchoff on the anvil. Add over torque error.
-'				Move P23 -Z(AnvilOffset)
-'				AnvilOffset = AnvilOffset + 0.25
-'				CurrentZ = CZ(RealPos)
-'			Loop
-'			
-'			If FlashPnlPrsnt = True Then
-'				removeFlash = True
-
-'			Do Until flashDone = True
+'		Do Until FlashPnlPrsntCC = True Or CurrentZ >= AnvilZlimit ' Move down until we touchoff on the anvil. Add over torque error.
+'			Move P23 -Z(AnvilOffset)
+'			AnvilOffset = AnvilOffset + 0.25
+'			CurrentZ = CZ(RealPos)
+'		Loop
+'		
+'		If FlashPnlPrsntCC = True Then
+''TODO: Read the datasheet for the flash removal tool
+'			removeFlash = True
+'
+'			Do Until flashDoneCC = True
 '				'do nothing
 '			Loop
-			
- ' Instead of wait, this is where the feedback(gating) from the FR Station will be
-'				removeFlash = False
-'			Else
+''Instead of wait, this is where the feedback(gating) from the FR Station will be
+'			
+'			removeFlash = False
+'			stackLightYelCC = False
+'			stackLightAlrmCC = False
+'
+'		Else
 '			erPanelStatusUnknown = True
-'				SystemPause()
-'			EndIf
-		EndIf
+'			stackLightYelCC = True
+'			stackLightAlrmCC = True
+'			Pause
+'		EndIf
+	EndIf
 		
-	Next
+Next
 	
 	SkipFlash:
 	
@@ -277,24 +297,24 @@ Redim PanelCordinates(recNumberOfHoles - 1, 1)
 'PanelCordinates(16, 0) = 7.1780
 'PanelCordinates(17, 0) = 8.6340
 '
-PanelCordinates(0, 1) = 1.2379
-PanelCordinates(1, 1) = 3.2431
-PanelCordinates(2, 1) = 4.2593
-PanelCordinates(3, 1) = 4.6885
-PanelCordinates(4, 1) = 4.8000
-PanelCordinates(5, 1) = 4.6885
-PanelCordinates(6, 1) = 4.2593
-PanelCordinates(7, 1) = 3.2431
-PanelCordinates(8, 1) = 1.2379
-PanelCordinates(9, 1) = -1.2379
-PanelCordinates(10, 1) = -3.2431
-PanelCordinates(11, 1) = -4.2593
-PanelCordinates(12, 1) = -4.6885
-PanelCordinates(13, 1) = -4.8000
-PanelCordinates(14, 1) = -4.6885
-PanelCordinates(15, 1) = -4.2593
-PanelCordinates(16, 1) = -3.2431
-PanelCordinates(17, 1) = -1.2379
+'PanelCordinates(0, 1) = 1.2379
+'PanelCordinates(1, 1) = 3.2431
+'PanelCordinates(2, 1) = 4.2593
+'PanelCordinates(3, 1) = 4.6885
+'PanelCordinates(4, 1) = 4.8000
+'PanelCordinates(5, 1) = 4.6885
+'PanelCordinates(6, 1) = 4.2593
+'PanelCordinates(7, 1) = 3.2431
+'PanelCordinates(8, 1) = 1.2379
+'PanelCordinates(9, 1) = -1.2379
+'PanelCordinates(10, 1) = -3.2431
+'PanelCordinates(11, 1) = -4.2593
+'PanelCordinates(12, 1) = -4.6885
+'PanelCordinates(13, 1) = -4.8000
+'PanelCordinates(14, 1) = -4.6885
+'PanelCordinates(15, 1) = -4.2593
+'PanelCordinates(16, 1) = -3.2431
+'PanelCordinates(17, 1) = -1.2379
 
 PanelCordinates(0, 0) = InTomm(8.6340)
 PanelCordinates(1, 0) = InTomm(7.1780)

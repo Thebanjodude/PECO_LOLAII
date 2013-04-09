@@ -62,16 +62,16 @@ Global Boolean stackLightRedCC, stackLightYelCC, stackLightGrnCC, stackLightAlrm
 Global Boolean airPressHigh, airPressLow
 Global Boolean backInterlock, frontInterlock, leftInterlock, rightInterlock
 Global Boolean heartBeat
+Global Real sirenOnTimeYellow, sirenOnTimeRed
 
 'Hot Stake and Flash Removal Global Vars
 Global Real PanelArray(25, 2)
 Global Real Theta, r
-Global Real AnvilZlimit, hsProbeTemp
+Global Real AnvilZlimit, heatStakeCurrentTemp
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean flashMtr, flashCyc, FlashPnlPrsnt, debrisMtr
 Global Boolean flashMtrCC, flashCycCC, debrisMtrCC
-
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas
 #define SkipFlagColumn 2 'The third column in the array are flags for holes if we want to skip them
@@ -86,6 +86,7 @@ Global Integer recNumberOfHoles, recInsertType
 Global Boolean recFlashRequired
 Global Real recZDropOff, recInsertDepth, recPanelThickness
 Global Real recTemp, recMinorDim, recMajorDim, recBossHeight
+Global Real hsProbeTemp
 
 'Error Vars
 Global Boolean erPanelFailedInspection, erFrontSafetyFrameOpen, erBackSafetyFrameOpen

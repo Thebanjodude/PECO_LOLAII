@@ -5,21 +5,26 @@ Function InspectPanel(HoleInspect As Boolean)
 	
 	Go ScanCenter3 ' Collision Avoidance Waypoint	
 	
+'	Go ScanCenter3 :Z(-99)
+	
 	SystemStatus = InspectingPanel
 	
 	Integer j
 	Real beta, mu, m1, m2, r1, phi, rho
   	
-  	DerivethetaR()
 	GetThetaR() 'get first r and theta
 '	FindPickUpError()
+	PanelArrayIndex = 0
 	
-	Redim InspectionArray(22, 1)
+	Redim InspectionArray(22, 1) ' Make the arrays big enough to fit all the panels
 	Redim PassFailArray(22, 1)
 	
 	recInsertDepth = .079
-	xOffset = -1.44
-	yOffset = -1.91998
+'	xOffset = -1.44
+'	yOffset = -1.91998
+
+	yOffset = 6.6001
+	xOffset = 35.3999
 
 	For j = 0 To recNumberOfHoles - 1 'k is the hole # we are on
 		
@@ -62,30 +67,35 @@ Function InspectPanel(HoleInspect As Boolean)
 			Pause
 		EndIf
 		
+		Print "beta:", beta
+				
 		mu = (180 - beta) / 2
+		
+		Print "Mu:", mu
 		
 		rho = mu ' this is the place to experiment with the angle
 		
 		If Theta = 0 Then
-			P23 = scancenter5 -Y(r) :U(90)
+			P23 = scancenter5 -Y(r) :U(90 + 45)
 		ElseIf Theta = 90 Then
-			P23 = scancenter5 -Y(r) :U(0)
+			P23 = scancenter5 -Y(r) :U(0 + 45)
 		ElseIf Theta = 180 Then
-			P23 = scancenter5 -Y(r) :U(-90)
+			P23 = scancenter5 -Y(r) :U(-90 - 45)
 		ElseIf Theta = 270 Then
-			P23 = scancenter5 -Y(r) :U(-180)
+			P23 = scancenter5 -Y(r) :U(-180 - 45)
 		ElseIf (0 < Theta And Theta < 90) Then
 			phi = 90 - Theta - rho
-			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi) -X(r * Sin(DegToRad(rho)))
+			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi + 45) -X(r * Sin(DegToRad(rho)))
+			Print P23
 		ElseIf (90 < Theta And Theta < 180) Then
 			phi = 90 - Theta - rho
-			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi) -X(r * Sin(DegToRad(rho)))
+			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi + 45) -X(r * Sin(DegToRad(rho)))
 		ElseIf (180 < Theta And Theta < 270) Then
 			phi = 90 - Theta - rho
-			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi) -X(r * Sin(DegToRad(rho)))
+			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi + 45) -X(r * Sin(DegToRad(rho)))
 		ElseIf (270 < Theta And Theta < 360) Then
 			phi = 90 - Theta + rho
-			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi) +X(r * Sin(DegToRad(rho)))
+			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi + 45) +X(r * Sin(DegToRad(rho)))
 		Else
 			Print "Error, theta is greater than 360"
 		EndIf
@@ -96,22 +106,29 @@ Function InspectPanel(HoleInspect As Boolean)
 		
 	'	Print P23
 		Wait 1
-		Go P23 -X(xOffset) -Y(yOffset) 'ROT CP
-		
+		Print P23
+		Go P23 -Y(yOffset) -X(xOffset) 'ROT CP
+		Print P23
+		Pause
 		If HoleInspect = True Then
 		
 			MeasureInsertDepth()
 		
 		Else
 		'switch to correct laser Profile
-		' This is where I will check the hole for pre-exisiting inserts
-		'If there is an insert then set the flag high so it wont get inserted
+		ChangeProfile("07")
+		
+			Print GetLaserMeasurement("01")
+			If GetLaserMeasurement("01") > 35 Then ' There is already an insert so set skip flag
+				PanelArray(j, SkipFlagColumn) = 1
+			EndIf
 		
 		EndIf
 Next
 
-	PrintPassFailArray()
-	PrintInspectionArray()
+'	PrintPassFailArray()
+'	PrintInspectionArray()
+	PrintPanelArray()
 	
 	UnpackInspectionArrays()
 		
@@ -142,12 +159,14 @@ Function PassOrFail(measurement As Real) As Boolean 'Pass is True
 	DepthInsertError = Abs(recInsertDepth - measurement)
 	Print DepthInsertError
 	
-	' make the tolerance a variable and make it adjustable via the hmi, we have .006 theirs is looser	
+' TODO: make the tolerance a variable and make it adjustable via the hmi, we have .006 but theirs is more loose	
 	If (DepthInsertError < 0.006) Then
 		PassOrFail = True ' Passed		
-	Else
-		PassOrFail = False
 		PanelPassedInspection = True
+	Else
+		'Dont alert opperator yet, this is only on a hole by hole basis
+		PassOrFail = False
+		PanelPassedInspection = False
 	EndIf
 	
 Fend
@@ -157,7 +176,7 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
     String Tokens$(0)
     String response$
     
-    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
+'    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
     
 	If ChkNet(203) < 0 Then ' If port is not open
 		OpenNet #203 As Client
@@ -182,20 +201,18 @@ Function ChangeOffset(InsertDepth$ As String) 'laser offset is in micrometers
     String Tokens$(0)
     String response$, command$
     
-    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
+'    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
     
 	If ChkNet(203) < 0 Then ' If port is not open
 		OpenNet #203 As Client
 		Print "Attempted Open TCP port to HMI"
 	EndIf
 		   
-   ChangeProfile("01")
-   Wait 1
+	ChangeProfile("01")
+	Wait .25
 	
 	command$ = "SW,OF,1,12," + InsertDepth$
-'	Print command$
 	Print #203, command$
-	
 	Wait .25
 	
     i = ChkNet(203)
@@ -206,7 +223,7 @@ Function ChangeOffset(InsertDepth$ As String) 'laser offset is in micrometers
    EndIf
    
    ChangeProfile("02")
-   Wait 1
+   Wait .25
    
 	command$ = "SW,OF,1,11," + InsertDepth$
 	Print command$
@@ -240,7 +257,7 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
     i = ChkNet(203)
     If i > 0 Then
     	Read #203, response$, i
-      	numTokens = ParseStr(response$, Tokens$(), ",")
+      	NumTokens = ParseStr(response$, Tokens$(), ",")
   		GetLaserMeasurement = Val(Tokens$(1))
     EndIf
 

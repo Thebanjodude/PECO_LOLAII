@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/04/02 22:41:09:157,DS:0000010601,CS:02639,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/08 19:20:34:952,DS:0000010876,CS:15366,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=40
@@ -210,83 +210,103 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=16
+	nNumberOfLabels=20
 	Label1 {
 		nBit=8
 		sLabel="HMI_connected"
 		sDescription=""
 	}
 	Label2 {
+		nBit=10
+		sLabel="LightRed"
+		sDescription=""
+	}
+	Label3 {
+		nBit=11
+		sLabel="LightYellow"
+		sDescription=""
+	}
+	Label4 {
+		nBit=12
+		sLabel="LightGreen"
+		sDescription=""
+	}
+	Label5 {
+		nBit=13
+		sLabel="AlertSiren"
+		sDescription=""
+	}
+	Label6 {
 		nBit=96
 		sLabel="inMagMtrH"
 		sDescription=""
 	}
-	Label3 {
+	Label7 {
 		nBit=97
 		sLabel="inMagMtrDirH"
 		sDescription=""
 	}
-	Label4 {
+	Label8 {
 		nBit=98
 		sLabel="outMagMtrDirH"
 		sDescription=""
 	}
-	Label5 {
+	Label9 {
 		nBit=99
 		sLabel="outMagMtrH"
 		sDescription=""
 	}
-	Label6 {
+	Label10 {
 		nBit=100
 		sLabel="flashMtrH"
 		sDescription=""
 	}
-	Label7 {
+	Label11 {
 		nBit=101
 		sLabel="flashCycH"
 		sDescription=""
 	}
-	Label8 {
+	Label12 {
 		nBit=102
 		sLabel="debrisMtrH"
 		sDescription=""
 	}
-	Label9 {
+	Label13 {
 		nBit=103
 		sLabel="suctionCupsH"
 		sDescription=""
 	}
-	Label10 {
+	Label14 {
 		nBit=104
 		sLabel="laserP1T"
 		sDescription=""
 	}
-	Label11 {
+	Label15 {
 		nBit=106
 		sLabel="stackLightAlrmH"
 		sDescription=""
 	}
-	Label12 {
+	Label16 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label13 {
+	Label17 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label14 {
+	Label18 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label15 {
+	Label19 {
 		nBit=110
 		sLabel="laserP2"
 		sDescription=""
 	}
-	Label16 {
+	Label20 {
 		nBit=111
 		sLabel="laserP1"
 		sDescription="Temp, but back in pin 29 2-1,bit 104"

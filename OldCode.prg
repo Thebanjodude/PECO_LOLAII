@@ -1585,3 +1585,110 @@
 ''	
 ''Fend
 
+'Function IntComTest()
+'	Do While True
+'	'ints
+'	systemStatus = systemStatus + 1
+'	jobNumPanelsDone = jobNumPanelsDone + 2
+'	ctrlrLineNumber = ctrlrLineNumber + 1
+'	ctrlrTaskNumber = ctrlrTaskNumber + 1
+'	ctrlrErrAxisNumber = ctrlrErrAxisNumber + 1
+'	ctrlrErrorNum = ctrlrErrorNum + 1
+'	'bools
+'	erUnknown = True
+'	erEstop = True
+'	erPanelFailedInspection = True
+'	erFrontSafetyFrameOpen = True
+'	erBackSafetyFrameOpen = True
+'	erLeftSafetyFrameOpen = True
+'	erRightSafetyFrameOpen = True
+'	erLowPressure = True
+'	erHighPressure = True
+'	erPanelStatusUnknown = True
+'	erWrongPanelHoles = True
+'	erWrongPanelDims = True
+'	erWrongPanel = True
+'	erWrongPanelInsert = True
+'	erInMagEmpty = True
+'	erInMagOpenInterlock = True
+'	erInMagCrowding = True
+'	erOutMagFull = True
+'	erOutMagOpenInterlock = True
+'	erOutMagCrowding = True
+'	erLaserScanner = True
+'	erDCPower = True
+'	erDCPowerHeatStake = True
+'	erHeatStakeBreaker = True
+'	erBowlFeederBreaker = True
+'	erInMagBreaker = True
+'	erOutMagBreaker = True
+'	erFlashBreaker = True
+'	erDebrisRemovalBreaker = True
+'	erPnumaticsBreaker = True
+'	erSafetySystemBreaker = True
+'	erRC180 = True
+'	'SOH
+'	homePositionStatus = True
+'	motorOnStatus = True
+'	motorPowerStatus = True
+'	joint1Status = True
+'	joint2Status = True
+'	joint3Status = True
+'	joint4Status = True
+'	eStopStatus = True
+'	errorStatus = True
+'	tasksRunningStatus = True
+'	pauseStatus = True
+'	teachModeStatus = True
+'	
+'	Wait .75
+'	
+'	erUnknown = False
+'	erEstop = False
+'	erPanelFailedInspection = False
+'	erFrontSafetyFrameOpen = False
+'	erBackSafetyFrameOpen = False
+'	erLeftSafetyFrameOpen = False
+'	erRightSafetyFrameOpen = False
+'	erLowPressure = False
+'	erHighPressure = False
+'	erPanelStatusUnknown = False
+'	erWrongPanelHoles = False
+'	erWrongPanelDims = False
+'	erWrongPanel = False
+'	erWrongPanelInsert = False
+'	erInMagEmpty = False
+'	erInMagOpenInterlock = False
+'	erInMagCrowding = False
+'	erOutMagFull = False
+'	erOutMagOpenInterlock = False
+'	erOutMagCrowding = False
+'	erLaserScanner = False
+'	erDCPower = False
+'	erDCPowerHeatStake = False
+'	erHeatStakeBreaker = False
+'	erBowlFeederBreaker = False
+'	erInMagBreaker = False
+'	erOutMagBreaker = False
+'	erFlashBreaker = False
+'	erDebrisRemovalBreaker = False
+'	erPnumaticsBreaker = False
+'	erSafetySystemBreaker = False
+'	erRC180 = False
+'	
+'	'SOH
+'	motorOnStatus = False
+'	motorPowerStatus = False
+'	joint1Status = False
+'	joint2Status = False
+'	joint3Status = False
+'	joint4Status = False
+'	eStopStatus = False
+'	errorStatus = False
+'	tasksRunningStatus = False
+'	pauseStatus = False
+'	teachModeStatus = False
+'	
+'	Loop
+'fend
+

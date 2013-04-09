@@ -21,179 +21,219 @@ Do While True
 	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine
 		Halt InMagControl
 		erInMagOpenInterlock = True
+		stackLightYelCC = True
 		InMagInterlockFlag = True ' Set flag
 '		inMagCurrentState = StatePaused
 	ElseIf inMagIntLockAck = True And InMagInterlockFlag = True Then
 		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False
+		stackLightYelCC = False
 		InMagInterlockFlag = False ' Reset flag
 	EndIf
 	
 	If outMagInt = True Then ' If an interlock gets tripped then halt the state machine
 		Halt OutMagControl
 		erOutMagOpenInterlock = True
+		stackLightYelCC = True
 		OutMagInterlockFlag = True ' Set flag
 	ElseIf outMagIntLockAck = True And OutMagInterlockFlag = True Then
 	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
 	 	erOutMagOpenInterlock = False
+	 	stackLightYelCC = False
 	 	OutMagInterlockFlag = False ' Reset flag
 	EndIf
 	
 	If frontInterlock = True Then ' If an interlock gets tripped then halt the state machine
-		SystemPause()
 		erFrontSafetyFrameOpen = True
+		stackLightYelCC = True
 		frontInterlockFlag = True ' Set flag
+		Pause
 	ElseIf frontInterlockACK = True And frontInterlockFlag = True Then
-	 	SystemUnPause()
 	 	erFrontSafetyFrameOpen = False
+		stackLightYelCC = False
 	 	frontInterlockFlag = False ' Reset flag
 	EndIf
 	
 	If backInterlock = True Then ' If an interlock gets tripped then halt the state machine
-		SystemPause()
 		erBackSafetyFrameOpen = True
+		stackLightYelCC = True
 		backInterlockFlag = True ' Set flag
+		Pause
 	ElseIf backInterlockACK = True And backInterlockFlag = True Then
-	 	SystemUnPause()
 	 	erBackSafetyFrameOpen = False
+		stackLightYelCC = False
 	 	backInterlockFlag = False ' Reset flag
 	EndIf
 	
 	If leftInterlock = True Then ' If an interlock gets tripped then halt the state machine
-		SystemPause()
 		erLeftSafetyFrameOpen = True
+		stackLightYelCC = True
 		LeftInterlockFlag = True ' Set flag
+		Pause
 	ElseIf leftInterlockACK = True And LeftInterlockFlag = True Then
-	 	SystemUnPause()
 	 	erLeftSafetyFrameOpen = False
+		stackLightYelCC = False
 	 	LeftInterlockFlag = False ' Reset flag
 	EndIf
 	
 	If rightInterlock = True Then ' If an interlock gets tripped then halt the state machine
-		SystemPause()
 		erRightSafetyFrameOpen = True
+		stackLightYelCC = True
 		RightInterlockFlag = True ' Set flag
+		Pause
 	ElseIf rightInterlockACK = True And RightInterlockFlag = True Then
-	 	SystemUnPause()
 	 	erRightSafetyFrameOpen = False
+		stackLightYelCC = False
 	 	RightInterlockFlag = False ' Reset flag
 	EndIf
 	
 	If airPressHigh = True Then
-		SystemPause()
 		erHighPressure = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
 		airPressHighFlag = True
+		Pause
 	ElseIf airPressHigh = False And airPressHighFlag = True Then
-		SystemUnPause()
 		erHighPressure = False
 		airPressHighFlag = False
 	EndIf
 	
 	If airPressLow = True Then
-		SystemPause()
 		erLowPressure = True
 		airPressLowFlag = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
+		Pause
 	ElseIf airPressLow = False And airPressLowFlag = True Then
-		SystemUnPause()
 		erLowPressure = False
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 	EndIf
 	
 	If cbMonHeatStake = True Then
-		SystemPause()
 		erHeatStakeBreaker = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
 		cbMonHeatStakeFlag = True
+		Pause
 	ElseIf cbMonHeatStake = False And cbMonHeatStakeFlag = True Then
-		SystemUnPause()
 		erHeatStakeBreaker = False
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 		cbMonHeatStakeFlag = False
 	EndIf
 	
 	If cbMonBowlFeder = True Then
-		SystemPause()
 		erBowlFeederBreaker = True
 		cbMonBowlFederFlag = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
+		Pause
 	ElseIf cbMonBowlFeder = False And cbMonBowlFederFlag = True Then
-		SystemUnPause()
 		erBowlFeederBreaker = False
 		cbMonBowlFederFlag = False
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 	EndIf
 	
 	If cbMonInMag = True Then
-		SystemPause()
 		erInMagBreaker = True
 		cbMonInMagFlag = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
+		Pause
 	ElseIf cbMonInMag = False And cbMonInMagFlag = True Then
-		SystemUnPause()
 		erInMagBreaker = False
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 		cbMonInMagFlag = False
 	EndIf
 	
 	If cbMonOutMag = True Then
-		SystemPause()
 		erOutMagBreaker = True
 		cbMonOutMagFlag = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
+		Pause
 	ElseIf cbMonOutMag = False And cbMonOutMagFlag = True Then
-		SystemUnPause()
 		erOutMagBreaker = False
 		cbMonOutMagFlag = False
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 	EndIf
 	
 	If cbMonFlashRmv = True Then
-		SystemPause()
+		stackLightRedCC = True
+		stackLightAlrmCC = True
 		erFlashBreaker = True
 		cbMonFlashRmvFlag = True
+		Pause
 	ElseIf cbMonFlashRmv = False And cbMonFlashRmvFlag = True Then
-		SystemUnPause()
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 		erFlashBreaker = False
 		cbMonFlashRmvFlag = False
 	EndIf
 	
 	If cbMonDebrisRmv = True Then
-		SystemPause()
 		erDebrisRemovalBreaker = True
 		cbMonDebrisRmvFlag = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
+		Pause
 	ElseIf cbMonDebrisRmv = False And cbMonDebrisRmvFlag = True Then
-		SystemUnPause()
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 		erDebrisRemovalBreaker = False
 		cbMonDebrisRmvFlag = False
 	EndIf
 	
 	If cbMonSafety = True Then
-		SystemPause()
+		stackLightRedCC = True
+		stackLightAlrmCC = True
 		erSafetySystemBreaker = True
 		cbMonSafetyFlag = True
 	ElseIf cbMonSafety = False And cbMonSafetyFlag = True Then
-		SystemUnPause()
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 		erSafetySystemBreaker = False
 		cbMonSafetyFlag = False
 	EndIf
 	
 	If cbMonPnumatic = True Then
-		SystemPause()
+		stackLightRedCC = True
+		stackLightAlrmCC = True
 		erPnumaticsBreaker = True
 		cbMonPnumaticFlag = True
 	ElseIf cbMonPnumatic = False And cbMonPnumaticFlag = True Then
-		SystemUnPause()
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 		erPnumaticsBreaker = False
 		cbMonPnumaticFlag = False
 	EndIf
 	
 	If dcPwrOk = True Then
-		SystemPause()
+		stackLightRedCC = True
+		stackLightAlrmCC = True
 		erDCPower = True
 		dcPwrOkFlag = True
+		Pause
 	ElseIf dcPwrOk = False And dcPwrOkFlag = True Then
-		SystemUnPause()
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 		erDCPower = False
 		dcPwrOkFlag = False
 	EndIf
 	
 	If cbMonPAS24vdc = True Then
-		SystemPause()
+		stackLightRedCC = True
+		stackLightAlrmCC = True
 		erDCPowerHeatStake = True
 		cbMonPAS24vdcFlag = True
+		Pause
 	ElseIf cbMonPAS24vdc = False And cbMonPAS24vdcFlag = True Then
-		SystemUnPause()
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 		erDCPowerHeatStake = False
 		cbMonPAS24vdc = False
 	EndIf
@@ -205,30 +245,14 @@ Do While True
 			erHeatStakeTemp = True 'throw error because we are out of tolerance
 		EndIf
 	
-	'Global Pause Initiated from HMI
-	If jobPause = True Then
-		SystemPause()
-		jobPauseFlag = True 'Set Flag	
-	ElseIf jobResume = True Then ' Pick up exactly where we left off
-		SystemUnPause()
-		jobPauseFlag = False ' Reset flag	
-	EndIf
-	
-	If jobStop = True Then
-	
-	EndIf
-	
-	If safeGuardInput = True Then
-		safeGuardInputFlag = True
-	ElseIf safeGuardInput = False And safeGuardInputFlag = True Then
-		Resume All
-		safeGuardInputFlag = False
-	EndIf
-
 	If EStopOn = True Then
 		erEstop = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
 	Else
 		erEstop = False
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 	EndIf
 	
 Loop
@@ -249,7 +273,7 @@ Loop
 		Print "Error AxisNumber:", ctrlrErrAxisNumber
 		Print "Error Number:", ctrlrErrorNum
 		
-		SystemPause()
+		Pause
 	EResume
 
 Fend
@@ -274,7 +298,7 @@ Function StateOfHealth()
 	joint3Status = GetSOHStatus(1, Joint3StatusBitNum, Joint3StatusMask)
 	joint4Status = GetSOHStatus(1, Joint4StatusBitNum, Joint4StatusMask)
 	
-	'For some reason my GetStatus function would not read address 0, so I kinda hacked it	
+	'For some reason my GetStatus function would not read address 0, so I kinda hacked my own function	
 	eStopStatus = RShift(Stat(0) And EstopStatusMask, EstopStatusBitNum)
 	errorStatus = RShift(Stat(0) And ErrorStatusMask, ErrorStatusBitNum)
 	tasksRunningStatus = RShift(Stat(0) And TasksRunningMask, TasksRunningStatusBitNum)

@@ -11,25 +11,28 @@ Do While True
 	SystemStatus = Idle
 	
 	SetInitialValues()
-	CheckInitialValues() ' Has the hmi has given us all the parameters we need to do a job?
-	CheckRecipeInitialization()
-	
+	CheckInitialParameters() ' Has the hmi has given us all the parameters we need to do a job?
+		
 '	Print "jobStart ", jobStart
 '	Wait 1
 
+	' fake for testing
 	jobStart = True
 	RecEntryMissing = False
 	ParamEntryMissing = False
-
-	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False Then
+	stackLightGrnCC = False
+			
+	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False And HotStakeTempRdy() = True Then
 		Print "doing a job"
+		stackLightGrnCC = True
 '		Wait 1
 '		PopPanel() ' Go to input magazine and pick up a panel
 '		FindPickUpError()
-		InspectPanel(True) 'Look for pre-existing inserts, set flags 
+		DerivethetaR()
+		InspectPanel(Preinspection) 'Look for pre-existing inserts, set flags 
 '		HotStakePanel() ' Take panel to hot stake machine; install all inserts
 '		FlashRemoval() ' Take panel to flash removal station, remove all flash as required
-'		InspectPanel(true) ' Take Panel to scanner 
+'		InspectPanel(Inspection) ' Take Panel to scanner 
 '		PushPanel() ' Take Panel to output magazine and drop it off
 '		Pause
 	EndIf
@@ -68,12 +71,13 @@ Function PowerOnSequence()
     OpenNet #203 As Client
 
 	' Execute Tasks
-	Xqt 2, IOTable, NoEmgAbort
-	Xqt 3, SystemMonitor, NoEmgAbort
-	Xqt 4, iotransfer, NoEmgAbort
-	Xqt 5, HmiListen, NoEmgAbort
-	Xqt 6, InMagControl, Normal ' First state is lowering 
-	Xqt 7, OutMagControl, Normal ' First state is raising 
+	Xqt 2, IOTableInputs, NoEmgAbort
+	Xqt 3, IOTableOutputs, Normal
+	Xqt 4, SystemMonitor, NoEmgAbort
+	Xqt 5, iotransfer, NoEmgAbort
+	Xqt 6, HmiListen, NoEmgAbort
+	Xqt 7, InMagControl, Normal ' First state is lowering 
+	Xqt 8, OutMagControl, Normal ' First state is raising 
 	
 	' Jump ScanCenter LimZ zLimit ' Go home
 	
@@ -85,43 +89,13 @@ Function SetInitialValues()
 	AnvilZlimit = -150.00
 	suckTime = .5
 	SystemAccel = 30
-	zLimit = -85
+	zLimit = -15
 '	jobNumPanelsDone = 0
 '	jobNumPanels = 0
 Fend
-Function CheckInitialValues()
-'check if the hmi has pushed all the parameter values to the controller, if not throw an error 
-	
-'	Print "AnvilZlimit:", AnvilZlimit
-'	Print "SystemSpeed:", SystemSpeed
-
-	If AnvilZlimit = 0.0 Or suckTime = 0.0 Then
-		ParamEntryMissing = True
-	ElseIf SystemSpeed = 0 Or SystemAccel = 0 Then
-		ParamEntryMissing = True
-	Else
-		ParamEntryMissing = False
-	EndIf
-	
-	If ParamEntryMissing = True Then
-		erParamEntryMissing = True
-	Else
-		erParamEntryMissing = False
-	EndIf
-	
-'	Print "erParamEntryMissing", erParamEntryMissing
-	
-Fend
-Function CheckRecipeInitialization()
+Function CheckInitialParameters()
 'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
-	
-'	Print "recBossHeight:", recBossHeight
-'	Print "recInsertDepth:", recInsertDepth
-'	Print "recMajorDim:", recMajorDim
-'	Print "recMinorDim:", recMinorDim
-'	Print "recZDropOff:", recZDropOff
-'	Print "recInsertType:", recInsertType
-'	Print "recNumberOfHoles:", recNumberOfHoles
+'check if the hmi has pushed all the parameter values to the controller, if not throw an error 
 
 	'add in check that panelarray is nonzero
 	
@@ -139,15 +113,56 @@ Function CheckRecipeInitialization()
 	
 	If RecEntryMissing = True Then
 		erRecEntryMissing = True
+		stackLightYelCC = True
 	Else
 		erRecEntryMissing = False
+		stackLightYelCC = False
 	EndIf
 	
 '	Print "erRecEntryMissing", erRecEntryMissing
-	Wait .5
+
+	If AnvilZlimit = 0.0 Or suckTime = 0.0 Then
+		ParamEntryMissing = True
+	ElseIf SystemSpeed = 0 Or SystemAccel = 0 Then
+		ParamEntryMissing = True
+	Else
+		ParamEntryMissing = False
+	EndIf
+	
+	If ParamEntryMissing = True Then
+		erParamEntryMissing = True
+		stackLightYelCC = True
+		stackLightAlrmCC = True ' I want to use : On (AlertSiren), 1, 1 because it's non-blocking
+		Wait sirenOnTimeYellow
+		stackLightAlrmCC = False
+	Else
+		erParamEntryMissing = False
+		stackLightYelCC = False
+		stackLightAlrmCC = False
+	EndIf
 
 Fend
+Function HotStakeTempRdy() As Boolean
+	
+	' Make 5% an adjustable parameter via the hmi l8r
+	
+	'Is the current temp within the tolerance to start a job?
+	If (recTemp - 2 < heatStakeCurrentTemp And heatStakeCurrentTemp < recTemp + 2) Then
+		HotStakeTempRdy = True
+		erHeatStakeTemp = False
+		stackLightYelCC = False
+	Else
+		HotStakeTempRdy = False ' Temperature is not in range
+		erHeatStakeTemp = True
+		stackLightYelCC = True
+		stackLightAlrmCC = True ' Do we want to siren on when its heating up? Doesnt make sense...
+		Wait sirenOnTimeYellow
+		stackLightAlrmCC = False
+	EndIf
+	
+	HotStakeTempRdy = True ' fake for testing
 
+Fend
 	
 
 

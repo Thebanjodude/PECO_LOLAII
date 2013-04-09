@@ -13,7 +13,7 @@ retry:
 	
 '	WaitSig InMagPickUpSignal ' Wait for inmag to confirm a panel is ready to be picked up
 	
-	suctionCups = True
+	suctionCupsCC = True
 	Jump InputMagCenter LimZ zLimit Sense Sw(inMagInterlockH) = True
 	
 	If JS = False Then ' Jump executed normally
@@ -95,6 +95,19 @@ SpeedS 20
 	
 	ChangeProfile("03")
 	Move ScanCenter4 CP Till Sw(laserGo)
+	
+	If TillOn = False Then
+	'If we think we have a panel and we actually dotn have one then should re-pop a panel?
+		erPanelStatusUnknown = True
+		stackLightYelCC = True
+		stackLightAlrmCC = True
+		Pause
+	Else
+		erPanelStatusUnknown = False
+		stackLightYelCC = False
+		stackLightAlrmCC = False
+	EndIf
+	
 	d1 = CY(CurPos)
 	
 	ChangeProfile("00")
@@ -118,6 +131,18 @@ SpeedS 20
 	
 	ChangeProfile("03")
 	Move ScanCenter4 +U(90) CP Till Sw(laserGo)
+	
+	If TillOn = False Then
+		erPanelStatusUnknown = True
+		stackLightYelCC = True
+		stackLightAlrmCC = True
+		Pause
+	Else
+		erPanelStatusUnknown = False
+		stackLightYelCC = False
+		stackLightAlrmCC = False
+	EndIf
+	'Use CY in both x and y offsets because we are only modulating along the Y-axis
 	d1 = CY(CurPos)
 
 	ChangeProfile("00")

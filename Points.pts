@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/04/05 03:54:16:032,DS:0000006114,CS:10849,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/09 17:49:27:801,DS:0000006102,CS:03138,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=28
@@ -223,9 +223,9 @@ Point13 {
 	sLabel="ScanCenter3"
 	sDescription=""
 	rX=0
-	rY=350
-	rZ=-87.84
-	rU=90
+	rY=365
+	rZ=-50
+	rU=135
 	rV=0
 	rW=0
 	nLocal=0
@@ -241,9 +241,9 @@ Point14 {
 	sLabel="ScanCenter4"
 	sDescription=""
 	rX=0
-	rY=500
-	rZ=-87.84
-	rU=90
+	rY=515
+	rZ=-50
+	rU=135
 	rV=0
 	rW=0
 	nLocal=0
@@ -260,7 +260,7 @@ Point15 {
 	sDescription=""
 	rX=0
 	rY=635
-	rZ=-87.36
+	rZ=-15
 	rU=90
 	rV=0
 	rW=0
@@ -297,7 +297,7 @@ Point17 {
 	rX=-600
 	rY=0
 	rZ=-165
-	rU=90
+	rU=0
 	rV=0
 	rW=0
 	nLocal=0
@@ -351,7 +351,7 @@ Point20 {
 	rX=-600
 	rY=0
 	rZ=-165
-	rU=90
+	rU=0
 	rV=0
 	rW=0
 	nLocal=0
@@ -368,7 +368,7 @@ Point21 {
 	sDescription=""
 	rX=0
 	rY=625
-	rZ=-84.65
+	rZ=-35
 	rU=0
 	rV=0
 	rW=0
