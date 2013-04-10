@@ -21,15 +21,22 @@ Do While True
 	RecEntryMissing = False
 	ParamEntryMissing = False
 	stackLightGrnCC = False
+	
+	Go PickUp
 			
 	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False And HotStakeTempRdy() = True Then
 		Print "doing a job"
+		
+'		PickUpPanel()
+		
 		stackLightGrnCC = True
 '		Wait 1
 '		PopPanel() ' Go to input magazine and pick up a panel
 		FindPickUpError()
 		DerivethetaR()
-		InspectPanel(Preinspection) 'Look for pre-existing inserts, set flags 
+		InspectPanel(Preinspection) 'Look for pre-existing inserts, set flags
+		
+'		DropOffPanel()
 '		HotStakePanel() ' Take panel to hot stake machine; install all inserts
 '		FlashRemoval() ' Take panel to flash removal station, remove all flash as required
 '		InspectPanel(Inspection) ' Take Panel to scanner 

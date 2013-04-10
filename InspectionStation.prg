@@ -11,7 +11,9 @@ Function InspectPanel(HoleInspect As Boolean)
 	
 	Integer j
 	Real beta, mu, m1, m2, r1, phi, rho
-	Real y1, y2, y3, dy
+	Real y1, y2, y3, dy, dx, deltaRotX, deltaRotY
+	Real RightOffset, LeftOffset
+	
   	
 	GetThetaR() 'get first r and theta
 '	FindPickUpError()
@@ -21,17 +23,6 @@ Function InspectPanel(HoleInspect As Boolean)
 	Redim PassFailArray(22, 1)
 	
 	recInsertDepth = .079
-'	xOffset = -1.44
-'	yOffset = -1.91998
-
-'	yOffset = 6.6001
-'	xOffset = 35.3999
-
-'	yOffset = -13.78
-'	xOffset = 0.980042
-
-yOffset = -14.32
-xOffset = 1.27997
 
 	For j = 0 To recNumberOfHoles - 1 'k is the hole # we are on
 		
@@ -44,6 +35,8 @@ xOffset = 1.27997
 			Print "r=0"
 			Pause
 		EndIf
+		
+		Print "r:", r
 
 		If j = 0 Then ' Find the slopes of the lines that connect the holes
 			m1 = FindSlope(recNumberOfHoles - 1, j) 'the last hole to the hole
@@ -83,52 +76,111 @@ xOffset = 1.27997
 		
 		rho = mu ' this is the place to experiment with the angle
 		
-		If Theta = 0 Then
-			P23 = scancenter5 -Y(r) :U(-45)
-            P23 = P23 +X(xOffset) +Y(yOffset)
-			Print "done"
+		If Theta = 0 Then ' If this works, they are all the same so condense the if's!
+			theta = Theta + thetaOffset
+			P23 = scancenter5 -Y(r) -U(Theta)
 			Go P23
 		ElseIf Theta = 90 Then
-			P23 = scancenter5 -Y(r) :U(0 - 45)
+			theta = Theta + thetaOffset
+			P23 = scancenter5 -Y(r) -U(Theta)
+			Go P23
 		ElseIf Theta = 180 Then
-			P23 = scancenter5 -Y(r) :U(-90 - 45)
+			theta = Theta + thetaOffset
+			P23 = scancenter5 -Y(r) -U(Theta)
+			Go P23
 		ElseIf Theta = 270 Then
-			P23 = scancenter5 -Y(r) :U(-180 - 45)
+			theta = Theta + thetaOffset
+			P23 = scancenter5 -Y(r) -U(Theta)
+			Go P23
 		ElseIf (0 < Theta And Theta < 90) Then
-		
+			theta = Theta + thetaOffset
+'			Print "theta:", Theta
+'			theta = Theta + thetaOffset ' adjust theta based on initial pick up offset
+'			Print "theta+offset:", Theta
+			
 			phi = rho + Theta
 			Print "phi:", phi
             P23 = scancenter5 -Y(r) -U(phi)
+			Pause
             Go P23
-			Print "Offset Move"
+
+			dy = r - (r * Cos(DegToRad(rho + thetaOffset)))
+			Print "dy:", dy
+			Print "dy move"
+			P23 = P23 +Y(dy)
+			Pause
+			Go P23
+			
+	       	dx = r * Sin(DegToRad(rho + thetaOffset))
+			Print "dx move"
+		    Print "dx:", dx
+            P23 = P23 -X(dx)
             Pause
-            P23 = P23 +X(xOffset) +Y(yOffset)
             Go P23
+
+		ElseIf (90 < Theta And Theta < 180) Then
+			theta = Theta + thetaOffset
+			phi = Theta + rho
+			Print "phi:", phi
+            P23 = scancenter5 -Y(r) -U(phi)
+            Go P23
+            Pause
+
 			dy = r - (r * Cos(DegToRad(rho)))
 			Print "dy:", dy
 			Print "dy move"
 			P23 = P23 +Y(dy)
 			Pause
 			Go P23
+			
 			Print "dx move"
             Pause
-            P23 = P23 -X(r * Sin(DegToRad(rho)))
+            P23 = P23 +X(r * Sin(DegToRad(rho)))
             Go P23
-            Print "done"
+            Pause
 
-		ElseIf (90 < Theta And Theta < 180) Then
-		'	phi = 90 - Theta + rho
-		'	phi = 90 - Theta - rho	old
-			P23 = scancenter5 +Y(CY(ScanCenter5) - r * Cos(DegToRad(rho)) - r) :U(phi - 45) -X(r * Sin(DegToRad(rho)))
 		ElseIf (180 < Theta And Theta < 270) Then
+			theta = Theta + thetaOffset
 			phi = 90 - Theta - rho
 		'	P23 = scancenter5 -Y(r * )) :U(phi - 45) -X(r * Sin(DegToRad(rho)))
 		ElseIf (270 < Theta And Theta < 360) Then
+			theta = Theta + thetaOffset
 			phi = 90 - Theta + rho
 			P23 = scancenter5 +Y(CY(ScanCenter5) - r * Cos(DegToRad(rho)) - r) :U(phi - 45) +X(r * Sin(DegToRad(rho)))
 		Else
 			Print "Error, theta is greater than 360"
 		EndIf
+		
+		Pause
+        Print "rotation offset move"
+'		deltaRotX = xOffset * Cos(DegToRad(phi)) + yOffset * Sin(DegToRad(phi))
+'		deltaRotY = xOffset * Sin(DegToRad(phi)) + yOffset * Cos(DegToRad(phi))
+'		Print "deltaRotX:", deltaRotX
+'		Print "deltaRotY:", deltaRotY
+'		P23 = P23 +X(deltaRotX) +Y(deltaRotY)
+		Go P23
+        Print "done"
+        Print CurPos
+		Pause
+		
+		If j = 0 Then
+		' We find the theta off set using the laset scanner. We use the position of the
+		'hole walls and derive theta offset 
+			ChangeProfile("00")
+			RightOffset = GetLaserMeasurement("03")
+			LeftOffset = GetLaserMeasurement("04")
+			thetaOffset = RadToDeg(Asin((RightOffset + LeftOffset) / (2 * r)))
+			Print "RightOffset: ", RightOffset
+			Print "LeftOffset: ", LeftOffset
+			Print "thetaOffset: ", thetaOffset
+			
+				If thetaOffset > 3 Then
+					Print "thetaoffset it more than 3 deg"
+					Pause
+				EndIf
+			Go P23 +U(thetaOffset) ' on first pass we need to offset the hole
+		EndIf
+
 
 		
 	'	Print "beta=", beta
@@ -136,25 +188,21 @@ xOffset = 1.27997
 	'	Print "Phi=", phi
 		
 	'	Print P23
-		Wait 1
+	'	Wait 1
 	'	Print P23
 	'	 P23 = P23 +Y(yOffset) +X(xOffset) 'ROT CP
 	'	 Go P23
 	'	Print P23
 		Pause
 		If HoleInspect = True Then
-		
 			MeasureInsertDepth()
-		
 		Else
 		'switch to correct laser Profile
-		ChangeProfile("07")
-		
+			ChangeProfile("07")
 			Print GetLaserMeasurement("01")
 			If GetLaserMeasurement("01") > 35 Then ' There is already an insert so set skip flag
 				PanelArray(j, SkipFlagColumn) = 1
 			EndIf
-		
 		EndIf
 Next
 
@@ -381,5 +429,25 @@ For n = 0 To recNumberOfHoles - 1
 	
 Next
 	
+Fend
+Function PickUpPanel
+	Off (15)
+	Go ScanCenter3 :U(CU(CurPos))
+	Go PrePickUp2 - PickUpOffset
+	Go PickUp2 - PickUpOffset
+	On (15)
+	Wait 1
+	Go PrePickup2 - PickUpOffset
+	Go ScanCenter3 :U(CU(CurPos))
+	Go ScanCenter3
+	Pause
+Fend
+Function DropOffPanel
+	Go ScanCenter3 :U(CU(CurPos))
+	Go DropOff
+	Off (15)
+	Wait 2
+	Go ScanCenter3
+	Pause
 Fend
 

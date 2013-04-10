@@ -94,7 +94,7 @@ SpeedS 20
 	Wait .25
 	
 	ChangeProfile("03")
-	Move ScanCenter4 CP Till Sw(laserGo)
+	Move ScanCenterLong CP Till Sw(laserGo)
 	
 	If TillOn = False Then
 	'If we think we have a panel and we actually dotn have one then should re-pop a panel?
@@ -111,15 +111,17 @@ SpeedS 20
 	d1 = CY(CurPos)
 	
 	ChangeProfile("00")
+	Move ScanCenter3 :U(CU(CurPos))
 	Go ScanCenter3 +U(180) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move ScanCenter4 +U(180) CP Till Sw(laserGo)
+	Go ScanCenter3 +U(20)
+	Move ScanCenterLong +U(180) CP Till Sw(laserGo)
 	d2 = CY(CurPos)
 	On (laserP1)
 	yOffset = (d1 - d2) /2
-	
+
 	
 	Print "yOffset", yOffset
 	
@@ -127,11 +129,13 @@ SpeedS 20
 	d2 = 0
 	
 	ChangeProfile("00")
+	Move ScanCenter3 :U(CU(CurPos))
 	Go ScanCenter3 +U(90) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move ScanCenter4 +U(90) CP Till Sw(laserGo)
+	Go ScanCenter3 +U(20)
+	Move ScanCenterShort +U(90) CP Till Sw(laserGo)
 	
 	If TillOn = False Then
 		erPanelStatusUnknown = True
@@ -147,11 +151,12 @@ SpeedS 20
 	d1 = CY(CurPos)
 
 	ChangeProfile("00")
+	Move ScanCenter3 :U(CU(CurPos))
 	Go ScanCenter3 +U(270) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move ScanCenter4 +U(270) CP Till Sw(laserGo)
+	Move ScanCenterShort +U(270 + 20) CP Till Sw(laserGo)
 	d2 = CY(CurPos)
 
 	xOffset = (d1 - d2) /2
@@ -161,7 +166,11 @@ SpeedS 20
 	d1 = 0
 	d2 = 0
 	ChangeProfile("00")
-	
+	Move ScanCenter3 :U(CU(CurPos))
 	Go scancenter3
 	
 Fend
+
+	
+
+

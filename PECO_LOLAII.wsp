@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/04/10 01:55:13:586,DS:0000002480,CS:00782,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="InspectionStation.prg"
+ENVT0100,LM:2013/04/10 23:06:33:879,DS:0000002469,CS:07745,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="PopAndPush.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=87
-		nTop=99
-		nWidth=1191
-		nHeight=674
+		nLeft=104
+		nTop=23
+		nWidth=1190
+		nHeight=671
 	}
 }
 ProgramFile2 {
@@ -17,10 +17,10 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=1
 	Window {
-		nLeft=-215
-		nTop=57
-		nWidth=1591
-		nHeight=710
+		nLeft=-51
+		nTop=73
+		nWidth=1589
+		nHeight=707
 	}
 }
 ProgramFile3 {
@@ -70,12 +70,12 @@ ProgramFile6 {
 ProgramFile7 {
 	sName="PopAndPush.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=212
-		nTop=17
-		nWidth=1144
-		nHeight=637
+		nLeft=217
+		nTop=60
+		nWidth=1048
+		nHeight=680
 	}
 }
 ProgramFile8 {
@@ -83,22 +83,22 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=346
-		nTop=61
-		nWidth=1201
-		nHeight=622
+		nLeft=130
+		nTop=33
+		nWidth=1272
+		nHeight=739
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=323
-		nTop=41
-		nWidth=1080
-		nHeight=635
+		nLeft=640
+		nTop=742
+		nWidth=132
+		nHeight=38
 	}
 }
 nPointFileCount=1
@@ -125,12 +125,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=621
-		nTop=116
-		nWidth=947
-		nHeight=611
+		nLeft=64
+		nTop=148
+		nWidth=941
+		nHeight=672
 	}
 }
 IOLabelEditor {
@@ -144,12 +144,12 @@ IOLabelEditor {
 	nWinState=0
 }
 IOMonitor {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=1453
-		nTop=129
+		nLeft=1429
+		nTop=221
 		nWidth=520
-		nHeight=461
+		nHeight=437
 	}
 }
 TaskMgr {
@@ -173,7 +173,7 @@ Macros {
 RobotMgr {
 	bOpened=True
 	Window {
-		nLeft=487
+		nLeft=330
 		nTop=113
 		nWidth=751
 		nHeight=485
