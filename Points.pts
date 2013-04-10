@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/04/09 17:49:27:801,DS:0000006102,CS:03138,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/10 01:30:41:798,DS:0000006112,CS:16234,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=28
@@ -223,9 +223,9 @@ Point13 {
 	sLabel="ScanCenter3"
 	sDescription=""
 	rX=0
-	rY=365
+	rY=350
 	rZ=-50
-	rU=135
+	rU=-45
 	rV=0
 	rW=0
 	nLocal=0
@@ -241,9 +241,9 @@ Point14 {
 	sLabel="ScanCenter4"
 	sDescription=""
 	rX=0
-	rY=515
+	rY=625
 	rZ=-50
-	rU=135
+	rU=-45
 	rV=0
 	rW=0
 	nLocal=0
@@ -259,7 +259,7 @@ Point15 {
 	sLabel="InspectionCenter"
 	sDescription=""
 	rX=0
-	rY=635
+	rY=695.325
 	rZ=-15
 	rU=90
 	rV=0
@@ -367,9 +367,9 @@ Point21 {
 	sLabel="ScanCenter5"
 	sDescription=""
 	rX=0
-	rY=625
+	rY=695.325
 	rZ=-35
-	rU=0
+	rU=-45
 	rV=0
 	rW=0
 	nLocal=0

@@ -27,7 +27,7 @@ Do While True
 		stackLightGrnCC = True
 '		Wait 1
 '		PopPanel() ' Go to input magazine and pick up a panel
-'		FindPickUpError()
+		FindPickUpError()
 		DerivethetaR()
 		InspectPanel(Preinspection) 'Look for pre-existing inserts, set flags 
 '		HotStakePanel() ' Take panel to hot stake machine; install all inserts

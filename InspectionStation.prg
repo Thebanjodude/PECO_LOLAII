@@ -11,6 +11,7 @@ Function InspectPanel(HoleInspect As Boolean)
 	
 	Integer j
 	Real beta, mu, m1, m2, r1, phi, rho
+	Real y1, y2, y3, dy
   	
 	GetThetaR() 'get first r and theta
 '	FindPickUpError()
@@ -23,8 +24,14 @@ Function InspectPanel(HoleInspect As Boolean)
 '	xOffset = -1.44
 '	yOffset = -1.91998
 
-	yOffset = 6.6001
-	xOffset = 35.3999
+'	yOffset = 6.6001
+'	xOffset = 35.3999
+
+'	yOffset = -13.78
+'	xOffset = 0.980042
+
+yOffset = -14.32
+xOffset = 1.27997
 
 	For j = 0 To recNumberOfHoles - 1 'k is the hole # we are on
 		
@@ -53,14 +60,15 @@ Function InspectPanel(HoleInspect As Boolean)
 '		Print "m2:", m2
 '		Print "Theta", Theta
 '		Print "beta Unchanged", GetAngle(m1, m2)
-	
-		If (Theta = 90) Then
+		If Theta = 0 Then
+			beta = 90
+		ElseIf (Theta = 90) Then
 			beta = 180
 		ElseIf (Theta = 270) Then
 			beta = 0
 		ElseIf (90 < Theta And Theta < 180) Then
 	 		beta = GetAngle(m1, m2) + 180 ' add 180 because its obtuse
-		ElseIf (270 < Theta Or Theta < 360) Or (0 < Theta Or Theta < 90) Or (180 < Theta And Theta < 270) Then
+		ElseIf (270 < Theta And Theta < 360) Or (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
 			beta = GetAngle(m1, m2) + 90
 		Else
 			Print "error, theta is defined as < 360"
@@ -76,29 +84,52 @@ Function InspectPanel(HoleInspect As Boolean)
 		rho = mu ' this is the place to experiment with the angle
 		
 		If Theta = 0 Then
-			P23 = scancenter5 -Y(r) :U(90 + 45)
+			P23 = scancenter5 -Y(r) :U(-45)
+            P23 = P23 +X(xOffset) +Y(yOffset)
+			Print "done"
+			Go P23
 		ElseIf Theta = 90 Then
-			P23 = scancenter5 -Y(r) :U(0 + 45)
+			P23 = scancenter5 -Y(r) :U(0 - 45)
 		ElseIf Theta = 180 Then
 			P23 = scancenter5 -Y(r) :U(-90 - 45)
 		ElseIf Theta = 270 Then
 			P23 = scancenter5 -Y(r) :U(-180 - 45)
 		ElseIf (0 < Theta And Theta < 90) Then
-			phi = 90 - Theta - rho
-			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi + 45) -X(r * Sin(DegToRad(rho)))
-			Print P23
+		
+			phi = rho + Theta
+			Print "phi:", phi
+            P23 = scancenter5 -Y(r) -U(phi)
+            Go P23
+			Print "Offset Move"
+            Pause
+            P23 = P23 +X(xOffset) +Y(yOffset)
+            Go P23
+			dy = r - (r * Cos(DegToRad(rho)))
+			Print "dy:", dy
+			Print "dy move"
+			P23 = P23 +Y(dy)
+			Pause
+			Go P23
+			Print "dx move"
+            Pause
+            P23 = P23 -X(r * Sin(DegToRad(rho)))
+            Go P23
+            Print "done"
+
 		ElseIf (90 < Theta And Theta < 180) Then
-			phi = 90 - Theta - rho
-			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi + 45) -X(r * Sin(DegToRad(rho)))
+		'	phi = 90 - Theta + rho
+		'	phi = 90 - Theta - rho	old
+			P23 = scancenter5 +Y(CY(ScanCenter5) - r * Cos(DegToRad(rho)) - r) :U(phi - 45) -X(r * Sin(DegToRad(rho)))
 		ElseIf (180 < Theta And Theta < 270) Then
 			phi = 90 - Theta - rho
-			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi + 45) -X(r * Sin(DegToRad(rho)))
+		'	P23 = scancenter5 -Y(r * )) :U(phi - 45) -X(r * Sin(DegToRad(rho)))
 		ElseIf (270 < Theta And Theta < 360) Then
 			phi = 90 - Theta + rho
-			P23 = scancenter5 -Y(r * Cos(DegToRad(rho))) :U(phi + 45) +X(r * Sin(DegToRad(rho)))
+			P23 = scancenter5 +Y(CY(ScanCenter5) - r * Cos(DegToRad(rho)) - r) :U(phi - 45) +X(r * Sin(DegToRad(rho)))
 		Else
 			Print "Error, theta is greater than 360"
 		EndIf
+
 		
 	'	Print "beta=", beta
 	'	Print "mu=", mu
@@ -106,9 +137,10 @@ Function InspectPanel(HoleInspect As Boolean)
 		
 	'	Print P23
 		Wait 1
-		Print P23
-		Go P23 -Y(yOffset) -X(xOffset) 'ROT CP
-		Print P23
+	'	Print P23
+	'	 P23 = P23 +Y(yOffset) +X(xOffset) 'ROT CP
+	'	 Go P23
+	'	Print P23
 		Pause
 		If HoleInspect = True Then
 		

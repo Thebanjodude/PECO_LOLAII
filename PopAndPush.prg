@@ -118,7 +118,8 @@ SpeedS 20
 	Move ScanCenter4 +U(180) CP Till Sw(laserGo)
 	d2 = CY(CurPos)
 	On (laserP1)
-	yOffset = d1 - d2
+	yOffset = (d1 - d2) /2
+	
 	
 	Print "yOffset", yOffset
 	
@@ -153,7 +154,7 @@ SpeedS 20
 	Move ScanCenter4 +U(270) CP Till Sw(laserGo)
 	d2 = CY(CurPos)
 
-	xOffset = d1 - d2
+	xOffset = (d1 - d2) /2
 	
 	Print "xOffset", xOffset
 	

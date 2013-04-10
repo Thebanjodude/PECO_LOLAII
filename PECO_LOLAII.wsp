@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/04/09 19:56:29:920,DS:0000002480,CS:13921,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/10 01:55:13:586,DS:0000002480,CS:00782,MA:6C-F0-49-E2-45-75,EI:           
 sActiveChild="InspectionStation.prg"
 bMdiMaximized=False
 ProgramFile1 {
@@ -6,10 +6,10 @@ ProgramFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=290
-		nTop=183
-		nWidth=1192
-		nHeight=678
+		nLeft=87
+		nTop=99
+		nWidth=1191
+		nHeight=674
 	}
 }
 ProgramFile2 {
@@ -17,10 +17,10 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=1
 	Window {
-		nLeft=-14
-		nTop=54
-		nWidth=1593
-		nHeight=713
+		nLeft=-215
+		nTop=57
+		nWidth=1591
+		nHeight=710
 	}
 }
 ProgramFile3 {
@@ -36,13 +36,13 @@ ProgramFile3 {
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=31
-		nTop=101
-		nWidth=1108
-		nHeight=545
+		nTop=5
+		nWidth=1107
+		nHeight=542
 	}
 }
 ProgramFile5 {
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=1
 	Window {
-		nLeft=-18
-		nTop=-16
-		nWidth=1250
-		nHeight=702
+		nLeft=212
+		nTop=17
+		nWidth=1144
+		nHeight=637
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=62
-		nTop=16
-		nWidth=1249
-		nHeight=625
+		nLeft=346
+		nTop=61
+		nWidth=1201
+		nHeight=622
 	}
 }
 nIncludeFileCount=1
@@ -125,12 +125,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=580
-		nTop=10
-		nWidth=1026
-		nHeight=826
+		nLeft=621
+		nTop=116
+		nWidth=947
+		nHeight=611
 	}
 }
 IOLabelEditor {
@@ -144,12 +144,12 @@ IOLabelEditor {
 	nWinState=0
 }
 IOMonitor {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=1502
-		nTop=208
+		nLeft=1453
+		nTop=129
 		nWidth=520
-		nHeight=465
+		nHeight=461
 	}
 }
 TaskMgr {
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=True
 	Window {
-		nLeft=316
-		nTop=159
+		nLeft=487
+		nTop=113
 		nWidth=751
 		nHeight=485
 	}

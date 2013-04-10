@@ -1,11 +1,11 @@
-ENVT0100,LM:2013/04/09 19:47:38:450,DS:0000003644,CS:03649,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/10 01:52:54:499,DS:0000003648,CS:15164,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="4/9/2013 1:47:37 PM"
-	bBuildComplete=True
+	sLastModified="4/9/2013 7:44:03 PM"
+	bBuildComplete=False
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
@@ -30,13 +30,13 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/9/2013 6:02:33 PM"
+	sTimeSavedInController="4/10/2013 1:39:37 AM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/8/2013 8:51:16 PM"
+	sTimeSavedInController="4/9/2013 8:29:57 PM"
 }
 ProgramFile3 {
 	sName="IOTable.prg"
@@ -66,13 +66,13 @@ ProgramFile7 {
 	sName="PopAndPush.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/9/2013 7:17:48 PM"
+	sTimeSavedInController="4/9/2013 9:46:35 PM"
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/9/2013 7:47:37 PM"
+	sTimeSavedInController="4/10/2013 1:44:03 AM"
 }
 nIncludeFileCount=1
 IncludeFile1 {
@@ -83,7 +83,7 @@ IncludeFile1 {
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="4/9/2013 5:49:27 PM"
+	sTimeSavedInController="4/10/2013 1:30:41 AM"
 }
 OperatorSettings {
 	OperatorWindow {
