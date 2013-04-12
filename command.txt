@@ -4,4 +4,14 @@
 !!Error: 3100, Syntax error.
 > atan2(1,1)
 !!Error: 3100, Syntax error.
+> cos(radtodeg(180))
+!!Error: 3100, Syntax error.
+> cos(pi)
+!!Error: 3100, Syntax error.
+> Cos(pi)
+!!Error: 3100, Syntax error.
+> Cos(Pi)
+!!Error: 3100, Syntax error.
+> cos(0)
+!!Error: 3100, Syntax error.
 > 

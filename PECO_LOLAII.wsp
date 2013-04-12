@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/04/10 23:06:33:879,DS:0000002469,CS:07745,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="PopAndPush.prg"
+ENVT0100,LM:2013/04/12 00:22:50:631,DS:0000002456,CS:00812,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Run"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=104
-		nTop=23
-		nWidth=1190
-		nHeight=671
+		nLeft=14
+		nTop=3
+		nWidth=1425
+		nHeight=667
 	}
 }
 ProgramFile2 {
@@ -17,10 +17,10 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=1
 	Window {
-		nLeft=-51
-		nTop=73
-		nWidth=1589
-		nHeight=707
+		nLeft=9
+		nTop=51
+		nWidth=1588
+		nHeight=703
 	}
 }
 ProgramFile3 {
@@ -30,8 +30,8 @@ ProgramFile3 {
 	Window {
 		nLeft=254
 		nTop=6
-		nWidth=1245
-		nHeight=747
+		nWidth=1243
+		nHeight=744
 	}
 }
 ProgramFile4 {
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=217
-		nTop=60
-		nWidth=1048
-		nHeight=680
+		nLeft=230
+		nTop=26
+		nWidth=1034
+		nHeight=610
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=130
-		nTop=33
-		nWidth=1272
-		nHeight=739
+		nLeft=193
+		nTop=76
+		nWidth=1042
+		nHeight=627
 	}
 }
 nIncludeFileCount=1
@@ -97,7 +97,7 @@ IncludeFile1 {
 	Window {
 		nLeft=640
 		nTop=742
-		nWidth=132
+		nWidth=143
 		nHeight=38
 	}
 }
@@ -127,10 +127,10 @@ CmdWindow {
 RunWindow {
 	bOpened=True
 	Window {
-		nLeft=64
-		nTop=148
-		nWidth=941
-		nHeight=672
+		nLeft=331
+		nTop=94
+		nWidth=1026
+		nHeight=547
 	}
 }
 IOLabelEditor {
@@ -144,12 +144,12 @@ IOLabelEditor {
 	nWinState=0
 }
 IOMonitor {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=1429
-		nTop=221
+		nLeft=3020
+		nTop=527
 		nWidth=520
-		nHeight=437
+		nHeight=431
 	}
 }
 TaskMgr {
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=True
 	Window {
-		nLeft=330
-		nTop=113
+		nLeft=381
+		nTop=153
 		nWidth=751
 		nHeight=485
 	}

@@ -84,17 +84,15 @@ Function FindPickUpError()
 Real d1, d2
 Integer i
 
-'recMajorDim = 247.142
-'recMinorDim = 143.764
 
 Speed 10 'slow it down so we get a better reading
-SpeedS 20
+SpeedS 50
 	
-	Go ScanCenter3 CP  ' Use CP so it's not jumpy
+	Go ScanCenter3 - PanelOffset CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move ScanCenterLong CP Till Sw(laserGo)
+	Move ScanCenterLong - PanelOffset CP Till Sw(laserGo)
 	
 	If TillOn = False Then
 	'If we think we have a panel and we actually dotn have one then should re-pop a panel?
@@ -111,31 +109,28 @@ SpeedS 20
 	d1 = CY(CurPos)
 	
 	ChangeProfile("00")
-	Move ScanCenter3 :U(CU(CurPos))
-	Go ScanCenter3 +U(180) CP  ' Use CP so it's not jumpy
+	Move (ScanCenter3 - PanelOffset) :U(CU(CurPos))
+	Go (ScanCenter3 - PanelOffset) +U(180) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Go ScanCenter3 +U(20)
-	Move ScanCenterLong +U(180) CP Till Sw(laserGo)
+	Move (ScanCenterLong - PanelOffset) :U(CU(CurPos)) CP Till Sw(laserGo)
 	d2 = CY(CurPos)
 	On (laserP1)
-	yOffset = (d1 - d2) /2
-
+	yOffset = (d2 - d1) /2
 	
-	Print "yOffset", yOffset
+'	Print "yOffset", yOffset
 	
 	d1 = 0
 	d2 = 0
 	
 	ChangeProfile("00")
-	Move ScanCenter3 :U(CU(CurPos))
-	Go ScanCenter3 +U(90) CP  ' Use CP so it's not jumpy
+	Move (ScanCenter3 - PanelOffset) :U(CU(CurPos))
+	Go ScanCenter3 - PanelOffset +U(90) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Go ScanCenter3 +U(20)
-	Move ScanCenterShort +U(90) CP Till Sw(laserGo)
+	Move (ScanCenterShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(laserGo)
 	
 	If TillOn = False Then
 		erPanelStatusUnknown = True
@@ -151,23 +146,27 @@ SpeedS 20
 	d1 = CY(CurPos)
 
 	ChangeProfile("00")
-	Move ScanCenter3 :U(CU(CurPos))
-	Go ScanCenter3 +U(270) CP  ' Use CP so it's not jumpy
+	Move (ScanCenter3 - PanelOffset) :U(CU(CurPos))
+	Go ScanCenter3 - PanelOffset +U(270) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move ScanCenterShort +U(270 + 20) CP Till Sw(laserGo)
+	Move (ScanCenterShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(laserGo)
 	d2 = CY(CurPos)
 
-	xOffset = (d1 - d2) /2
+	xOffset = -(d2 - d1) / 2
 	
-	Print "xOffset", xOffset
+'	Print "xOffset", xOffset
 	
 	d1 = 0
 	d2 = 0
 	ChangeProfile("00")
-	Move ScanCenter3 :U(CU(CurPos))
-	Go scancenter3
+	Move (ScanCenter3 - PanelOffset) :U(CU(CurPos))
+	Go (scancenter3 - PanelOffset)
+	
+	PanelOffset = PanelOffset :X(xOffset) :Y(yOffset) 'update offset point
+	Print "PanelOffset:", PanelOffset
+		
 	
 Fend
 

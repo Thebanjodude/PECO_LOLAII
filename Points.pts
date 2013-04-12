@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/04/10 22:07:08:619,DS:0000007731,CS:24887,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/11 21:10:40:611,DS:0000007942,CS:23877,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=36
+nNumberOfPoints=37
 Point1 {
 	nNumber=0
 	sLabel="InputMagCenter"
@@ -224,7 +224,7 @@ Point13 {
 	sDescription=""
 	rX=0
 	rY=415
-	rZ=8
+	rZ=-2.5
 	rU=45
 	rV=0
 	rW=0
@@ -242,7 +242,7 @@ Point14 {
 	sDescription=""
 	rX=0
 	rY=620
-	rZ=-4.5
+	rZ=-2.5
 	rU=45
 	rV=0
 	rW=0
@@ -259,8 +259,8 @@ Point15 {
 	sLabel="InspectionCenter"
 	sDescription=""
 	rX=0
-	rY=709.613
-	rZ=-4.5
+	rY=696.28
+	rZ=-2.5
 	rU=90
 	rV=0
 	rW=0
@@ -367,8 +367,8 @@ Point21 {
 	sLabel="ScanCenter5"
 	sDescription=""
 	rX=0
-	rY=709.613
-	rZ=-4.5
+	rY=696.28
+	rZ=-2.5
 	rU=45
 	rV=0
 	rW=0
@@ -494,7 +494,7 @@ Point28 {
 	sDescription=""
 	rX=0
 	rY=525
-	rZ=-4.5
+	rZ=-2.5
 	rU=45
 	rV=0
 	rW=0
@@ -598,7 +598,7 @@ Point33 {
 }
 Point34 {
 	nNumber=33
-	sLabel=""
+	sLabel="PanelOffset"
 	sDescription=""
 	rX=0
 	rY=0
@@ -615,6 +615,24 @@ Point34 {
 	bSimVisible=False
 }
 Point35 {
+	nNumber=34
+	sLabel="RotatedOffset"
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point36 {
 	nNumber=60
 	sLabel="RM0"
 	sDescription=""
@@ -632,7 +650,7 @@ Point35 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point36 {
+Point37 {
 	nNumber=61
 	sLabel="RM1"
 	sDescription=""

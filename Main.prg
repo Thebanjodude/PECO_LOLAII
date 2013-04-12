@@ -22,10 +22,14 @@ Do While True
 	ParamEntryMissing = False
 	stackLightGrnCC = False
 	
+	Move scancenter3 :U(CU(CurPos))
+	
 	Go PickUp
 			
 	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False And HotStakeTempRdy() = True Then
 		Print "doing a job"
+		
+		PanelOffset = PanelOffset :X(0) :Y(0) :Z(0) :U(0)
 		
 '		PickUpPanel()
 		
