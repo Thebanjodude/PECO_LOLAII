@@ -1,37 +1,37 @@
-ENVT0100,LM:2013/04/12 00:22:50:631,DS:0000002456,CS:00812,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Run"
+ENVT0100,LM:2013/04/15 22:07:56:438,DS:0000002487,CS:26373,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InspectionStation.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=14
-		nTop=3
-		nWidth=1425
-		nHeight=667
+		nLeft=306
+		nTop=138
+		nWidth=1084
+		nHeight=596
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=9
-		nTop=51
-		nWidth=1588
-		nHeight=703
+		nLeft=1
+		nTop=154
+		nWidth=1587
+		nHeight=699
 	}
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=254
-		nTop=6
-		nWidth=1243
-		nHeight=744
+		nLeft=-111
+		nTop=275
+		nWidth=1240
+		nHeight=737
 	}
 }
 ProgramFile4 {
@@ -52,30 +52,30 @@ ProgramFile5 {
 	Window {
 		nLeft=521
 		nTop=19
-		nWidth=1056
-		nHeight=707
+		nWidth=1055
+		nHeight=703
 	}
 }
 ProgramFile6 {
 	sName="SystemMonitor.prg"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=437
-		nTop=51
-		nWidth=1107
-		nHeight=759
+		nLeft=515
+		nTop=24
+		nWidth=1106
+		nHeight=756
 	}
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=230
-		nTop=26
-		nWidth=1034
-		nHeight=610
+		nLeft=163
+		nTop=37
+		nWidth=1217
+		nHeight=693
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=193
-		nTop=76
-		nWidth=1042
-		nHeight=627
+		nLeft=103
+		nTop=63
+		nWidth=1470
+		nHeight=780
 	}
 }
 nIncludeFileCount=1
@@ -95,10 +95,10 @@ IncludeFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=640
-		nTop=742
-		nWidth=143
-		nHeight=38
+		nLeft=116
+		nTop=123
+		nWidth=1321
+		nHeight=589
 	}
 }
 nPointFileCount=1
@@ -127,10 +127,10 @@ CmdWindow {
 RunWindow {
 	bOpened=True
 	Window {
-		nLeft=331
-		nTop=94
-		nWidth=1026
-		nHeight=547
+		nLeft=779
+		nTop=46
+		nWidth=844
+		nHeight=643
 	}
 }
 IOLabelEditor {
@@ -146,19 +146,19 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=3020
-		nTop=527
+		nLeft=1419
+		nTop=290
 		nWidth=520
-		nHeight=431
+		nHeight=532
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=60
-		nTop=306
-		nWidth=673
-		nHeight=458
+		nLeft=395
+		nTop=184
+		nWidth=672
+		nHeight=455
 	}
 }
 Macros {
@@ -171,10 +171,10 @@ Macros {
 	}
 }
 RobotMgr {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=381
-		nTop=153
+		nLeft=201
+		nTop=128
 		nWidth=751
 		nHeight=485
 	}

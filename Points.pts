@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/04/11 21:10:40:611,DS:0000007942,CS:23877,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/15 13:09:55:629,DS:0000007942,CS:22599,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=37
@@ -493,7 +493,7 @@ Point28 {
 	sLabel="ScanCenterLong"
 	sDescription=""
 	rX=0
-	rY=525
+	rY=500
 	rZ=-2.5
 	rU=45
 	rV=0

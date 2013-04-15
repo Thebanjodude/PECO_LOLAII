@@ -1,39 +1,224 @@
+'#include "Globals.INC"
+'
+'Function InspectPanel(HoleInspect As Boolean)
+'	'	HoleInspect As Boolean
+'	
+'	Go ScanCenter3 ' Collision Avoidance Waypoint	
+'	
+'	SystemStatus = InspectingPanel
+'	
+'	Integer k, j
+'	Real beta, mu, m1, m2, r1, phi, rho
+'	Real y1, y2, y3, dy, dx, deltaRotX, deltaRotY
+'	Real RightOffset, LeftOffset
+'  	
+'	GetThetaR() 'get first r and theta
+''	FindPickUpError()
+'	PanelArrayIndex = 0
+'	
+'	Redim InspectionArray(22, 1) ' Make the arrays big enough to fit all the panels
+'	Redim PassFailArray(22, 1)
+'	
+''	recInsertDepth = .079
+'	
+'	For j = 0 To recNumberOfHoles - 1 'k is the hole # we are on
+'		
+'		If j <> 0 Then
+'			IncrementIndex()
+'			GetThetaR()
+'		EndIf
+'		
+'		If r = 0 Then
+'			Print "r=0"
+'			Pause
+'		EndIf
+'		
+'		Print "r:", r
+'
+'		If j = 0 Then ' Find the slopes of the lines that connect the holes
+'			m1 = FindSlope(recNumberOfHoles - 1, j) 'the last hole to the hole
+'			m2 = FindSlope(j, j + 1) 'from the hole to the next hole
+'		ElseIf j = recNumberOfHoles - 1 Then
+'			m1 = FindSlope(j - 1, j) 'from the hole before to the hole
+'			m2 = FindSlope(j, 0) ' from the last hole to the first hole
+'		Else
+'			m1 = FindSlope(j - 1, j) 'from the hole before to the hole
+'			m2 = FindSlope(j, j + 1) 'from the hole to the next hole
+'		EndIf
+'	
+''		Print "m1:", m1
+''		Print "m2:", m2
+'		Print "Theta", Theta
+''		Print "beta Unchanged", GetAngle(m1, m2)
+'		If Theta = 0 Then
+'			beta = 90
+'		ElseIf (Theta = 90) Then
+'			beta = 180
+'		ElseIf (Theta = 270) Then
+'			beta = 0
+'		ElseIf (90 < Theta And Theta < 180) Then
+'	 		beta = GetAngle(m1, m2) + 180 ' add 180 because its obtuse
+'		ElseIf (270 < Theta And Theta < 360) Or (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
+'			beta = GetAngle(m1, m2) + 90
+'		Else
+'			Print "error, theta is defined as < 360"
+'			Pause
+'		EndIf
+'		
+'		Print "beta:", beta
+'				
+'		mu = (180 - beta) / 2
+'		
+'		Print "Mu:", mu
+'		
+'		rho = mu ' this is the place to experiment with the angle
+'		
+'		'Rotate PanelOffset to Theta		
+'		
+'		If Theta = 0 Then ' If this works, they are all the same so condense the if's!
+'			If j <> 0 Then
+'				RotatePanelOffset(Theta)
+'			EndIf
+'			P23 = (scancenter5) -Y(r) -U(Theta)
+'			'Go P23 - RotatedOffset
+'		ElseIf Theta = 90 Then
+'			If j <> 0 Then
+'				RotatePanelOffset(Theta)
+'			EndIf
+'			P23 = (scancenter5) -Y(r) -U(Theta)
+'			'Go P23 - RotatedOffset
+'		ElseIf Theta = 180 Then
+'			If j <> 0 Then
+'				RotatePanelOffset(Theta)
+'			EndIf
+'			P23 = (scancenter5) -Y(r) -U(Theta)
+'			'Go P23 - RotatedOffset
+'		ElseIf Theta = 270 Then
+'			If j <> 0 Then
+'				RotatePanelOffset(Theta)
+'			EndIf
+'			P23 = (scancenter5) -Y(r) -U(Theta)
+'			'Go P23 - RotatedOffset
+'		ElseIf (0 < Theta And Theta < 90) Then
+'			If j <> 0 Then
+'				RotatePanelOffset(Theta)
+'			EndIf
+'			
+'			phi = rho + Theta
+'			RotatePanelOffset(phi)
+'			Print "phi:", phi
+'            P23 = (scancenter5) -Y(r) -U(phi)
+'            
+'			'calculate and compensate for the dy that the rho rotation caused	
+'			dy = r - (r * Cos(DegToRad(rho)))
+'			P23 = P23 +Y(dy)
+'			
+'			'calculate and compensate for the dx that the rho rotation caused
+'            P23 = P23 -X(dx)
+'
+'		ElseIf (90 < Theta And Theta < 180) Then
+'			If j <> 0 Then
+'				RotatePanelOffset(Theta)
+'			EndIf
+'		ElseIf (180 < Theta And Theta < 270) Then
+'			If j <> 0 Then
+'				RotatePanelOffset(Theta)
+'			EndIf
+'		ElseIf (270 < Theta And Theta < 360) Then
+'			If j <> 0 Then
+'				RotatePanelOffset(Theta)
+'			EndIf
+'		Else
+'			Print "Error, theta is greater than 360"
+'		EndIf
+'
+'		If j = 0 Then
+'		' We find the theta offset using the laser scanner. We use the position of the
+'		'hole walls and derive theta offset 
+'				Go P23 - RotatedOffset
+'				ChangeProfile("00")
+'				RightOffset = GetLaserMeasurement("03")
+'				LeftOffset = GetLaserMeasurement("04")
+'				
+'				thetaOffset = RadToDeg(Asin((RightOffset + LeftOffset) / (2 * r)))
+'				Print "thetaOffset: ", thetaOffset
+'				
+'				If Abs(thetaOffset) > 3 Then
+'					Print "thetaoffset it more than 3 deg"
+'					Pause
+'				EndIf
+'				'thetaoffset is calculated with wrong sign
+'				PanelOffset = PanelOffset -U(thetaOffset)
+'				FindPickUpError()
+'				Print "PanelOffset:", PanelOffset
+'				RotatePanelOffset(Theta)
+'				'P23 = P23 - RotatedOffset
+'		EndIf
+'	
+'		Go P23 - RotatedOffset
+'		Print "j:", j
+'		Print " position:", P23
+'		
+'		If HoleInspect = True Then
+'			MeasureInsertDepth()
+'		Else
+'		'switch to correct laser Profile
+'			ChangeProfile("07")
+'			Print GetLaserMeasurement("01")
+'			If GetLaserMeasurement("01") > 35 Then ' There is already an insert so set skip flag
+'				PanelArray(j, SkipFlagColumn) = 1
+'			EndIf
+'		EndIf
+'		
+'		Pause
+'Next
+'
+''	PrintPassFailArray()
+''	PrintInspectionArray()
+'	PrintPanelArray()
+'	
+'	UnpackInspectionArrays()
+'		
+'	SystemStatus = MovingPanel
+'	Go ScanCenter3 ' Collision Avoidance Waypoint
+'	
+'Fend
 #include "Globals.INC"
 
 Function InspectPanel(HoleInspect As Boolean)
 	'	HoleInspect As Boolean
-	
+
 	Go ScanCenter3 ' Collision Avoidance Waypoint	
-	
+
 	SystemStatus = InspectingPanel
-	
+
 	Integer k, j
 	Real beta, mu, m1, m2, r1, phi, rho
 	Real y1, y2, y3, dy, dx, deltaRotX, deltaRotY
 	Real RightOffset, LeftOffset
-	
+
   	
 	GetThetaR() 'get first r and theta
 '	FindPickUpError()
 	PanelArrayIndex = 0
-	
+
 	Redim InspectionArray(22, 1) ' Make the arrays big enough to fit all the panels
 	Redim PassFailArray(22, 1)
-	
-	recInsertDepth = .079
-	
+
+'	recInsertDepth = .079
+
 	For j = 0 To recNumberOfHoles - 1 'k is the hole # we are on
-		
+
 		If j <> 0 Then
 			IncrementIndex()
 			GetThetaR()
 		EndIf
-		
+
 		If r = 0 Then
 			Print "r=0"
 			Pause
 		EndIf
-		
+
 		Print "r:", r
 
 		If j = 0 Then ' Find the slopes of the lines that connect the holes
@@ -46,36 +231,41 @@ Function InspectPanel(HoleInspect As Boolean)
 			m1 = FindSlope(j - 1, j) 'from the hole before to the hole
 			m2 = FindSlope(j, j + 1) 'from the hole to the next hole
 		EndIf
-	
+
 '		Print "m1:", m1
 '		Print "m2:", m2
 		Print "Theta", Theta
 '		Print "beta Unchanged", GetAngle(m1, m2)
 		If Theta = 0 Then
-			beta = 90
+			beta = 180
+			mu = 0
 		ElseIf (Theta = 90) Then
 			beta = 180
+			mu = 0
 		ElseIf (Theta = 270) Then
-			beta = 0
-		ElseIf (90 < Theta And Theta < 180) Then
-	 		beta = GetAngle(m1, m2) + 180 ' add 180 because its obtuse
-		ElseIf (270 < Theta And Theta < 360) Or (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
+			beta = 180
+			mu = 0
+		ElseIf (270 < Theta And Theta < 360) Or (90 < Theta And Theta < 180) Then
+	 		beta = GetAngle(m1, m2) + 90 ' add 180 because its obtuse
+			mu = (180 - beta) / 2
+		ElseIf (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
 			beta = GetAngle(m1, m2) + 90
+			mu = (180 - beta) / 2
 		Else
 			Print "error, theta is defined as < 360"
 			Pause
 		EndIf
 		
 		Print "beta:", beta
-				
-		mu = (180 - beta) / 2
-		
+
+'		mu = (180 - beta) / 2
+
 		Print "Mu:", mu
-		
+
 		rho = mu ' this is the place to experiment with the angle
-		
+
 		'Rotate PanelOffset to Theta		
-		
+
 		If Theta = 0 Then ' If this works, they are all the same so condense the if's!
 			If j <> 0 Then
 			RotatePanelOffset(Theta)
@@ -100,40 +290,43 @@ Function InspectPanel(HoleInspect As Boolean)
 			EndIf
 			P23 = (scancenter5) -Y(r) -U(Theta)
 			'Go P23 - RotatedOffset
-		ElseIf (0 < Theta And Theta < 90) Then
+		ElseIf (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
 			If j <> 0 Then
 				RotatePanelOffset(Theta)
 			EndIf
-			
-			phi = rho + Theta
+
+			phi = Theta + rho
 			RotatePanelOffset(phi)
 			Print "phi:", phi
             P23 = (scancenter5) -Y(r) -U(phi)
-			
+
 			dy = r - (r * Cos(DegToRad(rho)))
 			P23 = P23 +Y(dy)
-			
+
 	       	dx = r * Sin(DegToRad(rho))
             P23 = P23 -X(dx)
 
-		ElseIf (90 < Theta And Theta < 180) Then
+		ElseIf (90 < Theta And Theta < 180) Or (270 < Theta And Theta < 360) Then
 			If j <> 0 Then
 				RotatePanelOffset(Theta)
 			EndIf
-		ElseIf (180 < Theta And Theta < 270) Then
-			If j <> 0 Then
-				RotatePanelOffset(Theta)
-			EndIf
-		ElseIf (270 < Theta And Theta < 360) Then
-			If j <> 0 Then
-				RotatePanelOffset(Theta)
-			EndIf
+
+			phi = Theta - rho
+			RotatePanelOffset(phi)
+			Print "phi:", phi
+            P23 = (scancenter5) -Y(r) -U(phi)
+
+			dy = r - (r * Cos(DegToRad(rho)))
+			P23 = P23 +Y(dy)
+
+	       	dx = r * Sin(DegToRad(rho))
+            P23 = P23 +X(dx)
 		Else
 			Print "Error, theta is greater than 360"
 		EndIf
 
 		If j = 0 Then
-		' We find the theta off set using the laset scanner. We use the position of the
+		' We find the theta offset using the laset scanner. We use the position of the
 		'hole walls and derive theta offset 
 				Go P23 - RotatedOffset
 				ChangeProfile("00")
@@ -143,20 +336,21 @@ Function InspectPanel(HoleInspect As Boolean)
 '				Print "RightOffset: ", RightOffset
 '				Print "LeftOffset: ", LeftOffset
 				Print "thetaOffset: ", thetaOffset
-				
+
 				If Abs(thetaOffset) > 3 Then
-					Print "thetaoffset it more than 3 deg"
+					Print "thetaoffset is more than 3 deg"
 					Pause
 				EndIf
-				'thetaoffset is calculated with wrong sign
+
 				PanelOffset = PanelOffset -U(thetaOffset)
 				FindPickUpError()
 				Print "PanelOffset:", PanelOffset
 				RotatePanelOffset(Theta)
-				'P23 = P23 - RotatedOffset
 		EndIf
-	
-		Go P23 - RotatedOffset
+		
+		Print "RotatedOffset:", RotatedOffset
+		P23 = P23 - RotatedOffset
+		Go P23
 		Print "j:", j
 		Print " position:", P23
 		If HoleInspect = True Then
@@ -170,6 +364,10 @@ Function InspectPanel(HoleInspect As Boolean)
 			EndIf
 		EndIf
 		
+		RightOffset = GetLaserMeasurement("03")
+		LeftOffset = GetLaserMeasurement("04")
+		Print "Xerror:", (RightOffset + LeftOffset) /2
+		
 		Pause
 Next
 
@@ -177,12 +375,11 @@ Next
 '	PrintPassFailArray()
 '	PrintInspectionArray()
 	PrintPanelArray()
-	
+
 	UnpackInspectionArrays()
-		
+
 	SystemStatus = MovingPanel
 	Go ScanCenter3 ' Collision Avoidance Waypoint
-	
 Fend
 Function MeasureInsertDepth()
 	
@@ -422,9 +619,9 @@ Function RotatePanelOffset(angle As Real)
 		
 		'Compute the rotated X,Y and U PanelOffset components
 		RotatedOffset = RotatedOffset :X(CX(PanelOffset) * Cos(DegToRad(angle)) + CY(PanelOffset) * Sin(DegToRad(angle)))
-		Print "	RotatedOffset:", RotatedOffset
+'		Print "	RotatedOffset:", RotatedOffset
 		RotatedOffset = RotatedOffset :Y(CX(PanelOffset) * Sin(DegToRad(angle)) + CY(PanelOffset) * Cos(DegToRad(angle)))
-		Print "	RotatedOffset:", RotatedOffset
+'		Print "	RotatedOffset:", RotatedOffset
 		RotatedOffset = RotatedOffset :U(CU(PanelOffset))
 		Print "	RotatedOffset:", RotatedOffset
 Fend

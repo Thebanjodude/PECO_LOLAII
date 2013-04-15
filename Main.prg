@@ -38,7 +38,7 @@ Do While True
 '		PopPanel() ' Go to input magazine and pick up a panel
 		FindPickUpError()
 		DerivethetaR()
-		InspectPanel(Preinspection) 'Look for pre-existing inserts, set flags
+'		InspectPanel(Preinspection) 'Look for pre-existing inserts, set flags
 		
 '		DropOffPanel()
 '		HotStakePanel() ' Take panel to hot stake machine; install all inserts
@@ -72,10 +72,15 @@ Loop
 Fend
 Function PowerOnSequence()
 	
+	retry:
+'	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
+	
 	Motor On
-	Power High
+	Power Low
 	Speed 20
 	Accel 50, 50
+	
+	Print "ready"
 
 	' define the connection to the LASER
     SetNet #203, "10.22.251.171", 7351, CR, NONE, 0
@@ -90,7 +95,7 @@ Function PowerOnSequence()
 	Xqt 7, InMagControl, Normal ' First state is lowering 
 	Xqt 8, OutMagControl, Normal ' First state is raising 
 	
-	' Jump ScanCenter LimZ zLimit ' Go home
+	' go ScanCenter LimZ zLimit ' Go home
 	
 Fend
 Function SetInitialValues()
@@ -143,9 +148,7 @@ Function CheckInitialParameters()
 	If ParamEntryMissing = True Then
 		erParamEntryMissing = True
 		stackLightYelCC = True
-		stackLightAlrmCC = True ' I want to use : On (AlertSiren), 1, 1 because it's non-blocking
-		Wait sirenOnTimeYellow
-		stackLightAlrmCC = False
+		stackLightAlrmCC = True
 	Else
 		erParamEntryMissing = False
 		stackLightYelCC = False
@@ -158,7 +161,7 @@ Function HotStakeTempRdy() As Boolean
 	' Make 5% an adjustable parameter via the hmi l8r
 	
 	'Is the current temp within the tolerance to start a job?
-	If (recTemp - 2 < heatStakeCurrentTemp And heatStakeCurrentTemp < recTemp + 2) Then
+	If Abs(recTemp - heatStakeCurrentTemp) < Abs(heatStakeTempTolerance) Then
 		HotStakeTempRdy = True
 		erHeatStakeTemp = False
 		stackLightYelCC = False
@@ -167,13 +170,53 @@ Function HotStakeTempRdy() As Boolean
 		erHeatStakeTemp = True
 		stackLightYelCC = True
 		stackLightAlrmCC = True ' Do we want to siren on when its heating up? Doesnt make sense...
-		Wait sirenOnTimeYellow
-		stackLightAlrmCC = False
 	EndIf
 	
 	HotStakeTempRdy = True ' fake for testing
 
 Fend
+Function PowerOnHomeCheck() As Boolean
 	
+'TODO:check for leftyness and rightness!!
+	
+	Real distx, disty, distz, distance
+	#define startUpDistMax 150 '+/-300mm from home position
+	#define startUpHeight 25 ' +/-10mm from home position
+	
+	distx = Abs(CX(CurPos) - CX(Scancenter3))
+	disty = Abs(CY(CurPos) - CY(Scancenter3))
+	distz = Abs(CZ(CurPos) - CZ(Scancenter3))
+	Print "x", distx
+	Print "y", disty
+	Print "z", distz
+	
+	distance = Sqr(distx * distx + disty * disty) ' How the hell do you square numbers?
+'	Print "distance", distance
+
+	If distance > startUpDistMax Then
+		erRobotNotAtHome = True
+		PowerOnHomeCheck = False
+		Print "Distance NOT OK,distance"
+	ElseIf Abs(distz) > startUpHeight Then
+		erRobotNotAtHome = True
+		PowerOnHomeCheck = False
+		Print "Distance NOT OK,z"
+	Else
+		erRobotNotAtHome = False
+		PowerOnHomeCheck = True
+		Print "Distance OK"
+	EndIf
+	
+	If PowerOnHomeCheck = False Then
+		Motor On
+		SFree 1, 2, 3, 4
+		Print "move robot to home position"
+'		Do Until UserAck = True
+'			Wait .1
+'		Loop
+	Pause
+	EndIf
+		
+Fend
 
 

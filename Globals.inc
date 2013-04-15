@@ -62,12 +62,11 @@ Global Boolean stackLightRedCC, stackLightYelCC, stackLightGrnCC, stackLightAlrm
 Global Boolean airPressHigh, airPressLow
 Global Boolean backInterlock, frontInterlock, leftInterlock, rightInterlock
 Global Boolean heartBeat
-Global Real sirenOnTimeYellow, sirenOnTimeRed
 
 'Hot Stake and Flash Removal Global Vars
 Global Real PanelArray(25, 2)
 Global Real Theta, r
-Global Real AnvilZlimit, heatStakeCurrentTemp
+Global Real AnvilZlimit, heatStakeCurrentTemp, heatStakeTempTolerance
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean flashMtr, flashCyc, FlashPnlPrsnt, debrisMtr
@@ -99,7 +98,7 @@ Global Boolean erLaserScanner, erDCPower, erDCPowerHeatStake, erHeatStakeTemp
 Global Boolean erHeatStakeBreaker, erBowlFeederBreaker, erInMagBreaker
 Global Boolean erOutMagBreaker, erFlashBreaker, erDebrisRemovalBreaker
 Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180
-Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing
+Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing, erRobotNotAtHome
 Global Boolean RecEntryMissing, ParamEntryMissing
 
 ' Error Code array indexes, from IOT Excel MessageDB

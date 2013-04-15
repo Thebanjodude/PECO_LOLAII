@@ -40,7 +40,7 @@ Function PushPanel()
 	If PanelPassedInspection = False Then
 	'	Jump PanelFailDropOffPoint LimZ Zlimit
 		suctionCups = False
-		Wait .1 ' Give time for panel to relese from suction cups
+		Wait 1 ' Give time for panel to relese from suction cups
 		erPanelFailedInspection = True
 		jobPauseFlag = True 'Set flag
 		SystemPause()
@@ -53,7 +53,7 @@ Function PushPanel()
 		
 '		WaitSig OutMagDropOffSignal
 		
-		Jump OutputMagCenter LimZ zLimit Sense Sw(outMagIntlockH) = True
+		Jump OutputMagCenter -Z(recPanelThickness) LimZ zLimit Sense Sw(outMagIntlockH) = True
 		
 		If JS = False Then
 			suctionCups = False
@@ -83,7 +83,6 @@ Function FindPickUpError()
 	
 Real d1, d2
 Integer i
-
 
 Speed 10 'slow it down so we get a better reading
 SpeedS 50
@@ -117,7 +116,7 @@ SpeedS 50
 	Move (ScanCenterLong - PanelOffset) :U(CU(CurPos)) CP Till Sw(laserGo)
 	d2 = CY(CurPos)
 	On (laserP1)
-	yOffset = (d2 - d1) /2
+	yOffset = (d2 - d1) /2 ' I dont think its /2
 	
 '	Print "yOffset", yOffset
 	
@@ -126,7 +125,7 @@ SpeedS 50
 	
 	ChangeProfile("00")
 	Move (ScanCenter3 - PanelOffset) :U(CU(CurPos))
-	Go ScanCenter3 - PanelOffset +U(90) CP  ' Use CP so it's not jumpy
+	Go (ScanCenter3 - PanelOffset) +U(90) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
@@ -147,14 +146,14 @@ SpeedS 50
 
 	ChangeProfile("00")
 	Move (ScanCenter3 - PanelOffset) :U(CU(CurPos))
-	Go ScanCenter3 - PanelOffset +U(270) CP  ' Use CP so it's not jumpy
+	Go (ScanCenter3 - PanelOffset) +U(270) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
 	Move (ScanCenterShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(laserGo)
 	d2 = CY(CurPos)
 
-	xOffset = -(d2 - d1) / 2
+	xOffset = (d2 - d1) /2  ' I dont think its /2P23 - RotatedOffset
 	
 '	Print "xOffset", xOffset
 	
@@ -166,8 +165,7 @@ SpeedS 50
 	
 	PanelOffset = PanelOffset :X(xOffset) :Y(yOffset) 'update offset point
 	Print "PanelOffset:", PanelOffset
-		
-	
+			
 Fend
 
 	
