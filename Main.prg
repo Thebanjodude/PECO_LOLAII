@@ -43,7 +43,7 @@ Do While True
 '		DropOffPanel()
 '		HotStakePanel() ' Take panel to hot stake machine; install all inserts
 '		FlashRemoval() ' Take panel to flash removal station, remove all flash as required
-'		InspectPanel(Inspection) ' Take Panel to scanner 
+		InspectPanel(Inspection) ' Take Panel to scanner 
 '		PushPanel() ' Take Panel to output magazine and drop it off
 '		Pause
 	EndIf
