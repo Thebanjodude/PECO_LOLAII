@@ -275,17 +275,6 @@ Loop
 	EResume
 
 Fend
-Function SystemPause() ' We might just be able to use the pause command instead of this function
-	Halt main
-	Halt InMagControl
-	Halt OutMagControl
-	SystemStatus = SystemPaused
-Fend
-Function SystemUnPause() ' This will become obs if systempause is not needed
-    Resume main
-	Resume InMagControl
-	Resume OutMagControl
-Fend
 Function StateOfHealth()
 
 	homePositionStatus = GetSOHStatus(1, HomePositionStatusBitNum, HomePositionStatusMask)

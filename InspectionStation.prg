@@ -20,21 +20,19 @@ Function InspectPanel(HoleInspect As Boolean)
 	Redim InspectionArray(22, 1) ' Make the arrays big enough to fit all the panels
 	Redim PassFailArray(22, 1)
 
-	recInsertDepth = .165
+	recInsertDepth = .165 ' hardcode for testing
 
 	For j = 0 To recNumberOfHoles - 1 'k is the hole # we are on
 
 		If j <> 0 Then
 			IncrementIndex()
-			GetThetaR()
+			GetThetaR() ' get the next r and theta
 		EndIf
 
 		If r = 0 Then
 			Print "r=0"
 			Pause
 		EndIf
-
-		Print "r:", r
 
 		If j = 0 Then ' Find the slopes of the lines that connect the holes
 			m1 = FindSlope(recNumberOfHoles - 1, j) 'the last hole to the hole
@@ -47,10 +45,6 @@ Function InspectPanel(HoleInspect As Boolean)
 			m2 = FindSlope(j, j + 1) 'from the hole to the next hole
 		EndIf
 
-'		Print "m1:", m1
-'		Print "m2:", m2
-		Print "Theta", Theta
-'		Print "beta Unchanged", GetAngle(m1, m2)
 		If Theta = 0 Then
 			beta = 180
 			mu = 0
@@ -70,12 +64,6 @@ Function InspectPanel(HoleInspect As Boolean)
 			Print "error, theta is defined as < 360"
 			Pause
 		EndIf
-		
-		Print "beta:", beta
-
-'		mu = (180 - beta) / 2
-
-		Print "Mu:", mu
 
 		rho = mu ' this is the place to experiment with the angle
 
@@ -83,28 +71,24 @@ Function InspectPanel(HoleInspect As Boolean)
 
 		If Theta = 0 Then ' If this works, they are all the same so condense the if's!
 			If j <> 0 Then
-			RotatePanelOffset(Theta)
+				RotatePanelOffset(Theta)
 			EndIf
 			P23 = (scancenter5) -Y(r) -U(Theta)
-			'Go P23 - RotatedOffset
 		ElseIf Theta = 90 Then
 			If j <> 0 Then
-			RotatePanelOffset(Theta)
+				RotatePanelOffset(Theta)
 			EndIf
 			P23 = (scancenter5) -Y(r) -U(Theta)
-			'Go P23 - RotatedOffset
 		ElseIf Theta = 180 Then
 			If j <> 0 Then
-			RotatePanelOffset(Theta)
+				RotatePanelOffset(Theta)
 			EndIf
 			P23 = (scancenter5) -Y(r) -U(Theta)
-			'Go P23 - RotatedOffset
 		ElseIf Theta = 270 Then
 			If j <> 0 Then
-			RotatePanelOffset(Theta)
+				RotatePanelOffset(Theta)
 			EndIf
 			P23 = (scancenter5) -Y(r) -U(Theta)
-			'Go P23 - RotatedOffset
 		ElseIf (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
 			If j <> 0 Then
 				RotatePanelOffset(Theta)
@@ -116,10 +100,8 @@ Function InspectPanel(HoleInspect As Boolean)
             P23 = (scancenter5) -Y(r) -U(phi)
 
 			dy = r - (r * Cos(DegToRad(rho)))
-			P23 = P23 +Y(dy)
-
 	       	dx = r * Sin(DegToRad(rho))
-            P23 = P23 -X(dx)
+	       	P23 = P23 -X(dx) +Y(dy)
 
 		ElseIf (90 < Theta And Theta < 180) Or (270 < Theta And Theta < 360) Then
 			If j <> 0 Then
@@ -132,10 +114,9 @@ Function InspectPanel(HoleInspect As Boolean)
             P23 = (scancenter5) -Y(r) -U(phi)
 
 			dy = r - (r * Cos(DegToRad(rho)))
-			P23 = P23 +Y(dy)
-
 	       	dx = r * Sin(DegToRad(rho))
-            P23 = P23 +X(dx)
+            P23 = P23 +X(dx) +Y(dy)
+            
 		Else
 			Print "Error, theta is greater than 360"
 		EndIf
@@ -148,8 +129,7 @@ Function InspectPanel(HoleInspect As Boolean)
 				RightOffset = GetLaserMeasurement("03")
 				LeftOffset = GetLaserMeasurement("04")
 				thetaOffset = RadToDeg(Asin((RightOffset + LeftOffset) / (2 * r)))
-'				Print "RightOffset: ", RightOffset
-'				Print "LeftOffset: ", LeftOffset
+				
 				Print "thetaOffset: ", thetaOffset
 
 				If Abs(thetaOffset) > 3 Then
@@ -185,10 +165,6 @@ Function InspectPanel(HoleInspect As Boolean)
 
 		EndIf
 		
-'		RightOffset = GetLaserMeasurement("03")
-'		LeftOffset = GetLaserMeasurement("04")
-'		Print "Xerror:", (RightOffset + LeftOffset) /2
-		
 		Pause
 Next
 
@@ -214,7 +190,6 @@ Function MeasureInsertDepth()
 	InspectionArray(PanelArrayIndex, RightSpotFace) = MicroMetersToInches(GetLaserMeasurement("11"))
 	PassFailArray(PanelArrayIndex, RightSpotFace) = PassOrFail(InspectionArray(PanelArrayIndex, RightSpotFace))
 	PrintInspectionArray()
-
 	
 Fend
 Function MicroMetersToInches(um As Real) As Real
@@ -228,7 +203,7 @@ Function PassOrFail(measurement As Real) As Boolean 'Pass is True
 	Print DepthInsertError
 	
 ' TODO: make the tolerance a variable and make it adjustable via the hmi, we have .006 but theirs is more loose	
-	If (DepthInsertError < 0.006) Then
+	If (DepthInsertError < insertDepthTolerance) Then
 		PassOrFail = True ' Passed		
 		PanelPassedInspection = True
 	Else
@@ -251,61 +226,16 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
 		Print "Attempted Open TCP port to HMI"
 	EndIf
 	
-	Print #203, "PW" + "," + ProfileNumber$
+	Print #203, "PW" + "," + ProfileNumber$ ' Per laser scanner manual this is how you change profiles
 
-	Wait .55
+	Wait .35 ' wait for laser scanner to receive the command. This may be able to be shortened up
 	
     i = ChkNet(203)
     If i > 0 Then
     	Read #203, response$, i
     	NumTokens = ParseStr(response$, Tokens$(), ",")
-  '  	Print Tokens$(0)
 	EndIf
 	
-Fend
-Function ChangeOffset(InsertDepth$ As String) 'laser offset is in micrometers
-    
-    Integer i, NumTokens, j
-    String Tokens$(0)
-    String response$, command$
-    
-'    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
-    
-	If ChkNet(203) < 0 Then ' If port is not open
-		OpenNet #203 As Client
-		Print "Attempted Open TCP port to HMI"
-	EndIf
-		   
-	ChangeProfile("01")
-	Wait .25
-	
-	command$ = "SW,OF,1,12," + InsertDepth$
-	Print #203, command$
-	Wait .25
-	
-    i = ChkNet(203)
-    If i > 0 Then
-    	Read #203, response$, i
-    	NumTokens = ParseStr(response$, Tokens$(), ",")
-    	Print response$
-   EndIf
-   
-   ChangeProfile("02")
-   Wait .25
-   
-	command$ = "SW,OF,1,11," + InsertDepth$
-	Print command$
-	Print #203, command$
-	
-	Wait .25
-	
-    i = ChkNet(203)
-    If i > 0 Then
-    	Read #203, response$, i
-    	NumTokens = ParseStr(response$, Tokens$(), ",")
-    	Print response$
-   EndIf
-
 Fend
 Function GetLaserMeasurement(OutNumber$ As String) As Real
                 
@@ -411,6 +341,7 @@ Integer n
 
 For n = 0 To recNumberOfHoles - 1
 		
+	'comment this out during integration
 	If PassFailArray(n, LeftSpotFace) = False Or PassFailArray(n, RightSpotFace) = False Then
 		Print "hole " + Str$(n) + " failed!"
 	EndIf
@@ -419,11 +350,11 @@ Next
 	
 Fend
 Function PickUpPanel
-	Off (15)
+	Off (15) 'off (suctionCups)
 	Go ScanCenter3 :U(CU(CurPos))
 	Go PrePickUp2 - PickUpOffset
 	Go PickUp2 - PickUpOffset
-	On (15)
+	On (15) 'on (suctionCups)
 	Wait 1
 	Go PrePickup2 - PickUpOffset
 	Go ScanCenter3 :U(CU(CurPos))
@@ -433,7 +364,7 @@ Fend
 Function DropOffPanel
 	Go ScanCenter3 :U(CU(CurPos))
 	Go DropOff
-	Off (15)
+	Off (15) 'off(suctionCups)
 	Wait 2
 	Go ScanCenter3
 	Pause

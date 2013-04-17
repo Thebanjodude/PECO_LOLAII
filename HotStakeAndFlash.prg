@@ -153,7 +153,7 @@ Next
 Fend
 Function DerivethetaR()
 	
-Integer CoordIndex, i
+Integer i ' index for loop
 
 GetPanelCoords() ' load up the array with all the corrdinates
 	
@@ -273,6 +273,8 @@ Function InTomm(mm As Real) As Real
 	InTomm = mm * 25.4
 Fend
 Function GetPanelCoords()
+	
+' this will go away during integration
 	
 '88553
 recNumberOfHoles = 18

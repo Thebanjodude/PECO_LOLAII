@@ -12,7 +12,7 @@ Global Real PanelCordinates(22, 1)
 #define Inspection True
 
 'Commands from HMI
-Global Boolean jobDone, jobPauseFlag
+Global Boolean jobDone
 Global Integer jobNumPanels, jobNumPanelsDone
 Global Boolean backInterlockACKBtn, frontInterlockACKBtn
 Global Boolean inMagGoHomeBtn, inMagIntLockAckBtn, inMagLoadedBtn
@@ -47,7 +47,7 @@ Global Boolean outMagMtrCC, outMagMtrDirCC
 'Inspection Station Global Vars
 Global Boolean PanelPassedInspection ' Indicates if the panel passes inspection
 Global Integer x, z ' Increment for P(x) to define edge and num of holes found
-Global Real CurrentThetaHere, thetaAvg, rAvg
+Global Real CurrentThetaHere, insertDepthTolerance
 Global Boolean PassFailArray(0, 0)
 Global Real InspectionArray(0, 0)
 #define RightSpotFace 0
@@ -83,9 +83,8 @@ Global Boolean flashMtrCC, flashCycCC, debrisMtrCC
 #define YCoord 1
 Global Integer recNumberOfHoles, recInsertType
 Global Boolean recFlashRequired
-Global Real recZDropOff, recInsertDepth, recPanelThickness
-Global Real recTemp, recMinorDim, recMajorDim, recBossHeight
-Global Real hsProbeTemp
+Global Real recInsertDepth, recPanelThickness
+Global Real recTemp, hsProbeTemp
 
 'Error Vars
 Global Boolean erPanelFailedInspection, erFrontSafetyFrameOpen, erBackSafetyFrameOpen

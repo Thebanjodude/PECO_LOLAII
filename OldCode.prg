@@ -1692,3 +1692,48 @@
 '	Loop
 'fend
 
+'Function ChangeOffset(InsertDepth$ As String) 'laser offset is in micrometers
+'    
+'    Integer i, NumTokens, j
+'    String Tokens$(0)
+'    String response$, command$
+'    
+''    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
+'    
+'	If ChkNet(203) < 0 Then ' If port is not open
+'		OpenNet #203 As Client
+'		Print "Attempted Open TCP port to HMI"
+'	EndIf
+'		   
+'	ChangeProfile("01")
+'	Wait .25
+'	
+'	command$ = "SW,OF,1,12," + InsertDepth$
+'	Print #203, command$
+'	Wait .25
+'	
+'    i = ChkNet(203)
+'    If i > 0 Then
+'    	Read #203, response$, i
+'    	NumTokens = ParseStr(response$, Tokens$(), ",")
+'    	Print response$
+'   EndIf
+'   
+'   ChangeProfile("02")
+'   Wait .25
+'   
+'	command$ = "SW,OF,1,11," + InsertDepth$
+'	Print command$
+'	Print #203, command$
+'	
+'	Wait .25
+'	
+'    i = ChkNet(203)
+'    If i > 0 Then
+'    	Read #203, response$, i
+'    	NumTokens = ParseStr(response$, Tokens$(), ",")
+'    	Print response$
+'   EndIf
+'
+'Fend
+

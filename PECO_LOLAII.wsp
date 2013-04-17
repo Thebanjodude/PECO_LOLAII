@@ -1,37 +1,37 @@
-ENVT0100,LM:2013/04/16 23:30:12:555,DS:0000002480,CS:20754,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="SystemMonitor.prg"
+ENVT0100,LM:2013/04/17 21:49:25:624,DS:0000002478,CS:22080,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InspectionStation.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=306
-		nTop=138
-		nWidth=1084
-		nHeight=596
+		nLeft=305
+		nTop=40
+		nWidth=1177
+		nHeight=682
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=43
-		nTop=128
-		nWidth=1586
-		nHeight=696
+		nLeft=36
+		nTop=66
+		nWidth=1585
+		nHeight=693
 	}
 }
 ProgramFile3 {
 	sName="IOTable.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
 		nLeft=153
 		nTop=74
-		nWidth=1239
-		nHeight=734
+		nWidth=1317
+		nHeight=731
 	}
 }
 ProgramFile4 {
@@ -47,7 +47,7 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="OldCode.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=521
@@ -69,8 +69,8 @@ ProgramFile6 {
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=1
 	Window {
 		nLeft=163
 		nTop=37
@@ -83,22 +83,22 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=66
-		nTop=122
-		nWidth=1431
-		nHeight=725
+		nLeft=54
+		nTop=39
+		nWidth=1430
+		nHeight=722
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
 		nLeft=18
 		nTop=32
-		nWidth=1320
-		nHeight=586
+		nWidth=1319
+		nHeight=582
 	}
 }
 nPointFileCount=1

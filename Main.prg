@@ -10,7 +10,7 @@ Do While True
 
 	SystemStatus = Idle
 	
-	SetInitialValues()
+	SetInitialValues() ' get rid of this during integration
 	CheckInitialParameters() ' Has the hmi has given us all the parameters we need to do a job?
 		
 '	Print "jobStart ", jobStart
@@ -21,8 +21,6 @@ Do While True
 	RecEntryMissing = False
 	ParamEntryMissing = False
 	stackLightGrnCC = False
-	
-	Move scancenter3 :U(CU(CurPos))
 	
 	Go PickUp
 			
@@ -66,7 +64,7 @@ Loop
 		Print "Error AxisNumber:", ctrlrErrAxisNumber
 		Print "Error Number:", ctrlrErrorNum
 		
-		SystemPause()
+		Pause
 	EResume
 		
 Fend
@@ -95,7 +93,8 @@ Function PowerOnSequence()
 	Xqt 7, InMagControl, Normal ' First state is lowering 
 	Xqt 8, OutMagControl, Normal ' First state is raising 
 	
-	' go ScanCenter LimZ zLimit ' Go home
+	Move scancenter3 :U(CU(CurPos)) ' go home
+	Move scancenter3 ' go home
 	
 Fend
 Function SetInitialValues()
@@ -115,9 +114,7 @@ Function CheckInitialParameters()
 
 	'add in check that panelarray is nonzero
 	
-	If recBossHeight = 0.0 Or recInsertDepth = 0.0 Then
-		RecEntryMissing = True
-	ElseIf recMajorDim = 0.0 Or recMinorDim = 0.0 Or recZDropOff = 0.0 Then
+	If recInsertDepth = 0.0 Then
 		RecEntryMissing = True
 	ElseIf recInsertType = 0 Or recNumberOfHoles = 0 Then
 		RecEntryMissing = True
@@ -158,8 +155,6 @@ Function CheckInitialParameters()
 Fend
 Function HotStakeTempRdy() As Boolean
 	
-	' Make 5% an adjustable parameter via the hmi l8r
-	
 	'Is the current temp within the tolerance to start a job?
 	If Abs(recTemp - heatStakeCurrentTemp) < Abs(heatStakeTempTolerance) Then
 		HotStakeTempRdy = True
@@ -169,7 +164,7 @@ Function HotStakeTempRdy() As Boolean
 		HotStakeTempRdy = False ' Temperature is not in range
 		erHeatStakeTemp = True
 		stackLightYelCC = True
-		stackLightAlrmCC = True ' Do we want to siren on when its heating up? Doesnt make sense...
+		'stackLightAlrmCC = True ' Do we want to siren on when its heating up? Doesnt make sense...
 	EndIf
 	
 	HotStakeTempRdy = True ' fake for testing

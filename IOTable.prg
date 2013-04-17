@@ -975,9 +975,6 @@ Case "suctionCupsFV"
 Case "anvilZlimit"
     AnvilZlimit = Val(tokens$(1))
     Print "anvilZlimit:", AnvilZlimit
-Case "recBossHeight"
-    recBossHeight = Val(tokens$(1))
-    Print "recBossHeight:", recBossHeight
 Case "recFlashRequired"
     If tokens$(1) = "true" Then
         recFlashRequired = True
@@ -991,12 +988,6 @@ Case "recInsertDepth"
 Case "recInsertType"
     recInsertType = Val(tokens$(1))
     Print "recInsertType:", recInsertType
-Case "recMajorDim"
-    recMajorDim = Val(tokens$(1))
-    Print "recMajorDim:", recMajorDim
-Case "recMinorDim"
-    recMinorDim = Val(tokens$(1))
-    Print "recMinorDim:", recMinorDim
 Case "recNumberOfHoles"
     recNumberOfHoles = Val(tokens$(1))
     Redim PanelCordinates(recNumberOfHoles, 2)
@@ -1004,9 +995,6 @@ Case "recNumberOfHoles"
 Case "recTemp"
     recTemp = Val(tokens$(1))
     Print "recTemp:", recTemp
-Case "recZDropOff"
-    recZDropOff = Val(tokens$(1))
-    Print "recZDropOff:", recZDropOff
 Case "systemSpeed"
     SystemSpeed = Val(tokens$(1))
     Print "systemSpeed:", SystemSpeed

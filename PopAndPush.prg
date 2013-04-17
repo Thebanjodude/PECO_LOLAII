@@ -42,8 +42,7 @@ Function PushPanel()
 		suctionCups = False
 		Wait 1 ' Give time for panel to relese from suction cups
 		erPanelFailedInspection = True
-		jobPauseFlag = True 'Set flag
-		SystemPause()
+		Pause
 	Else
 		retry:
 		
@@ -61,7 +60,7 @@ Function PushPanel()
 			Jump ScanCenter LimZ zLimit ' Collision Avoidance Waypoint
 '			Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel
 		Else
-			GoTo retry
+			GoTo retry ' interlock was opened during a jump
 		EndIf
 		
 		If jobNumPanelsDone = jobNumPanels Then
