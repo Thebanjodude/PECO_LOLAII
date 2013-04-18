@@ -1,104 +1,104 @@
-ENVT0100,LM:2013/04/17 21:49:25:624,DS:0000002478,CS:22080,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="InspectionStation.prg"
+ENVT0100,LM:2013/04/18 20:04:42:031,DS:0000002496,CS:23367,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InMagOutMagStateMachines.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=305
-		nTop=40
-		nWidth=1177
-		nHeight=682
+		nLeft=309
+		nTop=76
+		nWidth=1176
+		nHeight=678
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=36
-		nTop=66
-		nWidth=1585
-		nHeight=693
+		nLeft=-24
+		nTop=84
+		nWidth=1584
+		nHeight=684
 	}
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=153
-		nTop=74
-		nWidth=1317
-		nHeight=731
+		nLeft=193
+		nTop=35
+		nWidth=1315
+		nHeight=801
 	}
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=1
 	Window {
-		nLeft=31
-		nTop=5
-		nWidth=1107
-		nHeight=542
+		nLeft=470
+		nTop=180
+		nWidth=1106
+		nHeight=539
 	}
 }
 ProgramFile5 {
 	sName="OldCode.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=521
+		nLeft=281
 		nTop=19
-		nWidth=1055
-		nHeight=703
+		nWidth=1053
+		nHeight=699
 	}
 }
 ProgramFile6 {
 	sName="SystemMonitor.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=515
-		nTop=24
-		nWidth=1106
-		nHeight=756
+		nLeft=275
+		nTop=-3
+		nWidth=1105
+		nHeight=753
 	}
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=163
-		nTop=37
-		nWidth=1217
-		nHeight=693
+		nLeft=247
+		nTop=38
+		nWidth=1216
+		nHeight=689
 	}
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=54
-		nTop=39
-		nWidth=1430
-		nHeight=722
+		nLeft=62
+		nTop=51
+		nWidth=1429
+		nHeight=719
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=18
-		nTop=32
-		nWidth=1319
-		nHeight=582
+		nLeft=267
+		nTop=61
+		nWidth=1315
+		nHeight=575
 	}
 }
 nPointFileCount=1
@@ -136,10 +136,10 @@ RunWindow {
 IOLabelEditor {
 	bOpened=False
 	Window {
-		nLeft=160
-		nTop=106
-		nWidth=1039
-		nHeight=545
+		nLeft=252
+		nTop=52
+		nWidth=1035
+		nHeight=692
 	}
 	nWinState=0
 }

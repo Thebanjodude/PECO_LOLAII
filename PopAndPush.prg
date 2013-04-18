@@ -7,17 +7,17 @@ Function PopPanel()
 	
 retry:
 
-	Do Until inMagInterlock = False 'And hmiAck = True
+	Do Until inMagIntlock = False 'And hmiAck = True
 		Wait .1 ' wait for user to close inmaginterlock
 	Loop
 	
 '	WaitSig InMagPickUpSignal ' Wait for inmag to confirm a panel is ready to be picked up
 	
 	suctionCupsCC = True
-	Jump InputMagCenter LimZ zLimit Sense Sw(inMagInterlockH) = True
+	Jump InputMagCenter LimZ zLimit Sense Sw(inMagIntlockH) = True
 	
 	If JS = False Then ' Jump executed normally
-		Wait suckTime ' Allow time for cups to seal on panel
+		Wait suctionWaitTime ' Allow time for cups to seal on panel
 		SystemStatus = MovingPanel
 '		Jump ScanCenter LimZ zLimit ' Collision Avoidance Waypoint
 '		Signal InMagRobotClearSignal ' Give permission for input magazine to queue up next panel
@@ -52,7 +52,7 @@ Function PushPanel()
 		
 '		WaitSig OutMagDropOffSignal
 		
-		Jump OutputMagCenter -Z(recPanelThickness) LimZ zLimit Sense Sw(outMagIntlockH) = True
+		Jump OutputMagCenter -Z(recPanelThickness) LimZ zLimit Sense Sw(outMagIntH) = True
 		
 		If JS = False Then
 			suctionCups = False
@@ -90,7 +90,7 @@ SpeedS 50
 	Wait .25
 	
 	ChangeProfile("03")
-	Move ScanCenterLong - PanelOffset CP Till Sw(laserGo)
+	Move ScanCenterLong - PanelOffset CP Till Sw(LaserGo)
 	
 	If TillOn = False Then
 	'If we think we have a panel and we actually dotn have one then should re-pop a panel?
@@ -114,7 +114,6 @@ SpeedS 50
 	ChangeProfile("03")
 	Move (ScanCenterLong - PanelOffset) :U(CU(CurPos)) CP Till Sw(laserGo)
 	d2 = CY(CurPos)
-	On (laserP1)
 	yOffset = (d2 - d1) /2 ' I dont think its /2
 	
 '	Print "yOffset", yOffset

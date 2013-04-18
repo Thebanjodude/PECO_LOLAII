@@ -1,7 +1,7 @@
 ' System Global Vars and #defines
 Global Integer SystemSpeed, SystemAccel
-Global Real suckTime ' Time in seconds it takes for the EOAT to make a good suction on a panel
-Global Boolean suctionCups, suctionCupsCC
+Global Real suctionWaitTime ' Time in seconds it takes for the EOAT to make a good suction on a panel
+Global Boolean suctionCups, suctionCupsCC, holeDetected, maintMode
 Global Integer systemStatus ' Integer that tells opperator what state the sytem is in-see State tab in IOT
 Global Real zLimit ' the highest the EOAT can move without hitting periphials
 #define ScanSpeed 35 ' Percent Speed the arm moves during the scanning process
@@ -10,6 +10,7 @@ Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
 #define Preinspection False
 #define Inspection True
+Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo
 
 'Commands from HMI
 Global Boolean jobDone
@@ -27,7 +28,8 @@ Global Boolean rightInterlockACK, sftyFrmIlockAck
 
 ' Input Magazine Global Vars
 Global Boolean inMagGoHome, inMagLoaded, inMagPnlRdy, inMagMtr, inMagMtrDir ' DIO to run intput the magazine
-Global Boolean inMagLowerLim, inMagUpperLim, inMagInterlock, inMagIntLockAck
+Global Boolean inMagLowLim, inMagUpLim, inMagIntlock, inMagIntLockAck
+Global Boolean inMagLowLimN, inMagUpLimN
 Global Boolean InMagRobotClearSignal ' Signal robot is out of the way,OK to move Inmag
 Global Boolean InMagPickUpSignal ' Signal robot it can pick up a panel from inmag
 Global Real InMagTorqueLim
@@ -36,8 +38,8 @@ Global Boolean inMagMtrCC, inMagMtrDirCC
 
 ' Output Magazine Global Vars
 Global Boolean outMagGoHome, outMagUnloaded, OutputMagSignal, outMagMtr 'DIO to run the output magazine
-Global Boolean outMagPanelRdy, outMagMtrDir, outMagUpperLim
-Global Boolean outMagLowerLim, outMagInt, outMagIntLockAck
+Global Boolean outMagPanelRdy, outMagMtrDir, outMagUpLim, outMagUpLimN
+Global Boolean outMagLowLim, outMagLowLimN, outMagInt, outMagIntLockAck
 Global Real OutMagTorqueLim
 Global Boolean OutMagDropOffSignal ' Signal robot it can Drop Off a panel to outmag
 Global Boolean OutMagRobotClearSignal ' Signal robot is out of the way,OK to move outmag
@@ -54,13 +56,12 @@ Global Real InspectionArray(0, 0)
 #define LeftSpotFace 1
 
 'System Monitor Vars
-Global Boolean cbMonHeatStake, cbMonBowlFeder, cbMonInMag
-Global Boolean cbMonOutMag, cbMonFlashRmv, cbMonDebrisRmv
-Global Boolean dcPwrOk, cbMonPnumatic, cbMonSafety, cbMonPAS24vdc
+Global Boolean cbMonHeatStake, cbMonInMag, cbMonOutMag, cbMonDebrisRmv, cbMonSafety, cbMonPAS24vdc
 Global Boolean stackLightRed, stackLightYel, stackLightGrn, stackLightAlrm
 Global Boolean stackLightRedCC, stackLightYelCC, stackLightGrnCC, stackLightAlrmCC
 Global Boolean airPressHigh, airPressLow
-Global Boolean backInterlock, frontInterlock, leftInterlock, rightInterlock
+Global Boolean backIntlock1, frontIntlock1, leftIntlock1, rightIntlock
+Global Boolean backIntlock2, frontIntlock2, leftIntlock2
 Global Boolean heartBeat
 
 'Hot Stake and Flash Removal Global Vars
@@ -69,8 +70,8 @@ Global Real Theta, r
 Global Real AnvilZlimit, heatStakeCurrentTemp, heatStakeTempTolerance
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
-Global Boolean flashMtr, flashCyc, FlashPnlPrsnt, debrisMtr
-Global Boolean flashMtrCC, flashCycCC, debrisMtrCC
+Global Boolean removeFlash, FlashPnlPrsnt, debrisMtr
+Global Boolean removeFlashCC, debrisMtrCC
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas
 #define SkipFlagColumn 2 'The third column in the array are flags for holes if we want to skip them
@@ -121,15 +122,11 @@ Global Boolean RecEntryMissing, ParamEntryMissing
 #define InMagEmpty 22 ' Input Magazine is empty, opperator needs to fill it
 #define OutMagFull 28 ' Output Magazine is full, opperator needs to empty it
 #define LaserAlarmError 33 'The Laser scanner is not seeing the expected panel profile 
-#define DCpwrError 34
 #define DCpwrHeatStakeError 35
 #define HeatStakeCBTripped 36
-#define BowlFeederCBTripped 37
 #define InMagCBTripped 38
 #define OutMagCBTripped 39
-#define FlashCBTripped 40
 #define DebrisCBTripped 41
-#define PnumaticsCBTripped 42
 #define SafetySystemCBTripped 43
 
 'System State Numbers

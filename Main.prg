@@ -102,7 +102,7 @@ Function SetInitialValues()
 	'they get initialized
 	SystemSpeed = 50
 	AnvilZlimit = -150.00
-	suckTime = .5
+	suctionWaitTime = 2
 	SystemAccel = 30
 	zLimit = -15
 '	jobNumPanelsDone = 0
@@ -134,7 +134,7 @@ Function CheckInitialParameters()
 	
 '	Print "erRecEntryMissing", erRecEntryMissing
 
-	If AnvilZlimit = 0.0 Or suckTime = 0.0 Then
+	If AnvilZlimit = 0.0 Or suctionWaitTime = 0.0 Then
 		ParamEntryMissing = True
 	ElseIf SystemSpeed = 0 Or SystemAccel = 0 Then
 		ParamEntryMissing = True

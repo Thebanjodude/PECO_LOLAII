@@ -39,14 +39,14 @@ Do While True
 		Case StatePresentNextPart
 			
 			'Don't leave state until panel is in position or EOT is reached
-			Do Until inMagPnlRdy = True Or inMagUpperLim = True
+			Do Until inMagPnlRdy = True Or inMagUpLim = True
 				inMagMtrDirCC = False 'set direction to UP
 				inMagMtrCC = True
 			Loop
 			
 			inMagMtrCC = False
 			
-			If inMagUpperLim = True Then 'If upper limit is reached then the magazine is out of panels 
+			If inMagUpLim = True Then 'If upper limit is reached then the magazine is out of panels 
 				NextState = StateLowering
 				erInMagEmpty = True
 			Else
@@ -56,7 +56,7 @@ Do While True
 			
 		Case StateLowering
 		
-			Do Until inMagLowerLim = True ' Don't leave state until magazine has reached lower limit (home)
+			Do Until inMagLowLim = True ' Don't leave state until magazine has reached lower limit (home)
 				inMagMtrDirCC = True 'set direction to DOWN
 				inMagMtrCC = True
 			Loop
@@ -123,14 +123,14 @@ Do While True
 			
 		Case StateOutMagLowering
 			
-			Do Until outMagPanelRdy = True Or outMagLowerLim = True
+			Do Until outMagPanelRdy = True Or outMagLowLim = True
 				outMagMtrDirCC = True 'Set direction to Down
 				outMagMtrCC = True
 			Loop
 			
 			outMagMtrCC = False
 			
-            If outMagLowerLim = True Then 'Determine which state to go to next
+            If outMagLowLim = True Then 'Determine which state to go to next
 				NextState = StateOutMagWaitingUser
 				erOutMagFull = True
 			Else
@@ -152,7 +152,7 @@ Do While True
 			
 		'	WaitSig OutMagRobotClearSignal
 			
-			Do Until outMagUpperLim = True ' Move magazine up until we hit the upper limit
+			Do Until outMagUpLim = True ' Move magazine up until we hit the upper limit
 				outMagMtrDirCC = False 'Set direction to UP 
 				outMagMtrCC = True
 			Loop
@@ -163,7 +163,7 @@ Do While True
 			
 		Case StateGoHome
 			
-			Do Until outMagLowerLim = True
+			Do Until outMagLowLim = True
 				outMagMtrDirCC = True 'Set direction to DOWN
 				outMagMtrCC = True
 			Loop
@@ -190,14 +190,14 @@ OutMagTorqueLim = -12345 ' Empirically define this limit
 	
 	If InMagTorqueLim > PTRQ(Zaxis) Then
 		Off (suctionCupsH) ' Stop attempt at picking up a panel
-		Jump ScanCenter LimZ Zlimit ' Go to a safe place
+		Jump ScanCenter LimZ zLimit ' Go to a safe place
 		erInMagCrowding = True
 		' Get user ack before leaving ISR	
 	EndIf
 
 		If OutMagTorqueLim < PTRQ(Zaxis) Then
 		On (suctionCupsH) ' Double check suction cups are on
-		Jump ScanCenter LimZ Zlimit ' Go to a safe place
+		Jump ScanCenter LimZ zLimit ' Go to a safe place
 		erOutMagCrowding = True
 		' Get user ack before leaving ISR	
 	EndIf

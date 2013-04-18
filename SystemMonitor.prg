@@ -1,8 +1,8 @@
 #include "Globals.INC"
 
-'This comment is just to test that git is working!
-
 Function SystemMonitor()
+	
+#define StatePaused 6
 	
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 	
@@ -18,73 +18,89 @@ Do While True
 	
 	StateOfHealth()
 
-	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine
+	If inMagIntlock = True Then ' If an interlock gets tripped then halt the state machine
 		Halt InMagControl
 		erInMagOpenInterlock = True
 		stackLightYelCC = True
-		InMagInterlockFlag = True ' Set flag
-'		inMagCurrentState = StatePaused
-	ElseIf inMagIntLockAck = True And InMagInterlockFlag = True Then
+		inMagCurrentState = StatePaused
+	Else
 		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False
 		stackLightYelCC = False
-		InMagInterlockFlag = False ' Reset flag
 	EndIf
 	
 	If outMagInt = True Then ' If an interlock gets tripped then halt the state machine
 		Halt OutMagControl
 		erOutMagOpenInterlock = True
 		stackLightYelCC = True
-		OutMagInterlockFlag = True ' Set flag
-	ElseIf outMagIntLockAck = True And OutMagInterlockFlag = True Then
+		outMagCurrentState = StatePaused
+	Else
 	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
 	 	erOutMagOpenInterlock = False
 	 	stackLightYelCC = False
-	 	OutMagInterlockFlag = False ' Reset flag
 	EndIf
 	
-	If frontInterlock = True Then ' If an interlock gets tripped then halt the state machine
+	If frontIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erFrontSafetyFrameOpen = True
 		stackLightYelCC = True
-		frontInterlockFlag = True ' Set flag
 		Pause
-	ElseIf frontInterlockACK = True And frontInterlockFlag = True Then
+	Else
 	 	erFrontSafetyFrameOpen = False
 		stackLightYelCC = False
-	 	frontInterlockFlag = False ' Reset flag
 	EndIf
 	
-	If backInterlock = True Then ' If an interlock gets tripped then halt the state machine
+	If frontIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
+		erFrontSafetyFrameOpen = True
+		stackLightYelCC = True
+		Pause
+	Else
+	 	erFrontSafetyFrameOpen = False
+		stackLightYelCC = False
+	EndIf
+	
+	If backIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erBackSafetyFrameOpen = True
 		stackLightYelCC = True
-		backInterlockFlag = True ' Set flag
 		Pause
-	ElseIf backInterlockACK = True And backInterlockFlag = True Then
+	Else
 	 	erBackSafetyFrameOpen = False
 		stackLightYelCC = False
-	 	backInterlockFlag = False ' Reset flag
 	EndIf
 	
-	If leftInterlock = True Then ' If an interlock gets tripped then halt the state machine
+	If backIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
+		erBackSafetyFrameOpen = True
+		stackLightYelCC = True
+		Pause
+	Else
+	 	erBackSafetyFrameOpen = False
+		stackLightYelCC = False
+	EndIf
+	
+	If leftIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erLeftSafetyFrameOpen = True
 		stackLightYelCC = True
-		LeftInterlockFlag = True ' Set flag
 		Pause
-	ElseIf leftInterlockACK = True And LeftInterlockFlag = True Then
+	Else
 	 	erLeftSafetyFrameOpen = False
 		stackLightYelCC = False
-	 	LeftInterlockFlag = False ' Reset flag
+	EndIf
+
+	If leftIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
+		erLeftSafetyFrameOpen = True
+		stackLightYelCC = True
+		Pause
+	Else
+	 	erLeftSafetyFrameOpen = False
+		stackLightYelCC = False
 	EndIf
 	
-	If rightInterlock = True Then ' If an interlock gets tripped then halt the state machine
+	If rightIntlock = True Then ' If an interlock gets tripped then halt the state machine
 		erRightSafetyFrameOpen = True
 		stackLightYelCC = True
-		RightInterlockFlag = True ' Set flag
 		Pause
-	ElseIf rightInterlockACK = True And RightInterlockFlag = True Then
+	Else
 	 	erRightSafetyFrameOpen = False
 		stackLightYelCC = False
-	 	RightInterlockFlag = False ' Reset flag
 	EndIf
 	
 	If airPressHigh = True Then
@@ -114,124 +130,64 @@ Do While True
 		erHeatStakeBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-		cbMonHeatStakeFlag = True
 		Pause
-	ElseIf cbMonHeatStake = False And cbMonHeatStakeFlag = True Then
+	Else
 		erHeatStakeBreaker = False
 		stackLightRedCC = False
 		stackLightAlrmCC = False
-		cbMonHeatStakeFlag = False
 	EndIf
-	
-	If cbMonBowlFeder = True Then
-		erBowlFeederBreaker = True
-		cbMonBowlFederFlag = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-		Pause
-	ElseIf cbMonBowlFeder = False And cbMonBowlFederFlag = True Then
-		erBowlFeederBreaker = False
-		cbMonBowlFederFlag = False
-		stackLightRedCC = False
-		stackLightAlrmCC = False
-	EndIf
-	
+
 	If cbMonInMag = True Then
 		erInMagBreaker = True
-		cbMonInMagFlag = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
 		Pause
-	ElseIf cbMonInMag = False And cbMonInMagFlag = True Then
+	Else
 		erInMagBreaker = False
 		stackLightRedCC = False
 		stackLightAlrmCC = False
-		cbMonInMagFlag = False
+
 	EndIf
 	
 	If cbMonOutMag = True Then
 		erOutMagBreaker = True
-		cbMonOutMagFlag = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
 		Pause
-	ElseIf cbMonOutMag = False And cbMonOutMagFlag = True Then
+	Else
 		erOutMagBreaker = False
-		cbMonOutMagFlag = False
 		stackLightRedCC = False
 		stackLightAlrmCC = False
-	EndIf
-	
-	If cbMonFlashRmv = True Then
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-		erFlashBreaker = True
-		cbMonFlashRmvFlag = True
-		Pause
-	ElseIf cbMonFlashRmv = False And cbMonFlashRmvFlag = True Then
-		stackLightRedCC = False
-		stackLightAlrmCC = False
-		erFlashBreaker = False
-		cbMonFlashRmvFlag = False
 	EndIf
 	
 	If cbMonDebrisRmv = True Then
 		erDebrisRemovalBreaker = True
-		cbMonDebrisRmvFlag = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
 		Pause
-	ElseIf cbMonDebrisRmv = False And cbMonDebrisRmvFlag = True Then
+	Else
 		stackLightRedCC = False
 		stackLightAlrmCC = False
 		erDebrisRemovalBreaker = False
-		cbMonDebrisRmvFlag = False
+
 	EndIf
 	
 	If cbMonSafety = True Then
 		stackLightRedCC = True
 		stackLightAlrmCC = True
 		erSafetySystemBreaker = True
-		cbMonSafetyFlag = True
-	ElseIf cbMonSafety = False And cbMonSafetyFlag = True Then
+	Else
 		stackLightRedCC = False
 		stackLightAlrmCC = False
 		erSafetySystemBreaker = False
-		cbMonSafetyFlag = False
 	EndIf
-	
-	If cbMonPnumatic = True Then
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-		erPnumaticsBreaker = True
-		cbMonPnumaticFlag = True
-	ElseIf cbMonPnumatic = False And cbMonPnumaticFlag = True Then
-		stackLightRedCC = False
-		stackLightAlrmCC = False
-		erPnumaticsBreaker = False
-		cbMonPnumaticFlag = False
-	EndIf
-	
-	If dcPwrOk = True Then
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-		erDCPower = True
-		dcPwrOkFlag = True
-		Pause
-	ElseIf dcPwrOk = False And dcPwrOkFlag = True Then
-		stackLightRedCC = False
-		stackLightAlrmCC = False
-		erDCPower = False
-		dcPwrOkFlag = False
-	EndIf
-	
+
 	If cbMonPAS24vdc = True Then
 		stackLightRedCC = True
 		stackLightAlrmCC = True
 		erDCPowerHeatStake = True
-		cbMonPAS24vdcFlag = True
 		Pause
-	ElseIf cbMonPAS24vdc = False And cbMonPAS24vdcFlag = True Then
+	Else
 		stackLightRedCC = False
 		stackLightAlrmCC = False
 		erDCPowerHeatStake = False

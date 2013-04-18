@@ -1,80 +1,80 @@
-ENVT0100,LM:2013/04/08 19:20:34:952,DS:0000010876,CS:15366,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/18 19:47:50:476,DS:0000012294,CS:04909,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
-	nNumberOfLabels=40
+	nNumberOfLabels=36
 	Label1 {
-		nBit=12
-		sLabel="outMagIntH"
+		nBit=10
+		sLabel="frontIntlock1H"
 		sDescription=""
 	}
 	Label2 {
-		nBit=13
-		sLabel="laserGo"
+		nBit=11
+		sLabel="frontIntlock2H"
 		sDescription=""
 	}
 	Label3 {
-		nBit=18
-		sLabel="rightInterlockH"
+		nBit=12
+		sLabel="backIntlock1H"
 		sDescription=""
 	}
 	Label4 {
-		nBit=19
-		sLabel="frontInterlockH"
+		nBit=13
+		sLabel="backIntlock2H"
 		sDescription=""
 	}
 	Label5 {
-		nBit=20
-		sLabel="leftInterlockH"
+		nBit=14
+		sLabel="leftIntlock1H"
 		sDescription=""
 	}
 	Label6 {
-		nBit=21
-		sLabel="backInterlockH"
+		nBit=15
+		sLabel="leftIntlock2H"
 		sDescription=""
 	}
 	Label7 {
+		nBit=16
+		sLabel="rightIntlockH"
+		sDescription=""
+	}
+	Label8 {
+		nBit=17
+		sLabel="LaserGo"
+		sDescription=""
+	}
+	Label9 {
 		nBit=22
 		sLabel="AirPressHighH"
 		sDescription=""
 	}
-	Label8 {
+	Label10 {
 		nBit=23
 		sLabel="AirPressLowH"
 		sDescription=""
 	}
-	Label9 {
+	Label11 {
 		nBit=64
 		sLabel="cbMonHeatStakeH"
 		sDescription=""
 	}
-	Label10 {
-		nBit=65
-		sLabel="cbMonBowlFederH"
-		sDescription=""
-	}
-	Label11 {
+	Label12 {
 		nBit=66
 		sLabel="cbMonInMagH"
 		sDescription=""
 	}
-	Label12 {
+	Label13 {
 		nBit=67
 		sLabel="cbMonOutMagH"
 		sDescription=""
 	}
-	Label13 {
-		nBit=68
-		sLabel="cbMonFlashRmvH"
-		sDescription=""
-	}
 	Label14 {
-		nBit=69
-		sLabel="cbMonDebrisRmvH"
+		nBit=68
+		sLabel="cbMonSafetyH"
 		sDescription=""
 	}
 	Label15 {
-		nBit=70
-		sLabel="dcPwrOkH"
+		nBit=69
+		sLabel="cbMonDebrisRmvH"
 		sDescription=""
 	}
 	Label16 {
@@ -83,123 +83,103 @@ InputBitLabels {
 		sDescription=""
 	}
 	Label17 {
-		nBit=72
-		sLabel="cbMonSafetyH"
-		sDescription=""
-	}
-	Label18 {
 		nBit=73
 		sLabel="cbMonPAS24vdcH"
 		sDescription=""
 	}
-	Label19 {
+	Label18 {
 		nBit=74
-		sLabel="holeDetectedT"
+		sLabel="holeDetectedH"
+		sDescription=""
+	}
+	Label19 {
+		nBit=75
+		sLabel="edgeDetectHiH"
 		sDescription=""
 	}
 	Label20 {
-		nBit=75
-		sLabel="laserHiT"
+		nBit=76
+		sLabel="edgeDetectLoH"
 		sDescription=""
 	}
 	Label21 {
-		nBit=76
-		sLabel="laserLoT"
+		nBit=77
+		sLabel="edgeDetectGoH"
 		sDescription=""
 	}
 	Label22 {
-		nBit=77
-		sLabel="laserGoT"
+		nBit=80
+		sLabel="maintModeH"
 		sDescription=""
 	}
 	Label23 {
-		nBit=78
-		sLabel="inspectionPassT"
-		sDescription=""
-	}
-	Label24 {
-		nBit=80
-		sLabel="debrisBinFullH"
-		sDescription=""
-	}
-	Label25 {
 		nBit=81
 		sLabel="HSPanelPresntH"
 		sDescription=""
 	}
-	Label26 {
+	Label24 {
 		nBit=82
 		sLabel="FlashPnlPrsntH"
 		sDescription=""
 	}
-	Label27 {
+	Label25 {
 		nBit=96
-		sLabel="inMagUpperLimH"
+		sLabel="inMagUpLimH"
+		sDescription=""
+	}
+	Label26 {
+		nBit=97
+		sLabel="inMagUpLimNH"
+		sDescription=""
+	}
+	Label27 {
+		nBit=98
+		sLabel="inMagLowLimH"
 		sDescription=""
 	}
 	Label28 {
-		nBit=98
-		sLabel="inMagLowerLimH"
+		nBit=99
+		sLabel="inMagLowLimNH"
 		sDescription=""
 	}
 	Label29 {
-		nBit=99
-		sLabel="laserLotemp"
-		sDescription="Temp, move back to Board 1"
-	}
-	Label30 {
-		nBit=100
-		sLabel="laserGotemp"
-		sDescription="Temp, move back to Board 1"
-	}
-	Label31 {
-		nBit=101
-		sLabel="laserHi"
-		sDescription="Temp, move back to Board 1"
-	}
-	Label32 {
 		nBit=102
 		sLabel="inMagPnlRdyH"
 		sDescription=""
 	}
-	Label33 {
+	Label30 {
 		nBit=103
-		sLabel="inMagInterlockH"
+		sLabel="inMagIntlockH"
+		sDescription=""
+	}
+	Label31 {
+		nBit=104
+		sLabel="outMagUpLimH"
+		sDescription=""
+	}
+	Label32 {
+		nBit=105
+		sLabel="outMagUpLimNH"
+		sDescription=""
+	}
+	Label33 {
+		nBit=106
+		sLabel="outMagLowLimH"
 		sDescription=""
 	}
 	Label34 {
-		nBit=104
-		sLabel="outMagUpperLimH"
+		nBit=107
+		sLabel="outMagLowLimNH"
 		sDescription=""
 	}
 	Label35 {
-		nBit=105
-		sLabel="holeDetected"
-		sDescription="Temp, move back to Board 1"
-	}
-	Label36 {
-		nBit=106
-		sLabel="outMagLowerLimH"
-		sDescription=""
-	}
-	Label37 {
-		nBit=107
-		sLabel="inspectionPass"
-		sDescription="Temp, move back to Board 1"
-	}
-	Label38 {
-		nBit=108
-		sLabel=""
-		sDescription="Temp, move back to Board 1"
-	}
-	Label39 {
 		nBit=110
 		sLabel="outMagPanelRdyH"
 		sDescription=""
 	}
-	Label40 {
+	Label36 {
 		nBit=111
-		sLabel="outMagIntlockH"
+		sLabel="outMagIntH"
 		sDescription=""
 	}
 }
@@ -210,106 +190,81 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=20
+	nNumberOfLabels=15
 	Label1 {
-		nBit=8
-		sLabel="HMI_connected"
-		sDescription=""
-	}
-	Label2 {
 		nBit=10
 		sLabel="LightRed"
 		sDescription=""
 	}
-	Label3 {
+	Label2 {
 		nBit=11
 		sLabel="LightYellow"
 		sDescription=""
 	}
-	Label4 {
+	Label3 {
 		nBit=12
 		sLabel="LightGreen"
 		sDescription=""
 	}
-	Label5 {
+	Label4 {
 		nBit=13
 		sLabel="AlertSiren"
 		sDescription=""
 	}
-	Label6 {
+	Label5 {
 		nBit=96
 		sLabel="inMagMtrH"
 		sDescription=""
 	}
-	Label7 {
+	Label6 {
 		nBit=97
 		sLabel="inMagMtrDirH"
 		sDescription=""
 	}
-	Label8 {
+	Label7 {
 		nBit=98
 		sLabel="outMagMtrDirH"
 		sDescription=""
 	}
-	Label9 {
+	Label8 {
 		nBit=99
 		sLabel="outMagMtrH"
 		sDescription=""
 	}
-	Label10 {
+	Label9 {
 		nBit=100
-		sLabel="flashMtrH"
+		sLabel="removeFlashH"
 		sDescription=""
 	}
-	Label11 {
-		nBit=101
-		sLabel="flashCycH"
-		sDescription=""
-	}
-	Label12 {
+	Label10 {
 		nBit=102
 		sLabel="debrisMtrH"
 		sDescription=""
 	}
-	Label13 {
+	Label11 {
 		nBit=103
 		sLabel="suctionCupsH"
 		sDescription=""
 	}
-	Label14 {
-		nBit=104
-		sLabel="laserP1T"
-		sDescription=""
-	}
-	Label15 {
-		nBit=106
-		sLabel="stackLightAlrmH"
-		sDescription=""
-	}
-	Label16 {
+	Label12 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label17 {
+	Label13 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label18 {
+	Label14 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label19 {
+	Label15 {
 		nBit=110
-		sLabel="laserP2"
+		sLabel="stackLightAlrmH"
 		sDescription=""
-	}
-	Label20 {
-		nBit=111
-		sLabel="laserP1"
-		sDescription="Temp, but back in pin 29 2-1,bit 104"
 	}
 }
 OutputByteLabels {
@@ -319,7 +274,7 @@ OutputWordLabels {
 	nNumberOfLabels=0
 }
 MemoryBitLabels {
-	nNumberOfLabels=82
+	nNumberOfLabels=112
 	Label1 {
 		nBit=0
 		sLabel="airPressLowF"
@@ -381,353 +336,503 @@ MemoryBitLabels {
 		sDescription=""
 	}
 	Label13 {
+		nBit=13
+		sLabel="hsInstallInsrtF"
+		sDescription=""
+	}
+	Label14 {
+		nBit=14
+		sLabel="hsInstallInsrtFV"
+		sDescription=""
+	}
+	Label15 {
 		nBit=15
 		sLabel="inMagMtrF"
 		sDescription=""
 	}
-	Label14 {
+	Label16 {
 		nBit=16
 		sLabel="inMagMtrFV"
 		sDescription=""
 	}
-	Label15 {
-		nBit=19
-		sLabel="hsInstallInsrtFV"
-		sDescription=""
-	}
-	Label16 {
-		nBit=20
-		sLabel="hsInstallInsrtF"
-		sDescription=""
-	}
 	Label17 {
-		nBit=22
-		sLabel="outMagIntFV"
-		sDescription=""
-	}
-	Label18 {
-		nBit=23
-		sLabel="outMagIntF"
-		sDescription=""
-	}
-	Label19 {
 		nBit=24
 		sLabel="FlashPnlPrsntF"
 		sDescription=""
 	}
-	Label20 {
+	Label18 {
 		nBit=25
 		sLabel="FlashPnlPrsntFV"
 		sDescription=""
 	}
-	Label21 {
+	Label19 {
 		nBit=26
 		sLabel="cbMonHeatStakeF"
 		sDescription=""
 	}
-	Label22 {
+	Label20 {
 		nBit=27
 		sLabel="cbMonHeatStakeFV"
 		sDescription=""
 	}
-	Label23 {
+	Label21 {
 		nBit=28
-		sLabel="cbMonBowlFederF"
+		sLabel="cbMonSafetyF"
 		sDescription=""
 	}
-	Label24 {
+	Label22 {
 		nBit=29
-		sLabel="cbMonBowlFederFV"
+		sLabel="cbMonSafetyFV"
 		sDescription=""
 	}
-	Label25 {
+	Label23 {
 		nBit=30
 		sLabel="cbMonInMagF"
 		sDescription=""
 	}
-	Label26 {
+	Label24 {
 		nBit=31
 		sLabel="cbMonInMagFV"
 		sDescription=""
 	}
-	Label27 {
+	Label25 {
 		nBit=32
 		sLabel="cbMonOutMagF"
 		sDescription=""
 	}
-	Label28 {
+	Label26 {
 		nBit=33
 		sLabel="cbMonOutMagFV"
 		sDescription=""
 	}
-	Label29 {
+	Label27 {
 		nBit=34
-		sLabel="cbMonFlashRmvF"
+		sLabel="cbMonPAS24vdcFV"
 		sDescription=""
 	}
-	Label30 {
+	Label28 {
 		nBit=35
-		sLabel="cbMonFlashRmvFV"
+		sLabel="cbMonPAS24vdcF"
 		sDescription=""
 	}
-	Label31 {
+	Label29 {
 		nBit=36
 		sLabel="cbMonDebrisRmvF"
 		sDescription=""
 	}
-	Label32 {
+	Label30 {
 		nBit=37
 		sLabel="cbMonDebrisRmvFV"
 		sDescription=""
 	}
-	Label33 {
-		nBit=38
-		sLabel="dcPwrOkF"
-		sDescription=""
-	}
-	Label34 {
-		nBit=39
-		sLabel="dcPwrOkFV"
-		sDescription=""
-	}
-	Label35 {
-		nBit=40
-		sLabel="cbMonPnumaticF"
-		sDescription=""
-	}
-	Label36 {
-		nBit=41
-		sLabel="cbMonPnumaticFV"
-		sDescription=""
-	}
-	Label37 {
-		nBit=42
-		sLabel="cbMonSafetyF"
-		sDescription=""
-	}
-	Label38 {
-		nBit=43
-		sLabel="cbMonSafetyFV"
-		sDescription=""
-	}
-	Label39 {
-		nBit=44
-		sLabel="cbMonPAS24vdcF"
-		sDescription=""
-	}
-	Label40 {
-		nBit=45
-		sLabel="cbMonPAS24vdcFV"
-		sDescription=""
-	}
-	Label41 {
+	Label31 {
 		nBit=48
 		sLabel="outMagLowerLimFV"
 		sDescription=""
 	}
-	Label42 {
+	Label32 {
 		nBit=49
 		sLabel="outMagLowerLimF"
 		sDescription=""
 	}
-	Label43 {
+	Label33 {
 		nBit=50
 		sLabel="hsPanelPresntFV"
 		sDescription=""
 	}
-	Label44 {
+	Label34 {
 		nBit=51
 		sLabel="hsPanelPresntF"
 		sDescription=""
 	}
-	Label45 {
+	Label35 {
 		nBit=53
 		sLabel="inMagMtrDirFV"
 		sDescription=""
 	}
-	Label46 {
+	Label36 {
 		nBit=54
 		sLabel="inMagMtrDirF"
 		sDescription=""
 	}
-	Label47 {
+	Label37 {
 		nBit=56
 		sLabel="outMagMtrFV"
 		sDescription=""
 	}
-	Label48 {
+	Label38 {
 		nBit=57
 		sLabel="outMagMtrF"
 		sDescription=""
 	}
-	Label49 {
+	Label39 {
 		nBit=58
 		sLabel="outMagMtrDirFV"
 		sDescription=""
 	}
-	Label50 {
+	Label40 {
 		nBit=59
 		sLabel="outMagMtrDirF"
 		sDescription=""
 	}
-	Label51 {
-		nBit=61
-		sLabel="flashCycFV"
-		sDescription=""
-	}
-	Label52 {
-		nBit=62
-		sLabel="flashCycF"
-		sDescription=""
-	}
-	Label53 {
-		nBit=63
-		sLabel="flashMtrFV"
-		sDescription=""
-	}
-	Label54 {
-		nBit=64
-		sLabel="flashMtrF"
-		sDescription=""
-	}
-	Label55 {
+	Label41 {
 		nBit=66
 		sLabel="outMagIntlockFV"
 		sDescription=""
 	}
-	Label56 {
+	Label42 {
 		nBit=67
 		sLabel="outMagIntlockF"
 		sDescription=""
 	}
-	Label57 {
+	Label43 {
 		nBit=69
 		sLabel="outMagUpperLimFV"
 		sDescription=""
 	}
-	Label58 {
+	Label44 {
 		nBit=70
 		sLabel="outMagUpperLimF"
 		sDescription=""
 	}
-	Label59 {
+	Label45 {
 		nBit=71
 		sLabel="outMagPanelRdyFV"
 		sDescription=""
 	}
-	Label60 {
+	Label46 {
 		nBit=72
 		sLabel="outMagPanelRdyF"
 		sDescription=""
 	}
-	Label61 {
+	Label47 {
 		nBit=74
 		sLabel="inMagInterlockFV"
 		sDescription=""
 	}
-	Label62 {
+	Label48 {
 		nBit=75
 		sLabel="inMagInterlockF"
 		sDescription=""
 	}
-	Label63 {
+	Label49 {
 		nBit=77
 		sLabel="inMagLowerLimFV"
 		sDescription=""
 	}
-	Label64 {
+	Label50 {
 		nBit=78
 		sLabel="inMagLowerLimF"
 		sDescription=""
 	}
-	Label65 {
+	Label51 {
 		nBit=79
 		sLabel="inMagUpperLimFV"
 		sDescription=""
 	}
-	Label66 {
+	Label52 {
 		nBit=80
 		sLabel="inMagUpperLimF"
 		sDescription=""
 	}
-	Label67 {
+	Label53 {
 		nBit=81
 		sLabel="inMagPnlRdyFV"
 		sDescription=""
 	}
-	Label68 {
+	Label54 {
 		nBit=82
 		sLabel="inMagPnlRdyF"
 		sDescription=""
 	}
-	Label69 {
+	Label55 {
 		nBit=84
 		sLabel="suctionCupsFV"
 		sDescription=""
 	}
-	Label70 {
+	Label56 {
 		nBit=85
 		sLabel="suctionCupsF"
 		sDescription=""
 	}
-	Label71 {
+	Label57 {
 		nBit=87
 		sLabel="outMagPartRdyF"
 		sDescription=""
 	}
-	Label72 {
+	Label58 {
 		nBit=88
 		sLabel="outMagPartRdyFV"
 		sDescription=""
 	}
-	Label73 {
+	Label59 {
 		nBit=90
 		sLabel="debrisMtrF"
 		sDescription=""
 	}
-	Label74 {
+	Label60 {
 		nBit=91
 		sLabel="debrisMtrFV"
 		sDescription=""
 	}
-	Label75 {
+	Label61 {
 		nBit=93
-		sLabel="frontInterlockFV"
+		sLabel="frontIntlockFV"
+		sDescription=""
+	}
+	Label62 {
+		nBit=94
+		sLabel="frontIntlockF"
+		sDescription=""
+	}
+	Label63 {
+		nBit=95
+		sLabel="rightIntlockFV"
+		sDescription=""
+	}
+	Label64 {
+		nBit=96
+		sLabel="rightIntlockF"
+		sDescription=""
+	}
+	Label65 {
+		nBit=97
+		sLabel="leftIntlockFV"
+		sDescription=""
+	}
+	Label66 {
+		nBit=98
+		sLabel="leftIntlockF"
+		sDescription=""
+	}
+	Label67 {
+		nBit=99
+		sLabel="backIntlockFV"
+		sDescription=""
+	}
+	Label68 {
+		nBit=100
+		sLabel="backIntlockF"
+		sDescription=""
+	}
+	Label69 {
+		nBit=102
+		sLabel="holeDetectedF"
+		sDescription=""
+	}
+	Label70 {
+		nBit=103
+		sLabel="holeDetectedFV"
+		sDescription=""
+	}
+	Label71 {
+		nBit=104
+		sLabel="inMagLowLimNF"
+		sDescription=""
+	}
+	Label72 {
+		nBit=105
+		sLabel="inMagLowLimNFV"
+		sDescription=""
+	}
+	Label73 {
+		nBit=106
+		sLabel="inMagUpLimNF"
+		sDescription=""
+	}
+	Label74 {
+		nBit=107
+		sLabel="inMagUpLimNFV"
+		sDescription=""
+	}
+	Label75 {
+		nBit=108
+		sLabel="leftIntlock1FV"
 		sDescription=""
 	}
 	Label76 {
-		nBit=94
-		sLabel="frontInterlockF"
+		nBit=109
+		sLabel="leftIntlock1F"
 		sDescription=""
 	}
 	Label77 {
-		nBit=95
-		sLabel="rightInterlockFV"
+		nBit=110
+		sLabel="leftIntlock2FV"
 		sDescription=""
 	}
 	Label78 {
-		nBit=96
-		sLabel="rightInterlockF"
+		nBit=111
+		sLabel="leftIntlock2F"
 		sDescription=""
 	}
 	Label79 {
-		nBit=97
-		sLabel="leftInterlockFV"
+		nBit=112
+		sLabel="maintModeF"
 		sDescription=""
 	}
 	Label80 {
-		nBit=98
-		sLabel="leftInterlockF"
+		nBit=113
+		sLabel="maintModeFV"
 		sDescription=""
 	}
 	Label81 {
-		nBit=99
-		sLabel="backInterlockFV"
+		nBit=114
+		sLabel="inMagLowLimF"
 		sDescription=""
 	}
 	Label82 {
-		nBit=100
-		sLabel="backInterlockF"
+		nBit=115
+		sLabel="inMagLowLimFV"
+		sDescription=""
+	}
+	Label83 {
+		nBit=116
+		sLabel="inMagUpLimFV"
+		sDescription=""
+	}
+	Label84 {
+		nBit=117
+		sLabel="inMagUpLimF"
+		sDescription=""
+	}
+	Label85 {
+		nBit=118
+		sLabel="outMagLowLimFV"
+		sDescription=""
+	}
+	Label86 {
+		nBit=119
+		sLabel="outMagLowLimF"
+		sDescription=""
+	}
+	Label87 {
+		nBit=120
+		sLabel="outMagLowLimNFV"
+		sDescription=""
+	}
+	Label88 {
+		nBit=121
+		sLabel="outMagLowLimNF"
+		sDescription=""
+	}
+	Label89 {
+		nBit=122
+		sLabel="outMagUpLimFV"
+		sDescription=""
+	}
+	Label90 {
+		nBit=123
+		sLabel="outMagUpLimF"
+		sDescription=""
+	}
+	Label91 {
+		nBit=124
+		sLabel="outMagUpLimNFV"
+		sDescription=""
+	}
+	Label92 {
+		nBit=125
+		sLabel="outMagUpLimNF"
+		sDescription=""
+	}
+	Label93 {
+		nBit=126
+		sLabel="removeFlashFV"
+		sDescription=""
+	}
+	Label94 {
+		nBit=127
+		sLabel="removeFlashF"
+		sDescription=""
+	}
+	Label95 {
+		nBit=128
+		sLabel="edgeDetectGoFV"
+		sDescription=""
+	}
+	Label96 {
+		nBit=129
+		sLabel="edgeDetectGoF"
+		sDescription=""
+	}
+	Label97 {
+		nBit=130
+		sLabel="edgeDetectLoFV"
+		sDescription=""
+	}
+	Label98 {
+		nBit=131
+		sLabel="edgeDetectLoF"
+		sDescription=""
+	}
+	Label99 {
+		nBit=132
+		sLabel="inMagIntlockFV"
+		sDescription=""
+	}
+	Label100 {
+		nBit=133
+		sLabel="inMagIntlockF"
+		sDescription=""
+	}
+	Label101 {
+		nBit=134
+		sLabel="outMagIntFV"
+		sDescription=""
+	}
+	Label102 {
+		nBit=135
+		sLabel="outMagIntF"
+		sDescription=""
+	}
+	Label103 {
+		nBit=136
+		sLabel="backIntlock1FV"
+		sDescription=""
+	}
+	Label104 {
+		nBit=137
+		sLabel="backIntlock1F"
+		sDescription=""
+	}
+	Label105 {
+		nBit=138
+		sLabel="backIntlock2FV"
+		sDescription=""
+	}
+	Label106 {
+		nBit=139
+		sLabel="backIntlock2F"
+		sDescription=""
+	}
+	Label107 {
+		nBit=140
+		sLabel="edgeDetectHiF"
+		sDescription=""
+	}
+	Label108 {
+		nBit=141
+		sLabel="edgeDetectHiFV"
+		sDescription=""
+	}
+	Label109 {
+		nBit=142
+		sLabel="frontIntlock2FV"
+		sDescription=""
+	}
+	Label110 {
+		nBit=143
+		sLabel="frontIntlock2F"
+		sDescription=""
+	}
+	Label111 {
+		nBit=144
+		sLabel="frontIntlock1FV"
+		sDescription=""
+	}
+	Label112 {
+		nBit=145
+		sLabel="frontIntlock1F"
 		sDescription=""
 	}
 }
