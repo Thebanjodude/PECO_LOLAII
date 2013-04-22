@@ -1,9 +1,9 @@
-ENVT0100,LM:2013/04/22 17:24:13:231,DS:0000002485,CS:29972,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="InspectionStation.prg"
+ENVT0100,LM:2013/04/22 20:49:29:066,DS:0000002474,CS:26965,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Globals.inc"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=309
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=62
-		nTop=90
-		nWidth=1428
-		nHeight=676
+		nLeft=248
+		nTop=96
+		nWidth=1427
+		nHeight=673
 	}
 }
 nIncludeFileCount=1
@@ -95,10 +95,10 @@ IncludeFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=177
-		nTop=48
-		nWidth=1350
-		nHeight=565
+		nLeft=0
+		nTop=178
+		nWidth=1348
+		nHeight=562
 	}
 }
 nPointFileCount=1

@@ -202,6 +202,17 @@ Function PowerOnHomeCheck() As Boolean
 		Print "Distance OK"
 	EndIf
 	
+	If Hand(Here) = 2 Then ' throw the error if the arm is in "lefty" orientation
+		erRobotNotAtHome = True
+		PowerOnHomeCheck = False
+		Print "Orientation NOT OK"
+	Else
+		erRobotNotAtHome = False
+		PowerOnHomeCheck = True
+		Print "Arm Orientation OK"
+	EndIf
+
+	
 	If PowerOnHomeCheck = False Then
 		Motor On
 		SFree 1, 2, 3, 4
