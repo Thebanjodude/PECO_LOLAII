@@ -200,7 +200,7 @@ Function PassOrFail(measurement As Real) As Boolean 'Pass is True
 	Real DepthInsertError
 	
 	DepthInsertError = Abs(recInsertDepth - measurement)
-	Print DepthInsertError
+	Print "DepthInsertError:", DepthInsertError
 	
 ' TODO: make the tolerance a variable and make it adjustable via the hmi, we have .006 but theirs is more loose	
 	If (DepthInsertError < insertDepthTolerance) Then
@@ -290,6 +290,7 @@ Function PrintInspectionArray()
 Fend
 Function UnpackInspectionArrays()
 	
+'Sending a JSON array is a pain so we are just unpacking the array into seperate vars 	
 hole0L = InspectionArray(0, LeftSpotFace)
 hole0R = InspectionArray(0, RightSpotFace)
 hole1R = InspectionArray(1, RightSpotFace)
@@ -347,6 +348,34 @@ For n = 0 To recNumberOfHoles - 1
 	EndIf
 	
 Next
+	
+Fend
+Function UnpackPassFailArray()
+	'Sending a JSON array is a pain so we are just unpacking the array into seperate vars 
+	'If either spotface fails then the hole fails
+	hole0PF = PassFailArray(0, LeftSpotFace) Or PassFailArray(0, RightSpotFace)
+	hole1PF = PassFailArray(1, LeftSpotFace) Or PassFailArray(1, RightSpotFace)
+	hole2PF = PassFailArray(2, LeftSpotFace) Or PassFailArray(2, RightSpotFace)
+	hole3PF = PassFailArray(3, LeftSpotFace) Or PassFailArray(3, RightSpotFace)
+	hole4PF = PassFailArray(4, LeftSpotFace) Or PassFailArray(4, RightSpotFace)
+	hole5PF = PassFailArray(5, LeftSpotFace) Or PassFailArray(5, RightSpotFace)
+	hole6PF = PassFailArray(6, LeftSpotFace) Or PassFailArray(6, RightSpotFace)
+	hole7PF = PassFailArray(7, LeftSpotFace) Or PassFailArray(7, RightSpotFace)
+	hole8PF = PassFailArray(8, LeftSpotFace) Or PassFailArray(8, RightSpotFace)
+	hole9PF = PassFailArray(9, LeftSpotFace) Or PassFailArray(9, RightSpotFace)
+	hole10PF = PassFailArray(10, LeftSpotFace) Or PassFailArray(10, RightSpotFace)
+	hole11PF = PassFailArray(11, LeftSpotFace) Or PassFailArray(11, RightSpotFace)
+	hole12PF = PassFailArray(12, LeftSpotFace) Or PassFailArray(12, RightSpotFace)
+	hole13PF = PassFailArray(13, LeftSpotFace) Or PassFailArray(13, RightSpotFace)
+	hole14PF = PassFailArray(14, LeftSpotFace) Or PassFailArray(14, RightSpotFace)
+	hole15PF = PassFailArray(15, LeftSpotFace) Or PassFailArray(15, RightSpotFace)
+	hole16PF = PassFailArray(16, LeftSpotFace) Or PassFailArray(16, RightSpotFace)
+	hole17PF = PassFailArray(17, LeftSpotFace) Or PassFailArray(17, RightSpotFace)
+	hole18PF = PassFailArray(18, LeftSpotFace) Or PassFailArray(18, RightSpotFace)
+	hole19PF = PassFailArray(19, LeftSpotFace) Or PassFailArray(19, RightSpotFace)
+	hole20PF = PassFailArray(20, LeftSpotFace) Or PassFailArray(20, RightSpotFace)
+	hole21PF = PassFailArray(21, LeftSpotFace) Or PassFailArray(21, RightSpotFace)
+	hole22PF = PassFailArray(22, LeftSpotFace) Or PassFailArray(22, RightSpotFace)
 	
 Fend
 Function PickUpPanel

@@ -100,6 +100,8 @@ Global Boolean erOutMagBreaker, erFlashBreaker, erDebrisRemovalBreaker
 Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180
 Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing, erRobotNotAtHome
 Global Boolean RecEntryMissing, ParamEntryMissing
+Global Boolean erInMagLowSensorBad, erInMagUpSensorBad, erOutMagLowSensorBad, erOutMagUpSensorBad
+
 
 ' Error Code array indexes, from IOT Excel MessageDB
 'Since we rolled these into the IOT and turned them into Bools, these are OBS
@@ -192,6 +194,15 @@ Global Real hole5R, hole5L, hole6R, hole6L, hole7R, hole7L, hole8R, hole8L, hole
 Global Real hole10R, hole10L, hole11R, hole11L, hole12R, hole12L, hole13R, hole13L, hole14R, hole14L
 Global Real hole15R, hole15L, hole16R, hole16L, hole17R, hole17L, hole18R, hole18L, hole19R, hole19L
 Global Real hole20R, hole20L, hole21R, hole21L, hole22R, hole22L
+
+' Send HMI all the holes that passed or failed ,(True=Pass)
+' When a hole fails the operator will know which hole failed.
+Global Boolean hole0PF, hole1PF, hole2PF, hole3PF, hole4PF
+Global Boolean hole5PF, hole6PF, hole7PF, hole8PF, hole9PF
+Global Boolean hole10PF, hole11PF, hole12PF, hole13PF, hole14PF
+Global Boolean hole15PF, hole16PF, hole17PF, hole18PF, hole19PF
+Global Boolean hole20PF, hole21PF, hole22PF
+
 
 
 

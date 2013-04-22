@@ -209,6 +209,50 @@ Do While True
 		stackLightAlrmCC = False
 	EndIf
 	
+	'If the in/out magazine sensor diff signals are the same then we know there is a problem	
+	If inMagLowLim = inMagLowLimN Then
+		erInMagLowSensorBad = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
+	Else
+		erInMagLowSensorBad = False
+		stackLightRedCC = False
+		stackLightAlrmCC = False
+	EndIf
+	
+	If inMagUpLim = inMagUpLimN Then
+		erInMagUpSensorBad = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
+	Else
+		erInMagUpSensorBad = False
+		stackLightRedCC = False
+		stackLightAlrmCC = False
+	EndIf
+	
+	If outMagLowLim = outMagLowLimN Then
+		erOutMagLowSensorBad = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
+	Else
+		erOutMagLowSensorBad = False
+		stackLightRedCC = False
+		stackLightAlrmCC = False
+	EndIf
+	
+	If outMagUpLim = outMagUpLimN Then
+		erOutMagUpSensorBad = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
+	Else
+		erOutMagUpSensorBad = False
+		stackLightRedCC = False
+		stackLightAlrmCC = False
+	EndIf
+	
+	
+	
+	
 Loop
 
 	errHandler:
