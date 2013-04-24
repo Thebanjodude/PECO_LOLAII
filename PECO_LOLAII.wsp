@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/04/22 20:49:29:066,DS:0000002474,CS:26965,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/24 18:05:03:845,DS:0000002473,CS:28214,MA:6C-F0-49-E2-45-75,EI:           
 sActiveChild="Globals.inc"
 bMdiMaximized=False
 ProgramFile1 {
@@ -69,7 +69,7 @@ ProgramFile6 {
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=247
@@ -95,10 +95,10 @@ IncludeFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=178
-		nWidth=1348
-		nHeight=562
+		nLeft=174
+		nTop=84
+		nWidth=1346
+		nHeight=554
 	}
 }
 nPointFileCount=1
@@ -146,10 +146,10 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=1419
-		nTop=290
+		nLeft=1209
+		nTop=256
 		nWidth=520
-		nHeight=532
+		nHeight=522
 	}
 }
 TaskMgr {
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=False
 	Window {
-		nLeft=238
-		nTop=116
+		nLeft=78
+		nTop=181
 		nWidth=751
 		nHeight=485
 	}

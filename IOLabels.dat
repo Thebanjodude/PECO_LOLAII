@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/04/18 19:47:50:476,DS:0000012294,CS:04909,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/23 15:03:53:913,DS:0000012019,CS:00069,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=36
@@ -190,78 +190,58 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=15
+	nNumberOfLabels=11
 	Label1 {
-		nBit=10
-		sLabel="LightRed"
-		sDescription=""
-	}
-	Label2 {
-		nBit=11
-		sLabel="LightYellow"
-		sDescription=""
-	}
-	Label3 {
-		nBit=12
-		sLabel="LightGreen"
-		sDescription=""
-	}
-	Label4 {
-		nBit=13
-		sLabel="AlertSiren"
-		sDescription=""
-	}
-	Label5 {
 		nBit=96
 		sLabel="inMagMtrH"
 		sDescription=""
 	}
-	Label6 {
+	Label2 {
 		nBit=97
 		sLabel="inMagMtrDirH"
 		sDescription=""
 	}
-	Label7 {
+	Label3 {
 		nBit=98
 		sLabel="outMagMtrDirH"
 		sDescription=""
 	}
-	Label8 {
+	Label4 {
 		nBit=99
 		sLabel="outMagMtrH"
 		sDescription=""
 	}
-	Label9 {
+	Label5 {
 		nBit=100
 		sLabel="removeFlashH"
 		sDescription=""
 	}
-	Label10 {
+	Label6 {
 		nBit=102
 		sLabel="debrisMtrH"
 		sDescription=""
 	}
-	Label11 {
+	Label7 {
 		nBit=103
 		sLabel="suctionCupsH"
 		sDescription=""
 	}
-	Label12 {
+	Label8 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label13 {
+	Label9 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label14 {
+	Label10 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label15 {
+	Label11 {
 		nBit=110
 		sLabel="stackLightAlrmH"
 		sDescription=""

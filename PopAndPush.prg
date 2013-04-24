@@ -5,6 +5,12 @@ Function PopPanel()
 	Print "poping Panel"
 	SystemStatus = PickingPanel
 	
+	hsDataTransferRdy = True ' set flag for hmi to readout 
+	
+	Do Until hsDataTransferACK = True ' do not proceed until the hmi is finished getting data
+		Wait .01
+	Loop
+	
 retry:
 
 	Do Until inMagIntlock = False 'And hmiAck = True
@@ -26,7 +32,8 @@ retry:
 	EndIf
 	
 '	FindPickUpError() ' after we pick up a panel, find the pickup offsets
-	
+
+	hsDataTransferRdy = False 'reset flag	
 	Go ScanCenter3
 	
 Fend
