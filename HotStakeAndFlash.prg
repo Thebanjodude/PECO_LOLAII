@@ -32,7 +32,7 @@ Function HotStakePanel()
 
 		If SkippedHole = False Then 'If the flag is set then we have finished all holes
 		
-         	P23 = HotStakeCenter2 -Y(Sin(45) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(45) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 135)
+         	P23 = HotStakeCenter -Y(Sin(45) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(45) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 135)
 			Print P23
 			Jump P23 LimZ zLimit
 						
@@ -111,7 +111,7 @@ Function FlashRemoval()
 
 		If SkippedHole = False Then 'If the flag is true then we have finished all holes
  		
-			P23 = FlashCenter2 +X(PanelArray(PanelArrayIndex, RadiusColumn) - xOffset) +Y(yOffset) :U(-PanelArray(PanelArrayIndex, ThetaColumn) + 180)
+			P23 = FlashCenter +X(PanelArray(PanelArrayIndex, RadiusColumn) - xOffset) +Y(yOffset) :U(-PanelArray(PanelArrayIndex, ThetaColumn) + 180)
 			Print CU(P23)
 			Jump P23 LimZ zLimit ' Limit the jump hight
 			
@@ -148,7 +148,7 @@ Next
 	SkipFlash:
 	
 	SystemStatus = MovingPanel
-	Go ScanCenter3 ' Collision Avoidance Waypoint
+	Go PreScan ' Collision Avoidance Waypoint
 		
 Fend
 Function DerivethetaR()

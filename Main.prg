@@ -22,8 +22,6 @@ Do While True
 	ParamEntryMissing = False
 	stackLightGrnCC = False
 	
-	Go PickUp
-			
 	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False And HotStakeTempRdy() = True Then
 		Print "doing a job"
 		
@@ -93,8 +91,8 @@ Function PowerOnSequence()
 	Xqt 7, InMagControl, Normal ' First state is lowering 
 	Xqt 8, OutMagControl, Normal ' First state is raising 
 	
-	Move scancenter3 :U(CU(CurPos)) ' go home
-	Move scancenter3 ' go home
+	Move PreScan :U(CU(CurPos)) ' go home
+	Move PreScan ' go home
 	
 Fend
 Function SetInitialValues()
@@ -178,9 +176,9 @@ Function PowerOnHomeCheck() As Boolean
 	#define startUpDistMax 150 '+/-300mm from home position
 	#define startUpHeight 25 ' +/-10mm from home position
 	
-	distx = Abs(CX(CurPos) - CX(Scancenter3))
-	disty = Abs(CY(CurPos) - CY(Scancenter3))
-	distz = Abs(CZ(CurPos) - CZ(Scancenter3))
+	distx = Abs(CX(CurPos) - CX(PreScan))
+	disty = Abs(CY(CurPos) - CY(PreScan))
+	distz = Abs(CZ(CurPos) - CZ(PreScan))
 	Print "x", distx
 	Print "y", disty
 	Print "z", distz

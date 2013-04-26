@@ -164,10 +164,8 @@ Function InspectPanel(HoleInspect As Boolean)
 			EndIf
 
 		EndIf
-		
 		Pause
 Next
-
 
 	PrintPassFailArray()
 '	PrintInspectionArray()
@@ -176,7 +174,7 @@ Next
 	UnpackInspectionArrays()
 
 	SystemStatus = MovingPanel
-	Go ScanCenter3 ' Collision Avoidance Waypoint
+	Go PreScan ' Go Home
 Fend
 Function MeasureInsertDepth()
 	
@@ -378,26 +376,18 @@ Function UnpackPassFailArray()
 	hole22PF = PassFailArray(22, LeftSpotFace) Or PassFailArray(22, RightSpotFace)
 	
 Fend
-Function PickUpPanel
-	Off (15) 'off (suctionCups)
-	Go ScanCenter3 :U(CU(CurPos))
-	Go PrePickUp2 - PickUpOffset
-	Go PickUp2 - PickUpOffset
-	On (15) 'on (suctionCups)
-	Wait 1
-	Go PrePickup2 - PickUpOffset
-	Go ScanCenter3 :U(CU(CurPos))
-	Go ScanCenter3
-	Pause
-Fend
-Function DropOffPanel
-	Go ScanCenter3 :U(CU(CurPos))
-	Go DropOff
-	Off (15) 'off(suctionCups)
-	Wait 2
-	Go ScanCenter3
-	Pause
-Fend
+'Function PickUpPanel
+'	suctionCupsCC = False
+'	Go ScanCenter3 :U(CU(CurPos))
+'	Go PrePickUp2 - PickUpOffset
+'	Go PickUp2 - PickUpOffset
+'	suctionCupsCC = True
+'	Wait suctionWaitTime
+'	Go PrePickUp2 - PickUpOffset
+'	Go ScanCenter3 :U(CU(CurPos))
+'	Go ScanCenter3
+'	Pause
+'Fend
 Function RotatePanelOffset(angle As Real)
 		
 		'Compute the rotated X,Y and U PanelOffset components

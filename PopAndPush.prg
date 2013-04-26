@@ -20,7 +20,7 @@ retry:
 '	WaitSig InMagPickUpSignal ' Wait for inmag to confirm a panel is ready to be picked up
 	
 	suctionCupsCC = True
-	Jump InputMagCenter LimZ zLimit Sense Sw(inMagIntlockH) = True
+	Jump InMagCenter LimZ zLimit Sense Sw(inMagIntlockH) = True
 	
 	If JS = False Then ' Jump executed normally
 		Wait suctionWaitTime ' Allow time for cups to seal on panel
@@ -34,7 +34,7 @@ retry:
 '	FindPickUpError() ' after we pick up a panel, find the pickup offsets
 
 	hsDataTransferRdy = False 'reset flag	
-	Go ScanCenter3
+	Go PreScan 'Go Home
 	
 Fend
 Function PushPanel()
@@ -59,12 +59,12 @@ Function PushPanel()
 		
 '		WaitSig OutMagDropOffSignal
 		
-		Jump OutputMagCenter -Z(recPanelThickness) LimZ zLimit Sense Sw(outMagIntH) = True
+		Jump OutMagCenter -Z(recPanelThickness) LimZ zLimit Sense Sw(outMagIntH) = True
 		
 		If JS = False Then
 			suctionCups = False
 			SystemStatus = MovingPanel
-			Jump ScanCenter LimZ zLimit ' Collision Avoidance Waypoint
+			Jump PreScan LimZ zLimit ' Collision Avoidance Waypoint
 '			Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel
 		Else
 			GoTo retry ' interlock was opened during a jump
@@ -78,7 +78,7 @@ Function PushPanel()
 		
 		jobNumPanelsDone = jobNumPanelsDone + 1 ' Increments how many panels we have finished
 			
-		Go ScanCenter3
+		Go PreScan
 		
 '		Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
 		
@@ -93,11 +93,11 @@ Integer i
 Speed 10 'slow it down so we get a better reading
 SpeedS 50
 	
-	Go ScanCenter3 - PanelOffset CP  ' Use CP so it's not jumpy
+	Go PreScan - PanelOffset CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move ScanCenterLong - PanelOffset CP Till Sw(LaserGo)
+	Move ScanLong - PanelOffset CP Till Sw(LaserGo)
 	
 	If TillOn = False Then
 	'If we think we have a panel and we actually dotn have one then should re-pop a panel?
@@ -114,12 +114,12 @@ SpeedS 50
 	d1 = CY(CurPos)
 	
 	ChangeProfile("00")
-	Move (ScanCenter3 - PanelOffset) :U(CU(CurPos))
-	Go (ScanCenter3 - PanelOffset) +U(180) CP  ' Use CP so it's not jumpy
+	Move (PreScan - PanelOffset) :U(CU(CurPos))
+	Go (PreScan - PanelOffset) +U(180) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move (ScanCenterLong - PanelOffset) :U(CU(CurPos)) CP Till Sw(laserGo)
+	Move (ScanLong - PanelOffset) :U(CU(CurPos)) CP Till Sw(LaserGo)
 	d2 = CY(CurPos)
 	yOffset = (d2 - d1) /2 ' I dont think its /2
 	
@@ -129,12 +129,12 @@ SpeedS 50
 	d2 = 0
 	
 	ChangeProfile("00")
-	Move (ScanCenter3 - PanelOffset) :U(CU(CurPos))
-	Go (ScanCenter3 - PanelOffset) +U(90) CP  ' Use CP so it's not jumpy
+	Move (PreScan - PanelOffset) :U(CU(CurPos))
+	Go (PreScan - PanelOffset) +U(90) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move (ScanCenterShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(laserGo)
+	Move (ScanShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(LaserGo)
 	
 	If TillOn = False Then
 		erPanelStatusUnknown = True
@@ -150,12 +150,12 @@ SpeedS 50
 	d1 = CY(CurPos)
 
 	ChangeProfile("00")
-	Move (ScanCenter3 - PanelOffset) :U(CU(CurPos))
-	Go (ScanCenter3 - PanelOffset) +U(270) CP  ' Use CP so it's not jumpy
+	Move (PreScan - PanelOffset) :U(CU(CurPos))
+	Go (PreScan - PanelOffset) +U(270) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move (ScanCenterShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(laserGo)
+	Move (ScanShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(LaserGo)
 	d2 = CY(CurPos)
 
 	xOffset = (d2 - d1) /2  ' I dont think its /2P23 - RotatedOffset
@@ -165,8 +165,8 @@ SpeedS 50
 	d1 = 0
 	d2 = 0
 	ChangeProfile("00")
-	Move (ScanCenter3 - PanelOffset) :U(CU(CurPos))
-	Go (scancenter3 - PanelOffset)
+	Move (PreScan - PanelOffset) :U(CU(CurPos))
+	Go (PreScan - PanelOffset)
 	
 	PanelOffset = PanelOffset :X(xOffset) :Y(yOffset) 'update offset point
 	Print "PanelOffset:", PanelOffset
