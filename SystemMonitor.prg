@@ -250,9 +250,25 @@ Do While True
 		stackLightAlrmCC = False
 	EndIf
 	
-	
-	
-	
+	If PauseOn = True And pauseFlag = False Then
+		pausepos = Here ' save the location where it paused
+		Print pausepos
+		pauseFlag = True
+	ElseIf PauseOn = False And pauseFlag = True Then
+		Real distx, disty, distz, distance
+		pauseFlag = False
+		
+		distx = Abs(CX(pausepos) - CX(Here))
+		disty = Abs(CY(pausepos) - CY(Here))
+		distz = Abs(CZ(pausepos) - CZ(Here))
+		distance = Sqr(distx * distx + disty * disty) ' How the hell do you square numbers?
+
+		If distance > 25 Or distz > 25 Then
+			Print "panel fails"
+		EndIf
+		
+	EndIf
+		
 Loop
 
 	errHandler:

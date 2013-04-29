@@ -1,5 +1,5 @@
-ENVT0100,LM:2013/04/29 15:59:46:982,DS:0000002479,CS:06456,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="InspectionStation.prg"
+ENVT0100,LM:2013/04/29 22:43:32:295,DS:0000002474,CS:28260,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="SystemMonitor.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
@@ -61,10 +61,10 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-144
-		nTop=24
-		nWidth=1103
-		nHeight=746
+		nLeft=308
+		nTop=55
+		nWidth=1245
+		nHeight=743
 	}
 }
 ProgramFile7 {
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=False
 	Window {
-		nLeft=365
-		nTop=217
+		nLeft=605
+		nTop=136
 		nWidth=751
 		nHeight=485
 	}

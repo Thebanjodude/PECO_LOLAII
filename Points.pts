@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/04/26 19:44:40:236,DS:0000002099,CS:20343,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/29 22:21:38:498,DS:0000002299,CS:14191,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=10
+nNumberOfPoints=11
 Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
@@ -167,6 +167,24 @@ Point9 {
 Point10 {
 	nNumber=10
 	sLabel="RotatedOffset"
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point11 {
+	nNumber=12
+	sLabel="currentpositon"
 	sDescription=""
 	rX=0
 	rY=0

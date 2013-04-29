@@ -10,7 +10,7 @@ Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
 #define Preinspection False
 #define Inspection True
-Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo
+Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
 
 'Commands from HMI
 Global Boolean jobDone

@@ -1,11 +1,11 @@
-ENVT0100,LM:2013/04/29 15:01:26:158,DS:0000003654,CS:06983,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/29 22:43:20:169,DS:0000003659,CS:00118,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="4/29/2013 8:55:46 AM"
-	bBuildComplete=True
+	sLastModified="4/29/2013 4:24:25 PM"
+	bBuildComplete=False
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
@@ -58,9 +58,9 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="SystemMonitor.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
-	sTimeSavedInController="4/19/2013 7:13:17 PM"
+	sTimeSavedInController="4/29/2013 10:25:32 PM"
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
@@ -78,12 +78,12 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="4/24/2013 6:02:24 PM"
+	sTimeSavedInController="4/29/2013 10:20:39 PM"
 }
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="4/26/2013 7:44:40 PM"
+	sTimeSavedInController="4/29/2013 10:21:38 PM"
 }
 OperatorSettings {
 	OperatorWindow {
