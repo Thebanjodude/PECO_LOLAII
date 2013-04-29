@@ -23,25 +23,17 @@ Do While True
 	stackLightGrnCC = False
 	
 	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False And HotStakeTempRdy() = True Then
-		Print "doing a job"
-		
-		PanelOffset = PanelOffset :X(0) :Y(0) :Z(0) :U(0)
-		
-'		PickUpPanel()
-		
 		stackLightGrnCC = True
-'		Wait 1
+		PanelOffset = PanelOffset :X(0) :Y(0) :Z(0) :U(0) 'Reinitialize PanelOffset to zero for every new panel
+	
 '		PopPanel() ' Go to input magazine and pick up a panel
-		FindPickUpError()
-		DerivethetaR()
-'		InspectPanel(Preinspection) 'Look for pre-existing inserts, set flags
-		
-'		DropOffPanel()
+'		FindPickUpError()
+'		DerivethetaR()
+'		InspectPanel(Preinspection) 'Look for pre-existing inserts, set flags		
 '		HotStakePanel() ' Take panel to hot stake machine; install all inserts
 '		FlashRemoval() ' Take panel to flash removal station, remove all flash as required
-		InspectPanel(Inspection) ' Take Panel to scanner 
+'		InspectPanel(Inspection) ' Take Panel to scanner 
 '		PushPanel() ' Take Panel to output magazine and drop it off
-'		Pause
 	EndIf
 
 Loop
@@ -61,7 +53,6 @@ Loop
 		Print "Error Task Number:", ctrlrTaskNumber
 		Print "Error AxisNumber:", ctrlrErrAxisNumber
 		Print "Error Number:", ctrlrErrorNum
-		
 		Pause
 	EResume
 		
@@ -69,15 +60,13 @@ Fend
 Function PowerOnSequence()
 	
 	retry:
-'	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
+	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
 	
 	Motor On
 	Power Low
-	Speed 20
+	Speed 20 'Paramterize these numbers
 	Accel 50, 50
 	
-	Print "ready"
-
 	' define the connection to the LASER
     SetNet #203, "10.22.251.171", 7351, CR, NONE, 0
     OpenNet #203 As Client
@@ -179,21 +168,17 @@ Function PowerOnHomeCheck() As Boolean
 	distx = Abs(CX(CurPos) - CX(PreScan))
 	disty = Abs(CY(CurPos) - CY(PreScan))
 	distz = Abs(CZ(CurPos) - CZ(PreScan))
-	Print "x", distx
-	Print "y", disty
-	Print "z", distz
 	
 	distance = Sqr(distx * distx + disty * disty) ' How the hell do you square numbers?
-'	Print "distance", distance
 
-	If distance > startUpDistMax Then
+	If distance > startUpDistMax Then 'Check is the position is close to home. If not throw error
 		erRobotNotAtHome = True
 		PowerOnHomeCheck = False
-		Print "Distance NOT OK,distance"
+		Print "Distance NOT OK, distance"
 	ElseIf Abs(distz) > startUpHeight Then
 		erRobotNotAtHome = True
 		PowerOnHomeCheck = False
-		Print "Distance NOT OK,z"
+		Print "Distance NOT OK, z"
 	Else
 		erRobotNotAtHome = False
 		PowerOnHomeCheck = True
@@ -203,22 +188,18 @@ Function PowerOnHomeCheck() As Boolean
 	If Hand(Here) = 2 Then ' throw the error if the arm is in "lefty" orientation
 		erRobotNotAtHome = True
 		PowerOnHomeCheck = False
-		Print "Orientation NOT OK"
+		Print "Arm Orientation NOT OK"
 	Else
 		erRobotNotAtHome = False
 		PowerOnHomeCheck = True
 		Print "Arm Orientation OK"
 	EndIf
-
 	
-	If PowerOnHomeCheck = False Then
+	If PowerOnHomeCheck = False Then ' When false free all the joints to opperator can move
 		Motor On
 		SFree 1, 2, 3, 4
 		Print "move robot to home position"
-'		Do Until UserAck = True
-'			Wait .1
-'		Loop
-	Pause
+		Pause
 	EndIf
 		
 Fend

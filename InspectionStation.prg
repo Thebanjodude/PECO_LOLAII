@@ -3,7 +3,7 @@
 Function InspectPanel(HoleInspect As Boolean)
 	'	HoleInspect As Boolean
 
-	Go ScanCenter3 ' Collision Avoidance Waypoint	
+	Go PreScan ' Collision Avoidance Waypoint	
 
 	SystemStatus = InspectingPanel
 
@@ -11,10 +11,8 @@ Function InspectPanel(HoleInspect As Boolean)
 	Real beta, mu, m1, m2, r1, phi, rho
 	Real y1, y2, y3, dy, dx, deltaRotX, deltaRotY
 	Real RightOffset, LeftOffset
-
   	
 	GetThetaR() 'get first r and theta
-'	FindPickUpError()
 	PanelArrayIndex = 0
 
 	Redim InspectionArray(22, 1) ' Make the arrays big enough to fit all the panels
@@ -73,22 +71,22 @@ Function InspectPanel(HoleInspect As Boolean)
 			If j <> 0 Then
 				RotatePanelOffset(Theta)
 			EndIf
-			P23 = (scancenter5) -Y(r) -U(Theta)
+'			P23 = (scancenter5) -Y(r) -U(Theta)
 		ElseIf Theta = 90 Then
 			If j <> 0 Then
 				RotatePanelOffset(Theta)
 			EndIf
-			P23 = (scancenter5) -Y(r) -U(Theta)
+'			P23 = (scancenter5) -Y(r) -U(Theta)
 		ElseIf Theta = 180 Then
 			If j <> 0 Then
 				RotatePanelOffset(Theta)
 			EndIf
-			P23 = (scancenter5) -Y(r) -U(Theta)
+'			P23 = (scancenter5) -Y(r) -U(Theta)
 		ElseIf Theta = 270 Then
 			If j <> 0 Then
 				RotatePanelOffset(Theta)
 			EndIf
-			P23 = (scancenter5) -Y(r) -U(Theta)
+'			P23 = (scancenter5) -Y(r) -U(Theta)
 		ElseIf (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
 			If j <> 0 Then
 				RotatePanelOffset(Theta)
@@ -97,7 +95,7 @@ Function InspectPanel(HoleInspect As Boolean)
 			phi = Theta + rho
 			RotatePanelOffset(phi)
 			Print "phi:", phi
-            P23 = (scancenter5) -Y(r) -U(phi)
+'            P23 = (scancenter5) -Y(r) -U(phi)
 
 			dy = r - (r * Cos(DegToRad(rho)))
 	       	dx = r * Sin(DegToRad(rho))
@@ -111,7 +109,7 @@ Function InspectPanel(HoleInspect As Boolean)
 			phi = Theta - rho
 			RotatePanelOffset(phi)
 			Print "phi:", phi
-            P23 = (scancenter5) -Y(r) -U(phi)
+'            P23 = (scancenter5) -Y(r) -U(phi)
 
 			dy = r - (r * Cos(DegToRad(rho)))
 	       	dx = r * Sin(DegToRad(rho))
@@ -187,6 +185,7 @@ Function MeasureInsertDepth()
 	'Get the right Spot face measurement, see if it is in spec and save the data to two arrays 
 	InspectionArray(PanelArrayIndex, RightSpotFace) = MicroMetersToInches(GetLaserMeasurement("11"))
 	PassFailArray(PanelArrayIndex, RightSpotFace) = PassOrFail(InspectionArray(PanelArrayIndex, RightSpotFace))
+	
 	PrintInspectionArray()
 	
 Fend
@@ -231,6 +230,7 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
     i = ChkNet(203)
     If i > 0 Then
     	Read #203, response$, i
+    	Print response$
     	NumTokens = ParseStr(response$, Tokens$(), ",")
 	EndIf
 	
@@ -376,18 +376,6 @@ Function UnpackPassFailArray()
 	hole22PF = PassFailArray(22, LeftSpotFace) Or PassFailArray(22, RightSpotFace)
 	
 Fend
-'Function PickUpPanel
-'	suctionCupsCC = False
-'	Go ScanCenter3 :U(CU(CurPos))
-'	Go PrePickUp2 - PickUpOffset
-'	Go PickUp2 - PickUpOffset
-'	suctionCupsCC = True
-'	Wait suctionWaitTime
-'	Go PrePickUp2 - PickUpOffset
-'	Go ScanCenter3 :U(CU(CurPos))
-'	Go ScanCenter3
-'	Pause
-'Fend
 Function RotatePanelOffset(angle As Real)
 		
 		'Compute the rotated X,Y and U PanelOffset components

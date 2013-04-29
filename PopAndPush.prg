@@ -5,84 +5,79 @@ Function PopPanel()
 	Print "poping Panel"
 	SystemStatus = PickingPanel
 	
-	hsDataTransferRdy = True ' set flag for hmi to readout 
-	
-	Do Until hsDataTransferACK = True ' do not proceed until the hmi is finished getting data
-		Wait .01
-	Loop
-	
 retry:
 
-	Do Until inMagIntlock = False 'And hmiAck = True
-		Wait .1 ' wait for user to close inmaginterlock
+	Do Until inMagIntlock = False
+		Wait .1 ' Wait for user to close inmaginterlock
 	Loop
 	
 '	WaitSig InMagPickUpSignal ' Wait for inmag to confirm a panel is ready to be picked up
-	
-	suctionCupsCC = True
+
 	Jump InMagCenter LimZ zLimit Sense Sw(inMagIntlockH) = True
 	
-	If JS = False Then ' Jump executed normally
+	If JS = False Then ' Jump executed without inmag interlock being opened
+		suctionCupsCC = True
 		Wait suctionWaitTime ' Allow time for cups to seal on panel
-		SystemStatus = MovingPanel
-'		Jump ScanCenter LimZ zLimit ' Collision Avoidance Waypoint
+		Jump Prescan LimZ zLimit
 '		Signal InMagRobotClearSignal ' Give permission for input magazine to queue up next panel
 	Else
 		GoTo retry 'Interlock was opened during jump
 	EndIf
-	
-'	FindPickUpError() ' after we pick up a panel, find the pickup offsets
 
-	hsDataTransferRdy = False 'reset flag	
+	SystemStatus = MovingPanel
 	Go PreScan 'Go Home
 	
 Fend
 Function PushPanel()
 	
-	Print "Pushing a panel"
 	SystemStatus = DepositingPanel
 	PanelPassedInspection = True ' fake it for testing	
 '	PanelPassedInspection = False ' rest flag
+
+	hsDataTransferRdy = True ' Tell HMI to readout hole data 	
+
+	Do Until hsDataTransferACK = True ' Do not proceed until the hmi is finished getting hole data
+		Wait .1
+	Loop
 	
 	If PanelPassedInspection = False Then
-	'	Jump PanelFailDropOffPoint LimZ Zlimit
+'		Jump PanelFailDropOffPoint LimZ zLimit
 		suctionCups = False
-		Wait 1 ' Give time for panel to relese from suction cups
+		Wait suctionWaitTime ' Allow time for cups to unseal
 		erPanelFailedInspection = True
 		Pause
 	Else
 		retry:
 		
 		Do Until outMagInt = False
-			Wait .25 ' Wait for output magazine interlock door to close
+			Wait .1 ' Wait for output magazine interlock door to close
 		Loop
 		
 '		WaitSig OutMagDropOffSignal
 		
 		Jump OutMagCenter -Z(recPanelThickness) LimZ zLimit Sense Sw(outMagIntH) = True
 		
-		If JS = False Then
+		If JS = False Then ' Jump executed without outmag interlock being opened
 			suctionCups = False
-			SystemStatus = MovingPanel
-			Jump PreScan LimZ zLimit ' Collision Avoidance Waypoint
-'			Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel
+			Wait suctionWaitTime ' Allow time for cups to unseal				
+			Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel
 		Else
 			GoTo retry ' interlock was opened during a jump
 		EndIf
+		
+		jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have finished	
 		
 		If jobNumPanelsDone = jobNumPanels Then
 			jobDone = True ' We have finished the run, don't execute the main loop
 		EndIf
 		
-		Print "jobdone", jobDone
-		
-		jobNumPanelsDone = jobNumPanelsDone + 1 ' Increments how many panels we have finished
-			
-		Go PreScan
+	EndIf
+	
+		hsDataTransferRdy = False 'reset flag	
+		SystemStatus = MovingPanel
+		Go PreScan ' Go home
 		
 '		Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
-		
-	EndIf
 	
 Fend
 Function FindPickUpError()

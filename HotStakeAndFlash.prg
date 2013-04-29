@@ -1,9 +1,6 @@
 #include "Globals.INC"
 
 Function HotStakePanel()
-	
-'	FindPickUpError()
-	
 	SystemStatus = InstallingInserts
 
 	Boolean SkippedHole
@@ -14,7 +11,6 @@ Function HotStakePanel()
 
 '	GetPanelArray()
 	GetThetaR()
-	zLimit = -135
 
 	For k = 0 To recNumberOfHoles - 1
 		
@@ -31,9 +27,8 @@ Function HotStakePanel()
 		EndIf
 
 		If SkippedHole = False Then 'If the flag is set then we have finished all holes
-		
+'!!!! Change the 45 deg to whatever the angles really are		
          	P23 = HotStakeCenter -Y(Sin(45) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(45) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 135)
-			Print P23
 			Jump P23 LimZ zLimit
 						
 'Comment this out for testing						
@@ -46,9 +41,7 @@ Function HotStakePanel()
 '		If HSPanelPresntCC = True Then
 '			hsInstallInsrtCC = True
 '		'	wait ? ' Wait for heatstake machine to receive the signal, time based or event based, im not sure yet
-'			hsInstallInsrtCC = False
-'			stackLightYelCC = True
-'            stackLightAlrmCC = True
+
 '		Else
 '            erPanelStatusUnknown = True
 '            stackLightYelCC = True
@@ -56,28 +49,22 @@ Function HotStakePanel()
 '            Pause
 '		EndIf
 '			Wait .4 ' Instead of wait, this is where the feedback from the HS Station will be
+'			hsInstallInsrtCC = False 'reset flag
 		EndIf
 
 	Next
 	
 	SystemStatus = MovingPanel
-'	Go ScanCenter ' Collision Avoidance Waypoint
+'	Go PreScan 'Go Home
 	
 Fend
 Function FlashRemoval()
-	
-'	FindPickUpError()
- 
-	Print "removing flash"
 
 	SystemStatus = RemovingFlash
 	
 	PrintPanelArray()
-	Pause
 	
-'	DerivethetaR()
-	
-	recFlashRequired = True ' for testing
+	recFlashRequired = True ' fake for testing
 	If recFlashRequired = False Then GoTo SkipFlash
 	
 	Boolean SkippedHole

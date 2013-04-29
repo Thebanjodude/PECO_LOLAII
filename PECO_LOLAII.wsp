@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/04/26 21:02:05:841,DS:0000002471,CS:31354,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Main.prg"
+ENVT0100,LM:2013/04/29 15:59:46:982,DS:0000002479,CS:06456,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InspectionStation.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=309
-		nTop=76
-		nWidth=1176
-		nHeight=678
+		nLeft=38
+		nTop=81
+		nWidth=1175
+		nHeight=674
 	}
 }
 ProgramFile2 {
@@ -17,21 +17,21 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=26
-		nTop=139
-		nWidth=1583
-		nHeight=681
+		nLeft=-9
+		nTop=71
+		nWidth=1581
+		nHeight=677
 	}
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=193
+		nLeft=49
 		nTop=35
-		nWidth=1315
-		nHeight=801
+		nWidth=1313
+		nHeight=797
 	}
 }
 ProgramFile4 {
@@ -39,10 +39,10 @@ ProgramFile4 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=470
-		nTop=180
-		nWidth=1105
-		nHeight=535
+		nLeft=51
+		nTop=18
+		nWidth=1196
+		nHeight=772
 	}
 }
 ProgramFile5 {
@@ -61,10 +61,10 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=0
+		nLeft=-144
 		nTop=24
-		nWidth=1104
-		nHeight=749
+		nWidth=1103
+		nHeight=746
 	}
 }
 ProgramFile7 {
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=698
-		nTop=52
-		nWidth=1215
-		nHeight=686
+		nLeft=269
+		nTop=42
+		nWidth=1214
+		nHeight=683
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=238
-		nTop=216
-		nWidth=1425
-		nHeight=670
+		nLeft=85
+		nTop=90
+		nWidth=1421
+		nHeight=662
 	}
 }
 nIncludeFileCount=1
@@ -95,10 +95,10 @@ IncludeFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=221
-		nTop=253
-		nWidth=1345
-		nHeight=551
+		nLeft=91
+		nTop=152
+		nWidth=1344
+		nHeight=547
 	}
 }
 nPointFileCount=1
@@ -127,10 +127,10 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=742
-		nTop=36
-		nWidth=919
-		nHeight=698
+		nLeft=663
+		nTop=29
+		nWidth=1001
+		nHeight=758
 	}
 }
 IOLabelEditor {
