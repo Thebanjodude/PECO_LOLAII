@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/04/29 22:21:38:498,DS:0000002299,CS:14191,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/30 13:15:42:099,DS:0000002293,CS:22025,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=11
@@ -184,7 +184,7 @@ Point10 {
 }
 Point11 {
 	nNumber=12
-	sLabel="currentpositon"
+	sLabel="pausepos"
 	sDescription=""
 	rX=0
 	rY=0

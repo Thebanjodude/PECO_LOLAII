@@ -21,6 +21,7 @@ Do While True
 	RecEntryMissing = False
 	ParamEntryMissing = False
 	stackLightGrnCC = False
+	'end fake
 	
 	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False And HotStakeTempRdy() = True Then
 		stackLightGrnCC = True
@@ -60,12 +61,14 @@ Fend
 Function PowerOnSequence()
 	
 	retry:
-	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
+'	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
 	
 	Motor On
 	Power Low
 	Speed 20 'Paramterize these numbers
 	Accel 50, 50
+	
+	SFree 1, 2, 3, 4 ' to test pause then move scenario 
 	
 	' define the connection to the LASER
     SetNet #203, "10.22.251.171", 7351, CR, NONE, 0
@@ -80,8 +83,8 @@ Function PowerOnSequence()
 	Xqt 7, InMagControl, Normal ' First state is lowering 
 	Xqt 8, OutMagControl, Normal ' First state is raising 
 	
-	Move PreScan :U(CU(CurPos)) ' go home
-	Move PreScan ' go home
+'	Move PreScan :U(CU(CurPos)) ' go home
+'	Move PreScan ' go home
 	
 Fend
 Function SetInitialValues()
@@ -159,11 +162,10 @@ Function HotStakeTempRdy() As Boolean
 Fend
 Function PowerOnHomeCheck() As Boolean
 	
-'TODO:check for leftyness and rightness!!
-	
 	Real distx, disty, distz, distance
-	#define startUpDistMax 150 '+/-300mm from home position
-	#define startUpHeight 25 ' +/-10mm from home position
+'TODO: Parameterize these #defines?
+	#define startUpDistMax 150 '+/-150mm from home position
+	#define startUpHeight 25 ' +/-25mm from home position
 	
 	distx = Abs(CX(CurPos) - CX(PreScan))
 	disty = Abs(CY(CurPos) - CY(PreScan))
@@ -195,7 +197,7 @@ Function PowerOnHomeCheck() As Boolean
 		Print "Arm Orientation OK"
 	EndIf
 	
-	If PowerOnHomeCheck = False Then ' When false free all the joints to opperator can move
+	If PowerOnHomeCheck() = False Then ' When false free all the joints so opperator can move
 		Motor On
 		SFree 1, 2, 3, 4
 		Print "move robot to home position"

@@ -6,13 +6,10 @@ Function SystemMonitor()
 	
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 	
-Boolean InMagInterlockFlag, OutMagInterlockFlag, ReturnFromEstopFlag, safeGuardInputFlag
-Boolean frontInterlockFlag, backInterlockFlag, LeftInterlockFlag, RightInterlockFlag
-Boolean airPressHighFlag, cbMonHeatStakeFlag, cbMonBowlFederFlag, airPressLowFlag
-Boolean cbMonInMagFlag, cbMonOutMagFlag, cbMonPAS24vdcFlag, dcPwrOkFlag
-Boolean cbMonFlashRmvFlag, cbMonSafetyFlag, cbMonDebrisRmvFlag, cbMonPnumaticFlag
- 	
+
 ' Monitor System Pressures, voltages, interlocks, Hot Stake Machine, CBs, E-stop, and ctrlr errors
+
+' I may want to modify the lights and alarm to only be turned on or off at one place
 
 Do While True
 	
@@ -43,7 +40,7 @@ Do While True
 	If frontIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erFrontSafetyFrameOpen = True
 		stackLightYelCC = True
-		Pause
+'		Pause
 	Else
 	 	erFrontSafetyFrameOpen = False
 		stackLightYelCC = False
@@ -52,7 +49,7 @@ Do While True
 	If frontIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
 		erFrontSafetyFrameOpen = True
 		stackLightYelCC = True
-		Pause
+'		Pause
 	Else
 	 	erFrontSafetyFrameOpen = False
 		stackLightYelCC = False
@@ -61,7 +58,7 @@ Do While True
 	If backIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erBackSafetyFrameOpen = True
 		stackLightYelCC = True
-		Pause
+'		Pause
 	Else
 	 	erBackSafetyFrameOpen = False
 		stackLightYelCC = False
@@ -70,7 +67,7 @@ Do While True
 	If backIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
 		erBackSafetyFrameOpen = True
 		stackLightYelCC = True
-		Pause
+'		Pause
 	Else
 	 	erBackSafetyFrameOpen = False
 		stackLightYelCC = False
@@ -79,7 +76,7 @@ Do While True
 	If leftIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erLeftSafetyFrameOpen = True
 		stackLightYelCC = True
-		Pause
+'		Pause
 	Else
 	 	erLeftSafetyFrameOpen = False
 		stackLightYelCC = False
@@ -88,7 +85,7 @@ Do While True
 	If leftIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
 		erLeftSafetyFrameOpen = True
 		stackLightYelCC = True
-		Pause
+'		Pause
 	Else
 	 	erLeftSafetyFrameOpen = False
 		stackLightYelCC = False
@@ -97,7 +94,7 @@ Do While True
 	If rightIntlock = True Then ' If an interlock gets tripped then halt the state machine
 		erRightSafetyFrameOpen = True
 		stackLightYelCC = True
-		Pause
+'		Pause
 	Else
 	 	erRightSafetyFrameOpen = False
 		stackLightYelCC = False
@@ -107,20 +104,17 @@ Do While True
 		erHighPressure = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-		airPressHighFlag = True
-		Pause
-	ElseIf airPressHigh = False And airPressHighFlag = True Then
+'		Pause
+	Else
 		erHighPressure = False
-		airPressHighFlag = False
 	EndIf
 	
 	If airPressLow = True Then
 		erLowPressure = True
-		airPressLowFlag = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-		Pause
-	ElseIf airPressLow = False And airPressLowFlag = True Then
+'		Pause
+	Else
 		erLowPressure = False
 		stackLightRedCC = False
 		stackLightAlrmCC = False
@@ -130,7 +124,7 @@ Do While True
 		erHeatStakeBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-		Pause
+'		Pause
 	Else
 		erHeatStakeBreaker = False
 		stackLightRedCC = False
@@ -141,19 +135,18 @@ Do While True
 		erInMagBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-		Pause
+'		Pause
 	Else
 		erInMagBreaker = False
 		stackLightRedCC = False
 		stackLightAlrmCC = False
-
 	EndIf
 	
 	If cbMonOutMag = True Then
 		erOutMagBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-		Pause
+'		Pause
 	Else
 		erOutMagBreaker = False
 		stackLightRedCC = False
@@ -164,7 +157,7 @@ Do While True
 		erDebrisRemovalBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-		Pause
+'		Pause
 	Else
 		stackLightRedCC = False
 		stackLightAlrmCC = False
@@ -176,6 +169,7 @@ Do While True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
 		erSafetySystemBreaker = True
+'		pause
 	Else
 		stackLightRedCC = False
 		stackLightAlrmCC = False
@@ -186,7 +180,7 @@ Do While True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
 		erDCPowerHeatStake = True
-		Pause
+'		Pause
 	Else
 		stackLightRedCC = False
 		stackLightAlrmCC = False
@@ -196,7 +190,7 @@ Do While True
 	
 	'Heat stake temp checking 
 	If HotStakeTempRdy = False Then
-		Pause
+'		Pause
 	EndIf
 	
 	If EStopOn = True Then
@@ -214,6 +208,7 @@ Do While True
 		erInMagLowSensorBad = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
+'		pause
 	Else
 		erInMagLowSensorBad = False
 		stackLightRedCC = False
@@ -224,6 +219,7 @@ Do While True
 		erInMagUpSensorBad = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
+'		pause		
 	Else
 		erInMagUpSensorBad = False
 		stackLightRedCC = False
@@ -234,6 +230,7 @@ Do While True
 		erOutMagLowSensorBad = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
+'		pause		
 	Else
 		erOutMagLowSensorBad = False
 		stackLightRedCC = False
@@ -244,6 +241,7 @@ Do While True
 		erOutMagUpSensorBad = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
+'		pause
 	Else
 		erOutMagUpSensorBad = False
 		stackLightRedCC = False
@@ -251,22 +249,28 @@ Do While True
 	EndIf
 	
 	If PauseOn = True And pauseFlag = False Then
-		pausepos = Here ' save the location where it paused
-		Print pausepos
+		' Change this from P50 to a lable so it doesn't get overwritten
+		P50 = Here ' save the location where it paused
+		Print P50
 		pauseFlag = True
+
 	ElseIf PauseOn = False And pauseFlag = True Then
 		Real distx, disty, distz, distance
 		pauseFlag = False
-		
-		distx = Abs(CX(pausepos) - CX(Here))
-		disty = Abs(CY(pausepos) - CY(Here))
-		distz = Abs(CZ(pausepos) - CZ(Here))
+		distx = Abs(CX(P50) - CX(Here))
+		disty = Abs(CY(P50) - CY(Here))
+		distz = Abs(CZ(P50) - CZ(Here))
 		distance = Sqr(distx * distx + disty * disty) ' How the hell do you square numbers?
-
-		If distance > 25 Or distz > 25 Then
+'TODO: Parameterize these?
+		If distance > 25 Or distz > 15 Then
 			Print "panel fails"
+			erIllegalArmMove = True
+			'is there a way to have the opperator catch the panel?
+			Quit All
+		Else
+			erIllegalArmMove = False
 		EndIf
-		
+				
 	EndIf
 		
 Loop

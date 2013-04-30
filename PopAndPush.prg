@@ -39,7 +39,7 @@ Function PushPanel()
 	Do Until hsDataTransferACK = True ' Do not proceed until the hmi is finished getting hole data
 		Wait .1
 	Loop
-	
+
 	If PanelPassedInspection = False Then
 '		Jump PanelFailDropOffPoint LimZ zLimit
 		suctionCups = False

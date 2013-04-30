@@ -97,7 +97,7 @@ Global Boolean erInMagCrowding, erOutMagFull, erOutMagOpenInterlock
 Global Boolean erLaserScanner, erDCPower, erDCPowerHeatStake, erHeatStakeTemp
 Global Boolean erHeatStakeBreaker, erBowlFeederBreaker, erInMagBreaker
 Global Boolean erOutMagBreaker, erFlashBreaker, erDebrisRemovalBreaker
-Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180
+Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180, erIllegalArmMove
 Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing, erRobotNotAtHome
 Global Boolean RecEntryMissing, ParamEntryMissing
 Global Boolean erInMagLowSensorBad, erInMagUpSensorBad, erOutMagLowSensorBad, erOutMagUpSensorBad

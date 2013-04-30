@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/04/29 22:43:32:295,DS:0000002474,CS:28260,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/04/30 19:30:34:903,DS:0000002478,CS:05707,MA:6C-F0-49-E2-45-75,EI:           
 sActiveChild="SystemMonitor.prg"
 bMdiMaximized=False
 ProgramFile1 {
@@ -6,15 +6,15 @@ ProgramFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=38
-		nTop=81
-		nWidth=1175
-		nHeight=674
+		nLeft=480
+		nTop=51
+		nWidth=1342
+		nHeight=609
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=-9
@@ -25,7 +25,7 @@ ProgramFile2 {
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=49
@@ -36,7 +36,7 @@ ProgramFile3 {
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=51
@@ -61,26 +61,26 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=308
-		nTop=55
-		nWidth=1245
-		nHeight=743
+		nLeft=15
+		nTop=15
+		nWidth=1241
+		nHeight=735
 	}
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=269
-		nTop=42
-		nWidth=1214
-		nHeight=683
+		nLeft=22
+		nTop=107
+		nWidth=1213
+		nHeight=679
 	}
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=85
@@ -92,7 +92,7 @@ ProgramFile8 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=91
@@ -127,10 +127,10 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=663
-		nTop=29
-		nWidth=1001
-		nHeight=758
+		nLeft=610
+		nTop=6
+		nWidth=1091
+		nHeight=823
 	}
 }
 IOLabelEditor {
@@ -138,27 +138,27 @@ IOLabelEditor {
 	Window {
 		nLeft=287
 		nTop=76
-		nWidth=1034
-		nHeight=688
+		nWidth=1033
+		nHeight=685
 	}
 	nWinState=0
 }
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=1209
-		nTop=256
+		nLeft=1257
+		nTop=221
 		nWidth=520
-		nHeight=522
+		nHeight=518
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=395
-		nTop=184
-		nWidth=672
-		nHeight=455
+		nLeft=133
+		nTop=207
+		nWidth=671
+		nHeight=451
 	}
 }
 Macros {
