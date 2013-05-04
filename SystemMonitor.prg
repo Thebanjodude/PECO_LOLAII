@@ -104,6 +104,7 @@ Do While True
 		erHighPressure = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
+		'Turn off main air supply to the machine! Do we even have one?
 '		Pause
 	Else
 		erHighPressure = False
@@ -253,7 +254,6 @@ Do While True
 		P50 = Here ' save the location where it paused
 		Print P50
 		pauseFlag = True
-
 	ElseIf PauseOn = False And pauseFlag = True Then
 		Real distx, disty, distz, distance
 		pauseFlag = False

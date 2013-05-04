@@ -1,18 +1,16 @@
 #include "Globals.INC"
 
-Function PopPanel()
-	
-	Print "poping Panel"
-	SystemStatus = PickingPanel
-	
+Function PopPanel() As Boolean
+    
 retry:
 
-	Do Until inMagIntlock = False
-		Wait .1 ' Wait for user to close inmaginterlock
-	Loop
+	If inMagIntlock = True Then
+		PopPanel = False
+		Pause
+		GoTo exitPopPanel
+	EndIf
 	
 '	WaitSig InMagPickUpSignal ' Wait for inmag to confirm a panel is ready to be picked up
-
 	Jump InMagCenter LimZ zLimit Sense Sw(inMagIntlockH) = True
 	
 	If JS = False Then ' Jump executed without inmag interlock being opened
@@ -23,12 +21,24 @@ retry:
 	Else
 		GoTo retry 'Interlock was opened during jump
 	EndIf
-
+	
+	PopPanel = True
 	SystemStatus = MovingPanel
+	
 	Go PreScan 'Go Home
 	
+	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have finished	
+	
+	If jobNumPanelsDone = jobNumPanels Then
+		jobDone = True ' We have finished the run, don't execute the main loop
+	EndIf
+	
+exitPopPanel:
+
+Print PopPanel
+    
 Fend
-Function PushPanel()
+Function PushPanel() As Boolean
 	
 	SystemStatus = DepositingPanel
 	PanelPassedInspection = True ' fake it for testing	
@@ -36,9 +46,11 @@ Function PushPanel()
 
 	hsDataTransferRdy = True ' Tell HMI to readout hole data 	
 
-	Do Until hsDataTransferACK = True ' Do not proceed until the hmi is finished getting hole data
-		Wait .1
-	Loop
+	hsDataTransferACK = True ' fake for testing	
+	If hsDataTransferACK = False Then
+		PushPanel = False
+		GoTo exitPushPanel
+	EndIf
 
 	If PanelPassedInspection = False Then
 '		Jump PanelFailDropOffPoint LimZ zLimit
@@ -49,35 +61,33 @@ Function PushPanel()
 	Else
 		retry:
 		
-		Do Until outMagInt = False
-			Wait .1 ' Wait for output magazine interlock door to close
-		Loop
+		If outMagInt = True Then
+			PushPanel = False
+			Pause
+			GoTo exitPushPanel
+		EndIf
 		
 '		WaitSig OutMagDropOffSignal
-		
+		Go Waypoint0
 		Jump OutMagCenter -Z(recPanelThickness) LimZ zLimit Sense Sw(outMagIntH) = True
 		
 		If JS = False Then ' Jump executed without outmag interlock being opened
-			suctionCups = False
+			suctionCupsCC = False
 			Wait suctionWaitTime ' Allow time for cups to unseal				
 			Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel
 		Else
 			GoTo retry ' interlock was opened during a jump
 		EndIf
 		
-		jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have finished	
-		
-		If jobNumPanelsDone = jobNumPanels Then
-			jobDone = True ' We have finished the run, don't execute the main loop
-		EndIf
-		
 	EndIf
 	
 		hsDataTransferRdy = False 'reset flag	
 		SystemStatus = MovingPanel
-		Go PreScan ' Go home
-		
+		Jump Waypoint0
+		PushPanel = True
 '		Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
+
+exitPushPanel:
 	
 Fend
 Function FindPickUpError()

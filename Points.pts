@@ -1,19 +1,19 @@
-ENVT0100,LM:2013/04/30 13:15:42:099,DS:0000002293,CS:22025,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/04 00:10:36:634,DS:0000002546,CS:14596,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=11
+nNumberOfPoints=12
 Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
 	sDescription=""
-	rX=0
-	rY=0
-	rZ=0
-	rU=0
+	rX=414.4
+	rY=468.63
+	rZ=-100
+	rU=45
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -24,14 +24,14 @@ Point2 {
 	nNumber=1
 	sLabel="OutMagCenter"
 	sDescription=""
-	rX=0
-	rY=0
-	rZ=0
-	rU=0
+	rX=414.4
+	rY=-163.83
+	rZ=-100
+	rU=45
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -132,14 +132,14 @@ Point8 {
 	nNumber=7
 	sLabel="PreScan"
 	sDescription=""
-	rX=0
-	rY=0
-	rZ=0
-	rU=0
+	rX=2.32
+	rY=354.021
+	rZ=-43.767
+	rU=45
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -194,6 +194,24 @@ Point11 {
 	rW=0
 	nLocal=0
 	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point12 {
+	nNumber=14
+	sLabel="Waypoint0"
+	sDescription=""
+	rX=349.346
+	rY=157.958
+	rZ=-25
+	rU=45
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0

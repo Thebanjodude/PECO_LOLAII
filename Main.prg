@@ -1,41 +1,55 @@
 #include "Globals.INC"
 
 Function main
+Integer NextState
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
+#define StateIdle 0
+#define StatePopPanel 1
+#define StatePushPanel 2
+'#define  3
+'#define  4
+'#define  5
+'#define  6
+
+inMagCurrentState = StateIdle
+jobStart = True
 Do While True
-
-	SystemStatus = Idle
 	
-	SetInitialValues() ' get rid of this during integration
-	CheckInitialParameters() ' Has the hmi has given us all the parameters we need to do a job?
+	Select inMagCurrentState
 		
-'	Print "jobStart ", jobStart
-'	Wait 1
-
-	' fake for testing
-	jobStart = True
-	RecEntryMissing = False
-	ParamEntryMissing = False
-	stackLightGrnCC = False
-	'end fake
+	Case StateIdle
+		SetInitialValues() ' get rid of this during integration
+		If CheckInitialParameters() = True And HotStakeTempRdy() = True And jobStart = True Then
+			NextState = StatePopPanel
+		Else
+			NextState = StateIdle
+		EndIf
+	Case StatePopPanel
+		If PopPanel = True Then
+			NextState = StatePushPanel
+			Print NextState
+		ElseIf abortJob = True Then
+			NextState = StateIdle
+		Else
+			NextState = StatePopPanel
+		EndIf
+	Case StatePushPanel
+		If PushPanel = True Then
+			NextState = StatePopPanel
+		Else
+			NextState = StatePushPanel
+		EndIf
+	Default
+		Print "Current State is Null" ' We should NEVER get here...
+		erUnknown = True
+		Pause
+	Send
 	
-	If jobStart = True And RecEntryMissing = False And ParamEntryMissing = False And jobDone = False And HotStakeTempRdy() = True Then
-		stackLightGrnCC = True
-		PanelOffset = PanelOffset :X(0) :Y(0) :Z(0) :U(0) 'Reinitialize PanelOffset to zero for every new panel
-	
-'		PopPanel() ' Go to input magazine and pick up a panel
-'		FindPickUpError()
-'		DerivethetaR()
-'		InspectPanel(Preinspection) 'Look for pre-existing inserts, set flags		
-'		HotStakePanel() ' Take panel to hot stake machine; install all inserts
-'		FlashRemoval() ' Take panel to flash removal station, remove all flash as required
-'		InspectPanel(Inspection) ' Take Panel to scanner 
-'		PushPanel() ' Take Panel to output magazine and drop it off
-	EndIf
+inMagCurrentState = NextState 'Set next state to current state after we break from case statment
 
 Loop
 
@@ -60,16 +74,6 @@ Loop
 Fend
 Function PowerOnSequence()
 	
-	retry:
-'	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
-	
-	Motor On
-	Power Low
-	Speed 20 'Paramterize these numbers
-	Accel 50, 50
-	
-	SFree 1, 2, 3, 4 ' to test pause then move scenario 
-	
 	' define the connection to the LASER
     SetNet #203, "10.22.251.171", 7351, CR, NONE, 0
     OpenNet #203 As Client
@@ -83,8 +87,18 @@ Function PowerOnSequence()
 	Xqt 7, InMagControl, Normal ' First state is lowering 
 	Xqt 8, OutMagControl, Normal ' First state is raising 
 	
-'	Move PreScan :U(CU(CurPos)) ' go home
-'	Move PreScan ' go home
+retry:
+
+	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
+	
+	Motor On
+	Power Low
+	Speed 20 'Paramterize these numbers
+	Accel 50, 50
+	QP (On) ' turn On quick pausing	
+	
+	Move PreScan :U(CU(CurPos)) ' go home
+	Move PreScan ROT ' go home
 	
 Fend
 Function SetInitialValues()
@@ -98,41 +112,31 @@ Function SetInitialValues()
 '	jobNumPanelsDone = 0
 '	jobNumPanels = 0
 Fend
-Function CheckInitialParameters()
+Function CheckInitialParameters() As Boolean
 'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
 'check if the hmi has pushed all the parameter values to the controller, if not throw an error 
 
 	'add in check that panelarray is nonzero
 	
 	If recInsertDepth = 0.0 Then
-		RecEntryMissing = True
+		CheckInitialParameters = True
 	ElseIf recInsertType = 0 Or recNumberOfHoles = 0 Then
-		RecEntryMissing = True
+		CheckInitialParameters = True
 	ElseIf recTemp = 0 Then
-		RecEntryMissing = True
+		CheckInitialParameters = True
 	Else
-		RecEntryMissing = False
+		CheckInitialParameters = False
 	EndIf
 	
-	If RecEntryMissing = True Then
-		erRecEntryMissing = True
-		stackLightYelCC = True
-	Else
-		erRecEntryMissing = False
-		stackLightYelCC = False
-	EndIf
-	
-'	Print "erRecEntryMissing", erRecEntryMissing
-
 	If AnvilZlimit = 0.0 Or suctionWaitTime = 0.0 Then
-		ParamEntryMissing = True
+		CheckInitialParameters = True
 	ElseIf SystemSpeed = 0 Or SystemAccel = 0 Then
-		ParamEntryMissing = True
+		CheckInitialParameters = True
 	Else
-		ParamEntryMissing = False
+		CheckInitialParameters = False
 	EndIf
 	
-	If ParamEntryMissing = True Then
+	If CheckInitialParameters = True Then
 		erParamEntryMissing = True
 		stackLightYelCC = True
 		stackLightAlrmCC = True
@@ -141,6 +145,8 @@ Function CheckInitialParameters()
 		stackLightYelCC = False
 		stackLightAlrmCC = False
 	EndIf
+	
+CheckInitialParameters = True 'fake for testing
 
 Fend
 Function HotStakeTempRdy() As Boolean
@@ -164,30 +170,26 @@ Function PowerOnHomeCheck() As Boolean
 	
 	Real distx, disty, distz, distance
 'TODO: Parameterize these #defines?
-	#define startUpDistMax 150 '+/-150mm from home position
-	#define startUpHeight 25 ' +/-25mm from home position
+	#define startUpDistMax 300 '+/-150mm from home position
 	
 	distx = Abs(CX(CurPos) - CX(PreScan))
 	disty = Abs(CY(CurPos) - CY(PreScan))
-	distz = Abs(CZ(CurPos) - CZ(PreScan))
 	
 	distance = Sqr(distx * distx + disty * disty) ' How the hell do you square numbers?
 
 	If distance > startUpDistMax Then 'Check is the position is close to home. If not throw error
 		erRobotNotAtHome = True
 		PowerOnHomeCheck = False
-		Print "Distance NOT OK, distance"
-	ElseIf Abs(distz) > startUpHeight Then
-		erRobotNotAtHome = True
-		PowerOnHomeCheck = False
-		Print "Distance NOT OK, z"
+'		Print "Distance NOT OK, distance"
 	Else
 		erRobotNotAtHome = False
 		PowerOnHomeCheck = True
-		Print "Distance OK"
+'		Print "Distance OK"
 	EndIf
 	
-	If Hand(Here) = 2 Then ' throw the error if the arm is in "lefty" orientation
+	Print Hand(Here)
+	
+	If Hand(Here) = 1 Then ' throw the error if the arm is in "righty" orientation
 		erRobotNotAtHome = True
 		PowerOnHomeCheck = False
 		Print "Arm Orientation NOT OK"
@@ -197,7 +199,7 @@ Function PowerOnHomeCheck() As Boolean
 		Print "Arm Orientation OK"
 	EndIf
 	
-	If PowerOnHomeCheck() = False Then ' When false free all the joints so opperator can move
+	If PowerOnHomeCheck = False Then ' When false, free all the joints so opperator can move
 		Motor On
 		SFree 1, 2, 3, 4
 		Print "move robot to home position"

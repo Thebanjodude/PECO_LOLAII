@@ -14,10 +14,10 @@ Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
 
 'Commands from HMI
 Global Boolean jobDone
-Global Integer jobNumPanels, jobNumPanelsDone
+Global Integer jobNumPanels, jobNumPanelsDone, abortJob
 Global Boolean backInterlockACKBtn, frontInterlockACKBtn
 Global Boolean inMagGoHomeBtn, inMagIntLockAckBtn, inMagLoadedBtn
-Global Boolean jobPauseBtn, jobResumeBtn, jobStartBtn
+Global Boolean jobPauseBtn, jobResumeBtn, jobStartBtn, abortJobBtn
 Global Boolean jobStopBtn, leftInterlockACKBtn, outMagGoHomeBtn
 Global Boolean outMagIntLockAckBtn, outMagUnloadedBtn, rightInterlockACKBtn, sftyFrmIlockAckBtn
 
