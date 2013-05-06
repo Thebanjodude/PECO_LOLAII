@@ -1,6 +1,9 @@
 #include "Globals.INC"
 
-Function HotStakePanel()
+Function HotStakePanel() As Boolean
+	
+	Trap 2, MemSw(abortJobH) = True GoTo exitHotStake ' arm trap
+	
 	SystemStatus = InstallingInserts
 
 	Boolean SkippedHole
@@ -32,6 +35,7 @@ Function HotStakePanel()
 			Jump P23 LimZ zLimit
 						
 'Comment this out for testing						
+' Instead, I could use the same method to get the panel to the outmag...anvil-recpanelthickness
 '		Do Until HSPanelPresntCC = True Or CurrentZ >= AnvilZlimit ' Move down until we touchoff on the anvil. 
 '			Move P23 -Z(AnvilOffset)
 '			AnvilOffset = AnvilOffset + 0.25
@@ -46,6 +50,7 @@ Function HotStakePanel()
 '            erPanelStatusUnknown = True
 '            stackLightYelCC = True
 '            stackLightAlrmCC = True
+			HotStakePanel = False ' send the state back to idle
 '            Pause
 '		EndIf
 '			Wait .4 ' Instead of wait, this is where the feedback from the HS Station will be
@@ -54,12 +59,16 @@ Function HotStakePanel()
 
 	Next
 	
+exitHotStake:
+
 	SystemStatus = MovingPanel
+	Trap 2 ' disarm trap
 '	Go PreScan 'Go Home
 	
 Fend
-Function FlashRemoval()
-
+Function FlashRemoval() As Boolean
+	
+	Trap 2, MemSw(abortJobH) = True GoTo exitFlash ' arm trap
 	SystemStatus = RemovingFlash
 	
 	PrintPanelArray()
@@ -117,8 +126,9 @@ Function FlashRemoval()
 '				'do nothing
 '			Loop
 ''Instead of wait, this is where the feedback(gating) from the FR Station will be
-'			
-'			removeFlash = False
+
+			FlashRemoval = True
+'			removeFlashCC = False
 '			stackLightYelCC = False
 '			stackLightAlrmCC = False
 '
@@ -126,6 +136,7 @@ Function FlashRemoval()
 '			erPanelStatusUnknown = True
 '			stackLightYelCC = True
 '			stackLightAlrmCC = True
+'			FlashRemoval = False ' send the state back to idle because there was a problem
 '			Pause
 '		EndIf
 	EndIf
@@ -133,7 +144,9 @@ Function FlashRemoval()
 Next
 	
 	SkipFlash:
+	exitFlash:
 	
+	Trap 2 ' disarm trap
 	SystemStatus = MovingPanel
 	Go PreScan ' Collision Avoidance Waypoint
 		

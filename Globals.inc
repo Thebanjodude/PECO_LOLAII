@@ -1,5 +1,5 @@
 ' System Global Vars and #defines
-Global Integer SystemSpeed, SystemAccel
+Global Integer SystemSpeed, SystemAccel, MainCurrentState
 Global Real suctionWaitTime ' Time in seconds it takes for the EOAT to make a good suction on a panel
 Global Boolean suctionCups, suctionCupsCC, holeDetected, maintMode
 Global Integer systemStatus ' Integer that tells opperator what state the sytem is in-see State tab in IOT
@@ -11,6 +11,24 @@ Global Real PanelCordinates(22, 1)
 #define Preinspection False
 #define Inspection True
 Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
+
+'Main() States
+#define StateIdle 0
+#define StatePopPanel 1
+#define StatePushPanel 2
+#define StateHotStakePanel 3
+#define StateFlashRemoval 4
+#define StateFindPickUpError 5
+#define StatePreinspection 6
+#define StateInspection 7
+
+'Inmag States
+#define StatePartPresent 0
+#define StatePartRemoved 1
+#define StatePresentNextPart 2
+#define StateLowering 3
+#define StateWaitingUser 4
+#define StatePaused 6
 
 'Commands from HMI
 Global Boolean jobDone
@@ -71,7 +89,7 @@ Global Real AnvilZlimit, heatStakeCurrentTemp, heatStakeTempTolerance
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean removeFlash, FlashPnlPrsnt, debrisMtr
-Global Boolean removeFlashCC, debrisMtrCC, hsDataTransferRdy, hsDataTransferACK
+Global Boolean removeFlashCC, debrisMtrCC, hsDataTxRdy, hsDataTxACK
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas
 #define SkipFlagColumn 2 'The third column in the array are flags for holes if we want to skip them
@@ -99,7 +117,7 @@ Global Boolean erHeatStakeBreaker, erBowlFeederBreaker, erInMagBreaker
 Global Boolean erOutMagBreaker, erFlashBreaker, erDebrisRemovalBreaker
 Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180, erIllegalArmMove
 Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing, erRobotNotAtHome
-Global Boolean RecEntryMissing, ParamEntryMissing
+Global Boolean RecEntryMissing, ParamEntryMissing, erHMICommunication
 Global Boolean erInMagLowSensorBad, erInMagUpSensorBad, erOutMagLowSensorBad, erOutMagUpSensorBad
 
 

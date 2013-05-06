@@ -1,25 +1,18 @@
 #include "Globals.INC"
 
-Function main
+Function main()
+	
 Integer NextState
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
-#define StateIdle 0
-#define StatePopPanel 1
-#define StatePushPanel 2
-'#define  3
-'#define  4
-'#define  5
-'#define  6
+MainCurrentState = StateIdle ' The first state is Idle
 
-inMagCurrentState = StateIdle
-jobStart = True
 Do While True
 	
-	Select inMagCurrentState
+	Select MainCurrentState
 		
 	Case StateIdle
 		SetInitialValues() ' get rid of this during integration
@@ -30,18 +23,50 @@ Do While True
 		EndIf
 	Case StatePopPanel
 		If PopPanel = True Then
-			NextState = StatePushPanel
-			Print NextState
-		ElseIf abortJob = True Then
-			NextState = StateIdle
+			NextState = StateFindPickUpError
+		ElseIf inMagIntlock = True Then
+			NextState = PopPanel
 		Else
+			NextState = StateIdle
+		EndIf
+	Case StateFindPickUpError
+		If FindPickUpError = True Then
+			DerivethetaR()
+			NextState = StatePreinspection
+		Else
+			NextState = StateIdle
+		EndIf
+	Case StatePreinspection
+			If InspectPanel(Preinspection) = True Then
+				NextState = StateHotStakePanel
+			Else
+				NextState = StateIdle
+			EndIf
+	Case StateHotStakePanel
+		If HotStakePanel = True Then
+			NextState = StateFlashRemoval
+		Else
+			NextState = StateIdle
+		EndIf
+	Case StateFlashRemoval
+		If FlashRemoval = True Then
 			NextState = StatePopPanel
+		Else
+			NextState = StateIdle
+		EndIf
+	Case StatePreinspection
+		If InspectPanel(Inspection) = True Then
+			NextState = StatePushPanel
+		Else
+			NextState = StateIdle
 		EndIf
 	Case StatePushPanel
 		If PushPanel = True Then
 			NextState = StatePopPanel
+		ElseIf inMagIntlock = True Then
+			NextState = PushPanel
 		Else
-			NextState = StatePushPanel
+			NextState = StateIdle
 		EndIf
 	Default
 		Print "Current State is Null" ' We should NEVER get here...
@@ -49,7 +74,12 @@ Do While True
 		Pause
 	Send
 	
-inMagCurrentState = NextState 'Set next state to current state after we break from case statment
+	If abortJob = True Then 'Check if the user has aborted the job
+		NextState = StateIdle
+		jobStart = False
+	EndIf
+	
+MainCurrentState = NextState 'Set next state to current state after we break from case statment
 
 Loop
 
@@ -104,6 +134,7 @@ Fend
 Function SetInitialValues()
 	' This is going to be OBS-the HMI will initialize the vars and I will check that
 	'they get initialized
+	jobStart = True ' fake
 	SystemSpeed = 50
 	AnvilZlimit = -150.00
 	suctionWaitTime = 2

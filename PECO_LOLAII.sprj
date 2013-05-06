@@ -1,12 +1,12 @@
-ENVT0100,LM:2013/05/04 00:19:48:457,DS:0000003653,CS:07292,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/06 15:01:19:507,DS:0000003653,CS:00890,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="5/3/2013 6:19:47 PM"
-	bBuildComplete=True
-	bRebuildRequired=False
+	sLastModified="5/6/2013 9:01:08 AM"
+	bBuildComplete=False
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMWKSDMELVIN"

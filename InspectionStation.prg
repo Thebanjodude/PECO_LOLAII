@@ -1,12 +1,11 @@
 #include "Globals.INC"
 
-Function InspectPanel(HoleInspect As Boolean)
-	'	HoleInspect As Boolean
-
-	Go PreScan ' Collision Avoidance Waypoint	
-
+Function InspectPanel(HoleInspect As Boolean) As Boolean
+	
+	Trap 2, MemSw(abortJobH) = True GoTo exitInspectPanel ' arm trap
+'	Go PreScan ' Collision Avoidance Waypoint
 	SystemStatus = InspectingPanel
-
+	InspectPanel = False
 	Integer k, j
 	Real beta, mu, m1, m2, r1, phi, rho
 	Real y1, y2, y3, dy, dx, deltaRotX, deltaRotY
@@ -60,6 +59,7 @@ Function InspectPanel(HoleInspect As Boolean)
 			mu = (180 - beta) / 2
 		Else
 			Print "error, theta is defined as < 360"
+			'recipe error...?
 			Pause
 		EndIf
 
@@ -95,7 +95,7 @@ Function InspectPanel(HoleInspect As Boolean)
 			phi = Theta + rho
 			RotatePanelOffset(phi)
 			Print "phi:", phi
-'            P23 = (scancenter5) -Y(r) -U(phi)
+'           P23 = (scancenter5) -Y(r) -U(phi)
 
 			dy = r - (r * Cos(DegToRad(rho)))
 	       	dx = r * Sin(DegToRad(rho))
@@ -163,6 +163,8 @@ Function InspectPanel(HoleInspect As Boolean)
 
 		EndIf
 		Pause
+		
+	InspectPanel = True
 Next
 
 	PrintPassFailArray()
@@ -171,8 +173,11 @@ Next
 
 	UnpackInspectionArrays()
 
+exitInspectPanel:
+
 	SystemStatus = MovingPanel
 	Go PreScan ' Go Home
+	Trap 2 'disarm trap
 Fend
 Function MeasureInsertDepth()
 	

@@ -3,13 +3,6 @@
 
 Function InMagControl
 
-#define StatePartPresent 0
-#define StatePartRemoved 1
-#define StatePresentNextPart 2
-#define StateLowering 3
-#define StateWaitingUser 4
-#define StatePaused 6
-
 Integer NextState
 
 inMagCurrentState = StateLowering ' When we power on the magazine it goes to the home position

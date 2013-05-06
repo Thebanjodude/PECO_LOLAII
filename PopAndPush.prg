@@ -1,12 +1,13 @@
 #include "Globals.INC"
 
 Function PopPanel() As Boolean
-    
+	
+Trap 2, MemSw(abortJobH) = True GoTo exitPopPanel ' arm trap
+
 retry:
 
-	If inMagIntlock = True Then
+	If inMagIntlock = True Then 'Check Interlock status
 		PopPanel = False
-		Pause
 		GoTo exitPopPanel
 	EndIf
 	
@@ -24,9 +25,7 @@ retry:
 	
 	PopPanel = True
 	SystemStatus = MovingPanel
-	
-	Go PreScan 'Go Home
-	
+	Go PreScan 'Go Home	
 	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have finished	
 	
 	If jobNumPanelsDone = jobNumPanels Then
@@ -35,20 +34,29 @@ retry:
 	
 exitPopPanel:
 
-Print PopPanel
+If MemSw(abortJobH) = True Then
+	abortJob = True
+EndIf
+
+Trap 2 'disarm trap
     
 Fend
 Function PushPanel() As Boolean
+	
+Trap 2, MemSw(abortJobH) = True GoTo exitPushPanel ' arm trap
 	
 	SystemStatus = DepositingPanel
 	PanelPassedInspection = True ' fake it for testing	
 '	PanelPassedInspection = False ' rest flag
 
-	hsDataTransferRdy = True ' Tell HMI to readout hole data 	
-
-	hsDataTransferACK = True ' fake for testing	
-	If hsDataTransferACK = False Then
+	hsDataTxRdy = True ' Tell HMI to readout hole data
+	MemOn (hsDataTxAckH) ' fake
+	
+	Wait MemSw(hsDataTxAckH) = True, 3
+	
+	If TW = True Then
 		PushPanel = False
+		erHMICommunication = True
 		GoTo exitPushPanel
 	EndIf
 
@@ -61,9 +69,8 @@ Function PushPanel() As Boolean
 	Else
 		retry:
 		
-		If outMagInt = True Then
+		If outMagInt = True Then ' Check interlock status
 			PushPanel = False
-			Pause
 			GoTo exitPushPanel
 		EndIf
 		
@@ -81,14 +88,16 @@ Function PushPanel() As Boolean
 		
 	EndIf
 	
-		hsDataTransferRdy = False 'reset flag	
+		hsDataTxRdy = False 'reset flag	
 		SystemStatus = MovingPanel
 		Jump Waypoint0
 		PushPanel = True
 '		Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
 
 exitPushPanel:
-	
+
+Trap 2 ' disarm trap	
+
 Fend
 Function FindPickUpError()
 	

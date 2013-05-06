@@ -2,8 +2,6 @@
 
 Function SystemMonitor()
 	
-#define StatePaused 6
-	
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 	
 
@@ -14,8 +12,15 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 Do While True
 	
 	StateOfHealth()
-
+	
+	If MainCurrentState = StatePopPanel Or MainCurrentState = StatePushPanel Then
+		Pause
+	EndIf
 	If inMagIntlock = True Then ' If an interlock gets tripped then halt the state machine
+		If MainCurrentState = StatePopPanel Or MainCurrentState = StatePushPanel Then
+			Pause ' pause robot movement to avoid pinchpoint
+		EndIf
+		
 		Halt InMagControl
 		erInMagOpenInterlock = True
 		stackLightYelCC = True
@@ -27,6 +32,10 @@ Do While True
 	EndIf
 	
 	If outMagInt = True Then ' If an interlock gets tripped then halt the state machine
+		If MainCurrentState = StatePopPanel Or MainCurrentState = StatePushPanel Then
+			Pause ' pause robot movement to avoid pinchpoint
+		EndIf
+		
 		Halt OutMagControl
 		erOutMagOpenInterlock = True
 		stackLightYelCC = True
