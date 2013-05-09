@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/05/06 15:01:19:507,DS:0000003653,CS:00890,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/09 22:10:03:532,DS:0000003655,CS:20534,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
@@ -9,7 +9,7 @@ SystemProperties {
 	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMWKSDMELVIN"
+	sComputerName="ALWKSBSCHAEFER"
 }
 UserProperties {
 	sVersion=""
