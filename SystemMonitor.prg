@@ -28,7 +28,6 @@ Do While True
 	Else
 		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False
-		stackLightYelCC = False
 	EndIf
 	
 	If outMagInt = True Then ' If an interlock gets tripped then halt the state machine
@@ -43,7 +42,6 @@ Do While True
 	Else
 	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
 	 	erOutMagOpenInterlock = False
-	 	stackLightYelCC = False
 	EndIf
 	
 	If frontIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
@@ -52,7 +50,6 @@ Do While True
 '		Pause
 	Else
 	 	erFrontSafetyFrameOpen = False
-		stackLightYelCC = False
 	EndIf
 	
 	If frontIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
@@ -61,16 +58,13 @@ Do While True
 '		Pause
 	Else
 	 	erFrontSafetyFrameOpen = False
-		stackLightYelCC = False
 	EndIf
 	
 	If backIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erBackSafetyFrameOpen = True
-		stackLightYelCC = True
 '		Pause
 	Else
 	 	erBackSafetyFrameOpen = False
-		stackLightYelCC = False
 	EndIf
 	
 	If backIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
@@ -79,7 +73,6 @@ Do While True
 '		Pause
 	Else
 	 	erBackSafetyFrameOpen = False
-		stackLightYelCC = False
 	EndIf
 	
 	If leftIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
@@ -88,7 +81,6 @@ Do While True
 '		Pause
 	Else
 	 	erLeftSafetyFrameOpen = False
-		stackLightYelCC = False
 	EndIf
 
 	If leftIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
@@ -97,7 +89,6 @@ Do While True
 '		Pause
 	Else
 	 	erLeftSafetyFrameOpen = False
-		stackLightYelCC = False
 	EndIf
 	
 	If rightIntlock = True Then ' If an interlock gets tripped then halt the state machine
@@ -106,7 +97,6 @@ Do While True
 '		Pause
 	Else
 	 	erRightSafetyFrameOpen = False
-		stackLightYelCC = False
 	EndIf
 	
 	If airPressHigh = True Then
@@ -125,8 +115,6 @@ Do While True
 		stackLightAlrmCC = True
 '		Pause
 	Else
-		erLowPressure = False
-		stackLightRedCC = False
 		stackLightAlrmCC = False
 	EndIf
 	
@@ -137,8 +125,6 @@ Do While True
 '		Pause
 	Else
 		erHeatStakeBreaker = False
-		stackLightRedCC = False
-		stackLightAlrmCC = False
 	EndIf
 
 	If cbMonInMag = True Then
@@ -148,8 +134,6 @@ Do While True
 '		Pause
 	Else
 		erInMagBreaker = False
-		stackLightRedCC = False
-		stackLightAlrmCC = False
 	EndIf
 	
 	If cbMonOutMag = True Then
@@ -159,8 +143,6 @@ Do While True
 '		Pause
 	Else
 		erOutMagBreaker = False
-		stackLightRedCC = False
-		stackLightAlrmCC = False
 	EndIf
 	
 	If cbMonDebrisRmv = True Then
@@ -169,8 +151,6 @@ Do While True
 		stackLightAlrmCC = True
 '		Pause
 	Else
-		stackLightRedCC = False
-		stackLightAlrmCC = False
 		erDebrisRemovalBreaker = False
 
 	EndIf
@@ -181,8 +161,6 @@ Do While True
 		erSafetySystemBreaker = True
 '		pause
 	Else
-		stackLightRedCC = False
-		stackLightAlrmCC = False
 		erSafetySystemBreaker = False
 	EndIf
 
@@ -192,10 +170,7 @@ Do While True
 		erDCPowerHeatStake = True
 '		Pause
 	Else
-		stackLightRedCC = False
-		stackLightAlrmCC = False
 		erDCPowerHeatStake = False
-		cbMonPAS24vdc = False
 	EndIf
 	
 	'Heat stake temp checking 
@@ -209,8 +184,6 @@ Do While True
 		stackLightAlrmCC = True
 	Else
 		erEstop = False
-		stackLightRedCC = False
-		stackLightAlrmCC = False
 	EndIf
 	
 	'If the in/out magazine sensor diff signals are the same then we know there is a problem	
@@ -221,8 +194,6 @@ Do While True
 '		pause
 	Else
 		erInMagLowSensorBad = False
-		stackLightRedCC = False
-		stackLightAlrmCC = False
 	EndIf
 	
 	If inMagUpLim = inMagUpLimN Then
@@ -232,8 +203,6 @@ Do While True
 '		pause		
 	Else
 		erInMagUpSensorBad = False
-		stackLightRedCC = False
-		stackLightAlrmCC = False
 	EndIf
 	
 	If outMagLowLim = outMagLowLimN Then
@@ -243,8 +212,6 @@ Do While True
 '		pause		
 	Else
 		erOutMagLowSensorBad = False
-		stackLightRedCC = False
-		stackLightAlrmCC = False
 	EndIf
 	
 	If outMagUpLim = outMagUpLimN Then
@@ -254,8 +221,12 @@ Do While True
 '		pause
 	Else
 		erOutMagUpSensorBad = False
-		stackLightRedCC = False
-		stackLightAlrmCC = False
+	EndIf
+	
+	If Sw(MaintanceMode) = True Then
+		maintMode = True
+	Else
+		maintMode = False
 	EndIf
 	
 	If PauseOn = True And pauseFlag = False Then

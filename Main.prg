@@ -6,6 +6,12 @@ Integer NextState
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
+Do While True
+	stackLightGrnCC = True
+	Wait 1
+	Print "testing..."
+Loop
+
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 MainCurrentState = StateIdle ' The first state is Idle
@@ -127,8 +133,8 @@ retry:
 	Accel 50, 50
 	QP (On) ' turn On quick pausing	
 	
-	Move PreScan :U(CU(CurPos)) ' go home
-	Move PreScan ROT ' go home
+'	Move PreScan :U(CU(CurPos)) ' go home
+'	Move PreScan ROT ' go home
 	
 Fend
 Function SetInitialValues()
@@ -220,7 +226,7 @@ Function PowerOnHomeCheck() As Boolean
 	
 	Print Hand(Here)
 	
-	If Hand(Here) = 1 Then ' throw the error if the arm is in "righty" orientation
+	If Hand(Here) = 2 Then ' throw the error if the arm is in "righty" orientation
 		erRobotNotAtHome = True
 		PowerOnHomeCheck = False
 		Print "Arm Orientation NOT OK"

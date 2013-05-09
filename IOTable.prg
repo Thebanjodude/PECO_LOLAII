@@ -33,7 +33,6 @@ inMagUpLim = IOTableBooleans(Sw(inMagUpLimH), MemSw(inMagUpLimFV), MemSw(inMagUp
 inMagUpLimN = IOTableBooleans(Sw(inMagUpLimNH), MemSw(inMagUpLimNFV), MemSw(inMagUpLimNF))
 leftIntlock1 = IOTableBooleans(Sw(leftIntlock1H), MemSw(leftIntlock1FV), MemSw(leftIntlock1F))
 leftIntlock2 = IOTableBooleans(Sw(leftIntlock2H), MemSw(leftIntlock2FV), MemSw(leftIntlock2F))
-maintMode = IOTableBooleans(Sw(maintModeH), MemSw(maintModeFV), MemSw(maintModeF))
 outMagInt = IOTableBooleans(Sw(outMagIntH), MemSw(outMagIntFV), MemSw(outMagIntF))
 outMagLowLim = IOTableBooleans(Sw(outMagLowLimH), MemSw(outMagLowLimFV), MemSw(outMagLowLimF))
 outMagLowLimN = IOTableBooleans(Sw(outMagLowLimNH), MemSw(outMagLowLimNFV), MemSw(outMagLowLimNF))
@@ -339,7 +338,7 @@ Print #201, "{", Chr$(&H22) + "inMagUpLim" + Chr$(&H22), ":", Str$(inMagUpLim), 
 Print #201, "{", Chr$(&H22) + "inMagUpLimN" + Chr$(&H22), ":", Str$(inMagUpLimN), "}",
 Print #201, "{", Chr$(&H22) + "leftIntlock1" + Chr$(&H22), ":", Str$(leftIntlock1), "}",
 Print #201, "{", Chr$(&H22) + "leftIntlock2" + Chr$(&H22), ":", Str$(leftIntlock2), "}",
-Print #201, "{", Chr$(&H22) + "maintMode" + Chr$(&H22), ":", Str$(maintMode), "}",
+Print #201, "{", Chr$(&H22) + "maintMode" + Chr$(&H22), ":", Str$(MaintMode), "}",
 Print #201, "{", Chr$(&H22) + "outMagInt" + Chr$(&H22), ":", Str$(outMagInt), "}",
 Print #201, "{", Chr$(&H22) + "outMagLowLim" + Chr$(&H22), ":", Str$(outMagLowLim), "}",
 Print #201, "{", Chr$(&H22) + "outMagLowLimN" + Chr$(&H22), ":", Str$(outMagLowLimN), "}",
@@ -896,49 +895,49 @@ Case "inMagUpLimNF"
         MemOff (inMagUpLimNF)
     EndIf
 Case "inMagUpperLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimNFV)
     Else
         MemOff (inMagUpLimNFV)
     EndIf
 Case "leftIntlock1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock1F)
     Else
         MemOff (leftIntlock1F)
     EndIf
 Case "leftIntlock1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock1FV)
     Else
         MemOff (leftIntlock1FV)
     EndIf
 Case "leftIntlock2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock2F)
     Else
         MemOff (leftIntlock2F)
     EndIf
 Case "leftIntlock2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock2FV)
     Else
         MemOff (leftIntlock2FV)
     EndIf
 Case "maintModeF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (maintModeF)
     Else
         MemOff (maintModeF)
     EndIf
 Case "maintModeFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (maintModeFV)
     Else
         MemOff (maintModeFV)
     EndIf
 Case "outMagIntF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagIntF)
     Else
         MemOff (outMagIntF)

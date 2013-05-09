@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/05/06 13:58:54:847,DS:0000012160,CS:16749,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/09 22:24:38:686,DS:0000012232,CS:13322,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
-	nNumberOfLabels=36
+	nNumberOfLabels=37
 	Label1 {
 		nBit=10
 		sLabel="frontIntlock1H"
@@ -43,141 +43,146 @@ InputBitLabels {
 		sDescription=""
 	}
 	Label9 {
+		nBit=18
+		sLabel="MaintanceMode"
+		sDescription=""
+	}
+	Label10 {
 		nBit=22
 		sLabel="AirPressHighH"
 		sDescription=""
 	}
-	Label10 {
+	Label11 {
 		nBit=23
 		sLabel="AirPressLowH"
 		sDescription=""
 	}
-	Label11 {
+	Label12 {
 		nBit=64
 		sLabel="cbMonHeatStakeH"
 		sDescription=""
 	}
-	Label12 {
+	Label13 {
 		nBit=66
 		sLabel="cbMonInMagH"
 		sDescription=""
 	}
-	Label13 {
+	Label14 {
 		nBit=67
 		sLabel="cbMonOutMagH"
 		sDescription=""
 	}
-	Label14 {
+	Label15 {
 		nBit=68
 		sLabel="cbMonSafetyH"
 		sDescription=""
 	}
-	Label15 {
+	Label16 {
 		nBit=69
 		sLabel="cbMonDebrisRmvH"
 		sDescription=""
 	}
-	Label16 {
+	Label17 {
 		nBit=71
 		sLabel="cbMonPnumaticH"
 		sDescription=""
 	}
-	Label17 {
+	Label18 {
 		nBit=73
 		sLabel="cbMonPAS24vdcH"
 		sDescription=""
 	}
-	Label18 {
+	Label19 {
 		nBit=74
 		sLabel="holeDetectedH"
 		sDescription=""
 	}
-	Label19 {
+	Label20 {
 		nBit=75
 		sLabel="edgeDetectHiH"
 		sDescription=""
 	}
-	Label20 {
+	Label21 {
 		nBit=76
 		sLabel="edgeDetectLoH"
 		sDescription=""
 	}
-	Label21 {
+	Label22 {
 		nBit=77
 		sLabel="edgeDetectGoH"
 		sDescription=""
 	}
-	Label22 {
+	Label23 {
 		nBit=80
 		sLabel="maintModeH"
 		sDescription=""
 	}
-	Label23 {
+	Label24 {
 		nBit=81
 		sLabel="HSPanelPresntH"
 		sDescription=""
 	}
-	Label24 {
+	Label25 {
 		nBit=82
 		sLabel="FlashPnlPrsntH"
 		sDescription=""
 	}
-	Label25 {
+	Label26 {
 		nBit=96
 		sLabel="inMagUpLimH"
 		sDescription=""
 	}
-	Label26 {
+	Label27 {
 		nBit=97
 		sLabel="inMagUpLimNH"
 		sDescription=""
 	}
-	Label27 {
+	Label28 {
 		nBit=98
 		sLabel="inMagLowLimH"
 		sDescription=""
 	}
-	Label28 {
+	Label29 {
 		nBit=99
 		sLabel="inMagLowLimNH"
 		sDescription=""
 	}
-	Label29 {
+	Label30 {
 		nBit=102
 		sLabel="inMagPnlRdyH"
 		sDescription=""
 	}
-	Label30 {
+	Label31 {
 		nBit=103
 		sLabel="inMagIntlockH"
 		sDescription=""
 	}
-	Label31 {
+	Label32 {
 		nBit=104
 		sLabel="outMagUpLimH"
 		sDescription=""
 	}
-	Label32 {
+	Label33 {
 		nBit=105
 		sLabel="outMagUpLimNH"
 		sDescription=""
 	}
-	Label33 {
+	Label34 {
 		nBit=106
 		sLabel="outMagLowLimH"
 		sDescription=""
 	}
-	Label34 {
+	Label35 {
 		nBit=107
 		sLabel="outMagLowLimNH"
 		sDescription=""
 	}
-	Label35 {
+	Label36 {
 		nBit=110
 		sLabel="outMagPanelRdyH"
 		sDescription=""
 	}
-	Label36 {
+	Label37 {
 		nBit=111
 		sLabel="outMagIntH"
 		sDescription=""

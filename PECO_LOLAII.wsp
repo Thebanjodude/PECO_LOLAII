@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/05/09 22:10:05:111,DS:0000002469,CS:28467,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Main.prg"
+ENVT0100,LM:2013/05/09 23:20:49:398,DS:0000002472,CS:30979,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Run"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=227
-		nTop=12
-		nWidth=1259
-		nHeight=774
+		nLeft=209
+		nTop=21
+		nWidth=1257
+		nHeight=770
 	}
 }
 ProgramFile2 {
@@ -25,13 +25,13 @@ ProgramFile2 {
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=49
-		nTop=35
-		nWidth=1290
-		nHeight=791
+		nLeft=274
+		nTop=341
+		nWidth=1288
+		nHeight=787
 	}
 }
 ProgramFile4 {
@@ -61,10 +61,10 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=101
-		nTop=229
-		nWidth=1236
-		nHeight=722
+		nLeft=124
+		nTop=34
+		nWidth=1132
+		nHeight=658
 	}
 }
 ProgramFile7 {
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=130
-		nTop=44
-		nWidth=1158
-		nHeight=755
+		nLeft=269
+		nTop=146
+		nWidth=1156
+		nHeight=751
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=148
-		nTop=138
-		nWidth=1420
-		nHeight=659
+		nLeft=77
+		nTop=239
+		nWidth=1419
+		nHeight=655
 	}
 }
 nIncludeFileCount=1
@@ -95,10 +95,10 @@ IncludeFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=91
-		nTop=152
-		nWidth=1341
-		nHeight=540
+		nLeft=101
+		nTop=267
+		nWidth=1339
+		nHeight=537
 	}
 }
 nPointFileCount=1
@@ -125,12 +125,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=802
-		nTop=56
-		nWidth=617
-		nHeight=667
+		nLeft=714
+		nTop=23
+		nWidth=672
+		nHeight=724
 	}
 }
 IOLabelEditor {
@@ -146,19 +146,19 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=1257
-		nTop=221
+		nLeft=1236
+		nTop=308
 		nWidth=520
-		nHeight=518
+		nHeight=511
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=336
+		nTop=224
+		nWidth=947
+		nHeight=412
 	}
 }
 Macros {
