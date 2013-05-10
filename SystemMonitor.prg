@@ -3,42 +3,39 @@
 Function SystemMonitor()
 	
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
-	
 
 ' Monitor System Pressures, voltages, interlocks, Hot Stake Machine, CBs, E-stop, and ctrlr errors
-
-' I may want to modify the lights and alarm to only be turned on or off at one place
 
 Do While True
 	
 	StateOfHealth()
 	
-	If MainCurrentState = StatePopPanel Or MainCurrentState = StatePushPanel Then
-		Pause
-	EndIf
 	If inMagIntlock = True Then ' If an interlock gets tripped then halt the state machine
-		If MainCurrentState = StatePopPanel Or MainCurrentState = StatePushPanel Then
-			Pause ' pause robot movement to avoid pinchpoint
-		EndIf
 		
 		Halt InMagControl
 		erInMagOpenInterlock = True
 		stackLightYelCC = True
 		inMagCurrentState = StatePaused
+		
+		If MainCurrentState = StatePopPanel Then
+			Pause ' if interlock open Pause only when in pop or push
+		EndIf
+		
 	Else
 		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False
 	EndIf
 	
 	If outMagInt = True Then ' If an interlock gets tripped then halt the state machine
-		If MainCurrentState = StatePopPanel Or MainCurrentState = StatePushPanel Then
-			Pause ' pause robot movement to avoid pinchpoint
-		EndIf
 		
 		Halt OutMagControl
 		erOutMagOpenInterlock = True
 		stackLightYelCC = True
 		outMagCurrentState = StatePaused
+		
+		If MainCurrentState = StatePushPanel Then
+			Pause ' pause robot movement to avoid pinchpoint
+		EndIf
 	Else
 	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
 	 	erOutMagOpenInterlock = False

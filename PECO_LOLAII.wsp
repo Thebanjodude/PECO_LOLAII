@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/05/09 23:20:49:398,DS:0000002472,CS:30979,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Run"
+ENVT0100,LM:2013/05/10 18:41:28:121,DS:0000002478,CS:17448,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Main.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=209
-		nTop=21
-		nWidth=1257
-		nHeight=770
+		nLeft=283
+		nTop=92
+		nWidth=1255
+		nHeight=767
 	}
 }
 ProgramFile2 {
@@ -59,12 +59,12 @@ ProgramFile5 {
 ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=124
-		nTop=34
-		nWidth=1132
-		nHeight=658
+		nLeft=212
+		nTop=120
+		nWidth=1131
+		nHeight=632
 	}
 }
 ProgramFile7 {
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=269
-		nTop=146
-		nWidth=1156
-		nHeight=751
+		nLeft=377
+		nTop=27
+		nWidth=1155
+		nHeight=747
 	}
 }
 ProgramFile8 {
@@ -92,13 +92,13 @@ ProgramFile8 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=101
-		nTop=267
-		nWidth=1339
-		nHeight=537
+		nLeft=70
+		nTop=256
+		nWidth=1337
+		nHeight=579
 	}
 }
 nPointFileCount=1
@@ -125,7 +125,7 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=714
 		nTop=23

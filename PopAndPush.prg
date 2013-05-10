@@ -12,22 +12,18 @@ retry:
 	EndIf
 	
 '	WaitSig InMagPickUpSignal ' Wait for inmag to confirm a panel is ready to be picked up
-	Jump InMagCenter LimZ zLimit Sense Sw(inMagIntlockH) = True
-	
-	If JS = False Then ' Jump executed without inmag interlock being opened
-		suctionCupsCC = True
-		Wait suctionWaitTime ' Allow time for cups to seal on panel
-		Jump Prescan LimZ zLimit
-'		Signal InMagRobotClearSignal ' Give permission for input magazine to queue up next panel
-	Else
-		GoTo retry 'Interlock was opened during jump
-	EndIf
-	
+	Jump InMagCenter LimZ zLimit
+
+	suctionCupsCC = True
+	Wait suctionWaitTime ' Allow time for cups to seal on panel
+	Jump Prescan LimZ zLimit
+'	Signal InMagRobotClearSignal ' Give permission for input magazine to queue up next panel
+
 	PopPanel = True
 	SystemStatus = MovingPanel
 	Go PreScan 'Go Home	
-	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have finished	
 	
+	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have finished		
 	If jobNumPanelsDone = jobNumPanels Then
 		jobDone = True ' We have finished the run, don't execute the main loop
 	EndIf
@@ -47,54 +43,51 @@ Trap 2, MemSw(abortJobH) = True GoTo exitPushPanel ' arm trap
 	
 	SystemStatus = DepositingPanel
 	PanelPassedInspection = True ' fake it for testing	
-'	PanelPassedInspection = False ' rest flag
 
-	hsDataTxRdy = True ' Tell HMI to readout hole data
-	MemOn (hsDataTxAckH) ' fake
+	panelDataTxRdy = True ' Tell HMI to readout hole data
+	MemOn (panelDataTxAckH) ' fake
 	
-	Wait MemSw(hsDataTxAckH) = True, 3
+	Wait MemSw(panelDataTxAckH) = True, 3
 	
-	If TW = True Then
+	If TW = True Then ' catch that the HMI timed out without acking
 		PushPanel = False
-		erHMICommunication = True
+		erHmiDataAck = True
 		GoTo exitPushPanel
 	EndIf
-
-	If PanelPassedInspection = False Then
-'		Jump PanelFailDropOffPoint LimZ zLimit
-		suctionCups = False
-		Wait suctionWaitTime ' Allow time for cups to unseal
-		erPanelFailedInspection = True
-		Pause
-	Else
-		retry:
-		
-		If outMagInt = True Then ' Check interlock status
-			PushPanel = False
-			GoTo exitPushPanel
-		EndIf
-		
-'		WaitSig OutMagDropOffSignal
-		Go Waypoint0
-		Jump OutMagCenter -Z(recPanelThickness) LimZ zLimit Sense Sw(outMagIntH) = True
-		
-		If JS = False Then ' Jump executed without outmag interlock being opened
-			suctionCupsCC = False
-			Wait suctionWaitTime ' Allow time for cups to unseal				
-			Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel
-		Else
-			GoTo retry ' interlock was opened during a jump
-		EndIf
-		
-	EndIf
 	
-		hsDataTxRdy = False 'reset flag	
-		SystemStatus = MovingPanel
-		Jump Waypoint0
-		PushPanel = True
-'		Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
+	If outMagInt = True Then ' Check interlock status
+		PushPanel = False
+		GoTo exitPushPanel
+	EndIf
+		
+'	WaitSig OutMagDropOffSignal		
+	
+	Go Waypoint0
+	Jump OutMagCenter -Z(recPanelThickness) LimZ zLimit
+	suctionCupsCC = False
+	Wait suctionWaitTime ' Allow time for cups to unseal				
+	Jump Waypoint0
+	Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel	
+	
+	If PanelPassedInspection = False Then
+		erPanelFailedInspection = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
+		Pause ' wait for operator to continue
+		stackLightRedCC = False ' turn off only after ack
+		stackLightAlrmCC = False
+		erPanelFailedInspection = False
+	EndIf
+
+	panelDataTxRdy = False 'reset flag
+	SystemStatus = MovingPanel
+	PanelPassedInspection = False ' rest flag
+	PushPanel = True
+'	Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
 
 exitPushPanel:
+
+	erHmiDataAck = False
 
 Trap 2 ' disarm trap	
 

@@ -89,7 +89,7 @@ Global Real AnvilZlimit, heatStakeCurrentTemp, heatStakeTempTolerance
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean removeFlash, FlashPnlPrsnt, debrisMtr
-Global Boolean removeFlashCC, debrisMtrCC, hsDataTxRdy, hsDataTxACK
+Global Boolean removeFlashCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas
 #define SkipFlagColumn 2 'The third column in the array are flags for holes if we want to skip them
@@ -109,7 +109,7 @@ Global Real recTemp, hsProbeTemp
 Global Boolean erPanelFailedInspection, erFrontSafetyFrameOpen, erBackSafetyFrameOpen
 Global Boolean erLeftSafetyFrameOpen, erRightSafetyFrameOpen, erLowPressure
 Global Boolean erHighPressure, erPanelStatusUnknown, erWrongPanelHoles
-Global Boolean erWrongPanelDims, erWrongPanel, erWrongPanelInsert
+Global Boolean erWrongPanelDims, erWrongPanel, erWrongPanelInsert, erHmiDataAck
 Global Boolean erInMagEmpty, erInMagOpenInterlock, erOutMagCrowding
 Global Boolean erInMagCrowding, erOutMagFull, erOutMagOpenInterlock
 Global Boolean erLaserScanner, erDCPower, erDCPowerHeatStake, erHeatStakeTemp
