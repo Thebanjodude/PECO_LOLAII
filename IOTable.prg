@@ -17,9 +17,9 @@ cbMonInMag = IOTableBooleans(Sw(cbMonInMagH), MemSw(cbMonInMagFV), MemSw(cbMonIn
 cbMonOutMag = IOTableBooleans(Sw(cbMonOutMagH), MemSw(cbMonOutMagFV), MemSw(cbMonOutMagF))
 cbMonPAS24vdc = IOTableBooleans(Sw(cbMonPAS24vdcH), MemSw(cbMonPAS24vdcFV), MemSw(cbMonPAS24vdcF))
 cbMonSafety = IOTableBooleans(Sw(cbMonSafetyH), MemSw(cbMonSafetyFV), MemSw(cbMonSafetyF))
-'edgeDetectGo = IOTableBooleans(Sw(edgeDetectGoH), MemSw(edgeDetectGoFV), MemSw(edgeDetectGoF))
-'edgeDetectHi = IOTableBooleans(Sw(edgeDetectHiH), MemSw(edgeDetectHiFV), MemSw(edgeDetectHiF))
-'edgeDetectLo = IOTableBooleans(Sw(edgeDetectLoH), MemSw(edgeDetectLoFV), MemSw(edgeDetectLoF))
+edgeDetectGo = IOTableBooleans(Sw(edgeDetectGoH), MemSw(edgeDetectGoFV), MemSw(edgeDetectGoF))
+edgeDetectHi = IOTableBooleans(Sw(edgeDetectHiH), MemSw(edgeDetectHiFV), MemSw(edgeDetectHiF))
+edgeDetectLo = IOTableBooleans(Sw(edgeDetectLoH), MemSw(edgeDetectLoFV), MemSw(edgeDetectLoF))
 flashPnlPrsnt = IOTableBooleans(Sw(FlashPnlPrsntH), MemSw(FlashPnlPrsntFV), MemSw(FlashPnlPrsntF))
 frontIntlock1 = IOTableBooleans(Sw(frontIntlock1H), MemSw(frontIntlock1FV), MemSw(frontIntlock1F))
 frontIntlock2 = IOTableBooleans(Sw(frontIntlock2H), MemSw(frontIntlock2FV), MemSw(frontIntlock2F))
@@ -98,7 +98,7 @@ If outMagMtrDir = True Then
     EndIf
 removeFlash = IOTableBooleans(removeFlashCC, MemSw(removeFlashFV), MemSw(removeFlashF))
 If removeFlash = True Then
-        On (removeFlashH)
+        On (removeFlashH), .25 ' It can only be on for a short duration, else it will break the drill
     Else
         Off (removeFlashH)
     EndIf
@@ -338,7 +338,7 @@ Print #201, "{", Chr$(&H22) + "inMagUpLim" + Chr$(&H22), ":", Str$(inMagUpLim), 
 Print #201, "{", Chr$(&H22) + "inMagUpLimN" + Chr$(&H22), ":", Str$(inMagUpLimN), "}",
 Print #201, "{", Chr$(&H22) + "leftIntlock1" + Chr$(&H22), ":", Str$(leftIntlock1), "}",
 Print #201, "{", Chr$(&H22) + "leftIntlock2" + Chr$(&H22), ":", Str$(leftIntlock2), "}",
-Print #201, "{", Chr$(&H22) + "maintMode" + Chr$(&H22), ":", Str$(MaintMode), "}",
+Print #201, "{", Chr$(&H22) + "maintMode" + Chr$(&H22), ":", Str$(maintMode), "}",
 Print #201, "{", Chr$(&H22) + "outMagInt" + Chr$(&H22), ":", Str$(outMagInt), "}",
 Print #201, "{", Chr$(&H22) + "outMagLowLim" + Chr$(&H22), ":", Str$(outMagLowLim), "}",
 Print #201, "{", Chr$(&H22) + "outMagLowLimN" + Chr$(&H22), ":", Str$(outMagLowLimN), "}",
@@ -895,49 +895,49 @@ Case "inMagUpLimNF"
         MemOff (inMagUpLimNF)
     EndIf
 Case "inMagUpperLimNFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagUpLimNFV)
     Else
         MemOff (inMagUpLimNFV)
     EndIf
 Case "leftIntlock1F"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (leftIntlock1F)
     Else
         MemOff (leftIntlock1F)
     EndIf
 Case "leftIntlock1FV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (leftIntlock1FV)
     Else
         MemOff (leftIntlock1FV)
     EndIf
 Case "leftIntlock2F"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (leftIntlock2F)
     Else
         MemOff (leftIntlock2F)
     EndIf
 Case "leftIntlock2FV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (leftIntlock2FV)
     Else
         MemOff (leftIntlock2FV)
     EndIf
 Case "maintModeF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (maintModeF)
     Else
         MemOff (maintModeF)
     EndIf
 Case "maintModeFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (maintModeFV)
     Else
         MemOff (maintModeFV)
     EndIf
 Case "outMagIntF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagIntF)
     Else
         MemOff (outMagIntF)
@@ -1153,8 +1153,8 @@ Case "suctionCupsFV"
         MemOff (suctionCupsFV)
     EndIf
 Case "anvilZlimit"
-    anvilZlimit = Val(tokens$(1))
-    Print "anvilZlimit:", anvilZlimit
+    AnvilZlimit = Val(tokens$(1))
+    Print "anvilZlimit:", AnvilZlimit
 Case "heatStakeTempTolerance"
     heatStakeTempTolerance = Val(tokens$(1))
     Print "heatStakeTempTolerance:", heatStakeTempTolerance
@@ -1187,14 +1187,14 @@ Case "suctionWaitTime"
     suctionWaitTime = Val(tokens$(1))
     Print "suctionWaitTime:", suctionWaitTime
 Case "systemAccel"
-    systemAccel = Val(tokens$(1))
-    Print "systemAccel:", systemAccel
+    SystemAccel = Val(tokens$(1))
+    Print "systemAccel:", SystemAccel
 Case "systemSpeed"
-    systemSpeed = Val(tokens$(1))
-    Print "systemSpeed:", systemSpeed
+    SystemSpeed = Val(tokens$(1))
+    Print "systemSpeed:", SystemSpeed
 Case "systemState"
-    systemState = Val(tokens$(1))
-    Print "systemState:", systemState
+    SystemState = Val(tokens$(1))
+    Print "systemState:", SystemState
 Case "zlimit"
     zLimit = Val(tokens$(1))
     Print "zlimit:", zLimit

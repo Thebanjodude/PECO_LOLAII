@@ -7,7 +7,6 @@ Integer NextState
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 Do While True
-	stackLightGrnCC = True
 	Wait 1
 	Print "testing..."
 Loop
@@ -201,7 +200,7 @@ Function HotStakeTempRdy() As Boolean
 	EndIf
 	
 	HotStakeTempRdy = True ' fake for testing
-
+	erHeatStakeTemp = False ' fake
 Fend
 Function PowerOnHomeCheck() As Boolean
 	

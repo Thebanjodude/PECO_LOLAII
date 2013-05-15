@@ -120,17 +120,12 @@ Function FlashRemoval() As Boolean
 '		
 '		If FlashPnlPrsntCC = True Then
 ''TODO: Read the datasheet for the flash removal tool
-'			removeFlash = True
+'			removeFlashCC = True
 '
 '			Do Until flashDoneCC = True
 '				'do nothing
 '			Loop
 ''Instead of wait, this is where the feedback(gating) from the FR Station will be
-
-			FlashRemoval = True
-'			removeFlashCC = False
-'			stackLightYelCC = False
-'			stackLightAlrmCC = False
 '
 '		Else
 '			erPanelStatusUnknown = True

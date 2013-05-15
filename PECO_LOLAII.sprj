@@ -1,11 +1,11 @@
-ENVT0100,LM:2013/05/10 18:40:49:073,DS:0000003657,CS:26370,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/15 20:56:06:999,DS:0000003657,CS:14853,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="5/10/2013 12:40:47 PM"
-	bBuildComplete=True
+	sLastModified="5/15/2013 2:55:50 PM"
+	bBuildComplete=False
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
@@ -60,7 +60,7 @@ ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="5/10/2013 6:40:47 PM"
+	sTimeSavedInController="5/15/2013 6:43:20 PM"
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
