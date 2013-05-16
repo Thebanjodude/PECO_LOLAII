@@ -88,8 +88,9 @@ Global Real Theta, r
 Global Real AnvilZlimit, heatStakeCurrentTemp, heatStakeTempTolerance
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
-Global Boolean removeFlash, FlashPnlPrsnt, debrisMtr
-Global Boolean removeFlashCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
+Global Boolean removeFlash, returnFlash, FlashPnlPrsnt, debrisMtr
+Global Boolean removeFlashCC, returnFlashCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
+Global Real flashDwellTime ' How long the flash tool is in contact with the insert
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas
 #define SkipFlagColumn 2 'The third column in the array are flags for holes if we want to skip them

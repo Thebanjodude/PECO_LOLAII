@@ -98,9 +98,12 @@ If outMagMtrDir = True Then
     EndIf
 removeFlash = IOTableBooleans(removeFlashCC, MemSw(removeFlashFV), MemSw(removeFlashF))
 If removeFlash = True Then
-        On (removeFlashH), .25 ' It can only be on for a short duration, else it will break the drill
+        On (removeFlashH), .25, 0 ' It can only be on for a short duration, else it will break the drill
+        Wait flashDwellTime
+        On (returnFlashH), .25, 0
     Else
         Off (removeFlashH)
+        Off (returnFlashH)
     EndIf
 stackLightAlrm = IOTableBooleans(stackLightAlrmCC, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
 If stackLightAlrm = True Then

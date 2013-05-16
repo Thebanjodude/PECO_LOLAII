@@ -121,7 +121,7 @@ Function FlashRemoval() As Boolean
 '		If FlashPnlPrsntCC = True Then
 ''TODO: Read the datasheet for the flash removal tool
 '			removeFlashCC = True
-'
+'			
 '			Do Until flashDoneCC = True
 '				'do nothing
 '			Loop

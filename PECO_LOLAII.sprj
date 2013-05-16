@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/05/15 20:56:06:999,DS:0000003657,CS:14853,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/16 23:10:37:926,DS:0000003666,CS:03853,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="5/15/2013 2:55:50 PM"
+	sLastModified="5/16/2013 5:10:37 PM"
 	bBuildComplete=False
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -28,49 +28,49 @@ UserErrorsFile {
 nProgramFileCount=8
 ProgramFile1 {
 	sName="Main.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
-	sTimeSavedInController="5/9/2013 11:15:44 PM"
+	sTimeSavedInController="5/15/2013 8:21:30 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
-	sTimeSavedInController="5/9/2013 10:06:28 PM"
+	sTimeSavedInController="5/15/2013 8:54:27 PM"
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
-	sTimeSavedInController="5/9/2013 10:24:19 PM"
+	sTimeSavedInController="5/15/2013 8:55:50 PM"
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
 	sTimeSavedInController="5/9/2013 10:06:28 PM"
 }
 ProgramFile5 {
 	sName="OldCode.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
 	sTimeSavedInController="4/17/2013 9:29:51 PM"
 }
 ProgramFile6 {
 	sName="SystemMonitor.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
-	sTimeSavedInController="5/15/2013 6:43:20 PM"
+	sTimeSavedInController="5/15/2013 8:41:39 PM"
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
 	sTimeSavedInController="5/10/2013 6:40:47 PM"
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
 	sTimeSavedInController="5/9/2013 10:06:28 PM"
 }
@@ -78,7 +78,7 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="5/10/2013 6:13:05 PM"
+	sTimeSavedInController="5/16/2013 11:02:39 PM"
 }
 nPointFileCount=1
 PointFile1 {
