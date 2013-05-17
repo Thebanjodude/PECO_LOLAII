@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/05/10 17:44:48:232,DS:0000012235,CS:06984,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/16 23:27:14:513,DS:0000012307,CS:15398,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=37
@@ -195,7 +195,7 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=11
+	nNumberOfLabels=12
 	Label1 {
 		nBit=96
 		sLabel="inMagMtrH"
@@ -222,31 +222,36 @@ OutputBitLabels {
 		sDescription=""
 	}
 	Label6 {
+		nBit=101
+		sLabel="returnFlashH"
+		sDescription=""
+	}
+	Label7 {
 		nBit=102
 		sLabel="debrisMtrH"
 		sDescription=""
 	}
-	Label7 {
+	Label8 {
 		nBit=103
 		sLabel="suctionCupsH"
 		sDescription=""
 	}
-	Label8 {
+	Label9 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label9 {
+	Label10 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label10 {
+	Label11 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label11 {
+	Label12 {
 		nBit=110
 		sLabel="stackLightAlrmH"
 		sDescription=""

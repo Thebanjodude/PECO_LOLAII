@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/05/16 23:23:08:280,DS:0000002476,CS:11845,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="IOTable.prg"
+ENVT0100,LM:2013/05/17 00:05:21:317,DS:0000002484,CS:02632,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="SystemMonitor.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=247
-		nTop=30
-		nWidth=1251
-		nHeight=756
+		nLeft=-5
+		nTop=28
+		nWidth=1250
+		nHeight=753
 	}
 }
 ProgramFile2 {
@@ -17,10 +17,10 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=2
-		nTop=42
-		nWidth=1662
-		nHeight=747
+		nLeft=196
+		nTop=134
+		nWidth=848
+		nHeight=744
 	}
 }
 ProgramFile3 {
@@ -28,10 +28,10 @@ ProgramFile3 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=54
-		nTop=105
-		nWidth=1285
-		nHeight=672
+		nLeft=106
+		nTop=430
+		nWidth=1284
+		nHeight=669
 	}
 }
 ProgramFile4 {
@@ -58,13 +58,13 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="SystemMonitor.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=60
-		nTop=74
-		nWidth=1129
-		nHeight=625
+		nLeft=35
+		nTop=58
+		nWidth=1128
+		nHeight=622
 	}
 }
 ProgramFile7 {
@@ -95,10 +95,10 @@ IncludeFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=94
-		nTop=65
-		nWidth=1336
-		nHeight=576
+		nLeft=1214
+		nTop=-4
+		nWidth=628
+		nHeight=573
 	}
 }
 nPointFileCount=1
@@ -127,38 +127,38 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=502
-		nTop=-3
-		nWidth=732
-		nHeight=786
+		nLeft=158
+		nTop=265
+		nWidth=797
+		nHeight=448
 	}
 }
 IOLabelEditor {
 	bOpened=False
 	Window {
-		nLeft=287
-		nTop=76
-		nWidth=1031
-		nHeight=678
+		nLeft=26
+		nTop=126
+		nWidth=1029
+		nHeight=674
 	}
 	nWinState=0
 }
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=411
-		nTop=128
+		nLeft=805
+		nTop=125
 		nWidth=520
-		nHeight=501
+		nHeight=507
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=336
-		nTop=224
-		nWidth=947
-		nHeight=412
+		nLeft=353
+		nTop=200
+		nWidth=945
+		nHeight=409
 	}
 }
 Macros {

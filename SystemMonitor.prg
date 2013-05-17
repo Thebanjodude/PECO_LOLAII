@@ -24,7 +24,6 @@ Do While True
 	Else
 		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False
-		stackLightGrnCC = True
 	EndIf
 	
 	If outMagInt = True Then ' If an interlock gets tripped then halt the state machine
@@ -40,14 +39,12 @@ Do While True
 	Else
 	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
 	 	erOutMagOpenInterlock = False
-		stackLightGrnCC = True
 	EndIf
 	
 	If frontIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erFrontSafetyFrameOpen = True
 		stackLightYelCC = True
 	Else
-		stackLightGrnCC = True
 	 	erFrontSafetyFrameOpen = False
 	EndIf
 	
@@ -55,7 +52,6 @@ Do While True
 		erFrontSafetyFrameOpen = True
 		stackLightYelCC = True
 	Else
-		stackLightGrnCC = True
 	 	erFrontSafetyFrameOpen = False
 	EndIf
 	
@@ -63,7 +59,6 @@ Do While True
 		erBackSafetyFrameOpen = True
 		stackLightYelCC = True
 	Else
-		stackLightGrnCC = True
 	 	erBackSafetyFrameOpen = False
 	EndIf
 	
@@ -71,7 +66,6 @@ Do While True
 		erBackSafetyFrameOpen = True
 		stackLightYelCC = True
 	Else
-		stackLightGrnCC = True
 	 	erBackSafetyFrameOpen = False
 	EndIf
 	
@@ -79,15 +73,13 @@ Do While True
 		erLeftSafetyFrameOpen = True
 		stackLightYelCC = True
 	Else
-		stackLightGrnCC = True
-	 	erLeftSafetyFrameOpen = False
+		 	erLeftSafetyFrameOpen = False
 	EndIf
 
 	If leftIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
 		erLeftSafetyFrameOpen = True
 		stackLightYelCC = True
 	Else
-		stackLightGrnCC = True
 	 	erLeftSafetyFrameOpen = False
 	EndIf
 	
@@ -95,7 +87,6 @@ Do While True
 		erRightSafetyFrameOpen = True
 		stackLightYelCC = True
 	Else
-		stackLightGrnCC = True
 	 	erRightSafetyFrameOpen = False
 	EndIf
 	
@@ -104,9 +95,8 @@ Do While True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
 		'Turn off main air supply to the machine! Do we even have one?
-'		Pause
+		Pause
 	Else
-		stackLightGrnCC = True
 		erHighPressure = False
 	EndIf
 	
@@ -114,9 +104,8 @@ Do While True
 		erLowPressure = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-'		Pause
+		Pause
 	Else
-		stackLightGrnCC = True
 		stackLightAlrmCC = False
 	EndIf
 	
@@ -124,9 +113,8 @@ Do While True
 		erHeatStakeBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-'		Pause
+		Pause
 	Else
-		stackLightGrnCC = True
 		erHeatStakeBreaker = False
 	EndIf
 
@@ -134,9 +122,8 @@ Do While True
 		erInMagBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-'		Pause
+		Pause
 	Else
-		stackLightGrnCC = True
 		erInMagBreaker = False
 	EndIf
 	
@@ -144,29 +131,26 @@ Do While True
 		erOutMagBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
-'		Pause
+		Pause
 	Else
-		stackLightGrnCC = True
 		erOutMagBreaker = False
 	EndIf
 	
 	If cbMonDebrisRmv = True Then
 		erDebrisRemovalBreaker = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-'		Pause
+'		stackLightRedCC = True
+'		stackLightAlrmCC = True
+		Pause
 	Else
-		stackLightGrnCC = True
 		erDebrisRemovalBreaker = False
 	EndIf
 	
 	If cbMonSafety = True Then
-		stackLightRedCC = True
-		stackLightAlrmCC = True
+'		stackLightRedCC = True
+'		stackLightAlrmCC = True
 		erSafetySystemBreaker = True
-'		pause
+'		pausestackLightGrnCC
 	Else
-		stackLightGrnCC = True
 		erSafetySystemBreaker = False
 	EndIf
 
@@ -176,7 +160,6 @@ Do While True
 		erDCPowerHeatStake = True
 '		Pause
 	Else
-		stackLightGrnCC = True
 		erDCPowerHeatStake = False
 	EndIf
 	
@@ -190,48 +173,43 @@ Do While True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
 	Else
-		stackLightGrnCC = True
 		erEstop = False
 	EndIf
 	
 	'If the in/out magazine sensor diff signals are the same then we know there is a problem	
 	If inMagLowLim = inMagLowLimN Then
 		erInMagLowSensorBad = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
+'		stackLightRedCC = True
+'		stackLightAlrmCC = True
 '		pause
 	Else
-		stackLightGrnCC = True
 		erInMagLowSensorBad = False
 	EndIf
 	
 	If inMagUpLim = inMagUpLimN Then
 		erInMagUpSensorBad = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
+'		stackLightRedCC = True
+'		stackLightAlrmCC = True
 '		pause		
 	Else
-		stackLightGrnCC = True
 		erInMagUpSensorBad = False
 	EndIf
 	
 	If outMagLowLim = outMagLowLimN Then
 		erOutMagLowSensorBad = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
+'		stackLightRedCC = True
+'		stackLightAlrmCC = True
 '		pause		
 	Else
-		stackLightGrnCC = True
 		erOutMagLowSensorBad = False
 	EndIf
 	
 	If outMagUpLim = outMagUpLimN Then
 		erOutMagUpSensorBad = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
+'		stackLightRedCC = True
+'		stackLightAlrmCC = True
 '		pause
 	Else
-		stackLightGrnCC = True
 		erOutMagUpSensorBad = False
 	EndIf
 	
@@ -261,10 +239,16 @@ Do While True
 			'is there a way to have the opperator catch the panel?
 			Quit All
 		Else
-			stackLightRedCC = True
+			stackLightRedCC = False
 			erIllegalArmMove = False
 		EndIf
 				
+	EndIf
+	
+	If (stackLightRedCC Or stackLightYelCC) = False Then
+		stackLightGrnCC = True
+	Else
+		stackLightGrnCC = False
 	EndIf
 		
 Loop

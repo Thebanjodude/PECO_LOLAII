@@ -191,11 +191,11 @@ Function HotStakeTempRdy() As Boolean
 	If Abs(recTemp - heatStakeCurrentTemp) < Abs(heatStakeTempTolerance) Then
 		HotStakeTempRdy = True
 		erHeatStakeTemp = False
-		stackLightYelCC = False
+		stackLightRedCC = False
 	Else
 		HotStakeTempRdy = False ' Temperature is not in range
 		erHeatStakeTemp = True
-		stackLightYelCC = True
+		'stackLightRedCC = True
 		'stackLightAlrmCC = True ' Do we want to siren on when its heating up? Doesnt make sense...
 	EndIf
 	
