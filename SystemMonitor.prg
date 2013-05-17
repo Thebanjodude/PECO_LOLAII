@@ -90,7 +90,7 @@ Do While True
 	 	erRightSafetyFrameOpen = False
 	EndIf
 	
-	If airPressHigh = True Then
+	If airPressHigh = False Then
 		erHighPressure = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
@@ -100,7 +100,7 @@ Do While True
 		erHighPressure = False
 	EndIf
 	
-	If airPressLow = True Then
+	If airPressLow = False Then
 		erLowPressure = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
@@ -109,7 +109,7 @@ Do While True
 		stackLightAlrmCC = False
 	EndIf
 	
-	If cbMonHeatStake = True Then
+	If cbMonHeatStake = False Then
 		erHeatStakeBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
@@ -118,7 +118,7 @@ Do While True
 		erHeatStakeBreaker = False
 	EndIf
 
-	If cbMonInMag = True Then
+	If cbMonInMag = False Then
 		erInMagBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
@@ -127,7 +127,7 @@ Do While True
 		erInMagBreaker = False
 	EndIf
 	
-	If cbMonOutMag = True Then
+	If cbMonOutMag = False Then
 		erOutMagBreaker = True
 		stackLightRedCC = True
 		stackLightAlrmCC = True
@@ -136,7 +136,7 @@ Do While True
 		erOutMagBreaker = False
 	EndIf
 	
-	If cbMonDebrisRmv = True Then
+	If cbMonDebrisRmv = False Then
 		erDebrisRemovalBreaker = True
 '		stackLightRedCC = True
 '		stackLightAlrmCC = True
@@ -145,7 +145,7 @@ Do While True
 		erDebrisRemovalBreaker = False
 	EndIf
 	
-	If cbMonSafety = True Then
+	If cbMonSafety = False Then
 '		stackLightRedCC = True
 '		stackLightAlrmCC = True
 		erSafetySystemBreaker = True

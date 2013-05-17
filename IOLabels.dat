@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/05/16 23:27:14:513,DS:0000012307,CS:15398,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/17 14:10:52:596,DS:0000012373,CS:29552,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
-	nNumberOfLabels=37
+	nNumberOfLabels=38
 	Label1 {
 		nBit=10
 		sLabel="frontIntlock1H"
@@ -88,101 +88,106 @@ InputBitLabels {
 		sDescription=""
 	}
 	Label18 {
+		nBit=72
+		sLabel="dc24vOK"
+		sDescription=""
+	}
+	Label19 {
 		nBit=73
 		sLabel="cbMonPAS24vdcH"
 		sDescription=""
 	}
-	Label19 {
+	Label20 {
 		nBit=74
 		sLabel="holeDetectedH"
 		sDescription=""
 	}
-	Label20 {
+	Label21 {
 		nBit=75
 		sLabel="edgeDetectHiH"
 		sDescription=""
 	}
-	Label21 {
+	Label22 {
 		nBit=76
 		sLabel="edgeDetectLoH"
 		sDescription=""
 	}
-	Label22 {
+	Label23 {
 		nBit=77
 		sLabel="edgeDetectGoH"
 		sDescription=""
 	}
-	Label23 {
+	Label24 {
 		nBit=80
 		sLabel="maintModeH"
 		sDescription=""
 	}
-	Label24 {
+	Label25 {
 		nBit=81
 		sLabel="HSPanelPresntH"
 		sDescription=""
 	}
-	Label25 {
+	Label26 {
 		nBit=82
 		sLabel="FlashPnlPrsntH"
 		sDescription=""
 	}
-	Label26 {
+	Label27 {
 		nBit=96
 		sLabel="inMagUpLimH"
 		sDescription=""
 	}
-	Label27 {
+	Label28 {
 		nBit=97
 		sLabel="inMagUpLimNH"
 		sDescription=""
 	}
-	Label28 {
+	Label29 {
 		nBit=98
 		sLabel="inMagLowLimH"
 		sDescription=""
 	}
-	Label29 {
+	Label30 {
 		nBit=99
 		sLabel="inMagLowLimNH"
 		sDescription=""
 	}
-	Label30 {
+	Label31 {
 		nBit=102
 		sLabel="inMagPnlRdyH"
 		sDescription=""
 	}
-	Label31 {
+	Label32 {
 		nBit=103
 		sLabel="inMagIntlockH"
 		sDescription=""
 	}
-	Label32 {
+	Label33 {
 		nBit=104
 		sLabel="outMagUpLimH"
 		sDescription=""
 	}
-	Label33 {
+	Label34 {
 		nBit=105
 		sLabel="outMagUpLimNH"
 		sDescription=""
 	}
-	Label34 {
+	Label35 {
 		nBit=106
 		sLabel="outMagLowLimH"
 		sDescription=""
 	}
-	Label35 {
+	Label36 {
 		nBit=107
 		sLabel="outMagLowLimNH"
 		sDescription=""
 	}
-	Label36 {
+	Label37 {
 		nBit=110
 		sLabel="outMagPanelRdyH"
 		sDescription=""
 	}
-	Label37 {
+	Label38 {
 		nBit=111
 		sLabel="outMagIntH"
 		sDescription=""

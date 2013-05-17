@@ -401,10 +401,10 @@ Function setVars(response$ As String)
 	EndIf
 '	Print tokens$(0), " : ", tokens$(1)
 	
-	Select tokens$(0)
+	Select Tokens$(0)
  'Rx from HMI:
 Case "backInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        backInterlockACKBtn = True
        backInterlockACK = True
    Else
@@ -412,7 +412,7 @@ Case "backInterlockACKBtn"
    EndIf
    Print "backInterlockACKBtn:", backInterlockACKBtn
 Case "frontInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        frontInterlockACKBtn = True
        frontInterlockACK = True
    Else
@@ -420,7 +420,7 @@ Case "frontInterlockACKBtn"
    EndIf
    Print "frontInterlockACKBtn:", frontInterlockACKBtn
 Case "inMagGoHomeBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        inMagGoHomeBtn = True
        inMagGoHome = True
    Else
@@ -428,7 +428,7 @@ Case "inMagGoHomeBtn"
    EndIf
    Print "inMagGoHomeBtn:", inMagGoHomeBtn
 Case "inMagIntLockAckBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        inMagIntLockAckBtn = True
        inMagIntLockAck = True
    Else
@@ -436,7 +436,7 @@ Case "inMagIntLockAckBtn"
    EndIf
    Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
 Case "inMagLoadedBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        inMagLoadedBtn = True
        inMagLoaded = True
    Else
@@ -444,7 +444,7 @@ Case "inMagLoadedBtn"
    EndIf
    Print "inMagLoadedBtn:", inMagLoadedBtn
 Case "jobPauseBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobPauseBtn = True
        jobPause = True
    Else
@@ -452,7 +452,7 @@ Case "jobPauseBtn"
    EndIf
    Print "jobPauseBtn:", jobPauseBtn
 Case "jobResumeBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobResumeBtn = True
        jobResume = True
    Else
@@ -460,7 +460,7 @@ Case "jobResumeBtn"
    EndIf
    Print "jobResumeBtn:", jobResumeBtn
 Case "jobStartBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobStartBtn = True
        jobStart = True
    Else
@@ -468,7 +468,7 @@ Case "jobStartBtn"
    EndIf
    Print "jobStartBtn:", jobStartBtn
 Case "jobStopBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobStopBtn = True
        jobStop = True
    Else
@@ -476,7 +476,7 @@ Case "jobStopBtn"
    EndIf
    Print "jobStopBtn:", jobStopBtn
 Case "leftInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        leftInterlockACKBtn = True
        leftInterlockACK = True
    Else
@@ -484,7 +484,7 @@ Case "leftInterlockACKBtn"
    EndIf
    Print "leftInterlockACKBtn:", leftInterlockACKBtn
 Case "outMagGoHomeBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        outMagGoHomeBtn = True
        outMagGoHome = True
    Else
@@ -492,7 +492,7 @@ Case "outMagGoHomeBtn"
    EndIf
    Print "outMagGoHomeBtn:", outMagGoHomeBtn
 Case "outMagIntLockAckBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        outMagIntLockAckBtn = True
        outMagIntLockAck = True
    Else
@@ -500,7 +500,7 @@ Case "outMagIntLockAckBtn"
    EndIf
    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 Case "outMagUnloadedBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        outMagUnloadedBtn = True
        outMagUnloaded = True
    Else
@@ -508,7 +508,7 @@ Case "outMagUnloadedBtn"
    EndIf
    Print "outMagUnloadedBtn:", outMagUnloadedBtn
 Case "rightInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        rightInterlockACKBtn = True
        rightInterlockACK = True
    Else
@@ -516,7 +516,7 @@ Case "rightInterlockACKBtn"
    EndIf
    Print "rightInterlockACKBtn:", rightInterlockACKBtn
 Case "sftyFrmIlockAckBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        sftyFrmIlockAckBtn = True
        sftyFrmIlockAck = True
    Else
@@ -556,37 +556,37 @@ Case "hole16X"
 Case "hole16Y"
     PanelCordinates(16, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole17X"
-    PanelCordinates(17, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(17, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole17Y"
-    PanelCordinates(17, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(17, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole18X"
-    PanelCordinates(18, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(18, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole18Y"
-    PanelCordinates(18, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(18, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole19X"
-    PanelCordinates(19, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(19, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole19Y"
-    PanelCordinates(19, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(19, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole1X"
-    PanelCordinates(1, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(1, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole1Y"
-    PanelCordinates(1, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(1, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole20X"
-    PanelCordinates(20, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(20, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole20Y"
-    PanelCordinates(20, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(20, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole21X"
-    PanelCordinates(21, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(21, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole21Y"
-    PanelCordinates(21, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(21, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole22X"
-    PanelCordinates(22, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(22, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole22Y"
-    PanelCordinates(22, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(22, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole2X"
-    PanelCordinates(2, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(2, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole2Y"
-    PanelCordinates(2, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(2, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole3X"
     PanelCordinates(3, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole3Y"
@@ -598,151 +598,151 @@ Case "hole4Y"
 Case "hole5X"
     PanelCordinates(5, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole5Y"
-    PanelCordinates(5, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(5, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole6X"
-    PanelCordinates(6, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(6, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole6Y"
-    PanelCordinates(6, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(6, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole7X"
-    PanelCordinates(7, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(7, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole7Y"
-    PanelCordinates(7, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(7, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole8X"
-    PanelCordinates(8, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(8, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole8Y"
-    PanelCordinates(8, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(8, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole9X"
-    PanelCordinates(9, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(9, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole9Y"
-    PanelCordinates(9, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(9, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "airPressHighF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (airPressHighF)
     Else
         MemOff (airPressHighF)
     EndIf
 Case "airPressHighFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (airPressHighFV)
     Else
         MemOff (airPressHighFV)
     EndIf
 Case "airPressLowF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (airPressLowF)
     Else
         MemOff (airPressLowF)
     EndIf
 Case "airPressLowFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (airPressLowFV)
     Else
         MemOff (airPressLowFV)
     EndIf
 Case "backInterlock1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock1F)
     Else
         MemOff (backIntlock1F)
     EndIf
 Case "backInterlock1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock1FV)
     Else
         MemOff (backIntlock1FV)
     EndIf
 Case "backInterlock2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock2F)
     Else
         MemOff (backIntlock2F)
     EndIf
 Case "backInterlock2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock2FV)
     Else
         MemOff (backIntlock2FV)
     EndIf
 Case "cbMonDebrisRmvF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonDebrisRmvF)
     Else
         MemOff (cbMonDebrisRmvF)
     EndIf
 Case "cbMonDebrisRmvFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonDebrisRmvFV)
     Else
         MemOff (cbMonDebrisRmvFV)
     EndIf
 Case "cbMonHeatStakeF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonHeatStakeF)
     Else
         MemOff (cbMonHeatStakeF)
     EndIf
 Case "cbMonHeatStakeFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonHeatStakeFV)
     Else
         MemOff (cbMonHeatStakeFV)
     EndIf
 Case "cbMonInMagF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonInMagF)
     Else
         MemOff (cbMonInMagF)
     EndIf
 Case "cbMonInMagFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonInMagFV)
     Else
         MemOff (cbMonInMagFV)
     EndIf
 Case "cbMonOutMagF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonOutMagF)
     Else
         MemOff (cbMonOutMagF)
     EndIf
 Case "cbMonOutMagFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonOutMagFV)
     Else
         MemOff (cbMonOutMagFV)
     EndIf
 Case "cbMonPAS24vdcF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonPAS24vdcF)
     Else
         MemOff (cbMonPAS24vdcF)
     EndIf
 Case "cbMonPAS24vdcFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonPAS24vdcFV)
     Else
         MemOff (cbMonPAS24vdcFV)
     EndIf
 Case "cbMonSafetyF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonSafetyF)
     Else
         MemOff (cbMonSafetyF)
     EndIf
 Case "cbMonSafetyFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonSafetyFV)
     Else
         MemOff (cbMonSafetyFV)
     EndIf
 Case "edgeDetectGoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectGoF)
     Else
         MemOff (edgeDetectGoF)
     EndIf
 Case "edgeDetectGoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectGoFV)
     Else
         MemOff (edgeDetectGoFV)
@@ -754,385 +754,387 @@ Case "edgeDetectHiF"
         MemOff (edgeDetectHiF)
     EndIf
 Case "edgeDetectHiFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectHiFV)
     Else
         MemOff (edgeDetectHiFV)
     EndIf
 Case "edgeDetectLoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectLoF)
     Else
         MemOff (edgeDetectLoF)
     EndIf
 Case "edgeDetectLoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectLoFV)
     Else
         MemOff (edgeDetectLoFV)
     EndIf
 Case "flashPnlPrsntF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (FlashPnlPrsntF)
     Else
         MemOff (FlashPnlPrsntF)
     EndIf
 Case "flashPnlPrsntFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (FlashPnlPrsntFV)
     Else
         MemOff (FlashPnlPrsntFV)
     EndIf
 Case "frontIntlock1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock1F)
     Else
         MemOff (frontIntlock1F)
     EndIf
 Case "frontIntlock1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock1FV)
     Else
         MemOff (frontIntlock1FV)
     EndIf
 Case "frontIntlock2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock2F)
     Else
         MemOff (frontIntlock2F)
     EndIf
 Case "frontIntlock2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock2FV)
     Else
         MemOff (frontIntlock2FV)
     EndIf
 Case "holeDetectedF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (holeDetectedF)
     Else
         MemOff (holeDetectedF)
     EndIf
 Case "holeDetectedFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (holeDetectedFV)
     Else
         MemOff (holeDetectedFV)
     EndIf
 Case "hsPanelPresntF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (hsPanelPresntF)
     Else
         MemOff (hsPanelPresntF)
     EndIf
 Case "hsPanelPresntFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (hsPanelPresntFV)
     Else
         MemOff (hsPanelPresntFV)
     EndIf
 Case "inMagInterlockF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagInterlockF)
     Else
         MemOff (inMagInterlockF)
     EndIf
 Case "inMagInterlockFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagInterlockFV)
     Else
         MemOff (inMagInterlockFV)
     EndIf
 Case "inMagLowerLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowerLimF)
     Else
         MemOff (inMagLowerLimF)
     EndIf
 Case "inMagLowerLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowerLimFV)
     Else
         MemOff (inMagLowerLimFV)
     EndIf
 Case "inMagLowerLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowLimNF)
     Else
         MemOff (inMagLowLimNF)
     EndIf
 Case "inMagLowerLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowLimNFV)
     Else
         MemOff (inMagLowLimNFV)
     EndIf
 Case "inMagPnlRdyF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagPnlRdyF)
     Else
         MemOff (inMagPnlRdyF)
     EndIf
 Case "inMagPnlRdyFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagPnlRdyFV)
     Else
         MemOff (inMagPnlRdyFV)
     EndIf
 Case "inMagUpperLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimF)
     Else
         MemOff (inMagUpLimF)
     EndIf
 Case "inMagUpperLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpperLimFV)
     Else
         MemOff (inMagUpLimFV)
     EndIf
 Case "inMagUpLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimNF)
     Else
         MemOff (inMagUpLimNF)
     EndIf
 Case "inMagUpperLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimNFV)
     Else
         MemOff (inMagUpLimNFV)
     EndIf
 Case "leftIntlock1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock1F)
     Else
         MemOff (leftIntlock1F)
     EndIf
 Case "leftIntlock1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock1FV)
     Else
         MemOff (leftIntlock1FV)
     EndIf
 Case "leftIntlock2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock2F)
     Else
         MemOff (leftIntlock2F)
     EndIf
 Case "leftIntlock2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock2FV)
     Else
         MemOff (leftIntlock2FV)
     EndIf
 Case "maintModeF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (maintModeF)
     Else
         MemOff (maintModeF)
     EndIf
 Case "maintModeFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (maintModeFV)
     Else
         MemOff (maintModeFV)
     EndIf
 Case "outMagIntF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagIntF)
     Else
         MemOff (outMagIntF)
     EndIf
 Case "outMagIntFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagIntFV)
     Else
         MemOff (outMagIntFV)
     EndIf
 Case "outMagLowLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimF)
     Else
         MemOff (outMagLowLimF)
     EndIf
 Case "outMagLowLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimFV)
     Else
         MemOff (outMagLowLimFV)
     EndIf
 Case "outMagLowLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimNF)
     Else
         MemOff (outMagLowLimNF)
     EndIf
 Case "outMagLowLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimNFV)
     Else
         MemOff (outMagLowLimNFV)
     EndIf
 Case "outMagPanelRdyF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagPanelRdyF)
     Else
         MemOff (outMagPanelRdyF)
     EndIf
 Case "outMagPanelRdyFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagPanelRdyFV)
     Else
         MemOff (outMagPanelRdyFV)
     EndIf
 Case "outMagUpLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimF)
     Else
         MemOff (outMagUpLimF)
     EndIf
 Case "outMagUpLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimFV)
     Else
         MemOff (outMagUpLimFV)
     EndIf
 Case "outMagUpLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimNF)
     Else
         MemOff (outMagUpLimNF)
     EndIf
 Case "outMagUpLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimNFV)
     Else
         MemOff (outMagUpLimNFV)
     EndIf
 Case "rightIntlockF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (rightIntlockF)
     Else
         MemOff (rightIntlockF)
     EndIf
 Case "rightIntlockFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (rightIntlockFV)
     Else
         MemOff (rightIntlockFV)
     EndIf
 Case "debrisMtrF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (debrisMtrF)
     Else
         MemOff (debrisMtrF)
     EndIf
 Case "debrisMtrFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (debrisMtrFV)
     Else
         MemOff (debrisMtrFV)
     EndIf
 Case "inMagMtrF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrF)
     Else
         MemOff (inMagMtrF)
     EndIf
 Case "inMagMtrFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrFV)
     Else
         MemOff (inMagMtrFV)
     EndIf
 Case "inMagMtrDirF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrDirF)
     Else
         MemOff (inMagMtrDirF)
     EndIf
 Case "inMagMtrDirFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrDirFV)
     Else
         MemOff (inMagMtrDirFV)
     EndIf
 Case "outMagMtrF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrF)
     Else
         MemOff (outMagMtrF)
     EndIf
 Case "outMagMtrFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrFV)
     Else
         MemOff (outMagMtrFV)
     EndIf
 Case "outMagMtrDirF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrDirF)
     Else
         MemOff (outMagMtrDirF)
     EndIf
 Case "outMagMtrDirFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrDirFV)
     Else
         MemOff (outMagMtrDirFV)
     EndIf
 Case "removeFlashF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (removeFlashF)
     Else
         MemOff (removeFlashF)
     EndIf
 Case "removeFlashFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (removeFlashFV)
     Else
         MemOff (removeFlashFV)
     EndIf
 Case "stackLightAlrmF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightAlrmF)
     Else
         MemOff (stackLightAlrmF)
     EndIf
 Case "stackLightAlrmFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightAlrmFV)
     Else
         MemOff (stackLightAlrmFV)
     EndIf
 Case "stackLightGrnF"
-    If tokens$(1) = "true" Then
+	Print "got it"
+    If Tokens$(1) = "true" Then
         MemOn (stackLightGrnF)
     Else
         MemOff (stackLightGrnF)
     EndIf
 Case "stackLightGrnFV"
-    If tokens$(1) = "true" Then
+	Print "got it"
+    If Tokens$(1) = "true" Then
         MemOn (stackLightGrnFV)
     Else
         MemOff (stackLightGrnFV)
     EndIf
 Case "stackLightRedF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightRedF)
     Else
         MemOff (stackLightRedF)
     EndIf
 Case "stackLightRedFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightRedFV)
     Else
         MemOff (stackLightRedFV)
     EndIf
 Case "stackLightYelF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightYelF)
     Else
         MemOff (stackLightYelF)
