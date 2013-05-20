@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/05/17 15:04:11:047,DS:0000003659,CS:23336,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/20 19:34:39:812,DS:0000003657,CS:01640,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="5/17/2013 9:04:09 AM"
+	sLastModified="5/20/2013 1:34:38 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="5/16/2013 11:56:21 PM"
+	sTimeSavedInController="5/20/2013 6:09:16 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
@@ -42,7 +42,7 @@ ProgramFile3 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="5/17/2013 3:04:09 PM"
+	sTimeSavedInController="5/20/2013 4:58:15 PM"
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
@@ -60,7 +60,7 @@ ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="5/17/2013 2:11:18 PM"
+	sTimeSavedInController="5/20/2013 7:34:38 PM"
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
@@ -78,7 +78,7 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="5/16/2013 11:02:39 PM"
+	sTimeSavedInController="5/20/2013 4:31:15 PM"
 }
 nPointFileCount=1
 PointFile1 {

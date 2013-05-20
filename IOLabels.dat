@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/05/17 14:10:52:596,DS:0000012373,CS:29552,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/20 13:56:55:107,DS:0000012373,CS:32634,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=38
@@ -222,23 +222,23 @@ OutputBitLabels {
 		sDescription=""
 	}
 	Label5 {
-		nBit=100
+		nBit=101
 		sLabel="removeFlashH"
 		sDescription=""
 	}
 	Label6 {
-		nBit=101
-		sLabel="returnFlashH"
-		sDescription=""
-	}
-	Label7 {
 		nBit=102
 		sLabel="debrisMtrH"
 		sDescription=""
 	}
-	Label8 {
+	Label7 {
 		nBit=103
 		sLabel="suctionCupsH"
+		sDescription=""
+	}
+	Label8 {
+		nBit=106
+		sLabel="returnFlashH"
 		sDescription=""
 	}
 	Label9 {

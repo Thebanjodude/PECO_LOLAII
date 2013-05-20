@@ -115,7 +115,7 @@ Function PowerOnSequence()
 
 	' Execute Tasks
 	Xqt 2, IOTableInputs, NoEmgAbort
-	Xqt 3, IOTableOutputs, Normal
+	Xqt 3, IOTableOutputs, NoEmgAbort
 	Xqt 4, SystemMonitor, NoEmgAbort
 	Xqt 5, iotransfer, NoEmgAbort
 	Xqt 6, HmiListen, NoEmgAbort
@@ -225,7 +225,7 @@ Function PowerOnHomeCheck() As Boolean
 	
 	Print Hand(Here)
 	
-	If Hand(Here) = 2 Then ' throw the error if the arm is in "righty" orientation
+	If Hand(Here) = 1 Then ' throw the error if the arm is in "righty" orientation
 		erRobotNotAtHome = True
 		PowerOnHomeCheck = False
 		Print "Arm Orientation NOT OK"

@@ -1,20 +1,20 @@
-ENVT0100,LM:2013/05/17 15:20:48:605,DS:0000002480,CS:19246,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="IOTable.prg"
+ENVT0100,LM:2013/05/20 20:06:57:143,DS:0000002483,CS:13133,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="SystemMonitor.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=-5
-		nTop=28
-		nWidth=1250
-		nHeight=753
+		nLeft=162
+		nTop=98
+		nWidth=1072
+		nHeight=648
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=196
@@ -26,12 +26,12 @@ ProgramFile2 {
 ProgramFile3 {
 	sName="IOTable.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=155
-		nTop=87
-		nWidth=1283
-		nHeight=665
+		nLeft=91
+		nTop=28
+		nWidth=1174
+		nHeight=704
 	}
 }
 ProgramFile4 {
@@ -61,10 +61,10 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=42
-		nTop=56
-		nWidth=1127
-		nHeight=694
+		nLeft=7
+		nTop=4
+		nWidth=1624
+		nHeight=757
 	}
 }
 ProgramFile7 {
@@ -72,33 +72,33 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=1
 	Window {
-		nLeft=377
+		nLeft=102
 		nTop=27
-		nWidth=1155
-		nHeight=747
+		nWidth=1154
+		nHeight=744
 	}
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=77
-		nTop=239
-		nWidth=1419
-		nHeight=655
+		nLeft=14
+		nTop=409
+		nWidth=1418
+		nHeight=776
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=174
-		nTop=31
-		nWidth=1127
-		nHeight=569
+		nLeft=27
+		nTop=138
+		nWidth=747
+		nHeight=563
 	}
 }
 nPointFileCount=1
@@ -125,40 +125,40 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=158
-		nTop=153
-		nWidth=1121
-		nHeight=618
+		nLeft=832
+		nTop=95
+		nWidth=851
+		nHeight=454
 	}
 }
 IOLabelEditor {
 	bOpened=False
 	Window {
-		nLeft=130
-		nTop=84
-		nWidth=1027
-		nHeight=671
+		nLeft=234
+		nTop=133
+		nWidth=1025
+		nHeight=667
 	}
 	nWinState=0
 }
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=2404
-		nTop=420
+		nLeft=1202
+		nTop=184
 		nWidth=520
-		nHeight=497
+		nHeight=523
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=2253
-		nTop=233
-		nWidth=943
-		nHeight=406
+		nLeft=2281
+		nTop=250
+		nWidth=940
+		nHeight=463
 	}
 }
 Macros {
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=False
 	Window {
-		nLeft=204
-		nTop=187
+		nLeft=469
+		nTop=72
 		nWidth=751
 		nHeight=485
 	}

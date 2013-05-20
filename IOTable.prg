@@ -476,7 +476,7 @@ Case "jobStopBtn"
    EndIf
    Print "jobStopBtn:", jobStopBtn
 Case "leftInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        leftInterlockACKBtn = True
        leftInterlockACK = True
    Else
@@ -484,7 +484,7 @@ Case "leftInterlockACKBtn"
    EndIf
    Print "leftInterlockACKBtn:", leftInterlockACKBtn
 Case "outMagGoHomeBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        outMagGoHomeBtn = True
        outMagGoHome = True
    Else
@@ -492,7 +492,7 @@ Case "outMagGoHomeBtn"
    EndIf
    Print "outMagGoHomeBtn:", outMagGoHomeBtn
 Case "outMagIntLockAckBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        outMagIntLockAckBtn = True
        outMagIntLockAck = True
    Else
@@ -500,7 +500,7 @@ Case "outMagIntLockAckBtn"
    EndIf
    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 Case "outMagUnloadedBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        outMagUnloadedBtn = True
        outMagUnloaded = True
    Else
@@ -508,7 +508,7 @@ Case "outMagUnloadedBtn"
    EndIf
    Print "outMagUnloadedBtn:", outMagUnloadedBtn
 Case "rightInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        rightInterlockACKBtn = True
        rightInterlockACK = True
    Else
@@ -516,7 +516,7 @@ Case "rightInterlockACKBtn"
    EndIf
    Print "rightInterlockACKBtn:", rightInterlockACKBtn
 Case "sftyFrmIlockAckBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        sftyFrmIlockAckBtn = True
        sftyFrmIlockAck = True
    Else
@@ -534,7 +534,7 @@ Case "hole10Y"
 Case "hole11X"
     PanelCordinates(11, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole11Y"
-    PanelCordinates(11, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(11, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole12X"
     PanelCordinates(12, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole12Y"
@@ -556,13 +556,13 @@ Case "hole16X"
 Case "hole16Y"
     PanelCordinates(16, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole17X"
-    PanelCordinates(17, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(17, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole17Y"
-    PanelCordinates(17, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(17, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole18X"
-    PanelCordinates(18, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(18, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole18Y"
-    PanelCordinates(18, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(18, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole19X"
     PanelCordinates(19, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole19Y"
@@ -588,65 +588,65 @@ Case "hole2X"
 Case "hole2Y"
     PanelCordinates(2, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole3X"
-    PanelCordinates(3, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(3, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole3Y"
-    PanelCordinates(3, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(3, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole4X"
-    PanelCordinates(4, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(4, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole4Y"
-    PanelCordinates(4, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(4, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole5X"
-    PanelCordinates(5, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(5, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole5Y"
-    PanelCordinates(5, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(5, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole6X"
-    PanelCordinates(6, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(6, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole6Y"
-    PanelCordinates(6, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(6, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole7X"
-    PanelCordinates(7, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(7, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole7Y"
-    PanelCordinates(7, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(7, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole8X"
-    PanelCordinates(8, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(8, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole8Y"
-    PanelCordinates(8, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(8, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole9X"
-    PanelCordinates(9, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(9, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole9Y"
-    PanelCordinates(9, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(9, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "airPressHighF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (airPressHighF)
     Else
         MemOff (airPressHighF)
     EndIf
 Case "airPressHighFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (airPressHighFV)
     Else
         MemOff (airPressHighFV)
     EndIf
 Case "airPressLowF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (airPressLowF)
     Else
         MemOff (airPressLowF)
     EndIf
 Case "airPressLowFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (airPressLowFV)
     Else
         MemOff (airPressLowFV)
     EndIf
 Case "backInterlock1F"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (backIntlock1F)
     Else
         MemOff (backIntlock1F)
     EndIf
 Case "backInterlock1FV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (backIntlock1FV)
     Else
         MemOff (backIntlock1FV)
@@ -658,25 +658,25 @@ Case "backInterlock2F"
         MemOff (backIntlock2F)
     EndIf
 Case "backInterlock2FV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (backIntlock2FV)
     Else
         MemOff (backIntlock2FV)
     EndIf
 Case "cbMonDebrisRmvF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (cbMonDebrisRmvF)
     Else
         MemOff (cbMonDebrisRmvF)
     EndIf
 Case "cbMonDebrisRmvFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (cbMonDebrisRmvFV)
     Else
         MemOff (cbMonDebrisRmvFV)
     EndIf
 Case "cbMonHeatStakeF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (cbMonHeatStakeF)
     Else
         MemOff (cbMonHeatStakeF)
@@ -736,13 +736,13 @@ Case "cbMonSafetyFV"
         MemOff (cbMonSafetyFV)
     EndIf
 Case "edgeDetectGoF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (edgeDetectGoF)
     Else
         MemOff (edgeDetectGoF)
     EndIf
 Case "edgeDetectGoFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (edgeDetectGoFV)
     Else
         MemOff (edgeDetectGoFV)
@@ -754,387 +754,387 @@ Case "edgeDetectHiF"
         MemOff (edgeDetectHiF)
     EndIf
 Case "edgeDetectHiFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (edgeDetectHiFV)
     Else
         MemOff (edgeDetectHiFV)
     EndIf
 Case "edgeDetectLoF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (edgeDetectLoF)
     Else
         MemOff (edgeDetectLoF)
     EndIf
 Case "edgeDetectLoFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (edgeDetectLoFV)
     Else
         MemOff (edgeDetectLoFV)
     EndIf
 Case "flashPnlPrsntF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (FlashPnlPrsntF)
     Else
         MemOff (FlashPnlPrsntF)
     EndIf
 Case "flashPnlPrsntFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (FlashPnlPrsntFV)
     Else
         MemOff (FlashPnlPrsntFV)
     EndIf
 Case "frontIntlock1F"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (frontIntlock1F)
     Else
         MemOff (frontIntlock1F)
     EndIf
 Case "frontIntlock1FV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (frontIntlock1FV)
     Else
         MemOff (frontIntlock1FV)
     EndIf
 Case "frontIntlock2F"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (frontIntlock2F)
     Else
         MemOff (frontIntlock2F)
     EndIf
 Case "frontIntlock2FV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (frontIntlock2FV)
     Else
         MemOff (frontIntlock2FV)
     EndIf
 Case "holeDetectedF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (holeDetectedF)
     Else
         MemOff (holeDetectedF)
     EndIf
 Case "holeDetectedFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (holeDetectedFV)
     Else
         MemOff (holeDetectedFV)
     EndIf
 Case "hsPanelPresntF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (hsPanelPresntF)
     Else
         MemOff (hsPanelPresntF)
     EndIf
 Case "hsPanelPresntFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (hsPanelPresntFV)
     Else
         MemOff (hsPanelPresntFV)
     EndIf
 Case "inMagInterlockF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagInterlockF)
     Else
         MemOff (inMagInterlockF)
     EndIf
 Case "inMagInterlockFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagInterlockFV)
     Else
         MemOff (inMagInterlockFV)
     EndIf
 Case "inMagLowerLimF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagLowerLimF)
     Else
         MemOff (inMagLowerLimF)
     EndIf
 Case "inMagLowerLimFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagLowerLimFV)
     Else
         MemOff (inMagLowerLimFV)
     EndIf
 Case "inMagLowerLimNF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagLowLimNF)
     Else
         MemOff (inMagLowLimNF)
     EndIf
 Case "inMagLowerLimNFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagLowLimNFV)
     Else
         MemOff (inMagLowLimNFV)
     EndIf
 Case "inMagPnlRdyF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagPnlRdyF)
     Else
         MemOff (inMagPnlRdyF)
     EndIf
 Case "inMagPnlRdyFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagPnlRdyFV)
     Else
         MemOff (inMagPnlRdyFV)
     EndIf
 Case "inMagUpperLimF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagUpLimF)
     Else
         MemOff (inMagUpLimF)
     EndIf
 Case "inMagUpperLimFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagUpperLimFV)
     Else
         MemOff (inMagUpLimFV)
     EndIf
 Case "inMagUpLimNF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagUpLimNF)
     Else
         MemOff (inMagUpLimNF)
     EndIf
 Case "inMagUpperLimNFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagUpLimNFV)
     Else
         MemOff (inMagUpLimNFV)
     EndIf
 Case "leftIntlock1F"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (leftIntlock1F)
     Else
         MemOff (leftIntlock1F)
     EndIf
 Case "leftIntlock1FV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (leftIntlock1FV)
     Else
         MemOff (leftIntlock1FV)
     EndIf
 Case "leftIntlock2F"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (leftIntlock2F)
     Else
         MemOff (leftIntlock2F)
     EndIf
 Case "leftIntlock2FV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (leftIntlock2FV)
     Else
         MemOff (leftIntlock2FV)
     EndIf
 Case "maintModeF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (maintModeF)
     Else
         MemOff (maintModeF)
     EndIf
 Case "maintModeFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (maintModeFV)
     Else
         MemOff (maintModeFV)
     EndIf
 Case "outMagIntF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagIntF)
     Else
         MemOff (outMagIntF)
     EndIf
 Case "outMagIntFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagIntFV)
     Else
         MemOff (outMagIntFV)
     EndIf
 Case "outMagLowLimF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagLowLimF)
     Else
         MemOff (outMagLowLimF)
     EndIf
 Case "outMagLowLimFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagLowLimFV)
     Else
         MemOff (outMagLowLimFV)
     EndIf
 Case "outMagLowLimNF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagLowLimNF)
     Else
         MemOff (outMagLowLimNF)
     EndIf
 Case "outMagLowLimNFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagLowLimNFV)
     Else
         MemOff (outMagLowLimNFV)
     EndIf
 Case "outMagPanelRdyF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagPanelRdyF)
     Else
         MemOff (outMagPanelRdyF)
     EndIf
 Case "outMagPanelRdyFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagPanelRdyFV)
     Else
         MemOff (outMagPanelRdyFV)
     EndIf
 Case "outMagUpLimF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagUpLimF)
     Else
         MemOff (outMagUpLimF)
     EndIf
 Case "outMagUpLimFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagUpLimFV)
     Else
         MemOff (outMagUpLimFV)
     EndIf
 Case "outMagUpLimNF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagUpLimNF)
     Else
         MemOff (outMagUpLimNF)
     EndIf
 Case "outMagUpLimNFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagUpLimNFV)
     Else
         MemOff (outMagUpLimNFV)
     EndIf
 Case "rightIntlockF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (rightIntlockF)
     Else
         MemOff (rightIntlockF)
     EndIf
 Case "rightIntlockFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (rightIntlockFV)
     Else
         MemOff (rightIntlockFV)
     EndIf
 Case "debrisMtrF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (debrisMtrF)
     Else
         MemOff (debrisMtrF)
     EndIf
 Case "debrisMtrFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (debrisMtrFV)
     Else
         MemOff (debrisMtrFV)
     EndIf
 Case "inMagMtrF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagMtrF)
     Else
         MemOff (inMagMtrF)
     EndIf
 Case "inMagMtrFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagMtrFV)
     Else
         MemOff (inMagMtrFV)
     EndIf
 Case "inMagMtrDirF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagMtrDirF)
     Else
         MemOff (inMagMtrDirF)
     EndIf
 Case "inMagMtrDirFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (inMagMtrDirFV)
     Else
         MemOff (inMagMtrDirFV)
     EndIf
 Case "outMagMtrF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagMtrF)
     Else
         MemOff (outMagMtrF)
     EndIf
 Case "outMagMtrFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagMtrFV)
     Else
         MemOff (outMagMtrFV)
     EndIf
 Case "outMagMtrDirF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagMtrDirF)
     Else
         MemOff (outMagMtrDirF)
     EndIf
 Case "outMagMtrDirFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagMtrDirFV)
     Else
         MemOff (outMagMtrDirFV)
     EndIf
 Case "removeFlashF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (removeFlashF)
     Else
         MemOff (removeFlashF)
     EndIf
 Case "removeFlashFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (removeFlashFV)
     Else
         MemOff (removeFlashFV)
     EndIf
 Case "stackLightAlrmF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (stackLightAlrmF)
     Else
         MemOff (stackLightAlrmF)
     EndIf
 Case "stackLightAlrmFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (stackLightAlrmFV)
     Else
         MemOff (stackLightAlrmFV)
     EndIf
 Case "stackLightGrnF"
 	Print "got it"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (stackLightGrnF)
     Else
         MemOff (stackLightGrnF)
     EndIf
 Case "stackLightGrnFV"
 	Print "got it"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (stackLightGrnFV)
     Else
         MemOff (stackLightGrnFV)
     EndIf
 Case "stackLightRedF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (stackLightRedF)
     Else
         MemOff (stackLightRedF)
     EndIf
 Case "stackLightRedFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (stackLightRedFV)
     Else
         MemOff (stackLightRedFV)
     EndIf
 Case "stackLightYelF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (stackLightYelF)
     Else
         MemOff (stackLightYelF)
@@ -1262,6 +1262,230 @@ Function HmiListen()
 	    Send
 	Loop
 Fend
+String CRLF$
+Integer modMessage(256)
+Integer modbusMessageID
 
+Function Main3()
+	Integer i
+	Integer writtenValue
+	Long readValue
+	Integer writeStatus
+	Integer portStatus
+	String testString$
+	Integer modLength
+	
+	readValue = 0
+	CRLF$ = Chr$(13) + Chr$(10)
+	 
+	SetNet #204, "10.22.251.171", 7352, CR, NONE, 0
+	
+	'Xqt twiddle_test, NoPause	
+		
+	readValue = modbusReadRegister(16)
+	
+	'set initial modbus ID as 0
+	modbusMessageID = 0;
+	
+	Do While 1
+		Wait 2.0
+		portStatus = ChkNet(204)
+		If portStatus < 0 Then
+			Print "portStatus: ", portStatus
+			OpenNet #204 As Client
+		EndIf
+		'Print #204, "Calling Modbus"
+		'writeStatus = modbusWriteRegister(&h33, &hAAFF)
+		writeStatus = modbusWriteRegister(&h33, modbusMessageID)
+		modbusMessageID = modbusMessageID + 1
+	Loop
+	
+Fend
+Function modbusCRC(modLength As Integer) As Long
+	
+	Long CRC
+	Long lowBit
+	Integer bitCount
+	Integer byteCount
+	
+	' initialize the CRC
+	CRC = &hFFFF
+
+	' step through the entire message
+	'Print "outer loop running from 0 to ", modLength - 1
+	For byteCount = 0 To modLength - 1
+		'Print "processing byte: ", Str$(modMessage(byteCount))
+
+		' XOR current byte of message with CRC
+		CRC = CRC Xor modMessage(byteCount)
+		'Print "after XOR with byte 0x", Hex$(modMessage(byteCount)), CRC
+		
+		' proceed through 8 shift operations XORing with polynomial if necessary
+		For bitCount = 0 To 7
+			'capture the low order bit before we shift it away
+			lowBit = CRC And 1
+		
+			' shift CRC right one bit
+			CRC = RShift(CRC, 1)
+		
+			' if the least significant bit was a 1, XOR it with polynomial constant 1010000000000001
+			If lowBit = 1 Then
+				CRC = CRC Xor &b1010000000000001
+				'Print "after XOR with poly: ", CRC
+			Else
+				'Print "No XOR with poly   : ", CRC
+			EndIf
+		Next
+	Next
+	
+	'Print "resulting CRC is: ", CRC
+	modbusCRC = CRC
+	
+Fend
+' This function is for writing a single 16 Modbus register on the PLC
+' It will build a valid Modbus RTU message and send it to the PLC
+' using the HMI ethernet to serial dameon as a bridge
+' It will then wait for a response and return a ??? for success or -1 for failure
+' calling type and return value are "Long" 
+Function modbusWriteRegister(regNum As Long, value As Long) As Integer
+	
+	Integer portStatus
+	Long CRC
+	Long modResponse(10)
+	Integer i
+	
+	portStatus = ChkNet(204)
+	
+
+
+	'build the command and send it to PLC
+	' function code		0x06
+	' address high 		0x00
+	' address low		0x00
+	' value high		0x00
+	' value low			0x00
+	modMessage(0) = &h11 'PLC modbus address
+	modMessage(1) = 6 ' function code
+	modMessage(2) = RShift(regNum, 8) ' high byte of address
+	modMessage(3) = regNum And &hFF ' low byte of address
+	modMessage(4) = RShift(value, 8) ' high byte of value
+	modMessage(5) = value And &hFF ' low byte of value
+	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
+	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
+	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
+	
+	For i = 0 To 7
+		Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
+	Next
+	
+	' if port is not open exit with error
+	If portStatus < 0 Then
+		modbusWriteRegister = -1 'error port should remain open
+		Print "Bailing! not port open"
+		Exit Function
+	EndIf
+	
+	' send the message to the PLC
+	WriteBin #204, modMessage(), 8
+	
+	' TMH possibly delay or check for bytes returned here	
+	' TMH may be a better way to do this but I wanted to avoid blocking if nothing is returned
+	Wait 1
+	If ChkNet(204) < 7 Then
+		modbusWriteRegister = -2 ' error invalid or no response
+	Else
+		' process the response or timeout
+		'wait for a predefinded period of time for the expected number of characters
+		'modResponse(0) = address of master
+		'modResponse(1) = function. Should be 6 if no error
+		'modResponse(2) = Register address high byte
+		'modResponse(3) = Register address low byte
+		'modResponse(4) = value high byte
+		'modResponse(5) = value low byte
+		'modResponse(6) = CRC low byte
+		'modResponse(7) = CRC high byte
+		ReadBin #204, modResponse(), 8
+	EndIf
+	
+Fend
+' This function is for reading a single 16 bit Modbus register from the PLC
+' It will build a valid Modbus RTU request and send it to the PLC
+' using the HMI ethernet to serial dameon as a bridge.
+' It will then wait for a response from the PLC
+Function modbusReadRegister(regNum As Long) As Long
+	
+	Integer portStatus
+	Long CRC
+	Long modResponse(10)
+	Integer i
+	
+	portStatus = ChkNet(204)
+	
+
+
+	'build the command and send it to PLC
+	' function code		0x03
+	' address high 		0x00
+	' address low		0x00
+	' No. of Regs high 	0x00
+	' No. of Regs low	0x01
+	modMessage(0) = &h11 'PLC modbus address
+	modMessage(1) = 3 ' function code
+	modMessage(2) = RShift(regNum, 8) ' high byte of address
+	modMessage(3) = regNum And &hFF ' low byte of address
+	modMessage(4) = 0 ' high byte of No. of regs is always zero 
+	modMessage(5) = 1 ' low byte of No. of regs is one i.e. read one register
+	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
+	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
+	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
+	
+	For i = 0 To 7
+	'	Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
+	Next
+	
+	' if port is not open exit with error
+	If portStatus < 0 Then
+		modbusReadRegister = -1 'error port should remain open
+		Print "Bailing! not port open"
+		Exit Function
+	EndIf
+	
+	' send the message to the PLC
+	WriteBin #204, modMessage(), 8
+
+	' delay then check for bytes returned 	
+	' TMH may be a better way to do this but I wanted to avoid blocking if nothing is returned
+	Wait 1
+	If ChkNet(204) < 7 Then
+		modbusReadRegister = -2 ' error invalid or no response
+	Else
+		'process the response or timeout 
+		'wait for a predefinded period of time for the expected number of characters
+		'modResponse(0) = address of master
+		'modResponse(1) = function. Should be 3 if no error
+		'modResponse(2) = No. Bytes returned. Should be 2 for one 16 bit register
+		'modResponse(3) = value returned high byte
+		'modResponse(4) = value returned low byte
+		'modResponse(5) = CRC low byte
+		'modResponse(6) = CRC high byte
+		ReadBin #204, modResponse(), 7
+		
+		modbusReadRegister = LShift(modMessage(4), 8) + (modMessage(3))
+		
+	EndIf
+		
+Fend
+' Write a single coil value on the PLC
+' Call with coil number
+' Returns 1 for success 0 for failure
+Function modbusWriteCoil(coilNum As Integer, value As Boolean)
+	
+Fend
+' Read a single coil value from the PLC
+' Call with coil number
+' Returns boolean value of coil
+Function modbusReadCoil(coilNum As Integer) As Boolean
+	modbusReadCoil = 1
+Fend
 
 

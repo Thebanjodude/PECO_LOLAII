@@ -112,7 +112,7 @@ Global Boolean erLeftSafetyFrameOpen, erRightSafetyFrameOpen, erLowPressure
 Global Boolean erHighPressure, erPanelStatusUnknown, erWrongPanelHoles
 Global Boolean erWrongPanelDims, erWrongPanel, erWrongPanelInsert, erHmiDataAck
 Global Boolean erInMagEmpty, erInMagOpenInterlock, erOutMagCrowding
-Global Boolean erInMagCrowding, erOutMagFull, erOutMagOpenInterlock
+Global Boolean erInMagCrowding, erOutMagFull, erOutMagOpenInterlock, erBadPressureSensor
 Global Boolean erLaserScanner, erDCPower, erDCPowerHeatStake, erHeatStakeTemp
 Global Boolean erHeatStakeBreaker, erBowlFeederBreaker, erInMagBreaker
 Global Boolean erOutMagBreaker, erFlashBreaker, erDebrisRemovalBreaker

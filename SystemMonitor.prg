@@ -14,11 +14,10 @@ Do While True
 		
 		Halt InMagControl
 		erInMagOpenInterlock = True
-		stackLightYelCC = True
 		inMagCurrentState = StatePaused
 		
 		If MainCurrentState = StatePopPanel Then
-			Pause ' if interlock open Pause only when in pop
+'			Pause ' if interlock open Pause only when in pop state
 		EndIf
 		
 	Else
@@ -30,11 +29,10 @@ Do While True
 		
 		Halt OutMagControl
 		erOutMagOpenInterlock = True
-		stackLightYelCC = True
 		outMagCurrentState = StatePaused
 		
 		If MainCurrentState = StatePushPanel Then
-			Pause ' pause robot movement to avoid pinchpoint
+'			Pause ' pause robot movement to avoid pinchpoint
 		EndIf
 	Else
 	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
@@ -43,120 +41,103 @@ Do While True
 	
 	If frontIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erFrontSafetyFrameOpen = True
-		stackLightYelCC = True
 	Else
 	 	erFrontSafetyFrameOpen = False
 	EndIf
 	
 	If frontIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
 		erFrontSafetyFrameOpen = True
-		stackLightYelCC = True
 	Else
 	 	erFrontSafetyFrameOpen = False
 	EndIf
 	
 	If backIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erBackSafetyFrameOpen = True
-		stackLightYelCC = True
 	Else
 	 	erBackSafetyFrameOpen = False
 	EndIf
 	
 	If backIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
 		erBackSafetyFrameOpen = True
-		stackLightYelCC = True
 	Else
 	 	erBackSafetyFrameOpen = False
 	EndIf
 	
 	If leftIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
 		erLeftSafetyFrameOpen = True
-		stackLightYelCC = True
 	Else
-		 	erLeftSafetyFrameOpen = False
+		erLeftSafetyFrameOpen = False
 	EndIf
 
 	If leftIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
 		erLeftSafetyFrameOpen = True
-		stackLightYelCC = True
 	Else
 	 	erLeftSafetyFrameOpen = False
 	EndIf
 	
 	If rightIntlock = True Then ' If an interlock gets tripped then halt the state machine
 		erRightSafetyFrameOpen = True
-		stackLightYelCC = True
 	Else
 	 	erRightSafetyFrameOpen = False
 	EndIf
 	
-	If airPressHigh = False Then
+	If airPressHigh = True Then
 		erHighPressure = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-		'Turn off main air supply to the machine! Do we even have one?
-		Pause
+'		Pause
 	Else
 		erHighPressure = False
 	EndIf
 	
-	If airPressLow = False Then
+	If airPressLow = True Then
 		erLowPressure = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-		Pause
+'		Pause
 	Else
-		stackLightAlrmCC = False
+		erLowPressure = False
+	EndIf
+	
+	If (airPressLow And airPressHigh) = True Then
+		erBadPressureSensor = True
+'		Pause
+	Else
+		erBadPressureSensor = False
 	EndIf
 	
 	If cbMonHeatStake = False Then
 		erHeatStakeBreaker = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-		Pause
+'		Pause
 	Else
 		erHeatStakeBreaker = False
 	EndIf
 
 	If cbMonInMag = False Then
 		erInMagBreaker = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-		Pause
+'		Pause
 	Else
 		erInMagBreaker = False
 	EndIf
-	
+
 	If cbMonOutMag = False Then
 		erOutMagBreaker = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-		Pause
+'		Pause
 	Else
 		erOutMagBreaker = False
 	EndIf
 	
 	If cbMonDebrisRmv = False Then
 		erDebrisRemovalBreaker = True
-'		stackLightRedCC = True
-'		stackLightAlrmCC = True
-		Pause
+'		Pause
 	Else
 		erDebrisRemovalBreaker = False
 	EndIf
 	
 	If cbMonSafety = False Then
-'		stackLightRedCC = True
-'		stackLightAlrmCC = True
 		erSafetySystemBreaker = True
-'		pausestackLightGrnCC
+'		Pause
 	Else
 		erSafetySystemBreaker = False
 	EndIf
 
-	If cbMonPAS24vdc = True Then
-		stackLightRedCC = True
-		stackLightAlrmCC = True
+	If cbMonPAS24vdc = False Then
 		erDCPowerHeatStake = True
 '		Pause
 	Else
@@ -170,45 +151,39 @@ Do While True
 	
 	If EStopOn = True Then
 		erEstop = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
 	Else
 		erEstop = False
 	EndIf
 	
 	'If the in/out magazine sensor diff signals are the same then we know there is a problem	
-	If inMagLowLim = inMagLowLimN Then
+	If (inMagLowLim And inMagLowLimN = True) Then
 		erInMagLowSensorBad = True
-'		stackLightRedCC = True
-'		stackLightAlrmCC = True
-'		pause
+		stackLightRedCC = True
+'		Pause
 	Else
 		erInMagLowSensorBad = False
 	EndIf
 	
-	If inMagUpLim = inMagUpLimN Then
+	If (inMagUpLim And inMagUpLimN = True) Then
 		erInMagUpSensorBad = True
-'		stackLightRedCC = True
-'		stackLightAlrmCC = True
-'		pause		
+		stackLightRedCC = True
+'		Pause
 	Else
 		erInMagUpSensorBad = False
 	EndIf
 	
-	If outMagLowLim = outMagLowLimN Then
+	If (outMagLowLim And outMagLowLimN = True) Then
 		erOutMagLowSensorBad = True
-'		stackLightRedCC = True
-'		stackLightAlrmCC = True
-'		pause		
+		stackLightRedCC = True
+'		Pause
 	Else
 		erOutMagLowSensorBad = False
 	EndIf
 	
-	If outMagUpLim = outMagUpLimN Then
+	If (outMagUpLim And outMagUpLimN = True) Then
 		erOutMagUpSensorBad = True
-'		stackLightRedCC = True
-'		stackLightAlrmCC = True
-'		pause
+		stackLightRedCC = True
+'		Pause
 	Else
 		erOutMagUpSensorBad = False
 	EndIf
@@ -245,11 +220,25 @@ Do While True
 				
 	EndIf
 	
-	If (stackLightRedCC Or stackLightYelCC) = False Then
-		stackLightGrnCC = True
-	Else
-		stackLightGrnCC = False
-	EndIf
+If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh = True) Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or EStopOn = True Or (inMagLowLim And inMagLowLimN = True) Or (inMagUpLim And inMagUpLimN = True) Or (outMagLowLim And outMagLowLimN = True) Or (outMagUpLim And outMagUpLimN = True) Then
+	stackLightRedCC = True
+	stackLightAlrmCC = True
+Else
+	stackLightRedCC = False
+	stackLightAlrmCC = False
+EndIf
+	
+If inMagIntlock = True Or outMagInt = True Or frontIntlock1 = True Or frontIntlock2 Or backIntlock1 = True Or backIntlock2 = True Or leftIntlock1 = True Or leftIntlock1 = True Or leftIntlock2 Or rightIntlock Then
+	stackLightYelCC = True
+Else
+	stackLightYelCC = False
+EndIf
+
+If (stackLightRedCC Or stackLightYelCC) = False Then
+	stackLightGrnCC = True
+Else
+	stackLightGrnCC = False
+EndIf
 		
 Loop
 
