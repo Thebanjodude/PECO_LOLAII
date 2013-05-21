@@ -4,6 +4,9 @@ Function PopPanel() As Boolean
 	
 Trap 2, MemSw(abortJobH) = True GoTo exitPopPanel ' arm trap
 
+suctionWaitTime = 1
+zLimit = -2
+
 retry:
 
 	If inMagIntlock = True Then 'Check Interlock status
@@ -21,9 +24,8 @@ retry:
 
 	PopPanel = True
 	SystemStatus = MovingPanel
-	Go PreScan 'Go Home	
 	
-	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have finished		
+	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have pulled		
 	If jobNumPanelsDone = jobNumPanels Then
 		jobDone = True ' We have finished the run, don't execute the main loop
 	EndIf
@@ -52,6 +54,7 @@ Trap 2, MemSw(abortJobH) = True GoTo exitPushPanel ' arm trap
 	If TW = True Then ' catch that the HMI timed out without acking
 		PushPanel = False
 		erHmiDataAck = True
+		Print "no data ack from hmi"
 		GoTo exitPushPanel
 	EndIf
 	
@@ -61,13 +64,18 @@ Trap 2, MemSw(abortJobH) = True GoTo exitPushPanel ' arm trap
 	EndIf
 		
 '	WaitSig OutMagDropOffSignal		
-	
-	Go Waypoint0
-	Jump OutMagCenter -Z(recPanelThickness) LimZ zLimit
+	Jump Waypoint1 LimZ zLimit
+	Jump InMagCenter LimZ zLimit
+	Jump Waypoint0 LimZ zLimit
+	Jump OutMagCenter LimZ zLimit
+'	Jump OutMagCenter -Z(recPanelThickness) LimZ zLimit
 	suctionCupsCC = False
 	Wait suctionWaitTime ' Allow time for cups to unseal				
 	Jump Waypoint0
+	Jump InMagCenter LimZ zLimit
 	Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel	
+	
+	PanelPassedInspection = True 'fake
 	
 	If PanelPassedInspection = False Then
 		erPanelFailedInspection = True
@@ -76,7 +84,6 @@ Trap 2, MemSw(abortJobH) = True GoTo exitPushPanel ' arm trap
 		Pause ' wait for operator to continue
 		stackLightRedCC = False ' turn off only after ack
 		stackLightAlrmCC = False
-		erPanelFailedInspection = False
 	EndIf
 
 	panelDataTxRdy = False 'reset flag
@@ -86,7 +93,7 @@ Trap 2, MemSw(abortJobH) = True GoTo exitPushPanel ' arm trap
 '	Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
 
 exitPushPanel:
-
+	erPanelFailedInspection = False
 	erHmiDataAck = False
 
 Trap 2 ' disarm trap	

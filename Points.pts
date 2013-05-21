@@ -1,14 +1,14 @@
-ENVT0100,LM:2013/05/04 00:10:36:634,DS:0000002546,CS:14596,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/21 04:28:45:979,DS:0000003228,CS:06152,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=12
+nNumberOfPoints=15
 Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
 	sDescription=""
-	rX=414.4
-	rY=468.63
-	rZ=-100
+	rX=345.361
+	rY=426.387
+	rZ=-157
 	rU=45
 	rV=0
 	rW=0
@@ -24,9 +24,9 @@ Point2 {
 	nNumber=1
 	sLabel="OutMagCenter"
 	sDescription=""
-	rX=414.4
-	rY=-163.83
-	rZ=-100
+	rX=-357.315
+	rY=-214.63
+	rZ=-45
 	rU=45
 	rV=0
 	rW=0
@@ -42,14 +42,14 @@ Point3 {
 	nNumber=2
 	sLabel="HotStakeCenter"
 	sDescription=""
-	rX=0
-	rY=0
-	rZ=0
+	rX=-457.706
+	rY=457.706
+	rZ=-2
 	rU=0
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -60,14 +60,14 @@ Point4 {
 	nNumber=3
 	sLabel="FlashCenter"
 	sDescription=""
-	rX=0
-	rY=0
-	rZ=0
-	rU=0
+	rX=-558.8
+	rY=-246.413
+	rZ=-2
+	rU=203.795
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -75,24 +75,6 @@ Point4 {
 	bSimVisible=False
 }
 Point5 {
-	nNumber=4
-	sLabel="FailDropOff"
-	sDescription=""
-	rX=0
-	rY=0
-	rZ=0
-	rU=0
-	rV=0
-	rW=0
-	nLocal=0
-	nHand=1
-	nElbow=1
-	nWrist=1
-	nJ4Flag=0
-	nJ6Flag=0
-	bSimVisible=False
-}
-Point6 {
 	nNumber=5
 	sLabel="ScanLong"
 	sDescription=""
@@ -103,14 +85,14 @@ Point6 {
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point7 {
+Point6 {
 	nNumber=6
 	sLabel="ScanShort"
 	sDescription=""
@@ -121,7 +103,25 @@ Point7 {
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point7 {
+	nNumber=7
+	sLabel="PreScan"
+	sDescription=""
+	rX=-340
+	rY=-50.8
+	rZ=-45
+	rU=135
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -129,17 +129,17 @@ Point7 {
 	bSimVisible=False
 }
 Point8 {
-	nNumber=7
-	sLabel="PreScan"
+	nNumber=8
+	sLabel="PreScanRighty"
 	sDescription=""
-	rX=2.32
-	rY=354.021
-	rZ=-43.767
-	rU=45
+	rX=-340
+	rY=-50.8
+	rZ=-45
+	rU=135
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=2
+	nHand=1
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -157,7 +157,7 @@ Point9 {
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -175,7 +175,7 @@ Point10 {
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -193,7 +193,7 @@ Point11 {
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -204,14 +204,68 @@ Point12 {
 	nNumber=14
 	sLabel="Waypoint0"
 	sDescription=""
-	rX=349.346
-	rY=157.958
-	rZ=-25
+	rX=345.361
+	rY=0
+	rZ=-45
 	rU=45
 	rV=0
 	rW=0
 	nLocal=0
 	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point13 {
+	nNumber=15
+	sLabel="Waypoint1"
+	sDescription=""
+	rX=-246.09
+	rY=253.696
+	rZ=-2
+	rU=90
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point14 {
+	nNumber=16
+	sLabel="Waypoint2"
+	sDescription=""
+	rX=-368.187
+	rY=-183.13
+	rZ=-4.822
+	rU=211.914
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point15 {
+	nNumber=17
+	sLabel="dropoff"
+	sDescription=""
+	rX=-119.429
+	rY=400
+	rZ=-73.206
+	rU=374.327
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0

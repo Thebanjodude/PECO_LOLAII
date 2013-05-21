@@ -12,8 +12,10 @@ Function HotStakePanel() As Boolean
   	
 	PanelArrayIndex = 0 ' Reset Index
 
-'	GetPanelArray()
+	GetPanelArray()
 	GetThetaR()
+	
+	Jump waypoint1 LimZ zLimit ' Take a safe path
 
 	For k = 0 To recNumberOfHoles - 1
 		
@@ -30,8 +32,8 @@ Function HotStakePanel() As Boolean
 		EndIf
 
 		If SkippedHole = False Then 'If the flag is set then we have finished all holes
-'!!!! Change the 45 deg to whatever the angles really are		
-         	P23 = HotStakeCenter -Y(Sin(45) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(45) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 135)
+		
+        	P23 = HotStakeCenter -Y(Sin(DegToRad(45)) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(DegToRad(45)) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 90)
 			Jump P23 LimZ zLimit
 						
 'Comment this out for testing						
@@ -56,9 +58,12 @@ Function HotStakePanel() As Boolean
 '			Wait .4 ' Instead of wait, this is where the feedback from the HS Station will be
 '			hsInstallInsrtCC = False 'reset flag
 		EndIf
+		
+		Wait 1
 
 	Next
-	
+		
+	Jump PreScan LimZ zLimit
 exitHotStake:
 
 	SystemStatus = MovingPanel
@@ -71,8 +76,11 @@ Function FlashRemoval() As Boolean
 	Trap 2, MemSw(abortJobH) = True GoTo exitFlash ' arm trap
 	SystemStatus = RemovingFlash
 	
-	PrintPanelArray()
+	suctionWaitTime = 1 'fake
+	zLimit = -2 'fake
 	
+'	Jump Waypoint2 LimZ zLimit
+		
 	recFlashRequired = True ' fake for testing
 	If recFlashRequired = False Then GoTo SkipFlash
 	
@@ -80,9 +88,8 @@ Function FlashRemoval() As Boolean
 	Integer t, AnvilOffset
 	Double CurrentZ
 	
-	zLimit = -85
 	PanelArrayIndex = 0 ' Reset index for IncrementArray Function
-
+	GetPanelArray()
 	GetThetaR() ' Call function that assignes first r and theta
 	
 	For t = 0 To recNumberOfHoles - 1
@@ -92,9 +99,6 @@ Function FlashRemoval() As Boolean
 			GetThetaR()
 		EndIf
 		
-		Print PanelArrayIndex
-		Print t
-					
 		SkippedHole = False 'Reset flag
 		
 		If PanelArray(PanelArrayIndex, SkipFlagColumn) <> 0 Then ' When nonzero, don't populate the hole because we want to skip it
@@ -102,13 +106,12 @@ Function FlashRemoval() As Boolean
 			Print "skipped hole"
 		Else
 			SkippedHole = False
-			Print "didnt skip hole"
 		EndIf
 
 		If SkippedHole = False Then 'If the flag is true then we have finished all holes
  		
-			P23 = FlashCenter +X(PanelArray(PanelArrayIndex, RadiusColumn) - xOffset) +Y(yOffset) :U(-PanelArray(PanelArrayIndex, ThetaColumn) + 180)
-			Print CU(P23)
+			P23 = FlashCenter +Y(Sin(DegToRad(23.795)) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(DegToRad(23.795)) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + (23.795 + 135))
+			Print P23
 			Jump P23 LimZ zLimit ' Limit the jump hight
 			
 'comment this out for testing
@@ -143,8 +146,9 @@ Next
 	
 	Trap 2 ' disarm trap
 	SystemStatus = MovingPanel
-	Go PreScan ' Collision Avoidance Waypoint
-		
+	Jump PreScan LimZ zLimit ' Collision Avoidance Waypoint
+	Jump Waypoint1 LimZ zLimit
+			
 Fend
 Function DerivethetaR()
 	
@@ -192,64 +196,62 @@ Function GetThetaR()
 Fend
 Function GetPanelArray() ' Hardcoded Array for 88554
 	
-'	recMajorDim = 247.142
-'	recMinorDim = 143.764
-'	recNumberOfHoles = 16
-'	
-'	PanelArray(0, 0) = 223.52
-'	PanelArray(1, 0) = 211.125
-'	PanelArray(2, 0) = 174.6
-'	PanelArray(3, 0) = 137.998
-'	PanelArray(4, 0) = 121.92
-'	PanelArray(5, 0) = 137.998
-'	PanelArray(6, 0) = 174.6
-'	PanelArray(7, 0) = 211.125
-'	PanelArray(8, 0) = 223.52
-'	PanelArray(9, 0) = 211.125
-'	PanelArray(10, 0) = 174.6
-'	PanelArray(11, 0) = 137.998
-'	PanelArray(12, 0) = 121.92
-'	PanelArray(13, 0) = 137.998
-'	PanelArray(14, 0) = 174.6
-'	PanelArray(15, 0) = 211.125
-'		
-'	PanelArray(0, 1) = 0
-'	PanelArray(1, 1) = 18.17728756
-'	PanelArray(2, 1) = 36.26356586
-'	PanelArray(3, 1) = 58.93929219
-'	PanelArray(4, 1) = 90
-'	PanelArray(5, 1) = 121.0591007
-'	PanelArray(6, 1) = 143.7426597
-'	PanelArray(7, 1) = 161.8183864
-'	PanelArray(8, 1) = 180
-'	PanelArray(9, 1) = 198.1816136
-'	PanelArray(10, 1) = 216.2573403
-'	PanelArray(11, 1) = 238.9408993
-'	PanelArray(12, 1) = 270
-'	PanelArray(13, 1) = 301.0591007
-'	PanelArray(14, 1) = 323.7426597
-'	PanelArray(15, 1) = 341.8183864
-'
-'	'Skip flags
-'	PanelArray(0, 2) = 0
-'	PanelArray(1, 2) = 0
-'	PanelArray(2, 2) = 0
-'	PanelArray(3, 2) = 0
-'	PanelArray(4, 2) = 0
-'	PanelArray(5, 2) = 0
-'	PanelArray(6, 2) = 0
-'	PanelArray(7, 2) = 0
-'	PanelArray(8, 2) = 0
-'	PanelArray(9, 2) = 0
-'	PanelArray(10, 2) = 0
-'	PanelArray(11, 2) = 0
-'	PanelArray(12, 2) = 0
-'	PanelArray(13, 2) = 0
-'	PanelArray(14, 2) = 0
-'	PanelArray(15, 2) = 0
-'
-'  	PrintPanelArray() ' Print for testing/troubleshooting
-'  	
+	recNumberOfHoles = 16
+	
+	PanelArray(0, 0) = 223.52
+	PanelArray(1, 0) = 211.125
+	PanelArray(2, 0) = 174.6
+	PanelArray(3, 0) = 137.998
+	PanelArray(4, 0) = 121.92
+	PanelArray(5, 0) = 137.998
+	PanelArray(6, 0) = 174.6
+	PanelArray(7, 0) = 211.125
+	PanelArray(8, 0) = 223.52
+	PanelArray(9, 0) = 211.125
+	PanelArray(10, 0) = 174.6
+	PanelArray(11, 0) = 137.998
+	PanelArray(12, 0) = 121.92
+	PanelArray(13, 0) = 137.998
+	PanelArray(14, 0) = 174.6
+	PanelArray(15, 0) = 211.125
+		
+	PanelArray(0, 1) = 0
+	PanelArray(1, 1) = 18.17728756
+	PanelArray(2, 1) = 36.26356586
+	PanelArray(3, 1) = 58.93929219
+	PanelArray(4, 1) = 90
+	PanelArray(5, 1) = 121.0591007
+	PanelArray(6, 1) = 143.7426597
+	PanelArray(7, 1) = 161.8183864
+	PanelArray(8, 1) = 180
+	PanelArray(9, 1) = 198.1816136
+	PanelArray(10, 1) = 216.2573403
+	PanelArray(11, 1) = 238.9408993
+	PanelArray(12, 1) = 270
+	PanelArray(13, 1) = 301.0591007
+	PanelArray(14, 1) = 323.7426597
+	PanelArray(15, 1) = 341.8183864
+
+	'Skip flags
+	PanelArray(0, 2) = 0
+	PanelArray(1, 2) = 0
+	PanelArray(2, 2) = 0
+	PanelArray(3, 2) = 0
+	PanelArray(4, 2) = 0
+	PanelArray(5, 2) = 0
+	PanelArray(6, 2) = 0
+	PanelArray(7, 2) = 0
+	PanelArray(8, 2) = 0
+	PanelArray(9, 2) = 0
+	PanelArray(10, 2) = 0
+	PanelArray(11, 2) = 0
+	PanelArray(12, 2) = 0
+	PanelArray(13, 2) = 0
+	PanelArray(14, 2) = 0
+	PanelArray(15, 2) = 0
+
+  	PrintPanelArray() ' Print for testing/troubleshooting
+  	
  Fend
 Function PrintPanelArray()
 	

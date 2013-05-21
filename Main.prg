@@ -6,9 +6,13 @@ Integer NextState
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
+PopPanel
+HotStakePanel()
+FlashRemoval()
+PushPanel
+
 Do While True
-	Wait 1
-	Print "testing..."
+
 Loop
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
@@ -124,7 +128,7 @@ Function PowerOnSequence()
 	
 retry:
 
-	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
+	'If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
 	
 	Motor On
 	Power Low
