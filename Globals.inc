@@ -1,5 +1,5 @@
 ' System Global Vars and #defines
-Global Integer SystemSpeed, SystemAccel, MainCurrentState
+Global Integer SystemSpeed, SystemAccel, mainCurrentState
 Global Real suctionWaitTime ' Time in seconds it takes for the EOAT to make a good suction on a panel
 Global Boolean suctionCups, suctionCupsCC, holeDetected, maintMode
 Global Integer systemStatus ' Integer that tells opperator what state the sytem is in-see State tab in IOT
@@ -10,18 +10,20 @@ Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
 #define Preinspection False
 #define Inspection True
-Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog
+Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog, alarmMuteBtn
 Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
+Global Boolean panelDataTxACKBtn
 
 'Main() States
-#define StateIdle 0
-#define StatePopPanel 1
-#define StatePushPanel 2
-#define StateHotStakePanel 3
-#define StateFlashRemoval 4
-#define StateFindPickUpError 5
-#define StatePreinspection 6
-#define StateInspection 7
+#define StateUnknown 0
+#define StateIdle 1
+#define StatePopPanel 2
+#define StatePushPanel 3
+#define StateHotStakePanel 4
+#define StateFlashRemoval 5
+#define StateFindPickUpError 6
+#define StatePreinspection 7
+#define StateInspection 8
 
 'Inmag States
 #define StatePartPresent 0
@@ -30,6 +32,15 @@ Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
 #define StateLowering 3
 #define StateWaitingUser 4
 #define StatePaused 6
+
+'Outmag States
+#define StateReadyToReceive 0
+#define StateOutMagPartPresent 1
+#define StateOutMagLowering 2
+#define StateOutMagWaitingUser 3
+#define StateRaising 4
+#define StateGoHome 5
+'#define StatePaused 6
 
 'Commands from HMI
 Global Boolean jobDone
@@ -89,8 +100,8 @@ Global Real Theta, r
 Global Real AnvilZlimit, heatStakeCurrentTemp, heatStakeTempTolerance
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
-Global Boolean removeFlash, returnFlash, FlashPnlPrsnt, debrisMtr
-Global Boolean removeFlashCC, returnFlashCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
+Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr
+Global Boolean drillGoCC, drillReturnCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
 Global Real flashDwellTime ' How long the flash tool is in contact with the insert
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas

@@ -80,14 +80,6 @@ Loop
 Fend
 Function OutMagControl
 
-#define StateReadyToReceive 0
-#define StateOutMagPartPresent 1
-#define StateOutMagLowering 2
-#define StateOutMagWaitingUser 3
-#define StateRaising 4
-#define StateGoHome 5
-'#define StatePaused 6
-
 Integer NextState
 
 outMagCurrentState = StateRaising ' On start up go to home position
@@ -173,6 +165,7 @@ Do While True
 
 outMagCurrentState = NextState 'Set next state to current state after we break from case statment
 
+Print "outMagCurrentState", outMagCurrentState
 Loop
 	
 Fend

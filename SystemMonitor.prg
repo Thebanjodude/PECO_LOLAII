@@ -8,6 +8,7 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 Do While True
 	
+	stackLightRedCC = True
 	StateOfHealth()
 	
 	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine
@@ -16,7 +17,7 @@ Do While True
 		erInMagOpenInterlock = True
 		inMagCurrentState = StatePaused
 		
-		If MainCurrentState = StatePopPanel Then
+		If mainCurrentState = StatePopPanel Then
 '			Pause ' if interlock open Pause only when in pop state
 		EndIf
 		
@@ -31,7 +32,7 @@ Do While True
 		erOutMagOpenInterlock = True
 		outMagCurrentState = StatePaused
 		
-		If MainCurrentState = StatePushPanel Then
+		If mainCurrentState = StatePushPanel Then
 '			Pause ' pause robot movement to avoid pinchpoint
 		EndIf
 	Else
@@ -216,7 +217,7 @@ Do While True
 				
 	EndIf
 	
-If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh = True) Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or EStopOn = True Or (inMagLowLim And inMagLowLimN = True) Or (inMagUpLim And inMagUpLimN = True) Or (outMagLowLim And outMagLowLimN = True) Or (outMagUpLim And outMagUpLimN = True) Then
+If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh) Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or EStopOn = True Or (inMagLowLim And inMagLowLimN = True) Or (inMagUpLim And inMagUpLimN = True) Or (outMagLowLim And outMagLowLimN = True) Or (outMagUpLim And outMagUpLimN = True) Then
 	stackLightRedCC = True
 	stackLightAlrmCC = True
 EndIf

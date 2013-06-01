@@ -7,44 +7,6 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 Do While True
 	
 'Inputs
-airPressHigh = IOTableBooleans(Sw(AirPressHighH), MemSw(airPressHighFV), MemSw(airPressHighF))
-airPressLow = IOTableBooleans(Sw(AirPressLowH), MemSw(airPressLowFV), MemSw(airPressLowF))
-backIntlock1 = IOTableBooleans(Sw(backIntlock1H), MemSw(backIntlock1FV), MemSw(backIntlock1F))
-backIntlock2 = IOTableBooleans(Sw(backIntlock2H), MemSw(backIntlock2FV), MemSw(backIntlock2F))
-'cbMonBowlFeder = IOTableBooleans(Sw(cbMonBowlFederH), MemSw(cbMonBowlFederFV), MemSw(cbMonBowlFederF))
-cbMonDebrisRmv = IOTableBooleans(Sw(cbMonDebrisRmvH), MemSw(cbMonDebrisRmvFV), MemSw(cbMonDebrisRmvF))
-cbMonHeatStake = IOTableBooleans(Sw(cbMonHeatStakeH), MemSw(cbMonHeatStakeFV), MemSw(cbMonHeatStakeF))
-cbMonInMag = IOTableBooleans(Sw(cbMonInMagH), MemSw(cbMonInMagFV), MemSw(cbMonInMagF))
-cbMonOutMag = IOTableBooleans(Sw(cbMonOutMagH), MemSw(cbMonOutMagFV), MemSw(cbMonOutMagF))
-dc24vOK = IOTableBooleans(Sw(dc24vOKH), MemSw(dc24vOKFV), MemSw(dc24vOKF))
-cbMonPAS24vdc = IOTableBooleans(Sw(cbMonPAS24vdcH), MemSw(cbMonPAS24vdcFV), MemSw(cbMonPAS24vdcF))
-cbMonSafety = IOTableBooleans(Sw(cbMonSafetyH), MemSw(cbMonSafetyFV), MemSw(cbMonSafetyF))
-edgeDetectGo = IOTableBooleans(Sw(edgeDetectGoH), MemSw(edgeDetectGoFV), MemSw(edgeDetectGoF))
-edgeDetectHi = IOTableBooleans(Sw(edgeDetectHiH), MemSw(edgeDetectHiFV), MemSw(edgeDetectHiF))
-edgeDetectLo = IOTableBooleans(Sw(edgeDetectLoH), MemSw(edgeDetectLoFV), MemSw(edgeDetectLoF))
-flashPnlPrsnt = IOTableBooleans(Sw(FlashPnlPrsntH), MemSw(FlashPnlPrsntFV), MemSw(FlashPnlPrsntF))
-frontIntlock1 = IOTableBooleans(Sw(frontIntlock1H), MemSw(frontIntlock1FV), MemSw(frontIntlock1F))
-frontIntlock2 = IOTableBooleans(Sw(frontIntlock2H), MemSw(frontIntlock2FV), MemSw(frontIntlock2F))
-holeDetected = IOTableBooleans(Sw(holeDetectedH), MemSw(holeDetectedFV), MemSw(holeDetectedF))
-hsPanelPresnt = IOTableBooleans(Sw(HSPanelPresntH), MemSw(hsPanelPresntFV), MemSw(hsPanelPresntF))
-inMagInterlock = IOTableBooleans(Sw(inMagInterlockH), MemSw(inMagInterlockFV), MemSw(inMagInterlockF))
-inMagLowLim = IOTableBooleans(Sw(inMagLowLimH), MemSw(inMagLowLimFV), MemSw(inMagLowLimF))
-inMagLowLimN = IOTableBooleans(Sw(inMagLowLimNH), MemSw(inMagLowLimNFV), MemSw(inMagLowLimNF))
-inMagPnlRdy = IOTableBooleans(Sw(inMagPnlRdyH), MemSw(inMagPnlRdyFV), MemSw(inMagPnlRdyF))
-inMagUpLim = IOTableBooleans(Sw(inMagUpLimH), MemSw(inMagUpLimFV), MemSw(inMagUpLimF))
-inMagUpLimN = IOTableBooleans(Sw(inMagUpLimNH), MemSw(inMagUpLimNFV), MemSw(inMagUpLimNF))
-leftIntlock1 = IOTableBooleans(Sw(leftIntlock1H), MemSw(leftIntlock1FV), MemSw(leftIntlock1F))
-leftIntlock2 = IOTableBooleans(Sw(leftIntlock2H), MemSw(leftIntlock2FV), MemSw(leftIntlock2F))
-maintMode = IOTableBooleans(Sw(MaintModeH), MemSw(maintModeFV), MemSw(maintModeF))
-outMagInt = IOTableBooleans(Sw(outMagIntH), MemSw(outMagIntFV), MemSw(outMagIntF))
-outMagLowLim = IOTableBooleans(Sw(outMagLowLimH), MemSw(outMagLowLimFV), MemSw(outMagLowLimF))
-outMagLowLimN = IOTableBooleans(Sw(outMagLowLimNH), MemSw(outMagLowLimNFV), MemSw(outMagLowLimNF))
-outMagPanelRdy = IOTableBooleans(Sw(outMagPanelRdyH), MemSw(outMagPanelRdyFV), MemSw(outMagPanelRdyF))
-outMagUpLim = IOTableBooleans(Sw(outMagUpLimH), MemSw(outMagUpLimFV), MemSw(outMagUpLimF))
-outMagUpLimN = IOTableBooleans(Sw(outMagUpLimNH), MemSw(outMagUpLimNFV), MemSw(outMagUpLimNF))
-rightIntlock = IOTableBooleans(Sw(rightIntlockH), MemSw(rightIntlockFV), MemSw(rightIntlockF))
-monEstop1 = IOTableBooleans(Sw(monEstop1H), MemSw(monEstop1FV), MemSw(monEstop1F))
-monEstop2 = IOTableBooleans(Sw(monEstop2H), MemSw(monEstop2FV), MemSw(monEstop2F))
 
 Loop
 	errHandler:
@@ -117,17 +79,23 @@ If outMagMtrDir = True Then
     Else
         Off (outMagMtrDirH)
     EndIf
-removeFlash = IOTableBooleans(removeFlashCC, MemSw(removeFlashFV), MemSw(removeFlashF))
-If removeFlash = True Then
-        On (removeFlashH)
+drillGo = IOTableBooleans(drillGoCC, MemSw(drillGoFV), MemSw(drillGoF))
+If drillGo = True Then
+        On (DrillGoH)
     Else
-        Off (removeFlashH)
+        Off (DrillGoH)
     EndIf
-returnFlash = IOTableBooleans(returnFlashCC, MemSw(returnFlashFV), MemSw(returnFlashF))
-If returnFlash = True Then
-        On (returnFlashH)
+drillReturn = IOTableBooleans(drillReturnCC, MemSw(drillReturnFV), MemSw(drillReturnF))
+If drillReturn = True Then
+        On (DrillReturnH)
     Else
-        Off (returnFlashH)
+        Off (DrillReturnH)
+    EndIf
+stackLightAlrm = IOTableBooleans(stackLightAlrmCC, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
+If stackLightAlrm = True Then
+        On (stackLightAlrmH)
+    Else
+        Off (stackLightAlrmH)
     EndIf
 stackLightGrn = IOTableBooleans(stackLightGrnCC, MemSw(stackLightGrnFV), MemSw(stackLightGrnF))
 If stackLightGrn = True Then
@@ -153,6 +121,9 @@ If suctionCups = True Then
     Else
         Off (suctionCupsH)
     EndIf
+
+
+
     
 Loop
 
@@ -213,7 +184,7 @@ Function IOTableReals(CtrlCodeValue As Real, HMIForceValue As Real, HMIForceFlag
 Fend
 Function iotransfer()
 ' This task runs continuously in the background updating variables between the controller and HMI
-' write and read variables to HMI
+' writes and reads variables to HMI
                 
     Integer i, j
     String response$
@@ -223,7 +194,8 @@ Function iotransfer()
 '    SetNet #201, "10.22.2.30", 1502, CRLF, NONE, 0
     SetNet #201, "10.22.251.171", 1502, CRLF, NONE, 0
 
-    Do While True 'g_io_xfr_on = 1
+    Do While True
+    	
    	OnErr GoTo RetryConnection ' on any error retry connection
   
 RetryConnection:
@@ -235,8 +207,10 @@ RetryConnection:
             ' write variable data to HMI
 '            Write #201, Chr$(12) 'this breaks the JSON interpreter
 		EndIf
+		
 heartBeat = Not heartBeat
 'Tx to HMI:
+Print #201, "{", Chr$(&H22) + "alarmMute" + Chr$(&H22), ":", Str$(alarmMute), "}",
 Print #201, "{", Chr$(&H22) + "backInterlockACK" + Chr$(&H22), ":", Str$(backInterlockACK), "}",
 Print #201, "{", Chr$(&H22) + "frontInterlockACK" + Chr$(&H22), ":", Str$(frontInterlockACK), "}",
 Print #201, "{", Chr$(&H22) + "inMagGoHome" + Chr$(&H22), ":", Str$(inMagGoHome), "}",
@@ -251,6 +225,7 @@ Print #201, "{", Chr$(&H22) + "outMagUnloaded" + Chr$(&H22), ":", Str$(outMagUnl
 Print #201, "{", Chr$(&H22) + "rightInterlockACK" + Chr$(&H22), ":", Str$(rightInterlockACK), "}",
 Print #201, "{", Chr$(&H22) + "sftyFrmIlockAck" + Chr$(&H22), ":", Str$(sftyFrmIlockAck), "}",
 Print #201, "{", Chr$(&H22) + "erBackSafetyFrameOpen" + Chr$(&H22), ":", Str$(erBackSafetyFrameOpen), "}",
+Print #201, "{", Chr$(&H22) + "erBadPressureSensor" + Chr$(&H22), ":", Str$(erBadPressureSensor), "}",
 Print #201, "{", Chr$(&H22) + "erDCPower" + Chr$(&H22), ":", Str$(erDCPower), "}",
 Print #201, "{", Chr$(&H22) + "erDCPowerHeatStake" + Chr$(&H22), ":", Str$(erDCPowerHeatStake), "}",
 Print #201, "{", Chr$(&H22) + "erDebrisRemovalBreaker" + Chr$(&H22), ":", Str$(erDebrisRemovalBreaker), "}",
@@ -260,6 +235,7 @@ Print #201, "{", Chr$(&H22) + "erHeatStakeBreaker" + Chr$(&H22), ":", Str$(erHea
 Print #201, "{", Chr$(&H22) + "erHeatStakeTemp" + Chr$(&H22), ":", Str$(erHeatStakeTemp), "}",
 Print #201, "{", Chr$(&H22) + "erHighPressure" + Chr$(&H22), ":", Str$(erHighPressure), "}",
 Print #201, "{", Chr$(&H22) + "erHMICommunication" + Chr$(&H22), ":", Str$(erHMICommunication), "}",
+Print #201, "{", Chr$(&H22) + "erHmiDataAck" + Chr$(&H22), ":", Str$(erHmiDataAck), "}",
 Print #201, "{", Chr$(&H22) + "erIllegalArmMove" + Chr$(&H22), ":", Str$(erIllegalArmMove), "}",
 Print #201, "{", Chr$(&H22) + "erInMagBreaker" + Chr$(&H22), ":", Str$(erInMagBreaker), "}",
 Print #201, "{", Chr$(&H22) + "erInMagCrowding" + Chr$(&H22), ":", Str$(erInMagCrowding), "}",
@@ -267,7 +243,6 @@ Print #201, "{", Chr$(&H22) + "erInMagEmpty" + Chr$(&H22), ":", Str$(erInMagEmpt
 Print #201, "{", Chr$(&H22) + "erInMagLowSensorBad" + Chr$(&H22), ":", Str$(erInMagLowSensorBad), "}",
 Print #201, "{", Chr$(&H22) + "erInMagOpenInterlock" + Chr$(&H22), ":", Str$(erInMagOpenInterlock), "}",
 Print #201, "{", Chr$(&H22) + "erInMagUpSensorBad" + Chr$(&H22), ":", Str$(erInMagUpSensorBad), "}",
-Print #201, "{", Chr$(&H22) + "erBadPressureSensor" + Chr$(&H22), ":", Str$(erBadPressureSensor), "}",
 Print #201, "{", Chr$(&H22) + "erLaserScanner" + Chr$(&H22), ":", Str$(erLaserScanner), "}",
 Print #201, "{", Chr$(&H22) + "erLeftSafetyFrameOpen" + Chr$(&H22), ":", Str$(erLeftSafetyFrameOpen), "}",
 Print #201, "{", Chr$(&H22) + "erLowPressure" + Chr$(&H22), ":", Str$(erLowPressure), "}",
@@ -290,7 +265,6 @@ Print #201, "{", Chr$(&H22) + "erWrongPanel" + Chr$(&H22), ":", Str$(erWrongPane
 Print #201, "{", Chr$(&H22) + "erWrongPanelDims" + Chr$(&H22), ":", Str$(erWrongPanelDims), "}",
 Print #201, "{", Chr$(&H22) + "erWrongPanelHoles" + Chr$(&H22), ":", Str$(erWrongPanelHoles), "}",
 Print #201, "{", Chr$(&H22) + "erWrongPanelInsert" + Chr$(&H22), ":", Str$(erWrongPanelInsert), "}",
-Print #201, "{", Chr$(&H22) + "erHmiDataAck" + Chr$(&H22), ":", Str$(erHmiDataAck), "}",
 Print #201, "{", Chr$(&H22) + "hole0L" + Chr$(&H22), ":", Str$(hole0L), "}",
 Print #201, "{", Chr$(&H22) + "hole0R" + Chr$(&H22), ":", Str$(hole0R), "}",
 Print #201, "{", Chr$(&H22) + "hole10L" + Chr$(&H22), ":", Str$(hole10L), "}",
@@ -346,9 +320,9 @@ Print #201, "{", Chr$(&H22) + "cbMonDebrisRmv" + Chr$(&H22), ":", Str$(cbMonDebr
 Print #201, "{", Chr$(&H22) + "cbMonHeatStake" + Chr$(&H22), ":", Str$(cbMonHeatStake), "}",
 Print #201, "{", Chr$(&H22) + "cbMonInMag" + Chr$(&H22), ":", Str$(cbMonInMag), "}",
 Print #201, "{", Chr$(&H22) + "cbMonOutMag" + Chr$(&H22), ":", Str$(cbMonOutMag), "}",
-Print #201, "{", Chr$(&H22) + "dc24vOK" + Chr$(&H22), ":", Str$(dc24vOK), "}",
 Print #201, "{", Chr$(&H22) + "cbMonPAS24vdc" + Chr$(&H22), ":", Str$(cbMonPAS24vdc), "}",
 Print #201, "{", Chr$(&H22) + "cbMonSafety" + Chr$(&H22), ":", Str$(cbMonSafety), "}",
+Print #201, "{", Chr$(&H22) + "dc24vOK" + Chr$(&H22), ":", Str$(dc24vOK), "}",
 Print #201, "{", Chr$(&H22) + "edgeDetectGo" + Chr$(&H22), ":", Str$(edgeDetectGo), "}",
 Print #201, "{", Chr$(&H22) + "edgeDetectHi" + Chr$(&H22), ":", Str$(edgeDetectHi), "}",
 Print #201, "{", Chr$(&H22) + "edgeDetectLo" + Chr$(&H22), ":", Str$(edgeDetectLo), "}",
@@ -366,6 +340,8 @@ Print #201, "{", Chr$(&H22) + "inMagUpLimN" + Chr$(&H22), ":", Str$(inMagUpLimN)
 Print #201, "{", Chr$(&H22) + "leftIntlock1" + Chr$(&H22), ":", Str$(leftIntlock1), "}",
 Print #201, "{", Chr$(&H22) + "leftIntlock2" + Chr$(&H22), ":", Str$(leftIntlock2), "}",
 Print #201, "{", Chr$(&H22) + "maintMode" + Chr$(&H22), ":", Str$(maintMode), "}",
+Print #201, "{", Chr$(&H22) + "monEstop1" + Chr$(&H22), ":", Str$(monEstop1), "}",
+Print #201, "{", Chr$(&H22) + "monEstop2" + Chr$(&H22), ":", Str$(monEstop2), "}",
 Print #201, "{", Chr$(&H22) + "outMagInt" + Chr$(&H22), ":", Str$(outMagInt), "}",
 Print #201, "{", Chr$(&H22) + "outMagLowLim" + Chr$(&H22), ":", Str$(outMagLowLim), "}",
 Print #201, "{", Chr$(&H22) + "outMagLowLimN" + Chr$(&H22), ":", Str$(outMagLowLimN), "}",
@@ -378,16 +354,15 @@ Print #201, "{", Chr$(&H22) + "inMagMtr" + Chr$(&H22), ":", Str$(inMagMtr), "}",
 Print #201, "{", Chr$(&H22) + "inMagMtrDir" + Chr$(&H22), ":", Str$(inMagMtrDir), "}",
 Print #201, "{", Chr$(&H22) + "outMagMtr" + Chr$(&H22), ":", Str$(outMagMtr), "}",
 Print #201, "{", Chr$(&H22) + "outMagMtrDir" + Chr$(&H22), ":", Str$(outMagMtrDir), "}",
-Print #201, "{", Chr$(&H22) + "removeFlash" + Chr$(&H22), ":", Str$(removeFlash), "}",
-Print #201, "{", Chr$(&H22) + "returnFlash" + Chr$(&H22), ":", Str$(returnFlash), "}",
+Print #201, "{", Chr$(&H22) + "drillGo" + Chr$(&H22), ":", Str$(drillGo), "}",
+Print #201, "{", Chr$(&H22) + "drillReturn" + Chr$(&H22), ":", Str$(drillReturn), "}",
 Print #201, "{", Chr$(&H22) + "stackLightAlrm" + Chr$(&H22), ":", Str$(stackLightAlrm), "}",
 Print #201, "{", Chr$(&H22) + "stackLightGrn" + Chr$(&H22), ":", Str$(stackLightGrn), "}",
 Print #201, "{", Chr$(&H22) + "stackLightRed" + Chr$(&H22), ":", Str$(stackLightRed), "}",
 Print #201, "{", Chr$(&H22) + "stackLightYel" + Chr$(&H22), ":", Str$(stackLightYel), "}",
 Print #201, "{", Chr$(&H22) + "suctionCups" + Chr$(&H22), ":", Str$(suctionCups), "}",
 Print #201, "{", Chr$(&H22) + "ctrlrErrAxisNumber" + Chr$(&H22), ":", Str$(ctrlrErrAxisNumber), "}",
-'Print #201, "{", Chr$(&H22) + "ctrlrErrMsg" + Chr$(&H22), ":", Str$(ctrlrErrMsg), "}",
-Print #201, "{", Chr$(&H22) + "ctrlrErrorNum" + Chr$(&H22), ":", Str$(ctrlrErrorNum), "}",
+'Print #201, "{", Chr$(&H22) + "ctrlrErrMsg$" + Chr$(&H22), ":", Str$(ctrlrErrMsg), "}",
 Print #201, "{", Chr$(&H22) + "ctrlrLineNumber" + Chr$(&H22), ":", Str$(ctrlrLineNumber), "}",
 Print #201, "{", Chr$(&H22) + "ctrlrTaskNumber" + Chr$(&H22), ":", Str$(ctrlrTaskNumber), "}",
 Print #201, "{", Chr$(&H22) + "errorStatus" + Chr$(&H22), ":", Str$(errorStatus), "}",
@@ -433,6 +408,9 @@ Print #201, "{", Chr$(&H22) + "jobDone" + Chr$(&H22), ":", Str$(jobDone), "}",
 Print #201, "{", Chr$(&H22) + "jobNumPanelsDone" + Chr$(&H22), ":", Str$(jobNumPanelsDone), "}",
 Print #201, "{", Chr$(&H22) + "outMagCurrentState" + Chr$(&H22), ":", Str$(outMagCurrentState), "}",
 Print #201, "{", Chr$(&H22) + "panelDataTxRdy" + Chr$(&H22), ":", Str$(panelDataTxRdy), "}",
+Print #201, "{", Chr$(&H22) + "systemState" + Chr$(&H22), ":", Str$(SystemState), "}",
+Print #201, "{", Chr$(&H22) + "mainCurrentState" + Chr$(&H22), ":", Str$(mainCurrentState), "}",
+
 'dont delete when updating
 Print #201, "{", Chr$(&H22) + "monEstop1" + Chr$(&H22), ":", Str$(monEstop1), "}",
 Print #201, "{", Chr$(&H22) + "monEstop2" + Chr$(&H22), ":", Str$(monEstop2), "}",
@@ -453,10 +431,18 @@ Function setVars(response$ As String)
 	EndIf
 '	Print tokens$(0), " : ", tokens$(1)
 	
-	Select Tokens$(0)
+	Select tokens$(0)
  'Rx from HMI:
+Case "alarmMuteBtn"
+   If tokens$(1) = "true" Then
+       alarmMuteBtn = True
+       alarmMute = True
+   Else
+       alarmMuteBtn = False
+   EndIf
+   Print "alarmMuteBtn:", alarmMuteBtn
 Case "backInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        backInterlockACKBtn = True
        backInterlockACK = True
    Else
@@ -464,7 +450,7 @@ Case "backInterlockACKBtn"
    EndIf
    Print "backInterlockACKBtn:", backInterlockACKBtn
 Case "frontInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        frontInterlockACKBtn = True
        frontInterlockACK = True
    Else
@@ -472,7 +458,7 @@ Case "frontInterlockACKBtn"
    EndIf
    Print "frontInterlockACKBtn:", frontInterlockACKBtn
 Case "inMagGoHomeBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        inMagGoHomeBtn = True
        inMagGoHome = True
    Else
@@ -480,7 +466,7 @@ Case "inMagGoHomeBtn"
    EndIf
    Print "inMagGoHomeBtn:", inMagGoHomeBtn
 Case "inMagIntLockAckBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        inMagIntLockAckBtn = True
        inMagIntLockAck = True
    Else
@@ -488,7 +474,7 @@ Case "inMagIntLockAckBtn"
    EndIf
    Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
 Case "inMagLoadedBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        inMagLoadedBtn = True
        inMagLoaded = True
    Else
@@ -496,7 +482,7 @@ Case "inMagLoadedBtn"
    EndIf
    Print "inMagLoadedBtn:", inMagLoadedBtn
 Case "jobAbortBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        jobAbortBtn = True
        jobAbort = True
    Else
@@ -504,7 +490,7 @@ Case "jobAbortBtn"
    EndIf
    Print "jobAbortBtn:", jobAbortBtn
 Case "jobStartBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        jobStartBtn = True
        jobStart = True
    Else
@@ -512,7 +498,7 @@ Case "jobStartBtn"
    EndIf
    Print "jobStartBtn:", jobStartBtn
 Case "leftInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        leftInterlockACKBtn = True
        leftInterlockACK = True
    Else
@@ -520,7 +506,7 @@ Case "leftInterlockACKBtn"
    EndIf
    Print "leftInterlockACKBtn:", leftInterlockACKBtn
 Case "outMagGoHomeBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        outMagGoHomeBtn = True
        outMagGoHome = True
    Else
@@ -528,7 +514,7 @@ Case "outMagGoHomeBtn"
    EndIf
    Print "outMagGoHomeBtn:", outMagGoHomeBtn
 Case "outMagIntLockAckBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        outMagIntLockAckBtn = True
        outMagIntLockAck = True
    Else
@@ -536,15 +522,23 @@ Case "outMagIntLockAckBtn"
    EndIf
    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 Case "outMagUnloadedBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        outMagUnloadedBtn = True
        outMagUnloaded = True
    Else
        outMagUnloadedBtn = False
    EndIf
    Print "outMagUnloadedBtn:", outMagUnloadedBtn
+Case "panelDataTxACKBtn"
+   If tokens$(1) = "true" Then
+       panelDataTxACKBtn = True
+       panelDataTxACK = True
+   Else
+       panelDataTxACKBtn = False
+   EndIf
+   Print "panelDataTxACKBtn:", panelDataTxACKBtn
 Case "rightInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        rightInterlockACKBtn = True
        rightInterlockACK = True
    Else
@@ -552,7 +546,7 @@ Case "rightInterlockACKBtn"
    EndIf
    Print "rightInterlockACKBtn:", rightInterlockACKBtn
 Case "sftyFrmIlockAckBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        sftyFrmIlockAckBtn = True
        sftyFrmIlockAck = True
    Else
@@ -560,93 +554,93 @@ Case "sftyFrmIlockAckBtn"
    EndIf
    Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
 Case "hole0X"
-    PanelCordinates(0, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(0, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole0Y"
-    PanelCordinates(0, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(0, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole10X"
-    PanelCordinates(10, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(10, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole10Y"
-    PanelCordinates(10, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(10, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole11X"
-    PanelCordinates(11, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(11, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole11Y"
-    PanelCordinates(11, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(11, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole12X"
-    PanelCordinates(12, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(12, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole12Y"
-    PanelCordinates(12, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(12, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole13X"
-    PanelCordinates(13, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(13, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole13Y"
-    PanelCordinates(13, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(13, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole14X"
-    PanelCordinates(14, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(14, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole14Y"
-    PanelCordinates(14, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(14, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole15X"
-    PanelCordinates(15, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(15, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole15Y"
-    PanelCordinates(15, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(15, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole16X"
-    PanelCordinates(16, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(16, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole16Y"
-    PanelCordinates(16, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(16, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole17X"
-    PanelCordinates(17, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(17, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole17Y"
-    PanelCordinates(17, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(17, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole18X"
-    PanelCordinates(18, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(18, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole18Y"
-    PanelCordinates(18, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(18, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole19X"
-    PanelCordinates(19, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(19, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole19Y"
-    PanelCordinates(19, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(19, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole1X"
-    PanelCordinates(1, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(1, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole1Y"
-    PanelCordinates(1, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(1, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole20X"
-    PanelCordinates(20, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(20, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole20Y"
-    PanelCordinates(20, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(20, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole21X"
-    PanelCordinates(21, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(21, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole21Y"
-    PanelCordinates(21, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(21, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole22X"
-    PanelCordinates(22, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(22, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole22Y"
-    PanelCordinates(22, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(22, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole2X"
-    PanelCordinates(2, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(2, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole2Y"
-    PanelCordinates(2, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(2, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole3X"
-    PanelCordinates(3, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(3, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole3Y"
-    PanelCordinates(3, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(3, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole4X"
-    PanelCordinates(4, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(4, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole4Y"
-    PanelCordinates(4, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(4, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole5X"
-    PanelCordinates(5, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(5, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole5Y"
-    PanelCordinates(5, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(5, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole6X"
-    PanelCordinates(6, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(6, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole6Y"
-    PanelCordinates(6, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(6, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole7X"
-    PanelCordinates(7, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(7, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole7Y"
-    PanelCordinates(7, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(7, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole8X"
-    PanelCordinates(8, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(8, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole8Y"
-    PanelCordinates(8, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(8, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole9X"
     PanelCordinates(9, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole9Y"
@@ -658,97 +652,71 @@ Case "airPressHighF"
         MemOff (airPressHighF)
     EndIf
 Case "airPressHighFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (airPressHighFV)
     Else
         MemOff (airPressHighFV)
     EndIf
 Case "airPressLowF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (airPressLowF)
     Else
         MemOff (airPressLowF)
     EndIf
 Case "airPressLowFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (airPressLowFV)
     Else
         MemOff (airPressLowFV)
     EndIf
 Case "backIntlock1F"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (backIntlock1F)
     Else
         MemOff (backIntlock1F)
     EndIf
 Case "backIntlock1FV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (backIntlock1FV)
     Else
         MemOff (backIntlock1FV)
     EndIf
 Case "backIntlock2F"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (backIntlock2F)
     Else
         MemOff (backIntlock2F)
     EndIf
 Case "backIntlock2FV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (backIntlock2FV)
     Else
         MemOff (backIntlock2FV)
     EndIf
-'Case "cbMonBowlFederF"
-'    If tokens$(1) = "true" Then
-'        MemOn (cbMonBowlFederF)
-'    Else
-'        MemOff (cbMonBowlFederF)
-'    EndIf
-'Case "cbMonBowlFederFV"
-'    If tokens$(1) = "true" Then
-'        MemOn (cbMonBowlFederFV)
-'    Else
-'        MemOff (cbMonBowlFederFV)
-'    EndIf
 Case "cbMonDebrisRmvF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (cbMonDebrisRmvF)
     Else
         MemOff (cbMonDebrisRmvF)
     EndIf
 Case "cbMonDebrisRmvFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (cbMonDebrisRmvFV)
     Else
         MemOff (cbMonDebrisRmvFV)
     EndIf
 Case "cbMonHeatStakeF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (cbMonHeatStakeF)
     Else
         MemOff (cbMonHeatStakeF)
     EndIf
 Case "cbMonHeatStakeFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (cbMonHeatStakeFV)
     Else
         MemOff (cbMonHeatStakeFV)
     EndIf
-Case "monEstop1"
-    If Tokens$(1) = "true" Then
-        monEstop1 = True
-    Else
-        monEstop1 = False
-    EndIf
-    Print "monEstop1:", monEstop1
-Case "monEstop2"
-    If tokens$(1) = "true" Then
-        monEstop2 = True
-    Else
-        monEstop2 = False
-    EndIf
-    Print "monEstop2:", monEstop2
 Case "cbMonInMagF"
     If tokens$(1) = "true" Then
         MemOn (cbMonInMagF)
@@ -773,18 +741,6 @@ Case "cbMonOutMagFV"
     Else
         MemOff (cbMonOutMagFV)
     EndIf
-Case "dc24vOKF"
-    If tokens$(1) = "true" Then
-        MemOn (dc24vOKF)
-    Else
-        MemOff (dc24vOKF)
-    EndIf
-Case "dc24vOKFV"
-    If tokens$(1) = "true" Then
-        MemOn (dc24vOKFV)
-    Else
-        MemOff (dc24vOKFV)
-    EndIf
 Case "cbMonPAS24vdcF"
     If tokens$(1) = "true" Then
         MemOn (cbMonPAS24vdcF)
@@ -808,6 +764,18 @@ Case "cbMonSafetyFV"
         MemOn (cbMonSafetyFV)
     Else
         MemOff (cbMonSafetyFV)
+    EndIf
+Case "dc24vOKF"
+    If tokens$(1) = "true" Then
+        MemOn (dc24vOKF)
+    Else
+        MemOff (dc24vOKF)
+    EndIf
+Case "dc24vOKFV"
+    If tokens$(1) = "true" Then
+        MemOn (dc24vOKFV)
+    Else
+        MemOff (dc24vOKFV)
     EndIf
 Case "edgeDetectGoF"
     If tokens$(1) = "true" Then
@@ -1013,6 +981,30 @@ Case "maintModeFV"
     Else
         MemOff (maintModeFV)
     EndIf
+Case "monEstop1F"
+    If tokens$(1) = "true" Then
+        MemOn (monEstop1F)
+    Else
+        MemOff (monEstop1F)
+    EndIf
+Case "monEstop1FV"
+    If tokens$(1) = "true" Then
+        MemOn (monEstop1FV)
+    Else
+        MemOff (monEstop1FV)
+    EndIf
+Case "monEstop2F"
+    If tokens$(1) = "true" Then
+        MemOn (monEstop2F)
+    Else
+        MemOff (monEstop2F)
+    EndIf
+Case "monEstop2FV"
+    If tokens$(1) = "true" Then
+        MemOn (monEstop2FV)
+    Else
+        MemOff (monEstop2FV)
+    EndIf
 Case "outMagIntF"
     If tokens$(1) = "true" Then
         MemOn (outMagIntF)
@@ -1157,29 +1149,29 @@ Case "outMagMtrDirFV"
     Else
         MemOff (outMagMtrDirFV)
     EndIf
-Case "removeFlashF"
+Case "drillGoF"
     If tokens$(1) = "true" Then
-        MemOn (removeFlashF)
+        MemOn (drillGoF)
     Else
-        MemOff (removeFlashF)
+        MemOff (drillGoF)
     EndIf
-Case "removeFlashFV"
+Case "drillGoFV"
     If tokens$(1) = "true" Then
-        MemOn (removeFlashFV)
+        MemOn (drillGoFV)
     Else
-        MemOff (removeFlashFV)
+        MemOff (drillGoFV)
     EndIf
-Case "returnFlashF"
+Case "drillReturnF"
     If tokens$(1) = "true" Then
-        MemOn (returnFlashF)
+        MemOn (drillReturnF)
     Else
-        MemOff (returnFlashF)
+        MemOff (drillReturnF)
     EndIf
-Case "returnFlashFV"
+Case "drillReturnFV"
     If tokens$(1) = "true" Then
-        MemOn (returnFlashFV)
+        MemOn (drillReturnFV)
     Else
-        MemOff (returnFlashFV)
+        MemOff (drillReturnFV)
     EndIf
 Case "stackLightAlrmF"
     If tokens$(1) = "true" Then
@@ -1244,6 +1236,9 @@ Case "suctionCupsFV"
 Case "anvilZlimit"
     AnvilZlimit = Val(tokens$(1))
     Print "anvilZlimit:", AnvilZlimit
+Case "flashDwellTime"
+    flashDwellTime = Val(tokens$(1))
+    Print "flashDwellTime:", flashDwellTime
 Case "heatStakeTempTolerance"
     heatStakeTempTolerance = Val(tokens$(1))
     Print "heatStakeTempTolerance:", heatStakeTempTolerance
@@ -1284,26 +1279,11 @@ Case "systemAccel"
 Case "systemSpeed"
     SystemSpeed = Val(tokens$(1))
     Print "systemSpeed:", SystemSpeed
-Case "systemState"
-    If tokens$(1) = "true" Then
-        SystemState = True
-    Else
-        SystemState = False
-    EndIf
-    Print "systemState:", SystemState
 Case "zlimit"
     zLimit = Val(tokens$(1))
     Print "zlimit:", zLimit
-Case "flashDwellTime"
-    flashDwellTime = Val(tokens$(1))
-    Print "flashDwellTime:", flashDwellTime
-Case "panelDataTxACK"
-    If tokens$(1) = "true" Then
-        panelDataTxACK = True
-    Else
-        panelDataTxACK = False
-    EndIf
-    Print "panelDataTxACK:", panelDataTxACK
+
+
 Default
 	' TMH for now print come back and do something useful
 	Print "Invalid Token received"

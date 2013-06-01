@@ -8,7 +8,7 @@ PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
-MainCurrentState = StateIdle ' The first state is Idle
+mainCurrentState = StateIdle ' The first state is Idle
 'jobStart = True 'fake
 
 Do While True
@@ -116,7 +116,7 @@ Do While True
 		jobStart = False
 	EndIf
 	
-MainCurrentState = NextState 'Set next state to current state after we break from case statment
+mainCurrentState = NextState 'Set next state to current state after we break from case statment
 
 Loop
 
