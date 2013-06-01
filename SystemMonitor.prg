@@ -8,7 +8,6 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 Do While True
 	
-	stackLightRedCC = True
 	StateOfHealth()
 	
 	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine

@@ -1,12 +1,12 @@
-ENVT0100,LM:2013/06/01 19:33:18:587,DS:0000003651,CS:00815,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/01 19:49:38:709,DS:0000003649,CS:25418,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="6/1/2013 1:32:48 PM"
-	bBuildComplete=False
-	bRebuildRequired=False
+	sLastModified="6/1/2013 1:46:12 PM"
+	bBuildComplete=True
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="ALWKSBSCHAEFER"
@@ -42,7 +42,7 @@ ProgramFile3 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/1/2013 7:22:58 PM"
+	sTimeSavedInController="6/1/2013 7:39:19 PM"
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
@@ -60,7 +60,7 @@ ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/1/2013 6:42:55 PM"
+	sTimeSavedInController="6/1/2013 7:46:12 PM"
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"

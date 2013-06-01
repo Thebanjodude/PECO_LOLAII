@@ -1,5 +1,5 @@
-ENVT0100,LM:2013/06/01 19:33:52:142,DS:0000002480,CS:00375,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Globals.inc"
+ENVT0100,LM:2013/06/01 20:12:18:358,DS:0000002496,CS:09022,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InMagOutMagStateMachines.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
@@ -36,7 +36,7 @@ ProgramFile3 {
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=134
@@ -61,10 +61,10 @@ ProgramFile6 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=267
-		nTop=377
-		nWidth=1272
-		nHeight=662
+		nLeft=109
+		nTop=30
+		nWidth=1271
+		nHeight=659
 	}
 }
 ProgramFile7 {
@@ -125,7 +125,7 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=1019
 		nTop=21
@@ -146,10 +146,10 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=1302
-		nTop=229
+		nLeft=1239
+		nTop=195
 		nWidth=520
-		nHeight=510
+		nHeight=506
 	}
 }
 TaskMgr {
