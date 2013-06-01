@@ -2,7 +2,7 @@
 
 Function InspectPanel(HoleInspect As Boolean) As Boolean
 	
-	Trap 2, MemSw(abortJobH) = True GoTo exitInspectPanel ' arm trap
+	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
 '	Go PreScan ' Collision Avoidance Waypoint
 	SystemStatus = InspectingPanel
 	InspectPanel = False

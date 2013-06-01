@@ -10,6 +10,7 @@ Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
 #define Preinspection False
 #define Inspection True
+Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog
 Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
 
 'Main() States
@@ -32,7 +33,7 @@ Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
 
 'Commands from HMI
 Global Boolean jobDone
-Global Integer jobNumPanels, jobNumPanelsDone, abortJob
+Global Integer jobNumPanels, jobNumPanelsDone, jobAbort
 Global Boolean backInterlockACKBtn, frontInterlockACKBtn
 Global Boolean inMagGoHomeBtn, inMagIntLockAckBtn, inMagLoadedBtn
 Global Boolean jobPauseBtn, jobResumeBtn, jobStartBtn, abortJobBtn
@@ -46,7 +47,7 @@ Global Boolean rightInterlockACK, sftyFrmIlockAck
 
 ' Input Magazine Global Vars
 Global Boolean inMagGoHome, inMagLoaded, inMagPnlRdy, inMagMtr, inMagMtrDir ' DIO to run intput the magazine
-Global Boolean inMagLowLim, inMagUpLim, inMagIntlock, inMagIntLockAck
+Global Boolean inMagLowLim, inMagUpLim, inMagInterlock, inMagIntLockAck
 Global Boolean inMagLowLimN, inMagUpLimN
 Global Boolean InMagRobotClearSignal ' Signal robot is out of the way,OK to move Inmag
 Global Boolean InMagPickUpSignal ' Signal robot it can pick up a panel from inmag
@@ -80,7 +81,7 @@ Global Boolean stackLightRedCC, stackLightYelCC, stackLightGrnCC, stackLightAlrm
 Global Boolean airPressHigh, airPressLow
 Global Boolean backIntlock1, frontIntlock1, leftIntlock1, rightIntlock
 Global Boolean backIntlock2, frontIntlock2, leftIntlock2
-Global Boolean heartBeat
+Global Boolean heartBeat, dc24vOK
 
 'Hot Stake and Flash Removal Global Vars
 Global Real PanelArray(25, 2)

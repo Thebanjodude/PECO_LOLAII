@@ -2,14 +2,14 @@
 
 Function PopPanel() As Boolean
 	
-Trap 2, MemSw(abortJobH) = True GoTo exitPopPanel ' arm trap
+Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 
-suctionWaitTime = 1
-zLimit = -2
+suctionWaitTime = .5 'fake
+zLimit = -2 'fake
 
 retry:
 
-	If inMagIntlock = True Then 'Check Interlock status
+	If inMagInterlock = True Then 'Check Interlock status
 		PopPanel = False
 		GoTo exitPopPanel
 	EndIf
@@ -32,8 +32,8 @@ retry:
 	
 exitPopPanel:
 
-If MemSw(abortJobH) = True Then
-	abortJob = True
+If MemSw(jobAbortH) = True Then
+	jobAbort = True
 EndIf
 
 Trap 2 'disarm trap
@@ -41,7 +41,7 @@ Trap 2 'disarm trap
 Fend
 Function PushPanel() As Boolean
 	
-Trap 2, MemSw(abortJobH) = True GoTo exitPushPanel ' arm trap
+Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 	
 	SystemStatus = DepositingPanel
 	PanelPassedInspection = True ' fake it for testing	
@@ -65,13 +65,12 @@ Trap 2, MemSw(abortJobH) = True GoTo exitPushPanel ' arm trap
 		
 '	WaitSig OutMagDropOffSignal		
 	Jump Waypoint1 LimZ zLimit
-	Jump InMagCenter LimZ zLimit
 	Jump Waypoint0 LimZ zLimit
 	Jump OutMagCenter LimZ zLimit
 '	Jump OutMagCenter -Z(recPanelThickness) LimZ zLimit
 	suctionCupsCC = False
 	Wait suctionWaitTime ' Allow time for cups to unseal				
-	Jump Waypoint0
+	Jump Waypoint0 LimZ zLimit
 	Jump InMagCenter LimZ zLimit
 	Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel	
 	
@@ -89,7 +88,7 @@ Trap 2, MemSw(abortJobH) = True GoTo exitPushPanel ' arm trap
 	panelDataTxRdy = False 'reset flag
 	SystemStatus = MovingPanel
 	PanelPassedInspection = False ' rest flag
-	PushPanel = True
+	PushPanel = True 'fake??
 '	Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
 
 exitPushPanel:

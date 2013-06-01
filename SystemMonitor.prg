@@ -10,7 +10,7 @@ Do While True
 	
 	StateOfHealth()
 	
-	If inMagIntlock = True Then ' If an interlock gets tripped then halt the state machine
+	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine
 		
 		Halt InMagControl
 		erInMagOpenInterlock = True
@@ -39,43 +39,43 @@ Do While True
 	 	erOutMagOpenInterlock = False
 	EndIf
 	
-	If frontIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
+	If frontIntlock1 = True Then
 		erFrontSafetyFrameOpen = True
 	Else
 	 	erFrontSafetyFrameOpen = False
 	EndIf
 	
-	If frontIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
+	If frontIntlock2 = True Then
 		erFrontSafetyFrameOpen = True
 	Else
 	 	erFrontSafetyFrameOpen = False
 	EndIf
 	
-	If backIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
+	If backIntlock1 = True Then
 		erBackSafetyFrameOpen = True
 	Else
 	 	erBackSafetyFrameOpen = False
 	EndIf
 	
-	If backIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
+	If backIntlock2 = True Then
 		erBackSafetyFrameOpen = True
 	Else
 	 	erBackSafetyFrameOpen = False
 	EndIf
 	
-	If leftIntlock1 = True Then ' If an interlock gets tripped then halt the state machine
+	If leftIntlock1 = True Then
 		erLeftSafetyFrameOpen = True
 	Else
 		erLeftSafetyFrameOpen = False
 	EndIf
 
-	If leftIntlock2 = True Then ' If an interlock gets tripped then halt the state machine
+	If leftIntlock2 = True Then
 		erLeftSafetyFrameOpen = True
 	Else
 	 	erLeftSafetyFrameOpen = False
 	EndIf
 	
-	If rightIntlock = True Then ' If an interlock gets tripped then halt the state machine
+	If rightIntlock = True Then
 		erRightSafetyFrameOpen = True
 	Else
 	 	erRightSafetyFrameOpen = False
@@ -151,6 +151,8 @@ Do While True
 	
 	If EStopOn = True Then
 		erEstop = True
+		stackLightRedCC = True
+		stackLightAlrmCC = True
 	Else
 		erEstop = False
 	EndIf
@@ -188,12 +190,6 @@ Do While True
 		erOutMagUpSensorBad = False
 	EndIf
 	
-	If Sw(MaintanceMode) = True Then
-		maintMode = True
-	Else
-		maintMode = False
-	EndIf
-	
 	If PauseOn = True And pauseFlag = False Then
 		' Change this from P50 to a lable so it doesn't get overwritten
 		P50 = Here ' save the location where it paused
@@ -223,21 +219,16 @@ Do While True
 If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh = True) Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or EStopOn = True Or (inMagLowLim And inMagLowLimN = True) Or (inMagUpLim And inMagUpLimN = True) Or (outMagLowLim And outMagLowLimN = True) Or (outMagUpLim And outMagUpLimN = True) Then
 	stackLightRedCC = True
 	stackLightAlrmCC = True
-Else
-	stackLightRedCC = False
-	stackLightAlrmCC = False
 EndIf
 	
-If inMagIntlock = True Or outMagInt = True Or frontIntlock1 = True Or frontIntlock2 Or backIntlock1 = True Or backIntlock2 = True Or leftIntlock1 = True Or leftIntlock1 = True Or leftIntlock2 Or rightIntlock Then
+If inMagInterlock = True Or outMagInt = True Then
 	stackLightYelCC = True
-Else
-	stackLightYelCC = False
 EndIf
 
-If (stackLightRedCC Or stackLightYelCC) = False Then
-	stackLightGrnCC = True
-Else
+If (stackLightRedCC Or stackLightYelCC) Then
 	stackLightGrnCC = False
+Else
+	stackLightGrnCC = True
 EndIf
 		
 Loop

@@ -33,7 +33,7 @@ Do While True
 			
 			'Don't leave state until panel is in position or EOT is reached
 			Do Until inMagPnlRdy = True Or inMagUpLim = True
-				inMagMtrDirCC = False 'set direction to UP
+				inMagMtrDirCC = True 'set direction to UP
 				inMagMtrCC = True
 			Loop
 			
@@ -50,7 +50,7 @@ Do While True
 		Case StateLowering
 		
 			Do Until inMagLowLim = True ' Don't leave state until magazine has reached lower limit (home)
-				inMagMtrDirCC = True 'set direction to DOWN
+				inMagMtrDirCC = False 'set direction to DOWN
 				inMagMtrCC = True
 			Loop
 			
@@ -90,7 +90,7 @@ Function OutMagControl
 
 Integer NextState
 
-outMagCurrentState = StateReadyToReceive ' On start up go to home position
+outMagCurrentState = StateRaising ' On start up go to home position
 
 Do While True
 				
@@ -117,7 +117,7 @@ Do While True
 		Case StateOutMagLowering
 			
 			Do Until outMagPanelRdy = True Or outMagLowLim = True
-				outMagMtrDirCC = True 'Set direction to Down
+				outMagMtrDirCC = False 'Set direction to Down
 				outMagMtrCC = True
 			Loop
 			
@@ -146,7 +146,7 @@ Do While True
 		'	WaitSig OutMagRobotClearSignal
 			
 			Do Until outMagUpLim = True ' Move magazine up until we hit the upper limit
-				outMagMtrDirCC = False 'Set direction to UP 
+				outMagMtrDirCC = True 'Set direction to UP 
 				outMagMtrCC = True
 			Loop
 			
@@ -157,7 +157,7 @@ Do While True
 		Case StateGoHome
 			
 			Do Until outMagLowLim = True
-				outMagMtrDirCC = True 'Set direction to DOWN
+				outMagMtrDirCC = False 'Set direction to DOWN
 				outMagMtrCC = True
 			Loop
 			

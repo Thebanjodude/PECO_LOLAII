@@ -6,51 +6,31 @@ Integer NextState
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
-PopPanel
-HotStakePanel()
-FlashRemoval()
-PushPanel
-
-Do While True
-
-Loop
-
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 MainCurrentState = StateIdle ' The first state is Idle
+'jobStart = True 'fake
 
 Do While True
-	
+	Wait 1
+Loop
+
+Do While True
+		
 	Select MainCurrentState
 		
 	Case StateIdle
-		SetInitialValues() ' get rid of this during integration
-		If CheckInitialParameters() = True And HotStakeTempRdy() = True And jobStart = True Then
+		If jobStart = True Then
 			NextState = StatePopPanel
 		Else
 			NextState = StateIdle
 		EndIf
 	Case StatePopPanel
 		If PopPanel = True Then
-			NextState = StateFindPickUpError
-		ElseIf inMagIntlock = True Then
-			NextState = PopPanel
+			NextState = StateHotStakePanel
 		Else
 			NextState = StateIdle
 		EndIf
-	Case StateFindPickUpError
-		If FindPickUpError = True Then
-			DerivethetaR()
-			NextState = StatePreinspection
-		Else
-			NextState = StateIdle
-		EndIf
-	Case StatePreinspection
-			If InspectPanel(Preinspection) = True Then
-				NextState = StateHotStakePanel
-			Else
-				NextState = StateIdle
-			EndIf
 	Case StateHotStakePanel
 		If HotStakePanel = True Then
 			NextState = StateFlashRemoval
@@ -59,12 +39,6 @@ Do While True
 		EndIf
 	Case StateFlashRemoval
 		If FlashRemoval = True Then
-			NextState = StatePopPanel
-		Else
-			NextState = StateIdle
-		EndIf
-	Case StatePreinspection
-		If InspectPanel(Inspection) = True Then
 			NextState = StatePushPanel
 		Else
 			NextState = StateIdle
@@ -72,18 +46,72 @@ Do While True
 	Case StatePushPanel
 		If PushPanel = True Then
 			NextState = StatePopPanel
-		ElseIf inMagIntlock = True Then
-			NextState = PushPanel
-		Else
-			NextState = StateIdle
+		ElseIf jobDone = True Then
+			nextstate = StateIdle
 		EndIf
-	Default
-		Print "Current State is Null" ' We should NEVER get here...
-		erUnknown = True
-		Pause
+
+'	Case StateIdle
+'		SetInitialValues() ' get rid of this during integration
+'		If CheckInitialParameters() = True And HotStakeTempRdy() = True And jobStart = True Then
+'			NextState = StatePopPanel
+'		Else
+'			NextState = StateIdle
+'		EndIf
+'	Case StatePopPanel
+'		If PopPanel = True Then
+'			NextState = StateFindPickUpError
+'
+'		ElseIf inMagIntlock = True Then
+'			NextState = PopPanel
+'		Else
+'			NextState = StateIdle
+'		EndIf
+'	Case StateFindPickUpError
+'		If FindPickUpError = True Then
+'			DerivethetaR()
+'			NextState = StatePreinspection
+'		Else
+'			NextState = StateIdle
+'		EndIf
+'	Case StatePreinspection
+'			If InspectPanel(Preinspection) = True Then
+'				NextState = StateHotStakePanel
+'			Else
+'				NextState = StateIdle
+'			EndIf
+'	Case StateHotStakePanel
+'		If HotStakePanel = True Then
+'			NextState = StateFlashRemoval
+'		Else
+'			NextState = StateIdle
+'		EndIf
+'	Case StateFlashRemoval
+'		If FlashRemoval = True Then
+'			NextState = StatePopPanel
+'		Else
+'			NextState = StateIdle
+'		EndIf
+'	Case StatePreinspection
+'		If InspectPanel(Inspection) = True Then
+'			NextState = StatePushPanel
+'		Else
+'			NextState = StateIdle
+'		EndIf
+'	Case StatePushPanel
+'		If PushPanel = True Then
+'			NextState = StatePopPanel
+'		ElseIf inMagIntlock = True Then
+'			NextState = PushPanel
+'		Else
+'			NextState = StateIdle
+'		EndIf
+'	Default
+'		Print "Current State is Null" ' We should NEVER get here...
+'		erUnknown = True
+'		Pause
 	Send
 	
-	If abortJob = True Then 'Check if the user has aborted the job
+	If jobAbort = True Then 'Check if the user has aborted the job
 		NextState = StateIdle
 		jobStart = False
 	EndIf
@@ -128,7 +156,7 @@ Function PowerOnSequence()
 	
 retry:
 
-	'If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
+	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
 	
 	Motor On
 	Power Low

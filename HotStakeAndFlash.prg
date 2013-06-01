@@ -2,7 +2,7 @@
 
 Function HotStakePanel() As Boolean
 	
-	Trap 2, MemSw(abortJobH) = True GoTo exitHotStake ' arm trap
+	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 	
 	SystemStatus = InstallingInserts
 
@@ -59,11 +59,13 @@ Function HotStakePanel() As Boolean
 '			hsInstallInsrtCC = False 'reset flag
 		EndIf
 		
-		Wait 1
+		Wait .5
 
 	Next
 		
 	Jump PreScan LimZ zLimit
+	HotStakePanel = True 'fake
+	
 exitHotStake:
 
 	SystemStatus = MovingPanel
@@ -73,7 +75,7 @@ exitHotStake:
 Fend
 Function FlashRemoval() As Boolean
 	
-	Trap 2, MemSw(abortJobH) = True GoTo exitFlash ' arm trap
+	Trap 2, MemSw(jobAbortH) = True GoTo exitFlash ' arm trap
 	SystemStatus = RemovingFlash
 	
 	suctionWaitTime = 1 'fake
@@ -138,9 +140,11 @@ Function FlashRemoval() As Boolean
 '			Pause
 '		EndIf
 	EndIf
+			
+	Wait .5
 		
 Next
-	
+	FlashRemoval = True
 	SkipFlash:
 	exitFlash:
 	

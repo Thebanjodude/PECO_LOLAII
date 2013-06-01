@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/05/21 04:28:45:979,DS:0000003228,CS:06152,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/05/21 06:26:12:706,DS:0000002801,CS:09266,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=15
+nNumberOfPoints=13
 Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
@@ -24,9 +24,9 @@ Point2 {
 	nNumber=1
 	sLabel="OutMagCenter"
 	sDescription=""
-	rX=-357.315
-	rY=-214.63
-	rZ=-45
+	rX=329.941
+	rY=-232.727
+	rZ=-157
 	rU=45
 	rV=0
 	rW=0
@@ -129,24 +129,6 @@ Point7 {
 	bSimVisible=False
 }
 Point8 {
-	nNumber=8
-	sLabel="PreScanRighty"
-	sDescription=""
-	rX=-340
-	rY=-50.8
-	rZ=-45
-	rU=135
-	rV=0
-	rW=0
-	nLocal=0
-	nHand=1
-	nElbow=1
-	nWrist=1
-	nJ4Flag=0
-	nJ6Flag=0
-	bSimVisible=False
-}
-Point9 {
 	nNumber=9
 	sLabel="PanelOffset"
 	sDescription=""
@@ -164,7 +146,7 @@ Point9 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point10 {
+Point9 {
 	nNumber=10
 	sLabel="RotatedOffset"
 	sDescription=""
@@ -182,7 +164,7 @@ Point10 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point11 {
+Point10 {
 	nNumber=12
 	sLabel="pausepos"
 	sDescription=""
@@ -200,13 +182,13 @@ Point11 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point12 {
+Point11 {
 	nNumber=14
 	sLabel="Waypoint0"
 	sDescription=""
 	rX=345.361
 	rY=0
-	rZ=-45
+	rZ=-2
 	rU=45
 	rV=0
 	rW=0
@@ -218,7 +200,7 @@ Point12 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point13 {
+Point12 {
 	nNumber=15
 	sLabel="Waypoint1"
 	sDescription=""
@@ -236,36 +218,18 @@ Point13 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point14 {
+Point13 {
 	nNumber=16
 	sLabel="Waypoint2"
 	sDescription=""
 	rX=-368.187
 	rY=-183.13
-	rZ=-4.822
+	rZ=-2
 	rU=211.914
 	rV=0
 	rW=0
 	nLocal=0
 	nHand=2
-	nElbow=1
-	nWrist=1
-	nJ4Flag=0
-	nJ6Flag=0
-	bSimVisible=False
-}
-Point15 {
-	nNumber=17
-	sLabel="dropoff"
-	sDescription=""
-	rX=-119.429
-	rY=400
-	rZ=-73.206
-	rU=374.327
-	rV=0
-	rW=0
-	nLocal=0
-	nHand=1
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
