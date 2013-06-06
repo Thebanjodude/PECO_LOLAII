@@ -81,21 +81,21 @@ Do While True
 	 	erRightSafetyFrameOpen = False
 	EndIf
 	
-	If airPressHigh = True Then
+	If airPressHigh = False Then
 		erHighPressure = True
 '		Pause
 	Else
 		erHighPressure = False
 	EndIf
 	
-	If airPressLow = True Then
+	If airPressLow = False Then
 		erLowPressure = True
 '		Pause
 	Else
 		erLowPressure = False
 	EndIf
 	
-	If (airPressLow And airPressHigh) = True Then
+	If (airPressLow = False And airPressHigh = False) = True Then
 		erBadPressureSensor = True
 '		Pause
 	Else

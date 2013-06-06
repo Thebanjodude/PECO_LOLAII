@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/06/01 20:12:18:358,DS:0000002496,CS:09022,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="InMagOutMagStateMachines.prg"
-bMdiMaximized=False
+ENVT0100,LM:2013/06/06 20:10:24:761,DS:0000002486,CS:24086,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="SystemMonitor.prg"
+bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
 		nLeft=7
 		nTop=65
@@ -36,13 +36,13 @@ ProgramFile3 {
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
-		nLeft=134
-		nTop=38
-		nWidth=1188
-		nHeight=612
+		nLeft=316
+		nTop=83
+		nWidth=1185
+		nHeight=605
 	}
 }
 ProgramFile5 {
@@ -59,12 +59,12 @@ ProgramFile5 {
 ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
-		nLeft=109
-		nTop=30
-		nWidth=1271
-		nHeight=659
+		nLeft=247
+		nTop=288
+		nWidth=1269
+		nHeight=655
 	}
 }
 ProgramFile7 {
@@ -93,7 +93,7 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
 		nLeft=371
 		nTop=118

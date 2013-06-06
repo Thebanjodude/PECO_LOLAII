@@ -104,6 +104,7 @@ Do While True
 		Case StateOutMagPartPresent
 			
 			'WaitSig OutputMagSignal ' Wait for main program to move robot out of the way
+			Wait 2 ' fake a manual wait for testing 
 			NextState = StateOutMagLowering
 			
 		Case StateOutMagLowering

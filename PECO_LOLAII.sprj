@@ -1,11 +1,11 @@
-ENVT0100,LM:2013/06/01 19:49:38:709,DS:0000003649,CS:25418,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/06 20:10:19:384,DS:0000003650,CS:11370,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="6/1/2013 1:46:12 PM"
-	bBuildComplete=True
+	sLastModified="6/6/2013 2:10:11 PM"
+	bBuildComplete=False
 	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False

@@ -26,21 +26,21 @@ Global Boolean panelDataTxACKBtn
 #define StateInspection 8
 
 'Inmag States
-#define StatePartPresent 0
-#define StatePartRemoved 1
-#define StatePresentNextPart 2
-#define StateLowering 3
-#define StateWaitingUser 4
+#define StatePartPresent 1
+#define StatePartRemoved 2
+#define StatePresentNextPart 3
+#define StateLowering 4
+#define StateWaitingUser 5
 #define StatePaused 6
 
 'Outmag States
-#define StateReadyToReceive 0
-#define StateOutMagPartPresent 1
-#define StateOutMagLowering 2
-#define StateOutMagWaitingUser 3
-#define StateRaising 4
-#define StateGoHome 5
-'#define StatePaused 6
+#define StateReadyToReceive 1
+#define StateOutMagPartPresent 2
+#define StateOutMagLowering 3
+#define StateOutMagWaitingUser 4
+#define StateRaising 5
+#define StateGoHome 6
+'#define StatePaused 7
 
 'Commands from HMI
 Global Boolean jobDone
