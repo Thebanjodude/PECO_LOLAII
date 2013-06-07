@@ -5,7 +5,7 @@ Function InMagControl
 
 Integer NextState
 
-inMagCurrentState = StateLowering ' When we power on the magazine it goes to the home position
+inMagCurrentState = StateWaitingUser ' When we power on the magazine it goes to the home position
 
 Do While True
 	
@@ -82,7 +82,7 @@ Function OutMagControl
 
 Integer NextState
 
-outMagCurrentState = StateRaising ' On start up go to home position
+outMagCurrentState = StateOutMagWaitingUser ' On start up go to home position
 
 Do While True
 				
@@ -104,7 +104,6 @@ Do While True
 		Case StateOutMagPartPresent
 			
 			'WaitSig OutputMagSignal ' Wait for main program to move robot out of the way
-			Wait 2 ' fake a manual wait for testing 
 			NextState = StateOutMagLowering
 			
 		Case StateOutMagLowering

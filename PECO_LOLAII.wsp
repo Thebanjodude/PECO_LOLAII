@@ -1,6 +1,6 @@
-ENVT0100,LM:2013/06/06 20:10:24:761,DS:0000002486,CS:24086,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="SystemMonitor.prg"
-bMdiMaximized=True
+ENVT0100,LM:2013/06/07 02:09:07:718,DS:0000002495,CS:12311,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InMagOutMagStateMachines.prg"
+bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
@@ -28,21 +28,21 @@ ProgramFile3 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=46
-		nTop=116
-		nWidth=1245
-		nHeight=665
+		nLeft=232
+		nTop=23
+		nWidth=1243
+		nHeight=662
 	}
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
 		nLeft=316
 		nTop=83
-		nWidth=1185
-		nHeight=605
+		nWidth=1297
+		nHeight=602
 	}
 }
 ProgramFile5 {
@@ -59,12 +59,12 @@ ProgramFile5 {
 ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bOpened=True
-	nWinState=2
+	nWinState=0
 	Window {
-		nLeft=247
-		nTop=288
-		nWidth=1269
-		nHeight=655
+		nLeft=315
+		nTop=104
+		nWidth=1267
+		nHeight=651
 	}
 }
 ProgramFile7 {
@@ -127,10 +127,10 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=1019
-		nTop=21
-		nWidth=652
-		nHeight=659
+		nLeft=700
+		nTop=84
+		nWidth=755
+		nHeight=340
 	}
 }
 IOLabelEditor {
@@ -146,10 +146,10 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=1239
-		nTop=195
+		nLeft=833
+		nTop=279
 		nWidth=520
-		nHeight=506
+		nHeight=499
 	}
 }
 TaskMgr {
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=False
 	Window {
-		nLeft=136
-		nTop=228
+		nLeft=248
+		nTop=318
 		nWidth=751
 		nHeight=485
 	}
