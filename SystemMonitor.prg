@@ -14,7 +14,7 @@ Do While True
 		
 		Halt InMagControl
 		erInMagOpenInterlock = True
-		inMagCurrentState = StatePaused
+		inMagCurrentState = StateInMagPaused
 		
 		If mainCurrentState = StatePopPanel Then
 '			Pause ' if interlock open Pause only when in pop state
@@ -29,7 +29,7 @@ Do While True
 		
 		Halt OutMagControl
 		erOutMagOpenInterlock = True
-		outMagCurrentState = StatePaused
+		outMagCurrentState = StateOutMagPaused
 		
 		If mainCurrentState = StatePushPanel Then
 '			Pause ' pause robot movement to avoid pinchpoint

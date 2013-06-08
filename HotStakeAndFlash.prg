@@ -424,3 +424,30 @@ Function FindSlope(pt1 As Integer, pt2 As Integer) As Real
 	EndIf
 	
 Fend
+Function RemoveFlash(DwellTime As Real) As Boolean
+	
+	Xqt 2, IOTableInputs, NoEmgAbort
+	Xqt 3, IOTableOutputs, NoEmgAbort
+	
+	drillGoCC = True
+	
+	Wait DwellTime + 2.25
+	
+	If flashHome = False Then
+		drillReturnCC = True
+		Wait 2.25 ' wait for drill to go back to the top
+		
+		If flashHome = True Then
+			RemoveFlash = True
+		Else
+			RemoveFlash = False
+		EndIf
+	Else
+		RemoveFlash = False
+		Print "did not stroke"
+	EndIf
+	
+	Print "RemoveFlash", RemoveFlash
+	
+Fend
+

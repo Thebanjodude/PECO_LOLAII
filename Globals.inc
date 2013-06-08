@@ -13,6 +13,7 @@ Global Real PanelCordinates(22, 1)
 Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog, alarmMuteBtn
 Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
 Global Boolean panelDataTxACKBtn
+Global Boolean GoFlag, ReturnFlag 'flags to make sure we dont break the drill
 
 'Main() States
 #define StateUnknown 0
@@ -26,21 +27,23 @@ Global Boolean panelDataTxACKBtn
 #define StateInspection 8
 
 'Inmag States
+#define StateInMagUnknown 0
 #define StatePartPresent 1
 #define StatePartRemoved 2
 #define StatePresentNextPart 3
 #define StateLowering 4
 #define StateWaitingUser 5
-#define StatePaused 6
+#define StateInMagPaused 6
 
 'Outmag States
+#define StateOutMagUnknown 0
 #define StateReadyToReceive 1
 #define StateOutMagPartPresent 2
 #define StateOutMagLowering 3
 #define StateOutMagWaitingUser 4
 #define StateRaising 5
 #define StateGoHome 6
-'#define StatePaused 7
+#define StateOutMagPaused 7
 
 'Commands from HMI
 Global Boolean jobDone
@@ -100,7 +103,7 @@ Global Real Theta, r
 Global Real AnvilZlimit, heatStakeCurrentTemp, heatStakeTempTolerance
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
-Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr
+Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flashHome
 Global Boolean drillGoCC, drillReturnCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
 Global Real flashDwellTime ' How long the flash tool is in contact with the insert
 #define RadiusColumn 0 'The first column in the array are radii

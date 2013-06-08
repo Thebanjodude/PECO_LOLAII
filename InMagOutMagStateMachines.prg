@@ -13,7 +13,7 @@ Do While True
 		Case StatePartPresent
 			
 			' Don't leave state unless part is removed or user commands magazine home
-			Do Until inMagPnlRdy = False Or inMagGoHome = True
+			Do Until inMagPnlRdy = True Or inMagGoHome = True
 				Wait .1 ' Do nothing
 			Loop
 			
@@ -32,7 +32,7 @@ Do While True
 		Case StatePresentNextPart
 			
 			'Don't leave state until panel is in position or EOT is reached
-			Do Until inMagPnlRdy = True Or inMagUpLim = True
+			Do Until inMagPnlRdy = False Or inMagUpLim = True
 				inMagMtrDirCC = True 'set direction to UP
 				inMagMtrCC = True
 			Loop
@@ -60,13 +60,16 @@ Do While True
 			
 		Case StateWaitingUser
 			
+			Print "waiting for user to load more panels"
 			Do Until inMagLoaded = True
 				' Send message to HMI "waiting for user to load more panels"
+				Wait .1
 			Loop
 			
 			erInMagEmpty = False ' the user has ack'ed that they loaded the input magazine
 			NextState = StatePresentNextPart
 			inMagLoaded = False 'Clear Flag
+			Print "User hit ready"
 			
 		Default
 			Print "Current State is Null" ' We should NEVER get here...
@@ -74,7 +77,7 @@ Do While True
 	Send
 	
 inMagCurrentState = NextState 'Set next state to current state after we break from case statment
-
+Print "inMagCurrentState", inMagCurrentState
 Loop
 
 Fend

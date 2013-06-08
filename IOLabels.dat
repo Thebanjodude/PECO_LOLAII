@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/06/01 17:56:25:072,DS:0000013132,CS:23874,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/08 02:16:45:359,DS:0000013412,CS:23129,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
-	nNumberOfLabels=38
+	nNumberOfLabels=40
 	Label1 {
 		nBit=8
 		sLabel="monEstop1H"
@@ -133,61 +133,71 @@ InputBitLabels {
 		sDescription=""
 	}
 	Label27 {
+		nBit=83
+		sLabel="FlashHomeNH"
+		sDescription=""
+	}
+	Label28 {
+		nBit=84
+		sLabel="FlashHomeH"
+		sDescription=""
+	}
+	Label29 {
+		nBit=86
+		sLabel="inMagPnlRdyH"
+		sDescription=""
+	}
+	Label30 {
+		nBit=87
+		sLabel="outMagPanelRdyH"
+		sDescription=""
+	}
+	Label31 {
 		nBit=96
 		sLabel="inMagUpLimH"
 		sDescription=""
 	}
-	Label28 {
+	Label32 {
 		nBit=97
 		sLabel="inMagUpLimNH"
 		sDescription=""
 	}
-	Label29 {
+	Label33 {
 		nBit=98
 		sLabel="inMagLowLimH"
 		sDescription=""
 	}
-	Label30 {
+	Label34 {
 		nBit=99
 		sLabel="inMagLowLimNH"
 		sDescription=""
 	}
-	Label31 {
-		nBit=102
-		sLabel="inMagPnlRdyH"
-		sDescription=""
-	}
-	Label32 {
+	Label35 {
 		nBit=103
 		sLabel="inMagInterlockH"
 		sDescription=""
 	}
-	Label33 {
+	Label36 {
 		nBit=104
 		sLabel="outMagUpLimH"
 		sDescription=""
 	}
-	Label34 {
+	Label37 {
 		nBit=105
 		sLabel="outMagUpLimNH"
 		sDescription=""
 	}
-	Label35 {
+	Label38 {
 		nBit=106
 		sLabel="outMagLowLimH"
 		sDescription=""
 	}
-	Label36 {
+	Label39 {
 		nBit=107
 		sLabel="outMagLowLimNH"
 		sDescription=""
 	}
-	Label37 {
-		nBit=110
-		sLabel="outMagPanelRdyH"
-		sDescription=""
-	}
-	Label38 {
+	Label40 {
 		nBit=111
 		sLabel="outMagIntH"
 		sDescription=""
@@ -274,7 +284,7 @@ OutputWordLabels {
 	nNumberOfLabels=0
 }
 MemoryBitLabels {
-	nNumberOfLabels=124
+	nNumberOfLabels=126
 	Label1 {
 		nBit=0
 		sLabel="airPressLowF"
@@ -893,6 +903,16 @@ MemoryBitLabels {
 	Label124 {
 		nBit=145
 		sLabel="frontIntlock1F"
+		sDescription=""
+	}
+	Label125 {
+		nBit=146
+		sLabel="flashHomeF"
+		sDescription=""
+	}
+	Label126 {
+		nBit=147
+		sLabel="flashHomeFV"
 		sDescription=""
 	}
 }

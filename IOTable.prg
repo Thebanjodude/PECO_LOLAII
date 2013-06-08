@@ -1,12 +1,15 @@
 #include "Globals.INC"
 
 Function IOTableInputs()
+	
+
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 Do While True
 	
 'Inputs
+flashHome = IOTableBooleans(Sw(FlashHomeH), MemSw(flashHomeFV), MemSw(flashHomeF))
 airPressHigh = IOTableBooleans(Sw(AirPressHighH), MemSw(airPressHighFV), MemSw(airPressHighF))
 airPressLow = IOTableBooleans(Sw(AirPressLowH), MemSw(airPressLowFV), MemSw(airPressLowF))
 backIntlock1 = IOTableBooleans(Sw(backIntlock1H), MemSw(backIntlock1FV), MemSw(backIntlock1F))
@@ -118,16 +121,40 @@ If outMagMtrDir = True Then
     EndIf
 drillGo = IOTableBooleans(drillGoCC, MemSw(drillGoFV), MemSw(drillGoF))
 If drillGo = True Then
-        On (DrillGoH)
+
+	If GoFlag = False Then
+        On (DrillGoH), .25, 0
+        GoFlag = True
+    EndIf
+    
+    If DrillGoH = Off Then
+    	drillGoCC = False
+    	MemOff (drillGoFV)
+    	GoFlag = False
+    EndIf
+    
     Else
         Off (DrillGoH)
+        GoFlag = False
     EndIf
 drillReturn = IOTableBooleans(drillReturnCC, MemSw(drillReturnFV), MemSw(drillReturnF))
 If drillReturn = True Then
-        On (DrillReturnH)
-    Else
-        Off (DrillReturnH)
+
+	If Returnflag = False Then
+        On (DrillReturnH), .25, 0
+        Returnflag = True
     EndIf
+    
+    If DrillReturnH = Off Then
+    	drillReturnCC = False
+    	MemOff (drillReturnFV)
+    	ReturnFlag = False
+    EndIf
+Else
+    Off (DrillReturnH)
+    ReturnFlag = False
+EndIf
+    
 stackLightAlrm = IOTableBooleans(stackLightAlrmCC, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
 If stackLightAlrm = True Then
         On (stackLightAlrmH)
@@ -479,7 +506,7 @@ Case "alarmMuteBtn"
    EndIf
    Print "alarmMuteBtn:", alarmMuteBtn
 Case "backInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        backInterlockACKBtn = True
        backInterlockACK = True
    Else
@@ -487,7 +514,7 @@ Case "backInterlockACKBtn"
    EndIf
    Print "backInterlockACKBtn:", backInterlockACKBtn
 Case "frontInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        frontInterlockACKBtn = True
        frontInterlockACK = True
    Else
@@ -495,7 +522,7 @@ Case "frontInterlockACKBtn"
    EndIf
    Print "frontInterlockACKBtn:", frontInterlockACKBtn
 Case "inMagGoHomeBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        inMagGoHomeBtn = True
        inMagGoHome = True
    Else
@@ -503,7 +530,7 @@ Case "inMagGoHomeBtn"
    EndIf
    Print "inMagGoHomeBtn:", inMagGoHomeBtn
 Case "inMagIntLockAckBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        inMagIntLockAckBtn = True
        inMagIntLockAck = True
    Else
@@ -511,7 +538,7 @@ Case "inMagIntLockAckBtn"
    EndIf
    Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
 Case "inMagLoadedBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        inMagLoadedBtn = True
        inMagLoaded = True
    Else
@@ -519,7 +546,7 @@ Case "inMagLoadedBtn"
    EndIf
    Print "inMagLoadedBtn:", inMagLoadedBtn
 Case "jobAbortBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobAbortBtn = True
        jobAbort = True
    Else
@@ -527,7 +554,7 @@ Case "jobAbortBtn"
    EndIf
    Print "jobAbortBtn:", jobAbortBtn
 Case "jobStartBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobStartBtn = True
        jobStart = True
    Else
@@ -535,7 +562,7 @@ Case "jobStartBtn"
    EndIf
    Print "jobStartBtn:", jobStartBtn
 Case "leftInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        leftInterlockACKBtn = True
        leftInterlockACK = True
    Else
@@ -543,7 +570,7 @@ Case "leftInterlockACKBtn"
    EndIf
    Print "leftInterlockACKBtn:", leftInterlockACKBtn
 Case "outMagGoHomeBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        outMagGoHomeBtn = True
        outMagGoHome = True
    Else
@@ -551,7 +578,7 @@ Case "outMagGoHomeBtn"
    EndIf
    Print "outMagGoHomeBtn:", outMagGoHomeBtn
 Case "outMagIntLockAckBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        outMagIntLockAckBtn = True
        outMagIntLockAck = True
    Else
@@ -559,7 +586,7 @@ Case "outMagIntLockAckBtn"
    EndIf
    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 Case "outMagUnloadedBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        outMagUnloadedBtn = True
        outMagUnloaded = True
    Else
@@ -567,7 +594,7 @@ Case "outMagUnloadedBtn"
    EndIf
    Print "outMagUnloadedBtn:", outMagUnloadedBtn
 Case "panelDataTxACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        panelDataTxACKBtn = True
        panelDataTxACK = True
    Else
@@ -575,7 +602,7 @@ Case "panelDataTxACKBtn"
    EndIf
    Print "panelDataTxACKBtn:", panelDataTxACKBtn
 Case "rightInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        rightInterlockACKBtn = True
        rightInterlockACK = True
    Else
@@ -583,7 +610,7 @@ Case "rightInterlockACKBtn"
    EndIf
    Print "rightInterlockACKBtn:", rightInterlockACKBtn
 Case "sftyFrmIlockAckBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        sftyFrmIlockAckBtn = True
        sftyFrmIlockAck = True
    Else
@@ -591,21 +618,21 @@ Case "sftyFrmIlockAckBtn"
    EndIf
    Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
 Case "hole0X"
-    PanelCordinates(0, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(0, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole0Y"
-    PanelCordinates(0, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(0, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole10X"
-    PanelCordinates(10, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(10, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole10Y"
-    PanelCordinates(10, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(10, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole11X"
-    PanelCordinates(11, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(11, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole11Y"
-    PanelCordinates(11, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(11, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole12X"
-    PanelCordinates(12, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(12, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole12Y"
-    PanelCordinates(12, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(12, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole13X"
     PanelCordinates(13, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole13Y"
@@ -1163,37 +1190,37 @@ Case "inMagMtrDirFV"
         MemOff (inMagMtrDirFV)
     EndIf
 Case "outMagMtrF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrF)
     Else
         MemOff (outMagMtrF)
     EndIf
 Case "outMagMtrFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrFV)
     Else
         MemOff (outMagMtrFV)
     EndIf
 Case "outMagMtrDirF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrDirF)
     Else
         MemOff (outMagMtrDirF)
     EndIf
 Case "outMagMtrDirFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrDirFV)
     Else
         MemOff (outMagMtrDirFV)
     EndIf
 Case "drillGoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (drillGoF)
     Else
         MemOff (drillGoF)
     EndIf
 Case "drillGoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (drillGoFV)
     Else
         MemOff (drillGoFV)
