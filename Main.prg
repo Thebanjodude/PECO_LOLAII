@@ -11,13 +11,15 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 mainCurrentState = StateIdle ' The first state is Idle
 'jobStart = True 'fake
 
+FakeLogging()
+
 Do While True
 	Wait 1
 Loop
 
 Do While True
 		
-	Select MainCurrentState
+	Select mainCurrentState
 		
 	Case StateIdle
 		If jobStart = True Then

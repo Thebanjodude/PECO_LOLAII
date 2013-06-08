@@ -291,6 +291,21 @@ Function PrintInspectionArray()
 	PrintArrayIndex = 0 	'Reset index
 	
 Fend
+Function FakeLogging()
+	
+	Integer i
+	recNumberOfHoles = 23
+	Redim InspectionArray(22, 1)
+	
+	For i = 0 To recNumberOfHoles - 1
+		InspectionArray(i, LeftSpotFace) = i
+		InspectionArray(i, RightSpotFace) = i
+	Next
+
+PrintInspectionArray
+UnpackInspectionArrays
+Fend
+
 Function UnpackInspectionArrays()
 	
 'Sending a JSON array is a pain so we are just unpacking the array into seperate vars 	
@@ -343,14 +358,14 @@ hole22L = InspectionArray(22, LeftSpotFace)
 
 Integer n
 
-For n = 0 To recNumberOfHoles - 1
-		
-	'comment this out during integration
-	If PassFailArray(n, LeftSpotFace) = False Or PassFailArray(n, RightSpotFace) = False Then
-		Print "hole " + Str$(n) + " failed!"
-	EndIf
-	
-Next
+'For n = 0 To recNumberOfHoles - 1
+'		
+'	'comment this out during integration
+'	If PassFailArray(n, LeftSpotFace) = False Or PassFailArray(n, RightSpotFace) = False Then
+'		Print "hole " + Str$(n) + " failed!"
+'	EndIf
+'	
+'Next
 	
 Fend
 Function UnpackPassFailArray()

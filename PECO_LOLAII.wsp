@@ -1,13 +1,15 @@
-ENVT0100,LM:2013/06/08 02:25:35:122,DS:0000002428,CS:20068,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/08 18:38:20:650,DS:0000002478,CS:05741,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Globals.inc"
+bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=50
-		nTop=50
-		nWidth=1195
-		nHeight=563
+		nLeft=182
+		nTop=126
+		nWidth=1193
+		nHeight=559
 	}
 }
 ProgramFile2 {
@@ -78,13 +80,13 @@ ProgramFile7 {
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=1
 	Window {
-		nLeft=55
-		nTop=51
-		nWidth=1416
-		nHeight=769
+		nLeft=239
+		nTop=175
+		nWidth=1298
+		nHeight=703
 	}
 }
 nIncludeFileCount=1
@@ -93,10 +95,10 @@ IncludeFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=82
-		nTop=123
-		nWidth=1075
-		nHeight=713
+		nLeft=52
+		nTop=65
+		nWidth=1073
+		nHeight=710
 	}
 }
 nPointFileCount=1
@@ -125,10 +127,10 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=458
-		nTop=105
-		nWidth=1195
-		nHeight=563
+		nLeft=600
+		nTop=122
+		nWidth=910
+		nHeight=611
 	}
 }
 IOLabelEditor {
@@ -144,10 +146,10 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=1163
-		nTop=256
+		nLeft=1611
+		nTop=224
 		nWidth=520
-		nHeight=495
+		nHeight=492
 	}
 }
 TaskMgr {

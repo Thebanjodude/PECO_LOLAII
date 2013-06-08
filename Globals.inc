@@ -237,6 +237,140 @@ Global Boolean hole10PF, hole11PF, hole12PF, hole13PF, hole14PF
 Global Boolean hole15PF, hole16PF, hole17PF, hole18PF, hole19PF
 Global Boolean hole20PF, hole21PF, hole22PF
 
+'#defines for addressing PLC Modbus (Words)
+
+#define pasSoftStopADDR &h0104
+#define pasVerticalLocationADDR &h0002
+#define pasInsertDepthADDR &h0102
+#define pasHeatStakingIPMADDR &h010A
+#define pasDwellADDR &h0191
+#define pasCoolADDR &h0192
+#define pasInsertEngageADDR &h0118
+#define pasInsertEngageIPMADDR &h010E
+#define pasInsertPreheatADDR &h0190
+#define pasSoftHomeADDR &h00FE
+#define pasHomeIPMADDR &h0106
+#define pasInsertPositionADDR &h0100
+#define pasInsertPickupIPMADDR &h0108
+#define pasRecipeADDR &h01C2
+#define pasMessageDBADDR &h0009
+#define pasLoadMeterADDR &h028B
+#define pasMaxLoadmeterADDR &h0265
+#define pasJogSpeedADDR &h01FE
+#define pasActualTempZone1ADDR &h0132
+#define pasSetTempZone1ADDR &h012C
+#define pasActualTempZone2ADDR &h0133
+#define pasSetTempZone2ADDR &h012D
+#define pasPreHeatActualADDR &hA147
+#define pasDwellActualADDR &hA148
+#define pasCoolActualADDR &hA149
+#define pasPIDsetupPZone1ADDR &h0164
+#define pasPIDsetupPZone2ADDR &h016E
+#define pasPIDsetupPZone3ADDR &h0178
+#define pasPIDsetupPZone4ADDR &h0182
+#define pasPIDsetupIZone1ADDR &h0165
+#define pasPIDsetupIZone2ADDR &h016F
+#define pasPIDsetupIZone3ADDR &h0179
+#define pasPIDsetupIZone4ADDR &h0183
+#define pasPIDsetupDZone1ADDR &h0166
+#define pasPIDsetupDZone2ADDR &h0170
+#define pasPIDsetupDZone3ADDR &h017A
+#define pasPIDsetupDZone4ADDR &h0184
+#define pasPIDShowPZone1ADDR &h0164
+#define pasPIDShowPZone2ADDR &h0165
+#define pasPIDShowIZone1ADDR &h0168
+#define pasPIDShowIZone2ADDR &h0169
+#define pasPIDShowDZone1ADDR &h016C
+#define pasPIDShowDZone2ADDR &h016D
+#define pasPIDsetupActualZone1ADDR &h0132
+#define pasPIDsetupActualZone2ADDR &h0133
+#define pasPIDsetupActualZone3ADDR &h0134
+#define pasPIDsetupActualZone4ADDR &h0135
+#define pasPIDsetupSetPointZone1ADDR &h012C
+#define pasPIDsetupSetPointZone2ADDR &h012D
+#define pasPIDsetupSetPointZone3ADDR &h012E
+#define pasPIDsetupSetPointZone4ADDR &h012F
+#define pasPIDsetupInTempZone1ADDR &h0149
+#define pasPIDsetupInTempZone2ADDR &h014A
+#define pasPIDsetupInTempZone3ADDR &h014B
+#define pasPIDsetupInTempZone4ADDR &h014C
+#define pasPIDsetupMaxTempZone1ADDR &h0138
+#define pasPIDsetupMaxTempZone2ADDR &h0139
+#define pasPIDsetupMaxTempZone3ADDR &h013A
+#define pasPIDsetupMaxTempZone4ADDR &h013B
+#define pasPIDsetupOffsetZone1ADDR &h015A
+#define pasPIDsetupOffsetZone2ADDR &h015B
+#define pasPIDsetupOffsetZone3ADDR &h015C
+#define pasPIDsetupOffsetZone4ADDR &h015D
+
+'#defines for addressing PLC Modbus (Coils)
+#define pasAlarmGroupADDR &h0032
+#define pasRemoteAlarmAcknowledgeADDR &h0034
+#define pasHighTempAlarmADDR &h0402
+#define pasInsertTypeADDR &h0230
+#define pasGoHomeADDR &h0001
+#define pasInsertDetectedADDR &h0384
+#define pasSteelInsertADDR &h0385
+#define pasShuttleLoadPositionADDR &h0388
+#define pasShuttleNoLoadADDR &h0389
+#define pasShuttleExtendADDR &h038A
+#define pasInsertInShuttleADDR &h038B
+#define pasShuttleMidwayADDR &h0386
+#define pasHeadDownADDR &h0014
+#define pasHeadUpADDR &h0015
+#define pasResetMaxADDR &h0069
+#define pasResetHighTempADDR &h03F9
+#define pasTempOn / OffADDR &h000D
+#define pasMasterTempADDR &h0401
+#define pasUpLimitADDR &h0055
+#define pasLowerlimitADDR &h0056
+#define pasHomeADDR &h0057
+#define pasMCREStopADDR &h3400
+#define pasStartADDR &h3401
+#define pasHeadinsertPickupRetractADDR &h3406
+#define pasHeadinsertpickupextendADDR &h3407
+#define pasSlideExtendADDR &h0017
+#define pas1inLoadInsertCylinderADDR &h0019
+#define pasBowlDumpOpenADDR &h001B
+#define pasBlowInsertADDR &h001E
+#define pasVibTrackADDR &h001C
+#define pasBowlFeederADDR &h001D
+#define pasInsertGripperADDR &h0018
+#define pasOTAOnOffZone1ADDR &h0403
+#define pasOTAOnOffZone2ADDR &h0404
+#define pasOTAOnOffZone3ADDR &h0405
+#define pasOTAOnOffZone4ADDR &h0406
+#define pasOnOffZone1ADDR &h012C
+#define pasOnOffZone2ADDR &h012D
+#define pasOnOffZone3ADDR &h012E
+#define pasOnOffZone4ADDR &h012F
+#define pasMaxTempOnOffZone1ADDR &h040D
+#define pasMaxTempOnOffZone2ADDR &h040E
+#define pasMaxTempOnOffZone3ADDR &h040F
+#define pasMaxTempOnOffZone4ADDR &h0410
+'#define pasInTempZone1ADDR
+'#define pasInTempZone2ADDR
+'#define pasInTempZone3ADDR
+'#define pasInTempZone4ADDR
+#define pasMaxTempZone1ADDR &h0028
+#define pasMaxTempZone2ADDR &h0029
+#define pasMaxTempZone3ADDR &h002A
+#define pasMaxTempZone4ADDR &h002B
+#define pasStartPIDTuneZone1ADDR &h0132
+#define pasStartPIDTuneZone2ADDR &h0133
+#define pasStartPIDTuneZone4ADDR &h0135
+#define pasPIDTuneDoneZone1ADDR &h0138
+#define pasPIDTuneDoneZone2ADDR &h0139
+#define pasPIDTuneDoneZone3ADDR &h013B
+'#define pasPIDTuneFailZone1ADDR
+'#define pasPIDTuneFailZone2ADDR
+'#define pasPIDTuneFailZone3ADDR
+
+
+
+
+
+
 
 
 
