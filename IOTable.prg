@@ -2,8 +2,6 @@
 
 Function IOTableInputs()
 	
-
-
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 Do While True

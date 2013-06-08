@@ -49,7 +49,7 @@ Do While True
 		If PushPanel = True Then
 			NextState = StatePopPanel
 		ElseIf jobDone = True Then
-			nextstate = StateIdle
+			Nextstate = StateIdle
 		EndIf
 
 '	Case StateIdle

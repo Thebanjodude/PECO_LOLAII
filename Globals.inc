@@ -133,7 +133,7 @@ Global Boolean erHeatStakeBreaker, erBowlFeederBreaker, erInMagBreaker
 Global Boolean erOutMagBreaker, erFlashBreaker, erDebrisRemovalBreaker
 Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180, erIllegalArmMove
 Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing, erRobotNotAtHome
-Global Boolean RecEntryMissing, ParamEntryMissing, erHMICommunication
+Global Boolean RecEntryMissing, ParamEntryMissing, erHMICommunication, erFlashStation
 Global Boolean erInMagLowSensorBad, erInMagUpSensorBad, erOutMagLowSensorBad, erOutMagUpSensorBad
 
 

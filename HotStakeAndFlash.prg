@@ -116,35 +116,24 @@ Function FlashRemoval() As Boolean
 			Print P23
 			Jump P23 LimZ zLimit ' Limit the jump hight
 			
+			
+'Potential Problem: The switch may engage before the panel is firmly on the anvil. The threaded conical peice on the anvil will solve that problem.			
 'comment this out for testing
 '		Do Until FlashPnlPrsntCC = True Or CurrentZ >= AnvilZlimit ' Move down until we touchoff on the anvil. Add over torque error.
 '			Move P23 -Z(AnvilOffset)
 '			AnvilOffset = AnvilOffset + 0.25
 '			CurrentZ = CZ(RealPos)
-'		Loop
-'		
-'		If FlashPnlPrsntCC = True Then
-''TODO: Read the datasheet for the flash removal tool
-'			removeFlashCC = True
-'			
-'			Do Until flashDoneCC = True
-'				'do nothing
-'			Loop
-''Instead of wait, this is where the feedback(gating) from the FR Station will be
-'
-'		Else
-'			erPanelStatusUnknown = True
-'			stackLightYelCC = True
-'			stackLightAlrmCC = True
-'			FlashRemoval = False ' send the state back to idle because there was a problem
-'			Pause
-'		EndIf
+'		Loop		
+
+			If RemoveFlash(flashDwellTime) = True Then
+				FlashRemoval = True ' flash removal for the hole executed correctly
+			Else
+				FlashRemoval = False ' send the state back to idle because there was a problem
+				Pause
+			EndIf
 	EndIf
-			
-	Wait .5
-		
 Next
-	FlashRemoval = True
+
 	SkipFlash:
 	exitFlash:
 	
@@ -426,15 +415,12 @@ Function FindSlope(pt1 As Integer, pt2 As Integer) As Real
 Fend
 Function RemoveFlash(DwellTime As Real) As Boolean
 	
-	Xqt 2, IOTableInputs, NoEmgAbort
-	Xqt 3, IOTableOutputs, NoEmgAbort
+	drillGoCC = True 'turn on the drill
 	
-	drillGoCC = True
+	Wait DwellTime + 2.25 '2.25 is about the time it takes to bottom out.
 	
-	Wait DwellTime + 2.25
-	
-	If flashHome = False Then
-		drillReturnCC = True
+	If flashHome = False Then ' check that the drill actually left the home position
+		drillReturnCC = True ' Tell the drill to return
 		Wait 2.25 ' wait for drill to go back to the top
 		
 		If flashHome = True Then
@@ -442,9 +428,12 @@ Function RemoveFlash(DwellTime As Real) As Boolean
 		Else
 			RemoveFlash = False
 		EndIf
+		erFlashStation = False
 	Else
 		RemoveFlash = False
 		Print "did not stroke"
+		erFlashStation = True
+		Pause
 	EndIf
 	
 	Print "RemoveFlash", RemoveFlash
