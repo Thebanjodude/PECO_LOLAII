@@ -138,9 +138,9 @@ If drillGo = True Then
 drillReturn = IOTableBooleans(drillReturnCC, MemSw(drillReturnFV), MemSw(drillReturnF))
 If drillReturn = True Then
 
-	If Returnflag = False Then
+	If ReturnFlag = False Then
         On (DrillReturnH), .25, 0
-        Returnflag = True
+        ReturnFlag = True
     EndIf
     
     If DrillReturnH = Off Then
@@ -179,13 +179,10 @@ If stackLightYel = True Then
     EndIf
 suctionCups = IOTableBooleans(suctionCupsCC, MemSw(suctionCupsFV), MemSw(suctionCupsF))
 If suctionCups = True Then
-        On (suctionCupsH)
+        On (suctionCupsH), Forced
     Else
         Off (suctionCupsH)
     EndIf
-
-
-
     
 Loop
 

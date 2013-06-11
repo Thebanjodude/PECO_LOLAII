@@ -1,14 +1,14 @@
-ENVT0100,LM:2013/06/11 01:35:42:097,DS:0000002809,CS:28287,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/11 21:54:06:746,DS:0000003031,CS:13091,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=13
+nNumberOfPoints=14
 Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
 	sDescription=""
 	rX=364.173
 	rY=417.83
-	rZ=-157
+	rZ=-145
 	rU=45
 	rV=0
 	rW=0
@@ -75,17 +75,17 @@ Point4 {
 	bSimVisible=False
 }
 Point5 {
-	nNumber=5
-	sLabel="ScanLong"
+	nNumber=4
+	sLabel="LaserCenter"
 	sDescription=""
-	rX=0
-	rY=-50.8
-	rZ=-45
-	rU=0
+	rX=615.695
+	rY=50.8
+	rZ=-10
+	rU=135
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=2
+	nHand=1
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -93,30 +93,12 @@ Point5 {
 	bSimVisible=False
 }
 Point6 {
-	nNumber=6
-	sLabel="ScanShort"
+	nNumber=5
+	sLabel="ScanLong"
 	sDescription=""
-	rX=0
+	rX=-438.5
 	rY=-50.8
-	rZ=-45
-	rU=0
-	rV=0
-	rW=0
-	nLocal=0
-	nHand=2
-	nElbow=1
-	nWrist=1
-	nJ4Flag=0
-	nJ6Flag=0
-	bSimVisible=False
-}
-Point7 {
-	nNumber=7
-	sLabel="PreScan"
-	sDescription=""
-	rX=-340
-	rY=-50.8
-	rZ=-45
+	rZ=-10
 	rU=135
 	rV=0
 	rW=0
@@ -128,7 +110,43 @@ Point7 {
 	nJ6Flag=0
 	bSimVisible=False
 }
+Point7 {
+	nNumber=6
+	sLabel="ScanShort"
+	sDescription=""
+	rX=-525
+	rY=-50.8
+	rZ=-10
+	rU=225
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
 Point8 {
+	nNumber=7
+	sLabel="PreScan"
+	sDescription=""
+	rX=-340
+	rY=-50.8
+	rZ=-10
+	rU=135
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point9 {
 	nNumber=9
 	sLabel="PanelOffset"
 	sDescription=""
@@ -146,7 +164,7 @@ Point8 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point9 {
+Point10 {
 	nNumber=10
 	sLabel="RotatedOffset"
 	sDescription=""
@@ -164,7 +182,7 @@ Point9 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point10 {
+Point11 {
 	nNumber=12
 	sLabel="pausepos"
 	sDescription=""
@@ -182,7 +200,7 @@ Point10 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point11 {
+Point12 {
 	nNumber=14
 	sLabel="Waypoint0"
 	sDescription=""
@@ -200,13 +218,13 @@ Point11 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point12 {
+Point13 {
 	nNumber=15
-	sLabel="Waypoint1"
+	sLabel="LaserToHeatStake"
 	sDescription=""
-	rX=-246.09
-	rY=253.696
-	rZ=-2
+	rX=-235
+	rY=260
+	rZ=-10
 	rU=90
 	rV=0
 	rW=0
@@ -218,7 +236,7 @@ Point12 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point13 {
+Point14 {
 	nNumber=16
 	sLabel="Waypoint2"
 	sDescription=""

@@ -15,7 +15,7 @@ Function HotStakePanel() As Boolean
 	GetPanelArray()
 	GetThetaR()
 	
-	Jump waypoint1 LimZ zLimit ' Take a safe path
+	Jump LaserToHeatStake LimZ zLimit ' Take a safe path
 
 	For k = 0 To recNumberOfHoles - 1
 		
@@ -33,7 +33,9 @@ Function HotStakePanel() As Boolean
 
 		If SkippedHole = False Then 'If the flag is set then we have finished all holes
 		
+        	
         	P23 = HotStakeCenter -Y(Sin(DegToRad(45)) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(DegToRad(45)) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 90)
+			P23 = P23 + PanelOffset
 			Jump P23 LimZ zLimit
 						
 'Comment this out for testing						
@@ -140,7 +142,6 @@ Next
 	Trap 2 ' disarm trap
 	SystemStatus = MovingPanel
 	Jump PreScan LimZ zLimit ' Collision Avoidance Waypoint
-	Jump Waypoint1 LimZ zLimit
 			
 Fend
 Function DerivethetaR()
@@ -243,7 +244,7 @@ Function GetPanelArray() ' Hardcoded Array for 88554
 	PanelArray(14, 2) = 0
 	PanelArray(15, 2) = 0
 
-  	PrintPanelArray() ' Print for testing/troubleshooting
+'  	PrintPanelArray() ' Print for testing/troubleshooting
   	
  Fend
 Function PrintPanelArray()

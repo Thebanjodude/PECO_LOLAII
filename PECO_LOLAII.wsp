@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/06/11 17:18:11:032,DS:0000002488,CS:28231,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="PopAndPush.prg"
+ENVT0100,LM:2013/06/11 22:22:41:557,DS:0000002503,CS:07734,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InMagOutMagStateMachines.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=58
-		nTop=36
-		nWidth=1416
-		nHeight=720
+		nLeft=153
+		nTop=221
+		nWidth=1415
+		nHeight=717
 	}
 }
 ProgramFile2 {
@@ -17,15 +17,15 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=168
-		nTop=67
-		nWidth=1333
-		nHeight=695
+		nLeft=180
+		nTop=508
+		nWidth=1451
+		nHeight=691
 	}
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=223
@@ -36,18 +36,18 @@ ProgramFile3 {
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=140
-		nTop=31
-		nWidth=1192
-		nHeight=555
+		nTop=260
+		nWidth=1190
+		nHeight=549
 	}
 }
 ProgramFile5 {
 	sName="OldCode.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=264
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=16
-		nTop=10
-		nWidth=1701
-		nHeight=868
+		nLeft=544
+		nTop=17
+		nWidth=1096
+		nHeight=793
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=130
-		nTop=118
-		nWidth=1155
-		nHeight=585
+		nLeft=302
+		nTop=33
+		nWidth=1135
+		nHeight=611
 	}
 }
 nIncludeFileCount=1
@@ -125,12 +125,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=859
-		nTop=161
-		nWidth=1019
-		nHeight=663
+		nLeft=308
+		nTop=22
+		nWidth=1209
+		nHeight=782
 	}
 }
 IOLabelEditor {
@@ -146,10 +146,10 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=1611
-		nTop=224
+		nLeft=1185
+		nTop=329
 		nWidth=520
-		nHeight=492
+		nHeight=479
 	}
 }
 TaskMgr {
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=False
 	Window {
-		nLeft=276
-		nTop=206
+		nLeft=586
+		nTop=155
 		nWidth=751
 		nHeight=485
 	}

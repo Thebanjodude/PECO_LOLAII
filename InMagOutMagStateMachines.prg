@@ -1,4 +1,4 @@
-'NOTE: Replace all direct inputs and outputs with var names in IOTable. They are IO so I can test. 
+
 #include "Globals.INC"
 
 Function InMagControl

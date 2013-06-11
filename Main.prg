@@ -4,20 +4,16 @@ Function main()
 	
 Integer NextState
 
-PowerOnSequence() ' Initialize the system and prepare it to do a job
+'PowerOnSequence() ' Initialize the system and prepare it to do a job
+'Halt InMagControl ' fake
+'Halt OutMagControl 'fake
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 mainCurrentState = StateIdle ' The first state is Idle
-'jobStart = True 'fake
+jobStart = True 'fake
 
-FakeLogging() ' fake logged values for Scott
-
-Do While True
-	Wait 1
-Loop
-
-jobStart = True
+'FakeLogging() ' fake logged values for Scott
 
 Do While True
 		
@@ -31,12 +27,22 @@ Do While True
 		EndIf
 	Case StatePopPanel
 		If PopPanel = True Then
+			NextState = StatePreinspection
+		Else
+			NextState = StateIdle
+		EndIf
+		
+	Case StatePreinspection
+		If FindPickUpError = True Then
 			NextState = StateHotStakePanel
 		Else
 			NextState = StateIdle
 		EndIf
+		
 	Case StateHotStakePanel
 		If HotStakePanel = True Then
+			Print "done"
+			Pause
 			NextState = StateFlashRemoval
 		Else
 			NextState = StateIdle

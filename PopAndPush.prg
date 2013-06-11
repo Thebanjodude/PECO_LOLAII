@@ -18,6 +18,7 @@ retry:
 	Jump InMagCenter LimZ zLimit
 
 	suctionCupsCC = True
+	On (suctionCupsH) ' fake
 	Wait suctionWaitTime ' Allow time for cups to seal on panel
 	Jump Prescan LimZ zLimit
 '	Signal InMagRobotClearSignal ' Give permission for input magazine to queue up next panel
@@ -63,8 +64,8 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 	EndIf
 		
 '	WaitSig OutMagDropOffSignal		
-	Jump Waypoint1 LimZ zLimit
-	Jump Waypoint0 LimZ zLimit
+'	Jump Waypoint1 LimZ zLimit
+'	Jump Waypoint0 LimZ zLimit
 	Jump OutMagCenter LimZ zLimit
 '	Jump OutMagCenter -Z(recPanelThickness) LimZ zLimit
 	suctionCupsCC = False
@@ -97,7 +98,7 @@ exitPushPanel:
 Trap 2 ' disarm trap	
 
 Fend
-Function FindPickUpError()
+Function FindPickUpError() As Boolean
 	
 Real d1, d2
 Integer i
@@ -109,10 +110,10 @@ SpeedS 50
 	Wait .25
 	
 	ChangeProfile("03")
-	Move ScanLong - PanelOffset CP Till Sw(LaserGo)
+	Move ScanLong - PanelOffset CP Till Sw(edgeDetectGoH)
 	
 	If TillOn = False Then
-	'If we think we have a panel and we actually dont have one then should re-pop a panel?
+		Print "missed edge"
 		erPanelStatusUnknown = True
 	Else
 		erPanelStatusUnknown = False
@@ -126,9 +127,17 @@ SpeedS 50
 	Wait .25
 	
 	ChangeProfile("03")
-	Move (ScanLong - PanelOffset) :U(CU(CurPos)) CP Till Sw(LaserGo)
+	Move (ScanLong - PanelOffset) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
+	
+	If TillOn = False Then
+		Print "missed edge"
+		erPanelStatusUnknown = True
+	Else
+		erPanelStatusUnknown = False
+	EndIf
+	
 	d2 = CX(CurPos)
-	yOffset = (d2 + d1) /2
+	yOffset = Abs((d2 - d1) / 2)
 	
 	If d1 > d2 Then
 		yOffset = -yOffset
@@ -145,9 +154,10 @@ SpeedS 50
 	Wait .25
 	
 	ChangeProfile("03")
-	Move (ScanShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(LaserGo)
+	Move (ScanShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
 	
 	If TillOn = False Then
+		Print "missed edge"
 		erPanelStatusUnknown = True
 	Else
 		erPanelStatusUnknown = False
@@ -161,10 +171,17 @@ SpeedS 50
 	Wait .25
 	
 	ChangeProfile("03")
-	Move (ScanShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(LaserGo)
+	Move (ScanShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
+	
+	If TillOn = False Then
+		Print "missed edge"
+		erPanelStatusUnknown = True
+	Else
+		erPanelStatusUnknown = False
+	EndIf
+	
 	d2 = CX(CurPos)
-
-	xOffset = (d2 + d1) /2
+	xOffset = Abs((d1 - d2) / 2)
 	
 	If d1 > d2 Then
 		xOffset = -xOffset
@@ -174,12 +191,17 @@ SpeedS 50
 	
 	d1 = 0
 	d2 = 0
+	
 	ChangeProfile("00") ' Null profile
 	Move (PreScan - PanelOffset) :U(CU(CurPos))
 	Go (PreScan - PanelOffset)
 	
 	PanelOffset = PanelOffset :X(xOffset) :Y(yOffset) 'update offset point
 	Print "PanelOffset:", PanelOffset
+	
+	FindPickUpError = True
+	
+	Print "done"
 			
 Fend
 

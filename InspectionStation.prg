@@ -3,23 +3,25 @@
 Function InspectPanel(HoleInspect As Boolean) As Boolean
 	
 	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
-'	Go PreScan ' Collision Avoidance Waypoint
+	Go PreScan ' Collision Avoidance Waypoint
 	SystemStatus = InspectingPanel
 	InspectPanel = False
+	
 	Integer k, j
 	Real beta, mu, m1, m2, r1, phi, rho
 	Real y1, y2, y3, dy, dx, deltaRotX, deltaRotY
 	Real RightOffset, LeftOffset
-  	
+  	  	
+  	GetPanelArray()
 	GetThetaR() 'get first r and theta
 	PanelArrayIndex = 0
 
 	Redim InspectionArray(22, 1) ' Make the arrays big enough to fit all the panels
 	Redim PassFailArray(22, 1)
 
-	recInsertDepth = .165 ' hardcode for testing
+	recInsertDepth = .165 ' fake for testing
 
-	For j = 0 To recNumberOfHoles - 1 'k is the hole # we are on
+	For j = 0 To recNumberOfHoles - 1 'j is the hole # we are on
 
 		If j <> 0 Then
 			IncrementIndex()
@@ -67,27 +69,18 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 
 		'Rotate PanelOffset to Theta		
 
-		If Theta = 0 Then ' If this works, they are all the same so condense the if's!
+		If Theta = 0 Or Theta = 90 Or Theta = 180 Or Theta = 270 Then
+		
 			If j <> 0 Then
 				RotatePanelOffset(Theta)
 			EndIf
-'			P23 = (scancenter5) -Y(r) -U(Theta)
-		ElseIf Theta = 90 Then
-			If j <> 0 Then
-				RotatePanelOffset(Theta)
-			EndIf
-'			P23 = (scancenter5) -Y(r) -U(Theta)
-		ElseIf Theta = 180 Then
-			If j <> 0 Then
-				RotatePanelOffset(Theta)
-			EndIf
-'			P23 = (scancenter5) -Y(r) -U(Theta)
-		ElseIf Theta = 270 Then
-			If j <> 0 Then
-				RotatePanelOffset(Theta)
-			EndIf
-'			P23 = (scancenter5) -Y(r) -U(Theta)
+			
+			P23 = (LaserCenter) -Y(r) -U(Theta)
+			
+			Pause
+			
 		ElseIf (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
+			
 			If j <> 0 Then
 				RotatePanelOffset(Theta)
 			EndIf
@@ -95,7 +88,7 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 			phi = Theta + rho
 			RotatePanelOffset(phi)
 			Print "phi:", phi
-'           P23 = (scancenter5) -Y(r) -U(phi)
+            P23 = (LaserCenter) -Y(r) -U(phi)
 
 			dy = r - (r * Cos(DegToRad(rho)))
 	       	dx = r * Sin(DegToRad(rho))
@@ -109,7 +102,7 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 			phi = Theta - rho
 			RotatePanelOffset(phi)
 			Print "phi:", phi
-'            P23 = (scancenter5) -Y(r) -U(phi)
+            P23 = (LaserCenter) -Y(r) -U(phi)
 
 			dy = r - (r * Cos(DegToRad(rho)))
 	       	dx = r * Sin(DegToRad(rho))
@@ -235,12 +228,12 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
 
 	Wait .4 ' wait for laser scanner to receive the command. This may be able to be shortened up
 	
-    i = ChkNet(203)
-    If i > 0 Then
-    	Read #203, response$, i
-    	Print response$
-    	NumTokens = ParseStr(response$, Tokens$(), ",")
-	EndIf
+'    i = ChkNet(203)
+'    If i > 0 Then
+'    	Read #203, response$, i
+'    	Print response$
+'    	NumTokens = ParseStr(response$, Tokens$(), ",")
+'	EndIf
 	
 	' check the responce here, compare it to what it should be. return boolean.
 	
@@ -260,12 +253,12 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
 	Print #203, "MS,0," + OutNumber$
 	Wait .5
 	
-    i = ChkNet(203)
-    If i > 0 Then
-    	Read #203, response$, i
-      	NumTokens = ParseStr(response$, Tokens$(), ",")
-  		GetLaserMeasurement = Val(Tokens$(1))
-    EndIf
+'    i = ChkNet(203)
+'    If i > 0 Then
+'    	Read #203, response$, i
+'      	NumTokens = ParseStr(response$, Tokens$(), ",")
+'  		GetLaserMeasurement = Val(Tokens$(1))
+'    EndIf
 
 Fend
 Function PrintPassFailArray()
