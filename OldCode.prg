@@ -1736,4 +1736,34 @@
 '   EndIf
 '
 'Fend
-
+'Function CheckMoveDuringPause()
+'	
+'	' This is now OBS since a door open = estop
+'	
+'		If PauseOn = True And pauseFlag = False Then
+'		' Change this from P50 to a lable so it doesn't get overwritten
+'		P50 = Here ' save the location where it paused
+'		Print P50
+'		pauseFlag = True
+'	ElseIf PauseOn = False And pauseFlag = True Then
+'		Real distx, disty, distz, distance
+'		pauseFlag = False
+'		distx = Abs(CX(P50) - CX(Here))
+'		disty = Abs(CY(P50) - CY(Here))
+'		distz = Abs(CZ(P50) - CZ(Here))
+'		distance = Sqr(distx * distx + disty * disty) ' How the hell do you square numbers?
+''TODO: Parameterize these?
+'		If distance > 25 Or distz > 15 Then
+'			Print "panel fails"
+'			erIllegalArmMove = True
+'			stackLightRedCC = True
+'			'is there a way to have the opperator catch the panel?
+'			Quit All
+'		Else
+'			stackLightRedCC = False
+'			erIllegalArmMove = False
+'		EndIf
+'				
+'	EndIf
+'	
+'Fend

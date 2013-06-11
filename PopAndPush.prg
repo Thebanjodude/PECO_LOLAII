@@ -31,8 +31,7 @@ retry:
 	EndIf
 	
 exitPopPanel:
-
-If MemSw(jobAbortH) = True Then
+If MemSw(jobAbortH) = True Then 'check if the operator wants to abort the job
 	jobAbort = True
 EndIf
 
@@ -113,35 +112,34 @@ SpeedS 50
 	Move ScanLong - PanelOffset CP Till Sw(LaserGo)
 	
 	If TillOn = False Then
-	'If we think we have a panel and we actually dotn have one then should re-pop a panel?
+	'If we think we have a panel and we actually dont have one then should re-pop a panel?
 		erPanelStatusUnknown = True
-		stackLightYelCC = True
-		stackLightAlrmCC = True
-		Pause
 	Else
 		erPanelStatusUnknown = False
-		stackLightYelCC = False
-		stackLightAlrmCC = False
 	EndIf
 	
-	d1 = CY(CurPos)
+	d1 = CX(CurPos)
 	
-	ChangeProfile("00")
+	ChangeProfile("00") ' Null profile
 	Move (PreScan - PanelOffset) :U(CU(CurPos))
 	Go (PreScan - PanelOffset) +U(180) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
 	Move (ScanLong - PanelOffset) :U(CU(CurPos)) CP Till Sw(LaserGo)
-	d2 = CY(CurPos)
-	yOffset = (d2 - d1) /2 ' I dont think its /2
+	d2 = CX(CurPos)
+	yOffset = (d2 + d1) /2
 	
-'	Print "yOffset", yOffset
+	If d1 > d2 Then
+		yOffset = -yOffset
+	EndIf
+	
+	Print "yOffset", yOffset
 	
 	d1 = 0
 	d2 = 0
 	
-	ChangeProfile("00")
+	ChangeProfile("00") ' Null profile
 	Move (PreScan - PanelOffset) :U(CU(CurPos))
 	Go (PreScan - PanelOffset) +U(90) CP  ' Use CP so it's not jumpy
 	Wait .25
@@ -151,33 +149,32 @@ SpeedS 50
 	
 	If TillOn = False Then
 		erPanelStatusUnknown = True
-		stackLightYelCC = True
-		stackLightAlrmCC = True
-		Pause
 	Else
 		erPanelStatusUnknown = False
-		stackLightYelCC = False
-		stackLightAlrmCC = False
 	EndIf
-	'Use CY in both x and y offsets because we are only modulating along the Y-axis
-	d1 = CY(CurPos)
+	'Use Cx in both x and y offsets because we are only modulating along the x-axis
+	d1 = CX(CurPos)
 
-	ChangeProfile("00")
+	ChangeProfile("00") ' Null profile
 	Move (PreScan - PanelOffset) :U(CU(CurPos))
 	Go (PreScan - PanelOffset) +U(270) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
 	Move (ScanShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(LaserGo)
-	d2 = CY(CurPos)
+	d2 = CX(CurPos)
 
-	xOffset = (d2 - d1) /2  ' I dont think its /2P23 - RotatedOffset
+	xOffset = (d2 + d1) /2
 	
-'	Print "xOffset", xOffset
+	If d1 > d2 Then
+		xOffset = -xOffset
+	EndIf
+	
+	Print "xOffset", xOffset
 	
 	d1 = 0
 	d2 = 0
-	ChangeProfile("00")
+	ChangeProfile("00") ' Null profile
 	Move (PreScan - PanelOffset) :U(CU(CurPos))
 	Go (PreScan - PanelOffset)
 	

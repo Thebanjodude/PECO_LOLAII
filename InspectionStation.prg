@@ -242,6 +242,8 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
     	NumTokens = ParseStr(response$, Tokens$(), ",")
 	EndIf
 	
+	' check the responce here, compare it to what it should be. return boolean.
+	
 Fend
 Function GetLaserMeasurement(OutNumber$ As String) As Real
                 

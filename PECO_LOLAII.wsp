@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/06/11 03:36:39:670,DS:0000002493,CS:13844,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="InspectionStation.prg"
+ENVT0100,LM:2013/06/11 17:18:11:032,DS:0000002488,CS:28231,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="PopAndPush.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=380
-		nTop=38
-		nWidth=1191
-		nHeight=723
+		nLeft=58
+		nTop=36
+		nWidth=1416
+		nHeight=720
 	}
 }
 ProgramFile2 {
@@ -18,9 +18,9 @@ ProgramFile2 {
 	nWinState=0
 	Window {
 		nLeft=168
-		nTop=35
-		nWidth=1334
-		nHeight=698
+		nTop=67
+		nWidth=1333
+		nHeight=695
 	}
 }
 ProgramFile3 {
@@ -29,20 +29,20 @@ ProgramFile3 {
 	nWinState=0
 	Window {
 		nLeft=223
-		nTop=130
-		nWidth=1193
-		nHeight=559
+		nTop=162
+		nWidth=1192
+		nHeight=555
 	}
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=81
-		nTop=149
-		nWidth=1193
-		nHeight=559
+		nLeft=140
+		nTop=31
+		nWidth=1192
+		nHeight=555
 	}
 }
 ProgramFile5 {
@@ -50,32 +50,32 @@ ProgramFile5 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=281
-		nTop=19
-		nWidth=1053
-		nHeight=699
+		nLeft=264
+		nTop=35
+		nWidth=1051
+		nHeight=696
 	}
 }
 ProgramFile6 {
 	sName="SystemMonitor.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=204
-		nTop=116
-		nWidth=1312
-		nHeight=632
+		nLeft=193
+		nTop=223
+		nWidth=1311
+		nHeight=628
 	}
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=287
-		nTop=192
-		nWidth=928
-		nHeight=527
+		nLeft=16
+		nTop=10
+		nWidth=1701
+		nHeight=868
 	}
 }
 ProgramFile8 {
@@ -83,22 +83,22 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=18
-		nTop=215
-		nWidth=1156
-		nHeight=588
+		nLeft=130
+		nTop=118
+		nWidth=1155
+		nHeight=585
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
 		nLeft=309
 		nTop=86
-		nWidth=1072
-		nHeight=707
+		nWidth=1071
+		nHeight=703
 	}
 }
 nPointFileCount=1

@@ -18,13 +18,14 @@ Global Boolean GoFlag, ReturnFlag 'flags to make sure we dont break the drill
 'Main() States
 #define StateUnknown 0
 #define StateIdle 1
-#define StatePopPanel 2
-#define StatePushPanel 3
-#define StateHotStakePanel 4
-#define StateFlashRemoval 5
-#define StateFindPickUpError 6
-#define StatePreinspection 7
+#define StatePaused 2
+#define StatePopPanel 3
+#define StateMoving 4
+#define StatePreinspection 5
+#define StateHotStakePanel 6
+#define StateFlashRemoval 7
 #define StateInspection 8
+#define StatePushPanel 9
 
 'Inmag States
 #define StateInMagUnknown 0

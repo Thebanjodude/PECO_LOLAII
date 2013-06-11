@@ -17,12 +17,14 @@ Do While True
 	Wait 1
 Loop
 
+jobStart = True
+
 Do While True
 		
 	Select mainCurrentState
 		
 	Case StateIdle
-		If jobStart = True Then
+		If jobStart = True And HotStakeTempRdy = True Then
 			NextState = StatePopPanel
 		Else
 			NextState = StateIdle
@@ -188,32 +190,16 @@ Function CheckInitialParameters() As Boolean
 
 	'add in check that panelarray is nonzero
 	
-	If recInsertDepth = 0.0 Then
-		CheckInitialParameters = True
-	ElseIf recInsertType = 0 Or recNumberOfHoles = 0 Then
-		CheckInitialParameters = True
-	ElseIf recTempProbe = 0 Or recTempTrack = 0 Then
-		CheckInitialParameters = True
-	Else
+	If recInsertDepth = 0 Or recInsertType = 0 Or recNumberOfHoles = 0 Or recTempProbe = 0 Or recTempTrack = 0 Then
 		CheckInitialParameters = False
+	Else
+		CheckInitialParameters = True
 	EndIf
 	
-	If AnvilZlimit = 0.0 Or suctionWaitTime = 0.0 Then
-		CheckInitialParameters = True
-	ElseIf SystemSpeed = 0 Or SystemAccel = 0 Then
-		CheckInitialParameters = True
-	Else
+	If AnvilZlimit = 0 Or suctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Then
 		CheckInitialParameters = False
-	EndIf
-	
-	If CheckInitialParameters = True Then
-		erParamEntryMissing = True
-		stackLightYelCC = True
-		stackLightAlrmCC = True
 	Else
-		erParamEntryMissing = False
-		stackLightYelCC = False
-		stackLightAlrmCC = False
+		CheckInitialParameters = True
 	EndIf
 	
 CheckInitialParameters = True 'fake for testing
@@ -237,12 +223,14 @@ Function HotStakeTempRdy() As Boolean
 	EndIf
 	
 	If probeInTemp = True And trackInTemp = True Then
-		HotStakeTempRdy = True
+		HotStakeTempRdy = True ' ready to start job
 		erHeatStakeTemp = False
 	Else
 		HotStakeTempRdy = False ' Temperature is not in range
 		erHeatStakeTemp = True
 	EndIf
+	
+	HotStakeTempRdy = True ' fake for testing
 	
 Fend
 Function PowerOnHomeCheck() As Boolean

@@ -1,10 +1,10 @@
 #include "Globals.INC"
 
 Function SystemMonitor()
-	
-OnErr GoTo errHandler ' Define where to go when a controller error occurs	
+' This function constantly monitors System Pressures, voltages, interlocks, Hot Stake Machine, \
+'CBs, E-stop, and controller errors. It reports them to the HMI for viewing and acking.
 
-' Monitor System Pressures, voltages, interlocks, Hot Stake Machine, CBs, E-stop, and ctrlr errors
+OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
 Do While True
 	
@@ -192,32 +192,14 @@ Do While True
 		erOutMagUpSensorBad = False
 	EndIf
 	
-	If PauseOn = True And pauseFlag = False Then
-		' Change this from P50 to a lable so it doesn't get overwritten
-		P50 = Here ' save the location where it paused
-		Print P50
-		pauseFlag = True
-	ElseIf PauseOn = False And pauseFlag = True Then
-		Real distx, disty, distz, distance
-		pauseFlag = False
-		distx = Abs(CX(P50) - CX(Here))
-		disty = Abs(CY(P50) - CY(Here))
-		distz = Abs(CZ(P50) - CZ(Here))
-		distance = Sqr(distx * distx + disty * disty) ' How the hell do you square numbers?
-'TODO: Parameterize these?
-		If distance > 25 Or distz > 15 Then
-			Print "panel fails"
-			erIllegalArmMove = True
-			stackLightRedCC = True
-			'is there a way to have the opperator catch the panel?
-			Quit All
-		Else
-			stackLightRedCC = False
-			erIllegalArmMove = False
-		EndIf
-				
-	EndIf
-	
+' In this section I set the error in the main routine and the lights and pausing are changed here	
+
+If erPanelStatusUnknown = True Then
+		stackLightYelCC = True
+		stackLightAlrmCC = True
+		Pause
+EndIf
+
 If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh) Or HotStakeTempRdy = False Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or EStopOn = True Or (inMagLowLim And inMagLowLimN = True) Or (inMagUpLim And inMagUpLimN = True) Or (outMagLowLim And outMagLowLimN = True) Or (outMagUpLim And outMagUpLimN = True) Then
 	stackLightRedCC = True
 	stackLightAlrmCC = True
@@ -231,6 +213,10 @@ If (stackLightRedCC Or stackLightYelCC) Then
 	stackLightGrnCC = False
 Else
 	stackLightGrnCC = True
+EndIf
+
+If PauseOn = True Then
+	mainCurrentState = StatePaused
 EndIf
 		
 Loop
