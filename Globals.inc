@@ -99,8 +99,7 @@ Global Boolean heartBeat, dc24vOK
 
 'Hot Stake and Flash Removal Global Vars
 Global Real PanelArray(25, 2)
-Global Real Theta, r
-Global Real AnvilZlimit, heatStakeCurrentTemp, heatStakeTempTolerance
+Global Real Theta, r, AnvilZlimit
 Global Integer PanelArrayIndex
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flashHome
@@ -109,6 +108,10 @@ Global Real flashDwellTime ' How long the flash tool is in contact with the inse
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas
 #define SkipFlagColumn 2 'The third column in the array are flags for holes if we want to skip them
+
+'Hot Stake Machine Vars
+Global Real pasSetTempZone1, pasSetTempZone2
+Global Real pasActualTempZone1, pasActualTempZone2, probeTempTolerance, trackTempTolerance
 
 ' Recipe Ingredients for Panels
 #define InsertTypeUnknown 0
@@ -119,7 +122,7 @@ Global Real flashDwellTime ' How long the flash tool is in contact with the inse
 Global Integer recNumberOfHoles, recInsertType
 Global Boolean recFlashRequired
 Global Real recInsertDepth, recPanelThickness
-Global Real recTemp, hsProbeTemp
+Global Real recTempProbe, recTempTrack
 
 'Error Vars
 Global Boolean erPanelFailedInspection, erFrontSafetyFrameOpen, erBackSafetyFrameOpen

@@ -216,6 +216,9 @@ Function PassOrFail(measurement As Real) As Boolean 'Pass is True
 	
 Fend
 Function ChangeProfile(ProfileNumber$ As String) As Boolean
+	
+'This function changes the active profile of the laser scanner. Just tell it which profile you want it to run. 
+'Set up profiles in its IDE
 
     Integer i, NumTokens
     String Tokens$(0)
@@ -230,7 +233,7 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
 	
 	Print #203, "PW" + "," + ProfileNumber$ ' Per laser scanner manual this is how you change profiles
 
-	Wait .35 ' wait for laser scanner to receive the command. This may be able to be shortened up
+	Wait .4 ' wait for laser scanner to receive the command. This may be able to be shortened up
 	
     i = ChkNet(203)
     If i > 0 Then

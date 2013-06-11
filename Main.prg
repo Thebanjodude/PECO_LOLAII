@@ -11,7 +11,7 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 mainCurrentState = StateIdle ' The first state is Idle
 'jobStart = True 'fake
 
-FakeLogging()
+FakeLogging() ' fake logged values for Scott
 
 Do While True
 	Wait 1
@@ -192,7 +192,7 @@ Function CheckInitialParameters() As Boolean
 		CheckInitialParameters = True
 	ElseIf recInsertType = 0 Or recNumberOfHoles = 0 Then
 		CheckInitialParameters = True
-	ElseIf recTemp = 0 Then
+	ElseIf recTempProbe = 0 Or recTempTrack = 0 Then
 		CheckInitialParameters = True
 	Else
 		CheckInitialParameters = False
@@ -221,20 +221,29 @@ CheckInitialParameters = True 'fake for testing
 Fend
 Function HotStakeTempRdy() As Boolean
 	
-	'Is the current temp within the tolerance to start a job?
-	If Abs(recTemp - heatStakeCurrentTemp) < Abs(heatStakeTempTolerance) Then
+	Boolean probeInTemp, trackInTemp
+	
+	'Is the current temp within the tolerance to start or continue a job?
+	If Abs(recTempProbe - pasActualTempZone1) < Abs(probeTempTolerance) Then
+		probeInTemp = True
+	Else
+		probeInTemp = False
+	EndIf
+	
+	If Abs(recTempTrack - pasActualTempZone2) < Abs(trackTempTolerance) Then
+		trackInTemp = True
+	Else
+		trackInTemp = False
+	EndIf
+	
+	If probeInTemp = True And trackInTemp = True Then
 		HotStakeTempRdy = True
 		erHeatStakeTemp = False
-		stackLightRedCC = False
 	Else
 		HotStakeTempRdy = False ' Temperature is not in range
 		erHeatStakeTemp = True
-		'stackLightRedCC = True
-		'stackLightAlrmCC = True ' Do we want to siren on when its heating up? Doesnt make sense...
 	EndIf
 	
-	HotStakeTempRdy = True ' fake for testing
-	erHeatStakeTemp = False ' fake
 Fend
 Function PowerOnHomeCheck() As Boolean
 	

@@ -441,7 +441,6 @@ Print #201, "{", Chr$(&H22) + "pauseStatus" + Chr$(&H22), ":", Str$(pauseStatus)
 Print #201, "{", Chr$(&H22) + "safeGuardInput" + Chr$(&H22), ":", Str$(safeGuardInput), "}",
 Print #201, "{", Chr$(&H22) + "tasksRunningStatus" + Chr$(&H22), ":", Str$(tasksRunningStatus), "}",
 Print #201, "{", Chr$(&H22) + "teachModeStatus" + Chr$(&H22), ":", Str$(teachModeStatus), "}",
-Print #201, "{", Chr$(&H22) + "heatStakeCurrentTemp" + Chr$(&H22), ":", Str$(heatStakeCurrentTemp), "}",
 Print #201, "{", Chr$(&H22) + "hole0PF" + Chr$(&H22), ":", Str$(hole0PF), "}",
 Print #201, "{", Chr$(&H22) + "hole10PF" + Chr$(&H22), ":", Str$(hole10PF), "}",
 Print #201, "{", Chr$(&H22) + "hole11PF" + Chr$(&H22), ":", Str$(hole11PF), "}",
@@ -1290,25 +1289,22 @@ Case "suctionCupsF"
         MemOff (suctionCupsF)
     EndIf
 Case "suctionCupsFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (suctionCupsFV)
     Else
         MemOff (suctionCupsFV)
     EndIf
 Case "anvilZlimit"
-    AnvilZlimit = Val(tokens$(1))
+    AnvilZlimit = Val(Tokens$(1))
     Print "anvilZlimit:", AnvilZlimit
 Case "flashDwellTime"
-    flashDwellTime = Val(tokens$(1))
+    flashDwellTime = Val(Tokens$(1))
     Print "flashDwellTime:", flashDwellTime
-Case "heatStakeTempTolerance"
-    heatStakeTempTolerance = Val(tokens$(1))
-    Print "heatStakeTempTolerance:", heatStakeTempTolerance
 Case "insertDepthTolerance"
-    insertDepthTolerance = Val(tokens$(1))
+    insertDepthTolerance = Val(Tokens$(1))
     Print "insertDepthTolerance:", insertDepthTolerance
 Case "jobNumPanels"
-    jobNumPanels = Val(tokens$(1))
+    jobNumPanels = Val(Tokens$(1))
     Print "jobNumPanels:", jobNumPanels
 Case "recFlashRequired"
     If tokens$(1) = "true" Then
@@ -1329,9 +1325,6 @@ Case "recNumberOfHoles"
 Case "recPanelThickness"
     recPanelThickness = Val(tokens$(1))
     Print "recPanelThickness:", recPanelThickness
-Case "recTemp"
-    recTemp = Val(tokens$(1))
-    Print "recTemp:", recTemp
 Case "suctionWaitTime"
     suctionWaitTime = Val(tokens$(1))
     Print "suctionWaitTime:", suctionWaitTime
@@ -1397,7 +1390,7 @@ Function HmiListen()
 				If ProcessLastToken Then
 					prepend$ = ""
 				Else
-					prepend$ = tokens$(numTokens - 1)
+					prepend$ = Tokens$(NumTokens - 1)
 				EndIf
 	    Send
 	Loop

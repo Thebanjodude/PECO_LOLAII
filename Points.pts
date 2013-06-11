@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/05/21 06:26:12:706,DS:0000002801,CS:09266,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/11 01:35:42:097,DS:0000002809,CS:28287,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=13
@@ -6,8 +6,8 @@ Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
 	sDescription=""
-	rX=345.361
-	rY=426.387
+	rX=364.173
+	rY=417.83
 	rZ=-157
 	rU=45
 	rV=0
@@ -24,8 +24,8 @@ Point2 {
 	nNumber=1
 	sLabel="OutMagCenter"
 	sDescription=""
-	rX=329.941
-	rY=-232.727
+	rX=364.173
+	rY=-214.63
 	rZ=-157
 	rU=45
 	rV=0
@@ -42,8 +42,8 @@ Point3 {
 	nNumber=2
 	sLabel="HotStakeCenter"
 	sDescription=""
-	rX=-457.706
-	rY=457.706
+	rX=-441.706
+	rY=441.706
 	rZ=-2
 	rU=0
 	rV=0
@@ -61,7 +61,7 @@ Point4 {
 	sLabel="FlashCenter"
 	sDescription=""
 	rX=-558.8
-	rY=-246.413
+	rY=-355.6
 	rZ=-2
 	rU=203.795
 	rV=0
@@ -79,8 +79,8 @@ Point5 {
 	sLabel="ScanLong"
 	sDescription=""
 	rX=0
-	rY=0
-	rZ=0
+	rY=-50.8
+	rZ=-45
 	rU=0
 	rV=0
 	rW=0
@@ -97,8 +97,8 @@ Point6 {
 	sLabel="ScanShort"
 	sDescription=""
 	rX=0
-	rY=0
-	rZ=0
+	rY=-50.8
+	rZ=-45
 	rU=0
 	rV=0
 	rW=0

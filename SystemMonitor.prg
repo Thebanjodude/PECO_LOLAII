@@ -12,28 +12,30 @@ Do While True
 	
 	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine
 		
-		Halt InMagControl
-		erInMagOpenInterlock = True
-		inMagCurrentState = StateInMagPaused
+		erInMagOpenInterlock = True 'Throw error
+		Halt InMagControl ' pause state machine where it is
+		inMagCurrentState = StateInMagPaused ' Set state to paused
 		
 		If mainCurrentState = StatePopPanel Then
-'			Pause ' if interlock open Pause only when in pop state
+			Pause ' if interlock open Pause only when in pop state
 		EndIf
 		
 	Else
 		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False
+		' The state machine will automatically change to its last state
 	EndIf
 	
 	If outMagInt = True Then ' If an interlock gets tripped then halt the state machine
 		
-		Halt OutMagControl
 		erOutMagOpenInterlock = True
 		outMagCurrentState = StateOutMagPaused
+		Halt OutMagControl
 		
 		If mainCurrentState = StatePushPanel Then
-'			Pause ' pause robot movement to avoid pinchpoint
+			Pause ' pause robot movement to avoid pinchpoint
 		EndIf
+		
 	Else
 	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
 	 	erOutMagOpenInterlock = False
@@ -216,7 +218,7 @@ Do While True
 				
 	EndIf
 	
-If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh) Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or EStopOn = True Or (inMagLowLim And inMagLowLimN = True) Or (inMagUpLim And inMagUpLimN = True) Or (outMagLowLim And outMagLowLimN = True) Or (outMagUpLim And outMagUpLimN = True) Then
+If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh) Or HotStakeTempRdy = False Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or EStopOn = True Or (inMagLowLim And inMagLowLimN = True) Or (inMagUpLim And inMagUpLimN = True) Or (outMagLowLim And outMagLowLimN = True) Or (outMagUpLim And outMagUpLimN = True) Then
 	stackLightRedCC = True
 	stackLightAlrmCC = True
 EndIf

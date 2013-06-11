@@ -1,12 +1,12 @@
-ENVT0100,LM:2013/06/08 19:58:37:533,DS:0000003651,CS:13320,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/11 01:48:10:452,DS:0000003657,CS:05239,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="6/8/2013 1:58:37 PM"
-	bBuildComplete=False
-	bRebuildRequired=True
+	sLastModified="6/10/2013 7:48:09 PM"
+	bBuildComplete=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="ALWKSBSCHAEFER"
@@ -30,19 +30,19 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/8/2013 5:38:07 PM"
+	sTimeSavedInController="6/11/2013 1:26:40 AM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/8/2013 2:14:32 AM"
+	sTimeSavedInController="6/8/2013 7:58:37 PM"
 }
 ProgramFile3 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/8/2013 2:08:04 AM"
+	sTimeSavedInController="6/11/2013 12:57:41 AM"
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
@@ -60,7 +60,7 @@ ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/7/2013 10:38:42 PM"
+	sTimeSavedInController="6/11/2013 1:15:53 AM"
 }
 ProgramFile7 {
 	sName="PopAndPush.prg"
@@ -72,18 +72,18 @@ ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/8/2013 5:41:10 PM"
+	sTimeSavedInController="6/11/2013 1:48:09 AM"
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="6/8/2013 2:08:28 AM"
+	sTimeSavedInController="6/11/2013 12:57:10 AM"
 }
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="5/21/2013 6:26:12 AM"
+	sTimeSavedInController="6/11/2013 1:35:42 AM"
 }
 OperatorSettings {
 	OperatorWindow {
