@@ -1,5 +1,65 @@
 #include "Globals.INC"
 
+Function InspectPanel2()
+	
+	Integer j
+	Real rightoffset, leftoffset
+	
+	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
+	Go PreScan ' Collision Avoidance Waypoint
+	SystemStatus = InspectingPanel
+	
+	GetPanelArray()
+	GetThetaR() 'Get first r and theta
+	PanelArrayIndex = 0
+	
+	FindPickUpError()
+	
+	For j = 0 To recNumberOfHoles - 1 'j is the hole # we are on
+		
+		If j <> 0 Then
+			IncrementIndex()
+			GetThetaR() ' get the next r and theta
+		EndIf
+		
+		If r = 0 Then
+			Print "r=0"
+			Pause
+		EndIf
+		
+		Print Theta, r
+		Go prescan CP
+
+		If Theta = 0 Or Theta = 90 Or Theta = 180 Or Theta = 270 Then
+			
+'			If j <> 0 Then
+'			RotatePanelOffset(Theta)
+'			EndIf
+			
+			P23 = (LaserCenter) +X(r) -U(Theta) + PanelOffset
+			Print PanelOffset
+			Print P23
+			Go P23
+			Pause
+			
+		EndIf
+		
+'		ChangeProfile("00")
+'		RightOffset = GetLaserMeasurement("03")
+'		leftoffset = GetLaserMeasurement("04")
+'		thetaOffset = RadToDeg(Asin((RightOffset + leftoffset) / (2 * r)))
+'		
+'		Print "thetaOffset: ", thetaOffset
+'		PanelOffset = PanelOffset -U(thetaOffset)
+'		FindPickUpError()
+		
+		
+	Next
+	
+exitInspectPanel:
+	
+Fend
+
 Function InspectPanel(HoleInspect As Boolean) As Boolean
 	
 	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
@@ -18,7 +78,6 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 
 	Redim InspectionArray(22, 1) ' Make the arrays big enough to fit all the panels
 	Redim PassFailArray(22, 1)
-
 	recInsertDepth = .165 ' fake for testing
 
 	For j = 0 To recNumberOfHoles - 1 'j is the hole # we are on
@@ -76,7 +135,7 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 			EndIf
 			
 			P23 = (LaserCenter) -Y(r) -U(Theta)
-			
+			Go P23
 			Pause
 			
 		ElseIf (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
@@ -139,6 +198,7 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 		Go P23
 		Print "j:", j
 		Print " position:", P23
+		
 		If HoleInspect = True Then
 			Go P23 -Z(8) -X(5)
 			Wait .1
@@ -394,12 +454,12 @@ Function UnpackPassFailArray()
 	hole22PF = PassFailArray(22, LeftSpotFace) Or PassFailArray(22, RightSpotFace)
 	
 Fend
-Function RotatePanelOffset(angle As Real)
+Function RotatePanelOffset(angle As Real) 'in degrees
 		
 		'Compute the rotated X,Y and U PanelOffset components
-		RotatedOffset = RotatedOffset :X(CX(PanelOffset) * Cos(DegToRad(angle)) + CY(PanelOffset) * Sin(DegToRad(angle)))
+		RotatedOffset = RotatedOffset :X(CX(PanelOffset) * Sin(DegToRad(angle)) + CY(PanelOffset) * Cos(DegToRad(angle)))
 '		Print "	RotatedOffset:", RotatedOffset
-		RotatedOffset = RotatedOffset :Y(CX(PanelOffset) * Sin(DegToRad(angle)) + CY(PanelOffset) * Cos(DegToRad(angle)))
+		RotatedOffset = RotatedOffset :Y(CX(PanelOffset) * Cos(DegToRad(angle)) + CY(PanelOffset) * Sin(DegToRad(angle)))
 '		Print "	RotatedOffset:", RotatedOffset
 		RotatedOffset = RotatedOffset :U(CU(PanelOffset))
 		Print "	RotatedOffset:", RotatedOffset

@@ -1,26 +1,26 @@
-ENVT0100,LM:2013/06/11 22:22:41:557,DS:0000002503,CS:07734,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="InMagOutMagStateMachines.prg"
-bMdiMaximized=False
+ENVT0100,LM:2013/06/12 02:35:43:644,DS:0000002475,CS:04673,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Main.prg"
+bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
-		nLeft=153
-		nTop=221
-		nWidth=1415
-		nHeight=717
+		nLeft=94
+		nTop=28
+		nWidth=1413
+		nHeight=713
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=180
-		nTop=508
-		nWidth=1451
-		nHeight=691
+		nLeft=198
+		nTop=144
+		nWidth=1449
+		nHeight=687
 	}
 }
 ProgramFile3 {
@@ -37,23 +37,23 @@ ProgramFile3 {
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=140
-		nTop=260
-		nWidth=1190
-		nHeight=549
+		nLeft=4
+		nTop=14
+		nWidth=1189
+		nHeight=545
 	}
 }
 ProgramFile5 {
 	sName="OldCode.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=264
 		nTop=35
-		nWidth=1051
-		nHeight=696
+		nWidth=1049
+		nHeight=693
 	}
 }
 ProgramFile6 {
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=544
-		nTop=17
-		nWidth=1096
-		nHeight=793
+		nLeft=488
+		nTop=78
+		nWidth=1095
+		nHeight=776
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=302
-		nTop=33
-		nWidth=1135
-		nHeight=611
+		nLeft=62
+		nTop=71
+		nWidth=1487
+		nHeight=747
 	}
 }
 nIncludeFileCount=1
@@ -127,10 +127,10 @@ CmdWindow {
 RunWindow {
 	bOpened=True
 	Window {
-		nLeft=308
-		nTop=22
-		nWidth=1209
-		nHeight=782
+		nLeft=826
+		nTop=93
+		nWidth=778
+		nHeight=521
 	}
 }
 IOLabelEditor {
@@ -171,10 +171,10 @@ Macros {
 	}
 }
 RobotMgr {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=586
-		nTop=155
+		nLeft=714
+		nTop=275
 		nWidth=751
 		nHeight=485
 	}

@@ -137,7 +137,7 @@ SpeedS 50
 	EndIf
 	
 	d2 = CX(CurPos)
-	yOffset = Abs((d2 - d1) / 2)
+	yOffset = Abs((d1 - d2) / 2)
 	
 	If d1 > d2 Then
 		yOffset = -yOffset
@@ -202,6 +202,7 @@ SpeedS 50
 	FindPickUpError = True
 	
 	Print "done"
+	Pause
 			
 Fend
 

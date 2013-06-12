@@ -33,7 +33,7 @@ Do While True
 		EndIf
 		
 	Case StatePreinspection
-		If FindPickUpError = True Then
+		If True Then
 			NextState = StateHotStakePanel
 		Else
 			NextState = StateIdle
