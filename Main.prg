@@ -5,8 +5,6 @@ Function main()
 Integer NextState
 
 'PowerOnSequence() ' Initialize the system and prepare it to do a job
-'Halt InMagControl ' fake
-'Halt OutMagControl 'fake
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 

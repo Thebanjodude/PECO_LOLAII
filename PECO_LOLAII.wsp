@@ -1,26 +1,26 @@
-ENVT0100,LM:2013/06/12 02:35:43:644,DS:0000002475,CS:04673,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Main.prg"
-bMdiMaximized=True
+ENVT0100,LM:2013/06/13 00:12:05:200,DS:0000002488,CS:09838,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="HotStakeAndFlash.prg"
+bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=2
+	nWinState=0
 	Window {
-		nLeft=94
-		nTop=28
-		nWidth=1413
-		nHeight=713
+		nLeft=338
+		nTop=34
+		nWidth=923
+		nHeight=710
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=198
-		nTop=144
-		nWidth=1449
-		nHeight=687
+		nLeft=173
+		nTop=38
+		nWidth=1445
+		nHeight=681
 	}
 }
 ProgramFile3 {
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=488
-		nTop=78
-		nWidth=1095
-		nHeight=776
+		nLeft=222
+		nTop=54
+		nWidth=1093
+		nHeight=739
 	}
 }
 ProgramFile8 {
@@ -83,17 +83,17 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=62
-		nTop=71
-		nWidth=1487
-		nHeight=747
+		nLeft=209
+		nTop=223
+		nWidth=1100
+		nHeight=744
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=1
 	Window {
 		nLeft=309
 		nTop=86
@@ -127,10 +127,10 @@ CmdWindow {
 RunWindow {
 	bOpened=True
 	Window {
-		nLeft=826
-		nTop=93
-		nWidth=778
-		nHeight=521
+		nLeft=703
+		nTop=156
+		nWidth=848
+		nHeight=613
 	}
 }
 IOLabelEditor {
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=True
 	Window {
-		nLeft=714
-		nTop=275
+		nLeft=21
+		nTop=183
 		nWidth=751
 		nHeight=485
 	}

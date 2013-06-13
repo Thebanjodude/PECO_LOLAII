@@ -103,14 +103,16 @@ Function FindPickUpError() As Boolean
 Real d1, d2
 Integer i
 
+PanelPickupError = PanelPickupError :X(0) :Y(0) :X(0) :U(0)
+
 Speed 10 'slow it down so we get a better reading
 SpeedS 50
 	
-	Go PreScan - PanelOffset CP  ' Use CP so it's not jumpy
+	Go PreScan CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move ScanLong - PanelOffset CP Till Sw(edgeDetectGoH)
+	Move ScanLong CP Till Sw(edgeDetectGoH)
 	
 	If TillOn = False Then
 		Print "missed edge"
@@ -122,12 +124,12 @@ SpeedS 50
 	d1 = CX(CurPos)
 	
 	ChangeProfile("00") ' Null profile
-	Move (PreScan - PanelOffset) :U(CU(CurPos))
-	Go (PreScan - PanelOffset) +U(180) CP  ' Use CP so it's not jumpy
+	Move (PreScan) :U(CU(CurPos))
+	Go (PreScan) +U(180) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move (ScanLong - PanelOffset) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
+	Move (ScanLong) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
 	
 	If TillOn = False Then
 		Print "missed edge"
@@ -137,24 +139,24 @@ SpeedS 50
 	EndIf
 	
 	d2 = CX(CurPos)
-	yOffset = Abs((d1 - d2) / 2)
+	xerror = Abs((d1 - d2) / 2)
 	
 	If d1 > d2 Then
-		yOffset = -yOffset
+		xerror = -xerror
 	EndIf
 	
-	Print "yOffset", yOffset
+	Print "xerror", xerror
 	
 	d1 = 0
 	d2 = 0
 	
 	ChangeProfile("00") ' Null profile
-	Move (PreScan - PanelOffset) :U(CU(CurPos))
-	Go (PreScan - PanelOffset) +U(90) CP  ' Use CP so it's not jumpy
+	Move (PreScan) :U(CU(CurPos))
+	Go (PreScan) +U(90) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move (ScanShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
+	Move (ScanShort) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
 	
 	If TillOn = False Then
 		Print "missed edge"
@@ -166,12 +168,12 @@ SpeedS 50
 	d1 = CX(CurPos)
 
 	ChangeProfile("00") ' Null profile
-	Move (PreScan - PanelOffset) :U(CU(CurPos))
-	Go (PreScan - PanelOffset) +U(270) CP  ' Use CP so it's not jumpy
+	Move (PreScan) :U(CU(CurPos))
+	Go (PreScan) +U(270) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
-	Move (ScanShort - PanelOffset) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
+	Move (ScanShort) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
 	
 	If TillOn = False Then
 		Print "missed edge"
@@ -181,23 +183,23 @@ SpeedS 50
 	EndIf
 	
 	d2 = CX(CurPos)
-	xOffset = Abs((d1 - d2) / 2)
+	yerror = (d1 - d2) /2
 	
 	If d1 > d2 Then
-		xOffset = -xOffset
+		yerror = -yerror
 	EndIf
 	
-	Print "xOffset", xOffset
+	Print "yerror", yerror
 	
 	d1 = 0
 	d2 = 0
 	
 	ChangeProfile("00") ' Null profile
-	Move (PreScan - PanelOffset) :U(CU(CurPos))
-	Go (PreScan - PanelOffset)
+	Move (PreScan) :U(CU(CurPos))
+	Go (PreScan)
 	
-	PanelOffset = PanelOffset :X(xOffset) :Y(yOffset) 'update offset point
-	Print "PanelOffset:", PanelOffset
+	PanelPickupError = PanelPickupError :X(xerror) :Y(yerror) 'update error point
+	Print "PanelPickupError:", PanelPickupError
 	
 	FindPickUpError = True
 	

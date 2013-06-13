@@ -26,19 +26,16 @@ Function InspectPanel2()
 			Print "r=0"
 			Pause
 		EndIf
-		
-		Print Theta, r
+
 		Go prescan CP
 
 		If Theta = 0 Or Theta = 90 Or Theta = 180 Or Theta = 270 Then
 			
-'			If j <> 0 Then
-'			RotatePanelOffset(Theta)
-'			EndIf
+			Print Theta, r
+			RotatedError(Theta) ' Set RotatedOffset Point
 			
-			P23 = (LaserCenter) +X(r) -U(Theta) + PanelOffset
-			Print PanelOffset
-			Print P23
+			P23 = (LaserCenter) +X(r) -U(Theta) + RotatedOffset
+			Print "p23", P23
 			Go P23
 			Pause
 			
@@ -51,8 +48,7 @@ Function InspectPanel2()
 '		
 '		Print "thetaOffset: ", thetaOffset
 '		PanelOffset = PanelOffset -U(thetaOffset)
-'		FindPickUpError()
-		
+'		FindPickUpError()	
 		
 	Next
 	
@@ -130,9 +126,7 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 
 		If Theta = 0 Or Theta = 90 Or Theta = 180 Or Theta = 270 Then
 		
-			If j <> 0 Then
-				RotatePanelOffset(Theta)
-			EndIf
+			RotatedError(Theta)
 			
 			P23 = (LaserCenter) -Y(r) -U(Theta)
 			Go P23
@@ -140,12 +134,10 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 			
 		ElseIf (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
 			
-			If j <> 0 Then
-				RotatePanelOffset(Theta)
-			EndIf
+			RotatedError(Theta)
 
 			phi = Theta + rho
-			RotatePanelOffset(phi)
+			RotatedError(phi)
 			Print "phi:", phi
             P23 = (LaserCenter) -Y(r) -U(phi)
 
@@ -155,11 +147,11 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 
 		ElseIf (90 < Theta And Theta < 180) Or (270 < Theta And Theta < 360) Then
 			If j <> 0 Then
-				RotatePanelOffset(Theta)
+				RotatedError(Theta)
 			EndIf
 
 			phi = Theta - rho
-			RotatePanelOffset(phi)
+			RotatedError(phi)
 			Print "phi:", phi
             P23 = (LaserCenter) -Y(r) -U(phi)
 
@@ -178,19 +170,19 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 				ChangeProfile("00")
 				RightOffset = GetLaserMeasurement("03")
 				LeftOffset = GetLaserMeasurement("04")
-				thetaOffset = RadToDeg(Asin((RightOffset + LeftOffset) / (2 * r)))
+				thetaerror = RadToDeg(Asin((RightOffset + LeftOffset) / (2 * r)))
 				
-				Print "thetaOffset: ", thetaOffset
+				Print "thetaerror: ", thetaerror
 
-				If Abs(thetaOffset) > 3 Then
+				If Abs(thetaerror) > 3 Then
 					Print "thetaoffset is more than 3 deg"
 					Pause
 				EndIf
 
-				PanelOffset = PanelOffset -U(thetaOffset)
+'				PanelOffset = PanelOffset -U(thetaerror)
 				FindPickUpError()
-				Print "PanelOffset:", PanelOffset
-				RotatePanelOffset(Theta)
+'				Print "PanelOffset:", PanelOffset
+'				RotatedError(Theta)
 		EndIf
 		
 		Print "RotatedOffset:", RotatedOffset
@@ -429,6 +421,7 @@ Fend
 Function UnpackPassFailArray()
 	'Sending a JSON array is a pain so we are just unpacking the array into seperate vars 
 	'If either spotface fails then the hole fails
+	
 	hole0PF = PassFailArray(0, LeftSpotFace) Or PassFailArray(0, RightSpotFace)
 	hole1PF = PassFailArray(1, LeftSpotFace) Or PassFailArray(1, RightSpotFace)
 	hole2PF = PassFailArray(2, LeftSpotFace) Or PassFailArray(2, RightSpotFace)
@@ -454,16 +447,35 @@ Function UnpackPassFailArray()
 	hole22PF = PassFailArray(22, LeftSpotFace) Or PassFailArray(22, RightSpotFace)
 	
 Fend
-Function RotatePanelOffset(angle As Real) 'in degrees
-		
-		'Compute the rotated X,Y and U PanelOffset components
-		RotatedOffset = RotatedOffset :X(CX(PanelOffset) * Sin(DegToRad(angle)) + CY(PanelOffset) * Cos(DegToRad(angle)))
-'		Print "	RotatedOffset:", RotatedOffset
-		RotatedOffset = RotatedOffset :Y(CX(PanelOffset) * Cos(DegToRad(angle)) + CY(PanelOffset) * Sin(DegToRad(angle)))
-'		Print "	RotatedOffset:", RotatedOffset
-		RotatedOffset = RotatedOffset :U(CU(PanelOffset))
-		Print "	RotatedOffset:", RotatedOffset
+Function RotatedError(angle As Real)
+	
+	Real Xoffset, Yoffset
+	
+	xerror = CX(PanelPickupError)
+	yerror = CY(PanelPickupError)
+	
+	Xoffset = -xerror * Cos(DegToRad(angle)) - yerror * Sin(DegToRad(angle))
+	Yoffset = -xerror * Sin(DegToRad(angle)) - yerror * Cos(DegToRad(angle))
+	
+	If angle = 90 Or angle = 270 Then
+		Xoffset = -Xoffset
+	EndIf
+	
+	RotatedOffset = RotatedOffset :X(Xoffset) :Y(Yoffset)
+	Print "RotatedOffset", RotatedOffset
+	
 Fend
+
+'Function RotatePanelOffset(angle As Real) 'in degrees
+'		
+'		'Compute the rotated X,Y and U PanelOffset components
+'		RotatedOffset = RotatedOffset :X(CX(PanelOffset) * Sin(DegToRad(angle)) + CY(PanelOffset) * Cos(DegToRad(angle)))
+''		Print "	RotatedOffset:", RotatedOffset
+'		RotatedOffset = RotatedOffset :Y(CX(PanelOffset) * Cos(DegToRad(angle)) + CY(PanelOffset) * Sin(DegToRad(angle)))
+''		Print "	RotatedOffset:", RotatedOffset
+'		RotatedOffset = RotatedOffset :U(CU(PanelOffset))
+'		Print "	RotatedOffset:", RotatedOffset
+'Fend
 
 
 

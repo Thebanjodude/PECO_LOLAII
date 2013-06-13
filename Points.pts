@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/06/12 00:31:00:400,DS:0000003033,CS:03358,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/12 22:43:46:521,DS:0000003038,CS:27192,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=14
@@ -148,7 +148,7 @@ Point8 {
 }
 Point9 {
 	nNumber=9
-	sLabel="PanelOffset"
+	sLabel="PanelPickupError"
 	sDescription=""
 	rX=0
 	rY=0

@@ -35,7 +35,7 @@ Function HotStakePanel() As Boolean
 		
         	
         	P23 = HotStakeCenter -Y(Sin(DegToRad(45)) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(DegToRad(45)) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 90)
-			P23 = P23 + PanelOffset
+'			P23 = P23 + PanelOffset
 			Jump P23 LimZ zLimit
 						
 'Comment this out for testing						
