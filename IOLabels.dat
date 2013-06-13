@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/06/11 19:17:01:576,DS:0000013346,CS:23135,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/13 05:14:35:331,DS:0000013278,CS:05220,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -205,7 +205,7 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=13
+	nNumberOfLabels=12
 	Label1 {
 		nBit=96
 		sLabel="inMagMtrDirH"
@@ -237,36 +237,31 @@ OutputBitLabels {
 		sDescription=""
 	}
 	Label7 {
-		nBit=104
-		sLabel="PnuMainH"
-		sDescription=""
-	}
-	Label8 {
 		nBit=105
 		sLabel="DrillGoH"
 		sDescription=""
 	}
-	Label9 {
+	Label8 {
 		nBit=106
 		sLabel="DrillReturnH"
 		sDescription=""
 	}
-	Label10 {
+	Label9 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label11 {
+	Label10 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label12 {
+	Label11 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label13 {
+	Label12 {
 		nBit=110
 		sLabel="stackLightAlrmH"
 		sDescription=""

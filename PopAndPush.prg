@@ -101,6 +101,8 @@ Fend
 Function FindPickUpError() As Boolean
 	
 Real d1, d2
+Real xerror1, xerror2, midpoint
+Real yerror1, yerror2
 Integer i
 
 PanelPickupError = PanelPickupError :X(0) :Y(0) :X(0) :U(0)
@@ -122,6 +124,7 @@ SpeedS 50
 	EndIf
 	
 	d1 = CX(CurPos)
+	Print "d1", d1
 	
 	ChangeProfile("00") ' Null profile
 	Move (PreScan) :U(CU(CurPos))
@@ -139,7 +142,16 @@ SpeedS 50
 	EndIf
 	
 	d2 = CX(CurPos)
-	xerror = Abs((d1 - d2) / 2)
+	Print "d2", d2
+	midpoint = (d1 + d2) /2
+	Print "midpoint", midpoint
+	
+	xerror1 = Abs(midpoint - d1)
+	xerror2 = Abs(midpoint - d2)
+	Print "xerror1", xerror1
+	Print "xerror2", xerror2
+	
+	xerror = (xerror1 + xerror2) /2
 	
 	If d1 > d2 Then
 		xerror = -xerror
@@ -149,10 +161,11 @@ SpeedS 50
 	
 	d1 = 0
 	d2 = 0
+	midpoint = 0
 	
 	ChangeProfile("00") ' Null profile
 	Move (PreScan) :U(CU(CurPos))
-	Go (PreScan) +U(90) CP  ' Use CP so it's not jumpy
+	Go (PreScan) -U(90) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
@@ -166,10 +179,11 @@ SpeedS 50
 	EndIf
 	'Use Cx in both x and y offsets because we are only modulating along the x-axis
 	d1 = CX(CurPos)
+	Print "d1", d1
 
 	ChangeProfile("00") ' Null profile
 	Move (PreScan) :U(CU(CurPos))
-	Go (PreScan) +U(270) CP  ' Use CP so it's not jumpy
+	Go (PreScan) -U(270) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("03")
@@ -183,7 +197,17 @@ SpeedS 50
 	EndIf
 	
 	d2 = CX(CurPos)
-	yerror = (d1 - d2) /2
+	Print "d2", d2
+	
+	midpoint = (d1 + d2) /2
+	Print "midpoint", midpoint
+	
+	yerror1 = Abs(midpoint - d1)
+	yerror2 = Abs(midpoint - d2)
+	Print "yerror1", yerror1
+	Print "yerror2", yerror2
+	
+	yerror = (yerror1 + yerror2) /2
 	
 	If d1 > d2 Then
 		yerror = -yerror
@@ -193,6 +217,7 @@ SpeedS 50
 	
 	d1 = 0
 	d2 = 0
+	midpoint = 0
 	
 	ChangeProfile("00") ' Null profile
 	Move (PreScan) :U(CU(CurPos))

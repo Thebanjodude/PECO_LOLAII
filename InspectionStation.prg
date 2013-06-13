@@ -10,10 +10,13 @@ Function InspectPanel2()
 	SystemStatus = InspectingPanel
 	
 	GetPanelArray()
+	DerivethetaR()
 	GetThetaR() 'Get first r and theta
 	PanelArrayIndex = 0
+	Pause
 	
 	FindPickUpError()
+	Go prescan CP
 	
 	For j = 0 To recNumberOfHoles - 1 'j is the hole # we are on
 		
@@ -27,14 +30,14 @@ Function InspectPanel2()
 			Pause
 		EndIf
 
-		Go prescan CP
-
 		If Theta = 0 Or Theta = 90 Or Theta = 180 Or Theta = 270 Then
 			
 			Print Theta, r
 			RotatedError(Theta) ' Set RotatedOffset Point
 			
-			P23 = (LaserCenter) +X(r) -U(Theta) + RotatedOffset
+			P23 = (LaserCenter) +X(r) -U(Theta)
+			Print "p23 pre adjust", P23
+			P23 = P23 + RotatedOffset
 			Print "p23", P23
 			Go P23
 			Pause
@@ -69,6 +72,7 @@ Function InspectPanel(HoleInspect As Boolean) As Boolean
 	Real RightOffset, LeftOffset
   	  	
   	GetPanelArray()
+
 	GetThetaR() 'get first r and theta
 	PanelArrayIndex = 0
 
@@ -450,7 +454,7 @@ Fend
 Function RotatedError(angle As Real)
 	
 	Real Xoffset, Yoffset
-	
+
 	xerror = CX(PanelPickupError)
 	yerror = CY(PanelPickupError)
 	
@@ -458,7 +462,8 @@ Function RotatedError(angle As Real)
 	Yoffset = -xerror * Sin(DegToRad(angle)) - yerror * Cos(DegToRad(angle))
 	
 	If angle = 90 Or angle = 270 Then
-		Xoffset = -Xoffset
+'		Xoffset = -Xoffset 
+		Yoffset = -Yoffset
 	EndIf
 	
 	RotatedOffset = RotatedOffset :X(Xoffset) :Y(Yoffset)
