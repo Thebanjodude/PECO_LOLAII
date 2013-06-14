@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/06/13 05:50:29:651,DS:0000003254,CS:21845,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/14 01:49:52:621,DS:0000004069,CS:22301,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=15
+nNumberOfPoints=19
 Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
@@ -44,8 +44,8 @@ Point3 {
 	sDescription=""
 	rX=-441.706
 	rY=441.706
-	rZ=-2
-	rU=0
+	rZ=-10
+	rU=90
 	rV=0
 	rW=0
 	nLocal=0
@@ -78,8 +78,8 @@ Point5 {
 	nNumber=4
 	sLabel="LaserCenter"
 	sDescription=""
-	rX=-615.695
-	rY=-50.8
+	rX=0
+	rY=0
 	rZ=-10
 	rU=135
 	rV=0
@@ -147,6 +147,24 @@ Point8 {
 	bSimVisible=False
 }
 Point9 {
+	nNumber=8
+	sLabel="PreHotStake"
+	sDescription=""
+	rX=-250
+	rY=250
+	rZ=-10
+	rU=90
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point10 {
 	nNumber=9
 	sLabel="PanelPickupError"
 	sDescription=""
@@ -164,7 +182,7 @@ Point9 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point10 {
+Point11 {
 	nNumber=10
 	sLabel="RotatedOffset"
 	sDescription=""
@@ -182,7 +200,7 @@ Point10 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point11 {
+Point12 {
 	nNumber=12
 	sLabel="pausepos"
 	sDescription=""
@@ -200,7 +218,25 @@ Point11 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point12 {
+Point13 {
+	nNumber=13
+	sLabel="LaserCalibrMax"
+	sDescription=""
+	rX=-516.803
+	rY=-50.8
+	rZ=-75
+	rU=135
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point14 {
 	nNumber=14
 	sLabel="Waypoint0"
 	sDescription=""
@@ -218,7 +254,7 @@ Point12 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point13 {
+Point15 {
 	nNumber=15
 	sLabel="LaserToHeatStake"
 	sDescription=""
@@ -236,7 +272,7 @@ Point13 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point14 {
+Point16 {
 	nNumber=16
 	sLabel="Waypoint2"
 	sDescription=""
@@ -254,7 +290,43 @@ Point14 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point15 {
+Point17 {
+	nNumber=17
+	sLabel="LaserCalibrY"
+	sDescription=""
+	rX=-493.603
+	rY=-26.657
+	rZ=-67.351
+	rU=135
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point18 {
+	nNumber=18
+	sLabel=""
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point19 {
 	nNumber=20
 	sLabel="TempPickUp"
 	sDescription=""

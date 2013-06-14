@@ -1,37 +1,37 @@
-ENVT0100,LM:2013/06/13 06:45:37:952,DS:0000002478,CS:15200,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Robot Manager"
+ENVT0100,LM:2013/06/14 02:18:20:165,DS:0000002475,CS:16728,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Globals.inc"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
 		nLeft=338
 		nTop=34
-		nWidth=923
-		nHeight=710
+		nWidth=1036
+		nHeight=707
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=428
-		nTop=242
-		nWidth=1125
-		nHeight=674
+		nLeft=53
+		nTop=31
+		nWidth=1718
+		nHeight=740
 	}
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=1
 	Window {
-		nLeft=223
-		nTop=162
-		nWidth=1192
-		nHeight=555
+		nLeft=217
+		nTop=127
+		nWidth=1191
+		nHeight=552
 	}
 }
 ProgramFile4 {
@@ -47,8 +47,8 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="OldCode.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=1
 	Window {
 		nLeft=264
 		nTop=35
@@ -72,21 +72,21 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=518
-		nTop=57
-		nWidth=1092
-		nHeight=735
+		nLeft=14
+		nTop=80
+		nWidth=918
+		nHeight=618
 	}
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=567
-		nTop=68
-		nWidth=922
-		nHeight=622
+		nLeft=85
+		nTop=1
+		nWidth=1260
+		nHeight=718
 	}
 }
 nIncludeFileCount=1
@@ -125,12 +125,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=715
-		nTop=115
-		nWidth=924
-		nHeight=665
+		nLeft=1030
+		nTop=124
+		nWidth=671
+		nHeight=481
 	}
 }
 IOLabelEditor {
@@ -144,12 +144,12 @@ IOLabelEditor {
 	nWinState=0
 }
 IOMonitor {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=222
-		nTop=96
+		nLeft=631
+		nTop=192
 		nWidth=520
-		nHeight=471
+		nHeight=468
 	}
 }
 TaskMgr {
@@ -171,10 +171,10 @@ Macros {
 	}
 }
 RobotMgr {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=755
-		nTop=135
+		nLeft=905
+		nTop=232
 		nWidth=751
 		nHeight=485
 	}

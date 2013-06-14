@@ -232,7 +232,55 @@ SpeedS 50
 	Pause
 			
 Fend
+Function CalibrateLaserLocation()
+	
+Real eoatLegnth, EOATyerror
+Real x1, LaserXcoordinate, LaserYcoordinate
 
+eoatLegnth = InTomm(12.5)
+Print "eoatLegnth", eoatLegnth
+	
+Speed 5 'slow it down so we get a better reading
+SpeedS 50
+	
+	Go PreScan :Z(-85) CP  ' Use CP so it's not jumpy
+	Wait .25
+	
+	ChangeProfile("11")
+	Move LaserCalibrMax CP Till Sw(edgeDetectGoH)
+
+	 If TillOn = True Then
+	 	Print "missed EOAT"
+	 EndIf
+		
+	x1 = CX(CurPos)
+	Print "x1", x1
+	
+	LaserXcoordinate = x1 - (eoatLegnth /2)
+	
+	Print "LaserXcoordinate", LaserXcoordinate
+
+	Go PreScan :Z(-85) CP  ' Use CP so it's not jumpy			
+	Wait .2
+	
+	ChangeProfile("12")
+	Move LaserCalibrY CP
+	Wait .2 ' wait for EOAT to settle
+	
+'	EOATyerror = GetLaserMeasurement("01")
+	Print "EOATyerror", EOATyerror
+
+	LaserYcoordinate = CY(LaserCalibrY) + EOATyerror - InTomm(.63)
+	Print "LaserYcoordinate", LaserYcoordinate
+	Go LaserCalibrY +Y(EOATyerror)
+	
+	' It is important to know that LaserCenter is defined as 0,0 and
+	' populated by this function. It will remain 0,0 in the points table
+	' but the values are set in memory.
+	LaserCenter = LaserCenter :X(LaserXcoordinate) :Y(LaserYcoordinate)
+	Print LaserCEnter
+	
+Fend
 	
 
 

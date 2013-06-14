@@ -174,6 +174,11 @@ retry:
 	
 '	Move PreScan :U(CU(CurPos)) ' go home
 '	Move PreScan ROT ' go home
+
+	If CX(LaserCenter) = 0 Or CY(LaserCenter) = 0 Then
+		Print "calibration needed"
+		CalibrateLaserLocation()
+	EndIf
 	
 Fend
 Function SetInitialValues()

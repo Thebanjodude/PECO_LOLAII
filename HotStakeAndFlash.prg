@@ -11,11 +11,18 @@ Function HotStakePanel() As Boolean
 	Double AnvilOffset, CurrentZ
   	
 	PanelArrayIndex = 0 ' Reset Index
+	
+	zLimit = 0 'fake
 
 	GetPanelArray()
+	DerivethetaR()
+	PanelArrayIndex = 0
 	GetThetaR()
 	
+	FindPickUpError() 'fake
+	
 	Jump LaserToHeatStake LimZ zLimit ' Take a safe path
+	Go PreHotStake CP
 
 	For k = 0 To recNumberOfHoles - 1
 		
@@ -31,12 +38,14 @@ Function HotStakePanel() As Boolean
 			Print "Skipped Hole"
 		EndIf
 
-		If SkippedHole = False Then 'If the flag is set then we have finished all holes
-		
+		If SkippedHole = False Then 'If the flag is set then we have finished all holes		
         	
-        	P23 = HotStakeCenter -Y(Sin(DegToRad(45)) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(DegToRad(45)) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn) + 90)
-'			P23 = P23 + PanelOffset
-			Jump P23 LimZ zLimit
+        	P23 = HotStakeCenter -Y(Sin(DegToRad(135)) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(DegToRad(135)) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn))
+'			Jump P23 LimZ zLimit
+			RotatedError(Theta)
+			Print P23
+			P23 = P23 + RotatedOffset
+			Go P23
 						
 'Comment this out for testing						
 ' Instead, I could use the same method to get the panel to the outmag...anvil-recpanelthickness
@@ -61,11 +70,11 @@ Function HotStakePanel() As Boolean
 '			hsInstallInsrtCC = False 'reset flag
 		EndIf
 		
-		Wait .5
+	Pause
 
 	Next
 		
-	Jump PreScan LimZ zLimit
+'	Jump PreScan LimZ zLimit
 	HotStakePanel = True 'fake
 	
 exitHotStake:
@@ -188,7 +197,7 @@ Function GetThetaR()
 		r = PanelArray(PanelArrayIndex, RadiusColumn) 'Reassign r and theta
 		Theta = PanelArray(PanelArrayIndex, ThetaColumn)
 Fend
-Function GetPanelArray() ' Hardcoded Array for 88554
+Function GetPanelArray() ' Hardcoded Array
 	
 	recNumberOfHoles = 16
 	
@@ -466,21 +475,38 @@ Function PrintCoordArray()
 	
 Fend
 Function GetAngle(Slope1 As Real, Slope2 As Real) As Real
+	
+		If Slope1 * Slope2 = -1 Then
+			
+			Print "error, divide by zero"
+			Pause
+			GoTo skiptoend
+			
+		EndIf
 		
 		GetAngle = RadToDeg(Atan(Abs((Slope1 - Slope2) / (1 + Slope1 * Slope2))))
+		
+		If Slope1 = 0 And Slope2 = 0 Then ' Special case
+			GetAngle = 180
+		EndIf
+		
+		skiptoend:
+		Print GetAngle
 Fend
 Function FindSlope(pt1 As Integer, pt2 As Integer) As Real
 	
-	GetPanelCoords()
+'	GetPanelCoords()
 	
-	If pt1 = pt2 Then
+	If pt1 = pt2 Then 'error check
 		Print "pts are the same"
 		Pause
-		FindSlope = 0
+		FindSlope = -99999
 	ElseIf PanelCordinates(pt2, 0) = PanelCordinates(pt1, 0) Then
 		FindSlope = 9999999 'the slope is infinity
+	ElseIf PanelCordinates(pt2, 1) = PanelCordinates(pt1, 1) Then
+		FindSlope = 0
 	Else
-	   	FindSlope = (PanelCordinates(pt2, 1) - PanelCordinates(pt1, 1)) /(PanelCordinates(pt2, 0) - PanelCordinates(pt1, 0))
+	   	FindSlope = (PanelCordinates(pt2, 1) - PanelCordinates(pt1, 1)) /((PanelCordinates(pt2, 0) - PanelCordinates(pt1, 0)))
 	EndIf
 	
 Fend
