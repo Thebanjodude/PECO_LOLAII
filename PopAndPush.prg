@@ -100,130 +100,44 @@ Trap 2 ' disarm trap
 Fend
 Function FindPickUpError() As Boolean
 	
-Real d1, d2
-Real xerror1, xerror2, midpoint
-Real yerror1, yerror2
-Integer i
-
-PanelPickupError = PanelPickupError :X(0) :Y(0) :X(0) :U(0)
-
-Speed 10 'slow it down so we get a better reading
-SpeedS 50
+	Speed 10 'slow it down so we get a better reading
+	SpeedS 50
 	
+	Real dx, dy, dtheta
+	
+	PanelPickupError = PanelPickupError :X(0) :Y(0) :Z(0) :U(0) ' initialize to zero
+
 	Go PreScan CP  ' Use CP so it's not jumpy
 	Wait .25
 	
-	ChangeProfile("03")
-	Move ScanLong CP Till Sw(edgeDetectGoH)
-	
-	If TillOn = False Then
-		Print "missed edge"
-		erPanelStatusUnknown = True
-	Else
-		erPanelStatusUnknown = False
-	EndIf
-	
-	d1 = CX(CurPos)
-	Print "d1", d1
-	
-	ChangeProfile("00") ' Null profile
-	Move (PreScan) :U(CU(CurPos))
-	Go (PreScan) +U(180) CP  ' Use CP so it's not jumpy
-	Wait .25
-	
-	ChangeProfile("03")
-	Move (ScanLong) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
-	
-	If TillOn = False Then
-		Print "missed edge"
-		erPanelStatusUnknown = True
-	Else
-		erPanelStatusUnknown = False
-	EndIf
-	
-	d2 = CX(CurPos)
-	Print "d2", d2
-	midpoint = (d1 + d2) /2
-	Print "midpoint", midpoint
-	
-	xerror1 = Abs(midpoint - d1)
-	xerror2 = Abs(midpoint - d2)
-	Print "xerror1", xerror1
-	Print "xerror2", xerror2
-	
-	xerror = (xerror1 + xerror2) /2
-	
-	If d1 > d2 Then
-		xerror = -xerror
-	EndIf
-	
-	Print "xerror", xerror
-	
-	d1 = 0
-	d2 = 0
-	midpoint = 0
-	
-	ChangeProfile("00") ' Null profile
-	Move (PreScan) :U(CU(CurPos))
-	Go (PreScan) -U(90) CP  ' Use CP so it's not jumpy
-	Wait .25
-	
-	ChangeProfile("03")
-	Move (ScanShort) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
-	
-	If TillOn = False Then
-		Print "missed edge"
-		erPanelStatusUnknown = True
-	Else
-		erPanelStatusUnknown = False
-	EndIf
-	'Use Cx in both x and y offsets because we are only modulating along the x-axis
-	d1 = CX(CurPos)
-	Print "d1", d1
+	dy = FindYpickupError(0) ' Go to the zero hole and find the Y pick up error
+	dx = FindXpickupError(0) ' Find the X pick up error
 
-	ChangeProfile("00") ' Null profile
-	Move (PreScan) :U(CU(CurPos))
-	Go (PreScan) -U(270) CP  ' Use CP so it's not jumpy
-	Wait .25
+	PanelPickupError = PanelPickupError :X(dx) :Y(dy) 'update error point
+	Print "PanelPickupError:", PanelPickupError
+'test-----	
+	r = PanelArray(0, 0)
+	theta = PanelArray(0, 1)
 	
-	ChangeProfile("03")
-	Move (ScanShort) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
+ 	Move Lasercenter +X(r) :U(Theta) + PanelPickupError
+ 	Pause
+'----------	
+	' when we rotate 90 deg then dx and dy switch
+	dx = FindXpickupError(4) ' Go to the zero hole and find the X pick up error
+	dy = FindYpickupError(4) ' Find the Y pick up error
+	' If dx and dy were zero then there was no theta pick up error	
 	
-	If TillOn = False Then
-		Print "missed edge"
-		erPanelStatusUnknown = True
-	Else
-		erPanelStatusUnknown = False
-	EndIf
+	dtheta = Atan(dy / dx) ' this is an area of suspicion
 	
-	d2 = CX(CurPos)
-	Print "d2", d2
+	PanelPickupError = PanelPickupError :X(0) :Y(0) :U(dtheta) 'update error point
+	Print "PanelPickupError:", PanelPickupError
 	
-	midpoint = (d1 + d2) /2
-	Print "midpoint", midpoint
+	' Now we need to go back to the first hole and find the real XY pick up error with the theta 	
+	'error accounted for
+	dy = FindYpickupError(0) ' go to the zero hole and find the Y pick up error
+	dx = FindXpickupError(0) ' Find the X pick up error
 	
-	yerror1 = Abs(midpoint - d1)
-	yerror2 = Abs(midpoint - d2)
-	Print "yerror1", yerror1
-	Print "yerror2", yerror2
-	
-	yerror = (yerror1 + yerror2) /2
-	
-	If d1 > d2 Then
-		yerror = -yerror
-	EndIf
-	
-	Print "yerror", yerror
-	
-	d1 = 0
-	d2 = 0
-	midpoint = 0
-	
-	ChangeProfile("00") ' Null profile
-	Move (PreScan) :U(CU(CurPos))
-	Go (PreScan)
-	
-	PanelPickupError = PanelPickupError :X(xerror) :Y(yerror) 'update error point
+	PanelPickupError = PanelPickupError :X(dx) :Y(dy)  'update error point
 	Print "PanelPickupError:", PanelPickupError
 	
 	FindPickUpError = True
@@ -232,6 +146,179 @@ SpeedS 50
 	Pause
 			
 Fend
+Function FindYpickupError(holenumber As Integer) As Real
+	
+	' code somthing so when theta =! 0 for the first hole and theta=! 90 for the second
+	
+	Real dy1, dy2
+	
+	r = PanelArray(holenumber, 0)
+	theta = PanelArray(holenumber, 1)
+		
+	' Add pickuperror point to the move?
+	Move Lasercenter +X(r) :U(Theta) +Y(FindYpickupError) ' Go to where we think the first hole is
+	ChangeProfile("")
+	dy1 = GetLaserMeasurement("")
+	dy2 = GetLaserMeasurement("")
+
+	FindYpickupError = dy1 - dy2 ' calculate the y error
+	
+Fend
+Function FindXpickupError(holenumber As Integer) As Real
+	
+	' code somthing so when theta =! 0 for the first hole and theta=! 90 for the second
+	
+	r = PanelArray(holenumber, 0) ' get theta and r
+	theta = PanelArray(holenumber, 1)
+	
+	ChangeProfile("") ' change to hole finding profile
+	Move Lasercenter +X(75) :U(Theta) CP Till Sw(holeDetectedH) ' move until we find the hole
+	
+	If TillOn = False Then ' if we didnt see a hole then throw and error
+		Print "missed edge"
+		erPanelStatusUnknown = True
+	Else
+		erPanelStatusUnknown = False
+	EndIf
+
+	FindXpickupError = (CU(Here) - CX(LaserCenter)) - r ' calculate the dx error
+
+Fend
+
+'Function FindPickUpError() As Boolean
+'	
+'Real d1, d2
+'Real xerror1, xerror2, midpoint
+'Real yerror1, yerror2
+'Integer i
+'
+'PanelPickupError = PanelPickupError :X(0) :Y(0) :X(0) :U(0)
+'
+'Speed 10 'slow it down so we get a better reading
+'SpeedS 50
+'	
+'	Go PreScan CP  ' Use CP so it's not jumpy
+'	Wait .25
+'	
+'	ChangeProfile("03")
+'	Move ScanLong CP Till Sw(edgeDetectGoH)
+'	
+'	If TillOn = False Then
+'		Print "missed edge"
+'		erPanelStatusUnknown = True
+'	Else
+'		erPanelStatusUnknown = False
+'	EndIf
+'	
+'	d1 = CX(CurPos)
+'	Print "d1", d1
+'	
+'	ChangeProfile("00") ' Null profile
+'	Move (PreScan) :U(CU(CurPos))
+'	Go (PreScan) +U(180) CP  ' Use CP so it's not jumpy
+'	Wait .25
+'	
+'	ChangeProfile("03")
+'	Move (ScanLong) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
+'	
+'	If TillOn = False Then
+'		Print "missed edge"
+'		erPanelStatusUnknown = True
+'	Else
+'		erPanelStatusUnknown = False
+'	EndIf
+'	
+'	d2 = CX(CurPos)
+'	Print "d2", d2
+'	midpoint = (d1 + d2) /2
+'	Print "midpoint", midpoint
+'	
+'	xerror1 = Abs(midpoint - d1)
+'	xerror2 = Abs(midpoint - d2)
+'	Print "xerror1", xerror1
+'	Print "xerror2", xerror2
+'	
+'	xerror = (xerror1 + xerror2) /2
+'	
+'	If d1 > d2 Then
+'		xerror = -xerror
+'	EndIf
+'	
+'	Print "xerror", xerror
+'	
+'	d1 = 0
+'	d2 = 0
+'	midpoint = 0
+'	
+'	ChangeProfile("00") ' Null profile
+'	Move (PreScan) :U(CU(CurPos))
+'	Go (PreScan) -U(90) CP  ' Use CP so it's not jumpy
+'	Wait .25
+'	
+'	ChangeProfile("03")
+'	Move (ScanShort) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
+'	
+'	If TillOn = False Then
+'		Print "missed edge"
+'		erPanelStatusUnknown = True
+'	Else
+'		erPanelStatusUnknown = False
+'	EndIf
+'	'Use Cx in both x and y offsets because we are only modulating along the x-axis
+'	d1 = CX(CurPos)
+'	Print "d1", d1
+'
+'	ChangeProfile("00") ' Null profile
+'	Move (PreScan) :U(CU(CurPos))
+'	Go (PreScan) -U(270) CP  ' Use CP so it's not jumpy
+'	Wait .25
+'	
+'	ChangeProfile("03")
+'	Move (ScanShort) :U(CU(CurPos)) CP Till Sw(edgeDetectGoH)
+'	
+'	If TillOn = False Then
+'		Print "missed edge"
+'		erPanelStatusUnknown = True
+'	Else
+'		erPanelStatusUnknown = False
+'	EndIf
+'	
+'	d2 = CX(CurPos)
+'	Print "d2", d2
+'	
+'	midpoint = (d1 + d2) /2
+'	Print "midpoint", midpoint
+'	
+'	yerror1 = Abs(midpoint - d1)
+'	yerror2 = Abs(midpoint - d2)
+'	Print "yerror1", yerror1
+'	Print "yerror2", yerror2
+'	
+'	yerror = (yerror1 + yerror2) /2
+'	
+'	If d1 > d2 Then
+'		yerror = -yerror
+'	EndIf
+'	
+'	Print "yerror", yerror
+'	
+'	d1 = 0
+'	d2 = 0
+'	midpoint = 0
+'	
+'	ChangeProfile("00") ' Null profile
+'	Move (PreScan) :U(CU(CurPos))
+'	Go (PreScan)
+'	
+'	PanelPickupError = PanelPickupError :X(xerror) :Y(yerror) 'update error point
+'	Print "PanelPickupError:", PanelPickupError
+'	
+'	FindPickUpError = True
+'	
+'	Print "done"
+'	Pause
+'			
+'Fend
 Function CalibrateLaserLocation()
 	
 Real eoatLegnth, EOATyerror, zoffset

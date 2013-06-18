@@ -1,5 +1,5 @@
-ENVT0100,LM:2013/06/17 20:05:32:997,DS:0000002476,CS:20759,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="InspectionStation.prg"
+ENVT0100,LM:2013/06/18 17:55:15:989,DS:0000002469,CS:32109,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="PopAndPush.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
@@ -15,12 +15,12 @@ ProgramFile1 {
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=-29
-		nTop=42
-		nWidth=1431
-		nHeight=736
+		nLeft=86
+		nTop=34
+		nWidth=1430
+		nHeight=727
 	}
 }
 ProgramFile3 {
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=123
-		nTop=23
-		nWidth=952
-		nHeight=712
+		nLeft=382
+		nTop=17
+		nWidth=1128
+		nHeight=709
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=15
-		nTop=-5
-		nWidth=1375
-		nHeight=804
+		nLeft=226
+		nTop=37
+		nWidth=1373
+		nHeight=801
 	}
 }
 nIncludeFileCount=1
@@ -95,10 +95,10 @@ IncludeFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=113
-		nTop=72
-		nWidth=1100
-		nHeight=696
+		nLeft=307
+		nTop=5
+		nWidth=1098
+		nHeight=693
 	}
 }
 nPointFileCount=1
@@ -127,10 +127,10 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=492
-		nTop=113
-		nWidth=944
-		nHeight=665
+		nLeft=501
+		nTop=60
+		nWidth=1028
+		nHeight=722
 	}
 }
 IOLabelEditor {

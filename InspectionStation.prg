@@ -10,13 +10,13 @@ Function InspectPanel2()
 	Go PreScan ' Collision Avoidance Waypoint
 	SystemStatus = InspectingPanel
 	
-	GetPanelArray()
+	GetPanelArray() '
 	DerivethetaR()
 	PanelArrayIndex = 0
 	GetThetaR() 'Get first r and theta
 	Pause
 	
-	FindPickUpError()
+'	FindPickUpError()
 	Go prescan CP
 	
 	For j = 0 To recNumberOfHoles - 1 'j is the hole # we are on
@@ -50,27 +50,14 @@ Function InspectPanel2()
 		EndIf
 			
 		If j = 0 Then ' Find the slopes of the lines that connect the holes
-			m1 = FindSlope(recNumberOfHoles - 1, j) 'the last hole to the hole
-			m2 = FindSlope(j, j + 1) 'from the hole to the next hole
+			mu = findmu(recNumberOfHoles - 1, j + 1) 'the last hole to the hole+1
 		ElseIf j = recNumberOfHoles - 1 Then
-			m1 = FindSlope(j - 1, j) 'from the hole before to the hole
-			m2 = FindSlope(j, 0) ' from the last hole to the first hole
+			mu = findmu(j - 1, 0) 'from the hole before to the hole
 		Else
-			m1 = FindSlope(j - 1, j) 'from the hole before to the hole
-			m2 = FindSlope(j, j + 1) 'from the hole to the next hole
+			mu = findmu(j - 1, j + 1) 'from the hole before to the hole
 		EndIf
 
-		If (270 < Theta And Theta < 360) Or (90 < Theta And Theta < 180) Then
-	 		beta = GetAngle(m1, m2) + 90 ' add 180 because its obtuse
-			mu = (180 - beta) / 2
-		ElseIf (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
-			beta = GetAngle(m1, m2) + 90
-			mu = (180 - beta) / 2
-		Else
-			Print "error, theta is defined as < 360"
-			'recipe error...?
-			Pause
-		EndIf
+		Print "mu", mu
 
 		rho = mu ' this is the place to experiment with the angle
 
@@ -534,7 +521,7 @@ Function UnpackPassFailArray()
 Fend
 Function RotatedError(angle As Real)
 	
-	Real Xoffset, Yoffset
+	Real Xoffset, Yoffset, xerror, yerror
 
 	xerror = CX(PanelPickupError)
 	yerror = CY(PanelPickupError)
@@ -551,6 +538,28 @@ Function RotatedError(angle As Real)
 	Print "RotatedOffset", RotatedOffset
 	
 Fend
+Function findmu(pt1 As Real, pt2 As Real) As Real
+	
+Real x1, x2, y1, y2, dx, dy
+	
+x1 = PanelCordinates(pt1, 0)
+x2 = PanelCordinates(pt2, 0)
+y1 = PanelCordinates(pt1, 1)
+y2 = PanelCordinates(pt2, 1)
+
+dx = x2 - x1
+dy = y2 - y1
+
+If dx = 0 Or dy = 0 Then
+	Print "error calculating mu, dx or dy =0"
+	Pause
+EndIf
+
+findmu = Atan(Abs(dx / dy))
+
+Fend
+	
+	
 
 'Function RotatePanelOffset(angle As Real) 'in degrees
 '		

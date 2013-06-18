@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/06/17 18:00:24:684,DS:0000003657,CS:14357,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/18 17:35:39:966,DS:0000003657,CS:10259,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="6/17/2013 12:00:21 PM"
+	sLastModified="6/18/2013 11:35:36 AM"
 	bBuildComplete=True
 	bRebuildRequired=True
 	bClearControllerProject=False
@@ -66,19 +66,19 @@ ProgramFile7 {
 	sName="PopAndPush.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/17/2013 5:29:45 PM"
+	sTimeSavedInController="6/18/2013 5:12:28 PM"
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/17/2013 6:00:21 PM"
+	sTimeSavedInController="6/18/2013 5:35:36 PM"
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="6/17/2013 6:00:21 PM"
+	sTimeSavedInController="6/18/2013 3:44:20 PM"
 }
 nPointFileCount=1
 PointFile1 {
