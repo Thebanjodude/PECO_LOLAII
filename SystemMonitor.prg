@@ -192,6 +192,10 @@ Do While True
 		erOutMagUpSensorBad = False
 	EndIf
 	
+	If erLaserScanner = True Then
+		stackLightAlrmCC = True
+	EndIf
+	
 ' In this section I set the error in the main routine and the lights and pausing are changed here	
 
 If erPanelStatusUnknown = True Then

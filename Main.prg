@@ -4,9 +4,13 @@ Function main()
 	
 Integer NextState
 
-'PowerOnSequence() ' Initialize the system and prepare it to do a job
+PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
+
+Do While True
+	
+Loop
 
 mainCurrentState = StateIdle ' The first state is Idle
 jobStart = True 'fake
@@ -177,7 +181,7 @@ retry:
 
 	If CX(LaserCenter) = 0 Or CY(LaserCenter) = 0 Then
 		Print "calibration needed"
-		CalibrateLaserLocation()
+'		CalibrateLaserLocation()
 	EndIf
 	
 Fend

@@ -21,6 +21,9 @@ Function InspectPanel2()
 	
 	For j = 0 To recNumberOfHoles - 1 'j is the hole # we are on
 		
+		 currentInspectHole = j ' Use these to tell HMI the which hole we are working on.
+		 currentPreinspectHole = j
+		
 		If j <> 0 Then
 			IncrementIndex()
 			GetThetaR() ' get the next r and theta
@@ -346,22 +349,26 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
 	
 	Print #203, "PW" + "," + ProfileNumber$ ' Per laser scanner manual this is how you change profiles
 
-	Wait .4 ' wait for laser scanner to receive the command. This may be able to be shortened up
+	Wait .3 ' wait for laser scanner to receive the command. This may be able to be shortened up
+
+    i = ChkNet(203)
+    If i > 0 Then
+    	Read #203, response$, i
+    	Print response$
+    		If response$ = "PW" + Chr$(&hd) Then
+				erLaserScanner = False
+	      	Else
+	      		erLaserScanner = True
+	      		Print "Laser Scanner error"
+	      	EndIf
+	EndIf
 	
-'    i = ChkNet(203)
-'    If i > 0 Then
-'    	Read #203, response$, i
-'    	Print response$
-'    	NumTokens = ParseStr(response$, Tokens$(), ",")
-'	EndIf
-	
-	' check the responce here, compare it to what it should be. return boolean.
-	
+	 
 Fend
 Function GetLaserMeasurement(OutNumber$ As String) As Real
                 
     Integer i, NumTokens
-    String Tokens$(0), response$
+    String Tokens$(0), response$, responceCR$
     
 '	SetNet #203, "10.22.251.171", 7351, CRLF, NONE, 0
     
@@ -373,12 +380,22 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
 	Print #203, "MS,0," + OutNumber$
 	Wait .5
 	
+' This routine checks the buffer for a returned value from the laser scanner, 
+' checks for the correct responce from the laser and returns requested data.
     i = ChkNet(203)
     If i > 0 Then
     	Read #203, response$, i
+'    	Print response$ ' for testing
       	NumTokens = ParseStr(response$, Tokens$(), ",")
-  		GetLaserMeasurement = Val(Tokens$(1))
+	     	If response$ = "MS" + Chr$(&hd) Then ' throw an error if we dont get the proper responce
+	      		erLaserScanner = True
+	      		Print "Laser Scanner error"
+	      	Else
+	      		erLaserScanner = False
+	      	EndIf
+  		GetLaserMeasurement = Val(Tokens$(1)) ' return value
     EndIf
+
 
 Fend
 Function PrintPassFailArray()

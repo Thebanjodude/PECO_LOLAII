@@ -234,51 +234,81 @@ SpeedS 50
 Fend
 Function CalibrateLaserLocation()
 	
-Real eoatLegnth, EOATyerror
-Real x1, LaserXcoordinate, LaserYcoordinate
+Real eoatLegnth, EOATyerror, zoffset
+Real x1, LaserXcoordinate, LaserYcoordinate, LaserZcoordinate
 
-eoatLegnth = InTomm(12.5)
-Print "eoatLegnth", eoatLegnth
+'At the start LaserCalibrY is approx where the EAOT drop off is.
+
+eoatLegnth = InTomm(12.5) ' overall dim
 	
-Speed 5 'slow it down so we get a better reading
+Speed 25 'slow it down so we get a better reading
 SpeedS 50
+
+	Go PreScan :Z(-85) CP  ' Use CP so it's not jumpy			
+	ChangeProfile("12")
 	
-	Go PreScan :Z(-85) CP  ' Use CP so it's not jumpy
+	Move LaserCalibrY CP ' go to about where the drop off should be
+	Wait 1 ' wait for EOAT to settle
+	
+	EOATyerror = -1 * GetLaserMeasurement("01")
+	Print "EOATyerror", EOATyerror
+	Pause
+	Do Until Abs(EOATyerror) <= 0.01
+		LaserCalibrY = LaserCalibrY +Y(EOATyerror)
+		Go LaserCalibrY
+		Wait 1
+		EOATyerror = -1 * GetLaserMeasurement("01")
+		Print "EOATyerror", EOATyerror
+	Loop
+
+	Pause
+	
+	LaserYcoordinate = CY(LaserCalibrY) - 16.02 ' add the EOAT step offset	
+	LaserCalibrY = LaserCalibrY :Y(LaserYcoordinate)
+	Go LaserCalibrY
+	Wait .25
+	
+'	Print -1 * GetLaserMeasurement("01") 'test-error should be 16.02	
+	Print "LaserYcoordinate", LaserYcoordinate
+	Pause
+	
+	Go PreScan :Z(-85) CP  ' Use CP so it's not jump
 	Wait .25
 	
 	ChangeProfile("11")
-	Move LaserCalibrMax CP Till Sw(edgeDetectGoH)
+	Move LaserCalibrMax :Y(CY(LaserCalibrY)) CP Till Sw(edgeDetectGoH) ' capture the very tip of the EOAT
 
-	 If TillOn = True Then
+	 If TillOn = True Then ' if we get to Laser calibr then we missed 
 	 	Print "missed EOAT"
 	 EndIf
 		
-	x1 = CX(CurPos)
+	x1 = CX(CurPos) ' x1 is where we captured the tip
 	Print "x1", x1
 	
-	LaserXcoordinate = x1 - (eoatLegnth /2)
+	LaserXcoordinate = x1 - (eoatLegnth /2) ' distance between the quill center and laser
 	
 	Print "LaserXcoordinate", LaserXcoordinate
-
-	Go PreScan :Z(-85) CP  ' Use CP so it's not jumpy			
-	Wait .2
 	
-	ChangeProfile("12")
-	Move LaserCalibrY CP
-	Wait .2 ' wait for EOAT to settle
+	zoffset = GetLaserMeasurement("14")
+	LaserZcoordinate = CZ(LaserCalibrMax) + zoffset
 	
-'	EOATyerror = GetLaserMeasurement("01")
-	Print "EOATyerror", EOATyerror
-
-	LaserYcoordinate = CY(LaserCalibrY) + EOATyerror - InTomm(.63)
-	Print "LaserYcoordinate", LaserYcoordinate
-	Go LaserCalibrY +Y(EOATyerror)
+	zoffset = GetLaserMeasurement("14")
+	Do Until EOATyerror <= .02
+		zoffset = GetLaserMeasurement("14")
+		Print "zoffset", zoffset
+		LaserCalibrY = LaserCalibrY +Z(zoffset)
+		Go LaserCalibrY
+		Wait .25
+	Loop
 	
-	' It is important to know that LaserCenter is defined as 0,0 and
-	' populated by this function. It will remain 0,0 in the points table
-	' but the values are set in memory.
-	LaserCenter = LaserCenter :X(LaserXcoordinate) :Y(LaserYcoordinate)
-	Print LaserCEnter
+	Pause
+'	
+'	' It is important to know that LaserCenter is defined as 0,0 and
+'	' populated by this function. It will remain 0,0 in the points table
+'	' but the calibrated values are set in memory.
+'	
+'	LaserCenter = LaserCenter :X(LaserXcoordinate) :Y(LaserYcoordinate)
+'	Print "LaserCenter", LaserCenter
 	
 Fend
 	

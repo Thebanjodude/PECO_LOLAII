@@ -15,4 +15,22 @@
 > cos(0)
 !!Error: 3100, Syntax error.
 > hex$(a)
-
+hofs
+> hofs
+> hofs
+hofs
+-17621, -64906, 80543, -78273
+> hofs
+0, 0, 0, 0
+> hofs -17621, -64906,0,0
+> hofs
+-17621, -64906, 0, 0
+> calib 3,4
+> hofs
+-17621, -64906, -1332620, -1104133
+> motor On
+!!Error: 4025, Cannot execute a motion command during emergency stop condition.
+> motor ob'
+!!Error: 3100, Syntax error.
+> motor on
+> 

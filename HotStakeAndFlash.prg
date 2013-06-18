@@ -7,7 +7,6 @@ Function HotStakePanel() As Boolean
 	SystemStatus = InstallingInserts
 
 	Boolean SkippedHole
-	Integer k
 	Double AnvilOffset, CurrentZ
   	
 	PanelArrayIndex = 0 ' Reset Index
@@ -24,9 +23,9 @@ Function HotStakePanel() As Boolean
 	Jump LaserToHeatStake LimZ zLimit ' Take a safe path
 	Go PreHotStake CP
 
-	For k = 0 To recNumberOfHoles - 1
+	For currentHSHole = 0 To recNumberOfHoles - 1
 		
-		If k <> 0 Then
+		If currentHSHole <> 0 Then
 			IncrementIndex()
 			GetThetaR()
 		EndIf

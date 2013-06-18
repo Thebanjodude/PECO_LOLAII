@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/06/14 01:49:52:621,DS:0000004069,CS:22301,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/15 01:31:22:918,DS:0000004065,CS:16902,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=19
@@ -223,7 +223,7 @@ Point13 {
 	sLabel="LaserCalibrMax"
 	sDescription=""
 	rX=-516.803
-	rY=-50.8
+	rY=0
 	rZ=-75
 	rU=135
 	rV=0
