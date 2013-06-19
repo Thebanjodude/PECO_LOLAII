@@ -100,9 +100,6 @@ Trap 2 ' disarm trap
 Fend
 Function FindPickUpError() As Boolean
 	
-	Speed 10 'slow it down so we get a better reading
-	SpeedS 50
-	
 	Real dx, dy, dtheta
 	
 	PanelPickupError = PanelPickupError :X(0) :Y(0) :Z(0) :U(0) ' initialize to zero
@@ -110,11 +107,11 @@ Function FindPickUpError() As Boolean
 	Go PreScan CP  ' Use CP so it's not jumpy
 	Wait .25
 	
-	dy = FindYpickupError(0) ' Go to the zero hole and find the Y pick up error
-	dx = FindXpickupError(0) ' Find the X pick up error
+'	dy = FindYpickupError(0) ' Go to the zero hole and find the Y pick up error
+'	dx = FindXpickupError(0) ' Find the X pick up error
 
-	PanelPickupError = PanelPickupError :X(dx) :Y(dy) 'update error point
-	Print "PanelPickupError:", PanelPickupError
+'	PanelPickupError = PanelPickupError :X(dx) :Y(dy) 'update error point
+'	Print "PanelPickupError:", PanelPickupError
 'test-----	
 	r = PanelArray(0, 0)
 	theta = PanelArray(0, 1)
@@ -123,8 +120,8 @@ Function FindPickUpError() As Boolean
  	Pause
 '----------	
 	' when we rotate 90 deg then dx and dy switch
-	dx = FindXpickupError(4) ' Go to the zero hole and find the X pick up error
-	dy = FindYpickupError(4) ' Find the Y pick up error
+'	dx = FindXpickupError(4) ' Go to the zero hole and find the X pick up error
+'	dy = FindYpickupError(4) ' Find the Y pick up error
 	' If dx and dy were zero then there was no theta pick up error	
 	
 	dtheta = Atan(dy / dx) ' this is an area of suspicion
@@ -134,8 +131,8 @@ Function FindPickUpError() As Boolean
 	
 	' Now we need to go back to the first hole and find the real XY pick up error with the theta 	
 	'error accounted for
-	dy = FindYpickupError(0) ' go to the zero hole and find the Y pick up error
-	dx = FindXpickupError(0) ' Find the X pick up error
+'	dy = FindYpickupError(0) ' go to the zero hole and find the Y pick up error
+'	dx = FindXpickupError(0) ' Find the X pick up error
 	
 	PanelPickupError = PanelPickupError :X(dx) :Y(dy)  'update error point
 	Print "PanelPickupError:", PanelPickupError
@@ -148,42 +145,128 @@ Function FindPickUpError() As Boolean
 Fend
 Function FindYpickupError(holenumber As Integer) As Real
 	
+	Motor On
+	Power High
+	
 	' code somthing so when theta =! 0 for the first hole and theta=! 90 for the second
 	
-	Real dy1, dy2
+	Real dy1, dy2, XpickupError, YpickupError, AnvilOffset
+	
+	Jump PreScan CP LimZ zLimit  ' Use CP so it's not jumpy
+	
+	zLimit = 0 ' fake for testing
+	
+	GetPanelArray() ' fake for testing
+	DerivethetaR()
 	
 	r = PanelArray(holenumber, 0)
 	theta = PanelArray(holenumber, 1)
-		
+	
+	Print r, Theta
+	
 	' Add pickuperror point to the move?
-	Move Lasercenter +X(r) :U(Theta) +Y(FindYpickupError) ' Go to where we think the first hole is
-	ChangeProfile("")
-	dy1 = GetLaserMeasurement("")
-	dy2 = GetLaserMeasurement("")
+	HolecenterY = Lasercenter +X(r) :U(Theta + 45) ' guess where the first hole is
+	Move HolecenterY ' Go to where we think the first hole is
+	ChangeProfile("00")
+	Pause
+	dy1 = GetLaserMeasurement("03")
+	dy2 = GetLaserMeasurement("04")
+		
+'Do Until Abs((dy2 + dy1) / 2) <= .01 ' the error is +- .01mm
 
-	FindYpickupError = dy1 - dy2 ' calculate the y error
+	YpickupError = -(dy2 + dy1) / 2 ' calculate the y error	
+		
+	HolecenterY = HolecenterY +Y(YpickupError)
+	Move HolecenterY ' make the correction
+	Wait .25
+	dy1 = GetLaserMeasurement("03")
+	dy2 = GetLaserMeasurement("04")
+	Print "dy1,dy2", dy1, dy2 ' print for testing
 	
-Fend
-Function FindXpickupError(holenumber As Integer) As Real
+	If Abs((dy2 + dy1) / 2) <= .01 Then
+		Print "Ben, you need to go through the loop more times"
+	EndIf
+' if we loop we need to accumulare the error	
+'Loop
 	
-	' code somthing so when theta =! 0 for the first hole and theta=! 90 for the second
+	Print HolecenterY
 	
-	r = PanelArray(holenumber, 0) ' get theta and r
-	theta = PanelArray(holenumber, 1)
-	
-	ChangeProfile("") ' change to hole finding profile
-	Move Lasercenter +X(75) :U(Theta) CP Till Sw(holeDetectedH) ' move until we find the hole
+	Move HoleCenterY +X(25) ' pull back from the hole and then...
+	Move HolecenterY +X(-58) CP Till Sw(holeDetectedH) ' move until we find the hole center
+	 
+	Pause
 	
 	If TillOn = False Then ' if we didnt see a hole then throw and error
-		Print "missed edge"
+		Print "missed hole"
 		erPanelStatusUnknown = True
 	Else
 		erPanelStatusUnknown = False
 	EndIf
-
-	FindXpickupError = (CU(Here) - CX(LaserCenter)) - r ' calculate the dx error
+	
+	XpickupError = (CX(Here) - CX(LaserCenter)) - r ' calculate the dx error
+	Print "XpickupError,YpickupError", XpickupError, YpickupError
+	
+	Jump LaserToHeatStake LimZ zLimit 'jump to waypoint
+	Pause
+	P23 = HotStakeCenter -Y(Sin(DegToRad(45)) * PanelArray(0, RadiusColumn)) +X(Cos(DegToRad(45)) * PanelArray(0, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn))
+	Jump P23 LimZ zLimit
+	Pause
+	P23 = P23 +X(XpickupError) +Y(YpickupError)
+	Jump P23 LimZ zLimit
+	
+	SFree 1, 2
+	
+	AnvilOffset = 0
+	Do Until Sw(HSPanelPresntH) = True
+		Go P23 -Z(AnvilOffset)
+		AnvilOffset = AnvilOffset + 0.25
+	Loop
+	
+	SLock 1, 2
+	
+	Pause
+	Jump LaserToHeatStake LimZ zLimit 'jump to waypoint
+	P23 = HotStakeCenter -Y(Sin(DegToRad(45)) * PanelArray(8, RadiusColumn)) +X(Cos(DegToRad(45)) * PanelArray(8, RadiusColumn)) :U(PanelArray(8, ThetaColumn))
+	Pause
+	P23 = P23 +X(-XpickupError) +Y(-YpickupError)
+	Jump P23 LimZ zLimit
+	
+	AnvilOffset = 0
+	Do Until Sw(HSPanelPresntH) = True
+		Go P23 -Z(AnvilOffset)
+		AnvilOffset = AnvilOffset + 0.25
+	Loop
+	
+'	RotatedError(Theta)
+'	Print P23
+'	P23 = P23 + RotatedOffset
+'	Go P23
 
 Fend
+'Function FindXpickupError(holenumber As Integer) As Real
+'	
+'	' code somthing so when theta =! 0 for the first hole and theta=! 90 for the second\
+'	Speed 1 'slow it down so we get a better reading
+'	SpeedS 5
+'	Go PreScan CP  ' Use CP so it's not jumpy	
+'	
+'	r = PanelArray(holenumber, 0) ' get theta and r
+'	theta = PanelArray(holenumber, 1)
+'	
+'	ChangeProfile("00") ' change to hole finding profile
+'	Move Lasercenter :X(-475) :Y(-58.56) :U(Theta + 45) :Z(-14) CP Till Sw(holeDetectedH) ' move until we find the hole
+'	Pause
+'	If TillOn = False Then ' if we didnt see a hole then throw and error
+'		Print "missed edge"
+'		erPanelStatusUnknown = True
+'	Else
+'		erPanelStatusUnknown = False
+'	EndIf
+'
+'	FindXpickupError = (CU(Here) - CX(LaserCenter)) - r ' calculate the dx error
+'	Print "FindXpickupError", FindXpickupError
+'
+'Fend
 
 'Function FindPickUpError() As Boolean
 '	
@@ -335,37 +418,33 @@ SpeedS 50
 	ChangeProfile("12")
 	
 	Move LaserCalibrY CP ' go to about where the drop off should be
-	Wait 1 ' wait for EOAT to settle
+	Wait .5 ' wait for EOAT to settle
 	
 	EOATyerror = -1 * GetLaserMeasurement("01")
 	Print "EOATyerror", EOATyerror
-	Pause
-	Do Until Abs(EOATyerror) <= 0.01
+
+	Do Until Abs(EOATyerror) <= 0.02
 		LaserCalibrY = LaserCalibrY +Y(EOATyerror)
 		Go LaserCalibrY
 		Wait 1
 		EOATyerror = -1 * GetLaserMeasurement("01")
 		Print "EOATyerror", EOATyerror
 	Loop
-
 	Pause
 	
-	LaserYcoordinate = CY(LaserCalibrY) - 16.02 ' add the EOAT step offset	
+	LaserYcoordinate = CY(Here) - 16.02 ' add the EOAT step offset	
 	LaserCalibrY = LaserCalibrY :Y(LaserYcoordinate)
-	Go LaserCalibrY
-	Wait .25
-	
-'	Print -1 * GetLaserMeasurement("01") 'test-error should be 16.02	
 	Print "LaserYcoordinate", LaserYcoordinate
+	Go LaserCalibrY ' go to where the center of the EOAT is
 	Pause
 	
-	Go PreScan :Z(-85) CP  ' Use CP so it's not jump
+	Go PreScan :Z(-85) CP  ' Use CP so it's not jumpy
 	Wait .25
 	
 	ChangeProfile("11")
-	Move LaserCalibrMax :Y(CY(LaserCalibrY)) CP Till Sw(edgeDetectGoH) ' capture the very tip of the EOAT
+	Move LaserCalibrMax :Y(LaserYcoordinate) CP Till Sw(edgeDetectGoH) ' capture the very tip of the EOAT
 
-	 If TillOn = True Then ' if we get to Laser calibr then we missed 
+	 If TillOn = False Then ' if we get to Laser calibr then we missed 
 	 	Print "missed EOAT"
 	 EndIf
 		
@@ -376,17 +455,18 @@ SpeedS 50
 	
 	Print "LaserXcoordinate", LaserXcoordinate
 	
-	zoffset = GetLaserMeasurement("14")
-	LaserZcoordinate = CZ(LaserCalibrMax) + zoffset
-	
-	zoffset = GetLaserMeasurement("14")
-	Do Until EOATyerror <= .02
-		zoffset = GetLaserMeasurement("14")
-		Print "zoffset", zoffset
-		LaserCalibrY = LaserCalibrY +Z(zoffset)
-		Go LaserCalibrY
-		Wait .25
-	Loop
+' comment this out until it matters	
+'	zoffset = GetLaserMeasurement("15")
+'	LaserZcoordinate = CZ(LaserCalibrMax) + zoffset
+'	
+'	zoffset = GetLaserMeasurement("15")
+'	Do Until EOATyerror <= .02
+'		zoffset = GetLaserMeasurement("15")
+'		Print "zoffset", zoffset
+'		LaserCalibrY = LaserCalibrY +Z(zoffset)
+'		Go LaserCalibrY
+'		Wait .25
+'	Loop
 	
 	Pause
 '	
@@ -394,8 +474,8 @@ SpeedS 50
 '	' populated by this function. It will remain 0,0 in the points table
 '	' but the calibrated values are set in memory.
 '	
-'	LaserCenter = LaserCenter :X(LaserXcoordinate) :Y(LaserYcoordinate)
-'	Print "LaserCenter", LaserCenter
+	LaserCenter = LaserCenter :X(LaserXcoordinate) :Y(LaserYcoordinate) :Z(LaserZcoordinate)
+	Print "LaserCenter", LaserCenter
 	
 Fend
 	

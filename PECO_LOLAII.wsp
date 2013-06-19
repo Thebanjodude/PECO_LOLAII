@@ -1,26 +1,26 @@
-ENVT0100,LM:2013/06/18 17:55:15:989,DS:0000002469,CS:32109,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/19 04:02:01:992,DS:0000002473,CS:07000,MA:6C-F0-49-E2-45-75,EI:           
 sActiveChild="PopAndPush.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=11
-		nTop=26
-		nWidth=1034
-		nHeight=699
+		nLeft=74
+		nTop=28
+		nWidth=1033
+		nHeight=696
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=86
-		nTop=34
-		nWidth=1430
-		nHeight=727
+		nLeft=10
+		nTop=163
+		nWidth=1650
+		nHeight=679
 	}
 }
 ProgramFile3 {
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=382
-		nTop=17
-		nWidth=1128
-		nHeight=709
+		nLeft=180
+		nTop=109
+		nWidth=1125
+		nHeight=533
 	}
 }
 ProgramFile8 {
@@ -83,22 +83,22 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=226
-		nTop=37
-		nWidth=1373
-		nHeight=801
+		nLeft=63
+		nTop=78
+		nWidth=1035
+		nHeight=634
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=307
-		nTop=5
-		nWidth=1098
-		nHeight=693
+		nLeft=142
+		nTop=10
+		nWidth=1096
+		nHeight=689
 	}
 }
 nPointFileCount=1
@@ -115,22 +115,22 @@ PointFile1 {
 }
 sActiveWindow="main.prg"
 CmdWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=910
-		nTop=71
-		nWidth=696
-		nHeight=645
+		nLeft=385
+		nTop=17
+		nWidth=626
+		nHeight=782
 	}
-	nWinState=0
+	nWinState=1
 }
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=501
-		nTop=60
-		nWidth=1028
-		nHeight=722
+		nLeft=786
+		nTop=55
+		nWidth=723
+		nHeight=638
 	}
 }
 IOLabelEditor {
@@ -146,10 +146,10 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=279
-		nTop=176
+		nLeft=1018
+		nTop=298
 		nWidth=520
-		nHeight=444
+		nHeight=419
 	}
 }
 TaskMgr {
@@ -173,8 +173,8 @@ Macros {
 RobotMgr {
 	bOpened=False
 	Window {
-		nLeft=580
-		nTop=98
+		nLeft=107
+		nTop=183
 		nWidth=751
 		nHeight=485
 	}

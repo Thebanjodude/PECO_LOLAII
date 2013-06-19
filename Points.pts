@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/06/15 01:31:22:918,DS:0000004065,CS:16902,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/19 03:00:30:157,DS:0000004278,CS:04477,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=19
+nNumberOfPoints=20
 Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
@@ -9,7 +9,7 @@ Point1 {
 	rX=364.173
 	rY=417.83
 	rZ=-145
-	rU=45
+	rU=-45
 	rV=0
 	rW=0
 	nLocal=0
@@ -27,7 +27,7 @@ Point2 {
 	rX=364.173
 	rY=-214.63
 	rZ=-157
-	rU=45
+	rU=90
 	rV=0
 	rW=0
 	nLocal=0
@@ -45,7 +45,7 @@ Point3 {
 	rX=-441.706
 	rY=441.706
 	rZ=-10
-	rU=90
+	rU=135
 	rV=0
 	rW=0
 	nLocal=0
@@ -78,10 +78,10 @@ Point5 {
 	nNumber=4
 	sLabel="LaserCenter"
 	sDescription=""
-	rX=0
-	rY=0
-	rZ=-10
-	rU=135
+	rX=-616.038
+	rY=-51.09
+	rZ=-14
+	rU=45
 	rV=0
 	rW=0
 	nLocal=0
@@ -135,7 +135,7 @@ Point8 {
 	rX=-340
 	rY=-50.8
 	rZ=-10
-	rU=135
+	rU=45
 	rV=0
 	rW=0
 	nLocal=0
@@ -222,10 +222,10 @@ Point13 {
 	nNumber=13
 	sLabel="LaserCalibrMax"
 	sDescription=""
-	rX=-516.803
-	rY=0
+	rX=-515
+	rY=-50.8
 	rZ=-75
-	rU=135
+	rU=45
 	rV=0
 	rW=0
 	nLocal=0
@@ -261,7 +261,7 @@ Point15 {
 	rX=-235
 	rY=260
 	rZ=-10
-	rU=90
+	rU=0
 	rV=0
 	rW=0
 	nLocal=0
@@ -294,10 +294,10 @@ Point17 {
 	nNumber=17
 	sLabel="LaserCalibrY"
 	sDescription=""
-	rX=-493.603
-	rY=-26.657
-	rZ=-67.351
-	rU=135
+	rX=-493.65
+	rY=-34.908
+	rZ=-81.873
+	rU=45.106
 	rV=0
 	rW=0
 	nLocal=0
@@ -327,13 +327,31 @@ Point18 {
 	bSimVisible=False
 }
 Point19 {
+	nNumber=19
+	sLabel="HoleCenterY"
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point20 {
 	nNumber=20
 	sLabel="TempPickUp"
 	sDescription=""
-	rX=14.959
-	rY=359.082
-	rZ=-79.445
-	rU=-225
+	rX=345.918
+	rY=412.883
+	rZ=-260.028
+	rU=-46.47
 	rV=0
 	rW=0
 	nLocal=0

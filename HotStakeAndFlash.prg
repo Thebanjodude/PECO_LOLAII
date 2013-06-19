@@ -198,9 +198,9 @@ Function GetThetaR()
 Fend
 Function GetPanelArray() ' Hardcoded Array
 	
-	recNumberOfHoles = 16
+recNumberOfHoles = 16
 	
-'88555
+'88555 and 89294
 PanelCordinates(0, 0) = InTomm(8.8)
 PanelCordinates(1, 0) = InTomm(7.897)
 PanelCordinates(2, 0) = InTomm(5.543)

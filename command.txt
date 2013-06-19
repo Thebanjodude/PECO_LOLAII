@@ -33,4 +33,115 @@ hofs
 > motor ob'
 !!Error: 3100, Syntax error.
 > motor on
+> hofs
+-17621, -64906, -1332620, -1104133
+> calib 4
+> hofs
+-17621, -64906, -1332620, -903065
+> calib 4
+> hofs
+-17621, -64906, -1332620, -3057580
+> calib 4
+> hofs
+-17621, -64906, -1332620, -3059691
+> hofs
+-17621, -64906, -1332620, -3059691
+> calib 4
+> hofs
+-17621, -64906, -1332620, -3059976
+> hofs
+-17621, -64906, -1332620, -3059976
+> calib 4
+> hofs
+-17621, -64906, -1332620, -3307115
+> calib 4
+> hofs
+-17621, -64906, -1332620, -3307120
+> hofs
+-17621, -64906, -1332620, -3307120
+> calib 4
+> hofs
+-17621, -64906, -1332620, -3307120
+!!Error: 3100, Syntax error.
+> 
+> calib 4
+> hofs
+-17621, -64906, -1332620, -3426259
+> hofs
+-17621, -64906, -1332620, -3426259
+> calpls
+!!Error: 2225, CalPls is not defined.
+> calpls 4
+!!Error: 3101, Parameter count error.
+> ppls
+!!Error: 3100, Syntax error.
+> pulse
+PULSE:  1:  2165097 pls 2:  -955071 pls 3:  -995066 pls 4:     -156 pls 
+> pulse
+PULSE:  1:  2165096 pls 2:  -955071 pls 3:  -231868 pls 4:  -437511 pls 
+> pulse
+PULSE:  1:  2165096 pls 2:  -955071 pls 3:  -231868 pls 4:       -3 pls 
+> hofs
+-17621, -64906, -1332620, -3426259
+> hofs -17621, -64906, -1332620, 0
+> hofs
+-17621, -64906, -1332620, 0
+> enc 4
+!!Error: 3100, Syntax error.
+> encreset 4
+!!Error: 2234, Cannot reset the encoder with motor in the on state.
+> hofs -17621, -64906, -1332620, -3426259
+> hofs -17621, -64906, -1332620, 0
+> encreset 4
+> calib 4
+> hofs
+-17621, -64906, -1332620, -25946
+> pulse
+PULSE:  1:  2165096 pls 2:  -955071 pls 3:    90796 pls 4:       -1 pls 
+> hofs
+-17621, -64906, -1332620, -25946
+> pulse
+PULSE:  1:  2165096 pls 2:  -955071 pls 3:    90797 pls 4:       -2 pls 
+> hofs
+-17621, -64906, -1332620, -25946
+> encreset 3,4
+!!Error: 2234, Cannot reset the encoder with motor in the on state.
+> encreset 3,4
+> calib 3,4
+> hofs
+-17621, -64906, 93600, -29101
+> pulse
+PULSE:  1:  2134222 pls 2: -1088444 pls 3:       -1 pls 4:        0 pls 
+> hofs
+-17621, -64906, 93600, -29101
+> pulse
+PULSE:  1:    31766 pls 2:   -14621 pls 3:  -732030 pls 4:    19793 pls 
+> encreset 3,4
+!!Error: 2234, Cannot reset the encoder with motor in the on state.
+> encreset 3,4
+> pulse
+PULSE:  1:    31766 pls 2:   -14621 pls 3:   -76670 pls 4:    19800 pls 
+> hofs
+-17621, -64906, 93600, -29101
+> calib 3,4
+> hofs
+-17621, -64906, 16931, -9300
+> calib
+!!Error: 3101, Parameter count error.
+> pulse
+PULSE:  1:    31766 pls 2:   -14621 pls 3:       -1 pls 4:        0 pls 
+> encreset 3,4
+!!Error: 2234, Cannot reset the encoder with motor in the on state.
+> encreset 3,4
+> calib 3,4
+> pulse
+PULSE:  1:     -116 pls 2:     -140 pls 3:       -1 pls 4:        0 pls 
+> hofs
+-17621, -64906, 16910, -9295
+> encreset 3
+!!Error: 2234, Cannot reset the encoder with motor in the on state.
+> encreset 3
+> calib 3
+> hofs
+-17621, -64906, 120772, -9295
 > 
