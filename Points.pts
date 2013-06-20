@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/06/19 03:00:30:157,DS:0000004278,CS:04477,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/20 04:58:49:381,DS:0000004277,CS:11646,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=20
@@ -6,9 +6,9 @@ Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
 	sDescription=""
-	rX=364.173
+	rX=350.173
 	rY=417.83
-	rZ=-145
+	rZ=0
 	rU=-45
 	rV=0
 	rW=0
@@ -78,8 +78,8 @@ Point5 {
 	nNumber=4
 	sLabel="LaserCenter"
 	sDescription=""
-	rX=-616.038
-	rY=-51.09
+	rX=-616.238
+	rY=-50.532
 	rZ=-14
 	rU=45
 	rV=0
@@ -166,7 +166,7 @@ Point9 {
 }
 Point10 {
 	nNumber=9
-	sLabel="PanelPickupError"
+	sLabel="PanelPickupCorct"
 	sDescription=""
 	rX=0
 	rY=0
@@ -348,10 +348,10 @@ Point20 {
 	nNumber=20
 	sLabel="TempPickUp"
 	sDescription=""
-	rX=345.918
-	rY=412.883
-	rZ=-260.028
-	rU=-46.47
+	rX=364.181
+	rY=417.757
+	rZ=-256.156
+	rU=-44.961
 	rV=0
 	rW=0
 	nLocal=0

@@ -144,4 +144,10 @@ PULSE:  1:     -116 pls 2:     -140 pls 3:       -1 pls 4:        0 pls
 > calib 3
 > hofs
 -17621, -64906, 120772, -9295
+> atan2(7.897,2.593)
+!!Error: 3100, Syntax error.
+> Atan2(1,2)
+!!Error: 3100, Syntax error.
+> radtodeg(atan(.903/2.593)
+!!Error: 3100, Syntax error.
 > 

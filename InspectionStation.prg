@@ -37,7 +37,7 @@ Function InspectPanel2()
 		If Theta = 0 Or Theta = 90 Or Theta = 180 Or Theta = 270 Then
 			
 			Print Theta, r
-			RotatedError(Theta) ' Set RotatedOffset Point
+'			RotatedError(Theta) ' Set RotatedOffset Point
 			
 			P23 = (LaserCenter) +X(r) -U(Theta)
 			Print "p23 pre adjust", P23
@@ -65,10 +65,10 @@ Function InspectPanel2()
 			
 		If (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
 			
-			RotatedError(Theta)
+'			RotatedError(Theta)
 
 			phi = Theta + rho
-			RotatedError(phi)
+'			RotatedError(phi)
 			Print "phi:", phi
             P23 = (LaserCenter) +Y(r) -U(phi) + RotatedOffset
 
@@ -78,11 +78,11 @@ Function InspectPanel2()
 
 		ElseIf (90 < Theta And Theta < 180) Or (270 < Theta And Theta < 360) Then
 			If j <> 0 Then
-				RotatedError(Theta)
+'				RotatedError(Theta)
 			EndIf
 
 			phi = Theta - rho
-			RotatedError(phi)
+'			RotatedError(phi)
 			Print "phi:", phi
             P23 = (LaserCenter) +Y(r) -U(phi) + RotatedOffset
 
@@ -519,20 +519,23 @@ Function UnpackPassFailArray()
 	hole22PF = PassFailArray(22, LeftSpotFace) Or PassFailArray(22, RightSpotFace)
 	
 Fend
-Function RotatedError(angle As Real)
+Function RotatedError(HoleAngle As Real, StationAngle As Real)
 	
 	Real Xoffset, Yoffset, xerror, yerror
 
-	xerror = CX(PanelPickupError)
-	yerror = CY(PanelPickupError)
+'	xerror = CX(PanelPickupCorct)
+'	yerror = CY(PanelPickupCorct)
 	
-	Xoffset = -xerror * Cos(DegToRad(angle)) - yerror * Sin(DegToRad(angle))
-	Yoffset = -xerror * Sin(DegToRad(angle)) - yerror * Cos(DegToRad(angle))
+	Yoffset = -CX(PanelPickupCorct) 'switch the coordinates
+	Xoffset = CY(PanelPickupCorct)
 	
-	If angle = 90 Or angle = 270 Then
-'		Xoffset = -Xoffset 
-		Yoffset = -Yoffset
-	EndIf
+'	Xoffset = xerror * Cos(DegToRad(HoleAngle + StationAngle)) + yerror * Sin(DegToRad(HoleAngle + StationAngle))
+'	Yoffset = xerror * Sin(DegToRad(HoleAngle + StationAngle)) + yerror * Cos(DegToRad(HoleAngle + StationAngle))
+	
+'	If HoleAngle = 90 Or HoleAngle = 270 Then ' In the ppt pres it has this correction but I 
+''		Xoffset = -Xoffset 					' still am not sure its needed. We will see
+'		Yoffset = -Yoffset
+'	EndIf
 	
 	RotatedOffset = RotatedOffset :X(Xoffset) :Y(Yoffset)
 	Print "RotatedOffset", RotatedOffset
