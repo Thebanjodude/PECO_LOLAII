@@ -102,81 +102,136 @@ Function FindPickUpError() As Boolean
 	
 	Motor On ' fake for test
 	
-	Real x1, y1, x0, y0, dtheta, dx, dy, r1, r2
-	
+	Real x1, y1, x0, y0, dtheta, dx, dy, r1, r2, ThetaT, thetaE, thetaA
+	Real da
+	Integer i
 	PanelPickupCorct = PanelPickupCorct :X(0) :Y(0) :Z(0) :U(0) ' initialize to zero
 
 	Go PreScan CP  ' Use CP so it's not jumpy
 	Wait .25
+	ThetaT = CalculateThetaT(0, 8)
+	Print "ThetaT", ThetaT
 
-	FindYpickupError(0) ' Go to the zero hole and find the pick up error
-'	x0 = CX(PanelPickupCorct)
-'	Print x0
-'	y0 = CY(PanelPickupCorct)
-'	Print y0
-'	PanelPickupCorct = PanelPickupCorct :X(0) :Y(0) :Z(0) :U(0) 'reset
+'For i = 0 To 15
+	FindYpickupError(0, 0) ' Go to the zero hole and find the pick up error
+	hole0 = Here
+	x0 = CX(hole0)
+	Print "x0:", x0
+	y0 = CY(hole0)
+	Print "y0", y0
+	PanelPickupCorct = PanelPickupCorct :X(0) :Y(0) :Z(0) :U(0) 'reset
 	Print "going to hole 1"
-	FindYpickupError(1)
-'	x1 = CX(PanelPickupCorct)
-'	Print x1
-'	y1 = CY(PanelPickupCorct)
-'	Print y1
-'	dx = x1 - x0
-'	dy = y1 - y0
-'	
-'	Print dx, dy
-'	dtheta = RadToDeg(Atan(dy / dx))
-'	Print "dtheta", dtheta
+	Go PreScan CP
+	FindYpickupError(8, 0)
+'Next
+'	PrintCoordQuillArray()
+	hole1 = Here
+	x1 = CX(hole1)
+	Print "x1:", x1
+	y1 = CY(hole1)
+	Print "y1", y1
+	dx = x0 - x1
+	dy = y0 - y1
+	
+	Print dx, dy
+	thetaA = RadToDeg(Atan(dy / dx))
+	Print "thetaA", thetaA
+	
+	thetaE = thetaA - ThetaT
+	Print "ThetaE", ThetaE
+	
+	FindYpickupError(0, 90 - ThetaE) ' Go to the zero hole and find the pick up error
+	hole0 = Here
+	x0 = CX(hole0)
+	Print x0
+	y0 = CY(hole0)
+	Print y0
+	PanelPickupCorct = PanelPickupCorct :X(0) :Y(0) :Z(0) :U(0) 'reset
+	Print "going to hole 1"
+	FindYpickupError(8, 90 - ThetaE)
+	hole1 = Here
+		
+	x1 = CX(hole1)
+	Print x1
+	y1 = CY(hole1)
+	Print y1
+	dx = x0 - x1
+	dy = y0 - y1
+	
+	Print dx, dy
+	thetaA = RadToDeg(Atan(dy / dx))
+	Print "da", thetaA
+	
+	thetaE = thetaA - ThetaT
+	Print "ThetaE", ThetaE
+	
+	
 '	PanelPickupCorct = PanelPickupCorct :X(0) :Y(0) :Z(0) :U(-dtheta) ' initialize to zero 
 '	
 '	FindYpickupError(0) ' now go back to the first hole, see what the real errors are
 '	FindYpickupError(1) ' then go back to the other hole and test that its zero
 			
 Fend
-Function FindYpickupError(holenumber As Integer) As Real
+Function CalculateThetaT(Hole0 As Integer, Hole1 As Integer) As Real
+	
+	Real tHole0x, tHole0y, tHole1x, tHole1y
+	
+	GetPanelCoords()
+	
+	'pull the coordinates and assign them
+	tHole0x = PanelCordinates(Hole0, 0)
+	tHole0y = PanelCordinates(Hole0, 1)
+	tHole1x = PanelCordinates(Hole1, 0)
+	tHole1y = PanelCordinates(Hole1, 1)
+	
+	Print "dx", tHole0x - tHole1x
+	Print "dy", tHole0y - tHole1y
+	
+	'this is a special case for 180 deg apart
+	CalculateThetaT = RadToDeg(Atan((tHole0y - tHole1y) / (tHole0x - tHole1x))) ' find the theta between the holes
+	Print CalculateThetaT
+Fend
+Function FindYpickupError(holenumber As Integer, ThetaE As Real) As Real
 	
 	Motor On
 	Power Low
 	Real dy1, dy2, XpickupError, YpickupError, AnvilOffset, x0, y0, thetaerror
 	
-	Go PreScan CP
+'	Go PreScan CP
 	YpickupError = 0
 	XpickupError = 0
 	zLimit = 0 ' fake for testing
 	HolecenterY = HolecenterY :X(0) :Y(0) :U(0) :Z(0) 'reset
 	GetPanelArray() ' fake for testing
+	DerivethetaR() ' fake for testing
 
-	x0 = PanelCordinates(holenumber, 0) ' get hole coordinates
-	y0 = PanelCordinates(holenumber, 1)
+'	x0 = PanelCordinates(holenumber, 0) ' get hole coordinates
+'	y0 = PanelCordinates(holenumber, 1)
+
+	r = PanelArray(holenumber, 0)
+	theta = PanelArray(holenumber, 1)
+	Print "theta,r", Theta, r
 	
-	HolecenterY = Lasercenter +X(x0) +Y(y0) :U(45) '+ PanelPickupCorct  ' guess where the first hole is
+	HolecenterY = Lasercenter +X(r) :U(-Theta + 45 + ThetaE)
+'	HolecenterY = Lasercenter +X(x0) +Y(y0) :U(45 + ThetaE) '+ PanelPickupCorct  ' guess where the first hole is
 	Go HolecenterY  ' Go to where we think the first hole is
-	Print "Guess of hole", HolecenterY
+	Wait .25
 	ChangeProfile("00")
 	dy1 = GetLaserMeasurement("03")
 	dy2 = GetLaserMeasurement("04")
-'	Print "dy1,dy2", dy1, dy2 ' print for testing		
-		
-'Do Until Abs((dy2 + dy1) / 2) <= .01 ' the error is +- .01mm
 
 	YpickupError = -(dy2 + dy1) / 2 ' calculate the y error	negate so it moves to correct itself
-'	Print "YpickupError", YpickupError ' print for testing
-	Pause
+	
 	HolecenterY = HolecenterY +Y(YpickupError)
 	Move HolecenterY ' make the correction
-	Wait .1 ' wait for panel to settle under the laser
-'	dy1 = GetLaserMeasurement("03") ' get the y measurements
-'	dy2 = GetLaserMeasurement("04")
-'	Print "dy1,dy2", dy1, dy2 ' print for testing, should be close to zero (dy1+dy2=0)
+	Wait .25 ' wait for panel to settle under the laser
 	
 	If Abs(YpickupError) <= .01 Then
 		Print "Ben, you need to go through the loop more times!"
 	EndIf
-' if we loop we need to accumulare the error	
-'Loop
 	
 	Move HoleCenterY +X(25) ' pull back from the hole and then...
-	Move HolecenterY +X(-58) CP Till Sw(holeDetectedH) ' move until we find the hole center
+	Move HolecenterY +X(-45) CP Till Sw(holeDetectedH) ' move until we find the hole center
 	
 	If TillOn = False Then ' if we didnt see a hole then throw and error
 		Print "missed hole"
@@ -187,15 +242,16 @@ Function FindYpickupError(holenumber As Integer) As Real
 		erPanelStatusUnknown = False
 	EndIf
 	
-	XpickupError = CX(Here) - CX(LaserCenter) - x0
+'	XpickupError = CX(Here) - CX(LaserCenter) - x0
 	' if laser is calibrated wrong it will mess up the X error calculation
-'	Print "XpickupError,YpickupError", XpickupError, YpickupError
 
-	Print Here
+'	PanelPickupCorct = PanelPickupCorct :X(XpickupError) :Y(YpickupError) 'update error point
+'	Print "PanelPickupCorct", PanelPickupCorct
 	
-	PanelPickupCorct = PanelPickupCorct :X(XpickupError) :Y(YpickupError) 'update error point
-	Print "PanelPickupCorct", PanelPickupCorct
-	Pause
+	PanelCordinatesQuill(holenumber, 0) = CX(Here)
+	PanelCordinatesQuill(holenumber, 1) = CY(Here)
+	
+'	Pause
 '	Go PreScan CP
 '	Print "going to center"
 '	HolecenterY = Lasercenter +X(r) :U(-Theta + 45) + PanelPickupCorct '+ RotatedOffset
@@ -238,58 +294,58 @@ Function FindYpickupError(holenumber As Integer) As Real
 '	Go P23
 
 Fend
-Function FindYpickupError2(holenumber As Integer) As Real
-	
-	Motor On
-	Power Low
-	Real dy1, dy2, XpickupError, YpickupError, AnvilOffset, x0, y0, thetaerror
-	
-	Go PreScan CP
-	YpickupError = 0
-	XpickupError = 0
-	zLimit = 0 ' fake for testing
-	HolecenterY = HolecenterY :X(0) :Y(0) :U(0) :Z(0) 'reset
-	GetPanelArray() ' fake for testing
-	DerivethetaR()
-
-	r = PanelArray(holenumber, 0) ' get hole  info
-	theta = PanelArray(holenumber, 1)
-	
-	HolecenterY = Lasercenter +X(r) :U(-Theta - 45)
-	Go HolecenterY  ' Go to where we think the first hole is
-	ChangeProfile("00")
-	dy1 = GetLaserMeasurement("03")
-	dy2 = GetLaserMeasurement("04")
-
-	YpickupError = -(dy2 + dy1) / 2 ' calculate the y error	negate so it moves to correct itself
-'	Print "YpickupError", YpickupError ' print for testing
-	Pause
-	HolecenterY = HolecenterY +Y(YpickupError)
-	Move HolecenterY ' make the correction
-	Wait .1 ' wait for panel to settle under the laser
-	
-	Move HoleCenterY +X(25) ' pull back from the hole and then...
-	Move HolecenterY +X(-58) CP Till Sw(holeDetectedH) ' move until we find the hole center
-	
-	If TillOn = False Then ' if we didnt see a hole then throw and error
-		Print "missed hole"
-		erPanelStatusUnknown = True
-		Pause
-'		Go PreScan ' go to way point
-	Else
-		erPanelStatusUnknown = False
-	EndIf
-	
-	XpickupError = CX(Here) - CX(LaserCenter) - r
-	' if laser is calibrated wrong it will mess up the X error calculation
-'	Print "XpickupError,YpickupError", XpickupError, YpickupError
-
-	PanelPickupCorct = PanelPickupCorct :X(XpickupError) :Y(YpickupError) 'update error point
-	Print "PanelPickupCorct", PanelPickupCorct
-	
-	x = CX(Here)
-	y = CY(Here)
-	Theta = CU(Here)
+'Function FindYpickupError2(holenumber As Integer) As Real
+'	
+'	Motor On
+'	Power Low
+'	Real dy1, dy2, XpickupError, YpickupError, AnvilOffset, x0, y0, thetaerror
+'	
+'	Go PreScan CP
+'	YpickupError = 0
+'	XpickupError = 0
+'	zLimit = 0 ' fake for testing
+'	HolecenterY = HolecenterY :X(0) :Y(0) :U(0) :Z(0) 'reset
+'	GetPanelArray() ' fake for testing
+'	DerivethetaR()
+'
+'	r = PanelArray(holenumber, 0) ' get hole  info
+'	theta = PanelArray(holenumber, 1)
+'	
+'	HolecenterY = Lasercenter +X(r) :U(-Theta - 45)
+'	Go HolecenterY  ' Go to where we think the first hole is
+'	ChangeProfile("00")
+'	dy1 = GetLaserMeasurement("03")
+'	dy2 = GetLaserMeasurement("04")
+'
+'	YpickupError = -(dy2 + dy1) / 2 ' calculate the y error	negate so it moves to correct itself
+''	Print "YpickupError", YpickupError ' print for testing
+'	Pause
+'	HolecenterY = HolecenterY +Y(YpickupError)
+'	Move HolecenterY ' make the correction
+'	Wait .1 ' wait for panel to settle under the laser
+'	
+'	Move HoleCenterY +X(25) ' pull back from the hole and then...
+'	Move HolecenterY +X(-58) CP Till Sw(holeDetectedH) ' move until we find the hole center
+'	
+'	If TillOn = False Then ' if we didnt see a hole then throw and error
+'		Print "missed hole"
+'		erPanelStatusUnknown = True
+'		Pause
+''		Go PreScan ' go to way point
+'	Else
+'		erPanelStatusUnknown = False
+'	EndIf
+'	
+'	XpickupError = CX(Here) - CX(LaserCenter) - r
+'	' if laser is calibrated wrong it will mess up the X error calculation
+''	Print "XpickupError,YpickupError", XpickupError, YpickupError
+'
+'	PanelPickupCorct = PanelPickupCorct :X(XpickupError) :Y(YpickupError) 'update error point
+'	Print "PanelPickupCorct", PanelPickupCorct
+'	
+'	x = CX(Here)
+'	y = CY(Here)
+'	Theta = CU(Here)
 	
 	'put them into an array...
 '	Go PreScan CP
@@ -333,7 +389,7 @@ Function FindYpickupError2(holenumber As Integer) As Real
 '	P23 = P23 + RotatedOffset
 '	Go P23
 
-Fend
+'Fend
 Function CalibrateLaserLocation()
 	
 Real eoatLegnth, EOATyerror, zoffset

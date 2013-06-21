@@ -5,9 +5,7 @@ Function IOTableInputs()
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 Do While True
-	
 'Inputs
-flashHome = IOTableBooleans(Sw(FlashHomeH), MemSw(flashHomeFV), MemSw(flashHomeF))
 airPressHigh = IOTableBooleans(Sw(AirPressHighH), MemSw(airPressHighFV), MemSw(airPressHighF))
 airPressLow = IOTableBooleans(Sw(AirPressLowH), MemSw(airPressLowFV), MemSw(airPressLowF))
 backIntlock1 = IOTableBooleans(Sw(backIntlock1H), MemSw(backIntlock1FV), MemSw(backIntlock1F))
@@ -22,6 +20,8 @@ dc24vOK = IOTableBooleans(Sw(dc24vOKH), MemSw(dc24vOKFV), MemSw(dc24vOKF))
 edgeDetectGo = IOTableBooleans(Sw(edgeDetectGoH), MemSw(edgeDetectGoFV), MemSw(edgeDetectGoF))
 edgeDetectHi = IOTableBooleans(Sw(edgeDetectHiH), MemSw(edgeDetectHiFV), MemSw(edgeDetectHiF))
 edgeDetectLo = IOTableBooleans(Sw(edgeDetectLoH), MemSw(edgeDetectLoFV), MemSw(edgeDetectLoF))
+flashHomeNC = IOTableBooleans(Sw(FlashHomeNCH), MemSw(flashHomeNCFV), MemSw(flashHomeNCF))
+flashHomeNO = IOTableBooleans(Sw(FlashHomeNOH), MemSw(flashHomeNOFV), MemSw(flashHomeNOF))
 flashPnlPrsnt = IOTableBooleans(Sw(FlashPnlPrsntH), MemSw(FlashPnlPrsntFV), MemSw(FlashPnlPrsntF))
 frontIntlock1 = IOTableBooleans(Sw(frontIntlock1H), MemSw(frontIntlock1FV), MemSw(frontIntlock1F))
 frontIntlock2 = IOTableBooleans(Sw(frontIntlock2H), MemSw(frontIntlock2FV), MemSw(frontIntlock2F))
@@ -71,7 +71,7 @@ Function IOTableOutputs()
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 	
 Do While True
-'Dont Delete when updating----	
+'Dont Delete when updating-------------
 stackLightAlrm = IOTableBooleans(stackLightAlrmCC, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
 If stackLightAlrm = True Then
 	If alarmTog = True Then
@@ -86,12 +86,62 @@ Else
 	Off (stackLightAlrmH)
 	alarmTog = False
 EndIf
-'-------
+
+drillGo = IOTableBooleans(drillGoCC, MemSw(drillGoFV), MemSw(drillGoF))
+If drillGo = True Then
+
+	If GoFlag = False Then
+        On (DrillGoH), .25, 0
+        GoFlag = True
+    EndIf
+    
+    If DrillGoH = Off Then
+    	drillGoCC = False
+    	MemOff (drillGoFV)
+    	GoFlag = False
+    EndIf
+    
+    Else
+        Off (DrillGoH)
+        GoFlag = False
+ 	EndIf
+    
+drillReturn = IOTableBooleans(drillReturnCC, MemSw(drillReturnFV), MemSw(drillReturnF))
+If drillReturn = True Then
+
+	If ReturnFlag = False Then
+        On (DrillReturnH), .25, 0
+        ReturnFlag = True
+    EndIf
+    
+    If DrillReturnH = Off Then
+    	drillReturnCC = False
+    	MemOff (drillReturnFV)
+    	ReturnFlag = False
+    EndIf
+Else
+    Off (DrillReturnH)
+    ReturnFlag = False
+EndIf
+
+'---------------------
 debrisMtr = IOTableBooleans(debrisMtrCC, MemSw(debrisMtrFV), MemSw(debrisMtrF))
 If debrisMtr = True Then
         On (debrisMtrH)
     Else
         Off (debrisMtrH)
+    EndIf
+eStopReset = IOTableBooleans(eStopResetCC, MemSw(eStopResetFV), MemSw(eStopResetF))
+If eStopReset = True Then
+        On (eStopResetH)
+    Else
+        Off (eStopResetH)
+    EndIf
+heatStakeGo = IOTableBooleans(heatStakeGoCC, MemSw(heatStakeGoFV), MemSw(heatStakeGoF))
+If heatStakeGo = True Then
+        On (heatStakeGoH)
+    Else
+        Off (heatStakeGoH)
     EndIf
 inMagMtr = IOTableBooleans(inMagMtrCC, MemSw(inMagMtrFV), MemSw(inMagMtrF))
 If inMagMtr = True Then
@@ -117,42 +167,6 @@ If outMagMtrDir = True Then
     Else
         Off (outMagMtrDirH)
     EndIf
-drillGo = IOTableBooleans(drillGoCC, MemSw(drillGoFV), MemSw(drillGoF))
-If drillGo = True Then
-
-	If GoFlag = False Then
-        On (DrillGoH), .25, 0
-        GoFlag = True
-    EndIf
-    
-    If DrillGoH = Off Then
-    	drillGoCC = False
-    	MemOff (drillGoFV)
-    	GoFlag = False
-    EndIf
-    
-    Else
-        Off (DrillGoH)
-        GoFlag = False
-    EndIf
-drillReturn = IOTableBooleans(drillReturnCC, MemSw(drillReturnFV), MemSw(drillReturnF))
-If drillReturn = True Then
-
-	If ReturnFlag = False Then
-        On (DrillReturnH), .25, 0
-        ReturnFlag = True
-    EndIf
-    
-    If DrillReturnH = Off Then
-    	drillReturnCC = False
-    	MemOff (drillReturnFV)
-    	ReturnFlag = False
-    EndIf
-Else
-    Off (DrillReturnH)
-    ReturnFlag = False
-EndIf
-    
 stackLightAlrm = IOTableBooleans(stackLightAlrmCC, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
 If stackLightAlrm = True Then
         On (stackLightAlrmH)
@@ -179,11 +193,10 @@ If stackLightYel = True Then
     EndIf
 suctionCups = IOTableBooleans(suctionCupsCC, MemSw(suctionCupsFV), MemSw(suctionCupsF))
 If suctionCups = True Then
-        On (suctionCupsH), Forced
+        On (suctionCupsH)
     Else
         Off (suctionCupsH)
     EndIf
-    
 Loop
 
 errHandler:
@@ -238,7 +251,7 @@ Function IOTableReals(CtrlCodeValue As Real, HMIForceValue As Real, HMIForceFlag
 		Value = HMIForceValue ' Take forced value from HMI, overwrite control code
 	EndIf
 	
-	IOTableReals = Value ' Return Value
+	IOTableReals = value ' Return Value
 	
 Fend
 Function iotransfer()
@@ -258,7 +271,7 @@ Function iotransfer()
    	OnErr GoTo RetryConnection ' on any error retry connection
   
 RetryConnection:
-      	Wait 1.0 'send I/O once per second
+      	'Wait .5 'send I/O once per second
         If ChkNet(201) < 0 Then ' If port is not open
             OpenNet #201 As Client
             Print "Attempted Open TCP port to HMI"
@@ -289,11 +302,12 @@ Print #201, "{", Chr$(&H22) + "erDCPower" + Chr$(&H22), ":", Str$(erDCPower), "}
 Print #201, "{", Chr$(&H22) + "erDCPowerHeatStake" + Chr$(&H22), ":", Str$(erDCPowerHeatStake), "}",
 Print #201, "{", Chr$(&H22) + "erDebrisRemovalBreaker" + Chr$(&H22), ":", Str$(erDebrisRemovalBreaker), "}",
 Print #201, "{", Chr$(&H22) + "erEstop" + Chr$(&H22), ":", Str$(erEstop), "}",
+Print #201, "{", Chr$(&H22) + "erFlashStation" + Chr$(&H22), ":", Str$(erFlashStation), "}",
 Print #201, "{", Chr$(&H22) + "erFrontSafetyFrameOpen" + Chr$(&H22), ":", Str$(erFrontSafetyFrameOpen), "}",
 Print #201, "{", Chr$(&H22) + "erHeatStakeBreaker" + Chr$(&H22), ":", Str$(erHeatStakeBreaker), "}",
 Print #201, "{", Chr$(&H22) + "erHeatStakeTemp" + Chr$(&H22), ":", Str$(erHeatStakeTemp), "}",
 Print #201, "{", Chr$(&H22) + "erHighPressure" + Chr$(&H22), ":", Str$(erHighPressure), "}",
-'Print #201, "{", Chr$(&H22) + "erHMICommunication + Chr$(&H22), ":", Str$(erHMICommunication), "}",
+Print #201, "{", Chr$(&H22) + "erHMICommunication" + Chr$(&H22), ":", Str$(erHMICommunication), "}",
 Print #201, "{", Chr$(&H22) + "erHmiDataAck" + Chr$(&H22), ":", Str$(erHmiDataAck), "}",
 Print #201, "{", Chr$(&H22) + "erIllegalArmMove" + Chr$(&H22), ":", Str$(erIllegalArmMove), "}",
 Print #201, "{", Chr$(&H22) + "erInMagBreaker" + Chr$(&H22), ":", Str$(erInMagBreaker), "}",
@@ -320,10 +334,7 @@ Print #201, "{", Chr$(&H22) + "erRightSafetyFrameOpen" + Chr$(&H22), ":", Str$(e
 Print #201, "{", Chr$(&H22) + "erRobotNotAtHome" + Chr$(&H22), ":", Str$(erRobotNotAtHome), "}",
 Print #201, "{", Chr$(&H22) + "erSafetySystemBreaker" + Chr$(&H22), ":", Str$(erSafetySystemBreaker), "}",
 Print #201, "{", Chr$(&H22) + "erUnknown" + Chr$(&H22), ":", Str$(erUnknown), "}",
-Print #201, "{", Chr$(&H22) + "erWrongPanel" + Chr$(&H22), ":", Str$(erWrongPanel), "}",
-Print #201, "{", Chr$(&H22) + "erWrongPanelDims" + Chr$(&H22), ":", Str$(erWrongPanelDims), "}",
 Print #201, "{", Chr$(&H22) + "erWrongPanelHoles" + Chr$(&H22), ":", Str$(erWrongPanelHoles), "}",
-Print #201, "{", Chr$(&H22) + "erWrongPanelInsert" + Chr$(&H22), ":", Str$(erWrongPanelInsert), "}",
 Print #201, "{", Chr$(&H22) + "hole0L" + Chr$(&H22), ":", Str$(hole0L), "}",
 Print #201, "{", Chr$(&H22) + "hole0R" + Chr$(&H22), ":", Str$(hole0R), "}",
 Print #201, "{", Chr$(&H22) + "hole10L" + Chr$(&H22), ":", Str$(hole10L), "}",
@@ -374,7 +385,6 @@ Print #201, "{", Chr$(&H22) + "airPressHigh" + Chr$(&H22), ":", Str$(airPressHig
 Print #201, "{", Chr$(&H22) + "airPressLow" + Chr$(&H22), ":", Str$(airPressLow), "}",
 Print #201, "{", Chr$(&H22) + "backIntlock1" + Chr$(&H22), ":", Str$(backIntlock1), "}",
 Print #201, "{", Chr$(&H22) + "backIntlock2" + Chr$(&H22), ":", Str$(backIntlock2), "}",
-'Print #201, "{", Chr$(&H22) + "cbMonBowlFeder" + Chr$(&H22), ":", Str$(cbMonBowlFeder), "}",
 Print #201, "{", Chr$(&H22) + "cbMonDebrisRmv" + Chr$(&H22), ":", Str$(cbMonDebrisRmv), "}",
 Print #201, "{", Chr$(&H22) + "cbMonHeatStake" + Chr$(&H22), ":", Str$(cbMonHeatStake), "}",
 Print #201, "{", Chr$(&H22) + "cbMonInMag" + Chr$(&H22), ":", Str$(cbMonInMag), "}",
@@ -385,6 +395,8 @@ Print #201, "{", Chr$(&H22) + "dc24vOK" + Chr$(&H22), ":", Str$(dc24vOK), "}",
 Print #201, "{", Chr$(&H22) + "edgeDetectGo" + Chr$(&H22), ":", Str$(edgeDetectGo), "}",
 Print #201, "{", Chr$(&H22) + "edgeDetectHi" + Chr$(&H22), ":", Str$(edgeDetectHi), "}",
 Print #201, "{", Chr$(&H22) + "edgeDetectLo" + Chr$(&H22), ":", Str$(edgeDetectLo), "}",
+Print #201, "{", Chr$(&H22) + "flashHomeNC" + Chr$(&H22), ":", Str$(flashHomeNC), "}",
+Print #201, "{", Chr$(&H22) + "flashHomeNO" + Chr$(&H22), ":", Str$(flashHomeNO), "}",
 Print #201, "{", Chr$(&H22) + "flashPnlPrsnt" + Chr$(&H22), ":", Str$(FlashPnlPrsnt), "}",
 Print #201, "{", Chr$(&H22) + "frontIntlock1" + Chr$(&H22), ":", Str$(frontIntlock1), "}",
 Print #201, "{", Chr$(&H22) + "frontIntlock2" + Chr$(&H22), ":", Str$(frontIntlock2), "}",
@@ -409,19 +421,46 @@ Print #201, "{", Chr$(&H22) + "outMagUpLim" + Chr$(&H22), ":", Str$(outMagUpLim)
 Print #201, "{", Chr$(&H22) + "outMagUpLimN" + Chr$(&H22), ":", Str$(outMagUpLimN), "}",
 Print #201, "{", Chr$(&H22) + "rightIntlock" + Chr$(&H22), ":", Str$(rightIntlock), "}",
 Print #201, "{", Chr$(&H22) + "debrisMtr" + Chr$(&H22), ":", Str$(debrisMtr), "}",
+Print #201, "{", Chr$(&H22) + "drillGo" + Chr$(&H22), ":", Str$(drillGo), "}",
+Print #201, "{", Chr$(&H22) + "drillReturn" + Chr$(&H22), ":", Str$(drillReturn), "}",
+Print #201, "{", Chr$(&H22) + "eStopReset" + Chr$(&H22), ":", Str$(eStopReset), "}",
+Print #201, "{", Chr$(&H22) + "heatStakeGo" + Chr$(&H22), ":", Str$(heatStakeGo), "}",
 Print #201, "{", Chr$(&H22) + "inMagMtr" + Chr$(&H22), ":", Str$(inMagMtr), "}",
 Print #201, "{", Chr$(&H22) + "inMagMtrDir" + Chr$(&H22), ":", Str$(inMagMtrDir), "}",
 Print #201, "{", Chr$(&H22) + "outMagMtr" + Chr$(&H22), ":", Str$(outMagMtr), "}",
 Print #201, "{", Chr$(&H22) + "outMagMtrDir" + Chr$(&H22), ":", Str$(outMagMtrDir), "}",
-Print #201, "{", Chr$(&H22) + "drillGo" + Chr$(&H22), ":", Str$(drillGo), "}",
-Print #201, "{", Chr$(&H22) + "drillReturn" + Chr$(&H22), ":", Str$(drillReturn), "}",
 Print #201, "{", Chr$(&H22) + "stackLightAlrm" + Chr$(&H22), ":", Str$(stackLightAlrm), "}",
 Print #201, "{", Chr$(&H22) + "stackLightGrn" + Chr$(&H22), ":", Str$(stackLightGrn), "}",
 Print #201, "{", Chr$(&H22) + "stackLightRed" + Chr$(&H22), ":", Str$(stackLightRed), "}",
 Print #201, "{", Chr$(&H22) + "stackLightYel" + Chr$(&H22), ":", Str$(stackLightYel), "}",
 Print #201, "{", Chr$(&H22) + "suctionCups" + Chr$(&H22), ":", Str$(suctionCups), "}",
+Print #201, "{", Chr$(&H22) + "pas1inLoadInsertCylinder" + Chr$(&H22), ":", Str$(pas1inLoadInsertCylinder), "}",
+Print #201, "{", Chr$(&H22) + "pasBlowInsert" + Chr$(&H22), ":", Str$(pasBlowInsert), "}",
+Print #201, "{", Chr$(&H22) + "pasBowlDumpOpen" + Chr$(&H22), ":", Str$(pasBowlDumpOpen), "}",
+Print #201, "{", Chr$(&H22) + "pasBowlFeeder" + Chr$(&H22), ":", Str$(pasBowlFeeder), "}",
+Print #201, "{", Chr$(&H22) + "pasGoHome" + Chr$(&H22), ":", Str$(pasGoHome), "}",
+Print #201, "{", Chr$(&H22) + "pasHeadDown" + Chr$(&H22), ":", Str$(pasHeadDown), "}",
+Print #201, "{", Chr$(&H22) + "pasHeadUp" + Chr$(&H22), ":", Str$(pasHeadUp), "}",
+Print #201, "{", Chr$(&H22) + "pasInsertGripper" + Chr$(&H22), ":", Str$(pasInsertGripper), "}",
+Print #201, "{", Chr$(&H22) + "pasInsertType" + Chr$(&H22), ":", Str$(pasInsertType), "}",
+Print #201, "{", Chr$(&H22) + "pasMasterTemp" + Chr$(&H22), ":", Str$(pasMasterTemp), "}",
+Print #201, "{", Chr$(&H22) + "pasMaxTempOnOffZone1" + Chr$(&H22), ":", Str$(pasMaxTempOnOffZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasMaxTempOnOffZone2" + Chr$(&H22), ":", Str$(pasMaxTempOnOffZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasOnOffZone1" + Chr$(&H22), ":", Str$(pasOnOffZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasOnOffZone2" + Chr$(&H22), ":", Str$(pasOnOffZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasOTAOnOffZone1" + Chr$(&H22), ":", Str$(pasOTAOnOffZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasOTAOnOffZone2" + Chr$(&H22), ":", Str$(pasOTAOnOffZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasRemoteAlarmAcknowledge" + Chr$(&H22), ":", Str$(pasRemoteAlarmAcknowledge), "}",
+Print #201, "{", Chr$(&H22) + "pasResetHighTemp" + Chr$(&H22), ":", Str$(pasResetHighTemp), "}",
+Print #201, "{", Chr$(&H22) + "pasResetMax" + Chr$(&H22), ":", Str$(pasResetMax), "}",
+Print #201, "{", Chr$(&H22) + "pasSlideExtend" + Chr$(&H22), ":", Str$(pasSlideExtend), "}",
+Print #201, "{", Chr$(&H22) + "pasStartPIDTuneZone1" + Chr$(&H22), ":", Str$(pasStartPIDTuneZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasStartPIDTuneZone2" + Chr$(&H22), ":", Str$(pasStartPIDTuneZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasTempOnOff" + Chr$(&H22), ":", Str$(pasTempOnOff), "}",
+Print #201, "{", Chr$(&H22) + "pasVibTrack" + Chr$(&H22), ":", Str$(pasVibTrack), "}",
 Print #201, "{", Chr$(&H22) + "ctrlrErrAxisNumber" + Chr$(&H22), ":", Str$(ctrlrErrAxisNumber), "}",
-'Print #201, "{", Chr$(&H22) + "ctrlrErrMsg$" + Chr$(&H22), ":", Str$(ctrlrErrMsg), "}",
+'Print #201, "{", Chr$(&H22) + "ctrlrErrMsg" + Chr$(&H22), ":", Str$(ctrlrErrMsg), "}",
+Print #201, "{", Chr$(&H22) + "ctrlrErrorNum" + Chr$(&H22), ":", Str$(ctrlrErrorNum), "}",
 Print #201, "{", Chr$(&H22) + "ctrlrLineNumber" + Chr$(&H22), ":", Str$(ctrlrLineNumber), "}",
 Print #201, "{", Chr$(&H22) + "ctrlrTaskNumber" + Chr$(&H22), ":", Str$(ctrlrTaskNumber), "}",
 Print #201, "{", Chr$(&H22) + "errorStatus" + Chr$(&H22), ":", Str$(errorStatus), "}",
@@ -438,6 +477,10 @@ Print #201, "{", Chr$(&H22) + "pauseStatus" + Chr$(&H22), ":", Str$(pauseStatus)
 Print #201, "{", Chr$(&H22) + "safeGuardInput" + Chr$(&H22), ":", Str$(safeGuardInput), "}",
 Print #201, "{", Chr$(&H22) + "tasksRunningStatus" + Chr$(&H22), ":", Str$(tasksRunningStatus), "}",
 Print #201, "{", Chr$(&H22) + "teachModeStatus" + Chr$(&H22), ":", Str$(teachModeStatus), "}",
+Print #201, "{", Chr$(&H22) + "currentFlashHole" + Chr$(&H22), ":", Str$(currentFlashHole), "}",
+Print #201, "{", Chr$(&H22) + "currentHSHole" + Chr$(&H22), ":", Str$(currentHSHole), "}",
+Print #201, "{", Chr$(&H22) + "currentInspectHole" + Chr$(&H22), ":", Str$(currentInspectHole), "}",
+Print #201, "{", Chr$(&H22) + "currentPreinspectHole" + Chr$(&H22), ":", Str$(currentPreinspectHole), "}",
 Print #201, "{", Chr$(&H22) + "hole0PF" + Chr$(&H22), ":", Str$(hole0PF), "}",
 Print #201, "{", Chr$(&H22) + "hole10PF" + Chr$(&H22), ":", Str$(hole10PF), "}",
 Print #201, "{", Chr$(&H22) + "hole11PF" + Chr$(&H22), ":", Str$(hole11PF), "}",
@@ -464,10 +507,40 @@ Print #201, "{", Chr$(&H22) + "hole9PF" + Chr$(&H22), ":", Str$(hole9PF), "}",
 Print #201, "{", Chr$(&H22) + "inMagCurrentState" + Chr$(&H22), ":", Str$(inMagCurrentState), "}",
 Print #201, "{", Chr$(&H22) + "jobDone" + Chr$(&H22), ":", Str$(jobDone), "}",
 Print #201, "{", Chr$(&H22) + "jobNumPanelsDone" + Chr$(&H22), ":", Str$(jobNumPanelsDone), "}",
+Print #201, "{", Chr$(&H22) + "mainCurrentState" + Chr$(&H22), ":", Str$(mainCurrentState), "}",
 Print #201, "{", Chr$(&H22) + "outMagCurrentState" + Chr$(&H22), ":", Str$(outMagCurrentState), "}",
 Print #201, "{", Chr$(&H22) + "panelDataTxRdy" + Chr$(&H22), ":", Str$(panelDataTxRdy), "}",
-Print #201, "{", Chr$(&H22) + "systemState" + Chr$(&H22), ":", Str$(SystemState), "}",
-Print #201, "{", Chr$(&H22) + "mainCurrentState" + Chr$(&H22), ":", Str$(mainCurrentState), "}",
+Print #201, "{", Chr$(&H22) + "pasActualTempZone1" + Chr$(&H22), ":", Str$(pasActualTempZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasActualTempZone2" + Chr$(&H22), ":", Str$(pasActualTempZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasAlarmGroup" + Chr$(&H22), ":", Str$(pasAlarmGroup), "}",
+Print #201, "{", Chr$(&H22) + "pasCoolActual" + Chr$(&H22), ":", Str$(pasCoolActual), "}",
+Print #201, "{", Chr$(&H22) + "pasDwellActual" + Chr$(&H22), ":", Str$(pasDwellActual), "}",
+Print #201, "{", Chr$(&H22) + "pasHeadInsertpickupextend" + Chr$(&H22), ":", Str$(pasHeadinsertpickupextend), "}",
+Print #201, "{", Chr$(&H22) + "pasHeadInsertPickupRetract" + Chr$(&H22), ":", Str$(pasHeadinsertPickupRetract), "}",
+Print #201, "{", Chr$(&H22) + "pasHighTempAlarm" + Chr$(&H22), ":", Str$(pasHighTempAlarm), "}",
+Print #201, "{", Chr$(&H22) + "pasHome" + Chr$(&H22), ":", Str$(pasHome), "}",
+Print #201, "{", Chr$(&H22) + "pasInsertDetected" + Chr$(&H22), ":", Str$(pasInsertDetected), "}",
+Print #201, "{", Chr$(&H22) + "pasInsertInShuttle" + Chr$(&H22), ":", Str$(pasInsertInShuttle), "}",
+Print #201, "{", Chr$(&H22) + "pasInTempZone1" + Chr$(&H22), ":", Str$(pasInTempZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasInTempZone2" + Chr$(&H22), ":", Str$(pasInTempZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasLoadMeter" + Chr$(&H22), ":", Str$(pasLoadMeter), "}",
+Print #201, "{", Chr$(&H22) + "pasLowerlimit" + Chr$(&H22), ":", Str$(pasLowerlimit), "}",
+Print #201, "{", Chr$(&H22) + "pasMaxLoadmeter" + Chr$(&H22), ":", Str$(pasMaxLoadmeter), "}",
+Print #201, "{", Chr$(&H22) + "pasMaxTempZone1" + Chr$(&H22), ":", Str$(pasMaxTempZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasMaxTempZone2" + Chr$(&H22), ":", Str$(pasMaxTempZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasMCREStop" + Chr$(&H22), ":", Str$(pasMCREStop), "}",
+Print #201, "{", Chr$(&H22) + "pasMessageDB" + Chr$(&H22), ":", Str$(pasMessageDB), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupActualZone1" + Chr$(&H22), ":", Str$(pasPIDsetupActualZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupActualZone2" + Chr$(&H22), ":", Str$(pasPIDsetupActualZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPreHeatActual" + Chr$(&H22), ":", Str$(pasPreHeatActual), "}",
+Print #201, "{", Chr$(&H22) + "pasShuttleExtend" + Chr$(&H22), ":", Str$(pasShuttleExtend), "}",
+Print #201, "{", Chr$(&H22) + "pasShuttleLoadPosition" + Chr$(&H22), ":", Str$(pasShuttleLoadPosition), "}",
+Print #201, "{", Chr$(&H22) + "pasShuttleMidway" + Chr$(&H22), ":", Str$(pasShuttleMidway), "}",
+Print #201, "{", Chr$(&H22) + "pasShuttleNoLoad" + Chr$(&H22), ":", Str$(pasShuttleNoLoad), "}",
+Print #201, "{", Chr$(&H22) + "pasStart" + Chr$(&H22), ":", Str$(pasStart), "}",
+Print #201, "{", Chr$(&H22) + "pasSteelInsert" + Chr$(&H22), ":", Str$(pasSteelInsert), "}",
+Print #201, "{", Chr$(&H22) + "pasUpLimit" + Chr$(&H22), ":", Str$(pasUpLimit), "}",
+'Print #201, "{", Chr$(&H22) + "pasVerticalLocation" + Chr$(&H22), ":", Str$(pasVerticalLocation), "}",
 
 'dont delete when updating
 Print #201, "{", Chr$(&H22) + "monEstop1" + Chr$(&H22), ":", Str$(monEstop1), "}",
@@ -491,7 +564,7 @@ Function setVars(response$ As String)
 	
 	Select tokens$(0)
  'Rx from HMI:
-Case "alarmMuteBtn"
+ Case "alarmMuteBtn"
    If tokens$(1) = "true" Then
        alarmMuteBtn = True
        alarmMute = True
@@ -500,7 +573,7 @@ Case "alarmMuteBtn"
    EndIf
    Print "alarmMuteBtn:", alarmMuteBtn
 Case "backInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        backInterlockACKBtn = True
        backInterlockACK = True
    Else
@@ -508,7 +581,7 @@ Case "backInterlockACKBtn"
    EndIf
    Print "backInterlockACKBtn:", backInterlockACKBtn
 Case "frontInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        frontInterlockACKBtn = True
        frontInterlockACK = True
    Else
@@ -516,7 +589,7 @@ Case "frontInterlockACKBtn"
    EndIf
    Print "frontInterlockACKBtn:", frontInterlockACKBtn
 Case "inMagGoHomeBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        inMagGoHomeBtn = True
        inMagGoHome = True
    Else
@@ -524,7 +597,7 @@ Case "inMagGoHomeBtn"
    EndIf
    Print "inMagGoHomeBtn:", inMagGoHomeBtn
 Case "inMagIntLockAckBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        inMagIntLockAckBtn = True
        inMagIntLockAck = True
    Else
@@ -532,7 +605,7 @@ Case "inMagIntLockAckBtn"
    EndIf
    Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
 Case "inMagLoadedBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        inMagLoadedBtn = True
        inMagLoaded = True
    Else
@@ -540,7 +613,7 @@ Case "inMagLoadedBtn"
    EndIf
    Print "inMagLoadedBtn:", inMagLoadedBtn
 Case "jobAbortBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        jobAbortBtn = True
        jobAbort = True
    Else
@@ -548,7 +621,7 @@ Case "jobAbortBtn"
    EndIf
    Print "jobAbortBtn:", jobAbortBtn
 Case "jobStartBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        jobStartBtn = True
        jobStart = True
    Else
@@ -556,7 +629,7 @@ Case "jobStartBtn"
    EndIf
    Print "jobStartBtn:", jobStartBtn
 Case "leftInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        leftInterlockACKBtn = True
        leftInterlockACK = True
    Else
@@ -564,7 +637,7 @@ Case "leftInterlockACKBtn"
    EndIf
    Print "leftInterlockACKBtn:", leftInterlockACKBtn
 Case "outMagGoHomeBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        outMagGoHomeBtn = True
        outMagGoHome = True
    Else
@@ -572,7 +645,7 @@ Case "outMagGoHomeBtn"
    EndIf
    Print "outMagGoHomeBtn:", outMagGoHomeBtn
 Case "outMagIntLockAckBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        outMagIntLockAckBtn = True
        outMagIntLockAck = True
    Else
@@ -580,7 +653,7 @@ Case "outMagIntLockAckBtn"
    EndIf
    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 Case "outMagUnloadedBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        outMagUnloadedBtn = True
        outMagUnloaded = True
    Else
@@ -588,7 +661,7 @@ Case "outMagUnloadedBtn"
    EndIf
    Print "outMagUnloadedBtn:", outMagUnloadedBtn
 Case "panelDataTxACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        panelDataTxACKBtn = True
        panelDataTxACK = True
    Else
@@ -596,7 +669,7 @@ Case "panelDataTxACKBtn"
    EndIf
    Print "panelDataTxACKBtn:", panelDataTxACKBtn
 Case "rightInterlockACKBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        rightInterlockACKBtn = True
        rightInterlockACK = True
    Else
@@ -604,7 +677,7 @@ Case "rightInterlockACKBtn"
    EndIf
    Print "rightInterlockACKBtn:", rightInterlockACKBtn
 Case "sftyFrmIlockAckBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        sftyFrmIlockAckBtn = True
        sftyFrmIlockAck = True
    Else
@@ -612,21 +685,21 @@ Case "sftyFrmIlockAckBtn"
    EndIf
    Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
 Case "hole0X"
-    PanelCordinates(0, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(0, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole0Y"
-    PanelCordinates(0, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(0, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole10X"
-    PanelCordinates(10, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(10, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole10Y"
-    PanelCordinates(10, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(10, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole11X"
-    PanelCordinates(11, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(11, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole11Y"
-    PanelCordinates(11, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(11, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole12X"
-    PanelCordinates(12, 0) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(12, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole12Y"
-    PanelCordinates(12, 1) = Val(Tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
+    PanelCordinates(12, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole13X"
     PanelCordinates(13, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "hole13Y"
@@ -870,6 +943,30 @@ Case "edgeDetectLoFV"
         MemOn (edgeDetectLoFV)
     Else
         MemOff (edgeDetectLoFV)
+    EndIf
+Case "flashHomeNCF"
+    If tokens$(1) = "true" Then
+        MemOn (flashHomeNCF)
+    Else
+        MemOff (flashHomeNCF)
+    EndIf
+Case "flashHomeNCFV"
+    If tokens$(1) = "true" Then
+        MemOn (flashHomeNCFV)
+    Else
+        MemOff (flashHomeNCFV)
+    EndIf
+Case "flashHomeNOF"
+    If tokens$(1) = "true" Then
+        MemOn (flashHomeNOF)
+    Else
+        MemOff (flashHomeNOF)
+    EndIf
+Case "flashHomeNOFV"
+    If tokens$(1) = "true" Then
+        MemOn (flashHomeNOFV)
+    Else
+        MemOff (flashHomeNOFV)
     EndIf
 Case "flashPnlPrsntF"
     If tokens$(1) = "true" Then
@@ -1159,6 +1256,54 @@ Case "debrisMtrFV"
     Else
         MemOff (debrisMtrFV)
     EndIf
+Case "drillGoF"
+    If tokens$(1) = "true" Then
+        MemOn (drillGoF)
+    Else
+        MemOff (drillGoF)
+    EndIf
+Case "drillGoFV"
+    If tokens$(1) = "true" Then
+        MemOn (drillGoFV)
+    Else
+        MemOff (drillGoFV)
+    EndIf
+Case "drillReturnF"
+    If tokens$(1) = "true" Then
+        MemOn (drillReturnF)
+    Else
+        MemOff (drillReturnF)
+    EndIf
+Case "drillReturnFV"
+    If tokens$(1) = "true" Then
+        MemOn (drillReturnFV)
+    Else
+        MemOff (drillReturnFV)
+    EndIf
+Case "eStopResetF"
+    If tokens$(1) = "true" Then
+        MemOn (eStopResetF)
+    Else
+        MemOff (eStopResetF)
+    EndIf
+Case "eStopResetFV"
+    If tokens$(1) = "true" Then
+        MemOn (eStopResetFV)
+    Else
+        MemOff (eStopResetFV)
+    EndIf
+Case "heatStakeGoF"
+    If tokens$(1) = "true" Then
+        MemOn (heatStakeGoF)
+    Else
+        MemOff (heatStakeGoF)
+    EndIf
+Case "heatStakeGoFV"
+    If tokens$(1) = "true" Then
+        MemOn (heatStakeGoFV)
+    Else
+        MemOff (heatStakeGoFV)
+    EndIf
 Case "inMagMtrF"
     If tokens$(1) = "true" Then
         MemOn (inMagMtrF)
@@ -1184,52 +1329,28 @@ Case "inMagMtrDirFV"
         MemOff (inMagMtrDirFV)
     EndIf
 Case "outMagMtrF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagMtrF)
     Else
         MemOff (outMagMtrF)
     EndIf
 Case "outMagMtrFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagMtrFV)
     Else
         MemOff (outMagMtrFV)
     EndIf
 Case "outMagMtrDirF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagMtrDirF)
     Else
         MemOff (outMagMtrDirF)
     EndIf
 Case "outMagMtrDirFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagMtrDirFV)
     Else
         MemOff (outMagMtrDirFV)
-    EndIf
-Case "drillGoF"
-    If Tokens$(1) = "true" Then
-        MemOn (drillGoF)
-    Else
-        MemOff (drillGoF)
-    EndIf
-Case "drillGoFV"
-    If Tokens$(1) = "true" Then
-        MemOn (drillGoFV)
-    Else
-        MemOff (drillGoFV)
-    EndIf
-Case "drillReturnF"
-    If tokens$(1) = "true" Then
-        MemOn (drillReturnF)
-    Else
-        MemOff (drillReturnF)
-    EndIf
-Case "drillReturnFV"
-    If tokens$(1) = "true" Then
-        MemOn (drillReturnFV)
-    Else
-        MemOff (drillReturnFV)
     EndIf
 Case "stackLightAlrmF"
     If tokens$(1) = "true" Then
@@ -1286,23 +1407,159 @@ Case "suctionCupsF"
         MemOff (suctionCupsF)
     EndIf
 Case "suctionCupsFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (suctionCupsFV)
     Else
         MemOff (suctionCupsFV)
     EndIf
 Case "anvilZlimit"
-    AnvilZlimit = Val(Tokens$(1))
+    AnvilZlimit = Val(tokens$(1))
     Print "anvilZlimit:", AnvilZlimit
 Case "flashDwellTime"
-    flashDwellTime = Val(Tokens$(1))
+    flashDwellTime = Val(tokens$(1))
     Print "flashDwellTime:", flashDwellTime
 Case "insertDepthTolerance"
-    insertDepthTolerance = Val(Tokens$(1))
+    insertDepthTolerance = Val(tokens$(1))
     Print "insertDepthTolerance:", insertDepthTolerance
 Case "jobNumPanels"
-    jobNumPanels = Val(Tokens$(1))
+    jobNumPanels = Val(tokens$(1))
     Print "jobNumPanels:", jobNumPanels
+Case "pasCool"
+    pasCool = Val(tokens$(1))
+    Print "pasCool:", pasCool
+Case "pasDwell"
+    pasDwell = Val(tokens$(1))
+    Print "pasDwell:", pasDwell
+Case "pasHeatStakingIPM"
+    pasHeatStakingIPM = Val(tokens$(1))
+    Print "pasHeatStakingIPM:", pasHeatStakingIPM
+Case "pasHomeIPM"
+    pasHomeIPM = Val(tokens$(1))
+    Print "pasHomeIPM:", pasHomeIPM
+Case "pasInsertDepth"
+    pasInsertDepth = Val(tokens$(1))
+    Print "pasInsertDepth:", pasInsertDepth
+Case "pasInsertEngage"
+    pasInsertEngage = Val(tokens$(1))
+    Print "pasInsertEngage:", pasInsertEngage
+Case "pasInsertEngageIPM"
+    pasInsertEngageIPM = Val(tokens$(1))
+    Print "pasInsertEngageIPM:", pasInsertEngageIPM
+Case "pasInsertPickupIPM"
+    pasInsertPickupIPM = Val(tokens$(1))
+    Print "pasInsertPickupIPM:", pasInsertPickupIPM
+Case "pasInsertPosition"
+    pasInsertPosition = Val(tokens$(1))
+    Print "pasInsertPosition:", pasInsertPosition
+Case "pasInsertPreheat"
+    pasInsertPreheat = Val(tokens$(1))
+    Print "pasInsertPreheat:", pasInsertPreheat
+Case "pasJogSpeed"
+    pasJogSpeed = Val(tokens$(1))
+    Print "pasJogSpeed:", pasJogSpeed
+Case "pasPIDsetupDZone1"
+    pasPIDsetupDZone1 = Val(tokens$(1))
+    Print "pasPIDsetupDZone1:", pasPIDsetupDZone1
+Case "pasPIDsetupDZone2"
+    pasPIDsetupDZone2 = Val(tokens$(1))
+    Print "pasPIDsetupDZone2:", pasPIDsetupDZone2
+Case "pasPIDsetupInTempZone1"
+    pasPIDsetupInTempZone1 = Val(tokens$(1))
+    Print "pasPIDsetupInTempZone1:", pasPIDsetupInTempZone1
+Case "pasPIDsetupInTempZone2"
+    pasPIDsetupInTempZone2 = Val(tokens$(1))
+    Print "pasPIDsetupInTempZone2:", pasPIDsetupInTempZone2
+Case "pasPIDsetupIZone1"
+    pasPIDsetupIZone1 = Val(tokens$(1))
+    Print "pasPIDsetupIZone1:", pasPIDsetupIZone1
+Case "pasPIDsetupIZone2"
+    pasPIDsetupIZone2 = Val(tokens$(1))
+    Print "pasPIDsetupIZone2:", pasPIDsetupIZone2
+Case "pasPIDsetupMaxTempZone1"
+    pasPIDsetupMaxTempZone1 = Val(tokens$(1))
+    Print "pasPIDsetupMaxTempZone1:", pasPIDsetupMaxTempZone1
+Case "pasPIDsetupMaxTempZone2"
+    pasPIDsetupMaxTempZone2 = Val(tokens$(1))
+    Print "pasPIDsetupMaxTempZone2:", pasPIDsetupMaxTempZone2
+Case "pasPIDsetupOffsetZone1"
+    pasPIDsetupOffsetZone1 = Val(tokens$(1))
+    Print "pasPIDsetupOffsetZone1:", pasPIDsetupOffsetZone1
+Case "pasPIDsetupOffsetZone2"
+    pasPIDsetupOffsetZone2 = Val(tokens$(1))
+    Print "pasPIDsetupOffsetZone2:", pasPIDsetupOffsetZone2
+Case "pasPIDsetupPZone1"
+    pasPIDsetupPZone1 = Val(tokens$(1))
+    Print "pasPIDsetupPZone1:", pasPIDsetupPZone1
+Case "pasPIDsetupPZone2"
+    pasPIDsetupPZone2 = Val(tokens$(1))
+    Print "pasPIDsetupPZone2:", pasPIDsetupPZone2
+Case "pasPIDsetupSetPointZone1"
+    pasPIDsetupSetPointZone1 = Val(tokens$(1))
+    Print "pasPIDsetupSetPointZone1:", pasPIDsetupSetPointZone1
+Case "pasPIDsetupSetPointZone2"
+    pasPIDsetupSetPointZone2 = Val(tokens$(1))
+    Print "pasPIDsetupSetPointZone2:", pasPIDsetupSetPointZone2
+Case "pasPIDShowDZone1"
+    pasPIDShowDZone1 = Val(tokens$(1))
+    Print "pasPIDShowDZone1:", pasPIDShowDZone1
+Case "pasPIDShowDZone2"
+    pasPIDShowDZone2 = Val(tokens$(1))
+    Print "pasPIDShowDZone2:", pasPIDShowDZone2
+Case "pasPIDShowIZone1"
+    pasPIDShowIZone1 = Val(tokens$(1))
+    Print "pasPIDShowIZone1:", pasPIDShowIZone1
+Case "pasPIDShowIZone2"
+    pasPIDShowIZone2 = Val(tokens$(1))
+    Print "pasPIDShowIZone2:", pasPIDShowIZone2
+Case "pasPIDShowPZone1"
+    pasPIDShowPZone1 = Val(tokens$(1))
+    Print "pasPIDShowPZone1:", pasPIDShowPZone1
+Case "pasPIDShowPZone2"
+    pasPIDShowPZone2 = Val(tokens$(1))
+    Print "pasPIDShowPZone2:", pasPIDShowPZone2
+Case "pasPIDTuneDoneZone1"
+    If tokens$(1) = "true" Then
+        pasPIDTuneDoneZone1 = True
+    Else
+        pasPIDTuneDoneZone1 = False
+    EndIf
+    Print "pasPIDTuneDoneZone1:", pasPIDTuneDoneZone1
+Case "pasPIDTuneDoneZone3"
+    If tokens$(1) = "true" Then
+        pasPIDTuneDoneZone3 = True
+    Else
+        pasPIDTuneDoneZone3 = False
+    EndIf
+    Print "pasPIDTuneDoneZone3:", pasPIDTuneDoneZone3
+Case "pasPIDTuneFailZone1"
+    If tokens$(1) = "true" Then
+        pasPIDTuneFailZone1 = True
+    Else
+        pasPIDTuneFailZone1 = False
+    EndIf
+    Print "pasPIDTuneFailZone1:", pasPIDTuneFailZone1
+Case "pasPIDTuneFailZone2"
+    If tokens$(1) = "true" Then
+        pasPIDTuneFailZone2 = True
+    Else
+        pasPIDTuneFailZone2 = False
+    EndIf
+    Print "pasPIDTuneFailZone2:", pasPIDTuneFailZone2
+Case "pasRecipe"
+    pasRecipe = Val(tokens$(1))
+    Print "pasRecipe:", pasRecipe
+Case "pasSetTempZone1"
+    pasSetTempZone1 = Val(tokens$(1))
+    Print "pasSetTempZone1:", pasSetTempZone1
+Case "pasSetTempZone2"
+    pasSetTempZone2 = Val(tokens$(1))
+    Print "pasSetTempZone2:", pasSetTempZone2
+Case "pasSoftHome"
+    pasSoftHome = Val(tokens$(1))
+    Print "pasSoftHome:", pasSoftHome
+Case "pasSoftStop"
+    pasSoftStop = Val(tokens$(1))
+    Print "pasSoftStop:", pasSoftStop
 Case "recFlashRequired"
     If tokens$(1) = "true" Then
         recFlashRequired = True
@@ -1310,6 +1567,9 @@ Case "recFlashRequired"
         recFlashRequired = False
     EndIf
     Print "recFlashRequired:", recFlashRequired
+Case "recInmagPickupOffset"
+    recInmagPickupOffset = Val(tokens$(1))
+    Print "recInmagPickupOffset:", recInmagPickupOffset
 Case "recInsertDepth"
     recInsertDepth = Val(tokens$(1))
     Print "recInsertDepth:", recInsertDepth
@@ -1319,6 +1579,9 @@ Case "recInsertType"
 Case "recNumberOfHoles"
     recNumberOfHoles = Val(tokens$(1))
     Print "recNumberOfHoles:", recNumberOfHoles
+Case "recOutmagPickupOffset"
+    recOutmagPickupOffset = Val(tokens$(1))
+    Print "recOutmagPickupOffset:", recOutmagPickupOffset
 Case "recPanelThickness"
     recPanelThickness = Val(tokens$(1))
     Print "recPanelThickness:", recPanelThickness
@@ -1334,6 +1597,224 @@ Case "systemSpeed"
 Case "zlimit"
     zLimit = Val(tokens$(1))
     Print "zlimit:", zLimit
+Case "pas1inLoadInsertCylinderBtn"
+   If tokens$(1) = "true" Then
+       pas1inLoadInsertCylinderBtn = True
+       MBWrite(pas1inLoadInsertCylinderAddr, 1, MBTypeCoil)
+   Else
+       pas1inLoadInsertCylinderBtn = False
+       MBWrite(pas1inLoadInsertCylinderAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pas1inLoadInsertCylinderBtn:", pas1inLoadInsertCylinderBtn
+Case "pasBlowInsertBtn"
+   If tokens$(1) = "true" Then
+       pasBlowInsertBtn = True
+       MBWrite(pasBlowInsertAddr, 1, MBTypeCoil)
+   Else
+       pasBlowInsertBtn = False
+       MBWrite(pasBlowInsertAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasBlowInsertBtn:", pasBlowInsertBtn
+Case "pasBowlDumpOpenBtn"
+   If tokens$(1) = "true" Then
+       pasBowlDumpOpenBtn = True
+       MBWrite(pasBowlDumpOpenAddr, 1, MBTypeCoil)
+   Else
+       pasBowlDumpOpenBtn = False
+       MBWrite(pasBowlDumpOpenAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasBowlDumpOpenBtn:", pasBowlDumpOpenBtn
+Case "pasBowlFeederBtn"
+   If tokens$(1) = "true" Then
+       pasBowlFeederBtn = True
+       MBWrite(pasBowlFeederAddr, 1, MBTypeCoil)
+   Else
+       pasBowlFeederBtn = False
+       MBWrite(pasBowlFeederAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasBowlFeederBtn:", pasBowlFeederBtn
+Case "pasGoHomeBtn"
+   If tokens$(1) = "true" Then
+       pasGoHomeBtn = True
+       MBWrite(pasGoHomeAddr, 1, MBTypeCoil)
+   Else
+       pasGoHomeBtn = False
+       MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasGoHomeBtn:", pasGoHomeBtn
+Case "pasHeadDownBtn"
+   If tokens$(1) = "true" Then
+       pasHeadDownBtn = True
+       MBWrite(pasHeadDownAddr, 1, MBTypeCoil)
+   Else
+       pasHeadDownBtn = False
+       MBWrite(pasHeadDownAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasHeadDownBtn:", pasHeadDownBtn
+Case "pasHeadUpBtn"
+   If tokens$(1) = "true" Then
+       pasHeadUpBtn = True
+       MBWrite(pasHeadUpAddr, 1, MBTypeCoil)
+   Else
+       pasHeadUpBtn = False
+       MBWrite(pasHeadUpAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasHeadUpBtn:", pasHeadUpBtn
+Case "pasInsertGripperBtn"
+   If tokens$(1) = "true" Then
+       pasInsertGripperBtn = True
+       MBWrite(pasInsertGripperAddr, 1, MBTypeCoil)
+   Else
+       pasInsertGripperBtn = False
+       MBWrite(pasInsertGripperAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasInsertGripperBtn:", pasInsertGripperBtn
+Case "pasInsertTypeBtn"
+   If tokens$(1) = "true" Then
+       pasInsertTypeBtn = True
+       MBWrite(pasInsertTypeAddr, 1, MBTypeCoil)
+   Else
+       pasInsertTypeBtn = False
+       MBWrite(pasInsertTypeAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasInsertTypeBtn:", pasInsertTypeBtn
+Case "pasMasterTempBtn"
+   If tokens$(1) = "true" Then
+       pasMasterTempBtn = True
+       MBWrite(pasMasterTempAddr, 1, MBTypeCoil)
+   Else
+       pasMasterTempBtn = False
+       MBWrite(pasMasterTempAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasMasterTempBtn:", pasMasterTempBtn
+Case "pasMaxTempOnOffZone1Btn"
+   If tokens$(1) = "true" Then
+       pasMaxTempOnOffZone1Btn = True
+       MBWrite(pasMaxTempOnOffZone1Addr, 1, MBTypeCoil)
+   Else
+       pasMaxTempOnOffZone1Btn = False
+       MBWrite(pasMaxTempOnOffZone1Addr, 0, MBTypeCoil)
+   EndIf
+   Print "pasMaxTempOnOffZone1Btn:", pasMaxTempOnOffZone1Btn
+Case "pasMaxTempOnOffZone2Btn"
+   If tokens$(1) = "true" Then
+       pasMaxTempOnOffZone2Btn = True
+       MBWrite(pasMaxTempOnOffZone2Addr, 1, MBTypeCoil)
+   Else
+       pasMaxTempOnOffZone2Btn = False
+       MBWrite(pasMaxTempOnOffZone2Addr, 0, MBTypeCoil)
+   EndIf
+   Print "pasMaxTempOnOffZone2Btn:", pasMaxTempOnOffZone2Btn
+Case "pasOnOffZone1Btn"
+   If tokens$(1) = "true" Then
+       pasOnOffZone1Btn = True
+       MBWrite(pasOnOffZone1Addr, 1, MBTypeCoil)
+   Else
+       pasOnOffZone1Btn = False
+       MBWrite(pasOnOffZone1Addr, 0, MBTypeCoil)
+   EndIf
+   Print "pasOnOffZone1Btn:", pasOnOffZone1Btn
+Case "pasOnOffZone2Btn"
+   If tokens$(1) = "true" Then
+       pasOnOffZone2Btn = True
+       MBWrite(pasOnOffZone2Addr, 1, MBTypeCoil)
+   Else
+       pasOnOffZone2Btn = False
+       MBWrite(pasOnOffZone2Addr, 0, MBTypeCoil)
+   EndIf
+   Print "pasOnOffZone2Btn:", pasOnOffZone2Btn
+Case "pasOTAOnOffZone1Btn"
+   If tokens$(1) = "true" Then
+       pasOTAOnOffZone1Btn = True
+       MBWrite(pasOTAOnOffZone1Addr, 1, MBTypeCoil)
+   Else
+       pasOTAOnOffZone1Btn = False
+       MBWrite(pasOTAOnOffZone1Addr, 0, MBTypeCoil)
+   EndIf
+   Print "pasOTAOnOffZone1Btn:", pasOTAOnOffZone1Btn
+Case "pasOTAOnOffZone2Btn"
+   If tokens$(1) = "true" Then
+       pasOTAOnOffZone2Btn = True
+       MBWrite(pasOTAOnOffZone2Addr, 1, MBTypeCoil)
+   Else
+       pasOTAOnOffZone2Btn = False
+       MBWrite(pasOTAOnOffZone2Addr, 0, MBTypeCoil)
+   EndIf
+   Print "pasOTAOnOffZone2Btn:", pasOTAOnOffZone2Btn
+Case "pasRemoteAlarmAcknowledgeBtn"
+   If tokens$(1) = "true" Then
+       pasRemoteAlarmAcknowledgeBtn = True
+       MBWrite(pasRemoteAlarmAcknowledgeAddr, 1, MBTypeCoil)
+   Else
+       pasRemoteAlarmAcknowledgeBtn = False
+       MBWrite(pasRemoteAlarmAcknowledgeAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasRemoteAlarmAcknowledgeBtn:", pasRemoteAlarmAcknowledgeBtn
+Case "pasResetHighTempBtn"
+   If tokens$(1) = "true" Then
+       pasResetHighTempBtn = True
+       MBWrite(pasResetHighTempAddr, 1, MBTypeCoil)
+   Else
+       pasResetHighTempBtn = False
+       MBWrite(pasResetHighTempAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasResetHighTempBtn:", pasResetHighTempBtn
+Case "pasResetMaxBtn"
+   If tokens$(1) = "true" Then
+       pasResetMaxBtn = True
+       MBWrite(pasResetMaxAddr, 1, MBTypeCoil)
+   Else
+       pasResetMaxBtn = False
+       MBWrite(pasResetMaxAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasResetMaxBtn:", pasResetMaxBtn
+Case "pasSlideExtendBtn"
+   If tokens$(1) = "true" Then
+       pasSlideExtendBtn = True
+       MBWrite(pasSlideExtendAddr, 1, MBTypeCoil)
+   Else
+       pasSlideExtendBtn = False
+       MBWrite(pasSlideExtendAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasSlideExtendBtn:", pasSlideExtendBtn
+Case "pasStartPIDTuneZone1Btn"
+   If Tokens$(1) = "true" Then
+       pasStartPIDTuneZone1Btn = True
+       MBWrite(pasStartPIDTuneZone1Addr, 1, MBTypeCoil)
+   Else
+       pasStartPIDTuneZone1Btn = False
+       MBWrite(pasStartPIDTuneZone1Addr, 0, MBTypeCoil)
+   EndIf
+   Print "pasStartPIDTuneZone1Btn:", pasStartPIDTuneZone1Btn
+Case "pasStartPIDTuneZone2Btn"
+   If Tokens$(1) = "true" Then
+       pasStartPIDTuneZone2Btn = True
+       MBWrite(pasStartPIDTuneZone2Addr, 1, MBTypeCoil)
+   Else
+       pasStartPIDTuneZone2Btn = False
+       MBWrite(pasStartPIDTuneZone2Addr, 0, MBTypeCoil)
+   EndIf
+   Print "pasStartPIDTuneZone2Btn:", pasStartPIDTuneZone2Btn
+Case "pasTempOnOffBtn"
+   If Tokens$(1) = "true" Then
+       pasTempOnOffBtn = True
+       MBWrite(pasTempOnOffAddr, 1, MBTypeCoil)
+   Else
+       pasTempOnOffBtn = False
+       MBWrite(pasTempOnOffAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasTempOnOffBtn:", pasTempOnOffBtn
+Case "pasVibTrackBtn"
+   If Tokens$(1) = "true" Then
+       pasVibTrackBtn = True
+       MBWrite(pasVibTrackAddr, 1, MBTypeCoil)
+   Else
+       pasVibTrackBtn = False
+       MBWrite(pasVibTrackAddr, 0, MBTypeCoil)
+   EndIf
+   Print "pasVibTrackBtn:", pasVibTrackBtn
+
+
 
 
 Default
@@ -1387,234 +1868,10 @@ Function HmiListen()
 				If ProcessLastToken Then
 					prepend$ = ""
 				Else
-					prepend$ = Tokens$(NumTokens - 1)
+					prepend$ = tokens$(numTokens - 1)
 				EndIf
 	    Send
 	Loop
-Fend
-String CRLF$
-Integer modMessage(256)
-Integer modbusMessageID
-
-Function Main3()
-	Integer i
-	Integer writtenValue
-	Long readValue
-	Integer writeStatus
-	Integer portStatus
-	String testString$
-	Integer modLength
-	
-	readValue = 0
-	CRLF$ = Chr$(13) + Chr$(10)
-	 
-	SetNet #204, "10.22.251.171", 7352, CR, NONE, 0
-	
-	'Xqt twiddle_test, NoPause	
-		
-	readValue = modbusReadRegister(16)
-	
-	'set initial modbus ID as 0
-	modbusMessageID = 0;
-	
-	Do While 1
-		Wait 2.0
-		portStatus = ChkNet(204)
-		If portStatus < 0 Then
-			Print "portStatus: ", portStatus
-			OpenNet #204 As Client
-		EndIf
-		'Print #204, "Calling Modbus"
-		'writeStatus = modbusWriteRegister(&h33, &hAAFF)
-		writeStatus = modbusWriteRegister(&h33, modbusMessageID)
-		modbusMessageID = modbusMessageID + 1
-	Loop
-	
-Fend
-Function modbusCRC(modLength As Integer) As Long
-	
-	Long CRC
-	Long lowBit
-	Integer bitCount
-	Integer byteCount
-	
-	' initialize the CRC
-	CRC = &hFFFF
-
-	' step through the entire message
-	'Print "outer loop running from 0 to ", modLength - 1
-	For byteCount = 0 To modLength - 1
-		'Print "processing byte: ", Str$(modMessage(byteCount))
-
-		' XOR current byte of message with CRC
-		CRC = CRC Xor modMessage(byteCount)
-		'Print "after XOR with byte 0x", Hex$(modMessage(byteCount)), CRC
-		
-		' proceed through 8 shift operations XORing with polynomial if necessary
-		For bitCount = 0 To 7
-			'capture the low order bit before we shift it away
-			lowBit = CRC And 1
-		
-			' shift CRC right one bit
-			CRC = RShift(CRC, 1)
-		
-			' if the least significant bit was a 1, XOR it with polynomial constant 1010000000000001
-			If lowBit = 1 Then
-				CRC = CRC Xor &b1010000000000001
-				'Print "after XOR with poly: ", CRC
-			Else
-				'Print "No XOR with poly   : ", CRC
-			EndIf
-		Next
-	Next
-	
-	'Print "resulting CRC is: ", CRC
-	modbusCRC = CRC
-	
-Fend
-' This function is for writing a single 16 Modbus register on the PLC
-' It will build a valid Modbus RTU message and send it to the PLC
-' using the HMI ethernet to serial dameon as a bridge
-' It will then wait for a response and return a ??? for success or -1 for failure
-' calling type and return value are "Long" 
-Function modbusWriteRegister(regNum As Long, value As Long) As Integer
-	
-	Integer portStatus
-	Long CRC
-	Long modResponse(10)
-	Integer i
-	
-	portStatus = ChkNet(204)
-	
-
-
-	'build the command and send it to PLC
-	' function code		0x06
-	' address high 		0x00
-	' address low		0x00
-	' value high		0x00
-	' value low			0x00
-	modMessage(0) = &h11 'PLC modbus address
-	modMessage(1) = 6 ' function code
-	modMessage(2) = RShift(regNum, 8) ' high byte of address
-	modMessage(3) = regNum And &hFF ' low byte of address
-	modMessage(4) = RShift(value, 8) ' high byte of value
-	modMessage(5) = value And &hFF ' low byte of value
-	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
-	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
-	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
-	
-	For i = 0 To 7
-		Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
-	Next
-	
-	' if port is not open exit with error
-	If portStatus < 0 Then
-		modbusWriteRegister = -1 'error port should remain open
-		Print "Bailing! not port open"
-		Exit Function
-	EndIf
-	
-	' send the message to the PLC
-	WriteBin #204, modMessage(), 8
-	
-	' TMH possibly delay or check for bytes returned here	
-	' TMH may be a better way to do this but I wanted to avoid blocking if nothing is returned
-	Wait 1
-	If ChkNet(204) < 7 Then
-		modbusWriteRegister = -2 ' error invalid or no response
-	Else
-		' process the response or timeout
-		'wait for a predefinded period of time for the expected number of characters
-		'modResponse(0) = address of master
-		'modResponse(1) = function. Should be 6 if no error
-		'modResponse(2) = Register address high byte
-		'modResponse(3) = Register address low byte
-		'modResponse(4) = value high byte
-		'modResponse(5) = value low byte
-		'modResponse(6) = CRC low byte
-		'modResponse(7) = CRC high byte
-		ReadBin #204, modResponse(), 8
-	EndIf
-	
-Fend
-' This function is for reading a single 16 bit Modbus register from the PLC
-' It will build a valid Modbus RTU request and send it to the PLC
-' using the HMI ethernet to serial dameon as a bridge.
-' It will then wait for a response from the PLC
-Function modbusReadRegister(regNum As Long) As Long
-	
-	Integer portStatus
-	Long CRC
-	Long modResponse(10)
-	Integer i
-	
-	portStatus = ChkNet(204)
-
-
-	'build the command and send it to PLC
-	' function code		0x03
-	' address high 		0x00
-	' address low		0x00
-	' No. of Regs high 	0x00
-	' No. of Regs low	0x01
-	modMessage(0) = &h11 'PLC modbus address
-	modMessage(1) = 3 ' function code
-	modMessage(2) = RShift(regNum, 8) ' high byte of address
-	modMessage(3) = regNum And &hFF ' low byte of address
-	modMessage(4) = 0 ' high byte of No. of regs is always zero 
-	modMessage(5) = 1 ' low byte of No. of regs is one i.e. read one register
-	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
-	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
-	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
-	
-	For i = 0 To 7
-	'	Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
-	Next
-	
-	' if port is not open exit with error
-	If portStatus < 0 Then
-		modbusReadRegister = -1 'error port should remain open
-		Print "Bailing! not port open"
-		Exit Function
-	EndIf
-	
-	' send the message to the PLC
-	WriteBin #204, modMessage(), 8
-
-	' delay then check for bytes returned 	
-	' TMH may be a better way to do this but I wanted to avoid blocking if nothing is returned
-	Wait 1
-	If ChkNet(204) < 7 Then
-		modbusReadRegister = -2 ' error invalid or no response
-	Else
-		'process the response or timeout 
-		'wait for a predefinded period of time for the expected number of characters
-		'modResponse(0) = address of master
-		'modResponse(1) = function. Should be 3 if no error
-		'modResponse(2) = No. Bytes returned. Should be 2 for one 16 bit register
-		'modResponse(3) = value returned high byte
-		'modResponse(4) = value returned low byte
-		'modResponse(5) = CRC low byte
-		'modResponse(6) = CRC high byte
-		ReadBin #204, modResponse(), 7
-		
-		modbusReadRegister = LShift(modMessage(3), 8) And (modMessage(4))
-		
-	EndIf
-		
-Fend
-' Write a single coil value on the PLC
-' Call with coil number
-' Returns 1 for success 0 for failure
-Function modbusWriteCoil(coilNum As Integer, value As Boolean)
-	
-Fend
-' Read a single coil value from the PLC
-' Call with coil number
-' Returns boolean value of coil
-Function modbusReadCoil(coilNum As Integer) As Boolean
-	modbusReadCoil = 1
 Fend
 
 

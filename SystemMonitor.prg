@@ -13,7 +13,7 @@ Do While True
 	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine
 		
 		erInMagOpenInterlock = True 'Throw error
-		Halt InMagControl ' pause state machine where it is
+'		Halt InMagControl ' pause state machine where it is
 		inMagCurrentState = StateInMagPaused ' Set state to paused
 		
 		If mainCurrentState = StatePopPanel Then
@@ -30,7 +30,7 @@ Do While True
 		
 		erOutMagOpenInterlock = True
 		outMagCurrentState = StateOutMagPaused
-		Halt OutMagControl
+'		Halt OutMagControl
 		
 		If mainCurrentState = StatePushPanel Then
 			Pause ' pause robot movement to avoid pinchpoint

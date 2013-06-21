@@ -1,14 +1,14 @@
-ENVT0100,LM:2013/06/20 04:58:49:381,DS:0000004277,CS:11646,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/21 08:09:06:007,DS:0000004658,CS:09811,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=20
+nNumberOfPoints=22
 Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
 	sDescription=""
 	rX=350.173
 	rY=417.83
-	rZ=0
+	rZ=-50
 	rU=-45
 	rV=0
 	rW=0
@@ -27,7 +27,7 @@ Point2 {
 	rX=364.173
 	rY=-214.63
 	rZ=-157
-	rU=90
+	rU=-45
 	rV=0
 	rW=0
 	nLocal=0
@@ -78,8 +78,8 @@ Point5 {
 	nNumber=4
 	sLabel="LaserCenter"
 	sDescription=""
-	rX=-616.238
-	rY=-50.532
+	rX=-616.437
+	rY=-50.928
 	rZ=-14
 	rU=45
 	rV=0
@@ -297,7 +297,7 @@ Point17 {
 	rX=-493.65
 	rY=-34.908
 	rZ=-81.873
-	rU=45.106
+	rU=45
 	rV=0
 	rW=0
 	nLocal=0
@@ -348,14 +348,50 @@ Point20 {
 	nNumber=20
 	sLabel="TempPickUp"
 	sDescription=""
-	rX=364.181
-	rY=417.757
-	rZ=-256.156
-	rU=-44.961
+	rX=338.256
+	rY=425.035
+	rZ=-255.029
+	rU=-47.668
 	rV=0
 	rW=0
 	nLocal=0
 	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point21 {
+	nNumber=22
+	sLabel="Hole0"
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point22 {
+	nNumber=23
+	sLabel="Hole1"
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0

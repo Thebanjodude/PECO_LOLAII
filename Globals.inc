@@ -11,8 +11,9 @@ Global Real PanelCordinates(22, 1)
 #define Inspection True
 Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog, alarmMuteBtn
 Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
-Global Boolean panelDataTxACKBtn
+Global Boolean panelDataTxACKBtn, eStopReset, eStopResetCC
 Global Boolean GoFlag, ReturnFlag 'flags to make sure we dont break the drill
+Global Real PanelCordinatesQuill(22, 1)
 
 'Main() States
 #define StateUnknown 0
@@ -73,7 +74,7 @@ Global Boolean inMagMtrCC, inMagMtrDirCC
 Global Boolean outMagGoHome, outMagUnloaded, OutputMagSignal, outMagMtr 'DIO to run the output magazine
 Global Boolean outMagPanelRdy, outMagMtrDir, outMagUpLim, outMagUpLimN
 Global Boolean outMagLowLim, outMagLowLimN, outMagInt, outMagIntLockAck
-Global Real OutMagTorqueLim
+Global Real OutMagTorqueLim, recOutmagPickupOffset
 Global Boolean OutMagDropOffSignal ' Signal robot it can Drop Off a panel to outmag
 Global Boolean OutMagRobotClearSignal ' Signal robot is out of the way,OK to move outmag
 Global Integer outMagCurrentState
@@ -84,7 +85,7 @@ Global Boolean PanelPassedInspection ' Indicates if the panel passes inspection
 Global Integer x, z ' Increment for P(x) to define edge and num of holes found
 Global Real CurrentThetaHere, insertDepthTolerance
 Global Boolean PassFailArray(0, 0)
-Global Real InspectionArray(0, 0)
+Global Real InspectionArray(0, 0), recInmagPickupOffset
 Global Integer currentInspectHole, currentPreinspectHole
 #define RightSpotFace 0
 #define LeftSpotFace 1
@@ -102,18 +103,15 @@ Global Boolean heartBeat, dc24vOK
 Global Real PanelArray(25, 2)
 Global Real Theta, r, AnvilZlimit
 Global Integer PanelArrayIndex
+Global Boolean heatStakeGoCC, heatStakeGo
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
-Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flashHome
+Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flashHomeNO, flashHomeNC
 Global Boolean drillGoCC, drillReturnCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
 Global Integer currentHSHole, currentFlashHole
 Global Real flashDwellTime ' How long the flash tool is in contact with the insert
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas
 #define SkipFlagColumn 2 'The third column in the array are flags for holes if we want to skip them
-
-'Hot Stake Machine Vars
-Global Real pasSetTempZone1, pasSetTempZone2
-Global Real pasActualTempZone1, pasActualTempZone2, probeTempTolerance, trackTempTolerance
 
 ' Recipe Ingredients for Panels
 #define InsertTypeUnknown 0
@@ -242,9 +240,208 @@ Global Boolean hole10PF, hole11PF, hole12PF, hole13PF, hole14PF
 Global Boolean hole15PF, hole16PF, hole17PF, hole18PF, hole19PF
 Global Boolean hole20PF, hole21PF, hole22PF
 
+'Heat Stake vars
+Global Boolean pasAlarmGroup
+Global Boolean pasRemoteAlarmAcknowledge, pasRemoteAlarmAcknowledgeBtn
+Global Boolean pasHighTempAlarm
+Global Boolean pasInsertType
+Global Boolean pasGoHome, pasGoHomeBtn
+Global Boolean pasInsertDetected
+Global Boolean pasSteelInsert
+Global Boolean pasShuttleLoadPosition
+Global Boolean pasShuttleNoLoad
+Global Boolean pasShuttleExtend
+Global Boolean pasInsertInShuttle
+Global Boolean pasShuttleMidway
+Global Boolean pasHeadDown, pasHeadDownBtn
+Global Boolean pasHeadUp, pasHeadUpBtn
+Global Boolean pasResetMax, pasResetMaxBtn
+Global Boolean pasResetHighTemp, pasResetHighTempBtn
+Global Boolean pasTempOnOff, pasTempOnOffBtn
+Global Boolean pasMasterTemp, pasMasterTempBtn
+Global Boolean pasUpLimit, pasUpLimitBtn
+Global Boolean pasLowerlimit, pasLowerlimitBtn
+Global Boolean pasHome, pasHomeBtn
+Global Boolean pasMCREStop, pasMCREStopBtn
+Global Boolean pasStart, pasStartBtn
+Global Boolean pasHeadinsertPickupRetract
+Global Boolean pasHeadinsertpickupextend
+Global Boolean pasSlideExtend, pasSlideExtendBtn
+Global Boolean pas1inLoadInsertCylinder
+Global Boolean pasBowlDumpOpen, pasBowlDumpOpenBtn
+Global Boolean pasBlowInsert, pasBlowInsertBtn
+Global Boolean pasVibTrack, pasVibTrackBtn
+Global Boolean pasBowlFeeder, pasBowlFeederBtn
+Global Boolean pasInsertGripper, pasInsertGripperBtn
+Global Boolean pasOTAOnOffZone1, pasOTAOnOffZone1Btn
+Global Boolean pasOTAOnOffZone2, pasOTAOnOffZone2Btn
+Global Boolean pasOTAOnOffZone3, pasOTAOnOffZone3Btn
+Global Boolean pasOTAOnOffZone4, pasOTAOnOffZone4Btn
+Global Boolean pasOnOffZone1, pasOnOffZone1Btn
+Global Boolean pasOnOffZone2, pasOnOffZone2Btn
+Global Boolean pasOnOffZone3, pasOnOffZone3Btn
+Global Boolean pasOnOffZone4, pasOnOffZone4Btn
+Global Boolean pasMaxTempOnOffZone1, pasMaxTempOnOffZone1Btn
+Global Boolean pasMaxTempOnOffZone2, pasMaxTempOnOffZone2Btn
+Global Boolean pasMaxTempOnOffZone3, pasMaxTempOnOffZone3Btn
+Global Boolean pasMaxTempOnOffZone4, pasMaxTempOnOffZone4Btn
+Global Boolean pasInTempZone1
+Global Boolean pasInTempZone2
+Global Boolean pasInTempZone3
+Global Boolean pasInTempZone4
+Global Boolean pasMaxTempZone1
+Global Boolean pasMaxTempZone2
+Global Boolean pasMaxTempZone3
+Global Boolean pasMaxTempZone4
+Global Boolean pasStartPIDTuneZone1, pasStartPIDTuneZone1Btn
+Global Boolean pasStartPIDTuneZone2, pasStartPIDTuneZone2Btn
+Global Boolean pasStartPIDTuneZone4, pasStartPIDTuneZone4Btn
+Global Boolean pasPIDTuneDoneZone1, pasPIDTuneDoneZone1Btn
+Global Boolean pasPIDTuneDoneZone2, pasPIDTuneDoneZone2Btn
+Global Boolean pasPIDTuneDoneZone3, pasPIDTuneDoneZone3Btn
+Global Boolean pasPIDTuneFailZone1, pasPIDTuneFailZone1Btn
+Global Boolean pasPIDTuneFailZone2, pasPIDTuneFailZone2Btn
+Global Boolean pasPIDTuneFailZone3, pasPIDTuneFailZone3Btn
+Global Long pasMessageDB
+Global Long pasSoftHome
+Global Long pasInsertPosition
+Global Long pasInsertDepth
+Global Long pasSoftStop
+Global Long pasHomeIPM
+Global Long pasInsertPickupIPM
+Global Long pasHeatStakingIPM
+Global Long pasInsertEngageIPM
+Global Long pasInsertEngage
+Global Long pasSetTempZone1
+Global Long pasVerticalLocation
+Global Integer pasPIDsetupSetPointZone1
+Global Integer pasSetTempZone2
+Global Integer pasPIDsetupSetPointZone2
+Global Integer pasPIDsetupSetPointZone3
+Global Integer pasPIDsetupSetPointZone4
+Global Integer pasActualTempZone1
+Global Integer pasPIDsetupActualZone1
+Global Integer pasActualTempZone2
+Global Integer pasPIDsetupActualZone2
+Global Integer pasPIDsetupActualZone3
+Global Integer pasPIDsetupActualZone4
+Global Integer pasPIDsetupMaxTempZone1
+Global Integer pasPIDsetupMaxTempZone2
+Global Integer pasPIDsetupMaxTempZone3
+Global Integer pasPIDsetupMaxTempZone4
+Global Integer pasPIDsetupInTempZone1
+Global Integer pasPIDsetupInTempZone2
+Global Integer pasPIDsetupInTempZone3
+Global Integer pasPIDsetupInTempZone4
+Global Integer pasPIDsetupOffsetZone1
+Global Integer pasPIDsetupOffsetZone2
+Global Integer pasPIDsetupOffsetZone3
+Global Integer pasPIDsetupOffsetZone4
+Global Integer pasPIDsetupPZone1
+Global Integer pasPIDShowPZone1
+Global Integer pasPIDsetupIZone1
+Global Integer pasPIDShowPZone2
+Global Integer pasPIDsetupDZone1
+Global Integer pasPIDShowIZone1
+Global Integer pasPIDShowIZone2
+Global Integer pasPIDShowDZone1
+Global Integer pasPIDShowDZone2
+Global Integer pasPIDsetupPZone2
+Global Integer pasPIDsetupIZone2
+Global Integer pasPIDsetupDZone2
+Global Integer pasPIDsetupPZone3
+Global Integer pasPIDsetupIZone3
+Global Integer pasPIDsetupDZone3
+Global Integer pasPIDsetupPZone4
+Global Integer pasPIDsetupIZone4
+Global Integer pasPIDsetupDZone4
+Global Integer pasInsertPreheat
+Global Integer pasDwell
+Global Integer pasCool
+Global Integer pasRecipe
+Global Integer pasJogSpeed
+Global Integer pasMaxLoadmeter
+Global Integer pasLoadMeter
+Global Integer pasPreHeatActual
+Global Integer pasDwellActual
+Global Integer pasCoolActual
+Global Boolean pas1inLoadInsertCylinderBtn, pasInsertTypeBtn
+
+'defines for hs
+#define pasAlarmGroupAddr &h0032
+#define pasRemoteAlarmAcknowledgeAddr &h0034
+#define pasHighTempAlarmAddr &h0402
+#define pasInsertTypeAddr &h0230
+#define pasGoHomeAddr &h0001
+#define pasInsertDetectedAddr &h0384
+#define pasSteelInsertAddr &h0385
+#define pasShuttleLoadPositionAddr &h0388
+#define pasShuttleNoLoadAddr &h0389
+#define pasShuttleExtendAddr &h038A
+#define pasInsertInShuttleAddr &h038B
+#define pasShuttleMidwayAddr &h0386
+#define pasHeadDownAddr &h0014
+#define pasHeadUpAddr &h0015
+#define pasResetMaxAddr &h0069
+#define pasResetHighTempAddr &h03F9
+#define pasTempOnOffAddr &h000D
+#define pasMasterTempAddr &h0401
+#define pasUpLimitAddr &h0055
+#define pasLowerlimitAddr &h0056
+#define pasHomeAddr &h0057
+#define pasMCREStopAddr &h3400
+#define pasStartAddr &h3401
+#define pasHeadinsertPickupRetractAddr &h3406
+#define pasHeadinsertpickupextendAddr &h3407
+#define pasSlideExtendAddr &h0017
+#define pas1inLoadInsertCylinderAddr &h0019
+#define pasBowlDumpOpenAddr &h001B
+#define pasBlowInsertAddr &h001E
+#define pasVibTrackAddr &h001C
+#define pasBowlFeederAddr &h001D
+#define pasInsertGripperAddr &h0018
+#define pasOTAOnOffZone1Addr &h0403
+#define pasOTAOnOffZone2Addr &h0404
+#define pasOTAOnOffZone3Addr &h0405
+#define pasOTAOnOffZone4Addr &h0406
+#define pasOnOffZone1Addr &h012C
+#define pasOnOffZone2Addr &h012D
+#define pasOnOffZone3Addr &h012E
+#define pasOnOffZone4Addr &h012F
+#define pasMaxTempOnOffZone1Addr &h040D
+#define pasMaxTempOnOffZone2Addr &h040E
+#define pasMaxTempOnOffZone3Addr &h040F
+#define pasMaxTempOnOffZone4Addr &h0410
+#define pasInTempZone1Addr &h
+#define pasInTempZone2Addr &h
+#define pasInTempZone3Addr &h
+#define pasInTempZone4Addr &h
+#define pasMaxTempZone1Addr &h0028
+#define pasMaxTempZone2Addr &h0029
+#define pasMaxTempZone3Addr &h002A
+#define pasMaxTempZone4Addr &h002B
+#define pasStartPIDTuneZone1Addr &h0132
+#define pasStartPIDTuneZone2Addr &h0133
+#define pasStartPIDTuneZone4Addr &h0135
+#define pasPIDTuneDoneZone1Addr &h0138
+#define pasPIDTuneDoneZone2Addr &h0139
+#define pasPIDTuneDoneZone3Addr &h013B
+#define pasPIDTuneFailZone1Addr &h
+#define pasPIDTuneFailZone2Addr &h
+#define pasPIDTuneFailZone3Addr &h
 
 
-
+' modbus constants	
+#define MBMitsubishiAddress 4
+#define MBCmdReadCoil 1
+#define MBCmdReadInput 2
+#define MBCmdReadRegister 3
+#define MBCmdWriteCoil 5
+#define MBCmdWriteRegister 6
+#define MBTypeCoil 1
+#define MBType16 2
+#define MBType32 3
+#define MBWriteQueueSize 30
 
 
 

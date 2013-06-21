@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/06/13 05:14:35:331,DS:0000013278,CS:05220,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/20 20:13:11:942,DS:0000014006,CS:18690,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -129,12 +129,12 @@ InputBitLabels {
 	}
 	Label26 {
 		nBit=83
-		sLabel="FlashHomeNH"
+		sLabel="FlashHomeNOH"
 		sDescription=""
 	}
 	Label27 {
 		nBit=84
-		sLabel="FlashHomeH"
+		sLabel="FlashHomeNCH"
 		sDescription=""
 	}
 	Label28 {
@@ -205,63 +205,73 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=12
+	nNumberOfLabels=14
 	Label1 {
+		nBit=0
+		sLabel="eStopResetH"
+		sDescription=""
+	}
+	Label2 {
+		nBit=8
+		sLabel="heatStakeGoH"
+		sDescription=""
+	}
+	Label3 {
 		nBit=96
 		sLabel="inMagMtrDirH"
 		sDescription=""
 	}
-	Label2 {
+	Label4 {
 		nBit=97
 		sLabel="inMagMtrH"
 		sDescription=""
 	}
-	Label3 {
+	Label5 {
 		nBit=98
 		sLabel="outMagMtrDirH"
 		sDescription=""
 	}
-	Label4 {
+	Label6 {
 		nBit=99
 		sLabel="outMagMtrH"
 		sDescription=""
 	}
-	Label5 {
+	Label7 {
 		nBit=102
 		sLabel="debrisMtrH"
 		sDescription=""
 	}
-	Label6 {
+	Label8 {
 		nBit=103
 		sLabel="suctionCupsH"
 		sDescription=""
 	}
-	Label7 {
+	Label9 {
 		nBit=105
 		sLabel="DrillGoH"
 		sDescription=""
 	}
-	Label8 {
+	Label10 {
 		nBit=106
 		sLabel="DrillReturnH"
 		sDescription=""
 	}
-	Label9 {
+	Label11 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label10 {
+	Label12 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label11 {
+	Label13 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label12 {
+	Label14 {
 		nBit=110
 		sLabel="stackLightAlrmH"
 		sDescription=""
@@ -274,7 +284,7 @@ OutputWordLabels {
 	nNumberOfLabels=0
 }
 MemoryBitLabels {
-	nNumberOfLabels=126
+	nNumberOfLabels=134
 	Label1 {
 		nBit=0
 		sLabel="airPressLowF"
@@ -903,6 +913,46 @@ MemoryBitLabels {
 	Label126 {
 		nBit=147
 		sLabel="flashHomeFV"
+		sDescription=""
+	}
+	Label127 {
+		nBit=148
+		sLabel="heatStakeGoF"
+		sDescription=""
+	}
+	Label128 {
+		nBit=149
+		sLabel="heatStakeGoFV"
+		sDescription=""
+	}
+	Label129 {
+		nBit=150
+		sLabel="eStopResetFV"
+		sDescription=""
+	}
+	Label130 {
+		nBit=151
+		sLabel="eStopResetF"
+		sDescription=""
+	}
+	Label131 {
+		nBit=152
+		sLabel="flashHomeNOFV"
+		sDescription=""
+	}
+	Label132 {
+		nBit=153
+		sLabel="flashHomeNOF"
+		sDescription=""
+	}
+	Label133 {
+		nBit=154
+		sLabel="flashHomeNCFV"
+		sDescription=""
+	}
+	Label134 {
+		nBit=155
+		sLabel="flashHomeNCF"
 		sDescription=""
 	}
 }

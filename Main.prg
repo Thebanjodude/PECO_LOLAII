@@ -5,11 +5,23 @@ Function main()
 Integer NextState
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
+'TestMB() ' fake for test
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 Do While True
-	
+
+	MBWrite(&h012C, 150, MBType16)
+	MBWrite(&h012D, 145, MBType16)
+'	Print "readback", pasSetTemp, pasSetTempZone2
+'	
+'	Print pasActualTempZone1
+'	Print pasActualTempZone2
+'	
+'	Print "pasPIDsetupInTempZone1", pasPIDsetupInTempZone1
+'	Print "pasPIDsetupInTempZone2", pasPIDsetupInTempZone2
+
+	Wait 1
 Loop
 
 mainCurrentState = StateIdle ' The first state is Idle
@@ -141,6 +153,7 @@ Loop
 	 	ctrlrErrAxisNumber = Era
 	 	ctrlrErrorNum = Err
 	 	
+	 	
 	 	' Print error for testing/troubleshooting
 	 	Print "Error Message:", ctrlrErrMsg$
 		Print "Error Line Number:", ctrlrLineNumber
@@ -165,7 +178,7 @@ Function PowerOnSequence()
 	Xqt 6, HmiListen, NoEmgAbort
 	Xqt 7, InMagControl, Normal ' First state is lowering 
 	Xqt 8, OutMagControl, Normal ' First state is raising 
-	
+	MBInitialize()
 retry:
 
 	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
@@ -223,17 +236,17 @@ Function HotStakeTempRdy() As Boolean
 	Boolean probeInTemp, trackInTemp
 	
 	'Is the current temp within the tolerance to start or continue a job?
-	If Abs(recTempProbe - pasActualTempZone1) < Abs(probeTempTolerance) Then
-		probeInTemp = True
-	Else
-		probeInTemp = False
-	EndIf
-	
-	If Abs(recTempTrack - pasActualTempZone2) < Abs(trackTempTolerance) Then
-		trackInTemp = True
-	Else
-		trackInTemp = False
-	EndIf
+'	If Abs(recTempProbe - pasActualTempZone1) < Abs(probeTempTolerance) Then
+'		probeInTemp = True
+'	Else
+'		probeInTemp = False
+'	EndIf
+'	
+'	If Abs(recTempTrack - pasActualTempZone2) < Abs(trackTempTolerance) Then
+'		trackInTemp = True
+'	Else
+'		trackInTemp = False
+'	EndIf
 	
 	If probeInTemp = True And trackInTemp = True Then
 		HotStakeTempRdy = True ' ready to start job

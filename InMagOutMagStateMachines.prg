@@ -5,7 +5,7 @@ Function InMagControl
 
 Integer NextState
 
-inMagCurrentState = StateWaitingUser ' When we power on the magazine it goes to the home position
+inMagCurrentState = StateWaitingUser ' When we power on the magazine it waits for the operator
 
 Do While True
 	
@@ -140,7 +140,7 @@ Do While True
 			
 		'	WaitSig OutMagRobotClearSignal
 			
-			Do Until outMagUpLim = True ' Move magazine up until we hit the upper limit
+			Do Until outMagUpLim = True Or outMagPanelRdy = False  ' Move magazine up until we hit the upper limit
 				outMagMtrDirCC = True 'Set direction to UP 
 				outMagMtrCC = True
 			Loop

@@ -185,7 +185,7 @@ For i = 0 To recNumberOfHoles - 1
 
 Next i
 
-	PrintPanelArray()
+'	PrintPanelArray()
 	PanelArrayIndex = 0
 	
 Fend
@@ -311,7 +311,7 @@ Function GetPanelCoords()
 ' this will go away during integration
 	
 '88553
-recNumberOfHoles = 18
+recNumberOfHoles = 16
 Redim PanelCordinates(recNumberOfHoles - 1, 1)
 'in inches
 'PanelCordinates(0, 0) = 8.6340
@@ -473,6 +473,19 @@ Function PrintCoordArray()
 	PrintArrayIndex = 0 	'Reset indexes
 	
 Fend
+Function PrintCoordQuillArray()
+	
+	Integer n, PrintArrayIndex
+
+	For n = 0 To recNumberOfHoles - 1
+		Print Str$(n) + " " + Str$(PanelCordinatesQuill(PrintArrayIndex, 0)) + " " + Str$(PanelCordinatesQuill(PrintArrayIndex, 1))
+		PrintArrayIndex = PrintArrayIndex + 1
+	Next
+	
+	PrintArrayIndex = 0 	'Reset indexes
+	
+Fend
+
 Function GetAngle(Slope1 As Real, Slope2 As Real) As Real
 	
 		If Slope1 * Slope2 = -1 Then
@@ -515,11 +528,11 @@ Function RemoveFlash(DwellTime As Real) As Boolean
 	
 	Wait DwellTime + 2.25 '2.25 is about the time it takes to bottom out.
 	
-	If flashHome = False Then ' check that the drill actually left the home position
+    If flashHomeNO = False Then ' check that the drill actually left the home position
 		drillReturnCC = True ' Tell the drill to return
 		Wait 2.25 ' wait for drill to go back to the top
 		
-		If flashHome = True Then
+		If flashHomeNO = True Then
 			RemoveFlash = True
 		Else
 			RemoveFlash = False
