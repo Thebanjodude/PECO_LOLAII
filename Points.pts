@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/06/21 08:09:06:007,DS:0000004658,CS:09811,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/22 01:49:03:315,DS:0000005314,CS:07521,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=22
+nNumberOfPoints=25
 Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
@@ -44,8 +44,8 @@ Point3 {
 	sDescription=""
 	rX=-441.706
 	rY=441.706
-	rZ=-10
-	rU=135
+	rZ=-30
+	rU=180
 	rV=0
 	rW=0
 	nLocal=0
@@ -153,7 +153,7 @@ Point9 {
 	rX=-250
 	rY=250
 	rZ=-10
-	rU=90
+	rU=0
 	rV=0
 	rW=0
 	nLocal=0
@@ -310,7 +310,7 @@ Point17 {
 }
 Point18 {
 	nNumber=18
-	sLabel=""
+	sLabel="EOATOffset"
 	sDescription=""
 	rX=0
 	rY=0
@@ -392,6 +392,60 @@ Point22 {
 	rW=0
 	nLocal=0
 	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point23 {
+	nNumber=25
+	sLabel="Nest"
+	sDescription=""
+	rX=-81.592
+	rY=-411.669
+	rZ=-27.429
+	rU=-137.317
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point24 {
+	nNumber=100
+	sLabel="HSAnvil"
+	sDescription=""
+	rX=-389.02
+	rY=336.717
+	rZ=0
+	rU=-224.962
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point25 {
+	nNumber=101
+	sLabel="FlashAnvil"
+	sDescription=""
+	rX=-506.624
+	rY=-357.366
+	rZ=0
+	rU=-224.995
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0

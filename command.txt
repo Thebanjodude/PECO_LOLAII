@@ -150,4 +150,29 @@ PULSE:  1:     -116 pls 2:     -140 pls 3:       -1 pls 4:        0 pls
 !!Error: 3100, Syntax error.
 > radtodeg(atan(.903/2.593)
 !!Error: 3100, Syntax error.
+> brake Off 1,2,3,4
+!!Error: 3201, Expected ','.
+> brake Off,1,2,3,4
+!!Error: 3101, Parameter count error.
+> brake Off ,1
+!!Error: 4060, Executed an invalid command while the motor is in the on state.
+> sfree 1,2,3,4
+> brake Off, 1
+!!Error: 4060, Executed an invalid command while the motor is in the on state.
+> brake 
+!!Error: 3215, On/Off was not specified.
+>brake 1
+!!Error: 3101, Parameter count error.
+> braje 1
+!!Error: 3100, Syntax error.
+> brake Off,1
+!!Error: 4060, Executed an invalid command while the motor is in the on state.
+> brake Off
+!!Error: 3101, Parameter count error.
+> brake Off,1
+> brake Off,2
+> brake Off,3
+> brake Off,4
+> brake Off
+!!Error: 3101, Parameter count error.
 > 

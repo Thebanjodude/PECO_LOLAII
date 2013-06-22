@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/04/03 19:19:57:748,DS:0000000530,CS:25894,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/22 00:57:33:943,DS:0000000523,CS:18796,MA:6C-F0-49-E2-45-75,EI:           
 Macro1 {
 	sName="test"
-	sCode="sdkfskd"
+	sCode=""
 }
 Macro2 {
 	sName=""

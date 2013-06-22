@@ -390,6 +390,54 @@ Fend
 '	Go P23
 
 'Fend
+Function CalibrateEOAT()
+	
+Real eoatLegnth, EOATyerror1, EOATyerror2, zoffset, yerror0, yerror180, EOATyerror3, EOATyerror4
+Real x1, LaserXcoordinate, LaserYcoordinate, LaserZcoordinate, thetaerror, thetaerror1, thetaerror2
+
+Speed 25 'slow it down so we get a better reading
+SpeedS 50
+
+	Go PreScan :Z(-85) CP  ' Use CP so it's not jumpy			
+	ChangeProfile("12")
+	
+	Go LaserCalibrY +X(2.5) CP ' go to about where the drop off should be
+	Wait 2 ' wait for EOAT to settle	
+	EOATyerror1 = GetLaserMeasurement("01")
+	Print "EOATyerror1", EOATyerror1
+	
+	Go LaserCalibrY -X(2.5) CP ' go to about where the drop off should be
+	Wait 2 ' wait for EOAT to settle	
+	EOATyerror2 = GetLaserMeasurement("01")
+	Print "EOATyerror2", EOATyerror2
+
+	yerror0 = EOATyerror1 - EOATyerror2
+	thetaerror1 = RadToDeg(Atan(yerror0 / 5))
+	Print "thetaerror1", thetaerror1
+	
+	Go LaserCalibrY +X(2.5) +U(180)  ' go to about where the drop off should be
+	Wait .5 ' wait for EOAT to settle	
+	EOATyerror3 = GetLaserMeasurement("01")
+	Print "EOATyerror3", EOATyerror3
+	
+	Go LaserCalibrY -X(2.5) +U(180) CP ' go to about where the drop off should be
+	Wait .5 ' wait for EOAT to settle	
+	EOATyerror4 = GetLaserMeasurement("01")
+	Print "EOATyerror4", EOATyerror4
+	
+	yerror180 = EOATyerror3 - EOATyerror4
+	thetaerror2 = RadToDeg(Atan(yerror180 / 5))
+	Print "thetaerror2", thetaerror2
+	
+	thetaerror = (thetaerror1 + thetaerror2) /2
+	Print "thetaerror", thetaerror
+	
+	EOATOffset = EOATOffset :U(thetaerror)
+	
+	Go PreScan :Z(-85) CP  ' Use CP so it's not jumpy
+	Wait .25
+	
+Fend
 Function CalibrateLaserLocation()
 	
 Real eoatLegnth, EOATyerror, zoffset
@@ -398,6 +446,10 @@ Real x1, LaserXcoordinate, LaserYcoordinate, LaserZcoordinate
 'At the start LaserCalibrY is approx where the EAOT drop off is.
 
 eoatLegnth = InTomm(12.5) ' overall dim
+
+CalibrateEOAT()
+
+Print EOATOffset
 	
 Speed 25 'slow it down so we get a better reading
 SpeedS 50
@@ -405,7 +457,7 @@ SpeedS 50
 	Go PreScan :Z(-85) CP  ' Use CP so it's not jumpy			
 	ChangeProfile("12")
 	
-	Move LaserCalibrY CP ' go to about where the drop off should be
+	Move LaserCalibrY +U(CU(EOATOffset)) CP ' go to about where the drop off should be
 	Wait .5 ' wait for EOAT to settle
 	
 	EOATyerror = -1 * GetLaserMeasurement("01")
@@ -441,7 +493,7 @@ SpeedS 50
 	
 	LaserXcoordinate = x1 - (eoatLegnth /2) ' distance between the quill center and laser
 	
-'	Print "LaserXcoordinate", LaserXcoordinate
+	Print "LaserXcoordinate", LaserXcoordinate
 	
 ' comment this out until it matters	
 '	zoffset = GetLaserMeasurement("15")

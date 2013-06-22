@@ -40,9 +40,6 @@ Function InspectPanel2()
 '			RotatedError(Theta) ' Set RotatedOffset Point
 			
 			P23 = (LaserCenter) +X(r) -U(Theta)
-			Print "p23 pre adjust", P23
-			P23 = P23 + RotatedOffset
-			Print "p23", P23
 			Go P23
 			GoTo skip
 			Pause
@@ -65,31 +62,33 @@ Function InspectPanel2()
 			
 		If (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
 			
-'			RotatedError(Theta)
-
 			phi = Theta + rho
-'			RotatedError(phi)
 			Print "phi:", phi
-            P23 = (LaserCenter) +Y(r) -U(phi) + RotatedOffset
-
+            P23 = (LaserCenter) +X(r) -U(phi)
+	       	Go P23
+	       	Wait 1
 			dx = r - (r * Cos(DegToRad(rho)))
 	       	dy = r * Sin(DegToRad(rho))
 	       	P23 = P23 -X(dx) +Y(dy)
+	       	Go P23
+	       	Wait 1
 
 		ElseIf (90 < Theta And Theta < 180) Or (270 < Theta And Theta < 360) Then
 			If j <> 0 Then
-'				RotatedError(Theta)
+
 			EndIf
 
 			phi = Theta - rho
-'			RotatedError(phi)
 			Print "phi:", phi
-            P23 = (LaserCenter) +Y(r) -U(phi) + RotatedOffset
-
+            P23 = (LaserCenter) +X(r) -U(phi)
+	       	Go P23
+	       	Wait 1
 			dx = r - (r * Cos(DegToRad(rho)))
 	       	dy = r * Sin(DegToRad(rho))
             P23 = P23 +X(dx) +Y(dy)
-            
+ 	       	Go P23
+ 	 	    Wait 1
+ 	 	    
 		Else
 			Print "Error, theta is greater than 360"
 		EndIf
@@ -561,9 +560,6 @@ EndIf
 findmu = Atan(Abs(dx / dy))
 
 Fend
-	
-	
-
 'Function RotatePanelOffset(angle As Real) 'in degrees
 '		
 '		'Compute the rotated X,Y and U PanelOffset components

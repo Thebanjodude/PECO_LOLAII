@@ -2,26 +2,27 @@
 
 Function HotStakePanel() As Boolean
 	
+	Power High
 	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 	
 	SystemStatus = InstallingInserts
-
 	Boolean SkippedHole
 	Double AnvilOffset, CurrentZ
-  	
-	PanelArrayIndex = 0 ' Reset Index
 	
+	TeachPoints() ' set new coords for anvil
+  	
+	PanelArrayIndex = 0 ' Reset Index	
 	zLimit = 0 'fake
 
+	PanelArrayIndex = 0
 	GetPanelArray()
 	DerivethetaR()
-	PanelArrayIndex = 0
 	GetThetaR()
 	
-	FindPickUpError() 'fake
+'	FindPickUpError() 'fake
 	
-	Jump LaserToHeatStake LimZ zLimit ' Take a safe path
-	Go PreHotStake CP
+'	Jump LaserToHeatStake LimZ zLimit ' Take a safe path
+	Jump PreHotStake CP
 
 	For currentHSHole = 0 To recNumberOfHoles - 1
 		
@@ -38,21 +39,43 @@ Function HotStakePanel() As Boolean
 		EndIf
 
 		If SkippedHole = False Then 'If the flag is set then we have finished all holes		
-        	
-        	P23 = HotStakeCenter -Y(Sin(DegToRad(135)) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(DegToRad(135)) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(PanelArray(PanelArrayIndex, ThetaColumn))
+			        	
+			Print r, Theta
+			SLock 1, 2, 3, 4
+        	P23 = HotStakeCenter -Y(Sin(DegToRad(45)) * PanelArray(PanelArrayIndex, RadiusColumn)) +X(Cos(DegToRad(45)) * PanelArray(PanelArrayIndex, RadiusColumn)) :U(-PanelArray(PanelArrayIndex, ThetaColumn))
 '			Jump P23 LimZ zLimit
 '			RotatedError(Theta)
-			Print P23
-			P23 = P23 + RotatedOffset
-			Go P23
+'			Print P23
+'			P23 = P23 + RotatedOffset
+			Jump P23
 						
 'Comment this out for testing						
 ' Instead, I could use the same method to get the panel to the outmag...anvil-recpanelthickness
-'		Do Until HSPanelPresntCC = True Or CurrentZ >= AnvilZlimit ' Move down until we touchoff on the anvil. 
-'			Move P23 -Z(AnvilOffset)
-'			AnvilOffset = AnvilOffset + 0.25
+		AnvilOffset = 0
+		Do Until Sw(HSPanelPresntH) = True ' Move down until we touchoff on the anvil. 
+			SFree 1, 2
+			Move P23 -Z(AnvilOffset)
+			AnvilOffset = AnvilOffset + .75
 '			CurrentZ = CZ(RealPos)
-'		Loop
+		Loop
+		SLock 1, 2
+		
+		Print "hole number", currentHSHole, "hole diff:", P23 - Here
+		
+		P23 = Here
+		
+
+		AnvilOffset = 0
+		
+		Move P23 +Z(10)
+		Do Until Sw(HSPanelPresntH) = True ' Move down until we touchoff on the anvil. 
+			SFree 1, 2
+			Move P23 -Z(AnvilOffset)
+			AnvilOffset = AnvilOffset + .5
+''			CurrentZ = CZ(RealPos)
+		Loop
+'		Pause
+		SLock 1, 2
 '			
 '		If HSPanelPresntCC = True Then
 '			hsInstallInsrtCC = True
@@ -68,8 +91,6 @@ Function HotStakePanel() As Boolean
 '			Wait .4 ' Instead of wait, this is where the feedback from the HS Station will be
 '			hsInstallInsrtCC = False 'reset flag
 		EndIf
-		
-	Pause
 
 	Next
 		
