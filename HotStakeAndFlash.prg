@@ -52,30 +52,43 @@ Function HotStakePanel() As Boolean
 'Comment this out for testing						
 ' Instead, I could use the same method to get the panel to the outmag...anvil-recpanelthickness
 		AnvilOffset = 0
-		Do Until Sw(HSPanelPresntH) = True ' Move down until we touchoff on the anvil. 
+'		Do Until Sw(HSPanelPresntH) = True ' Move down until we touchoff on the anvil. 
 			SFree 1, 2
-			Move P23 -Z(AnvilOffset)
-			AnvilOffset = AnvilOffset + .75
+			Speed 1
+			Go P23 -Z(15) Till Sw(HSPanelPresntH) = True
+			
+			If TillOn = False Then
+				Print "missed anvil"
+			EndIf
+			
+'			Move P23 -Z(AnvilOffset)
+'			AnvilOffset = AnvilOffset + .5
 '			CurrentZ = CZ(RealPos)
-		Loop
+'		Loop
+		
+' This will make it less choppy and faster!		
+
+		
 		SLock 1, 2
 		
 		Print "hole number", currentHSHole, "hole diff:", P23 - Here
 		
 		P23 = Here
-		
 
 		AnvilOffset = 0
 		
-		Move P23 +Z(10)
-		Do Until Sw(HSPanelPresntH) = True ' Move down until we touchoff on the anvil. 
-			SFree 1, 2
-			Move P23 -Z(AnvilOffset)
-			AnvilOffset = AnvilOffset + .5
-''			CurrentZ = CZ(RealPos)
-		Loop
+		Move P23 +Z(4)
+		Wait .01
+		Move P23 -Z(4)
+'		Do Until Sw(HSPanelPresntH) = True ' Move down until we touchoff on the anvil. 
+'			SFree 1, 2
+'			Move P23 -Z(AnvilOffset)
+'			AnvilOffset = AnvilOffset + .5
+'''			CurrentZ = CZ(RealPos)
+'		Loop
 '		Pause
 		SLock 1, 2
+		Pause
 '			
 '		If HSPanelPresntCC = True Then
 '			hsInstallInsrtCC = True
@@ -569,4 +582,9 @@ Function RemoveFlash(DwellTime As Real) As Boolean
 	Print "RemoveFlash", RemoveFlash
 	
 Fend
-
+Function loopback
+	
+	If Sw(HSPanelPresntH) = True Then
+		'set anvil loopback in mem for till statemets
+	EndIf
+Fend

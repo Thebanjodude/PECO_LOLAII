@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/06/22 01:49:03:315,DS:0000005314,CS:07521,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/23 02:55:34:853,DS:0000005706,CS:25723,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=25
+nNumberOfPoints=27
 Point1 {
 	nNumber=0
 	sLabel="InMagCenter"
@@ -44,7 +44,7 @@ Point3 {
 	sDescription=""
 	rX=-441.706
 	rY=441.706
-	rZ=-30
+	rZ=-42
 	rU=180
 	rV=0
 	rW=0
@@ -78,10 +78,10 @@ Point5 {
 	nNumber=4
 	sLabel="LaserCenter"
 	sDescription=""
-	rX=-616.437
-	rY=-50.928
-	rZ=-14
-	rU=45
+	rX=51
+	rY=615
+	rZ=-19
+	rU=135
 	rV=0
 	rW=0
 	nLocal=0
@@ -132,10 +132,10 @@ Point8 {
 	nNumber=7
 	sLabel="PreScan"
 	sDescription=""
-	rX=-340
-	rY=-50.8
+	rX=50.8
+	rY=350
 	rZ=-10
-	rU=45
+	rU=135
 	rV=0
 	rW=0
 	nLocal=0
@@ -201,6 +201,24 @@ Point11 {
 	bSimVisible=False
 }
 Point12 {
+	nNumber=11
+	sLabel=""
+	sDescription=""
+	rX=50.8
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point13 {
 	nNumber=12
 	sLabel="pausepos"
 	sDescription=""
@@ -218,14 +236,14 @@ Point12 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point13 {
+Point14 {
 	nNumber=13
 	sLabel="LaserCalibrMax"
 	sDescription=""
-	rX=-515
-	rY=-50.8
-	rZ=-75
-	rU=45
+	rX=65.9
+	rY=525
+	rZ=-88.064
+	rU=135
 	rV=0
 	rW=0
 	nLocal=0
@@ -236,12 +254,12 @@ Point13 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point14 {
+Point15 {
 	nNumber=14
 	sLabel="Waypoint0"
 	sDescription=""
 	rX=345.361
-	rY=0
+	rY=300
 	rZ=-2
 	rU=45
 	rV=0
@@ -254,7 +272,7 @@ Point14 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point15 {
+Point16 {
 	nNumber=15
 	sLabel="LaserToHeatStake"
 	sDescription=""
@@ -272,7 +290,7 @@ Point15 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point16 {
+Point17 {
 	nNumber=16
 	sLabel="Waypoint2"
 	sDescription=""
@@ -290,14 +308,14 @@ Point16 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point17 {
+Point18 {
 	nNumber=17
-	sLabel="LaserCalibrY"
+	sLabel="LaserCalibr"
 	sDescription=""
-	rX=-493.65
-	rY=-34.908
-	rZ=-81.873
-	rU=45
+	rX=65.937
+	rY=491.146
+	rZ=-81.41
+	rU=135
 	rV=0
 	rW=0
 	nLocal=0
@@ -308,7 +326,7 @@ Point17 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point18 {
+Point19 {
 	nNumber=18
 	sLabel="EOATOffset"
 	sDescription=""
@@ -326,7 +344,7 @@ Point18 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point19 {
+Point20 {
 	nNumber=19
 	sLabel="HoleCenterY"
 	sDescription=""
@@ -344,7 +362,7 @@ Point19 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point20 {
+Point21 {
 	nNumber=20
 	sLabel="TempPickUp"
 	sDescription=""
@@ -362,7 +380,7 @@ Point20 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point21 {
+Point22 {
 	nNumber=22
 	sLabel="Hole0"
 	sDescription=""
@@ -380,7 +398,7 @@ Point21 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point22 {
+Point23 {
 	nNumber=23
 	sLabel="Hole1"
 	sDescription=""
@@ -398,7 +416,7 @@ Point22 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point23 {
+Point24 {
 	nNumber=25
 	sLabel="Nest"
 	sDescription=""
@@ -416,7 +434,25 @@ Point23 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point24 {
+Point25 {
+	nNumber=28
+	sLabel="LaserArc"
+	sDescription=""
+	rX=-392.917
+	rY=-50.928
+	rZ=-14
+	rU=45
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point26 {
 	nNumber=100
 	sLabel="HSAnvil"
 	sDescription=""
@@ -434,7 +470,7 @@ Point24 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point25 {
+Point27 {
 	nNumber=101
 	sLabel="FlashAnvil"
 	sDescription=""

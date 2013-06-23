@@ -34,6 +34,7 @@ Do While True
 	Select mainCurrentState
 		
 	Case StateIdle
+		jobDone = False
 		If jobStart = True And HotStakeTempRdy = True Then
 			NextState = StatePopPanel
 		Else

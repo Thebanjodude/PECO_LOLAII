@@ -2,6 +2,8 @@
 
 Function InspectPanel2()
 	
+	Xqt loopback
+	
 	Integer j
 	Real rightoffset, leftoffset, beta, mu, rho, phi
 	Real dx, dy, m1, m2
@@ -14,7 +16,6 @@ Function InspectPanel2()
 	DerivethetaR()
 	PanelArrayIndex = 0
 	GetThetaR() 'Get first r and theta
-	Pause
 	
 '	FindPickUpError()
 	Go prescan CP
@@ -33,24 +34,27 @@ Function InspectPanel2()
 			Print "r=0"
 			Pause
 		EndIf
+		
+		Print "inspecting hole: ", j
 
 		If Theta = 0 Or Theta = 90 Or Theta = 180 Or Theta = 270 Then
-			
 			Print Theta, r
-'			RotatedError(Theta) ' Set RotatedOffset Point
-			
-			P23 = (LaserCenter) +X(r) -U(Theta)
+			P23 = (LaserCenter) -Y(r + 50) -U(Theta)
 			Go P23
-			GoTo skip
+			Wait .1
+			Go P23 +Y(50) ' We moved back to spin so move inwards
 			Pause
-			
+			GoTo skip
 		EndIf
 			
-		If j = 0 Then ' Find the slopes of the lines that connect the holes
+		If j = 0 Then ' Find mu
+			Print "from hole: ", recNumberOfHoles - 1, "to hole: ", j + 1
 			mu = findmu(recNumberOfHoles - 1, j + 1) 'the last hole to the hole+1
 		ElseIf j = recNumberOfHoles - 1 Then
+			Print "from hole: ", j - 1, "to hole: ", 0
 			mu = findmu(j - 1, 0) 'from the hole before to the hole
 		Else
+			Print "from hole: ", j - 1, "to hole: ", j + 1
 			mu = findmu(j - 1, j + 1) 'from the hole before to the hole
 		EndIf
 
@@ -59,40 +63,73 @@ Function InspectPanel2()
 		rho = mu ' this is the place to experiment with the angle
 
 		'Rotate PanelOffset to Theta		
+		
+		Print "theta", Theta
 			
-		If (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
-			
-			phi = Theta + rho
-			Print "phi:", phi
-            P23 = (LaserCenter) +X(r) -U(phi)
-	       	Go P23
-	       	Wait 1
-			dx = r - (r * Cos(DegToRad(rho)))
-	       	dy = r * Sin(DegToRad(rho))
-	       	P23 = P23 -X(dx) +Y(dy)
-	       	Go P23
-	       	Wait 1
+		If (0 < Theta And Theta < 90) Then
+			P23 = (LaserCenter) -Y(r) -U(rho)
+			Go P23
+			Pause
 
-		ElseIf (90 < Theta And Theta < 180) Or (270 < Theta And Theta < 360) Then
-			If j <> 0 Then
-
-			EndIf
-
-			phi = Theta - rho
-			Print "phi:", phi
-            P23 = (LaserCenter) +X(r) -U(phi)
-	       	Go P23
-	       	Wait 1
-			dx = r - (r * Cos(DegToRad(rho)))
-	       	dy = r * Sin(DegToRad(rho))
-            P23 = P23 +X(dx) +Y(dy)
- 	       	Go P23
- 	 	    Wait 1
- 	 	    
-		Else
-			Print "Error, theta is greater than 360"
+'			dy = r - (r * Cos(DegToRad(rho - Theta)))
+'	       	dx = r * Sin(DegToRad(rho - Theta))
+'	       	P23 = P23 -X(dx) +Y(dy)
+'	       	Go P23
+'			Pause
 		EndIf
+		
+		If (180 < Theta And Theta < 270) Then
+		
+			P23 = (LaserCenter) -Y(r) -U(rho + 180)
+			Go P23
+			Pause
+
+'			dy = r - (r * Cos(DegToRad(rho - Theta)))
+'	       	dx = r * Sin(DegToRad(rho - Theta))
+'	       	P23 = P23 -X(dx) +Y(dy)
+'	       	Go P23
+'			Pause
+		EndIf
+'		If (0 < Theta And Theta < 90) Or (180 < Theta And Theta < 270) Then
+
+'			P23 = (LaserCenter) -Y(r) -U(rho)
+
 			
+''			phi = Theta + rho
+''			Print "phi:", phi
+'            'P23 = (LaserCenter) -Y(r + 50) -U(phi)
+''           Pause
+''           Go P23 +Y(50)
+''           Pause
+''           P23 = P23 -U(mu)
+''	       	Go P23
+''	       	Print mu, rho
+''	       	Pause
+'
+'			dy = r - (r * Cos(DegToRad(rho - Theta)))
+'	       	dx = r * Sin(DegToRad(rho - Theta))
+''	       	dy = dx * Tan(DegToRad(rho))
+'	       	P23 = P23 -X(dx) +Y(dy)
+'	       	Go P23
+'			Pause
+'		EndIf
+		
+'		If (90 < Theta And Theta < 180) Or (270 < Theta And Theta < 360) Then
+'
+''			phi = Theta - rho
+''			Print "phi:", phi
+'          	P23 = (LaserCenter) -Y(r) -U(rho)
+''			P23 = (LaserCenter) -Y(r) -U(rho)
+'			Go P23
+''	       	Go P23
+'	    	Pause
+'			dy = r - (r * Cos(DegToRad(rho + Theta)))
+'	       	dx = r * Sin(DegToRad(rho + Theta))
+'			P23 = P23 +X(dx) +Y(dy)
+' 	       	Pause
+' 	       	Go P23
+' 	 	    
+'		EndIf
 	
 '		ChangeProfile("00")
 '		RightOffset = GetLaserMeasurement("03")
@@ -104,6 +141,7 @@ Function InspectPanel2()
 '		FindPickUpError()	
 
 	skip:
+	P23 = XY(0, 0, 0, 0) ' reset P23
 	Next
 	
 exitInspectPanel:
@@ -545,8 +583,8 @@ Function findmu(pt1 As Real, pt2 As Real) As Real
 Real x1, x2, y1, y2, dx, dy
 	
 x1 = PanelCordinates(pt1, 0)
-x2 = PanelCordinates(pt2, 0)
 y1 = PanelCordinates(pt1, 1)
+x2 = PanelCordinates(pt2, 0)
 y2 = PanelCordinates(pt2, 1)
 
 dx = x2 - x1
@@ -556,20 +594,11 @@ If dx = 0 Or dy = 0 Then
 	Print "error calculating mu, dx or dy =0"
 	Pause
 EndIf
-
-findmu = Atan(Abs(dx / dy))
+findmu = RadToDeg(Atan(Abs(dx / dy)))
+'findmu = RadToDeg(Atan(Abs(dx / dy))) ' I think this is mu*2
 
 Fend
-'Function RotatePanelOffset(angle As Real) 'in degrees
-'		
-'		'Compute the rotated X,Y and U PanelOffset components
-'		RotatedOffset = RotatedOffset :X(CX(PanelOffset) * Sin(DegToRad(angle)) + CY(PanelOffset) * Cos(DegToRad(angle)))
-''		Print "	RotatedOffset:", RotatedOffset
-'		RotatedOffset = RotatedOffset :Y(CX(PanelOffset) * Cos(DegToRad(angle)) + CY(PanelOffset) * Sin(DegToRad(angle)))
-''		Print "	RotatedOffset:", RotatedOffset
-'		RotatedOffset = RotatedOffset :U(CU(PanelOffset))
-'		Print "	RotatedOffset:", RotatedOffset
-'Fend
+
 
 
 
