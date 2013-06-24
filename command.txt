@@ -177,4 +177,6 @@ PULSE:  1:     -116 pls 2:     -140 pls 3:       -1 pls 4:        0 pls
 !!Error: 3101, Parameter count error.
 > Tan(DegToRad(34))
 !!Error: 3100, Syntax error.
+> fine
+10000, 10000, 10000, 10000
 > 

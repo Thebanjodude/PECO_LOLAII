@@ -86,6 +86,7 @@ Function OutMagControl
 Integer NextState
 
 outMagCurrentState = StateOutMagWaitingUser ' On start up go to home position
+outMagUnloaded = True
 
 Do While True
 				
@@ -138,7 +139,7 @@ Do While True
 			
 		Case StateRaising
 			
-		'	WaitSig OutMagRobotClearSignal
+			'WaitSig OutMagRobotClearSignal
 			
 			Do Until outMagUpLim = True Or outMagPanelRdy = False  ' Move magazine up until we hit the upper limit
 				outMagMtrDirCC = True 'Set direction to UP 

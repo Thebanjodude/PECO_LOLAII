@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/06/20 20:13:11:942,DS:0000014006,CS:18690,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/24 20:51:52:439,DS:0000014074,CS:09527,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -205,7 +205,7 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=14
+	nNumberOfLabels=15
 	Label1 {
 		nBit=0
 		sLabel="eStopResetH"
@@ -247,31 +247,36 @@ OutputBitLabels {
 		sDescription=""
 	}
 	Label9 {
+		nBit=104
+		sLabel="nestpneu"
+		sDescription=""
+	}
+	Label10 {
 		nBit=105
 		sLabel="DrillGoH"
 		sDescription=""
 	}
-	Label10 {
+	Label11 {
 		nBit=106
 		sLabel="DrillReturnH"
 		sDescription=""
 	}
-	Label11 {
+	Label12 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label12 {
+	Label13 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label13 {
+	Label14 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label14 {
+	Label15 {
 		nBit=110
 		sLabel="stackLightAlrmH"
 		sDescription=""

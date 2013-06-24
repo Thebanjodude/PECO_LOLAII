@@ -7,8 +7,8 @@ Global Real zLimit ' the highest the EOAT can move without hitting periphials
 #define ScanSpeed 35 ' Percent Speed the arm moves during the scanning process
 Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
-#define Preinspection False
-#define Inspection True
+#define Preinspection 1
+#define Postinspection 2
 Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog, alarmMuteBtn
 Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
 Global Boolean panelDataTxACKBtn, eStopReset, eStopResetCC
@@ -81,11 +81,13 @@ Global Integer outMagCurrentState
 Global Boolean outMagMtrCC, outMagMtrDirCC
 
 'Inspection Station Global Vars
+
 Global Boolean PanelPassedInspection ' Indicates if the panel passes inspection
 Global Integer x, z ' Increment for P(x) to define edge and num of holes found
 Global Real CurrentThetaHere, insertDepthTolerance
 Global Boolean PassFailArray(0, 0)
 Global Real InspectionArray(0, 0), recInmagPickupOffset
+Global Boolean SkipHoleArray(0, 0) ' This needs to be global
 Global Integer currentInspectHole, currentPreinspectHole
 #define RightSpotFace 0
 #define LeftSpotFace 1
@@ -119,10 +121,13 @@ Global Real flashDwellTime ' How long the flash tool is in contact with the inse
 #define StainlessInsert 2
 #define xCoord 0
 #define YCoord 1
-Global Integer recNumberOfHoles, recInsertType
+Global Integer recNumberOfHoles, recInsertType, recPartNumber
 Global Boolean recFlashRequired
 Global Real recInsertDepth, recPanelThickness
 Global Real recTempProbe, recTempTrack
+Global Integer FirstHolePointInspection, LastHolePointInspection
+Global Integer FirstHolePointHotStake, LastHolePointHotStake
+Global Integer FirstHolePointFlash, LastHolePointFlash
 
 'Error Vars
 Global Boolean erPanelFailedInspection, erFrontSafetyFrameOpen, erBackSafetyFrameOpen
