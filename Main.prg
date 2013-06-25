@@ -1,37 +1,45 @@
-'#include "Globals.INC"
-'
-'Function main()
-'	
-'Integer NextState
-'
-'PowerOnSequence() ' Initialize the system and prepare it to do a job
-''TestMB() ' fake for test
-'
-'OnErr GoTo errHandler ' Define where to go when a controller error occurs
-'
-'Do While True
-'
-'	MBWrite(&h012C, 150, MBType16)
-'	MBWrite(&h012D, 145, MBType16)
-''	Print "readback", pasSetTemp, pasSetTempZone2
-''	
-''	Print pasActualTempZone1
-''	Print pasActualTempZone2
-''	
-''	Print "pasPIDsetupInTempZone1", pasPIDsetupInTempZone1
-''	Print "pasPIDsetupInTempZone2", pasPIDsetupInTempZone2
-'
-'	Wait 1
-'Loop
-'
-'mainCurrentState = StateIdle ' The first state is Idle
-'jobStart = True 'fake
-'
-''FakeLogging() ' fake logged values for Scott
-'
+#include "Globals.INC"
+
+Function main()
+OnErr GoTo errHandler ' Define where to go when a controller error occurs	
+
+PowerOnSequence() ' Initialize the system and prepare it to do a job
+
+Do While True
+
+Loop
+
+Motor On
+Power Low
+Fine 3000, 3000, 3000, 3000 ' set the robot to high accuracy 	
+LoadPoints "points3.pts"
+
+Do While True
+	
+Pause
+
+jobStart = True 'fake
+recPartNumber = 12345 ' fake for testing
+recNumberOfHoles = 16 ' fake for test
+recInsertDepth = .165 ' fake for testing
+suctionWaitTime = 3 'fake
+zLimit = -12.5 'fake
+
+PickupPanel()
+CrowdingSequence()
+InspectPanel(Preinspection)
+HotStakeTest()
+'FlashTest()
+InspectPanel(Postinspection)
+DropOffPanel()
+
+Loop
+
 'Do While True
 '		
 '	Select mainCurrentState
+
+mainCurrentState = StateIdle ' The first state is Idle
 '		
 '	Case StateIdle
 '		jobDone = False
@@ -140,65 +148,61 @@
 '		NextState = StateIdle
 '		jobStart = False
 '	EndIf
-'	
+	
 'mainCurrentState = NextState 'Set next state to current state after we break from case statment
-'
+
 'Loop
-'
-'	errHandler:
-'		
-'		'Assign things of interest to var names
-'		ctrlrErrMsg$ = ErrMsg$(Err)
-'	 	ctrlrLineNumber = Erl
-'		ctrlrTaskNumber = Ert
-'	 	ctrlrErrAxisNumber = Era
-'	 	ctrlrErrorNum = Err
-'	 	
-'	 	
-'	 	' Print error for testing/troubleshooting
-'	 	Print "Error Message:", ctrlrErrMsg$
-'		Print "Error Line Number:", ctrlrLineNumber
-'		Print "Error Task Number:", ctrlrTaskNumber
-'		Print "Error AxisNumber:", ctrlrErrAxisNumber
-'		Print "Error Number:", ctrlrErrorNum
-'		Pause
-'	EResume
-'		
-'Fend
-'Function PowerOnSequence()
-'	
-'	' define the connection to the LASER
-'    SetNet #203, "10.22.251.171", 7351, CR, NONE, 0
-'    OpenNet #203 As Client
-'
-'	' Execute Tasks
-'	Xqt 2, IOTableInputs, NoEmgAbort
-'	Xqt 3, IOTableOutputs, NoEmgAbort
-'	Xqt 4, SystemMonitor, NoEmgAbort
-'	Xqt 5, iotransfer, NoEmgAbort
-'	Xqt 6, HmiListen, NoEmgAbort
-'	Xqt 7, InMagControl, Normal ' First state is lowering 
-'	Xqt 8, OutMagControl, Normal ' First state is raising 
-'	MBInitialize()
-'retry:
-'
+
+	errHandler:
+		
+		'Assign things of interest to var names
+		ctrlrErrMsg$ = ErrMsg$(Err)
+	 	ctrlrLineNumber = Erl
+		ctrlrTaskNumber = Ert
+	 	ctrlrErrAxisNumber = Era
+	 	ctrlrErrorNum = Err
+	 	
+	 	
+	 	' Print error for testing/troubleshooting
+	 	Print "Error Message:", ctrlrErrMsg$
+		Print "Error Line Number:", ctrlrLineNumber
+		Print "Error Task Number:", ctrlrTaskNumber
+		Print "Error AxisNumber:", ctrlrErrAxisNumber
+		Print "Error Number:", ctrlrErrorNum
+		Pause
+	EResume
+		
+Fend
+Function PowerOnSequence()
+	
+	' define the connection to the LASER
+    SetNet #203, "10.22.251.171", 7351, CR, NONE, 0
+    OpenNet #203 As Client
+
+	' Execute Tasks
+	Xqt 2, IOTableInputs, NoEmgAbort
+	Xqt 3, IOTableOutputs, NoEmgAbort
+	Xqt 4, SystemMonitor, NoEmgAbort
+	Xqt 5, iotransfer, NoEmgAbort
+	Xqt 6, HmiListen, NoEmgAbort
+	Xqt 7, InMagControl, Normal ' First state is lowering 
+	Xqt 8, OutMagControl, Normal ' First state is raising 
+	MBInitialize()
+retry:
+
 '	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
-'	
-'	Motor On
-'	Power Low
-'	Speed 20 'Paramterize these numbers
-'	Accel 50, 50
-'	QP (On) ' turn On quick pausing	
-'	
-''	Move PreScan :U(CU(CurPos)) ' go home
-''	Move PreScan ROT ' go home
-'
-'	If CX(LaserCenter) = 0 Or CY(LaserCenter) = 0 Then
-'		Print "calibration needed"
-''		CalibrateLaserLocation()
-'	EndIf
-'	
-'Fend
+	
+	Motor On
+	Power Low
+	Speed 20 'Paramterize these numbers
+	Accel 50, 50
+	QP (On) ' turn On quick pausing	
+	
+'	Move PreScan :U(CU(CurPos)) ' go home
+'	Move PreScan ROT ' go home
+
+	
+Fend
 'Function SetInitialValues()
 '	' This is going to be OBS-the HMI will initialize the vars and I will check that
 '	'they get initialized
@@ -232,34 +236,34 @@
 'CheckInitialParameters = True 'fake for testing
 '
 'Fend
-'Function HotStakeTempRdy() As Boolean
-'	
-'	Boolean probeInTemp, trackInTemp
-'	
-'	'Is the current temp within the tolerance to start or continue a job?
-''	If Abs(recTempProbe - pasActualTempZone1) < Abs(probeTempTolerance) Then
-''		probeInTemp = True
-''	Else
-''		probeInTemp = False
-''	EndIf
-''	
-''	If Abs(recTempTrack - pasActualTempZone2) < Abs(trackTempTolerance) Then
-''		trackInTemp = True
-''	Else
-''		trackInTemp = False
-''	EndIf
-'	
-'	If probeInTemp = True And trackInTemp = True Then
-'		HotStakeTempRdy = True ' ready to start job
-'		erHeatStakeTemp = False
+Function HotStakeTempRdy() As Boolean
+	
+	Boolean probeInTemp, trackInTemp
+	
+	'Is the current temp within the tolerance to start or continue a job?
+'	If Abs(recTempProbe - pasActualTempZone1) < Abs(probeTempTolerance) Then
+'		probeInTemp = True
 '	Else
-'		HotStakeTempRdy = False ' Temperature is not in range
-'		erHeatStakeTemp = True
+'		probeInTemp = False
 '	EndIf
 '	
-'	HotStakeTempRdy = True ' fake for testing
-'	
-'Fend
+'	If Abs(recTempTrack - pasActualTempZone2) < Abs(trackTempTolerance) Then
+'		trackInTemp = True
+'	Else
+'		trackInTemp = False
+'	EndIf
+	
+	If probeInTemp = True And trackInTemp = True Then
+		HotStakeTempRdy = True ' ready to start job
+		erHeatStakeTemp = False
+	Else
+		HotStakeTempRdy = False ' Temperature is not in range
+		erHeatStakeTemp = True
+	EndIf
+	
+	HotStakeTempRdy = True ' fake for testing
+	
+Fend
 'Function PowerOnHomeCheck() As Boolean
 '	
 '	Real distx, disty, distz, distance
