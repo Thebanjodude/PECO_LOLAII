@@ -6,7 +6,6 @@ Function InMagControl
 Integer NextState
 
 inMagCurrentState = StateWaitingUser ' When we power on the magazine it waits for the operator
-
 Do While True
 	
 	Select inMagCurrentState
@@ -32,12 +31,21 @@ Do While True
 		Case StatePresentNextPart
 			
 			'Don't leave state until panel is in position or EOT is reached
+
 			Do Until inMagPnlRdy = False Or inMagUpLim = True
-				inMagMtrDirCC = True 'set direction to UP
-				inMagMtrCC = True
+				On inMagMtrDirH 'set direction to UP
+            	On inMagMtrH
+				
+				If inMagUpLim = True Then
+					GoTo blah
+				EndIf
 			Loop
 			
-			inMagMtrCC = False
+			blah:
+						
+			Off inMagMtrH
+			Off inMagMtrDirH 'set direction to UP
+
 			
 			If inMagUpLim = True Then 'If upper limit is reached then the magazine is out of panels 
 				NextState = StateLowering
@@ -79,6 +87,78 @@ Do While True
 inMagCurrentState = NextState 'Set next state to current state after we break from case statment
 Print "inMagCurrentState", inMagCurrentState
 Loop
+'Do While True
+'	
+'	Select inMagCurrentState
+'		Case StatePartPresent
+'			
+'			' Don't leave state unless part is removed or user commands magazine home
+'			Do Until inMagPnlRdy = True Or inMagGoHome = True
+'				Wait .1 ' Do nothing
+'			Loop
+'			
+'			If inMagGoHome = True Then ' Determine which state to go to next
+'				NextState = StateLowering
+'				inMagGoHome = False 'Clear Flag
+'			Else
+'				NextState = StatePartRemoved
+'			EndIf
+'
+'		Case StatePartRemoved
+'					
+'		'	WaitSig InMagRobotClearSignal ' Wait for main program to move robot out of the way
+'			NextState = StatePresentNextPart
+'			
+'		Case StatePresentNextPart
+'			
+'			'Don't leave state until panel is in position or EOT is reached
+'			Do Until inMagPnlRdy = False Or inMagUpLim = True
+'				inMagMtrDirCC = True 'set direction to UP
+'				inMagMtrCC = True
+'			Loop
+'			
+'			inMagMtrCC = False
+'			
+'			If inMagUpLim = True Then 'If upper limit is reached then the magazine is out of panels 
+'				NextState = StateLowering
+'				erInMagEmpty = True
+'			Else
+'				NextState = StatePartPresent
+'				Signal InMagPickUpSignal
+'			EndIf
+'			
+'		Case StateLowering
+'		
+'			Do Until inMagLowLim = True ' Don't leave state until magazine has reached lower limit (home)
+'				inMagMtrDirCC = False 'set direction to DOWN
+'				inMagMtrCC = True
+'			Loop
+'			
+'			inMagMtrCC = False
+'			
+'			NextState = StateWaitingUser
+'			
+'		Case StateWaitingUser
+'			
+'			Print "waiting for user to load more panels"
+'			Do Until inMagLoaded = True
+'				' Send message to HMI "waiting for user to load more panels"
+'				Wait .1
+'			Loop
+'			
+'			erInMagEmpty = False ' the user has ack'ed that they loaded the input magazine
+'			NextState = StatePresentNextPart
+'			inMagLoaded = False 'Clear Flag
+'			Print "User hit ready"
+'			
+'		Default
+'			Print "Current State is Null" ' We should NEVER get here...
+'			erUnknown = True
+'	Send
+'	
+'inMagCurrentState = NextState 'Set next state to current state after we break from case statment
+'Print "inMagCurrentState", inMagCurrentState
+'Loop
 
 Fend
 Function OutMagControl
@@ -86,7 +166,6 @@ Function OutMagControl
 Integer NextState
 
 outMagCurrentState = StateOutMagWaitingUser ' On start up go to home position
-outMagUnloaded = True
 
 Do While True
 				
@@ -141,7 +220,7 @@ Do While True
 			
 			'WaitSig OutMagRobotClearSignal
 			
-			Do Until outMagUpLim = True Or outMagPanelRdy = False  ' Move magazine up until we hit the upper limit
+			Do Until Sw(outMagLowLimH) = True Or Sw(outMagPanelRdyH) = False  ' Move magazine up until we hit the upper limit
 				outMagMtrDirCC = True 'Set direction to UP 
 				outMagMtrCC = True
 			Loop

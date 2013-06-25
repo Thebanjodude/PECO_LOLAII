@@ -6,13 +6,8 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 Do While True
-
+	Wait 1
 Loop
-
-Motor On
-Power Low
-Fine 3000, 3000, 3000, 3000 ' set the robot to high accuracy 	
-LoadPoints "points3.pts"
 
 Do While True
 	
@@ -187,7 +182,7 @@ Function PowerOnSequence()
 	Xqt 6, HmiListen, NoEmgAbort
 	Xqt 7, InMagControl, Normal ' First state is lowering 
 	Xqt 8, OutMagControl, Normal ' First state is raising 
-	MBInitialize()
+	MBInitialize() ' Kick off the modbus
 retry:
 
 '	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
@@ -197,6 +192,8 @@ retry:
 	Speed 20 'Paramterize these numbers
 	Accel 50, 50
 	QP (On) ' turn On quick pausing	
+	Fine 1000, 1000, 1000, 1000 ' set the robot to high accuracy 	
+	LoadPoints "points3.pts"
 	
 '	Move PreScan :U(CU(CurPos)) ' go home
 '	Move PreScan ROT ' go home

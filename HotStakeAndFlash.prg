@@ -1,7 +1,40 @@
 '#include "Globals.INC"
 '
 'Function HotStakePanel() As Boolean
-'	
+
+Function HotStakeTest()
+	LoadPoints "points3.pts"
+	
+	Integer i
+	
+	Jump PreHotStake LimZ -12.5
+	
+	Select recPartNumber
+		Case 88555
+			LoadPoints "points3.pts" ' define which points table to use
+			FirstHolePointHotStake = 175
+			LastHolePointHotStake = 190
+		Case 88123
+			LoadPoints "points2.pts" ' define which points table to use
+			'FirstHolePointInspection = xxx
+			'LastHolePointInspection = xxx
+		Case 12345
+			LoadPoints "points3.pts" ' define which points table to use
+			'FirstHolePointHotStake = 225
+			'LastHolePointHotStake = 227
+			FirstHolePointHotStake = 245
+			LastHolePointHotStake = 247
+		Default
+			Print "Panel points undefined"
+	Send
+	
+	For i = FirstHolePointHotStake To LastHolePointHotStake
+		Jump P(i)
+		Wait 1
+	Next
+
+Fend
+	
 '	Power High
 '	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 '	
@@ -118,6 +151,21 @@
 '	
 'Fend
 'Function FlashRemoval() As Boolean
+
+Function FlashTest()
+	LoadPoints "points3.pts"
+	Integer i
+	
+	Jump PreFlash
+	
+'	For i = 191 To 206
+
+	For i = 228 To 230
+		Jump P(i)
+		Wait 1
+	Next
+
+Fend
 '	
 '	Trap 2, MemSw(jobAbortH) = True GoTo exitFlash ' arm trap
 '	SystemStatus = RemovingFlash

@@ -222,53 +222,6 @@ Fend
 '	
 'Fend
 
-
-Function HotStakeTest()
-	LoadPoints "points3.pts"
-	
-	Integer i
-	
-	Jump PreHotStake LimZ -12.5
-	
-	Select recPartNumber
-		Case 88555
-			LoadPoints "points3.pts" ' define which points table to use
-			FirstHolePointHotStake = 175
-			LastHolePointHotStake = 190
-		Case 88123
-			LoadPoints "points2.pts" ' define which points table to use
-			'FirstHolePointInspection = xxx
-			'LastHolePointInspection = xxx
-		Case 12345
-			LoadPoints "points3.pts" ' define which points table to use
-			'FirstHolePointHotStake = 225
-			'LastHolePointHotStake = 227
-			FirstHolePointHotStake = 245
-			LastHolePointHotStake = 247
-		Default
-			Print "Panel points undefined"
-	Send
-	
-	For i = FirstHolePointHotStake To LastHolePointHotStake
-		Jump P(i)
-		Wait 1
-	Next
-
-Fend
-Function FlashTest()
-	LoadPoints "points3.pts"
-	Integer i
-	
-	Jump PreFlash
-	
-'	For i = 191 To 206
-
-	For i = 228 To 230
-		Jump P(i)
-		Wait 1
-	Next
-
-Fend
 Function ChangeProfile(ProfileNumber$ As String) As Boolean
 	
 'This function changes the active profile of the laser scanner. Just tell it which profile you want it to run. 
@@ -366,7 +319,7 @@ Function MicroMetersToInches(um As Real) As Real
 		MicroMetersToInches = um * .00003937
 Fend
 Function CrowdingSequence()
-	Jump temnest LimZ -12.5
+	Jump temnest LimZ zLimit
 	Off suctionCupsH
 	Wait 2.5
 	Go temnest +Z(30)
@@ -381,11 +334,12 @@ Function CrowdingSequence()
 	Wait .5
 	On nestpneu
 	Wait 3
-	Jump temnest LimZ -12.5
+	Jump temnest LimZ zLimit
 	On suctionCupsH
 	Wait 2
 	Off nestpneu
 	Go temnest +Z(30)
+	Jump PreScan LimZ zLimit
 Fend
 
 
