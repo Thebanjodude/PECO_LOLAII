@@ -6,9 +6,7 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 Integer check, check2, nextState
-'Do While True
-'	Wait 1
-'Loop
+
 	
 jobStart = True 'fake
 recPartNumber = 12345 ' fake for testing
@@ -16,6 +14,13 @@ recNumberOfHoles = 16 ' fake for test
 recInsertDepth = .165 ' fake for testing
 suctionWaitTime = 3 'fake
 zLimit = -12.5 'fake
+
+Do While True
+
+	PickupPanel(0)
+	DropOffPanel(0)
+
+Loop
 
 Do While True
 

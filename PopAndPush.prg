@@ -27,12 +27,10 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 		GoTo exitPushPanel
 	EndIf
 	
-	OutMagDropOffSignal = False
-
 	Jump PreScan LimZ zLimit
 	Jump OutmagWaypoint LimZ zLimit
 	
-	Do Until OutMagDropOffSignal = True And outMagInt = False
+	Do Until OutMagDropOffSignal = True
 		Wait .25 ' wait until the output magazine is ready
 	Loop
 	

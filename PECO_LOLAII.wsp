@@ -1,5 +1,5 @@
-ENVT0100,LM:2013/06/26 02:41:39:846,DS:0000002919,CS:19259,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Main.prg"
+ENVT0100,LM:2013/06/26 02:56:28:827,DS:0000002933,CS:01918,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Run - Remote Console"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
@@ -37,12 +37,12 @@ ProgramFile3 {
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=51
-		nTop=56
-		nWidth=1060
-		nHeight=665
+		nLeft=583
+		nTop=122
+		nWidth=1059
+		nHeight=662
 	}
 }
 ProgramFile5 {
@@ -72,10 +72,10 @@ ProgramFile7 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=197
-		nTop=4
-		nWidth=1209
-		nHeight=744
+		nLeft=0
+		nTop=69
+		nWidth=1207
+		nHeight=741
 	}
 }
 ProgramFile8 {
@@ -114,13 +114,13 @@ ProgramFile10 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=17
-		nTop=24
-		nWidth=847
-		nHeight=648
+		nLeft=11
+		nTop=316
+		nWidth=845
+		nHeight=645
 	}
 }
 nPointFileCount=2
@@ -179,19 +179,19 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=575
-		nTop=203
+		nLeft=338
+		nTop=303
 		nWidth=520
-		nHeight=506
+		nHeight=503
 	}
 }
 TaskMgr {
 	bOpened=True
 	Window {
-		nLeft=1925
-		nTop=120
-		nWidth=964
-		nHeight=341
+		nLeft=745
+		nTop=270
+		nWidth=980
+		nHeight=278
 	}
 }
 Macros {
