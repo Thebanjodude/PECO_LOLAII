@@ -5,14 +5,11 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
-Do While True
-	Wait 1
-Loop
-
-Do While True
+Integer check, check2, nextState
+'Do While True
+'	Wait 1
+'Loop
 	
-Pause
-
 jobStart = True 'fake
 recPartNumber = 12345 ' fake for testing
 recNumberOfHoles = 16 ' fake for test
@@ -20,21 +17,79 @@ recInsertDepth = .165 ' fake for testing
 suctionWaitTime = 3 'fake
 zLimit = -12.5 'fake
 
-PickupPanel()
-CrowdingSequence()
-InspectPanel(Preinspection)
-HotStakeTest()
+Do While True
+
+'CrowdingSequence()
+'InspectPanel(Preinspection)
+'HotStakeTest()
 'FlashTest()
-InspectPanel(Postinspection)
-DropOffPanel()
+'InspectPanel(Postinspection)
+
+'mainCurrentState = StateIdle ' The first state is Idle
+mainCurrentState = StatePopPanel ' The first state is Idle
+
+Select mainCurrentState
+
+	Case StateIdle
+		jobDone = False
+		If jobStart = True Then 'And HotStakeTempRdy = True Then
+			mainCurrentState = StatePopPanel
+		Else
+			mainCurrentState = StateIdle
+		EndIf
+		
+	Case StatePopPanel
+		
+		check = PickupPanel(0)
+		Print "check", check
+		
+		If check = PickupSuccessful Then
+			mainCurrentState = StatePushPanel ' fake
+			'NextState = StatePreinspection
+		ElseIf check = InmagIlockOpen Then
+			'	mainCurrentState = StatePopPanel ' keep visititng until the interlock is closed
+		ElseIf check = InmagError Then
+			'mainCurrentState = StateIdle ' Go to idle because there was an error
+		EndIf
+
+'	Case StatePreinspection
+'		If True Then
+'			NextState = StateHotStakePanel
+'		Else
+'			NextState = StateIdle
+'		EndIf
+'		
+'	Case StateHotStakePanel
+'		If HotStakePanel = True Then
+'			Print "done"
+'			Pause
+'			NextState = StateFlashRemoval
+'		Else
+'			NextState = StateIdle
+'		EndIf
+'	Case StateFlashRemoval
+'		If FlashRemoval = True Then
+'			NextState = StatePushPanel
+'		Else
+'			NextState = StateIdle
+'		EndIf
+	Case StatePushPanel
+		
+		check2 = DropOffPanel(0)
+		Print "check2", check2
+		
+		If check2 = DropoffSuccessful Then
+			mainCurrentState = StatePopPanel
+		ElseIf jobDone = True Then
+			mainCurrentState = StateIdle
+		EndIf
+Send
 
 Loop
 
 'Do While True
 '		
 '	Select mainCurrentState
-
-mainCurrentState = StateIdle ' The first state is Idle
 '		
 '	Case StateIdle
 '		jobDone = False
@@ -182,7 +237,7 @@ Function PowerOnSequence()
 	Xqt 6, HmiListen, NoEmgAbort
 	Xqt 7, InMagControl, Normal ' First state is lowering 
 	Xqt 8, OutMagControl, Normal ' First state is raising 
-	MBInitialize() ' Kick off the modbus
+	'MBInitialize() ' Kick off the modbus
 retry:
 
 '	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home

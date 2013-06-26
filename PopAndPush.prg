@@ -1,7 +1,8 @@
 #include "Globals.INC"
 
-Function DropOffPanel() As Boolean
-	
+Function DropOffPanel(stupidCompiler1 As Byte) As Integer 'byte me
+' You can't return a value unless you pass it one	
+
 Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 
 	DropOffPanel = False ' dafult to fail
@@ -22,14 +23,19 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 '	EndIf
 	
 	If outMagInt = True Then ' Check interlock status
-		DropOffPanel = False
+		DropOffPanel = OutmagIlockOpen
 		GoTo exitPushPanel
 	EndIf
-		
-'	WaitSig OutMagDropOffSignal		
+	
+	OutMagDropOffSignal = False
 
 	Jump PreScan LimZ zLimit
 	Jump OutmagWaypoint LimZ zLimit
+	
+	Do Until OutMagDropOffSignal = True And outMagInt = False
+		Wait .25 ' wait until the output magazine is ready
+	Loop
+	
 	Jump Outmag LimZ zLimit
 	
 	Off suctionCupsH ' fake
@@ -37,7 +43,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 	Wait suctionWaitTime ' Allow time for cups to unseal
 	Jump OutmagWaypoint LimZ zLimit
 
-'	Signal OutputMagSignal ' Give permission for output magazine to dequeue next panel	
+	OutputMagSignal = True ' Give permission for output magazine to dequeue next panel	
 	
 	PanelPassedInspection = True 'fake
 	
@@ -53,7 +59,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 	panelDataTxRdy = False 'reset flag
 	SystemStatus = MovingPanel
 	PanelPassedInspection = False ' rest flag
-	DropOffPanel = True 'fake??
+	DropOffPanel = DropoffSuccessful
 '	Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
 
 	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have pulled		
@@ -68,38 +74,42 @@ exitPushPanel:
 Trap 2 ' disarm trap	
 
 Fend
-Function PickupPanel() As Boolean
+Function PickupPanel(stupidCompiler As Byte) As Integer 'byte me
+' You can't return a value unless you pass it one
 	
 Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 
-	PickupPanel = False ' default to fail
+'	PickupPanel = 2 ' default to fail
 
 retry:
 
 	If inMagInterlock = True Then 'Check Interlock status
-		PickupPanel = False
+		PickupPanel = 1
 		GoTo exitPopPanel
 	EndIf
 	
-	Jump PreScan LimZ -12.5
+	Jump PreScan LimZ zLimit
 	
-'	WaitSig InMagPickUpSignal ' Wait for inmag to confirm a panel is ready to be picked up
-	Jump Inmag LimZ -12.5 LimZ zLimit
+	Do Until InMagPickUpSignal = True ' Wait for inmag to confirm a panel is ready to be picked up
+		Wait .25
+	Loop
+	
+	InMagPickUpSignal = False ' reset trigger
+	
+	Jump Inmag LimZ zLimit
 
 	suctionCupsCC = True
-	On (suctionCupsH) ' fake
 	Wait suctionWaitTime ' Allow time for cups to seal on panel
 	
-	PickupPanel = True
-'	SystemStatus = StateMoving
-	Jump PreScan LimZ -12.5
+	SystemStatus = StateMoving
+	Jump PreScan LimZ zLimit
 	
-'	Signal InMagRobotClearSignal ' Give permission for input magazine to queue up next panel
+	InMagRobotClearSignal = True ' Give permission for input magazine to queue up next panel
+	PickupPanel = 0
 	
 exitPopPanel:
 If MemSw(jobAbortH) = True Then 'check if the operator wants to abort the job
 	jobAbort = True
-	PickupPanel = False
 EndIf
 
 Trap 2 'disarm trap

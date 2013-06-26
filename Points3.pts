@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/06/24 22:31:04:510,DS:0000016019,CS:21090,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/26 01:21:17:432,DS:0000016022,CS:13863,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=75
@@ -132,10 +132,10 @@ Point8 {
 	nNumber=7
 	sLabel="Inmag"
 	sDescription=""
-	rX=340.137
-	rY=420.428
-	rZ=-255.579
-	rU=132.642
+	rX=338.73
+	rY=418.837
+	rZ=-260.097
+	rU=133.512
 	rV=0
 	rW=0
 	nLocal=0
@@ -150,10 +150,10 @@ Point9 {
 	nNumber=8
 	sLabel="outmag"
 	sDescription=""
-	rX=343.781
-	rY=-217.963
-	rZ=-210.566
-	rU=135
+	rX=358.733
+	rY=-220.811
+	rZ=-210.004
+	rU=132.922
 	rV=0
 	rW=0
 	nLocal=0

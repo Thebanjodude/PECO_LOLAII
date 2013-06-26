@@ -629,7 +629,7 @@ Case "jobStartBtn"
    EndIf
    Print "jobStartBtn:", jobStartBtn
 Case "leftInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        leftInterlockACKBtn = True
        leftInterlockACK = True
    Else
@@ -637,7 +637,7 @@ Case "leftInterlockACKBtn"
    EndIf
    Print "leftInterlockACKBtn:", leftInterlockACKBtn
 Case "outMagGoHomeBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        outMagGoHomeBtn = True
        outMagGoHome = True
    Else
@@ -645,7 +645,7 @@ Case "outMagGoHomeBtn"
    EndIf
    Print "outMagGoHomeBtn:", outMagGoHomeBtn
 Case "outMagIntLockAckBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        outMagIntLockAckBtn = True
        outMagIntLockAck = True
    Else
@@ -653,15 +653,16 @@ Case "outMagIntLockAckBtn"
    EndIf
    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 Case "outMagUnloadedBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        outMagUnloadedBtn = True
        outMagUnloaded = True
    Else
        outMagUnloadedBtn = False
    EndIf
    Print "outMagUnloadedBtn:", outMagUnloadedBtn
+   Print "outMagUnloaded:", outMagUnloaded
 Case "panelDataTxACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        panelDataTxACKBtn = True
        panelDataTxACK = True
    Else

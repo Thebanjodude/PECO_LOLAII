@@ -9,6 +9,7 @@ Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
 #define Preinspection 1
 #define Postinspection 2
+
 'Global Integer NextState
 Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog, alarmMuteBtn
 Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
@@ -37,6 +38,10 @@ Global Real PanelCordinatesQuill(22, 1)
 #define StateWaitingUser 5
 #define StateInMagPaused 6
 
+#define PickupSuccessful 0
+#define InmagIlockOpen 1
+#define InmagError 2
+
 'Outmag States
 #define StateOutMagUnknown 0
 #define StateReadyToReceive 1
@@ -46,6 +51,10 @@ Global Real PanelCordinatesQuill(22, 1)
 #define StateRaising 5
 #define StateGoHome 6
 #define StateOutMagPaused 7
+
+#define DropoffSuccessful 0
+#define OutmagIlockOpen 1
+#define OutmagError 2
 
 'Commands from HMI
 Global Boolean jobDone
@@ -65,11 +74,11 @@ Global Boolean rightInterlockACK, sftyFrmIlockAck
 Global Boolean inMagGoHome, inMagLoaded, inMagPnlRdy, inMagMtr, inMagMtrDir ' DIO to run intput the magazine
 Global Boolean inMagLowLim, inMagUpLim, inMagInterlock, inMagIntLockAck
 Global Boolean inMagLowLimN, inMagUpLimN
-Global Boolean InMagRobotClearSignal ' Signal robot is out of the way,OK to move Inmag
-Global Boolean InMagPickUpSignal ' Signal robot it can pick up a panel from inmag
 Global Real InMagTorqueLim
 Global Integer inMagCurrentState
 Global Boolean inMagMtrCC, inMagMtrDirCC
+Global Boolean InMagRobotClearSignal  ' Signal robot is out of the way,OK to move Inmag
+Global Boolean InMagPickUpSignal  ' Signal robot it can pick up a panel from inmag
 
 ' Output Magazine Global Vars
 Global Boolean outMagGoHome, outMagUnloaded, OutputMagSignal, outMagMtr 'DIO to run the output magazine
@@ -77,7 +86,7 @@ Global Boolean outMagPanelRdy, outMagMtrDir, outMagUpLim, outMagUpLimN
 Global Boolean outMagLowLim, outMagLowLimN, outMagInt, outMagIntLockAck
 Global Real OutMagTorqueLim, recOutmagPickupOffset
 Global Boolean OutMagDropOffSignal ' Signal robot it can Drop Off a panel to outmag
-Global Boolean OutMagRobotClearSignal ' Signal robot is out of the way,OK to move outmag
+Global Boolean OutMagRobotClearSignal  ' Signal robot is out of the way,OK to move outmag
 Global Integer outMagCurrentState
 Global Boolean outMagMtrCC, outMagMtrDirCC
 

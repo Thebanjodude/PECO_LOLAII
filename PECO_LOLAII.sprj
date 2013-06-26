@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/06/25 19:28:47:703,DS:0000004180,CS:30742,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/26 02:39:12:244,DS:0000004041,CS:26928,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="6/25/2013 1:28:46 PM"
+	sLastModified="6/25/2013 8:39:10 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -25,12 +25,12 @@ UserErrorsFile {
 	sName="UserErrors.dat"
 	nChecksum=0
 }
-nProgramFileCount=11
+nProgramFileCount=10
 ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/25/2013 4:25:29 PM"
+	sTimeSavedInController="6/26/2013 2:39:10 AM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
@@ -42,13 +42,13 @@ ProgramFile3 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/21/2013 2:59:33 AM"
+	sTimeSavedInController="6/26/2013 12:11:59 AM"
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/25/2013 7:28:46 PM"
+	sTimeSavedInController="6/26/2013 12:45:32 AM"
 }
 ProgramFile5 {
 	sName="OldCode.prg"
@@ -66,7 +66,7 @@ ProgramFile7 {
 	sName="PopAndPush.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="6/24/2013 11:58:57 PM"
+	sTimeSavedInController="6/26/2013 2:39:10 AM"
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
@@ -81,12 +81,6 @@ ProgramFile9 {
 	sTimeSavedInController="6/21/2013 2:52:47 AM"
 }
 ProgramFile10 {
-	sName="PickUpOffset.prg"
-	bCompiled=True
-	bStoreInController=True
-	sTimeSavedInController="6/21/2013 3:32:27 AM"
-}
-ProgramFile11 {
 	sName="CalibrationRoutines.prg"
 	bCompiled=True
 	bStoreInController=True
@@ -96,7 +90,7 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="6/24/2013 11:46:54 PM"
+	sTimeSavedInController="6/26/2013 1:31:51 AM"
 }
 nPointFileCount=2
 PointFile1 {
@@ -105,7 +99,7 @@ PointFile1 {
 }
 PointFile2 {
 	sName="Points3.pts"
-	sTimeSavedInController="6/24/2013 10:31:04 PM"
+	sTimeSavedInController="6/26/2013 1:21:17 AM"
 }
 OperatorSettings {
 	OperatorWindow {
