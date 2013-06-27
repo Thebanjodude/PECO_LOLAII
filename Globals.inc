@@ -10,6 +10,7 @@ Global Real PanelCordinates(22, 1)
 #define Preinspection 1
 #define Postinspection 2
 Global Real ZmaxTorque, ZavgTorque ' Monitors Z torque
+Global Boolean abortJob
 
 'Global Integer NextState
 Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog, alarmMuteBtn
@@ -191,6 +192,9 @@ Global Boolean erInMagLowSensorBad, erInMagUpSensorBad, erOutMagLowSensorBad, er
 #define SafetySystemCBTripped 43
 
 'State of Health Global Vars and defines
+
+Global Integer StatusCheckPickUp, StatusCheckCrowding, StatusCheckPreinspection
+Global Integer StatusCheckHotStake, StatusCheckFlash, StatusCheckDropOff
 Global String ctrlrErrMsg$
 Global Integer ctrlrLineNumber, ctrlrTaskNumber, ctrlrErrAxisNumber, ctrlrErrorNum
 Global Boolean motorOnStatus, motorPowerStatus, eStopStatus, errorStatus

@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/06/27 21:29:07:570,DS:0000002938,CS:09756,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Run - Remote Console"
+ENVT0100,LM:2013/06/27 23:56:04:430,DS:0000002928,CS:27398,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Main.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=26
-		nTop=42
-		nWidth=1121
-		nHeight=730
+		nLeft=89
+		nTop=269
+		nWidth=1261
+		nHeight=686
 	}
 }
 ProgramFile2 {
@@ -17,10 +17,10 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=729
-		nTop=181
-		nWidth=632
-		nHeight=495
+		nLeft=177
+		nTop=39
+		nWidth=1005
+		nHeight=752
 	}
 }
 ProgramFile3 {
@@ -36,13 +36,13 @@ ProgramFile3 {
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=121
-		nTop=48
-		nWidth=1500
-		nHeight=837
+		nLeft=341
+		nTop=138
+		nWidth=1246
+		nHeight=758
 	}
 }
 ProgramFile5 {
@@ -69,13 +69,13 @@ ProgramFile6 {
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=72
-		nTop=340
-		nWidth=1286
-		nHeight=778
+		nLeft=170
+		nTop=64
+		nWidth=1241
+		nHeight=774
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=691
-		nTop=119
-		nWidth=814
-		nHeight=517
+		nLeft=550
+		nTop=44
+		nWidth=1180
+		nHeight=674
 	}
 }
 ProgramFile9 {
@@ -96,8 +96,8 @@ ProgramFile9 {
 	Window {
 		nLeft=59
 		nTop=113
-		nWidth=1171
-		nHeight=634
+		nWidth=1169
+		nHeight=630
 	}
 }
 ProgramFile10 {
@@ -107,8 +107,8 @@ ProgramFile10 {
 	Window {
 		nLeft=297
 		nTop=59
-		nWidth=1213
-		nHeight=780
+		nWidth=1212
+		nHeight=777
 	}
 }
 nIncludeFileCount=1
@@ -117,10 +117,10 @@ IncludeFile1 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=160
-		nTop=62
-		nWidth=939
-		nHeight=770
+		nLeft=80
+		nTop=72
+		nWidth=936
+		nHeight=759
 	}
 }
 nPointFileCount=2
@@ -160,10 +160,10 @@ CmdWindow {
 RunWindow {
 	bOpened=True
 	Window {
-		nLeft=637
-		nTop=9
-		nWidth=918
-		nHeight=727
+		nLeft=748
+		nTop=142
+		nWidth=632
+		nHeight=607
 	}
 }
 IOLabelEditor {
@@ -177,12 +177,12 @@ IOLabelEditor {
 	nWinState=0
 }
 IOMonitor {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=1204
-		nTop=113
+		nLeft=286
+		nTop=60
 		nWidth=520
-		nHeight=454
+		nHeight=446
 	}
 }
 TaskMgr {
@@ -204,10 +204,10 @@ Macros {
 	}
 }
 RobotMgr {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=76
-		nTop=146
+		nTop=53
 		nWidth=751
 		nHeight=485
 	}

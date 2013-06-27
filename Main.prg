@@ -5,7 +5,7 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
-Integer check, check2, NextState, StatusCheckPickUp, StatusCheckDropOff
+Integer check, check2, NextState
 
 jobStart = True 'fake
 recPartNumber = 88555 ' fake for testing
@@ -13,40 +13,30 @@ recNumberOfHoles = 16 ' fake for test
 recInsertDepth = .165 ' fake for testing
 suctionWaitTime = 1.5 'fake
 zLimit = -12.5 'fake
-
-mainCurrentState = StatePopPanel
-'mainCurrentState = StateIdle ' The first state is Idle
-
 Power Low ' Manually set power to This will be done in PowerOnSequence()
 
 Do While True
-	SFree 1, 2, 3, 4
+
 Loop
+
 Do While True
 
-'This is just a sequence I use for easy testing
-'CrowdingSequence()
-'InspectPanel(Preinspection)
-'HotStakeTest()
-'FlashTest()
-'InspectPanel(Postinspection)
-
-'mainCurrentState = StateIdle ' The first state is Idle
-
-'The state machine below is production code, I will integrate incrementally
+mainCurrentState = StateIdle ' The first state is Idle
 
 Select mainCurrentState
 
 	Case StateIdle
 	' This state waits for the operator to start a job and the heat stake machine 
-	'to come up to temp. Also, if any of the other states encounters a major error, it returns	
+	' to come up to temp. Also, if any of the other states encounters a major error, it returns	
 	' to the idle state and waits for an operator.
 	
 		jobDone = False ' reset job done (move this)
-		If jobStart = True Then 'And HotStakeTempRdy = True Then
+		jobAbort = False ' reset job abort (move this)
+		
+		If jobStart = True Then 'And HotStakeTempRdy = True Then ' Fake for testing
 			mainCurrentState = StatePopPanel
 		Else
-			mainCurrentState = StateIdle ' Stay in idle 
+			mainCurrentState = StateIdle ' Stay in idle until ready
 		EndIf
 		
 	Case StatePopPanel
@@ -59,36 +49,48 @@ Select mainCurrentState
 			mainCurrentState = StateCrowding
 		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePopPanel
-		Else
-			mainCurrentState = StateIdle ' Go to idle because there was an error
+		ElseIf StatusCheckPickUp = 2 Or abortJob = True Then
+			mainCurrentState = StateIdle ' Go to idle because there was an error or we want to quit
 		EndIf
 		
 	Case StateCrowding
+		'This state Moves a panel from the home location, crowds it, then
+		' presents it to the laser scanner for pre-inspection
 		
-		CrowdingSequence() ' Add return ints for crowdseq for errors...
-		mainCurrentState = StatePreinspection
+		StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
+
+		If StatusCheckCrowding = 0 Then
+			mainCurrentState = StatePreinspection
+		ElseIf StatusCheckCrowding = 2 Or abortJob = True Then
+			mainCurrentState = StateIdle ' Go to idle because there was an error or we want to quit
+		EndIf
 
 	Case StatePreinspection
-'		If True Then
-			InspectPanel(1) ' 1=Preinspection . Make define.
-			mainCurrentState = StateHotStakePanel
-'		Else
-'			NextState = StateIdle
-'		EndIf
+		' This state uses the laser scanner to find pre-installed inserts and attempts
+		' to check if the correct panel has been put into the magazine.
+		' Add other checks
+		
+			StatusCheckPreinspection = InspectPanel(1) ' 1=Preinspection 
+			If StatusCheckPreinspection = 0 Then
+				mainCurrentState = StateHotStakePanel
+			ElseIf StatusCheckPreinspection = 2 Or abortJob = True Then
+				mainCurrentState = StateIdle ' Go to idle because there was an error or we want to quit
+			EndIf
 '		
 	Case StateHotStakePanel
-		HotStakePanel()
-'		If HotStakePanel = True Then
-'			Print "done"
-'			Pause
-			mainCurrentState = StateFlashRemoval
-'		Else
-'			NextState = StateIdle
-'		EndIf
+		' This state iterates through each hole and install an insert
+		
+		StatusCheckHotStake = HotStakePanel(0)
+		If StatusCheckHotStake = 0 Then
+			mainCurrentState = StateFlashRemoval ' The next state is Flash Removal
+		ElseIf StatusCheckHotStake = 2 Or abortJob = True Then
+				mainCurrentState = StateIdle ' Go to idle because there was an error or we want to quit
+		EndIf
+		
 '	Case StateFlashRemoval
 
-		FlashPanel()
-'		If FlashRemoval = True Then
+		StatusCheckFlash = FlashPanel(0)
+'		If StatusCheckFlash = 0 Then
 			mainCurrentState = StatePushPanel
 '		Else
 '			NextState = StateIdle
@@ -107,7 +109,6 @@ Select mainCurrentState
 		EndIf
 	Send
 		
-		'mainCurrentState = NextState
 Loop
 
 	errHandler:
@@ -118,7 +119,6 @@ Loop
 		ctrlrTaskNumber = Ert
 	 	ctrlrErrAxisNumber = Era
 	 	ctrlrErrorNum = Err
-	 	
 	 	
 	 	' Print error for testing/troubleshooting
 	 	Print "Error Message:", ctrlrErrMsg$
@@ -163,18 +163,6 @@ retry:
 
 	
 Fend
-'Function SetInitialValues()
-'	' This is going to be OBS-the HMI will initialize the vars and I will check that
-'	'they get initialized
-'	jobStart = True ' fake
-'	SystemSpeed = 50
-'	AnvilZlimit = -150.00
-'	suctionWaitTime = 2
-'	SystemAccel = 30
-'	zLimit = -15
-''	jobNumPanelsDone = 0
-''	jobNumPanels = 0
-'Fend
 'Function CheckInitialParameters() As Boolean
 ''check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
 ''check if the hmi has pushed all the parameter values to the controller, if not throw an error 
