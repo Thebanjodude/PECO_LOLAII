@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/06/26 02:56:28:827,DS:0000002933,CS:01918,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Run - Remote Console"
+ENVT0100,LM:2013/06/27 00:24:18:829,DS:0000002929,CS:15918,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="IOTable.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=399
-		nTop=30
-		nWidth=1074
-		nHeight=724
+		nLeft=261
+		nTop=153
+		nWidth=1037
+		nHeight=644
 	}
 }
 ProgramFile2 {
@@ -25,7 +25,7 @@ ProgramFile2 {
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=150
@@ -39,10 +39,10 @@ ProgramFile4 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=583
-		nTop=122
-		nWidth=1059
-		nHeight=662
+		nLeft=58
+		nTop=0
+		nWidth=1368
+		nHeight=885
 	}
 }
 ProgramFile5 {
@@ -58,24 +58,24 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="SystemMonitor.prg"
-	bOpened=False
-	nWinState=0
-	Window {
-		nLeft=208
-		nTop=96
-		nWidth=1177
-		nHeight=662
-	}
-}
-ProgramFile7 {
-	sName="PopAndPush.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=69
-		nWidth=1207
-		nHeight=741
+		nLeft=78
+		nTop=113
+		nWidth=1059
+		nHeight=776
+	}
+}
+ProgramFile7 {
+	sName="PickupAndDropOff.prg"
+	bOpened=True
+	nWinState=0
+	Window {
+		nLeft=293
+		nTop=90
+		nWidth=1087
+		nHeight=788
 	}
 }
 ProgramFile8 {
@@ -114,13 +114,13 @@ ProgramFile10 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=11
-		nTop=316
-		nWidth=845
-		nHeight=645
+		nLeft=41
+		nTop=34
+		nWidth=842
+		nHeight=635
 	}
 }
 nPointFileCount=2
@@ -158,12 +158,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=843
-		nTop=22
-		nWidth=715
-		nHeight=720
+		nLeft=709
+		nTop=32
+		nWidth=653
+		nHeight=481
 	}
 }
 IOLabelEditor {
@@ -179,19 +179,19 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=338
-		nTop=303
+		nLeft=1139
+		nTop=373
 		nWidth=520
-		nHeight=503
+		nHeight=485
 	}
 }
 TaskMgr {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=745
-		nTop=270
+		nLeft=900
+		nTop=493
 		nWidth=980
-		nHeight=278
+		nHeight=342
 	}
 }
 Macros {
@@ -206,8 +206,8 @@ Macros {
 RobotMgr {
 	bOpened=True
 	Window {
-		nLeft=881
-		nTop=176
+		nLeft=791
+		nTop=236
 		nWidth=751
 		nHeight=485
 	}

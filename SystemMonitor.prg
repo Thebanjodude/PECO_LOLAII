@@ -13,14 +13,15 @@ Do While True
 	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine
 		
 		erInMagOpenInterlock = True 'Throw error
-'		Halt InMagControl ' pause state machine where it is
-		inMagCurrentState = StateInMagPaused ' Set state to paused
-		
-		If mainCurrentState = StatePopPanel Then
-			Pause ' if interlock open Pause only when in pop state
-		EndIf
+		inMagCurrentState = StateInMagPaused
+'		Halt InMagControl ' pause state machine where it is		
+				
+'		If mainCurrentState = StatePopPanel Then
+'			Pause ' if interlock open Pause only when in pop state
+'		EndIf
 		
 	Else
+
 		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False
 		' The state machine will automatically change to its last state
@@ -32,9 +33,9 @@ Do While True
 		outMagCurrentState = StateOutMagPaused
 '		Halt OutMagControl
 		
-		If mainCurrentState = StatePushPanel Then
-			Pause ' pause robot movement to avoid pinchpoint
-		EndIf
+'		If mainCurrentState = StatePushPanel Then
+'			Pause ' pause robot movement to avoid pinchpoint
+'		EndIf
 		
 	Else
 	 	Resume OutMagControl ' When the interlock is back into position resume where we left off

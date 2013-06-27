@@ -9,6 +9,7 @@ Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
 #define Preinspection 1
 #define Postinspection 2
+Global Real ZmaxTorque, ZavgTorque ' Monitors Z torque
 
 'Global Integer NextState
 Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog, alarmMuteBtn
@@ -42,6 +43,8 @@ Global Real PanelCordinatesQuill(22, 1)
 #define InmagIlockOpen 1
 #define InmagError 2
 
+Global Integer InmagLastState
+
 'Outmag States
 #define StateOutMagUnknown 0
 #define StateReadyToReceive 1
@@ -55,6 +58,8 @@ Global Real PanelCordinatesQuill(22, 1)
 #define DropoffSuccessful 0
 #define OutmagIlockOpen 1
 #define OutmagError 2
+
+Global Integer OutmagLastState
 
 'Commands from HMI
 Global Boolean jobDone
@@ -88,7 +93,7 @@ Global Real OutMagTorqueLim, recOutmagPickupOffset
 Global Boolean OutMagDropOffSignal ' Signal robot it can Drop Off a panel to outmag
 Global Boolean OutMagRobotClearSignal  ' Signal robot is out of the way,OK to move outmag
 Global Integer outMagCurrentState
-Global Boolean outMagMtrCC, outMagMtrDirCC
+Global Boolean outMagMtrCC, outMagMtrDirCC, RobotPlacedPanel
 
 'Inspection Station Global Vars
 

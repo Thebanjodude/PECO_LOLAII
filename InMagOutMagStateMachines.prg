@@ -19,6 +19,7 @@ Do While True
 			Loop
 			
 			If inMagGoHome = True Then ' Determine which state to go to next
+				InMagPickUpSignal = False
 				NextState = StateLowering
 				inMagGoHome = False 'Clear Flag
 			Else
@@ -100,7 +101,7 @@ Do While True
 			
 			OutMagDropOffSignal = True ' Tell robot the output mag is ready
 			' Don't leave state unless panel is detected Or user specifies go home
-			Do Until outMagPanelRdy = False Or outMagGoHome = True
+			Do Until outMagGoHome = True Or RobotPlacedPanel = True 'outMagPanelRdy = False Or 
 				Wait .1 ' Do nothing
 			Loop
 
@@ -110,6 +111,9 @@ Do While True
 			Else
 				NextState = StateOutMagPartPresent
 			EndIf
+			
+			RobotPlacedPanel = False
+			OutMagDropOffSignal = False ' Tell robot the output mag is not ready
 
 		Case StateOutMagPartPresent
 
@@ -120,10 +124,23 @@ Do While True
 			NextState = StateOutMagLowering
 
 		Case StateOutMagLowering
-
-			Do Until outMagPanelRdy = True Or outMagLowLim = True
+			
+			Boolean PartPresentTrigger, endloop
+			
+			PartPresentTrigger = False ' Ititialize
+			endloop = False
+			
+			Do Until endloop = True Or outMagLowLim = True
 				outMagMtrDirCC = False 'Set direction to Down
 				outMagMtrCC = True
+				
+				If outMagPanelRdy = False Then
+					PartPresentTrigger = True
+				EndIf
+			
+				If PartPresentTrigger = True And outMagPanelRdy = True Then
+					endloop = True
+				EndIf
 			Loop
 
 			outMagMtrCC = False
@@ -131,39 +148,50 @@ Do While True
             If outMagLowLim = True Then 'Determine which state to go to next
 				NextState = StateOutMagWaitingUser
 				erOutMagFull = True
+				OutMagDropOffSignal = False
 			Else
 				NextState = StateReadyToReceive
 			EndIf
 
 		Case StateOutMagWaitingUser
-
+			
 			Do Until outMagUnloaded = True ' Don't leave state until magazine has been unloaded
 				Wait .1
 			Loop
-			
-'			If outMagPanelRdy = True Then
-'				NextState = StateOutMagLowering
-'			Else
-				NextState = StateRaising
-'			EndIf
 
-			outMagUnloaded = False
+			NextState = StateRaising
+
 			erOutMagFull = False ' The user has ack'ed that they unloaded the output mag.
 			outMagUnloaded = False ' Reset Flag
 
+			If outMagPanelRdy = False Then
+				erOutMagFull = True ' The user has ack'ed that they unloaded the output mag.
+				outMagUnloaded = False ' Reset Flag
+				NextState = StateOutMagWaitingUser
+			EndIf
+
 		Case StateRaising
-
-			Do Until outMagUpLim = True Or Sw(outMagPanelRdyH) = False  ' Move magazine up until we hit the upper limit
-'				outMagMtrDirCC = True 'Set direction to UP 
-'				outMagMtrCC = True
-				On (outMagMtrH)
-				outMagMtrDirCC = True 'Set direction to UP 
-			Loop
-
-			Off (outMagMtrH)
-			outMagMtrCC = False
-
-			NextState = StateReadyToReceive
+			
+			If outMagPanelRdy = False Then
+				NextState = StateOutMagWaitingUser
+			Else
+				
+				Do Until outMagUpLim = True Or Sw(outMagPanelRdyH) = False  ' Move magazine up until we hit the upper limit
+	'				outMagMtrDirCC = True 'Set direction to UP 
+	'				outMagMtrCC = True
+					On (outMagMtrH)
+					outMagMtrDirCC = True 'Set direction to UP 
+				Loop
+				
+				Off (outMagMtrH)
+				outMagMtrCC = False
+				
+				If Sw(outMagPanelRdyH) = False Then
+					NextState = StateOutMagLowering
+				Else
+					NextState = StateReadyToReceive
+				EndIf
+			EndIf
 
 		Case StateGoHome
 

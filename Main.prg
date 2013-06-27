@@ -5,25 +5,23 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
-Integer check, check2, nextState
+Integer check, check2, NextState, StatusCheckPickUp, StatusCheckDropOff
 
-	
 jobStart = True 'fake
 recPartNumber = 12345 ' fake for testing
 recNumberOfHoles = 16 ' fake for test
 recInsertDepth = .165 ' fake for testing
-suctionWaitTime = 3 'fake
+suctionWaitTime = 1.5 'fake
 zLimit = -12.5 'fake
 
-Do While True
+mainCurrentState = StatePopPanel
+'mainCurrentState = StateIdle ' The first state is Idle
 
-	PickupPanel(0)
-	DropOffPanel(0)
-
-Loop
+Power High
 
 Do While True
 
+'This is just a sequence I use for easy testing
 'CrowdingSequence()
 'InspectPanel(Preinspection)
 'HotStakeTest()
@@ -31,7 +29,10 @@ Do While True
 'InspectPanel(Postinspection)
 
 'mainCurrentState = StateIdle ' The first state is Idle
-mainCurrentState = StatePopPanel ' The first state is Idle
+
+'The state machine below is production code, I will integrate incrementally
+
+
 
 Select mainCurrentState
 
@@ -45,16 +46,16 @@ Select mainCurrentState
 		
 	Case StatePopPanel
 		
-		check = PickupPanel(0)
-		Print "check", check
+		StatusCheckPickUp = PickupPanel(0)
+		Print "StatusCheckPickUp", StatusCheckPickUp
 		
-		If check = PickupSuccessful Then
-			mainCurrentState = StatePushPanel ' fake
-			'NextState = StatePreinspection
-		ElseIf check = InmagIlockOpen Then
-			'	mainCurrentState = StatePopPanel ' keep visititng until the interlock is closed
-		ElseIf check = InmagError Then
-			'mainCurrentState = StateIdle ' Go to idle because there was an error
+		If StatusCheckPickUp = 0 Then
+			Print "here"
+			mainCurrentState = StatePushPanel
+		ElseIf StatusCheckPickUp = 1 Then
+			mainCurrentState = StatePopPanel ' keep visititng until the interlock is closed
+		Else
+			mainCurrentState = StateIdle ' Go to idle because there was an error
 		EndIf
 
 '	Case StatePreinspection
@@ -80,133 +81,20 @@ Select mainCurrentState
 '		EndIf
 	Case StatePushPanel
 		
-		check2 = DropOffPanel(0)
-		Print "check2", check2
+		StatusCheckDropOff = DropOffPanel(0)
+		Print "StatusCheckDropOff", StatusCheckDropOff
 		
-		If check2 = DropoffSuccessful Then
+		If StatusCheckDropOff = 0 Then
 			mainCurrentState = StatePopPanel
-		ElseIf jobDone = True Then
+		ElseIf StatusCheckDropOff = 1 Then
+			mainCurrentState = StatePushPanel
+		Else
 			mainCurrentState = StateIdle
 		EndIf
-Send
-
+	Send
+		
+		'mainCurrentState = NextState
 Loop
-
-'Do While True
-'		
-'	Select mainCurrentState
-'		
-'	Case StateIdle
-'		jobDone = False
-'		If jobStart = True And HotStakeTempRdy = True Then
-'			NextState = StatePopPanel
-'		Else
-'			NextState = StateIdle
-'		EndIf
-'	Case StatePopPanel
-'		If PopPanel = True Then
-'			NextState = StatePreinspection
-'		Else
-'			NextState = StateIdle
-'		EndIf
-'		
-'	Case StatePreinspection
-'		If True Then
-'			NextState = StateHotStakePanel
-'		Else
-'			NextState = StateIdle
-'		EndIf
-'		
-'	Case StateHotStakePanel
-'		If HotStakePanel = True Then
-'			Print "done"
-'			Pause
-'			NextState = StateFlashRemoval
-'		Else
-'			NextState = StateIdle
-'		EndIf
-'	Case StateFlashRemoval
-'		If FlashRemoval = True Then
-'			NextState = StatePushPanel
-'		Else
-'			NextState = StateIdle
-'		EndIf
-'	Case StatePushPanel
-'		If PushPanel = True Then
-'			NextState = StatePopPanel
-'		ElseIf jobDone = True Then
-'			Nextstate = StateIdle
-'		EndIf
-'
-''	Case StateIdle
-''		SetInitialValues() ' get rid of this during integration
-''		If CheckInitialParameters() = True And HotStakeTempRdy() = True And jobStart = True Then
-''			NextState = StatePopPanel
-''		Else
-''			NextState = StateIdle
-''		EndIf
-''	Case StatePopPanel
-''		If PopPanel = True Then
-''			NextState = StateFindPickUpError
-''
-''		ElseIf inMagIntlock = True Then
-''			NextState = PopPanel
-''		Else
-''			NextState = StateIdle
-''		EndIf
-''	Case StateFindPickUpError
-''		If FindPickUpError = True Then
-''			DerivethetaR()
-''			NextState = StatePreinspection
-''		Else
-''			NextState = StateIdle
-''		EndIf
-''	Case StatePreinspection
-''			If InspectPanel(Preinspection) = True Then
-''				NextState = StateHotStakePanel
-''			Else
-''				NextState = StateIdle
-''			EndIf
-''	Case StateHotStakePanel
-''		If HotStakePanel = True Then
-''			NextState = StateFlashRemoval
-''		Else
-''			NextState = StateIdle
-''		EndIf
-''	Case StateFlashRemoval
-''		If FlashRemoval = True Then
-''			NextState = StatePopPanel
-''		Else
-''			NextState = StateIdle
-''		EndIf
-''	Case StatePreinspection
-''		If InspectPanel(Inspection) = True Then
-''			NextState = StatePushPanel
-''		Else
-''			NextState = StateIdle
-''		EndIf
-''	Case StatePushPanel
-''		If PushPanel = True Then
-''			NextState = StatePopPanel
-''		ElseIf inMagIntlock = True Then
-''			NextState = PushPanel
-''		Else
-''			NextState = StateIdle
-''		EndIf
-''	Default
-''		Print "Current State is Null" ' We should NEVER get here...
-''		erUnknown = True
-''		Pause
-'	Send
-'	
-'	If jobAbort = True Then 'Check if the user has aborted the job
-'		NextState = StateIdle
-'		jobStart = False
-'	EndIf
-	
-'mainCurrentState = NextState 'Set next state to current state after we break from case statment
-
-'Loop
 
 	errHandler:
 		
@@ -242,6 +130,7 @@ Function PowerOnSequence()
 	Xqt 6, HmiListen, NoEmgAbort
 	Xqt 7, InMagControl, Normal ' First state is lowering 
 	Xqt 8, OutMagControl, Normal ' First state is raising 
+	Xqt 9, JointTorqueMonitor(), Normal
 	'MBInitialize() ' Kick off the modbus
 retry:
 

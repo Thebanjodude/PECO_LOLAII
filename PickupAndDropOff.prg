@@ -5,7 +5,7 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer 'byte me
 
 Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 
-	DropOffPanel = False ' dafult to fail
+'	DropOffPanel = 2 ' dafult to fail
 	SystemStatus = DepositingPanel
 	PanelPassedInspection = True ' fake it for testing	
 
@@ -24,7 +24,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 	
 	If outMagInt = True Then ' Check interlock status
 		DropOffPanel = OutmagIlockOpen
-		GoTo exitPushPanel
+		Exit Function
 	EndIf
 	
 	Jump PreScan LimZ zLimit
@@ -34,11 +34,12 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 		Wait .25 ' wait until the output magazine is ready
 	Loop
 	
-	Jump Outmag LimZ zLimit
+	Jump Outmag2 LimZ zLimit
 	
 	Off suctionCupsH ' fake
 	suctionCupsCC = False
 	Wait suctionWaitTime ' Allow time for cups to unseal
+	RobotPlacedPanel = True ' Tell the output magazine we put a panel into it
 	Jump OutmagWaypoint LimZ zLimit
 
 	OutputMagSignal = True ' Give permission for output magazine to dequeue next panel	
@@ -83,7 +84,7 @@ retry:
 
 	If inMagInterlock = True Then 'Check Interlock status
 		PickupPanel = 1
-		GoTo exitPopPanel
+		Exit Function
 	EndIf
 	
 	Jump PreScan LimZ zLimit
@@ -94,17 +95,23 @@ retry:
 	
 	InMagPickUpSignal = False ' reset trigger
 	
-	Jump Inmag LimZ zLimit
+	Jump Inmag2 +Z(5) LimZ zLimit
+	
+	PTCLR
+	Do While ZmaxTorque < .3
+		JTran 3, -.5
+	Loop
+	
+	Print "torqe met"
 
 	suctionCupsCC = True
 	Wait suctionWaitTime ' Allow time for cups to seal on panel
-	
 	SystemStatus = StateMoving
 	Jump PreScan LimZ zLimit
 	
 	InMagRobotClearSignal = True ' Give permission for input magazine to queue up next panel
 	PickupPanel = 0
-	
+
 exitPopPanel:
 If MemSw(jobAbortH) = True Then 'check if the operator wants to abort the job
 	jobAbort = True
@@ -113,3 +120,54 @@ EndIf
 Trap 2 'disarm trap
 
 Fend
+Function JointTorqueMonitor()
+	
+	Real Tpklow, Tpkhigh, TAvglow, TAvgHigh
+	
+'	Tpklow = 100
+'	Tpkhigh = 0
+'	TAvglow = 100
+'	TAvgHigh = 0
+	
+
+	' This test is to determine if we can sense when the robot picks up a panel
+		
+	ATCLR
+    PTCLR
+        
+Do While True
+	
+	ZmaxTorque = PTRQ(3)
+'	Print "ZmaxTorque", ZmaxTorque
+	
+	ATCLR
+	PTCLR
+	
+'		Print " The Average torque on the Z axis is ", ATRQ(3) 'ditto
+'		Print " The Peak torque on the Z axis is ", PTRQ(3) 'ditto
+'		
+'		If Tpklow > PTRQ(3) Then
+'			Tpklow = PTRQ(3)
+'		EndIf
+'		
+'		If Tpkhigh < PTRQ(3) Then
+'			Tpkhigh = PTRQ(3)
+'		EndIf
+'		
+'		If TAvglow > ATRQ(3) Then
+'			TAvglow = ATRQ(3)
+'		EndIf
+'		
+'		If TAvgHigh < ATRQ(3) Then
+'			TAvgHigh = ATRQ(3)
+'		EndIf
+
+'	Print " Tpklow is: ", Tpklow
+'	Print " Tpkhigh is: ", Tpkhigh
+'	Print " Tavglow is: ", TAvglow
+'	Print " Tavghigh is: ", TAvgHigh
+
+Loop
+	
+Fend
+
