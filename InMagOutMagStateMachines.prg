@@ -12,7 +12,7 @@ Do While True
 	Select inMagCurrentState
 		Case StatePartPresent
 
-			InMagPickUpSignal = True ' Tell The controller the magazine is ready
+			InMagPickUpSignal = True ' Tell The robot the magazine is ready
 			' Don't leave state unless part is removed or user commands magazine home
 			Do Until inMagPnlRdy = True Or inMagGoHome = True
 				Wait .25 ' Do nothing
@@ -179,12 +179,12 @@ Do While True
 				Do Until outMagUpLim = True Or Sw(outMagPanelRdyH) = False  ' Move magazine up until we hit the upper limit
 	'				outMagMtrDirCC = True 'Set direction to UP 
 	'				outMagMtrCC = True
-					On (outMagMtrH)
 					outMagMtrDirCC = True 'Set direction to UP 
+					On (outMagMtrH) ' Turn on Motor
 				Loop
 				
 				Off (outMagMtrH)
-				outMagMtrCC = False
+				outMagMtrCC = False 'Turn off motor
 				
 				If Sw(outMagPanelRdyH) = False Then
 					NextState = StateOutMagLowering

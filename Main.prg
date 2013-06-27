@@ -8,7 +8,7 @@ PowerOnSequence() ' Initialize the system and prepare it to do a job
 Integer check, check2, NextState, StatusCheckPickUp, StatusCheckDropOff
 
 jobStart = True 'fake
-recPartNumber = 12345 ' fake for testing
+recPartNumber = 88555 ' fake for testing
 recNumberOfHoles = 16 ' fake for test
 recInsertDepth = .165 ' fake for testing
 suctionWaitTime = 1.5 'fake
@@ -17,8 +17,11 @@ zLimit = -12.5 'fake
 mainCurrentState = StatePopPanel
 'mainCurrentState = StateIdle ' The first state is Idle
 
-Power High
+Power Low ' Manually set power to This will be done in PowerOnSequence()
 
+Do While True
+	SFree 1, 2, 3, 4
+Loop
 Do While True
 
 'This is just a sequence I use for easy testing
@@ -32,64 +35,75 @@ Do While True
 
 'The state machine below is production code, I will integrate incrementally
 
-
-
 Select mainCurrentState
 
 	Case StateIdle
-		jobDone = False
+	' This state waits for the operator to start a job and the heat stake machine 
+	'to come up to temp. Also, if any of the other states encounters a major error, it returns	
+	' to the idle state and waits for an operator.
+	
+		jobDone = False ' reset job done (move this)
 		If jobStart = True Then 'And HotStakeTempRdy = True Then
 			mainCurrentState = StatePopPanel
 		Else
-			mainCurrentState = StateIdle
+			mainCurrentState = StateIdle ' Stay in idle 
 		EndIf
 		
 	Case StatePopPanel
-		
-		StatusCheckPickUp = PickupPanel(0)
-		Print "StatusCheckPickUp", StatusCheckPickUp
-		
-		If StatusCheckPickUp = 0 Then
-			Print "here"
-			mainCurrentState = StatePushPanel
-		ElseIf StatusCheckPickUp = 1 Then
-			mainCurrentState = StatePopPanel ' keep visititng until the interlock is closed
+	' This state picks up a panel from the input magazine. Then takes the panel to the home	
+	' position. 
+	
+		StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
+				
+		If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
+			mainCurrentState = StateCrowding
+		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
+			mainCurrentState = StatePopPanel
 		Else
 			mainCurrentState = StateIdle ' Go to idle because there was an error
 		EndIf
+		
+	Case StateCrowding
+		
+		CrowdingSequence() ' Add return ints for crowdseq for errors...
+		mainCurrentState = StatePreinspection
 
-'	Case StatePreinspection
+	Case StatePreinspection
 '		If True Then
-'			NextState = StateHotStakePanel
+			InspectPanel(1) ' 1=Preinspection . Make define.
+			mainCurrentState = StateHotStakePanel
 '		Else
 '			NextState = StateIdle
 '		EndIf
 '		
-'	Case StateHotStakePanel
+	Case StateHotStakePanel
+		HotStakePanel()
 '		If HotStakePanel = True Then
 '			Print "done"
 '			Pause
-'			NextState = StateFlashRemoval
+			mainCurrentState = StateFlashRemoval
 '		Else
 '			NextState = StateIdle
 '		EndIf
 '	Case StateFlashRemoval
+
+		FlashPanel()
 '		If FlashRemoval = True Then
-'			NextState = StatePushPanel
+			mainCurrentState = StatePushPanel
 '		Else
 '			NextState = StateIdle
 '		EndIf
 	Case StatePushPanel
-		
+	' This state drops off a panel into the output magazine. 		
+	
 		StatusCheckDropOff = DropOffPanel(0)
-		Print "StatusCheckDropOff", StatusCheckDropOff
 		
-		If StatusCheckDropOff = 0 Then
+		If StatusCheckDropOff = 0 Then ' We successfully dropped off a panel
 			mainCurrentState = StatePopPanel
-		ElseIf StatusCheckDropOff = 1 Then
+		ElseIf StatusCheckDropOff = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePushPanel
 		Else
-			mainCurrentState = StateIdle
+			mainCurrentState = StateIdle ' Go to idle because there was an error
 		EndIf
 	Send
 		
@@ -253,3 +267,24 @@ Fend
 'Fend
 '
 
+Function getRobotPoints()
+	
+	Select recPartNumber
+		
+		Case 88555
+			
+			LoadPoints "points.pts"
+			FirstHolePointInspection = 350
+			LastHolePointInspection = 365
+			FirstHolePointHotStake = 400
+			LastHolePointHotStake = 405
+			'FirstHolePointFlash = 316
+			'LastHolePointFlash = 331
+			
+		Case 12345
+		
+		Default
+			Print "No point defined for this panel"
+			'throw and error
+	Send
+Fend

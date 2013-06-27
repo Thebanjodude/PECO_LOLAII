@@ -29,6 +29,7 @@ Global Real PanelCordinatesQuill(22, 1)
 #define StateFlashRemoval 7
 #define StateInspection 8
 #define StatePushPanel 9
+#define StateCrowding 10
 
 'Inmag States
 #define StateInMagUnknown 0
@@ -136,7 +137,8 @@ Global Real flashDwellTime ' How long the flash tool is in contact with the inse
 #define StainlessInsert 2
 #define xCoord 0
 #define YCoord 1
-Global Integer recNumberOfHoles, recInsertType, recPartNumber
+Global Integer recNumberOfHoles, recInsertType
+Global Double recPartNumber
 Global Boolean recFlashRequired
 Global Real recInsertDepth, recPanelThickness
 Global Real recTempProbe, recTempTrack
@@ -187,21 +189,6 @@ Global Boolean erInMagLowSensorBad, erInMagUpSensorBad, erOutMagLowSensorBad, er
 #define OutMagCBTripped 39
 #define DebrisCBTripped 41
 #define SafetySystemCBTripped 43
-
-'System State Numbers
-Global Integer SystemState
-#define Unknown 0
-#define Idle 1
-#define PickingPanel 3
-#define ScanningPanel 5
-#define InstallingInserts 6
-#define RemovingFlash 7
-#define InspectingPanel 8
-#define DepositingPanel 9
-#define MovingPanel 4
-#define WaitingForOperator 10
-#define BuiltInTestMode 11
-#define SystemPaused 12
 
 'State of Health Global Vars and defines
 Global String ctrlrErrMsg$

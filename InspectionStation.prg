@@ -4,37 +4,20 @@ Function InspectPanel(blah As Integer) As Boolean
 	LoadPoints "points3.pts"
 	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
 	
-	SystemStatus = InspectingPanel
+	SystemStatus = StateInspection
 	InspectPanel = False
 	
 	Jump PreScan LimZ zLimit
 	
 	Integer i
-	Redim SkipHoleArray(recNumberOfHoles - 1, 0)
-	Redim InspectionArray(recNumberOfHoles - 1, 1) ' Make the arrays big enough to fit all the panels
-	Redim PassFailArray(recNumberOfHoles - 1, 1)
+'	Redim SkipHoleArray(recNumberOfHoles - 1, 0)
+'	Redim InspectionArray(recNumberOfHoles - 1, 1) ' Make the arrays big enough to fit all the panels
+'	Redim PassFailArray(recNumberOfHoles - 1, 1)
 	
-	recNumberOfHoles = 16 'fake	
-	recPartNumber = 12345 ' fake
-	
-	currentPreinspectHole = 0 ' This tells the HMI which hole we are working on
-	currentInspectHole = 0 ' This tells the HMI which hole we are working on
-	
-	Select recPartNumber
-		Case 88555
-			LoadPoints "points3.pts" ' define which points table to use
-			FirstHolePointInspection = 158
-			LastHolePointInspection = 174
-		Case 12345
-			LoadPoints "points3.pts" ' define which points table to use
-'			FirstHolePointInspection = 231
-'			LastHolePointInspection = 233
-			FirstHolePointInspection = 248
-			LastHolePointInspection = 250
-		Default
-			Print "Panel points undefined"
-	Send
-	
+	currentPreinspectHole = 0 ' This tells the HMI which hole we are working on during preinspection
+	currentInspectHole = 0 ' This tells the HMI which hole we are working on during inspection
+	recPartNumber = 88555
+	getRobotPoints()
 	For i = FirstHolePointInspection To LastHolePointInspection
 		
 		Go PreScan :U(CU(P(i)))
@@ -44,22 +27,22 @@ Function InspectPanel(blah As Integer) As Boolean
 		If blah = 1 Then
 
 			ChangeProfile("07")
-			Print GetLaserMeasurement("01")
+			Print GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
 			
 			If Abs(GetLaserMeasurement("01")) < 250 Then ' There is already an insert so set skip flag
-				SkipHoleArray(currentPreinspectHole, 0) = 1
+				'SkipHoleArray(currentPreinspectHole, 0) = 1
 				Print "Hole ", i, " is already populated"
 			EndIf
 			
 			currentPreinspectHole = currentPreinspectHole + 1
+			
 		ElseIf blah = 2 Then
 			
 		MeasureInsertDepth(currentPreinspectHole)
-
 		currentInspectHole = currentInspectHole + 1
 		
 		Else
-			Print "state undefined"
+			Print "Inspection argument undefined"
 		EndIf
 			
 		Go P(i) -Y(50)
@@ -73,10 +56,8 @@ Function InspectPanel(blah As Integer) As Boolean
 '	PrintInspectionArray()
 '	PrintPanelArray()
 '	UnpackInspectionArrays()
-
 exitInspectPanel:
-
-	SystemStatus = MovingPanel
+	SystemStatus = StateMoving
 	Jump PreScan LimZ zLimit ' Go Home
 	Trap 2 'disarm trap
 Fend
@@ -319,10 +300,13 @@ Function MicroMetersToInches(um As Real) As Real
 		MicroMetersToInches = um * .00003937
 Fend
 Function CrowdingSequence()
-	Jump temnest LimZ zLimit
+	LoadPoints "points.pts"
+	Off nestpneu ' Make sure the nest is closed
+	Jump P348 -Y(8) +X(4) LimZ zLimit
+'	suctionCupsCC = False
 	Off suctionCupsH
-	Wait 2.5
-	Go temnest +Z(30)
+	Wait suctionWaitTime
+	Go P348 +Z(30)
 	Wait .5
 	On nestpneu
 	Wait .5
@@ -333,12 +317,12 @@ Function CrowdingSequence()
 	Off nestpneu
 	Wait .5
 	On nestpneu
-	Wait 3
-	Jump temnest LimZ zLimit
+	Wait 1
+	Jump P348 LimZ zLimit
 	On suctionCupsH
+'	suctionCupsCC = True
 	Wait 2
 	Off nestpneu
-	Go temnest +Z(30)
 	Jump PreScan LimZ zLimit
 Fend
 

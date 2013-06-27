@@ -1,42 +1,27 @@
-'#include "Globals.INC"
-'
-'Function HotStakePanel() As Boolean
+#include "Globals.INC"
 
-Function HotStakeTest()
+Function HotStakePanel() As Boolean
+
 	LoadPoints "points3.pts"
 	
 	Integer i
 	
-	Jump PreHotStake LimZ -12.5
-	
-	Select recPartNumber
-		Case 88555
-			LoadPoints "points3.pts" ' define which points table to use
-			FirstHolePointHotStake = 175
-			LastHolePointHotStake = 190
-		Case 88123
-			LoadPoints "points2.pts" ' define which points table to use
-			'FirstHolePointInspection = xxx
-			'LastHolePointInspection = xxx
-		Case 12345
-			LoadPoints "points3.pts" ' define which points table to use
-			'FirstHolePointHotStake = 225
-			'LastHolePointHotStake = 227
-			FirstHolePointHotStake = 245
-			LastHolePointHotStake = 247
-		Default
-			Print "Panel points undefined"
-	Send
-	
+	Jump PreHotStake LimZ zLimit
+	recPartNumber = 88555
+	getRobotPoints()
 	For i = FirstHolePointHotStake To LastHolePointHotStake
+		
 		Jump P(i)
-		Wait 1
+
+		' Add Tanda's Heat State Function here
+		
+		Pause ' Added for Testing
 	Next
 
 Fend
 	
 '	Power High
-'	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
+
 '	
 '	SystemStatus = InstallingInserts
 '	Boolean SkippedHole
@@ -152,17 +137,19 @@ Fend
 'Fend
 'Function FlashRemoval() As Boolean
 
-Function FlashTest()
-	LoadPoints "points3.pts"
+Function FlashPanel()
+	'	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
+	
 	Integer i
 	
 	Jump PreFlash
-	
-'	For i = 191 To 206
-
-	For i = 228 To 230
+	recPartNumber = 88555
+	getRobotPoints()
+	For i = FirstHolePointFlash To LastHolePointFlash
 		Jump P(i)
-		Wait 1
+		
+		' Add in stroke function here
+		Pause
 	Next
 
 Fend

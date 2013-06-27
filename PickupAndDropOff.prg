@@ -4,9 +4,9 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer 'byte me
 ' You can't return a value unless you pass it one	
 
 Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
-
+ LoadPoints "points3.pts"
 '	DropOffPanel = 2 ' dafult to fail
-	SystemStatus = DepositingPanel
+	SystemStatus = StatePushPanel
 	PanelPassedInspection = True ' fake it for testing	
 
 	panelDataTxRdy = True ' Tell HMI to readout hole data
@@ -34,7 +34,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 		Wait .25 ' wait until the output magazine is ready
 	Loop
 	
-	Jump Outmag2 LimZ zLimit
+	Jump Outmag LimZ zLimit
 	
 	Off suctionCupsH ' fake
 	suctionCupsCC = False
@@ -56,7 +56,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 	EndIf
 
 	panelDataTxRdy = False 'reset flag
-	SystemStatus = MovingPanel
+	SystemStatus = StateMoving
 	PanelPassedInspection = False ' rest flag
 	DropOffPanel = DropoffSuccessful
 '	Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
@@ -74,7 +74,7 @@ Trap 2 ' disarm trap
 
 Fend
 Function PickupPanel(stupidCompiler As Byte) As Integer 'byte me
-' You can't return a value unless you pass it one
+' You can't return a value unless you pass it one...
 	
 Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 
@@ -95,7 +95,7 @@ retry:
 	
 	InMagPickUpSignal = False ' reset trigger
 	
-	Jump Inmag2 +Z(5) LimZ zLimit
+	Jump Inmag +Z(5) LimZ zLimit
 	
 	PTCLR
 	Do While ZmaxTorque < .3
