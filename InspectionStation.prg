@@ -303,7 +303,6 @@ Function CrowdingSequence(StupidCompiler3 As Byte) As Integer
 
 Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 
-	LoadPoints "points.pts"
 	Off nestpneu ' Make sure the nest is closed
 	Jump P348 -Y(8) +X(4) LimZ zLimit
 '	suctionCupsCC = False
@@ -330,8 +329,6 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	CrowdingSequence = 0
 	
 exitCrowding:
-	erPanelFailedInspection = False
-	erHmiDataAck = False
 	
 If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	jobAbort = True

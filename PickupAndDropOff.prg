@@ -59,7 +59,6 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 	SystemStatus = StateMoving
 	PanelPassedInspection = False ' rest flag
 	DropOffPanel = DropoffSuccessful
-'	Signal OutMagRobotClearSignal ' Tell outmag the robot it out of the way, ok to move
 
 	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have pulled		
 	If jobNumPanelsDone = jobNumPanels Then
@@ -102,7 +101,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	PTCLR ' Clear the Peak Torque Buffer- if you dont clear it, it will overflow and cause an error
 	
 	Do While ZmaxTorque < .3 ' Approach the panel slowly until we hit a torque limit
-		JTran 3, -.5
+		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
 	Loop
 
 	suctionCupsCC = True ' Turn on the cups because we have engaged a panel

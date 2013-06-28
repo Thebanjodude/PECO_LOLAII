@@ -1,12 +1,12 @@
-ENVT0100,LM:2013/06/27 23:55:57:409,DS:0000004049,CS:06522,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/28 19:22:02:022,DS:0000004049,CS:07536,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="6/27/2013 5:55:55 PM"
-	bBuildComplete=True
-	bRebuildRequired=False
+	sLastModified="6/28/2013 1:21:53 PM"
+	bBuildComplete=False
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="ALWKSBSCHAEFER"

@@ -198,11 +198,14 @@ Do While True
 	EndIf
 	
 ' In this section I set the error in the main routine and the lights and pausing are changed here	
-
+	
 If erPanelStatusUnknown = True Then
-		stackLightYelCC = True
-		stackLightAlrmCC = True
-		Pause
+	stackLightYelCC = True
+	stackLightAlrmCC = True
+EndIf
+	
+If erPanelUndefined = True Then
+	stackLightAlrmCC = True
 EndIf
 
 If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh) Or HotStakeTempRdy = False Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or EStopOn = True Or (inMagLowLim And inMagLowLimN = True) Or (inMagUpLim And inMagUpLimN = True) Or (outMagLowLim And outMagLowLimN = True) Or (outMagUpLim And outMagUpLimN = True) Then

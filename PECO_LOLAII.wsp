@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/06/27 23:56:04:430,DS:0000002928,CS:27398,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/06/28 20:11:06:159,DS:0000002924,CS:10261,MA:6C-F0-49-E2-45-75,EI:           
 sActiveChild="Main.prg"
 bMdiMaximized=False
 ProgramFile1 {
@@ -6,10 +6,10 @@ ProgramFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=89
-		nTop=269
-		nWidth=1261
-		nHeight=686
+		nLeft=129
+		nTop=87
+		nWidth=1394
+		nHeight=682
 	}
 }
 ProgramFile2 {
@@ -17,10 +17,10 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=177
-		nTop=39
-		nWidth=1005
-		nHeight=752
+		nLeft=10
+		nTop=14
+		nWidth=1130
+		nHeight=747
 	}
 }
 ProgramFile3 {
@@ -28,21 +28,21 @@ ProgramFile3 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=58
-		nTop=181
-		nWidth=1304
-		nHeight=689
+		nLeft=131
+		nTop=98
+		nWidth=1302
+		nHeight=686
 	}
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=341
-		nTop=138
-		nWidth=1246
-		nHeight=758
+		nLeft=263
+		nTop=48
+		nWidth=1171
+		nHeight=755
 	}
 }
 ProgramFile5 {
@@ -50,10 +50,10 @@ ProgramFile5 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=56
-		nTop=35
-		nWidth=1047
-		nHeight=686
+		nLeft=40
+		nTop=121
+		nWidth=1046
+		nHeight=683
 	}
 }
 ProgramFile6 {
@@ -61,21 +61,21 @@ ProgramFile6 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=285
-		nTop=132
-		nWidth=1058
-		nHeight=772
+		nLeft=62
+		nTop=65
+		nWidth=1288
+		nHeight=769
 	}
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=170
-		nTop=64
-		nWidth=1241
-		nHeight=774
+		nLeft=66
+		nTop=149
+		nWidth=1239
+		nHeight=767
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=550
-		nTop=44
-		nWidth=1180
-		nHeight=674
+		nLeft=92
+		nTop=77
+		nWidth=950
+		nHeight=671
 	}
 }
 ProgramFile9 {
@@ -117,10 +117,10 @@ IncludeFile1 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=80
-		nTop=72
-		nWidth=936
-		nHeight=759
+		nLeft=40
+		nTop=57
+		nWidth=935
+		nHeight=756
 	}
 }
 nPointFileCount=2
@@ -158,7 +158,7 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=748
 		nTop=142

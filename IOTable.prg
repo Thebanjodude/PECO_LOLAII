@@ -1390,13 +1390,13 @@ Case "stackLightRedFV"
         MemOff (stackLightRedFV)
     EndIf
 Case "stackLightYelF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightYelF)
     Else
         MemOff (stackLightYelF)
     EndIf
 Case "stackLightYelFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightYelFV)
     Else
         MemOff (stackLightYelFV)
@@ -1416,9 +1416,9 @@ Case "suctionCupsFV"
 Case "anvilZlimit"
     AnvilZlimit = Val(tokens$(1))
     Print "anvilZlimit:", AnvilZlimit
-Case "flashDwellTime"
-    flashDwellTime = Val(tokens$(1))
-    Print "flashDwellTime:", flashDwellTime
+Case "recFlashDwellTime"
+    recFlashDwellTime = Val(tokens$(1))
+    Print "recFlashDwellTime:", recFlashDwellTime
 Case "insertDepthTolerance"
     insertDepthTolerance = Val(tokens$(1))
     Print "insertDepthTolerance:", insertDepthTolerance

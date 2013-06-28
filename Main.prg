@@ -5,8 +5,6 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
-Integer check, check2, NextState
-
 jobStart = True 'fake
 recPartNumber = 88555 ' fake for testing
 recNumberOfHoles = 16 ' fake for test
@@ -29,12 +27,12 @@ Select mainCurrentState
 	' This state waits for the operator to start a job and the heat stake machine 
 	' to come up to temp. Also, if any of the other states encounters a major error, it returns	
 	' to the idle state and waits for an operator.
-	
-		jobDone = False ' reset job done (move this)
-		jobAbort = False ' reset job abort (move this)
 		
-		If jobStart = True Then 'And HotStakeTempRdy = True Then ' Fake for testing
+		If jobStart = True Then 'And HotStakeTempRdy = 0 and CheckInitialParameters()=0 Then ' Fake for testing
 			mainCurrentState = StatePopPanel
+			If getRobotPoints() = 2 Then ' Set robot points for selected panel
+				mainCurrentState = StateIdle ' If we cant get the robot points, stay in idle
+			EndIf
 		Else
 			mainCurrentState = StateIdle ' Stay in idle until ready
 		EndIf
@@ -49,52 +47,97 @@ Select mainCurrentState
 			mainCurrentState = StateCrowding
 		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePopPanel
-		ElseIf StatusCheckPickUp = 2 Or abortJob = True Then
-			mainCurrentState = StateIdle ' Go to idle because there was an error or we want to quit
+		ElseIf StatusCheckPickUp = 2 Then
+			mainCurrentState = StateIdle ' Go to idle because there was an error 
+		EndIf
+		
+		If abortJob = True Then
+			If StatusCheckPickUp = 0 Then ' If we have a panel, drop it off before we go to idle
+				mainCurrentState = StatePushPanel
+			Else
+				mainCurrentState = StateIdle ' Go to idle because the operator wants to quit
+			EndIf
 		EndIf
 		
 	Case StateCrowding
 		'This state Moves a panel from the home location, crowds it, then
 		' presents it to the laser scanner for pre-inspection
 		
+		'Bug-> abort job and leave the panel in the nest!
+		
 		StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
 
 		If StatusCheckCrowding = 0 Then
 			mainCurrentState = StatePreinspection
-		ElseIf StatusCheckCrowding = 2 Or abortJob = True Then
-			mainCurrentState = StateIdle ' Go to idle because there was an error or we want to quit
+		ElseIf StatusCheckCrowding = 2 Then
+			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
+		EndIf
+		
+		If abortJob = True Then
+			mainCurrentState = StatePushPanel ' Go drop off the panel before we quit 
 		EndIf
 
 	Case StatePreinspection
 		' This state uses the laser scanner to find pre-installed inserts and attempts
 		' to check if the correct panel has been put into the magazine.
-		' Add other checks
 		
 			StatusCheckPreinspection = InspectPanel(1) ' 1=Preinspection 
 			If StatusCheckPreinspection = 0 Then
 				mainCurrentState = StateHotStakePanel
-			ElseIf StatusCheckPreinspection = 2 Or abortJob = True Then
-				mainCurrentState = StateIdle ' Go to idle because there was an error or we want to quit
+			ElseIf StatusCheckPreinspection = 2 Then
+				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle 
 			EndIf
-'		
+			
+			If abortJob = True Then
+				mainCurrentState = StatePushPanel ' Drop off the panel before we quit 
+			EndIf
+		
 	Case StateHotStakePanel
 		' This state iterates through each hole and install an insert
 		
 		StatusCheckHotStake = HotStakePanel(0)
 		If StatusCheckHotStake = 0 Then
 			mainCurrentState = StateFlashRemoval ' The next state is Flash Removal
-		ElseIf StatusCheckHotStake = 2 Or abortJob = True Then
-				mainCurrentState = StateIdle ' Go to idle because there was an error or we want to quit
+			If recFlashRequired = False Then
+				mainCurrentState = StateInspection ' Flash not required so skip it
+			EndIf
+		ElseIf StatusCheckHotStake = 2 Then
+			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 		EndIf
 		
-'	Case StateFlashRemoval
+		If abortJob = True Then
+			mainCurrentState = StatePushPanel ' Drop off the panel before we quit	
+		EndIf
+		
+	Case StateFlashRemoval
 
-		StatusCheckFlash = FlashPanel(0)
-'		If StatusCheckFlash = 0 Then
-			mainCurrentState = StatePushPanel
-'		Else
-'			NextState = StateIdle
-'		EndIf
+		StatusCheckFlash = FlashPanel(recFlashDwellTime)
+		If StatusCheckFlash = 0 Then
+			mainCurrentState = StateInspection
+		ElseIf StatusCheckFlash = 2 Then ' Go to idle because there was an error
+			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
+		EndIf
+
+		If abortJob = True Then
+			mainCurrentState = StatePushPanel ' Go to idle because the operator wants to quit
+		EndIf
+		
+	Case StateInspection
+		' This state uses the laser scanner to find pre-installed inserts and attempts
+		' to check if the correct panel has been put into the magazine.
+		' Add other checks
+		
+			StatusCheckPreinspection = InspectPanel(2) ' 2=Inspection 
+			If StatusCheckPreinspection = 0 Then
+				mainCurrentState = StateHotStakePanel
+			ElseIf StatusCheckPreinspection = 2 Then
+				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
+			EndIf
+			
+		If abortJob = True Then
+			mainCurrentState = StatePushPanel ' Go to idle because the operator wants to quit	
+		EndIf
+		
 	Case StatePushPanel
 	' This state drops off a panel into the output magazine. 		
 	
@@ -105,7 +148,17 @@ Select mainCurrentState
 		ElseIf StatusCheckDropOff = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePushPanel
 		Else
-			mainCurrentState = StateIdle ' Go to idle because there was an error
+			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
+		EndIf
+		
+		If abortJob = True Then
+			mainCurrentState = StateIdle ' Go to idle because the operator wants to quit	
+			abortJob = False ' reset flag
+		EndIf
+		
+		If jobDone = True Then
+			mainCurrentState = StateIdle ' Go to idle because we finished the job
+			jobDone = False ' reset flag
 		EndIf
 	Send
 		
@@ -255,8 +308,11 @@ Fend
 'Fend
 '
 
-Function getRobotPoints()
-	
+Function getRobotPoints() As Integer
+'This is where PECO will put a case in for each panel they have. 	
+'From the recipe, the part number is chosen from this case statement and all the taught points are loaded up 
+'at runtime
+
 	Select recPartNumber
 		
 		Case 88555
@@ -268,11 +324,12 @@ Function getRobotPoints()
 			LastHolePointHotStake = 405
 			'FirstHolePointFlash = 316
 			'LastHolePointFlash = 331
-			
+			erPanelUndefined = False
 		Case 12345
 		
 		Default
-			Print "No point defined for this panel"
-			'throw and error
+			' An operator chose a panel part number that has not been programmed into the system
+			erPanelUndefined = True
+			getRobotPoints = 2
 	Send
 Fend

@@ -127,7 +127,6 @@ Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flashHomeNO, flashHomeNC
 Global Boolean drillGoCC, drillReturnCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
 Global Integer currentHSHole, currentFlashHole
-Global Real flashDwellTime ' How long the flash tool is in contact with the insert
 #define RadiusColumn 0 'The first column in the array are radii
 #define ThetaColumn 1 'The second column in the array are thetas
 #define SkipFlagColumn 2 'The third column in the array are flags for holes if we want to skip them
@@ -146,13 +145,14 @@ Global Real recTempProbe, recTempTrack
 Global Integer FirstHolePointInspection, LastHolePointInspection
 Global Integer FirstHolePointHotStake, LastHolePointHotStake
 Global Integer FirstHolePointFlash, LastHolePointFlash
+Global Real recFlashDwellTime ' How long the flash tool is in contact with the insert
 
 'Error Vars
 Global Boolean erPanelFailedInspection, erFrontSafetyFrameOpen, erBackSafetyFrameOpen
 Global Boolean erLeftSafetyFrameOpen, erRightSafetyFrameOpen, erLowPressure
 Global Boolean erHighPressure, erPanelStatusUnknown, erWrongPanelHoles
 Global Boolean erWrongPanelDims, erWrongPanel, erWrongPanelInsert, erHmiDataAck
-Global Boolean erInMagEmpty, erInMagOpenInterlock, erOutMagCrowding
+Global Boolean erInMagEmpty, erInMagOpenInterlock, erOutMagCrowding, erPanelUndefined
 Global Boolean erInMagCrowding, erOutMagFull, erOutMagOpenInterlock, erBadPressureSensor
 Global Boolean erLaserScanner, erDCPower, erDCPowerHeatStake, erHeatStakeTemp
 Global Boolean erHeatStakeBreaker, erBowlFeederBreaker, erInMagBreaker
