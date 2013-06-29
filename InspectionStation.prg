@@ -1,55 +1,62 @@
 #include "Globals.INC"
 
-Function InspectPanel(blah As Integer) As Boolean
-	LoadPoints "points3.pts"
+Function InspectPanel(SelectRoutine As Integer) As Integer
+
 	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
 	
 	SystemStatus = StateInspection
-	InspectPanel = False
+	InspectPanel = 2 ' default to fail
 	
 	Jump PreScan LimZ zLimit
 	
 	Integer i
-'	Redim SkipHoleArray(recNumberOfHoles - 1, 0)
-'	Redim InspectionArray(recNumberOfHoles - 1, 1) ' Make the arrays big enough to fit all the panels
-'	Redim PassFailArray(recNumberOfHoles - 1, 1)
+	Real BossCrosssectionalArea
+'	Redim SkipHoleArray(LastHolePointInspection -FirstHolePointInspection+ 1, 0) ' Size the arrays
+'	Redim InspectionArray(LastHolePointInspection -FirstHolePointInspection+ 1, 1) 
+'	Redim PassFailArray(LastHolePointInspection -FirstHolePointInspection+ 1, 1)
 	
 	currentPreinspectHole = 0 ' This tells the HMI which hole we are working on during preinspection
 	currentInspectHole = 0 ' This tells the HMI which hole we are working on during inspection
-	recPartNumber = 88555
-	getRobotPoints()
+
 	For i = FirstHolePointInspection To LastHolePointInspection
 		
 		Go PreScan :U(CU(P(i)))
 		
 		Go P(i)
 		
-		If blah = 1 Then
+		If SelectRoutine = 1 Then
 
 			ChangeProfile("07")
-			Print GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
+			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
 			
-			If Abs(GetLaserMeasurement("01")) < 250 Then ' There is already an insert so set skip flag
+			If Abs(BossCrosssectionalArea) < 250 Then ' There is already an insert so set skip flag
 				'SkipHoleArray(currentPreinspectHole, 0) = 1
-				Print "Hole ", i, " is already populated"
+				Print "Hole ", currentPreinspectHole, " is already populated"
+			EndIf
+			
+			If Abs(BossCrosssectionalArea) < 12345 Then ' We dont see an empty hole or a populated hole. Panel is backwards or 
+				erPanelStatusUnknown = True
+				InspectPanel = 2					' the wrong panel was put into the magazine
+				'back out of the laser	
+				Exit For
 			EndIf
 			
 			currentPreinspectHole = currentPreinspectHole + 1
 			
-		ElseIf blah = 2 Then
+		ElseIf SelectRoutine = 2 Then
 			
-		MeasureInsertDepth(currentPreinspectHole)
+		MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
 		currentInspectHole = currentInspectHole + 1
 		
 		Else
 			Print "Inspection argument undefined"
 		EndIf
 			
-		Go P(i) -Y(50)
-		Wait .5
+		Go P(i) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
+		Wait .25
 	Next
 	
-	InspectPanel = True ' Inspection occured without errors
+	InspectPanel = 0 ' Inspection occured without errors
 	Go PreScan :U(CU(Here))
 
 '	PrintPassFailArray()

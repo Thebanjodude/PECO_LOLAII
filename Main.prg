@@ -325,6 +325,10 @@ Function getRobotPoints() As Integer
 			'FirstHolePointFlash = 316
 			'LastHolePointFlash = 331
 			erPanelUndefined = False
+			Inmag = P234
+			outmag = P235
+			Crowding = P236
+			
 		Case 12345
 		
 		Default

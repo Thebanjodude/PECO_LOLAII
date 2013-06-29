@@ -1,6 +1,6 @@
-ENVT0100,LM:2013/06/28 20:11:06:159,DS:0000002924,CS:10261,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Main.prg"
-bMdiMaximized=False
+ENVT0100,LM:2013/06/29 18:29:47:170,DS:0000002936,CS:24398,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InspectionStation.prg"
+bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
@@ -8,8 +8,8 @@ ProgramFile1 {
 	Window {
 		nLeft=129
 		nTop=87
-		nWidth=1394
-		nHeight=682
+		nWidth=1393
+		nHeight=678
 	}
 }
 ProgramFile2 {
@@ -26,7 +26,7 @@ ProgramFile2 {
 ProgramFile3 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=131
 		nTop=98
@@ -74,19 +74,19 @@ ProgramFile7 {
 	Window {
 		nLeft=66
 		nTop=149
-		nWidth=1239
-		nHeight=767
+		nWidth=1238
+		nHeight=763
 	}
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=92
 		nTop=77
-		nWidth=950
-		nHeight=671
+		nWidth=949
+		nHeight=667
 	}
 }
 ProgramFile9 {

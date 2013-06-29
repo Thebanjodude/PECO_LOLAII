@@ -1402,40 +1402,37 @@ Case "stackLightYelFV"
         MemOff (stackLightYelFV)
     EndIf
 Case "suctionCupsF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (suctionCupsF)
     Else
         MemOff (suctionCupsF)
     EndIf
 Case "suctionCupsFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (suctionCupsFV)
     Else
         MemOff (suctionCupsFV)
     EndIf
-Case "anvilZlimit"
-    AnvilZlimit = Val(tokens$(1))
-    Print "anvilZlimit:", AnvilZlimit
 Case "recFlashDwellTime"
-    recFlashDwellTime = Val(tokens$(1))
+    recFlashDwellTime = Val(Tokens$(1))
     Print "recFlashDwellTime:", recFlashDwellTime
 Case "insertDepthTolerance"
-    insertDepthTolerance = Val(tokens$(1))
+    insertDepthTolerance = Val(Tokens$(1))
     Print "insertDepthTolerance:", insertDepthTolerance
 Case "jobNumPanels"
-    jobNumPanels = Val(tokens$(1))
+    jobNumPanels = Val(Tokens$(1))
     Print "jobNumPanels:", jobNumPanels
 Case "pasCool"
-    pasCool = Val(tokens$(1))
+    pasCool = Val(Tokens$(1))
     Print "pasCool:", pasCool
 Case "pasDwell"
-    pasDwell = Val(tokens$(1))
+    pasDwell = Val(Tokens$(1))
     Print "pasDwell:", pasDwell
 Case "pasHeatStakingIPM"
-    pasHeatStakingIPM = Val(tokens$(1))
+    pasHeatStakingIPM = Val(Tokens$(1))
     Print "pasHeatStakingIPM:", pasHeatStakingIPM
 Case "pasHomeIPM"
-    pasHomeIPM = Val(tokens$(1))
+    pasHomeIPM = Val(Tokens$(1))
     Print "pasHomeIPM:", pasHomeIPM
 Case "pasInsertDepth"
     pasInsertDepth = Val(tokens$(1))

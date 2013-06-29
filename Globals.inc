@@ -45,8 +45,6 @@ Global Real PanelCordinatesQuill(22, 1)
 #define InmagIlockOpen 1
 #define InmagError 2
 
-Global Integer InmagLastState
-
 'Outmag States
 #define StateOutMagUnknown 0
 #define StateReadyToReceive 1
@@ -120,8 +118,6 @@ Global Boolean heartBeat, dc24vOK
 
 'Hot Stake and Flash Removal Global Vars
 Global Real PanelArray(25, 2)
-Global Real Theta, r, AnvilZlimit
-Global Integer PanelArrayIndex
 Global Boolean heatStakeGoCC, heatStakeGo
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flashHomeNO, flashHomeNC
