@@ -5,19 +5,17 @@ Global Boolean suctionCups, suctionCupsCC, holeDetected, maintMode
 Global Integer systemStatus ' Integer that tells opperator what state the sytem is in-see State tab in IOT
 Global Real zLimit ' the highest the EOAT can move without hitting periphials
 #define ScanSpeed 35 ' Percent Speed the arm moves during the scanning process
-Global Real PanelCordinates(22, 1)
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
 #define Preinspection 1
 #define Postinspection 2
-Global Real ZmaxTorque, ZavgTorque ' Monitors Z torque
-Global Boolean abortJob
+Global Real ZmaxTorque ' Monitors Z torque
+Global Boolean abortjob
 
 'Global Integer NextState
 Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog, alarmMuteBtn
 Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
 Global Boolean panelDataTxACKBtn, eStopReset, eStopResetCC
 Global Boolean GoFlag, ReturnFlag 'flags to make sure we dont break the drill
-Global Real PanelCordinatesQuill(22, 1)
 
 'Main() States
 #define StateUnknown 0
@@ -58,7 +56,6 @@ Global Real PanelCordinatesQuill(22, 1)
 #define DropoffSuccessful 0
 #define OutmagIlockOpen 1
 #define OutmagError 2
-
 Global Integer OutmagLastState
 
 'Commands from HMI
@@ -117,15 +114,11 @@ Global Boolean backIntlock2, frontIntlock2, leftIntlock2
 Global Boolean heartBeat, dc24vOK
 
 'Hot Stake and Flash Removal Global Vars
-Global Real PanelArray(25, 2)
 Global Boolean heatStakeGoCC, heatStakeGo
 Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flashHomeNO, flashHomeNC
 Global Boolean drillGoCC, drillReturnCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
 Global Integer currentHSHole, currentFlashHole
-#define RadiusColumn 0 'The first column in the array are radii
-#define ThetaColumn 1 'The second column in the array are thetas
-#define SkipFlagColumn 2 'The third column in the array are flags for holes if we want to skip them
 
 ' Recipe Ingredients for Panels
 #define InsertTypeUnknown 0
@@ -133,7 +126,7 @@ Global Integer currentHSHole, currentFlashHole
 #define StainlessInsert 2
 #define xCoord 0
 #define YCoord 1
-Global Integer recNumberOfHoles, recInsertType
+Global Integer recNumberOfHoles, recInsertType, recInmag, recOutmag, recCrowding
 Global Double recPartNumber
 Global Boolean recFlashRequired
 Global Real recInsertDepth, recPanelThickness
@@ -157,38 +150,12 @@ Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180, erIllegalArmM
 Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing, erRobotNotAtHome
 Global Boolean RecEntryMissing, ParamEntryMissing, erHMICommunication, erFlashStation
 Global Boolean erInMagLowSensorBad, erInMagUpSensorBad, erOutMagLowSensorBad, erOutMagUpSensorBad
-
-
-' Error Code array indexes, from IOT Excel MessageDB
-'Since we rolled these into the IOT and turned them into Bools, these are OBS
-#define UnknownError 0 ' An error occured but we are not sure what happened
-#define EStopActive 1 ' The E-Stop is engaged
-#define PanelFailed 2 ' A panel failed inspection
-#define PickUpFailedPanel 3 ' We did not pick up a panel from the input mag
-#define ControllerError 4 ' The EPSON RC 180 controller has generated an error
-#define frontInterlockError 6 ' The Front interlock is open
-#define backInterlockError 7 ' The Back interlock is open
-#define LeftInterlockError 8 ' The Left interlock is open
-#define RightInterlockError 9 ' The Right interlock is open
-#define LowAirPressure 12 ' The system air pressure is too low, we might drop a panel
-#define HighAirPressure 13 ' The system air pressure is too high we are risking breaking the robot
-#define InMagInterlockOpen 23 'The Input Magazine's interlock is open
-#define OutMagInterlockOpen 29 'The Output Magazine's interlock is open
-#define OutMagTooTight 30 ' The Output Magazine crowding is too tight, opperator needs to loosen
-#define InMagTooTight 24 ' The Input Magazine crowding is too tight, opperator needs to loosen
-#define PanelStatusUnknown 15 ' The hotstake anvil or flash anvil did not detect a panel
-#define InMagEmpty 22 ' Input Magazine is empty, opperator needs to fill it
-#define OutMagFull 28 ' Output Magazine is full, opperator needs to empty it
-#define LaserAlarmError 33 'The Laser scanner is not seeing the expected panel profile 
-#define DCpwrHeatStakeError 35
-#define HeatStakeCBTripped 36
-#define InMagCBTripped 38
-#define OutMagCBTripped 39
-#define DebrisCBTripped 41
-#define SafetySystemCBTripped 43
+'modbus monitoring variables
+Boolean erModbusTimeout 'did not recieve response before timeout
+Boolean erModbusPort ' TCP port to HMI is not open
+Boolean erModbusCommand ' Invalid command or parameter in modbus communication
 
 'State of Health Global Vars and defines
-
 Global Integer StatusCheckPickUp, StatusCheckCrowding, StatusCheckPreinspection
 Global Integer StatusCheckHotStake, StatusCheckFlash, StatusCheckDropOff
 Global String ctrlrErrMsg$
@@ -225,12 +192,6 @@ Global Boolean joint1Status, joint2Status, joint3Status, joint4Status, safeGuard
 #define Joint4StatusMask &H100
 #define SafeGuardMask &H400000
 
-'Hole X,Y Coordinites, sent from HMI (center of panel is origin)
-Global Real hole0Y, hole1X, hole1Y, hole2X, hole2Y, hole3X, hole3Y, hole4X, hole4Y
-Global Real hole5X, hole5Y, hole6X, hole6Y, hole7X, hole7Y, hole8X, hole8Y, hole9X, hole9Y
-Global Real hole10X, hole10Y, hole11X, hole11Y, hole12X, hole12Y, hole13X, hole13Y, hole14X, hole14Y
-Global Real hole15X, hole15Y, hole16X, hole16Y, hole17X, hole17Y, hole18X, hole18Y, hole19X, hole19Y
-Global Real hole20X, hole20Y, hole21X, hole21Y, hole22X, hole22Y
 
 'Left and Right Spotface Measurements=> send to HMI
 Global Real hole0L, hole0R, hole1R, hole1L, hole2R, hole2L, hole3R, hole3L, hole4R, hole4L
@@ -309,69 +270,69 @@ Global Boolean pasPIDTuneDoneZone3, pasPIDTuneDoneZone3Btn
 Global Boolean pasPIDTuneFailZone1, pasPIDTuneFailZone1Btn
 Global Boolean pasPIDTuneFailZone2, pasPIDTuneFailZone2Btn
 Global Boolean pasPIDTuneFailZone3, pasPIDTuneFailZone3Btn
-Global Long pasMessageDB
-Global Long pasSoftHome
-Global Long pasInsertPosition
-Global Long pasInsertDepth
-Global Long pasSoftStop
-Global Long pasHomeIPM
-Global Long pasInsertPickupIPM
-Global Long pasHeatStakingIPM
-Global Long pasInsertEngageIPM
-Global Long pasInsertEngage
-Global Long pasSetTempZone1
-Global Long pasVerticalLocation
-Global Integer pasPIDsetupSetPointZone1
-Global Integer pasSetTempZone2
-Global Integer pasPIDsetupSetPointZone2
-Global Integer pasPIDsetupSetPointZone3
-Global Integer pasPIDsetupSetPointZone4
-Global Integer pasActualTempZone1
-Global Integer pasPIDsetupActualZone1
-Global Integer pasActualTempZone2
-Global Integer pasPIDsetupActualZone2
-Global Integer pasPIDsetupActualZone3
-Global Integer pasPIDsetupActualZone4
-Global Integer pasPIDsetupMaxTempZone1
-Global Integer pasPIDsetupMaxTempZone2
-Global Integer pasPIDsetupMaxTempZone3
-Global Integer pasPIDsetupMaxTempZone4
-Global Integer pasPIDsetupInTempZone1
-Global Integer pasPIDsetupInTempZone2
-Global Integer pasPIDsetupInTempZone3
-Global Integer pasPIDsetupInTempZone4
-Global Integer pasPIDsetupOffsetZone1
-Global Integer pasPIDsetupOffsetZone2
-Global Integer pasPIDsetupOffsetZone3
-Global Integer pasPIDsetupOffsetZone4
-Global Integer pasPIDsetupPZone1
-Global Integer pasPIDShowPZone1
-Global Integer pasPIDsetupIZone1
-Global Integer pasPIDShowPZone2
-Global Integer pasPIDsetupDZone1
-Global Integer pasPIDShowIZone1
-Global Integer pasPIDShowIZone2
-Global Integer pasPIDShowDZone1
-Global Integer pasPIDShowDZone2
-Global Integer pasPIDsetupPZone2
-Global Integer pasPIDsetupIZone2
-Global Integer pasPIDsetupDZone2
-Global Integer pasPIDsetupPZone3
-Global Integer pasPIDsetupIZone3
-Global Integer pasPIDsetupDZone3
-Global Integer pasPIDsetupPZone4
-Global Integer pasPIDsetupIZone4
-Global Integer pasPIDsetupDZone4
-Global Integer pasInsertPreheat
-Global Integer pasDwell
-Global Integer pasCool
-Global Integer pasRecipe
-Global Integer pasJogSpeed
-Global Integer pasMaxLoadmeter
-Global Integer pasLoadMeter
-Global Integer pasPreHeatActual
-Global Integer pasDwellActual
-Global Integer pasCoolActual
+Global Real pasMessageDB
+Global Real pasSoftHome
+Global Real pasInsertPosition
+Global Real pasInsertDepth
+Global Real pasSoftStop
+Global Real pasHomeIPM
+Global Real pasInsertPickupIPM
+Global Real pasHeatStakingIPM
+Global Real pasInsertEngageIPM
+Global Real pasInsertEngage
+Global Real pasSetTempZone1
+Global Real pasVerticalLocation
+Global Long pasPIDsetupSetPointZone1
+Global Long pasSetTempZone2
+Global Long pasPIDsetupSetPointZone2
+Global Long pasPIDsetupSetPointZone3
+Global Long pasPIDsetupSetPointZone4
+Global Long pasActualTempZone1
+Global Long pasPIDsetupActualZone1
+Global Long pasActualTempZone2
+Global Long pasPIDsetupActualZone2
+Global Long pasPIDsetupActualZone3
+Global Long pasPIDsetupActualZone4
+Global Long pasPIDsetupMaxTempZone1
+Global Long pasPIDsetupMaxTempZone2
+Global Long pasPIDsetupMaxTempZone3
+Global Long pasPIDsetupMaxTempZone4
+Global Long pasPIDsetupInTempZone1
+Global Long pasPIDsetupInTempZone2
+Global Long pasPIDsetupInTempZone3
+Global Long pasPIDsetupInTempZone4
+Global Long pasPIDsetupOffsetZone1
+Global Long pasPIDsetupOffsetZone2
+Global Long pasPIDsetupOffsetZone3
+Global Long pasPIDsetupOffsetZone4
+Global Long pasPIDsetupPZone1
+Global Long pasPIDShowPZone1
+Global Long pasPIDsetupIZone1
+Global Long pasPIDShowPZone2
+Global Long pasPIDsetupDZone1
+Global Long pasPIDShowIZone1
+Global Long pasPIDShowIZone2
+Global Long pasPIDShowDZone1
+Global Long pasPIDShowDZone2
+Global Long pasPIDsetupPZone2
+Global Long pasPIDsetupIZone2
+Global Long pasPIDsetupDZone2
+Global Long pasPIDsetupPZone3
+Global Long pasPIDsetupIZone3
+Global Long pasPIDsetupDZone3
+Global Long pasPIDsetupPZone4
+Global Long pasPIDsetupIZone4
+Global Long pasPIDsetupDZone4
+Global Long pasInsertPreheat
+Global Long pasDwell
+Global Long pasCool
+Global Long pasRecipe
+Global Long pasJogSpeed
+Global Long pasMaxLoadmeter
+Global Long pasLoadMeter
+Global Long pasPreHeatActual
+Global Long pasDwellActual
+Global Long pasCoolActual
 Global Boolean pas1inLoadInsertCylinderBtn, pasInsertTypeBtn
 
 'defines for hs

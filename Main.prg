@@ -5,21 +5,22 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
-jobStart = True 'fake
+'jobStart = True 'fake
 recPartNumber = 88555 ' fake for testing
+'recPartNumber = 88558 ' fake for testing
 recNumberOfHoles = 16 ' fake for test
 recInsertDepth = .165 ' fake for testing
 suctionWaitTime = 1.5 'fake
 zLimit = -12.5 'fake
-Power Low ' Manually set power to This will be done in PowerOnSequence()
-
-Do While True
-
-Loop
-
-Do While True
+recInmag = 50
+recOutmag = 51
+recCrowding = 248
+LoadPoints "points.pts"
+Power Low ' Manually set power. This will be done in PowerOnSequence()
 
 mainCurrentState = StateIdle ' The first state is Idle
+
+Do While True
 
 Select mainCurrentState
 
@@ -30,9 +31,8 @@ Select mainCurrentState
 		
 		If jobStart = True Then 'And HotStakeTempRdy = 0 and CheckInitialParameters()=0 Then ' Fake for testing
 			mainCurrentState = StatePopPanel
-			If getRobotPoints() = 2 Then ' Set robot points for selected panel
-				mainCurrentState = StateIdle ' If we cant get the robot points, stay in idle
-			EndIf
+			getRobotPoints()
+			jobStart = False ' reset flag
 		Else
 			mainCurrentState = StateIdle ' Stay in idle until ready
 		EndIf
@@ -44,21 +44,21 @@ Select mainCurrentState
 		StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
 				
 		If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
-			mainCurrentState = StateCrowding
+			'mainCurrentState = StateCrowding
+			mainCurrentState = StatePushPanel ' fake for testing
 		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePopPanel
 		ElseIf StatusCheckPickUp = 2 Then
+			Jump PreScan LimZ zLimit ' go back home
 			mainCurrentState = StateIdle ' Go to idle because there was an error 
+		Else
+			mainCurrentState = StateIdle ' Go to idle because its the only thing to do
 		EndIf
 		
-		If abortJob = True Then
-			If StatusCheckPickUp = 0 Then ' If we have a panel, drop it off before we go to idle
-				mainCurrentState = StatePushPanel
-			Else
-				mainCurrentState = StateIdle ' Go to idle because the operator wants to quit
-			EndIf
+		If jobAbort = True Then
+			mainCurrentState = StatePushPanel ' push a panel before going to idle
 		EndIf
-		
+				
 	Case StateCrowding
 		'This state Moves a panel from the home location, crowds it, then
 		' presents it to the laser scanner for pre-inspection
@@ -73,7 +73,7 @@ Select mainCurrentState
 			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 		EndIf
 		
-		If abortJob = True Then
+		If jobAbort = True Then
 			mainCurrentState = StatePushPanel ' Go drop off the panel before we quit 
 		EndIf
 
@@ -88,7 +88,7 @@ Select mainCurrentState
 				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle 
 			EndIf
 			
-			If abortJob = True Then
+			If jobAbort = True Then
 				mainCurrentState = StatePushPanel ' Drop off the panel before we quit 
 			EndIf
 		
@@ -105,7 +105,7 @@ Select mainCurrentState
 			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 		EndIf
 		
-		If abortJob = True Then
+		If jobAbort = True Then
 			mainCurrentState = StatePushPanel ' Drop off the panel before we quit	
 		EndIf
 		
@@ -118,7 +118,7 @@ Select mainCurrentState
 			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 		EndIf
 
-		If abortJob = True Then
+		If jobAbort = True Then
 			mainCurrentState = StatePushPanel ' Go to idle because the operator wants to quit
 		EndIf
 		
@@ -134,7 +134,7 @@ Select mainCurrentState
 				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 			EndIf
 			
-		If abortJob = True Then
+		If jobAbort = True Then
 			mainCurrentState = StatePushPanel ' Go to idle because the operator wants to quit	
 		EndIf
 		
@@ -147,18 +147,13 @@ Select mainCurrentState
 			mainCurrentState = StatePopPanel
 		ElseIf StatusCheckDropOff = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePushPanel
-		Else
-			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 		EndIf
 		
-		If abortJob = True Then
-			mainCurrentState = StateIdle ' Go to idle because the operator wants to quit	
-			abortJob = False ' reset flag
-		EndIf
-		
-		If jobDone = True Then
-			mainCurrentState = StateIdle ' Go to idle because we finished the job
-			jobDone = False ' reset flag
+		If jobAbort = True Or jobDone = True Then
+			Jump PreScan LimZ zLimit ' go home
+			mainCurrentState = StateIdle ' Go to idle because the operator wants to quit or job is done	
+			jobAbort = False ' reset flag
+			jobStart = False ' reset flag
 		EndIf
 	Send
 		
@@ -195,10 +190,10 @@ Function PowerOnSequence()
 	Xqt 4, SystemMonitor, NoEmgAbort
 	Xqt 5, iotransfer, NoEmgAbort
 	Xqt 6, HmiListen, NoEmgAbort
-	Xqt 7, InMagControl, Normal ' First state is lowering 
-	Xqt 8, OutMagControl, Normal ' First state is raising 
+    Xqt 7, InMagControl, Normal ' First state is lowering 
+    Xqt 8, OutMagControl, Normal ' First state is raising 
 	Xqt 9, JointTorqueMonitor(), Normal
-	'MBInitialize() ' Kick off the modbus
+	MBInitialize() ' Kick off the modbus
 retry:
 
 '	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
@@ -209,7 +204,6 @@ retry:
 	Accel 50, 50
 	QP (On) ' turn On quick pausing	
 	Fine 1000, 1000, 1000, 1000 ' set the robot to high accuracy 	
-	LoadPoints "points3.pts"
 	
 '	Move PreScan :U(CU(CurPos)) ' go home
 '	Move PreScan ROT ' go home
@@ -239,22 +233,7 @@ Fend
 'Fend
 Function HotStakeTempRdy() As Boolean
 	
-	Boolean probeInTemp, trackInTemp
-	
-	'Is the current temp within the tolerance to start or continue a job?
-'	If Abs(recTempProbe - pasActualTempZone1) < Abs(probeTempTolerance) Then
-'		probeInTemp = True
-'	Else
-'		probeInTemp = False
-'	EndIf
-'	
-'	If Abs(recTempTrack - pasActualTempZone2) < Abs(trackTempTolerance) Then
-'		trackInTemp = True
-'	Else
-'		trackInTemp = False
-'	EndIf
-	
-	If probeInTemp = True And trackInTemp = True Then
+	If pasPIDsetupInTempZone1 = True And pasPIDsetupInTempZone2 = True Then
 		HotStakeTempRdy = True ' ready to start job
 		erHeatStakeTemp = False
 	Else
@@ -268,7 +247,7 @@ Fend
 'Function PowerOnHomeCheck() As Boolean
 '	
 '	Real distx, disty, distz, distance
-''TODO: Parameterize these #defines?
+' TODO: Parameterize these #defines?
 '	#define startUpDistMax 300 '+/-150mm from home position
 '	
 '	distx = Abs(CX(CurPos) - CX(PreScan))
@@ -311,7 +290,7 @@ Fend
 Function getRobotPoints() As Integer
 'This is where PECO will put a case in for each panel they have. 	
 'From the recipe, the part number is chosen from this case statement and all the taught points are loaded up 
-'at runtime
+'at runtime.
 
 	Select recPartNumber
 		
@@ -322,14 +301,20 @@ Function getRobotPoints() As Integer
 			LastHolePointInspection = 365
 			FirstHolePointHotStake = 400
 			LastHolePointHotStake = 405
-			'FirstHolePointFlash = 316
-			'LastHolePointFlash = 331
+			FirstHolePointFlash = 316
+			LastHolePointFlash = 331
+			recInmag = 45
+			recOutmag = 55
+
 			erPanelUndefined = False
-			Inmag = P234
-			outmag = P235
-			Crowding = P236
+			getRobotPoints = 0
 			
-		Case 12345
+		Case 88558
+			LoadPoints "points.pts"
+			recInmag = 54
+			recOutmag = 55
+			erPanelUndefined = False
+			getRobotPoints = 0
 		
 		Default
 			' An operator chose a panel part number that has not been programmed into the system

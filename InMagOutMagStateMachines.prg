@@ -6,15 +6,16 @@ Function InMagControl
 Integer NextState
 
 inMagCurrentState = StateWaitingUser ' When we power on the magazine it waits for the operator
+InMagRobotClearSignal = True ' initialization, because the robot starts at home
 
 Do While True
 	
 	Select inMagCurrentState
 		Case StatePartPresent
 
-			InMagPickUpSignal = True ' Tell The robot the magazine is ready
 			' Don't leave state unless part is removed or user commands magazine home
 			Do Until inMagPnlRdy = True Or inMagGoHome = True
+				InMagPickUpSignal = True ' Tell The robot the magazine is ready
 				Wait .25 ' Do nothing
 			Loop
 			

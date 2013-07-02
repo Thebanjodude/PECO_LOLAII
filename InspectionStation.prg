@@ -20,7 +20,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 
 	For i = FirstHolePointInspection To LastHolePointInspection
 		
-		Go PreScan :U(CU(P(i)))
+		Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
 		
 		Go P(i)
 		
@@ -311,11 +311,11 @@ Function CrowdingSequence(StupidCompiler3 As Byte) As Integer
 Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 
 	Off nestpneu ' Make sure the nest is closed
-	Jump P348 -Y(8) +X(4) LimZ zLimit
+	Jump Crowding LimZ zLimit 'Jump to the crowding location
 '	suctionCupsCC = False
 	Off suctionCupsH
-	Wait suctionWaitTime
-	Go P348 +Z(30)
+	Wait suctionWaitTime ' wait for cups to release
+	Go Crowding +Z(15) ' Relese the suction cups and move them out of the way for crowding
 	Wait .5
 	On nestpneu
 	Wait .5
@@ -327,7 +327,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Wait .5
 	On nestpneu
 	Wait 1
-	Jump P348 LimZ zLimit
+	Jump Crowding LimZ zLimit 'Jump to the crowding location
 	On suctionCupsH
 '	suctionCupsCC = True
 	Wait 2

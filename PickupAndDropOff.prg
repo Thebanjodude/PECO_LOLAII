@@ -3,10 +3,10 @@
 Function DropOffPanel(stupidCompiler1 As Byte) As Integer 'byte me
 ' You can't return a value unless you pass it one	
 
-Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
- LoadPoints "points3.pts"
-'	DropOffPanel = 2 ' dafult to fail
-	SystemStatus = StatePushPanel
+'Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
+
+	DropOffPanel = 2 ' dafult to fail
+'	SystemStatus = StatePushPanel
 	PanelPassedInspection = True ' fake it for testing	
 
 	panelDataTxRdy = True ' Tell HMI to readout hole data
@@ -23,7 +23,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 '	EndIf
 	
 	If outMagInt = True Then ' Check interlock status
-		DropOffPanel = OutmagIlockOpen
+		DropOffPanel = 1 ' Interlock is open		
 		Exit Function
 	EndIf
 	
@@ -34,7 +34,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 		Wait .25 ' wait until the output magazine is ready
 	Loop
 	
-	Jump Outmag LimZ zLimit
+	Jump P(recOutmag) LimZ zLimit
 	
 	Off suctionCupsH ' fake
 	suctionCupsCC = False
@@ -65,12 +65,12 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 		jobDone = True ' We have finished the run, don't execute the main loop
 	EndIf
 
-exitPushPanel:
+'exitPushPanel:
 	erPanelFailedInspection = False
 	erHmiDataAck = False
 	
 If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-	jobAbort = True
+	MemOff (jobAbortH) ' reset flag	
 EndIf
 
 Trap 2 ' disarm trap	
@@ -96,7 +96,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	
 	InMagPickUpSignal = False ' reset trigger
 	
-	Jump Inmag +Z(5) LimZ zLimit
+	Jump P(recInmag) +Z(5) LimZ zLimit
 	
 	PTCLR ' Clear the Peak Torque Buffer- if you dont clear it, it will overflow and cause an error
 	
@@ -107,15 +107,17 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	suctionCupsCC = True ' Turn on the cups because we have engaged a panel
 	Wait suctionWaitTime ' Allow time for cups to seal on panel	
 	SystemStatus = StateMoving
-	Jump PreScan LimZ zLimit ' Go home
-	
-	InMagRobotClearSignal = True ' Give permission for input magazine to queue up next panel
+	Jump PreScan LimZ zLimit ' Go home	
+
 	PickupPanel = 0 ' We successfully picked up a panel
 
 exitPopPanel:
 If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	jobAbort = True
+	MemOff (jobAbortH)
 EndIf
+
+	InMagRobotClearSignal = True ' Give permission for input magazine to queue up next panel
 
 Trap 2 'disarm trap
 
@@ -128,11 +130,8 @@ Function JointTorqueMonitor()
     PTCLR
         
 Do While True
-	
-	ZmaxTorque = PTRQ(3) ' Get the z axis peak torque
-	
-	PTCLR ' Clear the buffers
-	
+	ZmaxTorque = PTRQ(3) ' Get the z axis peak torque	
+	PTCLR ' Clear the buffers	
 Loop
 	
 Fend

@@ -1,7 +1,7 @@
 #include "Globals.INC"
 
 Function SystemMonitor()
-' This function constantly monitors System Pressures, voltages, interlocks, Hot Stake Machine, \
+' This function constantly monitors System Pressures, voltages, interlocks, Hot Stake Machine, 
 'CBs, E-stop, and controller errors. It reports them to the HMI for viewing and acking.
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
@@ -22,7 +22,7 @@ Do While True
 		
 	Else
 
-		Resume InMagControl ' When the interlock is back into position resume where we left off
+'		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False
 		' The state machine will automatically change to its last state
 	EndIf
@@ -38,10 +38,10 @@ Do While True
 '		EndIf
 		
 	Else
-	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
+'	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
 	 	erOutMagOpenInterlock = False
 	EndIf
-	
+		
 	If frontIntlock1 = True Then
 		erFrontSafetyFrameOpen = True
 	Else
@@ -193,8 +193,10 @@ Do While True
 		erOutMagUpSensorBad = False
 	EndIf
 	
-	If erLaserScanner = True Then
+	If erLaserScanner = True Then ' The laser scanner has lost comms
 		stackLightAlrmCC = True
+		stackLightRedCC = True
+'		Pause
 	EndIf
 	
 ' In this section I set the error in the main routine and the lights and pausing are changed here	
@@ -213,11 +215,11 @@ If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh) O
 	stackLightAlrmCC = True
 EndIf
 	
-If inMagInterlock = True Or outMagInt = True Then
+If inMagInterlock = True Or outMagInt = True Then ' If a magazine interlock is open then turn on the yelow light
 	stackLightYelCC = True
 EndIf
 
-If (stackLightRedCC Or stackLightYelCC) Then
+If (stackLightRedCC Or stackLightYelCC) Then ' Turn off the green light if the red or yellow is on
 	stackLightGrnCC = False
 Else
 	stackLightGrnCC = True
@@ -225,6 +227,10 @@ EndIf
 
 If PauseOn = True Then
 	mainCurrentState = StatePaused
+EndIf
+
+If alarmMute = True Then ' Mute the alarm
+	stackLightAlrmCC = False
 EndIf
 		
 Loop

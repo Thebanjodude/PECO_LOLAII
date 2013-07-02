@@ -227,7 +227,7 @@ Function IOTableBooleans(CtrlCodeValue As Boolean, HMIForceValue As Boolean, HMI
 		Value = HMIForceValue ' Take forced value from HMI, overwrite control code
 	EndIf
 	
-	IOTableBooleans = Value ' Return Value
+	IOTableBooleans = value ' Return Value
 	
 Fend
 Function IOTableIntegers(CtrlCodeValue As Integer, HMIForceValue As Integer, HMIForceFlag As Boolean) As Integer
@@ -251,7 +251,7 @@ Function IOTableReals(CtrlCodeValue As Real, HMIForceValue As Real, HMIForceFlag
 		Value = HMIForceValue ' Take forced value from HMI, overwrite control code
 	EndIf
 	
-	IOTableReals = value ' Return Value
+	IOTableReals = Value ' Return Value
 	
 Fend
 Function iotransfer()
@@ -309,6 +309,7 @@ Print #201, "{", Chr$(&H22) + "erHeatStakeTemp" + Chr$(&H22), ":", Str$(erHeatSt
 Print #201, "{", Chr$(&H22) + "erHighPressure" + Chr$(&H22), ":", Str$(erHighPressure), "}",
 Print #201, "{", Chr$(&H22) + "erHMICommunication" + Chr$(&H22), ":", Str$(erHMICommunication), "}",
 Print #201, "{", Chr$(&H22) + "erHmiDataAck" + Chr$(&H22), ":", Str$(erHmiDataAck), "}",
+Print #201, "{", Chr$(&H22) + "erPanelUndefined" + Chr$(&H22), ":", Str$(erPanelUndefined), "}",
 Print #201, "{", Chr$(&H22) + "erIllegalArmMove" + Chr$(&H22), ":", Str$(erIllegalArmMove), "}",
 Print #201, "{", Chr$(&H22) + "erInMagBreaker" + Chr$(&H22), ":", Str$(erInMagBreaker), "}",
 Print #201, "{", Chr$(&H22) + "erInMagCrowding" + Chr$(&H22), ":", Str$(erInMagCrowding), "}",
@@ -540,7 +541,8 @@ Print #201, "{", Chr$(&H22) + "pasShuttleNoLoad" + Chr$(&H22), ":", Str$(pasShut
 Print #201, "{", Chr$(&H22) + "pasStart" + Chr$(&H22), ":", Str$(pasStart), "}",
 Print #201, "{", Chr$(&H22) + "pasSteelInsert" + Chr$(&H22), ":", Str$(pasSteelInsert), "}",
 Print #201, "{", Chr$(&H22) + "pasUpLimit" + Chr$(&H22), ":", Str$(pasUpLimit), "}",
-'Print #201, "{", Chr$(&H22) + "pasVerticalLocation" + Chr$(&H22), ":", Str$(pasVerticalLocation), "}",
+Print #201, "{", Chr$(&H22) + "pasVerticalLocation" + Chr$(&H22), ":", Str$(pasVerticalLocation), "}",
+
 
 'dont delete when updating
 Print #201, "{", Chr$(&H22) + "monEstop1" + Chr$(&H22), ":", Str$(monEstop1), "}",
@@ -564,7 +566,19 @@ Function setVars(response$ As String)
 	
 	Select tokens$(0)
  'Rx from HMI:
- Case "alarmMuteBtn"
+ 
+'_____Dont delete while updating 
+Case "jobAbortBtn"
+   If tokens$(1) = "true" Then
+       jobAbortBtn = True
+       MemOn (jobAbortH)
+   Else
+       jobAbortBtn = False
+   EndIf
+   Print "jobAbortBtn:", jobAbortBtn
+'__________________
+
+Case "alarmMuteBtn"
    If tokens$(1) = "true" Then
        alarmMuteBtn = True
        alarmMute = True
@@ -597,7 +611,7 @@ Case "inMagGoHomeBtn"
    EndIf
    Print "inMagGoHomeBtn:", inMagGoHomeBtn
 Case "inMagIntLockAckBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        inMagIntLockAckBtn = True
        inMagIntLockAck = True
    Else
@@ -605,23 +619,15 @@ Case "inMagIntLockAckBtn"
    EndIf
    Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
 Case "inMagLoadedBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        inMagLoadedBtn = True
        inMagLoaded = True
    Else
        inMagLoadedBtn = False
    EndIf
    Print "inMagLoadedBtn:", inMagLoadedBtn
-Case "jobAbortBtn"
-   If tokens$(1) = "true" Then
-       jobAbortBtn = True
-       jobAbort = True
-   Else
-       jobAbortBtn = False
-   EndIf
-   Print "jobAbortBtn:", jobAbortBtn
 Case "jobStartBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobStartBtn = True
        jobStart = True
    Else
@@ -660,7 +666,6 @@ Case "outMagUnloadedBtn"
        outMagUnloadedBtn = False
    EndIf
    Print "outMagUnloadedBtn:", outMagUnloadedBtn
-   Print "outMagUnloaded:", outMagUnloaded
 Case "panelDataTxACKBtn"
    If Tokens$(1) = "true" Then
        panelDataTxACKBtn = True
@@ -670,7 +675,7 @@ Case "panelDataTxACKBtn"
    EndIf
    Print "panelDataTxACKBtn:", panelDataTxACKBtn
 Case "rightInterlockACKBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        rightInterlockACKBtn = True
        rightInterlockACK = True
    Else
@@ -678,713 +683,621 @@ Case "rightInterlockACKBtn"
    EndIf
    Print "rightInterlockACKBtn:", rightInterlockACKBtn
 Case "sftyFrmIlockAckBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        sftyFrmIlockAckBtn = True
        sftyFrmIlockAck = True
    Else
        sftyFrmIlockAckBtn = False
    EndIf
    Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
-Case "hole0X"
-    PanelCordinates(0, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole0Y"
-    PanelCordinates(0, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole10X"
-    PanelCordinates(10, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole10Y"
-    PanelCordinates(10, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole11X"
-    PanelCordinates(11, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole11Y"
-    PanelCordinates(11, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole12X"
-    PanelCordinates(12, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole12Y"
-    PanelCordinates(12, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole13X"
-    PanelCordinates(13, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole13Y"
-    PanelCordinates(13, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole14X"
-    PanelCordinates(14, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole14Y"
-    PanelCordinates(14, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole15X"
-    PanelCordinates(15, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole15Y"
-    PanelCordinates(15, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole16X"
-    PanelCordinates(16, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole16Y"
-    PanelCordinates(16, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole17X"
-    PanelCordinates(17, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole17Y"
-    PanelCordinates(17, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole18X"
-    PanelCordinates(18, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole18Y"
-    PanelCordinates(18, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole19X"
-    PanelCordinates(19, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole19Y"
-    PanelCordinates(19, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole1X"
-    PanelCordinates(1, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole1Y"
-    PanelCordinates(1, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole20X"
-    PanelCordinates(20, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole20Y"
-    PanelCordinates(20, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole21X"
-    PanelCordinates(21, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole21Y"
-    PanelCordinates(21, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole22X"
-    PanelCordinates(22, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole22Y"
-    PanelCordinates(22, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole2X"
-    PanelCordinates(2, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole2Y"
-    PanelCordinates(2, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole3X"
-    PanelCordinates(3, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole3Y"
-    PanelCordinates(3, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole4X"
-    PanelCordinates(4, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole4Y"
-    PanelCordinates(4, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole5X"
-    PanelCordinates(5, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole5Y"
-    PanelCordinates(5, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole6X"
-    PanelCordinates(6, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole6Y"
-    PanelCordinates(6, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole7X"
-    PanelCordinates(7, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole7Y"
-    PanelCordinates(7, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole8X"
-    PanelCordinates(8, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole8Y"
-    PanelCordinates(8, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole9X"
-    PanelCordinates(9, 0) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
-Case "hole9Y"
-    PanelCordinates(9, 1) = Val(tokens$(1)) * 25.4 'convert inches to mm (mm are the default Epson unit)
 Case "airPressHighF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (airPressHighF)
     Else
         MemOff (airPressHighF)
     EndIf
 Case "airPressHighFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (airPressHighFV)
     Else
         MemOff (airPressHighFV)
     EndIf
 Case "airPressLowF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (airPressLowF)
     Else
         MemOff (airPressLowF)
     EndIf
 Case "airPressLowFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (airPressLowFV)
     Else
         MemOff (airPressLowFV)
     EndIf
 Case "backIntlock1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock1F)
     Else
         MemOff (backIntlock1F)
     EndIf
 Case "backIntlock1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock1FV)
     Else
         MemOff (backIntlock1FV)
     EndIf
 Case "backIntlock2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock2F)
     Else
         MemOff (backIntlock2F)
     EndIf
 Case "backIntlock2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock2FV)
     Else
         MemOff (backIntlock2FV)
     EndIf
 Case "cbMonDebrisRmvF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonDebrisRmvF)
     Else
         MemOff (cbMonDebrisRmvF)
     EndIf
 Case "cbMonDebrisRmvFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonDebrisRmvFV)
     Else
         MemOff (cbMonDebrisRmvFV)
     EndIf
 Case "cbMonHeatStakeF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonHeatStakeF)
     Else
         MemOff (cbMonHeatStakeF)
     EndIf
 Case "cbMonHeatStakeFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonHeatStakeFV)
     Else
         MemOff (cbMonHeatStakeFV)
     EndIf
 Case "cbMonInMagF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonInMagF)
     Else
         MemOff (cbMonInMagF)
     EndIf
 Case "cbMonInMagFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonInMagFV)
     Else
         MemOff (cbMonInMagFV)
     EndIf
 Case "cbMonOutMagF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonOutMagF)
     Else
         MemOff (cbMonOutMagF)
     EndIf
 Case "cbMonOutMagFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonOutMagFV)
     Else
         MemOff (cbMonOutMagFV)
     EndIf
 Case "cbMonPAS24vdcF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonPAS24vdcF)
     Else
         MemOff (cbMonPAS24vdcF)
     EndIf
 Case "cbMonPAS24vdcFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonPAS24vdcFV)
     Else
         MemOff (cbMonPAS24vdcFV)
     EndIf
 Case "cbMonSafetyF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonSafetyF)
     Else
         MemOff (cbMonSafetyF)
     EndIf
 Case "cbMonSafetyFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonSafetyFV)
     Else
         MemOff (cbMonSafetyFV)
     EndIf
 Case "dc24vOKF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (dc24vOKF)
     Else
         MemOff (dc24vOKF)
     EndIf
 Case "dc24vOKFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (dc24vOKFV)
     Else
         MemOff (dc24vOKFV)
     EndIf
 Case "edgeDetectGoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectGoF)
     Else
         MemOff (edgeDetectGoF)
     EndIf
 Case "edgeDetectGoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectGoFV)
     Else
         MemOff (edgeDetectGoFV)
     EndIf
 Case "edgeDetectHiF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectHiF)
     Else
         MemOff (edgeDetectHiF)
     EndIf
 Case "edgeDetectHiFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectHiFV)
     Else
         MemOff (edgeDetectHiFV)
     EndIf
 Case "edgeDetectLoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectLoF)
     Else
         MemOff (edgeDetectLoF)
     EndIf
 Case "edgeDetectLoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectLoFV)
     Else
         MemOff (edgeDetectLoFV)
     EndIf
 Case "flashHomeNCF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (flashHomeNCF)
     Else
         MemOff (flashHomeNCF)
     EndIf
 Case "flashHomeNCFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (flashHomeNCFV)
     Else
         MemOff (flashHomeNCFV)
     EndIf
 Case "flashHomeNOF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (flashHomeNOF)
     Else
         MemOff (flashHomeNOF)
     EndIf
 Case "flashHomeNOFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (flashHomeNOFV)
     Else
         MemOff (flashHomeNOFV)
     EndIf
 Case "flashPnlPrsntF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (FlashPnlPrsntF)
     Else
         MemOff (FlashPnlPrsntF)
     EndIf
 Case "flashPnlPrsntFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (FlashPnlPrsntFV)
     Else
         MemOff (FlashPnlPrsntFV)
     EndIf
 Case "frontIntlock1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock1F)
     Else
         MemOff (frontIntlock1F)
     EndIf
 Case "frontIntlock1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock1FV)
     Else
         MemOff (frontIntlock1FV)
     EndIf
 Case "frontIntlock2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock2F)
     Else
         MemOff (frontIntlock2F)
     EndIf
 Case "frontIntlock2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock2FV)
     Else
         MemOff (frontIntlock2FV)
     EndIf
 Case "holeDetectedF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (holeDetectedF)
     Else
         MemOff (holeDetectedF)
     EndIf
 Case "holeDetectedFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (holeDetectedFV)
     Else
         MemOff (holeDetectedFV)
     EndIf
 Case "hsPanelPresntF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (hsPanelPresntF)
     Else
         MemOff (hsPanelPresntF)
     EndIf
 Case "hsPanelPresntFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (hsPanelPresntFV)
     Else
         MemOff (hsPanelPresntFV)
     EndIf
 Case "inMagInterlockF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagInterlockF)
     Else
         MemOff (inMagInterlockF)
     EndIf
 Case "inMagInterlockFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagInterlockFV)
     Else
         MemOff (inMagInterlockFV)
     EndIf
 Case "inMagLowLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowLimF)
     Else
         MemOff (inMagLowLimF)
     EndIf
 Case "inMagLowLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowLimFV)
     Else
         MemOff (inMagLowLimFV)
     EndIf
 Case "inMagLowLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowLimNF)
     Else
         MemOff (inMagLowLimNF)
     EndIf
 Case "inMagLowLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowLimNFV)
     Else
         MemOff (inMagLowLimNFV)
     EndIf
 Case "inMagPnlRdyF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagPnlRdyF)
     Else
         MemOff (inMagPnlRdyF)
     EndIf
 Case "inMagPnlRdyFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagPnlRdyFV)
     Else
         MemOff (inMagPnlRdyFV)
     EndIf
 Case "inMagUpLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimF)
     Else
         MemOff (inMagUpLimF)
     EndIf
 Case "inMagUpLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimFV)
     Else
         MemOff (inMagUpLimFV)
     EndIf
 Case "inMagUpLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimNF)
     Else
         MemOff (inMagUpLimNF)
     EndIf
 Case "inMagUpLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimNFV)
     Else
         MemOff (inMagUpLimNFV)
     EndIf
 Case "leftIntlock1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock1F)
     Else
         MemOff (leftIntlock1F)
     EndIf
 Case "leftIntlock1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock1FV)
     Else
         MemOff (leftIntlock1FV)
     EndIf
 Case "leftIntlock2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock2F)
     Else
         MemOff (leftIntlock2F)
     EndIf
 Case "leftIntlock2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock2FV)
     Else
         MemOff (leftIntlock2FV)
     EndIf
 Case "maintModeF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (maintModeF)
     Else
         MemOff (maintModeF)
     EndIf
 Case "maintModeFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (maintModeFV)
     Else
         MemOff (maintModeFV)
     EndIf
 Case "monEstop1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (monEstop1F)
     Else
         MemOff (monEstop1F)
     EndIf
 Case "monEstop1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (monEstop1FV)
     Else
         MemOff (monEstop1FV)
     EndIf
 Case "monEstop2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (monEstop2F)
     Else
         MemOff (monEstop2F)
     EndIf
 Case "monEstop2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (monEstop2FV)
     Else
         MemOff (monEstop2FV)
     EndIf
 Case "outMagIntF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagIntF)
     Else
         MemOff (outMagIntF)
     EndIf
 Case "outMagIntFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagIntFV)
     Else
         MemOff (outMagIntFV)
     EndIf
 Case "outMagLowLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimF)
     Else
         MemOff (outMagLowLimF)
     EndIf
 Case "outMagLowLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimFV)
     Else
         MemOff (outMagLowLimFV)
     EndIf
 Case "outMagLowLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimNF)
     Else
         MemOff (outMagLowLimNF)
     EndIf
 Case "outMagLowLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimNFV)
     Else
         MemOff (outMagLowLimNFV)
     EndIf
 Case "outMagPanelRdyF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagPanelRdyF)
     Else
         MemOff (outMagPanelRdyF)
     EndIf
 Case "outMagPanelRdyFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagPanelRdyFV)
     Else
         MemOff (outMagPanelRdyFV)
     EndIf
 Case "outMagUpLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimF)
     Else
         MemOff (outMagUpLimF)
     EndIf
 Case "outMagUpLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimFV)
     Else
         MemOff (outMagUpLimFV)
     EndIf
 Case "outMagUpLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimNF)
     Else
         MemOff (outMagUpLimNF)
     EndIf
 Case "outMagUpLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimNFV)
     Else
         MemOff (outMagUpLimNFV)
     EndIf
 Case "rightIntlockF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (rightIntlockF)
     Else
         MemOff (rightIntlockF)
     EndIf
 Case "rightIntlockFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (rightIntlockFV)
     Else
         MemOff (rightIntlockFV)
     EndIf
 Case "debrisMtrF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (debrisMtrF)
     Else
         MemOff (debrisMtrF)
     EndIf
 Case "debrisMtrFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (debrisMtrFV)
     Else
         MemOff (debrisMtrFV)
     EndIf
 Case "drillGoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (drillGoF)
     Else
         MemOff (drillGoF)
     EndIf
 Case "drillGoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (drillGoFV)
     Else
         MemOff (drillGoFV)
     EndIf
 Case "drillReturnF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (drillReturnF)
     Else
         MemOff (drillReturnF)
     EndIf
 Case "drillReturnFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (drillReturnFV)
     Else
         MemOff (drillReturnFV)
     EndIf
 Case "eStopResetF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (eStopResetF)
     Else
         MemOff (eStopResetF)
     EndIf
 Case "eStopResetFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (eStopResetFV)
     Else
         MemOff (eStopResetFV)
     EndIf
 Case "heatStakeGoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (heatStakeGoF)
     Else
         MemOff (heatStakeGoF)
     EndIf
 Case "heatStakeGoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (heatStakeGoFV)
     Else
         MemOff (heatStakeGoFV)
     EndIf
 Case "inMagMtrF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrF)
     Else
         MemOff (inMagMtrF)
     EndIf
 Case "inMagMtrFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrFV)
     Else
         MemOff (inMagMtrFV)
     EndIf
 Case "inMagMtrDirF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrDirF)
     Else
         MemOff (inMagMtrDirF)
     EndIf
 Case "inMagMtrDirFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrDirFV)
     Else
         MemOff (inMagMtrDirFV)
     EndIf
 Case "outMagMtrF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrF)
     Else
         MemOff (outMagMtrF)
     EndIf
 Case "outMagMtrFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrFV)
     Else
         MemOff (outMagMtrFV)
     EndIf
 Case "outMagMtrDirF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrDirF)
     Else
         MemOff (outMagMtrDirF)
     EndIf
 Case "outMagMtrDirFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrDirFV)
     Else
         MemOff (outMagMtrDirFV)
     EndIf
 Case "stackLightAlrmF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightAlrmF)
     Else
         MemOff (stackLightAlrmF)
     EndIf
 Case "stackLightAlrmFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightAlrmFV)
     Else
         MemOff (stackLightAlrmFV)
     EndIf
 Case "stackLightGrnF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightGrnF)
     Else
         MemOff (stackLightGrnF)
     EndIf
 Case "stackLightGrnFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightGrnFV)
     Else
         MemOff (stackLightGrnFV)
     EndIf
 Case "stackLightRedF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightRedF)
     Else
         MemOff (stackLightRedF)
     EndIf
 Case "stackLightRedFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightRedFV)
     Else
         MemOff (stackLightRedFV)
@@ -1413,405 +1326,356 @@ Case "suctionCupsFV"
     Else
         MemOff (suctionCupsFV)
     EndIf
-Case "recFlashDwellTime"
-    recFlashDwellTime = Val(Tokens$(1))
-    Print "recFlashDwellTime:", recFlashDwellTime
 Case "insertDepthTolerance"
     insertDepthTolerance = Val(Tokens$(1))
     Print "insertDepthTolerance:", insertDepthTolerance
 Case "jobNumPanels"
     jobNumPanels = Val(Tokens$(1))
     Print "jobNumPanels:", jobNumPanels
-Case "pasCool"
+Case "pasCoolSet"
     pasCool = Val(Tokens$(1))
     Print "pasCool:", pasCool
-Case "pasDwell"
+Case "pasDwellSet"
     pasDwell = Val(Tokens$(1))
     Print "pasDwell:", pasDwell
-Case "pasHeatStakingIPM"
+Case "pasHeatStakingIPMSet"
     pasHeatStakingIPM = Val(Tokens$(1))
     Print "pasHeatStakingIPM:", pasHeatStakingIPM
-Case "pasHomeIPM"
+Case "pasHomeIPMSet"
     pasHomeIPM = Val(Tokens$(1))
     Print "pasHomeIPM:", pasHomeIPM
-Case "pasInsertDepth"
-    pasInsertDepth = Val(tokens$(1))
+Case "pasInsertDepthSet"
+    pasInsertDepth = Val(Tokens$(1))
     Print "pasInsertDepth:", pasInsertDepth
-Case "pasInsertEngage"
-    pasInsertEngage = Val(tokens$(1))
+Case "pasInsertEngageSet"
+    pasInsertEngage = Val(Tokens$(1))
     Print "pasInsertEngage:", pasInsertEngage
-Case "pasInsertEngageIPM"
-    pasInsertEngageIPM = Val(tokens$(1))
+Case "pasInsertEngageIPMSet"
+    pasInsertEngageIPM = Val(Tokens$(1))
     Print "pasInsertEngageIPM:", pasInsertEngageIPM
-Case "pasInsertPickupIPM"
-    pasInsertPickupIPM = Val(tokens$(1))
+Case "pasInsertPickupIPMSet"
+    pasInsertPickupIPM = Val(Tokens$(1))
     Print "pasInsertPickupIPM:", pasInsertPickupIPM
-Case "pasInsertPosition"
-    pasInsertPosition = Val(tokens$(1))
+Case "pasInsertPositionSet"
+    pasInsertPosition = Val(Tokens$(1))
     Print "pasInsertPosition:", pasInsertPosition
-Case "pasInsertPreheat"
-    pasInsertPreheat = Val(tokens$(1))
+Case "pasInsertPreheatSet"
+    pasInsertPreheat = Val(Tokens$(1))
     Print "pasInsertPreheat:", pasInsertPreheat
-Case "pasJogSpeed"
-    pasJogSpeed = Val(tokens$(1))
+Case "pasJogSpeedSet"
+    pasJogSpeed = Val(Tokens$(1))
     Print "pasJogSpeed:", pasJogSpeed
-Case "pasPIDsetupDZone1"
-    pasPIDsetupDZone1 = Val(tokens$(1))
+Case "pasPIDsetupDZone1Set"
+    pasPIDsetupDZone1 = Val(Tokens$(1))
     Print "pasPIDsetupDZone1:", pasPIDsetupDZone1
-Case "pasPIDsetupDZone2"
-    pasPIDsetupDZone2 = Val(tokens$(1))
+Case "pasPIDsetupDZone2Set"
+    pasPIDsetupDZone2 = Val(Tokens$(1))
     Print "pasPIDsetupDZone2:", pasPIDsetupDZone2
-Case "pasPIDsetupInTempZone1"
-    pasPIDsetupInTempZone1 = Val(tokens$(1))
+Case "pasPIDsetupInTempZone1Set"
+    pasPIDsetupInTempZone1 = Val(Tokens$(1))
     Print "pasPIDsetupInTempZone1:", pasPIDsetupInTempZone1
-Case "pasPIDsetupInTempZone2"
-    pasPIDsetupInTempZone2 = Val(tokens$(1))
+Case "pasPIDsetupInTempZone2Set"
+    pasPIDsetupInTempZone2 = Val(Tokens$(1))
     Print "pasPIDsetupInTempZone2:", pasPIDsetupInTempZone2
-Case "pasPIDsetupIZone1"
-    pasPIDsetupIZone1 = Val(tokens$(1))
+Case "pasPIDsetupIZone1Set"
+    pasPIDsetupIZone1 = Val(Tokens$(1))
     Print "pasPIDsetupIZone1:", pasPIDsetupIZone1
-Case "pasPIDsetupIZone2"
-    pasPIDsetupIZone2 = Val(tokens$(1))
+Case "pasPIDsetupIZone2Set"
+    pasPIDsetupIZone2 = Val(Tokens$(1))
     Print "pasPIDsetupIZone2:", pasPIDsetupIZone2
-Case "pasPIDsetupMaxTempZone1"
-    pasPIDsetupMaxTempZone1 = Val(tokens$(1))
+Case "pasPIDsetupMaxTempZone1Set"
+    pasPIDsetupMaxTempZone1 = Val(Tokens$(1))
     Print "pasPIDsetupMaxTempZone1:", pasPIDsetupMaxTempZone1
-Case "pasPIDsetupMaxTempZone2"
-    pasPIDsetupMaxTempZone2 = Val(tokens$(1))
+Case "pasPIDsetupMaxTempZone2Set"
+    pasPIDsetupMaxTempZone2 = Val(Tokens$(1))
     Print "pasPIDsetupMaxTempZone2:", pasPIDsetupMaxTempZone2
-Case "pasPIDsetupOffsetZone1"
-    pasPIDsetupOffsetZone1 = Val(tokens$(1))
+Case "pasPIDsetupOffsetZone1Set"
+    pasPIDsetupOffsetZone1 = Val(Tokens$(1))
     Print "pasPIDsetupOffsetZone1:", pasPIDsetupOffsetZone1
-Case "pasPIDsetupOffsetZone2"
-    pasPIDsetupOffsetZone2 = Val(tokens$(1))
+Case "pasPIDsetupOffsetZone2Set"
+    pasPIDsetupOffsetZone2 = Val(Tokens$(1))
     Print "pasPIDsetupOffsetZone2:", pasPIDsetupOffsetZone2
-Case "pasPIDsetupPZone1"
-    pasPIDsetupPZone1 = Val(tokens$(1))
+Case "pasPIDsetupPZone1Set"
+    pasPIDsetupPZone1 = Val(Tokens$(1))
     Print "pasPIDsetupPZone1:", pasPIDsetupPZone1
-Case "pasPIDsetupPZone2"
-    pasPIDsetupPZone2 = Val(tokens$(1))
+Case "pasPIDsetupPZone2Set"
+    pasPIDsetupPZone2 = Val(Tokens$(1))
     Print "pasPIDsetupPZone2:", pasPIDsetupPZone2
-Case "pasPIDsetupSetPointZone1"
-    pasPIDsetupSetPointZone1 = Val(tokens$(1))
+Case "pasPIDsetupSetPointZone1Set"
+    pasPIDsetupSetPointZone1 = Val(Tokens$(1))
     Print "pasPIDsetupSetPointZone1:", pasPIDsetupSetPointZone1
-Case "pasPIDsetupSetPointZone2"
-    pasPIDsetupSetPointZone2 = Val(tokens$(1))
+Case "pasPIDsetupSetPointZone2Set"
+    pasPIDsetupSetPointZone2 = Val(Tokens$(1))
     Print "pasPIDsetupSetPointZone2:", pasPIDsetupSetPointZone2
-Case "pasPIDShowDZone1"
-    pasPIDShowDZone1 = Val(tokens$(1))
+Case "pasPIDShowDZone1Set"
+    pasPIDShowDZone1 = Val(Tokens$(1))
     Print "pasPIDShowDZone1:", pasPIDShowDZone1
-Case "pasPIDShowDZone2"
-    pasPIDShowDZone2 = Val(tokens$(1))
+Case "pasPIDShowDZone2Set"
+    pasPIDShowDZone2 = Val(Tokens$(1))
     Print "pasPIDShowDZone2:", pasPIDShowDZone2
-Case "pasPIDShowIZone1"
-    pasPIDShowIZone1 = Val(tokens$(1))
+Case "pasPIDShowIZone1Set"
+    pasPIDShowIZone1 = Val(Tokens$(1))
     Print "pasPIDShowIZone1:", pasPIDShowIZone1
-Case "pasPIDShowIZone2"
-    pasPIDShowIZone2 = Val(tokens$(1))
+Case "pasPIDShowIZone2Set"
+    pasPIDShowIZone2 = Val(Tokens$(1))
     Print "pasPIDShowIZone2:", pasPIDShowIZone2
-Case "pasPIDShowPZone1"
-    pasPIDShowPZone1 = Val(tokens$(1))
+Case "pasPIDShowPZone1Set"
+    pasPIDShowPZone1 = Val(Tokens$(1))
     Print "pasPIDShowPZone1:", pasPIDShowPZone1
-Case "pasPIDShowPZone2"
-    pasPIDShowPZone2 = Val(tokens$(1))
+Case "pasPIDShowPZone2Set"
+    pasPIDShowPZone2 = Val(Tokens$(1))
     Print "pasPIDShowPZone2:", pasPIDShowPZone2
-Case "pasPIDTuneDoneZone1"
-    If tokens$(1) = "true" Then
-        pasPIDTuneDoneZone1 = True
-    Else
-        pasPIDTuneDoneZone1 = False
+Case "pasPIDTuneDoneZone1Set"
+    If Tokens$(1) = "true" Then
+ 		pasPIDTuneDoneZone1 = True
+ 	Else
+ 		pasPIDTuneDoneZone1 = False
     EndIf
     Print "pasPIDTuneDoneZone1:", pasPIDTuneDoneZone1
-Case "pasPIDTuneDoneZone3"
-    If tokens$(1) = "true" Then
-        pasPIDTuneDoneZone3 = True
-    Else
-        pasPIDTuneDoneZone3 = False
+Case "pasPIDTuneDoneZone3Set"
+    If Tokens$(1) = "true" Then
+ 		pasPIDTuneDoneZone3 = True
+ 	Else
+ 		pasPIDTuneDoneZone3 = False
     EndIf
     Print "pasPIDTuneDoneZone3:", pasPIDTuneDoneZone3
-Case "pasPIDTuneFailZone1"
-    If tokens$(1) = "true" Then
-        pasPIDTuneFailZone1 = True
-    Else
-        pasPIDTuneFailZone1 = False
+Case "pasPIDTuneFailZone1Set"
+    If Tokens$(1) = "true" Then
+	 pasPIDTuneFailZone1 = True
+		 Else
+	 pasPIDTuneFailZone1 = False
     EndIf
     Print "pasPIDTuneFailZone1:", pasPIDTuneFailZone1
-Case "pasPIDTuneFailZone2"
-    If tokens$(1) = "true" Then
-        pasPIDTuneFailZone2 = True
-    Else
-        pasPIDTuneFailZone2 = False
+Case "pasPIDTuneFailZone2Set"
+    If Tokens$(1) = "true" Then
+	 pasPIDTuneFailZone2 = True
+		 Else
+	pasPIDTuneFailZone2 = False
     EndIf
     Print "pasPIDTuneFailZone2:", pasPIDTuneFailZone2
-Case "pasRecipe"
-    pasRecipe = Val(tokens$(1))
+Case "pasRecipeSet"
+    pasRecipe = Val(Tokens$(1))
     Print "pasRecipe:", pasRecipe
-Case "pasSetTempZone1"
-    pasSetTempZone1 = Val(tokens$(1))
+Case "pasSetTempZone1Set"
+    pasSetTempZone1 = Val(Tokens$(1))
     Print "pasSetTempZone1:", pasSetTempZone1
-Case "pasSetTempZone2"
-    pasSetTempZone2 = Val(tokens$(1))
+Case "pasSetTempZone2Set"
+    pasSetTempZone2 = Val(Tokens$(1))
     Print "pasSetTempZone2:", pasSetTempZone2
-Case "pasSoftHome"
-    pasSoftHome = Val(tokens$(1))
+Case "pasSoftHomeSet"
+    pasSoftHome = Val(Tokens$(1))
     Print "pasSoftHome:", pasSoftHome
-Case "pasSoftStop"
-    pasSoftStop = Val(tokens$(1))
+Case "pasSoftStopSet"
+    pasSoftStop = Val(Tokens$(1))
     Print "pasSoftStop:", pasSoftStop
 Case "recFlashRequired"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         recFlashRequired = True
     Else
         recFlashRequired = False
     EndIf
     Print "recFlashRequired:", recFlashRequired
 Case "recInmagPickupOffset"
-    recInmagPickupOffset = Val(tokens$(1))
+    recInmagPickupOffset = Val(Tokens$(1))
     Print "recInmagPickupOffset:", recInmagPickupOffset
 Case "recInsertDepth"
-    recInsertDepth = Val(tokens$(1))
+    recInsertDepth = Val(Tokens$(1))
     Print "recInsertDepth:", recInsertDepth
+Case "recFlashDwellTime"
+    recFlashDwellTime = Val(Tokens$(1))
+    Print "recFlashDwellTime:", recFlashDwellTime
 Case "recInsertType"
-    recInsertType = Val(tokens$(1))
+    recInsertType = Val(Tokens$(1))
     Print "recInsertType:", recInsertType
 Case "recNumberOfHoles"
-    recNumberOfHoles = Val(tokens$(1))
+    recNumberOfHoles = Val(Tokens$(1))
     Print "recNumberOfHoles:", recNumberOfHoles
 Case "recOutmagPickupOffset"
-    recOutmagPickupOffset = Val(tokens$(1))
+    recOutmagPickupOffset = Val(Tokens$(1))
     Print "recOutmagPickupOffset:", recOutmagPickupOffset
 Case "recPanelThickness"
-    recPanelThickness = Val(tokens$(1))
+    recPanelThickness = Val(Tokens$(1))
     Print "recPanelThickness:", recPanelThickness
 Case "suctionWaitTime"
-    suctionWaitTime = Val(tokens$(1))
+    suctionWaitTime = Val(Tokens$(1))
     Print "suctionWaitTime:", suctionWaitTime
 Case "systemAccel"
-    SystemAccel = Val(tokens$(1))
+    SystemAccel = Val(Tokens$(1))
     Print "systemAccel:", SystemAccel
 Case "systemSpeed"
-    SystemSpeed = Val(tokens$(1))
+    SystemSpeed = Val(Tokens$(1))
     Print "systemSpeed:", SystemSpeed
 Case "zlimit"
-    zLimit = Val(tokens$(1))
+    zLimit = Val(Tokens$(1))
     Print "zlimit:", zLimit
 Case "pas1inLoadInsertCylinderBtn"
-   If tokens$(1) = "true" Then
-       pas1inLoadInsertCylinderBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pas1inLoadInsertCylinderAddr, 1, MBTypeCoil)
    Else
-       pas1inLoadInsertCylinderBtn = False
        MBWrite(pas1inLoadInsertCylinderAddr, 0, MBTypeCoil)
    EndIf
    Print "pas1inLoadInsertCylinderBtn:", pas1inLoadInsertCylinderBtn
 Case "pasBlowInsertBtn"
-   If tokens$(1) = "true" Then
-       pasBlowInsertBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasBlowInsertAddr, 1, MBTypeCoil)
    Else
-       pasBlowInsertBtn = False
        MBWrite(pasBlowInsertAddr, 0, MBTypeCoil)
    EndIf
    Print "pasBlowInsertBtn:", pasBlowInsertBtn
 Case "pasBowlDumpOpenBtn"
-   If tokens$(1) = "true" Then
-       pasBowlDumpOpenBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasBowlDumpOpenAddr, 1, MBTypeCoil)
    Else
-       pasBowlDumpOpenBtn = False
        MBWrite(pasBowlDumpOpenAddr, 0, MBTypeCoil)
    EndIf
    Print "pasBowlDumpOpenBtn:", pasBowlDumpOpenBtn
 Case "pasBowlFeederBtn"
-   If tokens$(1) = "true" Then
-       pasBowlFeederBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasBowlFeederAddr, 1, MBTypeCoil)
    Else
-       pasBowlFeederBtn = False
        MBWrite(pasBowlFeederAddr, 0, MBTypeCoil)
    EndIf
    Print "pasBowlFeederBtn:", pasBowlFeederBtn
 Case "pasGoHomeBtn"
-   If tokens$(1) = "true" Then
-       pasGoHomeBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasGoHomeAddr, 1, MBTypeCoil)
    Else
-       pasGoHomeBtn = False
        MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
    EndIf
    Print "pasGoHomeBtn:", pasGoHomeBtn
 Case "pasHeadDownBtn"
-   If tokens$(1) = "true" Then
-       pasHeadDownBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasHeadDownAddr, 1, MBTypeCoil)
    Else
-       pasHeadDownBtn = False
        MBWrite(pasHeadDownAddr, 0, MBTypeCoil)
    EndIf
    Print "pasHeadDownBtn:", pasHeadDownBtn
 Case "pasHeadUpBtn"
-   If tokens$(1) = "true" Then
-       pasHeadUpBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasHeadUpAddr, 1, MBTypeCoil)
    Else
-       pasHeadUpBtn = False
        MBWrite(pasHeadUpAddr, 0, MBTypeCoil)
    EndIf
    Print "pasHeadUpBtn:", pasHeadUpBtn
 Case "pasInsertGripperBtn"
-   If tokens$(1) = "true" Then
-       pasInsertGripperBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasInsertGripperAddr, 1, MBTypeCoil)
    Else
-       pasInsertGripperBtn = False
        MBWrite(pasInsertGripperAddr, 0, MBTypeCoil)
    EndIf
    Print "pasInsertGripperBtn:", pasInsertGripperBtn
 Case "pasInsertTypeBtn"
-   If tokens$(1) = "true" Then
-       pasInsertTypeBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasInsertTypeAddr, 1, MBTypeCoil)
    Else
-       pasInsertTypeBtn = False
        MBWrite(pasInsertTypeAddr, 0, MBTypeCoil)
    EndIf
    Print "pasInsertTypeBtn:", pasInsertTypeBtn
 Case "pasMasterTempBtn"
-   If tokens$(1) = "true" Then
-       pasMasterTempBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasMasterTempAddr, 1, MBTypeCoil)
    Else
-       pasMasterTempBtn = False
        MBWrite(pasMasterTempAddr, 0, MBTypeCoil)
    EndIf
    Print "pasMasterTempBtn:", pasMasterTempBtn
 Case "pasMaxTempOnOffZone1Btn"
-   If tokens$(1) = "true" Then
-       pasMaxTempOnOffZone1Btn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasMaxTempOnOffZone1Addr, 1, MBTypeCoil)
    Else
-       pasMaxTempOnOffZone1Btn = False
        MBWrite(pasMaxTempOnOffZone1Addr, 0, MBTypeCoil)
    EndIf
    Print "pasMaxTempOnOffZone1Btn:", pasMaxTempOnOffZone1Btn
 Case "pasMaxTempOnOffZone2Btn"
-   If tokens$(1) = "true" Then
-       pasMaxTempOnOffZone2Btn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasMaxTempOnOffZone2Addr, 1, MBTypeCoil)
    Else
-       pasMaxTempOnOffZone2Btn = False
        MBWrite(pasMaxTempOnOffZone2Addr, 0, MBTypeCoil)
    EndIf
    Print "pasMaxTempOnOffZone2Btn:", pasMaxTempOnOffZone2Btn
 Case "pasOnOffZone1Btn"
-   If tokens$(1) = "true" Then
-       pasOnOffZone1Btn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasOnOffZone1Addr, 1, MBTypeCoil)
    Else
-       pasOnOffZone1Btn = False
        MBWrite(pasOnOffZone1Addr, 0, MBTypeCoil)
    EndIf
    Print "pasOnOffZone1Btn:", pasOnOffZone1Btn
 Case "pasOnOffZone2Btn"
-   If tokens$(1) = "true" Then
-       pasOnOffZone2Btn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasOnOffZone2Addr, 1, MBTypeCoil)
    Else
-       pasOnOffZone2Btn = False
        MBWrite(pasOnOffZone2Addr, 0, MBTypeCoil)
    EndIf
    Print "pasOnOffZone2Btn:", pasOnOffZone2Btn
 Case "pasOTAOnOffZone1Btn"
-   If tokens$(1) = "true" Then
-       pasOTAOnOffZone1Btn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasOTAOnOffZone1Addr, 1, MBTypeCoil)
    Else
-       pasOTAOnOffZone1Btn = False
        MBWrite(pasOTAOnOffZone1Addr, 0, MBTypeCoil)
    EndIf
    Print "pasOTAOnOffZone1Btn:", pasOTAOnOffZone1Btn
 Case "pasOTAOnOffZone2Btn"
-   If tokens$(1) = "true" Then
-       pasOTAOnOffZone2Btn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasOTAOnOffZone2Addr, 1, MBTypeCoil)
    Else
-       pasOTAOnOffZone2Btn = False
        MBWrite(pasOTAOnOffZone2Addr, 0, MBTypeCoil)
    EndIf
    Print "pasOTAOnOffZone2Btn:", pasOTAOnOffZone2Btn
 Case "pasRemoteAlarmAcknowledgeBtn"
-   If tokens$(1) = "true" Then
-       pasRemoteAlarmAcknowledgeBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasRemoteAlarmAcknowledgeAddr, 1, MBTypeCoil)
    Else
-       pasRemoteAlarmAcknowledgeBtn = False
        MBWrite(pasRemoteAlarmAcknowledgeAddr, 0, MBTypeCoil)
    EndIf
    Print "pasRemoteAlarmAcknowledgeBtn:", pasRemoteAlarmAcknowledgeBtn
 Case "pasResetHighTempBtn"
-   If tokens$(1) = "true" Then
-       pasResetHighTempBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasResetHighTempAddr, 1, MBTypeCoil)
    Else
-       pasResetHighTempBtn = False
        MBWrite(pasResetHighTempAddr, 0, MBTypeCoil)
    EndIf
    Print "pasResetHighTempBtn:", pasResetHighTempBtn
 Case "pasResetMaxBtn"
-   If tokens$(1) = "true" Then
-       pasResetMaxBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasResetMaxAddr, 1, MBTypeCoil)
    Else
-       pasResetMaxBtn = False
        MBWrite(pasResetMaxAddr, 0, MBTypeCoil)
    EndIf
    Print "pasResetMaxBtn:", pasResetMaxBtn
 Case "pasSlideExtendBtn"
-   If tokens$(1) = "true" Then
-       pasSlideExtendBtn = True
+   If Tokens$(1) = "true" Then
        MBWrite(pasSlideExtendAddr, 1, MBTypeCoil)
    Else
-       pasSlideExtendBtn = False
        MBWrite(pasSlideExtendAddr, 0, MBTypeCoil)
    EndIf
    Print "pasSlideExtendBtn:", pasSlideExtendBtn
 Case "pasStartPIDTuneZone1Btn"
    If Tokens$(1) = "true" Then
-       pasStartPIDTuneZone1Btn = True
        MBWrite(pasStartPIDTuneZone1Addr, 1, MBTypeCoil)
    Else
-       pasStartPIDTuneZone1Btn = False
        MBWrite(pasStartPIDTuneZone1Addr, 0, MBTypeCoil)
    EndIf
    Print "pasStartPIDTuneZone1Btn:", pasStartPIDTuneZone1Btn
 Case "pasStartPIDTuneZone2Btn"
    If Tokens$(1) = "true" Then
-       pasStartPIDTuneZone2Btn = True
        MBWrite(pasStartPIDTuneZone2Addr, 1, MBTypeCoil)
    Else
-       pasStartPIDTuneZone2Btn = False
        MBWrite(pasStartPIDTuneZone2Addr, 0, MBTypeCoil)
    EndIf
    Print "pasStartPIDTuneZone2Btn:", pasStartPIDTuneZone2Btn
 Case "pasTempOnOffBtn"
    If Tokens$(1) = "true" Then
-       pasTempOnOffBtn = True
        MBWrite(pasTempOnOffAddr, 1, MBTypeCoil)
    Else
-       pasTempOnOffBtn = False
        MBWrite(pasTempOnOffAddr, 0, MBTypeCoil)
    EndIf
    Print "pasTempOnOffBtn:", pasTempOnOffBtn
 Case "pasVibTrackBtn"
    If Tokens$(1) = "true" Then
-       pasVibTrackBtn = True
        MBWrite(pasVibTrackAddr, 1, MBTypeCoil)
    Else
-       pasVibTrackBtn = False
        MBWrite(pasVibTrackAddr, 0, MBTypeCoil)
    EndIf
    Print "pasVibTrackBtn:", pasVibTrackBtn
-
 
 
 

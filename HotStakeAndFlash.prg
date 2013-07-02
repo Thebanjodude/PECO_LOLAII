@@ -12,7 +12,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 	For i = FirstHolePointHotStake To LastHolePointHotStake
 		
-		Jump P(i) ' Go to the next hole
+		Jump P(i) LimZ zLimit ' Go to the next hole
 
 		If hsPanelPresnt = False Then ' A boss should be engaging the anvil but it isnt...
 			erPanelStatusUnknown = True
@@ -50,7 +50,7 @@ Function FlashPanel(DwellTime As Real) As Integer
 	
 	For i = FirstHolePointFlash To LastHolePointFlash
 		
-		Jump P(i)
+		Jump P(i) LimZ zLimit
 		
 		If flashPanelPresnt = False Then ' A boss should be engaging the anvil but it isnt...
 			erPanelStatusUnknown = True
@@ -62,7 +62,7 @@ Function FlashPanel(DwellTime As Real) As Integer
 		
 		drillGoCC = True 'Begin stroking the drill
 	
-		Wait DwellTime + 2.25 '2.25 is about the time it takes to bottom out.
+		Wait DwellTime + 2.25 '2.25 is the time it takes to bottom out.
 	
 	    If flashHomeNO = False Then ' Check that the drill actually left the home position
 			

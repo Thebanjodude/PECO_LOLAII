@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/06/24 20:51:52:439,DS:0000014074,CS:09527,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/01 23:29:24:327,DS:0000014074,CS:12084,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -371,13 +371,13 @@ MemoryBitLabels {
 		sDescription=""
 	}
 	Label17 {
-		nBit=18
-		sLabel="jobAbortH"
+		nBit=20
+		sLabel="panelDataTxAckH"
 		sDescription=""
 	}
 	Label18 {
-		nBit=20
-		sLabel="panelDataTxAckH"
+		nBit=22
+		sLabel="jobAbortH"
 		sDescription=""
 	}
 	Label19 {

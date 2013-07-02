@@ -1,10 +1,5 @@
 #include "Globals.INC"
 
-'modbus monitoring variables
-Boolean ErModbusTimeout 'did not recieve response before timeout
-Boolean ErModbusPort ' TCP port to HMI is not open
-Boolean ErModbusCommand ' Invalid command or parameter in modbus communication
-
 ' modbus write queque
 ' structure to maintain a queue of pending
 ' writes to the PLC via modbus
@@ -23,7 +18,6 @@ Boolean testcoil
 Boolean testinput
 
 'globals for testing
-
 
 Function TestMB()
 	Integer i
@@ -80,16 +74,16 @@ Fend
 Function MBInitialize()
 	
 	' clear global modbus error flags
-	ErModbusTimeout = False
-	ErModbusCommand = False
-	ErModbusPort = False
+	erModbusTimeout = False
+	erModbusCommand = False
+	erModbusPort = False
 	
 	' initialize queue pointers
 	MBQueueHead = 0
 	MBQueueTail = 0
 	
 	' kick off the command processing task
-	Xqt 9, MBCommandTask, NoEmgAbort
+	Xqt 10, MBCommandTask, NoEmgAbort
 	
 Fend
 'place modbus write commands into a queue to be processed by a seperate task
@@ -102,6 +96,9 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 		Print "overflow"
 		Exit Function
 	EndIf
+	
+	Print "queueing request", Address, Value, Type
+	
 	
 	' range check against type here if I decide to become untrusting TMH
 	
@@ -145,16 +142,14 @@ Function MBCommandTask()
 	' this off again.
 	Do While 1
 		
-		'Print ".",
 		
 		' if the port is not open try to open it
+		Wait 1
 		portStatus = ChkNet(204)
 		If portStatus < 0 Then
 			OpenNet #204 As Client
-			Wait 1
 			portStatus = ChkNet(204)
 			Print "portStatus is: ", portStatus
-			Wait 10
 			' if we are unable to open it set an error and abort
 			If portStatus < 0 Then
 				ErModbusPort = True
@@ -164,6 +159,7 @@ Function MBCommandTask()
 		
 		'if the queue isn't empty there is something to do
 		If MBQueueHead <> MBQueueTail Then
+			Print "something in the queue!"
 			If MBQueueType(MBQueueTail) = MBType16 Then
 				' send one MB word command
 				modbusWriteRegister(MBQueueAddress(MBQueueTail), MBQueueValue(MBQueueTail))
@@ -186,6 +182,7 @@ Function MBCommandTask()
 			ElseIf MBQueueType(MBQueueTail) = MBTypeCoil Then
 				' set or clear MB coil
 				' any non-zero value will set coil
+				Print "writing type coil"
 				If MBQueueValue(MBQueueTail) = 0 Then
 					temp_bool = False
 				Else
@@ -201,7 +198,9 @@ Function MBCommandTask()
 				'invalid type
 			EndIf
 		Else
+				Print ".",
 			Select CurrentReadNum
+
 				Case 1
 					pasAlarmGroup = modbusReadInput(&h0032)
 				Case 2
@@ -313,43 +312,26 @@ Function MBCommandTask()
 				Case 55
 					pasMessageDB = modbusReadRegister(&h0009)
 				Case 56
-					pasSoftHome = LShift(modbusReadRegister(&h00FE), 16)
-					pasSoftHome = pasSoftHome + modbusReadRegister(&h00FF) And &hFFFF
-					'7.62939e-007
-					pasSoftHome = pasSoftHome * .000000762939
+					'Gain for position settings 7.62939e-007
+					pasSoftHome = modbusRead32Register(&h00FE) * .000000762939
+					'Print "Soft home after gain", pasSoftHome
 				Case 57
-					pasInsertPosition = LShift(modbusReadRegister(&h0100), 16)
-					pasInsertPosition = pasInsertPosition + modbusReadRegister(&h0101) And &hFFFF
-					pasInsertPosition = pasInsertPosition * .000000762939
+					pasInsertPosition = modbusRead32Register(&h0100) * .000000762939
 				Case 58
-					pasInsertDepth = LShift(modbusReadRegister(&h0102), 16)
-					pasInsertDepth = pasInsertDepth + modbusReadRegister(&h103) And &hFFFF
-					pasInsertDepth = pasInsertDepth * .000000762939
+					pasInsertDepth = modbusRead32Register(&h0102) * .000000762939
 				Case 59
-					pasSoftStop = LShift(modbusReadRegister(&h0104), 16)
-					pasSoftStop = pasSoftStop + modbusReadRegister(&h0105) And &hFFFF
-					pasSoftStop = pasSoftStop * .000000762939
+					pasSoftStop = modbusRead32Register(&h0104) * .000000762939
 				Case 60
-					pasHomeIPM = LShift(modbusReadRegister(&h0106), 16)
-					pasHomeIPM = pasHomeIPM + modbusReadRegister(&h0107) And &hFFFF
-					'4.57764e-005
-					pasHomeIPM = pasHomeIPM * .0000457764
+					'Gain for movement rates in inches per minute 4.57764e-005
+					pasHomeIPM = modbusRead32Register(&h0106) * .0000457764
 				Case 61
-					pasInsertPickupIPM = LShift(modbusReadRegister(&h0108), 16)
-					pasInsertPickupIPM = pasInsertPickupIPM + modbusReadRegister(&h0109) And &hFFFF
-					pasInsertPickupIPM = pasInsertPickupIPM * .0000457764
+					pasInsertPickupIPM = modbusRead32Register(&h0108) * .0000457764
 				Case 62
-					pasHeatStakingIPM = LShift(modbusReadRegister(&h010A), 16)
-					pasHeatStakingIPM = pasHeatStakingIPM + modbusReadRegister(&h010B) And &hFFFF
-					pasHeatStakingIPM = pasHeatStakingIPM * .0000457764
+					pasHeatStakingIPM = modbusRead32Register(&h010A) * .0000457764
 				Case 63
-					pasInsertEngageIPM = LShift(modbusReadRegister(&h010E), 16)
-					pasInsertEngageIPM = pasInsertEngageIPM + modbusReadRegister(&h010F) And &hFFFF
-					pasInsertEngageIPM = pasInsertEngageIPM * .0000457764
+					pasInsertEngageIPM = modbusRead32Register(&h010E) * .0000457764
 				Case 64
-					pasInsertEngage = LShift(modbusReadRegister(&h0118), 16)
-					pasInsertEngage = pasInsertEngage + modbusReadRegister(&h0119) And &hFFFF
-					pasInsertEngage = pasInsertEngage * .000000762939
+					pasInsertEngage = modbusRead32Register(&h0118) * .000000762939
 				Case 65
 					pasSetTempZone1 = modbusReadRegister(&h012C)
 				Case 66
@@ -359,14 +341,13 @@ Function MBCommandTask()
 				Case 68
 					pasPIDsetupSetPointZone2 = modbusReadRegister(&h012D)
 				Case 69
-					pasPIDsetupSetPointZone3 = modbusReadRegister(&h012E)
+					'pasPIDsetupSetPointZone3 = modbusReadRegister(&h012E)
 				Case 70
-					pasPIDsetupSetPointZone4 = modbusReadRegister(&h012F)
+					'pasPIDsetupSetPointZone4 = modbusReadRegister(&h012F)
 				Case 71
-					pasActualTempZone1 = modbusReadRegister(&h0132) ' should these be the same?
-					Print "getting temp", pasActualTempZone1
+					pasActualTempZone1 = modbusReadRegister(&h0132)
 				Case 72
-					pasPIDsetupActualZone1 = modbusReadRegister(&h0132) ' should these be the same?
+					pasPIDsetupActualZone1 = modbusReadRegister(&h0132)
 				Case 73
 					pasActualTempZone2 = modbusReadRegister(&h0133)
 				Case 74
@@ -438,7 +419,6 @@ Function MBCommandTask()
 				Case 107
 					pasInsertPreheat = modbusReadRegister(&h0190)
 				Case 108
-					Print "*"
 					pasDwell = modbusReadRegister(&h0191)
 				Case 109
 					pasCool = modbusReadRegister(&h0192)
@@ -561,14 +541,14 @@ Fend
 ' Given a length in inches (stored in a real) this fuction
 ' will perform the appropriate transfer function and bit twiddling
 ' to return a long that can be sent to modbusWriteRegister
-Function inches2Modbus(inches As Long) As Long
+Function inches2Modbus(inches As Real) As Long
 	' 7.62939e-007
 	inches2Modbus = inches /.000000762939
 Fend
 ' Given a time in seconds (stored in a real) this fuction
 ' will perform the appropriate transfer function and bit twiddling
 ' to return a long that can be sent to modbusWriteRegister
-Function seconds2Modbus(seconds As Long) As Long
+Function seconds2Modbus(seconds As Real) As Long
 	seconds2Modbus = seconds / -0.1
 Fend
 ' function receives jog speed as number from 1 to 100 and 
@@ -578,8 +558,8 @@ Function JogRate2Modbus(jog As Real) As Long
 	JogRate2Modbus = jog /0.005
 Fend
 Function modbusWrite32Register(regNum As Long, value As Long) As Integer
-	modbusWriteRegister(regNum, RShift(value, 16))
-	modbusWriteRegister(regNum + 1, value And &hFFFF)
+	modbusWriteRegister(regNum, value And &hFFFF)
+	modbusWriteRegister(regNum + 1, LShift(value, 16))
 Fend
 
 ' This function is for writing a single 16 Modbus register on the PLC
@@ -641,8 +621,8 @@ Function modbusRead32Register(regNum As Long) As Long
 	Long msw
 	Long lsw
 
-	msw = modbusReadRegister(regNum)
-	lsw = modbusReadRegister(regNum + 1)
+	lsw = modbusReadRegister(regNum)
+	msw = modbusReadRegister(regNum + 1)
 	
 	modbusRead32Register = LShift(msw, 16) + (lsw And &hFFFF)
 
@@ -698,27 +678,28 @@ Function modbusReadRegister(regNum As Long) As Long
 	'modResponse(6) = CRC high byte
 	ReadBin #204, modResponse(), 7
 	
-	If regNum = &h01FE Then
-		Print modResponse(0)
-		Print modResponse(1)
-		Print modResponse(2)
-		Print modResponse(3)
-		Print modResponse(4)
-		Print modResponse(5)
-		Print modResponse(6)
-	EndIf
+'	If regNum = &h0FE Or regNum = &h0FF Then
+'		Print "--", regNum
+'		Print modResponse(0)
+'		Print modResponse(1)
+'		Print modResponse(2)
+'		Print modResponse(3)
+'		Print modResponse(4)
+'		Print modResponse(5)
+'		Print modResponse(6)
+'	EndIf
 	
-		Print modResponse(3)
-		Print modResponse(4)
+'		Print modResponse(3)
+'		Print modResponse(4)
 	
 	' check for valid response CRC
 	validResponse = modbusResponseCRC(7) ' TODO: Fix this, it returns false
 	If validResponse = False Then
-		ErModbusCommand = True
+		erModbusCommand = True
 	EndIf
 	
 	modbusReadRegister = LShift(modResponse(3), 8) + modResponse(4)
-	
+
 Fend
 ' This function is for writing a single Modbus coil on the PLC
 ' It will build a valid Modbus RTU message and send it to the PLC
@@ -750,9 +731,10 @@ Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
 	
 	' debugging simply print the contents of the message
-'	For i = 0 To 7
-'		Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
-'	Next
+	Print "WriteCoilReached"
+	For i = 0 To 7
+		Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
+	Next
 	
 	' if port is not open exit with error
 	If portStatus < 0 Then
@@ -784,7 +766,7 @@ Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	' check for valid response CRC
 	validResponse = modbusResponseCRC(8)
 	If validResponse = False Then
-		ErModbusCommand = True
+		erModbusCommand = True
 	EndIf
 
 	
@@ -837,7 +819,7 @@ Function modbusReadCoil(coilNum As Long)
 	' check for valid response CRC
 	validResponse = modbusResponseCRC(6)
 	If validResponse = False Then
-		ErModbusCommand = True
+		erModbusCommand = True
 	EndIf
 	
 Fend
@@ -894,7 +876,7 @@ Function modbusReadInput(inputNum As Long)
 	' check for valid response CRC
 	validResponse = modbusResponseCRC(6)
 	If validResponse = False Then
-		ErModbusCommand = True
+		erModbusCommand = True
 	EndIf
 	
 Fend
