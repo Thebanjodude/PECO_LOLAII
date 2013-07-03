@@ -131,6 +131,12 @@ If debrisMtr = True Then
     Else
         Off (debrisMtrH)
     EndIf
+drillGo = IOTableBooleans(drillGoCC, MemSw(drillGoFV), MemSw(drillGoF))
+If drillGo = True Then
+        On (DrillGoH)
+    Else
+        Off (DrillGoH)
+    EndIf
 eStopReset = IOTableBooleans(eStopResetCC, MemSw(eStopResetFV), MemSw(eStopResetF))
 If eStopReset = True Then
         On (eStopResetH)
@@ -227,7 +233,7 @@ Function IOTableBooleans(CtrlCodeValue As Boolean, HMIForceValue As Boolean, HMI
 		Value = HMIForceValue ' Take forced value from HMI, overwrite control code
 	EndIf
 	
-	IOTableBooleans = value ' Return Value
+	IOTableBooleans = Value ' Return Value
 	
 Fend
 Function IOTableIntegers(CtrlCodeValue As Integer, HMIForceValue As Integer, HMIForceFlag As Boolean) As Integer
@@ -336,6 +342,9 @@ Print #201, "{", Chr$(&H22) + "erRobotNotAtHome" + Chr$(&H22), ":", Str$(erRobot
 Print #201, "{", Chr$(&H22) + "erSafetySystemBreaker" + Chr$(&H22), ":", Str$(erSafetySystemBreaker), "}",
 Print #201, "{", Chr$(&H22) + "erUnknown" + Chr$(&H22), ":", Str$(erUnknown), "}",
 Print #201, "{", Chr$(&H22) + "erWrongPanelHoles" + Chr$(&H22), ":", Str$(erWrongPanelHoles), "}",
+Print #201, "{", Chr$(&H22) + "erModbusTimeout" + Chr$(&H22), ":", Str$(erModbusTimeout), "}",
+Print #201, "{", Chr$(&H22) + "erModbusPort" + Chr$(&H22), ":", Str$(erModbusPort), "}",
+Print #201, "{", Chr$(&H22) + "erModbusCommand" + Chr$(&H22), ":", Str$(erModbusCommand), "}",
 Print #201, "{", Chr$(&H22) + "hole0L" + Chr$(&H22), ":", Str$(hole0L), "}",
 Print #201, "{", Chr$(&H22) + "hole0R" + Chr$(&H22), ":", Str$(hole0R), "}",
 Print #201, "{", Chr$(&H22) + "hole10L" + Chr$(&H22), ":", Str$(hole10L), "}",
@@ -435,6 +444,46 @@ Print #201, "{", Chr$(&H22) + "stackLightGrn" + Chr$(&H22), ":", Str$(stackLight
 Print #201, "{", Chr$(&H22) + "stackLightRed" + Chr$(&H22), ":", Str$(stackLightRed), "}",
 Print #201, "{", Chr$(&H22) + "stackLightYel" + Chr$(&H22), ":", Str$(stackLightYel), "}",
 Print #201, "{", Chr$(&H22) + "suctionCups" + Chr$(&H22), ":", Str$(suctionCups), "}",
+Print #201, "{", Chr$(&H22) + "pasCool" + Chr$(&H22), ":", Str$(pasCool), "}",
+Print #201, "{", Chr$(&H22) + "pasDwell" + Chr$(&H22), ":", Str$(pasDwell), "}",
+Print #201, "{", Chr$(&H22) + "pasHeatStakingIPM" + Chr$(&H22), ":", Str$(pasHeatStakingIPM), "}",
+Print #201, "{", Chr$(&H22) + "pasHomeIPM" + Chr$(&H22), ":", Str$(pasHomeIPM), "}",
+Print #201, "{", Chr$(&H22) + "pasInsertDepth" + Chr$(&H22), ":", Str$(pasInsertDepth), "}",
+Print #201, "{", Chr$(&H22) + "pasInsertEngage" + Chr$(&H22), ":", Str$(pasInsertEngage), "}",
+Print #201, "{", Chr$(&H22) + "pasInsertEngageIPM" + Chr$(&H22), ":", Str$(pasInsertEngageIPM), "}",
+Print #201, "{", Chr$(&H22) + "pasInsertPickupIPM" + Chr$(&H22), ":", Str$(pasInsertPickupIPM), "}",
+Print #201, "{", Chr$(&H22) + "pasInsertPosition" + Chr$(&H22), ":", Str$(pasInsertPosition), "}",
+Print #201, "{", Chr$(&H22) + "pasInsertPreheat" + Chr$(&H22), ":", Str$(pasInsertPreheat), "}",
+Print #201, "{", Chr$(&H22) + "pasJogSpeed" + Chr$(&H22), ":", Str$(pasJogSpeed), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupDZone1" + Chr$(&H22), ":", Str$(pasPIDsetupDZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupDZone2" + Chr$(&H22), ":", Str$(pasPIDsetupDZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupInTempZone1" + Chr$(&H22), ":", Str$(pasPIDsetupInTempZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupInTempZone2" + Chr$(&H22), ":", Str$(pasPIDsetupInTempZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupIZone1" + Chr$(&H22), ":", Str$(pasPIDsetupIZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupIZone2" + Chr$(&H22), ":", Str$(pasPIDsetupIZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupMaxTempZone1" + Chr$(&H22), ":", Str$(pasPIDsetupMaxTempZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupMaxTempZone2" + Chr$(&H22), ":", Str$(pasPIDsetupMaxTempZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupOffsetZone1" + Chr$(&H22), ":", Str$(pasPIDsetupOffsetZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupOffsetZone2" + Chr$(&H22), ":", Str$(pasPIDsetupOffsetZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupPZone1" + Chr$(&H22), ":", Str$(pasPIDsetupPZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupPZone2" + Chr$(&H22), ":", Str$(pasPIDsetupPZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupSetPointZone1" + Chr$(&H22), ":", Str$(pasPIDsetupSetPointZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDsetupSetPointZone2" + Chr$(&H22), ":", Str$(pasPIDsetupSetPointZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDShowDZone1" + Chr$(&H22), ":", Str$(pasPIDShowDZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDShowDZone2" + Chr$(&H22), ":", Str$(pasPIDShowDZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDShowIZone1" + Chr$(&H22), ":", Str$(pasPIDShowIZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDShowIZone2" + Chr$(&H22), ":", Str$(pasPIDShowIZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDShowPZone1" + Chr$(&H22), ":", Str$(pasPIDShowPZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDShowPZone2" + Chr$(&H22), ":", Str$(pasPIDShowPZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDTuneDoneZone1" + Chr$(&H22), ":", Str$(pasPIDTuneDoneZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDTuneDoneZone3" + Chr$(&H22), ":", Str$(pasPIDTuneDoneZone3), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDTuneFailZone1" + Chr$(&H22), ":", Str$(pasPIDTuneFailZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasPIDTuneFailZone2" + Chr$(&H22), ":", Str$(pasPIDTuneFailZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasRecipe" + Chr$(&H22), ":", Str$(pasRecipe), "}",
+Print #201, "{", Chr$(&H22) + "pasSetTempZone1" + Chr$(&H22), ":", Str$(pasSetTempZone1), "}",
+Print #201, "{", Chr$(&H22) + "pasSetTempZone2" + Chr$(&H22), ":", Str$(pasSetTempZone2), "}",
+Print #201, "{", Chr$(&H22) + "pasSoftHome" + Chr$(&H22), ":", Str$(pasSoftHome), "}",
+Print #201, "{", Chr$(&H22) + "pasSoftStop" + Chr$(&H22), ":", Str$(pasSoftStop), "}",
 Print #201, "{", Chr$(&H22) + "pas1inLoadInsertCylinder" + Chr$(&H22), ":", Str$(pas1inLoadInsertCylinder), "}",
 Print #201, "{", Chr$(&H22) + "pasBlowInsert" + Chr$(&H22), ":", Str$(pasBlowInsert), "}",
 Print #201, "{", Chr$(&H22) + "pasBowlDumpOpen" + Chr$(&H22), ":", Str$(pasBowlDumpOpen), "}",
@@ -564,12 +613,12 @@ Function setVars(response$ As String)
 	EndIf
 '	Print tokens$(0), " : ", tokens$(1)
 	
-	Select tokens$(0)
+	Select Tokens$(0)
  'Rx from HMI:
  
 '_____Dont delete while updating 
 Case "jobAbortBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobAbortBtn = True
        MemOn (jobAbortH)
    Else
@@ -579,117 +628,126 @@ Case "jobAbortBtn"
 '__________________
 
 Case "alarmMuteBtn"
-   If tokens$(1) = "true" Then
-       alarmMuteBtn = True
-       alarmMute = True
-   Else
-       alarmMuteBtn = False
-   EndIf
-   Print "alarmMuteBtn:", alarmMuteBtn
+    If Tokens$(1) = "true" Then
+        alarmMuteBtn = True
+        alarmMute = True
+    Else
+        alarmMuteBtn = False
+    EndIf
+    Print "alarmMuteBtn:", alarmMuteBtn
 Case "backInterlockACKBtn"
-   If tokens$(1) = "true" Then
-       backInterlockACKBtn = True
-       backInterlockACK = True
-   Else
-       backInterlockACKBtn = False
-   EndIf
-   Print "backInterlockACKBtn:", backInterlockACKBtn
+    If Tokens$(1) = "true" Then
+        backInterlockACKBtn = True
+        backInterlockACK = True
+    Else
+        backInterlockACKBtn = False
+    EndIf
+    Print "backInterlockACKBtn:", backInterlockACKBtn
 Case "frontInterlockACKBtn"
-   If tokens$(1) = "true" Then
-       frontInterlockACKBtn = True
-       frontInterlockACK = True
-   Else
-       frontInterlockACKBtn = False
-   EndIf
-   Print "frontInterlockACKBtn:", frontInterlockACKBtn
+    If Tokens$(1) = "true" Then
+        frontInterlockACKBtn = True
+        frontInterlockACK = True
+    Else
+        frontInterlockACKBtn = False
+    EndIf
+    Print "frontInterlockACKBtn:", frontInterlockACKBtn
 Case "inMagGoHomeBtn"
-   If tokens$(1) = "true" Then
-       inMagGoHomeBtn = True
-       inMagGoHome = True
-   Else
-       inMagGoHomeBtn = False
-   EndIf
-   Print "inMagGoHomeBtn:", inMagGoHomeBtn
+    If Tokens$(1) = "true" Then
+        inMagGoHomeBtn = True
+        inMagGoHome = True
+    Else
+        inMagGoHomeBtn = False
+    EndIf
+    Print "inMagGoHomeBtn:", inMagGoHomeBtn
 Case "inMagIntLockAckBtn"
-   If Tokens$(1) = "true" Then
-       inMagIntLockAckBtn = True
-       inMagIntLockAck = True
-   Else
-       inMagIntLockAckBtn = False
-   EndIf
-   Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
+    If Tokens$(1) = "true" Then
+        inMagIntLockAckBtn = True
+        inMagIntLockAck = True
+    Else
+        inMagIntLockAckBtn = False
+    EndIf
+    Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
 Case "inMagLoadedBtn"
-   If Tokens$(1) = "true" Then
-       inMagLoadedBtn = True
-       inMagLoaded = True
-   Else
-       inMagLoadedBtn = False
-   EndIf
-   Print "inMagLoadedBtn:", inMagLoadedBtn
+    If Tokens$(1) = "true" Then
+        inMagLoadedBtn = True
+        inMagLoaded = True
+    Else
+        inMagLoadedBtn = False
+    EndIf
+    Print "inMagLoadedBtn:", inMagLoadedBtn
+Case "jobAbortBtn"
+    If Tokens$(1) = "true" Then
+        jobAbortBtn = True
+        jobAbort = True
+    Else
+        jobAbortBtn = False
+    EndIf
+    Print "jobAbortBtn:", jobAbortBtn
 Case "jobStartBtn"
-   If Tokens$(1) = "true" Then
-       jobStartBtn = True
-       jobStart = True
-   Else
-       jobStartBtn = False
-   EndIf
-   Print "jobStartBtn:", jobStartBtn
+    If Tokens$(1) = "true" Then
+        jobStartBtn = True
+        jobStart = True
+    Else
+        jobStartBtn = False
+    EndIf
+    Print "jobStartBtn:", jobStartBtn
 Case "leftInterlockACKBtn"
-   If Tokens$(1) = "true" Then
-       leftInterlockACKBtn = True
-       leftInterlockACK = True
-   Else
-       leftInterlockACKBtn = False
-   EndIf
-   Print "leftInterlockACKBtn:", leftInterlockACKBtn
+    If Tokens$(1) = "true" Then
+        leftInterlockACKBtn = True
+        leftInterlockACK = True
+    Else
+        leftInterlockACKBtn = False
+    EndIf
+    Print "leftInterlockACKBtn:", leftInterlockACKBtn
 Case "outMagGoHomeBtn"
-   If Tokens$(1) = "true" Then
-       outMagGoHomeBtn = True
-       outMagGoHome = True
-   Else
-       outMagGoHomeBtn = False
-   EndIf
-   Print "outMagGoHomeBtn:", outMagGoHomeBtn
+    If Tokens$(1) = "true" Then
+        outMagGoHomeBtn = True
+        outMagGoHome = True
+    Else
+        outMagGoHomeBtn = False
+    EndIf
+    Print "outMagGoHomeBtn:", outMagGoHomeBtn
 Case "outMagIntLockAckBtn"
-   If Tokens$(1) = "true" Then
-       outMagIntLockAckBtn = True
-       outMagIntLockAck = True
-   Else
-       outMagIntLockAckBtn = False
-   EndIf
-   Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
+    If Tokens$(1) = "true" Then
+        outMagIntLockAckBtn = True
+        outMagIntLockAck = True
+    Else
+        outMagIntLockAckBtn = False
+    EndIf
+    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 Case "outMagUnloadedBtn"
-   If Tokens$(1) = "true" Then
-       outMagUnloadedBtn = True
-       outMagUnloaded = True
-   Else
-       outMagUnloadedBtn = False
-   EndIf
-   Print "outMagUnloadedBtn:", outMagUnloadedBtn
+    If Tokens$(1) = "true" Then
+        outMagUnloadedBtn = True
+        outMagUnloaded = True
+    Else
+        outMagUnloadedBtn = False
+    EndIf
+    Print "outMagUnloadedBtn:", outMagUnloadedBtn
 Case "panelDataTxACKBtn"
-   If Tokens$(1) = "true" Then
-       panelDataTxACKBtn = True
-       panelDataTxACK = True
-   Else
-       panelDataTxACKBtn = False
-   EndIf
-   Print "panelDataTxACKBtn:", panelDataTxACKBtn
+    If Tokens$(1) = "true" Then
+        panelDataTxACKBtn = True
+        panelDataTxACK = True
+        MemOn (panelDataTxAckH)
+    Else
+        panelDataTxACKBtn = False
+    EndIf
+    Print "panelDataTxACKBtn:", panelDataTxACKBtn
 Case "rightInterlockACKBtn"
-   If Tokens$(1) = "true" Then
-       rightInterlockACKBtn = True
-       rightInterlockACK = True
-   Else
-       rightInterlockACKBtn = False
-   EndIf
-   Print "rightInterlockACKBtn:", rightInterlockACKBtn
+    If Tokens$(1) = "true" Then
+        rightInterlockACKBtn = True
+        rightInterlockACK = True
+    Else
+        rightInterlockACKBtn = False
+    EndIf
+    Print "rightInterlockACKBtn:", rightInterlockACKBtn
 Case "sftyFrmIlockAckBtn"
-   If Tokens$(1) = "true" Then
-       sftyFrmIlockAckBtn = True
-       sftyFrmIlockAck = True
-   Else
-       sftyFrmIlockAckBtn = False
-   EndIf
-   Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
+    If Tokens$(1) = "true" Then
+        sftyFrmIlockAckBtn = True
+        sftyFrmIlockAck = True
+    Else
+        sftyFrmIlockAckBtn = False
+    EndIf
+    Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
 Case "airPressHighF"
     If Tokens$(1) = "true" Then
         MemOn (airPressHighF)
@@ -1333,141 +1391,107 @@ Case "jobNumPanels"
     jobNumPanels = Val(Tokens$(1))
     Print "jobNumPanels:", jobNumPanels
 Case "pasCoolSet"
-    pasCool = Val(Tokens$(1))
-    Print "pasCool:", pasCool
+    MBWrite(pasCoolAddr, Val(Tokens$(1)), MBType16)
+    Print "pasCoolSet:", pasCoolSet
 Case "pasDwellSet"
-    pasDwell = Val(Tokens$(1))
-    Print "pasDwell:", pasDwell
+    MBWrite(pasDwellAddr, Val(Tokens$(1)), MBType16)
+    Print "pasDwellSet:", pasDwellSet
 Case "pasHeatStakingIPMSet"
-    pasHeatStakingIPM = Val(Tokens$(1))
-    Print "pasHeatStakingIPM:", pasHeatStakingIPM
+    MBWrite(pasHeatStakingIPMAddr, Val(Tokens$(1)), MBType32)
+    Print "pasHeatStakingIPMSet:", pasHeatStakingIPMSet
 Case "pasHomeIPMSet"
-    pasHomeIPM = Val(Tokens$(1))
-    Print "pasHomeIPM:", pasHomeIPM
+    MBWrite(pasHomeIPMAddr, Val(Tokens$(1)), MBType32)
+    Print "pasHomeIPMSet:", pasHomeIPMSet
 Case "pasInsertDepthSet"
-    pasInsertDepth = Val(Tokens$(1))
-    Print "pasInsertDepth:", pasInsertDepth
+    MBWrite(pasInsertDepthAddr, Val(Tokens$(1)), MBType32)
+    Print "pasInsertDepthSet:", pasInsertDepthSet
 Case "pasInsertEngageSet"
-    pasInsertEngage = Val(Tokens$(1))
-    Print "pasInsertEngage:", pasInsertEngage
+    MBWrite(pasInsertEngageAddr, Val(Tokens$(1)), MBType32)
+    Print "pasInsertEngageSet:", pasInsertEngageSet
 Case "pasInsertEngageIPMSet"
-    pasInsertEngageIPM = Val(Tokens$(1))
-    Print "pasInsertEngageIPM:", pasInsertEngageIPM
+    MBWrite(pasInsertEngageIPMAddr, Val(Tokens$(1)), MBType32)
+    Print "pasInsertEngageIPMSet:", pasInsertEngageIPMSet
 Case "pasInsertPickupIPMSet"
-    pasInsertPickupIPM = Val(Tokens$(1))
-    Print "pasInsertPickupIPM:", pasInsertPickupIPM
+    MBWrite(pasInsertPickupIPMAddr, Val(Tokens$(1)), MBType32)
+    Print "pasInsertPickupIPMSet:", pasInsertPickupIPMSet
 Case "pasInsertPositionSet"
-    pasInsertPosition = Val(Tokens$(1))
-    Print "pasInsertPosition:", pasInsertPosition
+    MBWrite(pasInsertPositionAddr, Val(Tokens$(1)), MBType32)
+    Print "pasInsertPositionSet:", pasInsertPositionSet
 Case "pasInsertPreheatSet"
-    pasInsertPreheat = Val(Tokens$(1))
-    Print "pasInsertPreheat:", pasInsertPreheat
+    MBWrite(pasInsertPreheatAddr, Val(Tokens$(1)), MBType16)
+    Print "pasInsertPreheatSet:", pasInsertPreheatSet
 Case "pasJogSpeedSet"
-    pasJogSpeed = Val(Tokens$(1))
-    Print "pasJogSpeed:", pasJogSpeed
+    MBWrite(pasJogSpeedAddr, Val(Tokens$(1)), MBType16)
+    Print "pasJogSpeedSet:", pasJogSpeedSet
 Case "pasPIDsetupDZone1Set"
-    pasPIDsetupDZone1 = Val(Tokens$(1))
-    Print "pasPIDsetupDZone1:", pasPIDsetupDZone1
+    MBWrite(pasPIDsetupDZone1Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupDZone1Set:", pasPIDsetupDZone1Set
 Case "pasPIDsetupDZone2Set"
-    pasPIDsetupDZone2 = Val(Tokens$(1))
-    Print "pasPIDsetupDZone2:", pasPIDsetupDZone2
-Case "pasPIDsetupInTempZone1Set"
-    pasPIDsetupInTempZone1 = Val(Tokens$(1))
-    Print "pasPIDsetupInTempZone1:", pasPIDsetupInTempZone1
-Case "pasPIDsetupInTempZone2Set"
-    pasPIDsetupInTempZone2 = Val(Tokens$(1))
-    Print "pasPIDsetupInTempZone2:", pasPIDsetupInTempZone2
+    MBWrite(pasPIDsetupDZone2Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupDZone2Set:", pasPIDsetupDZone2Set
 Case "pasPIDsetupIZone1Set"
-    pasPIDsetupIZone1 = Val(Tokens$(1))
-    Print "pasPIDsetupIZone1:", pasPIDsetupIZone1
+    MBWrite(pasPIDsetupIZone1Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupIZone1Set:", pasPIDsetupIZone1Set
 Case "pasPIDsetupIZone2Set"
-    pasPIDsetupIZone2 = Val(Tokens$(1))
-    Print "pasPIDsetupIZone2:", pasPIDsetupIZone2
+    MBWrite(pasPIDsetupIZone2Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupIZone2Set:", pasPIDsetupIZone2Set
 Case "pasPIDsetupMaxTempZone1Set"
-    pasPIDsetupMaxTempZone1 = Val(Tokens$(1))
-    Print "pasPIDsetupMaxTempZone1:", pasPIDsetupMaxTempZone1
+    MBWrite(pasPIDsetupMaxTempZone1Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupMaxTempZone1Set:", pasPIDsetupMaxTempZone1Set
 Case "pasPIDsetupMaxTempZone2Set"
-    pasPIDsetupMaxTempZone2 = Val(Tokens$(1))
-    Print "pasPIDsetupMaxTempZone2:", pasPIDsetupMaxTempZone2
+    MBWrite(pasPIDsetupMaxTempZone2Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupMaxTempZone2Set:", pasPIDsetupMaxTempZone2Set
 Case "pasPIDsetupOffsetZone1Set"
-    pasPIDsetupOffsetZone1 = Val(Tokens$(1))
-    Print "pasPIDsetupOffsetZone1:", pasPIDsetupOffsetZone1
+    MBWrite(pasPIDsetupOffsetZone1Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupOffsetZone1Set:", pasPIDsetupOffsetZone1Set
 Case "pasPIDsetupOffsetZone2Set"
-    pasPIDsetupOffsetZone2 = Val(Tokens$(1))
-    Print "pasPIDsetupOffsetZone2:", pasPIDsetupOffsetZone2
+    MBWrite(pasPIDsetupOffsetZone2Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupOffsetZone2Set:", pasPIDsetupOffsetZone2Set
 Case "pasPIDsetupPZone1Set"
-    pasPIDsetupPZone1 = Val(Tokens$(1))
-    Print "pasPIDsetupPZone1:", pasPIDsetupPZone1
+    MBWrite(pasPIDsetupPZone1Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupPZone1Set:", pasPIDsetupPZone1Set
 Case "pasPIDsetupPZone2Set"
-    pasPIDsetupPZone2 = Val(Tokens$(1))
-    Print "pasPIDsetupPZone2:", pasPIDsetupPZone2
+    MBWrite(pasPIDsetupPZone2Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupPZone2Set:", pasPIDsetupPZone2Set
 Case "pasPIDsetupSetPointZone1Set"
-    pasPIDsetupSetPointZone1 = Val(Tokens$(1))
-    Print "pasPIDsetupSetPointZone1:", pasPIDsetupSetPointZone1
+    MBWrite(pasPIDsetupSetPointZone1Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupSetPointZone1Set:", pasPIDsetupSetPointZone1Set
 Case "pasPIDsetupSetPointZone2Set"
-    pasPIDsetupSetPointZone2 = Val(Tokens$(1))
-    Print "pasPIDsetupSetPointZone2:", pasPIDsetupSetPointZone2
+    MBWrite(pasPIDsetupSetPointZone2Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDsetupSetPointZone2Set:", pasPIDsetupSetPointZone2Set
 Case "pasPIDShowDZone1Set"
-    pasPIDShowDZone1 = Val(Tokens$(1))
-    Print "pasPIDShowDZone1:", pasPIDShowDZone1
+    MBWrite(pasPIDShowDZone1Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDShowDZone1Set:", pasPIDShowDZone1Set
 Case "pasPIDShowDZone2Set"
-    pasPIDShowDZone2 = Val(Tokens$(1))
-    Print "pasPIDShowDZone2:", pasPIDShowDZone2
+    MBWrite(pasPIDShowDZone2Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDShowDZone2Set:", pasPIDShowDZone2Set
 Case "pasPIDShowIZone1Set"
-    pasPIDShowIZone1 = Val(Tokens$(1))
-    Print "pasPIDShowIZone1:", pasPIDShowIZone1
+    MBWrite(pasPIDShowIZone1Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDShowIZone1Set:", pasPIDShowIZone1Set
 Case "pasPIDShowIZone2Set"
-    pasPIDShowIZone2 = Val(Tokens$(1))
-    Print "pasPIDShowIZone2:", pasPIDShowIZone2
+    MBWrite(pasPIDShowIZone2Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDShowIZone2Set:", pasPIDShowIZone2Set
 Case "pasPIDShowPZone1Set"
-    pasPIDShowPZone1 = Val(Tokens$(1))
-    Print "pasPIDShowPZone1:", pasPIDShowPZone1
+    MBWrite(pasPIDShowPZone1Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDShowPZone1Set:", pasPIDShowPZone1Set
 Case "pasPIDShowPZone2Set"
-    pasPIDShowPZone2 = Val(Tokens$(1))
-    Print "pasPIDShowPZone2:", pasPIDShowPZone2
-Case "pasPIDTuneDoneZone1Set"
-    If Tokens$(1) = "true" Then
- 		pasPIDTuneDoneZone1 = True
- 	Else
- 		pasPIDTuneDoneZone1 = False
-    EndIf
-    Print "pasPIDTuneDoneZone1:", pasPIDTuneDoneZone1
-Case "pasPIDTuneDoneZone3Set"
-    If Tokens$(1) = "true" Then
- 		pasPIDTuneDoneZone3 = True
- 	Else
- 		pasPIDTuneDoneZone3 = False
-    EndIf
-    Print "pasPIDTuneDoneZone3:", pasPIDTuneDoneZone3
-Case "pasPIDTuneFailZone1Set"
-    If Tokens$(1) = "true" Then
-	 pasPIDTuneFailZone1 = True
-		 Else
-	 pasPIDTuneFailZone1 = False
-    EndIf
-    Print "pasPIDTuneFailZone1:", pasPIDTuneFailZone1
-Case "pasPIDTuneFailZone2Set"
-    If Tokens$(1) = "true" Then
-	 pasPIDTuneFailZone2 = True
-		 Else
-	pasPIDTuneFailZone2 = False
-    EndIf
-    Print "pasPIDTuneFailZone2:", pasPIDTuneFailZone2
-Case "pasRecipeSet"
-    pasRecipe = Val(Tokens$(1))
-    Print "pasRecipe:", pasRecipe
+    MBWrite(pasPIDShowPZone2Addr, Val(Tokens$(1)), MBType16)
+    Print "pasPIDShowPZone2Set:", pasPIDShowPZone2Set
+'Case "pasRecipeSet"
+'    MBWrite(pasRecipeAddr, Val(Tokens$(1)), MBTypeCHANGEME
+'    Print "pasRecipeSet:", pasRecipeSet
 Case "pasSetTempZone1Set"
-    pasSetTempZone1 = Val(Tokens$(1))
-    Print "pasSetTempZone1:", pasSetTempZone1
+    MBWrite(pasSetTempZone1Addr, Val(Tokens$(1)), MBType16)
+    Print "pasSetTempZone1Set:", pasSetTempZone1Set
 Case "pasSetTempZone2Set"
-    pasSetTempZone2 = Val(Tokens$(1))
-    Print "pasSetTempZone2:", pasSetTempZone2
+    MBWrite(pasSetTempZone2Addr, Val(Tokens$(1)), MBType16)
+    Print "pasSetTempZone2Set:", pasSetTempZone2Set
 Case "pasSoftHomeSet"
-    pasSoftHome = Val(Tokens$(1))
-    Print "pasSoftHome:", pasSoftHome
+    MBWrite(pasSoftHomeAddr, Val(Tokens$(1)), MBType32)
+    Print "pasSoftHomeSet:", pasSoftHomeSet
 Case "pasSoftStopSet"
-    pasSoftStop = Val(Tokens$(1))
-    Print "pasSoftStop:", pasSoftStop
+    MBWrite(pasSoftStopAddr, Val(Tokens$(1)), MBType32)
+    Print "pasSoftStopSet:", pasSoftStopSet
 Case "recFlashRequired"
     If Tokens$(1) = "true" Then
         recFlashRequired = True
@@ -1509,175 +1533,173 @@ Case "zlimit"
     zLimit = Val(Tokens$(1))
     Print "zlimit:", zLimit
 Case "pas1inLoadInsertCylinderBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pas1inLoadInsertCylinderAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pas1inLoadInsertCylinderAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pas1inLoadInsertCylinderBtn:", pas1inLoadInsertCylinderBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pas1inLoadInsertCylinderAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pas1inLoadInsertCylinderAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pas1inLoadInsertCylinderBtn:", pas1inLoadInsertCylinderBtn
 Case "pasBlowInsertBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasBlowInsertAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasBlowInsertAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasBlowInsertBtn:", pasBlowInsertBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasBlowInsertAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasBlowInsertAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasBlowInsertBtn:", pasBlowInsertBtn
 Case "pasBowlDumpOpenBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasBowlDumpOpenAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasBowlDumpOpenAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasBowlDumpOpenBtn:", pasBowlDumpOpenBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasBowlDumpOpenAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasBowlDumpOpenAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasBowlDumpOpenBtn:", pasBowlDumpOpenBtn
 Case "pasBowlFeederBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasBowlFeederAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasBowlFeederAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasBowlFeederBtn:", pasBowlFeederBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasBowlFeederAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasBowlFeederAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasBowlFeederBtn:", pasBowlFeederBtn
 Case "pasGoHomeBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasGoHomeAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasGoHomeBtn:", pasGoHomeBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasGoHomeAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasGoHomeBtn:", pasGoHomeBtn
 Case "pasHeadDownBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasHeadDownAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasHeadDownAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasHeadDownBtn:", pasHeadDownBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasHeadDownAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasHeadDownAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasHeadDownBtn:", pasHeadDownBtn
 Case "pasHeadUpBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasHeadUpAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasHeadUpAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasHeadUpBtn:", pasHeadUpBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasHeadUpAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasHeadUpAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasHeadUpBtn:", pasHeadUpBtn
 Case "pasInsertGripperBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasInsertGripperAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasInsertGripperAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasInsertGripperBtn:", pasInsertGripperBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasInsertGripperAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasInsertGripperAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasInsertGripperBtn:", pasInsertGripperBtn
 Case "pasInsertTypeBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasInsertTypeAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasInsertTypeAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasInsertTypeBtn:", pasInsertTypeBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasInsertTypeAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasInsertTypeAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasInsertTypeBtn:", pasInsertTypeBtn
 Case "pasMasterTempBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasMasterTempAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasMasterTempAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasMasterTempBtn:", pasMasterTempBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasMasterTempAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasMasterTempAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasMasterTempBtn:", pasMasterTempBtn
 Case "pasMaxTempOnOffZone1Btn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasMaxTempOnOffZone1Addr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasMaxTempOnOffZone1Addr, 0, MBTypeCoil)
-   EndIf
-   Print "pasMaxTempOnOffZone1Btn:", pasMaxTempOnOffZone1Btn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasMaxTempOnOffZone1Addr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasMaxTempOnOffZone1Addr, 0, MBTypeCoil)
+    EndIf
+    Print "pasMaxTempOnOffZone1Btn:", pasMaxTempOnOffZone1Btn
 Case "pasMaxTempOnOffZone2Btn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasMaxTempOnOffZone2Addr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasMaxTempOnOffZone2Addr, 0, MBTypeCoil)
-   EndIf
-   Print "pasMaxTempOnOffZone2Btn:", pasMaxTempOnOffZone2Btn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasMaxTempOnOffZone2Addr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasMaxTempOnOffZone2Addr, 0, MBTypeCoil)
+    EndIf
+    Print "pasMaxTempOnOffZone2Btn:", pasMaxTempOnOffZone2Btn
 Case "pasOnOffZone1Btn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasOnOffZone1Addr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasOnOffZone1Addr, 0, MBTypeCoil)
-   EndIf
-   Print "pasOnOffZone1Btn:", pasOnOffZone1Btn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasOnOffZone1Addr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasOnOffZone1Addr, 0, MBTypeCoil)
+    EndIf
+    Print "pasOnOffZone1Btn:", pasOnOffZone1Btn
 Case "pasOnOffZone2Btn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasOnOffZone2Addr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasOnOffZone2Addr, 0, MBTypeCoil)
-   EndIf
-   Print "pasOnOffZone2Btn:", pasOnOffZone2Btn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasOnOffZone2Addr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasOnOffZone2Addr, 0, MBTypeCoil)
+    EndIf
+    Print "pasOnOffZone2Btn:", pasOnOffZone2Btn
 Case "pasOTAOnOffZone1Btn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasOTAOnOffZone1Addr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasOTAOnOffZone1Addr, 0, MBTypeCoil)
-   EndIf
-   Print "pasOTAOnOffZone1Btn:", pasOTAOnOffZone1Btn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasOTAOnOffZone1Addr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasOTAOnOffZone1Addr, 0, MBTypeCoil)
+    EndIf
+    Print "pasOTAOnOffZone1Btn:", pasOTAOnOffZone1Btn
 Case "pasOTAOnOffZone2Btn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasOTAOnOffZone2Addr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasOTAOnOffZone2Addr, 0, MBTypeCoil)
-   EndIf
-   Print "pasOTAOnOffZone2Btn:", pasOTAOnOffZone2Btn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasOTAOnOffZone2Addr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasOTAOnOffZone2Addr, 0, MBTypeCoil)
+    EndIf
+    Print "pasOTAOnOffZone2Btn:", pasOTAOnOffZone2Btn
 Case "pasRemoteAlarmAcknowledgeBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasRemoteAlarmAcknowledgeAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasRemoteAlarmAcknowledgeAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasRemoteAlarmAcknowledgeBtn:", pasRemoteAlarmAcknowledgeBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasRemoteAlarmAcknowledgeAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasRemoteAlarmAcknowledgeAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasRemoteAlarmAcknowledgeBtn:", pasRemoteAlarmAcknowledgeBtn
 Case "pasResetHighTempBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasResetHighTempAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasResetHighTempAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasResetHighTempBtn:", pasResetHighTempBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasResetHighTempAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasResetHighTempAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasResetHighTempBtn:", pasResetHighTempBtn
 Case "pasResetMaxBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasResetMaxAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasResetMaxAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasResetMaxBtn:", pasResetMaxBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasResetMaxAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasResetMaxAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasResetMaxBtn:", pasResetMaxBtn
 Case "pasSlideExtendBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasSlideExtendAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasSlideExtendAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasSlideExtendBtn:", pasSlideExtendBtn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasSlideExtendAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasSlideExtendAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasSlideExtendBtn:", pasSlideExtendBtn
 Case "pasStartPIDTuneZone1Btn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasStartPIDTuneZone1Addr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasStartPIDTuneZone1Addr, 0, MBTypeCoil)
-   EndIf
-   Print "pasStartPIDTuneZone1Btn:", pasStartPIDTuneZone1Btn
+    If Tokens$(1) = "true" Then
+        MBWrite(pasStartPIDTuneZone1Addr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasStartPIDTuneZone1Addr, 0, MBTypeCoil)
+    EndIf
+    Print "pasStartPIDTuneZone1Btn:", pasStartPIDTuneZone1Btn
 Case "pasStartPIDTuneZone2Btn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasStartPIDTuneZone2Addr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasStartPIDTuneZone2Addr, 0, MBTypeCoil)
-   EndIf
-   Print "pasStartPIDTuneZone2Btn:", pasStartPIDTuneZone2Btn
+    If tokens$(1) = "true" Then
+        MBWrite(pasStartPIDTuneZone2Addr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasStartPIDTuneZone2Addr, 0, MBTypeCoil)
+    EndIf
+    Print "pasStartPIDTuneZone2Btn:", pasStartPIDTuneZone2Btn
 Case "pasTempOnOffBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasTempOnOffAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasTempOnOffAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasTempOnOffBtn:", pasTempOnOffBtn
+    If tokens$(1) = "true" Then
+        MBWrite(pasTempOnOffAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasTempOnOffAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasTempOnOffBtn:", pasTempOnOffBtn
 Case "pasVibTrackBtn"
-   If Tokens$(1) = "true" Then
-       MBWrite(pasVibTrackAddr, 1, MBTypeCoil)
-   Else
-       MBWrite(pasVibTrackAddr, 0, MBTypeCoil)
-   EndIf
-   Print "pasVibTrackBtn:", pasVibTrackBtn
-
-
+    If tokens$(1) = "true" Then
+        MBWrite(pasVibTrackAddr, 1, MBTypeCoil)
+    Else
+        MBWrite(pasVibTrackAddr, 0, MBTypeCoil)
+    EndIf
+    Print "pasVibTrackBtn:", pasVibTrackBtn
 
 Default
 	' TMH for now print come back and do something useful

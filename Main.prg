@@ -12,11 +12,28 @@ recNumberOfHoles = 16 ' fake for test
 recInsertDepth = .165 ' fake for testing
 suctionWaitTime = 1.5 'fake
 zLimit = -12.5 'fake
-recInmag = 50
-recOutmag = 51
-recCrowding = 248
+recInmag = 200
+recOutmag = 201
+recCrowding = 203
+'FirstHolePointInspection =
+'LastHolePointInspection =
+FirstHolePointHotStake = 204
+LastHolePointHotStake = 214
+'FirstHolePointFlash =
+'LastHolePointFlash =
 LoadPoints "points.pts"
-Power Low ' Manually set power. This will be done in PowerOnSequence()
+Power High ' Manually set power. This will be done in PowerOnSequence()
+Speed 65
+
+
+
+Do While True
+	If jobStart = True Then
+	FakeLogging()
+	Print "done"
+EndIf
+	
+Loop
 
 mainCurrentState = StateIdle ' The first state is Idle
 
@@ -31,7 +48,6 @@ Select mainCurrentState
 		
 		If jobStart = True Then 'And HotStakeTempRdy = 0 and CheckInitialParameters()=0 Then ' Fake for testing
 			mainCurrentState = StatePopPanel
-			getRobotPoints()
 			jobStart = False ' reset flag
 		Else
 			mainCurrentState = StateIdle ' Stay in idle until ready
@@ -322,3 +338,37 @@ Function getRobotPoints() As Integer
 			getRobotPoints = 2
 	Send
 Fend
+Function testLaser()
+	
+	Crowding = 100
+	
+Do While True
+	LoadPoints "points.pts"
+	Integer i, s
+	zLimit = -12.5
+	suctionWaitTime = 1
+	recNumberOfHoles = 3
+	s = 0
+	Motor On
+	Power High
+	Speed 50
+	Accel 50, 50
+	Redim InspectionArray(2, 1)
+	
+	CrowdingSequence(0)
+	Jump PreScan LimZ zLimit
+	
+For i = 110 To 112
+	Jump P(i) LimZ zLimit
+	MeasureInsertDepth(s)
+	s = s + 1
+	Go P(i) -Y(50)
+Next
+
+	PrintInspectionArray()
+	Jump PreScan LimZ zLimit
+Loop
+
+Fend
+	
+

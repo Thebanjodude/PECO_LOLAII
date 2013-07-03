@@ -24,33 +24,33 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		
 		Go P(i)
 		
-		If SelectRoutine = 1 Then
-
-			ChangeProfile("07")
-			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
-			
-			If Abs(BossCrosssectionalArea) < 250 Then ' There is already an insert so set skip flag
-				'SkipHoleArray(currentPreinspectHole, 0) = 1
-				Print "Hole ", currentPreinspectHole, " is already populated"
-			EndIf
-			
-			If Abs(BossCrosssectionalArea) < 12345 Then ' We dont see an empty hole or a populated hole. Panel is backwards or 
-				erPanelStatusUnknown = True
-				InspectPanel = 2					' the wrong panel was put into the magazine
-				'back out of the laser	
-				Exit For
-			EndIf
+'		If SelectRoutine = 1 Then
+'
+'			ChangeProfile("07")
+'			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
+'			
+'			If Abs(BossCrosssectionalArea) < 250 Then ' There is already an insert so set skip flag
+'				'SkipHoleArray(currentPreinspectHole, 0) = 1
+'				Print "Hole ", currentPreinspectHole, " is already populated"
+'			EndIf
+'			
+''			If Abs(BossCrosssectionalArea) < 12345 Then ' We dont see an empty hole or a populated hole. Panel is backwards or 
+''				erPanelStatusUnknown = True
+''				InspectPanel = 2					' the wrong panel was put into the magazine
+''				'back out of the laser	
+''				Exit For
+''			EndIf
 			
 			currentPreinspectHole = currentPreinspectHole + 1
-			
-		ElseIf SelectRoutine = 2 Then
-			
-		MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
-		currentInspectHole = currentInspectHole + 1
-		
-		Else
-			Print "Inspection argument undefined"
-		EndIf
+'			
+'		ElseIf SelectRoutine = 2 Then
+'			
+'			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
+'			currentInspectHole = currentInspectHole + 1
+'		
+'		Else
+'			Print "Inspection argument undefined"
+'		EndIf
 			
 		Go P(i) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
 		Wait .25
@@ -103,83 +103,101 @@ Fend
 '	
 'Fend
 
-'Function FakeLogging()
+Function FakeLogging()
+
+	Integer i
+	recNumberOfHoles = 23
+	Redim InspectionArray(recNumberOfHoles - 1, 1)
+	
+	For i = 0 To recNumberOfHoles - 1
+		InspectionArray(i, LeftSpotFace) = i
+		InspectionArray(i, RightSpotFace) = i
+	Next
+
+	PrintInspectionArray()
+	UnpackInspectionArrays()
+
+	panelDataTxRdy = True ' Tell HMI to readout hole data
+	
+'	MemOn (panelDataTxAckH) ' fake
+	
+' this is for hmi logging
+	Wait MemSw(panelDataTxAckH) = True, 3
+	
+	If TW = True Then ' catch that the HMI timed out without acking
+		erHmiDataAck = True
+		Print "no data ack from hmi"
+	EndIf
+
+	panelDataTxRdy = False ' reset flag
+	MemOff (panelDataTxAckH) ' reset flag
+	Print "ending log"
+	jobDone = True
+	
+Fend
+
+Function UnpackInspectionArrays()
+	
+'Sending a JSON array is a pain so we are just unpacking the array into seperate vars 	
+hole0L = InspectionArray(0, LeftSpotFace)
+hole0R = InspectionArray(0, RightSpotFace)
+hole1R = InspectionArray(1, RightSpotFace)
+hole1L = InspectionArray(1, LeftSpotFace)
+hole2R = InspectionArray(2, RightSpotFace)
+hole2L = InspectionArray(2, LeftSpotFace)
+hole3R = InspectionArray(3, RightSpotFace)
+hole3L = InspectionArray(3, LeftSpotFace)
+hole4R = InspectionArray(4, RightSpotFace)
+hole4L = InspectionArray(4, LeftSpotFace)
+hole5R = InspectionArray(5, RightSpotFace)
+hole5L = InspectionArray(5, LeftSpotFace)
+hole6R = InspectionArray(6, RightSpotFace)
+hole6L = InspectionArray(6, LeftSpotFace)
+hole7R = InspectionArray(7, RightSpotFace)
+hole7L = InspectionArray(7, LeftSpotFace)
+hole8R = InspectionArray(8, RightSpotFace)
+hole8L = InspectionArray(8, LeftSpotFace)
+hole9R = InspectionArray(9, RightSpotFace)
+hole9L = InspectionArray(9, LeftSpotFace)
+hole10R = InspectionArray(10, RightSpotFace)
+hole10L = InspectionArray(10, LeftSpotFace)
+hole11R = InspectionArray(11, RightSpotFace)
+hole11L = InspectionArray(11, LeftSpotFace)
+hole12R = InspectionArray(12, RightSpotFace)
+hole12L = InspectionArray(12, LeftSpotFace)
+hole13R = InspectionArray(13, RightSpotFace)
+hole13L = InspectionArray(13, LeftSpotFace)
+hole14R = InspectionArray(14, RightSpotFace)
+hole14L = InspectionArray(14, LeftSpotFace)
+hole15R = InspectionArray(15, RightSpotFace)
+hole15L = InspectionArray(15, LeftSpotFace)
+hole16R = InspectionArray(16, RightSpotFace)
+hole16L = InspectionArray(16, LeftSpotFace)
+hole17R = InspectionArray(17, RightSpotFace)
+hole17L = InspectionArray(17, LeftSpotFace)
+hole18R = InspectionArray(18, RightSpotFace)
+hole18L = InspectionArray(18, LeftSpotFace)
+hole19R = InspectionArray(19, RightSpotFace)
+hole19L = InspectionArray(19, LeftSpotFace)
+hole20R = InspectionArray(20, RightSpotFace)
+hole20L = InspectionArray(20, LeftSpotFace)
+hole21R = InspectionArray(21, RightSpotFace)
+hole21L = InspectionArray(21, LeftSpotFace)
+hole22R = InspectionArray(22, RightSpotFace)
+hole22L = InspectionArray(22, LeftSpotFace)
+
+Integer n
+
+'For n = 0 To recNumberOfHoles - 1
+'		
+'	'comment this out during integration
+'	If PassFailArray(n, LeftSpotFace) = False Or PassFailArray(n, RightSpotFace) = False Then
+'		Print "hole " + Str$(n) + " failed!"
+'	EndIf
 '	
-'	Integer i
-'	recNumberOfHoles = 23
-'	Redim InspectionArray(22, 1)
-'	
-'	For i = 0 To recNumberOfHoles - 1
-'		InspectionArray(i, LeftSpotFace) = i
-'		InspectionArray(i, RightSpotFace) = i
-'	Next
-'
-'PrintInspectionArray
-'UnpackInspectionArrays
-'Fend
-'
-'Function UnpackInspectionArrays()
-'	
-''Sending a JSON array is a pain so we are just unpacking the array into seperate vars 	
-'hole0L = InspectionArray(0, LeftSpotFace)
-'hole0R = InspectionArray(0, RightSpotFace)
-'hole1R = InspectionArray(1, RightSpotFace)
-'hole1L = InspectionArray(1, LeftSpotFace)
-'hole2R = InspectionArray(2, RightSpotFace)
-'hole2L = InspectionArray(2, LeftSpotFace)
-'hole3R = InspectionArray(3, RightSpotFace)
-'hole3L = InspectionArray(3, LeftSpotFace)
-'hole4R = InspectionArray(4, RightSpotFace)
-'hole4L = InspectionArray(4, LeftSpotFace)
-'hole5R = InspectionArray(5, RightSpotFace)
-'hole5L = InspectionArray(5, LeftSpotFace)
-'hole6R = InspectionArray(6, RightSpotFace)
-'hole6L = InspectionArray(6, LeftSpotFace)
-'hole7R = InspectionArray(7, RightSpotFace)
-'hole7L = InspectionArray(7, LeftSpotFace)
-'hole8R = InspectionArray(8, RightSpotFace)
-'hole8L = InspectionArray(8, LeftSpotFace)
-'hole9R = InspectionArray(9, RightSpotFace)
-'hole9L = InspectionArray(9, LeftSpotFace)
-'hole10R = InspectionArray(10, RightSpotFace)
-'hole10L = InspectionArray(10, LeftSpotFace)
-'hole11R = InspectionArray(11, RightSpotFace)
-'hole11L = InspectionArray(11, LeftSpotFace)
-'hole12R = InspectionArray(12, RightSpotFace)
-'hole12L = InspectionArray(12, LeftSpotFace)
-'hole13R = InspectionArray(13, RightSpotFace)
-'hole13L = InspectionArray(13, LeftSpotFace)
-'hole14R = InspectionArray(14, RightSpotFace)
-'hole14L = InspectionArray(14, LeftSpotFace)
-'hole15R = InspectionArray(15, RightSpotFace)
-'hole15L = InspectionArray(15, LeftSpotFace)
-'hole16R = InspectionArray(16, RightSpotFace)
-'hole16L = InspectionArray(16, LeftSpotFace)
-'hole17R = InspectionArray(17, RightSpotFace)
-'hole17L = InspectionArray(17, LeftSpotFace)
-'hole18R = InspectionArray(18, RightSpotFace)
-'hole18L = InspectionArray(18, LeftSpotFace)
-'hole19R = InspectionArray(19, RightSpotFace)
-'hole19L = InspectionArray(19, LeftSpotFace)
-'hole20R = InspectionArray(20, RightSpotFace)
-'hole20L = InspectionArray(20, LeftSpotFace)
-'hole21R = InspectionArray(21, RightSpotFace)
-'hole21L = InspectionArray(21, LeftSpotFace)
-'hole22R = InspectionArray(22, RightSpotFace)
-'hole22L = InspectionArray(22, LeftSpotFace)
-'
-'Integer n
-'
-''For n = 0 To recNumberOfHoles - 1
-''		
-''	'comment this out during integration
-''	If PassFailArray(n, LeftSpotFace) = False Or PassFailArray(n, RightSpotFace) = False Then
-''		Print "hole " + Str$(n) + " failed!"
-''	EndIf
-''	
-''Next
-'	
-'Fend
+'Next
+	
+Fend
 'Function UnpackPassFailArray()
 '	'Sending a JSON array is a pain so we are just unpacking the array into seperate vars 
 '	'If either spotface fails then the hole fails
@@ -233,7 +251,7 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
     i = ChkNet(203)
     If i > 0 Then
     	Read #203, response$, i
-    	Print response$
+    	'Print response$
     		If response$ = "PW" + Chr$(&hd) Then
 				erLaserScanner = False
 	      	Else
@@ -256,7 +274,7 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
 	EndIf
                 
 	Print #203, "MS,0," + OutNumber$
-	Wait .5
+	Wait 1
 	
 ' This routine checks the buffer for a returned value from the laser scanner, 
 ' checks for the correct responce from the laser and returns requested data.
@@ -286,10 +304,11 @@ Function MeasureInsertDepth(Index As Integer)
 	InspectionArray(Index, RightSpotFace) = MicroMetersToInches(GetLaserMeasurement("11"))
 '	PassFailArray(PanelArrayIndex, RightSpotFace) = PassOrFail(InspectionArray(PanelArrayIndex, RightSpotFace))
 	
-	PrintInspectionArray()
+	'PrintInspectionArray()
 	
 Fend
 Function PrintInspectionArray()
+
 	
 	Integer n, PrintArrayIndex
 	
@@ -311,28 +330,19 @@ Function CrowdingSequence(StupidCompiler3 As Byte) As Integer
 Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 
 	Off nestpneu ' Make sure the nest is closed
-	Jump Crowding LimZ zLimit 'Jump to the crowding location
+	Jump P(Crowding) -Y(10) LimZ zLimit 'Jump to the crowding location
 '	suctionCupsCC = False
 	Off suctionCupsH
 	Wait suctionWaitTime ' wait for cups to release
-	Go Crowding +Z(15) ' Relese the suction cups and move them out of the way for crowding
-	Wait .5
+	Go P(Crowding) +Z(15) ' Relese the suction cups and move them out of the way for crowding
+	Wait .25
 	On nestpneu
-	Wait .5
-	Off nestpneu
-	Wait .5
-	On nestpneu
-	Wait .5
-	Off nestpneu
-	Wait .5
-	On nestpneu
-	Wait 1
-	Jump Crowding LimZ zLimit 'Jump to the crowding location
+	Wait 1.5
+	Go P(Crowding)  'Go to the crowding location
 	On suctionCupsH
 '	suctionCupsCC = True
-	Wait 2
+	Wait suctionWaitTime
 	Off nestpneu
-	Jump PreScan LimZ zLimit
 	CrowdingSequence = 0
 	
 exitCrowding:
