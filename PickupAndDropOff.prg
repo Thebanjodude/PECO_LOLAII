@@ -6,15 +6,15 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer 'byte me
 'Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
 
 	DropOffPanel = 2 ' dafult to fail
-'	SystemStatus = StatePushPanel
+	SystemStatus = StatePushPanel
 	PanelPassedInspection = True ' fake it for testing	
 
 	panelDataTxRdy = True ' Tell HMI to readout hole data
-	MemOn (panelDataTxAckH) ' fake
 	
 ' this is for hmi logging
 '	Wait MemSw(panelDataTxAckH) = True, 3
-'	
+'	Redim InspectionArray(0, 0) ' clear all the values in the Inspection Array
+'	panelDataTxRdy = false ' reset flag	
 '	If TW = True Then ' catch that the HMI timed out without acking
 '		DropOffPanel = False
 '		erHmiDataAck = True
@@ -55,7 +55,6 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer 'byte me
 		stackLightAlrmCC = False
 	EndIf
 
-	panelDataTxRdy = False 'reset flag
 	SystemStatus = StateMoving
 	PanelPassedInspection = False ' rest flag
 	DropOffPanel = DropoffSuccessful
@@ -98,18 +97,16 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	
 	Jump P(recInmag) +Z(5) LimZ zLimit
 	
-	PTCLR ' Clear the Peak Torque Buffer- if you dont clear it, it will overflow and cause an error
-	
 	Do While ZmaxTorque < .3 ' Approach the panel slowly until we hit a torque limit
 		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
 	Loop
 
 	suctionCupsCC = True ' Turn on the cups because we have engaged a panel
 	Wait suctionWaitTime ' Allow time for cups to seal on panel	
-	SystemStatus = StateMoving
 	Jump PreScan LimZ zLimit ' Go home	
 
 	PickupPanel = 0 ' We successfully picked up a panel
+	InMagRobotClearSignal = True ' Give permission for input magazine to queue up next panel
 
 exitPopPanel:
 If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
@@ -117,7 +114,8 @@ If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	MemOff (jobAbortH)
 EndIf
 
-	InMagRobotClearSignal = True ' Give permission for input magazine to queue up next panel
+	SystemStatus = StateMoving
+
 
 Trap 2 'disarm trap
 

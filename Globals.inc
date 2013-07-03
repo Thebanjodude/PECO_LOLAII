@@ -127,7 +127,7 @@ Global Integer currentHSHole, currentFlashHole
 #define StainlessInsert 2
 #define xCoord 0
 #define YCoord 1
-Global Integer recNumberOfHoles, recInsertType, recInmag, recOutmag, recCrowding
+Global Integer recNumberOfHoles, recInsertType, recInmag, recOutmag, recCrowding, recPreCrowding
 Global Double recPartNumber
 Global Boolean recFlashRequired
 Global Real recInsertDepth, recPanelThickness
@@ -157,7 +157,7 @@ Boolean erModbusPort ' TCP port to HMI is not open
 Boolean erModbusCommand ' Invalid command or parameter in modbus communication
 
 'State of Health Global Vars and defines
-Global Integer StatusCheckPickUp, StatusCheckCrowding, StatusCheckPreinspection
+Global Integer StatusCheckPickUp, StatusCheckCrowding, StatusCheckPreinspection, StatusCheckInspection
 Global Integer StatusCheckHotStake, StatusCheckFlash, StatusCheckDropOff
 Global String ctrlrErrMsg$
 Global Integer ctrlrLineNumber, ctrlrTaskNumber, ctrlrErrAxisNumber, ctrlrErrorNum

@@ -2,10 +2,10 @@
 
 Function InspectPanel(SelectRoutine As Integer) As Integer
 
-	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
+'	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
 	
 	SystemStatus = StateInspection
-	InspectPanel = 2 ' default to fail
+'	InspectPanel = 2 ' default to fail
 	
 	Jump PreScan LimZ zLimit
 	
@@ -21,7 +21,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	For i = FirstHolePointInspection To LastHolePointInspection
 		
 		Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
-		
+
 		Go P(i)
 		
 '		If SelectRoutine = 1 Then
@@ -135,7 +135,6 @@ Function FakeLogging()
 	jobDone = True
 	
 Fend
-
 Function UnpackInspectionArrays()
 	
 'Sending a JSON array is a pain so we are just unpacking the array into seperate vars 	
@@ -308,7 +307,6 @@ Function MeasureInsertDepth(Index As Integer)
 	
 Fend
 Function PrintInspectionArray()
-
 	
 	Integer n, PrintArrayIndex
 	
@@ -329,18 +327,21 @@ Function CrowdingSequence(StupidCompiler3 As Byte) As Integer
 
 Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 
+	Jump Prescan LimZ zLimit
+	Jump PreHotStake
+	
 	Off nestpneu ' Make sure the nest is closed
-	Jump P(Crowding) -Y(10) LimZ zLimit 'Jump to the crowding location
-'	suctionCupsCC = False
-	Off suctionCupsH
+	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
+	suctionCupsCC = False
+'	Off suctionCupsH
 	Wait suctionWaitTime ' wait for cups to release
-	Go P(Crowding) +Z(15) ' Relese the suction cups and move them out of the way for crowding
+	Go P(recCrowding) +Z(15) ' Relese the suction cups and move them out of the way for crowding
 	Wait .25
 	On nestpneu
 	Wait 1.5
-	Go P(Crowding)  'Go to the crowding location
-	On suctionCupsH
-'	suctionCupsCC = True
+	Go P(recCrowding)  'Go to the crowding location
+'	On suctionCupsH
+	suctionCupsCC = True
 	Wait suctionWaitTime
 	Off nestpneu
 	CrowdingSequence = 0

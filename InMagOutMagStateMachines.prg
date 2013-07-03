@@ -26,6 +26,8 @@ Do While True
 			Else
 				NextState = StatePartRemoved
 			EndIf
+			
+			InMagPickUpSignal = False ' Tell The robot the magazine is not ready
 
 		Case StatePartRemoved
 					

@@ -6,36 +6,33 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 'jobStart = True 'fake
-recPartNumber = 88555 ' fake for testing
+'recPartNumber = 88555 ' fake for testing
 'recPartNumber = 88558 ' fake for testing
 recNumberOfHoles = 16 ' fake for test
+recFlashRequired = True
 recInsertDepth = .165 ' fake for testing
-suctionWaitTime = 1.5 'fake
+suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
 recInmag = 200
 recOutmag = 201
+recPreCrowding = 202
 recCrowding = 203
-'FirstHolePointInspection =
-'LastHolePointInspection =
+recFlashDwellTime = 1
+FirstHolePointInspection = 110
+LastHolePointInspection = 112
 FirstHolePointHotStake = 204
 LastHolePointHotStake = 214
-'FirstHolePointFlash =
-'LastHolePointFlash =
+FirstHolePointFlash = 260
+LastHolePointFlash = 261
 LoadPoints "points.pts"
 Power High ' Manually set power. This will be done in PowerOnSequence()
 Speed 65
 
-
+mainCurrentState = StateIdle ' The first state is Idle
 
 Do While True
-	If jobStart = True Then
-	FakeLogging()
-	Print "done"
-EndIf
 	
 Loop
-
-mainCurrentState = StateIdle ' The first state is Idle
 
 Do While True
 
@@ -60,20 +57,25 @@ Select mainCurrentState
 		StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
 				
 		If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
-			'mainCurrentState = StateCrowding
-			mainCurrentState = StatePushPanel ' fake for testing
+			mainCurrentState = StateCrowding
+			'mainCurrentState = StatePushPanel ' fake for testing
+			Print "Pick up Successful"
 		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePopPanel
+			Print "Waiting for Interlock"
 		ElseIf StatusCheckPickUp = 2 Then
 			Jump PreScan LimZ zLimit ' go back home
 			mainCurrentState = StateIdle ' Go to idle because there was an error 
+			Print "Pickup failed"
 		Else
 			mainCurrentState = StateIdle ' Go to idle because its the only thing to do
+			Print "going to idle"
 		EndIf
 		
-		If jobAbort = True Then
-			mainCurrentState = StatePushPanel ' push a panel before going to idle
-		EndIf
+'		If jobAbort = True Then
+'			mainCurrentState = StatePushPanel ' push a panel before going to idle
+'			print "aborting pick up)
+'		EndIf
 				
 	Case StateCrowding
 		'This state Moves a panel from the home location, crowds it, then
@@ -83,15 +85,15 @@ Select mainCurrentState
 		
 		StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
 
-		If StatusCheckCrowding = 0 Then
+'		If StatusCheckCrowding = 0 Then
 			mainCurrentState = StatePreinspection
-		ElseIf StatusCheckCrowding = 2 Then
-			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
-		EndIf
+'		ElseIf StatusCheckCrowding = 2 Then
+'			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
+'		EndIf
 		
-		If jobAbort = True Then
-			mainCurrentState = StatePushPanel ' Go drop off the panel before we quit 
-		EndIf
+'		If jobAbort = True Then
+'			mainCurrentState = StatePushPanel ' Go drop off the panel before we quit 
+'		EndIf
 
 	Case StatePreinspection
 		' This state uses the laser scanner to find pre-installed inserts and attempts
@@ -100,22 +102,28 @@ Select mainCurrentState
 			StatusCheckPreinspection = InspectPanel(1) ' 1=Preinspection 
 			If StatusCheckPreinspection = 0 Then
 				mainCurrentState = StateHotStakePanel
+'				mainCurrentState = StateInspection
+				Print "Preinspection executed"
 			ElseIf StatusCheckPreinspection = 2 Then
 				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle 
+				' go to this state if we cant find all the holes 
 			EndIf
 			
 			If jobAbort = True Then
 				mainCurrentState = StatePushPanel ' Drop off the panel before we quit 
+				Print "aborting"
 			EndIf
 		
 	Case StateHotStakePanel
-		' This state iterates through each hole and install an insert
+		' This state iterates through each hole and installs all inserts
 		
 		StatusCheckHotStake = HotStakePanel(0)
 		If StatusCheckHotStake = 0 Then
-			mainCurrentState = StateFlashRemoval ' The next state is Flash Removal
+			Print "hot stake done"
 			If recFlashRequired = False Then
 				mainCurrentState = StateInspection ' Flash not required so skip it
+			Else
+				mainCurrentState = StateFlashRemoval ' The next state is normally Flash Removal
 			EndIf
 		ElseIf StatusCheckHotStake = 2 Then
 			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
@@ -143,9 +151,10 @@ Select mainCurrentState
 		' to check if the correct panel has been put into the magazine.
 		' Add other checks
 		
-			StatusCheckPreinspection = InspectPanel(2) ' 2=Inspection 
-			If StatusCheckPreinspection = 0 Then
-				mainCurrentState = StateHotStakePanel
+			StatusCheckInspection = InspectPanel(2) ' 2=Inspection of Install Inserts 
+			If StatusCheckInspection = 0 Then
+				mainCurrentState = StatePushPanel
+				Print "Inspection Executed"
 			ElseIf StatusCheckPreinspection = 2 Then
 				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 			EndIf
@@ -170,6 +179,7 @@ Select mainCurrentState
 			mainCurrentState = StateIdle ' Go to idle because the operator wants to quit or job is done	
 			jobAbort = False ' reset flag
 			jobStart = False ' reset flag
+			jobDone = True ' set flag
 		EndIf
 	Send
 		

@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/07/02 15:09:25:502,DS:0000015381,CS:19802,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/03 17:12:03:324,DS:0000015377,CS:17729,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=72
@@ -908,7 +908,7 @@ Point51 {
 	sDescription=""
 	rX=-551.998
 	rY=-44.026
-	rZ=-37.943
+	rZ=-25
 	rU=869.584
 	rV=0
 	rW=0

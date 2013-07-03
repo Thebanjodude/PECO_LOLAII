@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/07/03 00:10:29:992,DS:0000004036,CS:02640,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/03 22:07:03:050,DS:0000004033,CS:14155,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="7/2/2013 6:10:28 PM"
+	sLastModified="7/3/2013 4:07:01 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -30,13 +30,13 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/3/2013 12:06:19 AM"
+	sTimeSavedInController="7/3/2013 10:07:01 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/1/2013 2:43:45 PM"
+	sTimeSavedInController="7/3/2013 8:51:58 PM"
 }
 ProgramFile3 {
 	sName="IOTable.prg"
@@ -48,7 +48,7 @@ ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/2/2013 2:23:18 AM"
+	sTimeSavedInController="7/3/2013 9:32:19 PM"
 }
 ProgramFile5 {
 	sName="OldCode.prg"
@@ -66,13 +66,13 @@ ProgramFile7 {
 	sName="PickupAndDropOff.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/2/2013 11:56:30 PM"
+	sTimeSavedInController="7/3/2013 9:43:21 PM"
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/3/2013 12:10:28 AM"
+	sTimeSavedInController="7/3/2013 8:13:42 PM"
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
@@ -90,16 +90,16 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="7/2/2013 10:55:38 PM"
+	sTimeSavedInController="7/3/2013 6:49:51 PM"
 }
 nPointFileCount=2
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="7/2/2013 9:35:55 PM"
+	sTimeSavedInController="7/3/2013 9:55:58 PM"
 }
 PointFile2 {
 	sName="Points3.pts"
-	sTimeSavedInController="7/2/2013 3:09:25 PM"
+	sTimeSavedInController="7/3/2013 5:12:03 PM"
 }
 OperatorSettings {
 	OperatorWindow {
