@@ -97,14 +97,14 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 		Exit Function
 	EndIf
 	
-	Print "queueing request", Address, Value, Type
+	Print "queueing request", Address, value, Type
 	
 	
 	' range check against type here if I decide to become untrusting TMH
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = Value
+	MBQueueValue(MBQueueHead) = value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -152,7 +152,7 @@ Function MBCommandTask()
 			Print "portStatus is: ", portStatus
 			' if we are unable to open it set an error and abort
 			If portStatus < 0 Then
-				ErModbusPort = True
+				erModbusPort = True
 				Exit Function
 			EndIf
 		EndIf
@@ -417,25 +417,25 @@ Function MBCommandTask()
 				Case 106
 				'	pasPIDsetupDZone4 = modbusReadRegister(&h0184)
 				Case 107
-					pasInsertPreheat = modbusReadRegister(&h0190)
+					pasInsertPreheat = modbusReadRegister(&h0190) * 0.1
 				Case 108
-					pasDwell = modbusReadRegister(&h0191)
+					pasDwell = modbusReadRegister(&h0191) * 0.1
 				Case 109
-					pasCool = modbusReadRegister(&h0192)
+					pasCool = modbusReadRegister(&h0192) * 0.1
 				Case 110
 					pasRecipe = modbusReadRegister(&h01C2)
 				Case 111
-					pasJogSpeed = modbusReadRegister(&h01FE)
+					pasJogSpeed = modbusReadRegister(&h01FE) * 0.5
 				Case 112
-					pasMaxLoadmeter = modbusReadRegister(&h0265)
+					pasMaxLoadmeter = modbusReadRegister(&h0265) * 0.1
 				Case 113
-					pasLoadMeter = modbusReadRegister(&h028B)
+					pasLoadMeter = modbusReadRegister(&h028B) * -0.1
 				Case 114
-					pasPreHeatActual = modbusReadRegister(&hA147)
+					pasPreHeatActual = modbusReadRegister(&hA147) * 0.1
 				Case 115
-					pasDwellActual = modbusReadRegister(&hA148)
+					pasDwellActual = modbusReadRegister(&hA148) * 0.1
 				Case 116
-					pasCoolActual = modbusReadRegister(&hA149)
+					pasCoolActual = modbusReadRegister(&hA149) * 0.1
 					
 				'Default
 				'	MBNumReadValues = CurrentReadNum - 1
@@ -584,8 +584,8 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	modMessage(1) = MBCmdWriteRegister
 	modMessage(2) = RShift(regNum, 8) ' high byte of address
 	modMessage(3) = regNum And &hFF ' low byte of address
-	modMessage(4) = RShift(value, 8) ' high byte of value
-	modMessage(5) = value And &hFF ' low byte of value
+	modMessage(4) = RShift(Value, 8) ' high byte of value
+	modMessage(5) = Value And &hFF ' low byte of value
 	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
 	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
 	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
@@ -613,7 +613,7 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	' check for valid response CRC
 	validResponse = modbusResponseCRC(8)
 	If validResponse = False Then
-		ErModbusCommand = True
+		erModbusCommand = True
 	EndIf
 	
 Fend
