@@ -13,26 +13,22 @@ recFlashRequired = True
 recInsertDepth = .165 ' fake for testing
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
-recInmag = 200
-recOutmag = 201
-recPreCrowding = 202
-recCrowding = 203
+recInmag = 50
+recOutmag = 101
+recPreCrowding = 51
+recCrowding = 52
 recFlashDwellTime = 1
-FirstHolePointInspection = 110
-LastHolePointInspection = 112
-FirstHolePointHotStake = 204
-LastHolePointHotStake = 214
-FirstHolePointFlash = 260
-LastHolePointFlash = 261
+FirstHolePointInspection = 53
+LastHolePointInspection = 68
+FirstHolePointHotStake = 69
+LastHolePointHotStake = 84
+FirstHolePointFlash = 85
+LastHolePointFlash = 100
 LoadPoints "points.pts"
-Power High ' Manually set power. This will be done in PowerOnSequence()
+Power Low ' Manually set power. This will be done in PowerOnSequence()
 Speed 65
 
 mainCurrentState = StateIdle ' The first state is Idle
-
-Do While True
-	
-Loop
 
 Do While True
 

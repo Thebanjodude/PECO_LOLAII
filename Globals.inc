@@ -525,6 +525,7 @@ Global Long pasCoolActualSet
 #define pasPIDsetupMaxTempZone4ADDR &h013B
 #define pasPIDsetupOffsetZone3ADDR &h015C
 #define pasPIDsetupOffsetZone4ADDR &h015D
+#define pasCrowdingADDR &h03A5
 
 
 ' modbus constants	
