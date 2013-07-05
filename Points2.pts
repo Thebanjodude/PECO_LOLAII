@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/07/05 18:42:46:342,DS:0000015241,CS:20593,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/05 17:27:44:287,DS:0000015032,CS:30079,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=77
+nNumberOfPoints=76
 Point1 {
 	nNumber=1
 	sLabel="PreScan"
@@ -76,7 +76,7 @@ Point4 {
 }
 Point5 {
 	nNumber=50
-	sLabel="MagIN_51010"
+	sLabel="IN_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -94,7 +94,7 @@ Point5 {
 }
 Point6 {
 	nNumber=51
-	sLabel="CwdIN_51010"
+	sLabel="C_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -112,7 +112,7 @@ Point6 {
 }
 Point7 {
 	nNumber=52
-	sLabel="CwdOUT_51010"
+	sLabel="I1_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -130,7 +130,7 @@ Point7 {
 }
 Point8 {
 	nNumber=53
-	sLabel="I1_51010"
+	sLabel="I2_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -148,7 +148,7 @@ Point8 {
 }
 Point9 {
 	nNumber=54
-	sLabel="I2_51010"
+	sLabel="I3_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -166,7 +166,7 @@ Point9 {
 }
 Point10 {
 	nNumber=55
-	sLabel="I3_51010"
+	sLabel="I4_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -184,7 +184,7 @@ Point10 {
 }
 Point11 {
 	nNumber=56
-	sLabel="I4_51010"
+	sLabel="I5_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -202,7 +202,7 @@ Point11 {
 }
 Point12 {
 	nNumber=57
-	sLabel="I5_51010"
+	sLabel="I6_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -220,7 +220,7 @@ Point12 {
 }
 Point13 {
 	nNumber=58
-	sLabel="I6_51010"
+	sLabel="I7_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -238,7 +238,7 @@ Point13 {
 }
 Point14 {
 	nNumber=59
-	sLabel="I7_51010"
+	sLabel="I8_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -256,7 +256,7 @@ Point14 {
 }
 Point15 {
 	nNumber=60
-	sLabel="I8_51010"
+	sLabel="I9_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -274,7 +274,7 @@ Point15 {
 }
 Point16 {
 	nNumber=61
-	sLabel="I9_51010"
+	sLabel="I10_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -292,7 +292,7 @@ Point16 {
 }
 Point17 {
 	nNumber=62
-	sLabel="I10_51010"
+	sLabel="I11_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -310,7 +310,7 @@ Point17 {
 }
 Point18 {
 	nNumber=63
-	sLabel="I11_51010"
+	sLabel="I12_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -328,7 +328,7 @@ Point18 {
 }
 Point19 {
 	nNumber=64
-	sLabel="I12_51010"
+	sLabel="I13_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -346,7 +346,7 @@ Point19 {
 }
 Point20 {
 	nNumber=65
-	sLabel="I13_51010"
+	sLabel="I14_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -364,7 +364,7 @@ Point20 {
 }
 Point21 {
 	nNumber=66
-	sLabel="I14_51010"
+	sLabel="I15_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -382,7 +382,7 @@ Point21 {
 }
 Point22 {
 	nNumber=67
-	sLabel="I15_51010"
+	sLabel="I16_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -400,7 +400,7 @@ Point22 {
 }
 Point23 {
 	nNumber=68
-	sLabel="I16_51010"
+	sLabel="I17_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -418,7 +418,7 @@ Point23 {
 }
 Point24 {
 	nNumber=69
-	sLabel="I17_51010"
+	sLabel="I18_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -436,7 +436,7 @@ Point24 {
 }
 Point25 {
 	nNumber=70
-	sLabel="I18_51010"
+	sLabel="I19_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -454,7 +454,7 @@ Point25 {
 }
 Point26 {
 	nNumber=71
-	sLabel="I19_51010"
+	sLabel="I20_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -472,7 +472,7 @@ Point26 {
 }
 Point27 {
 	nNumber=72
-	sLabel="I20_51010"
+	sLabel="I21_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -490,7 +490,7 @@ Point27 {
 }
 Point28 {
 	nNumber=73
-	sLabel="I21_51010"
+	sLabel="I22_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -508,7 +508,7 @@ Point28 {
 }
 Point29 {
 	nNumber=74
-	sLabel="I22_51010"
+	sLabel="I23_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -526,7 +526,7 @@ Point29 {
 }
 Point30 {
 	nNumber=75
-	sLabel="I23_51010"
+	sLabel="H1_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -544,7 +544,7 @@ Point30 {
 }
 Point31 {
 	nNumber=76
-	sLabel="H1_51010"
+	sLabel="H2_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -562,7 +562,7 @@ Point31 {
 }
 Point32 {
 	nNumber=77
-	sLabel="H2_51010"
+	sLabel="H3_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -580,7 +580,7 @@ Point32 {
 }
 Point33 {
 	nNumber=78
-	sLabel="H3_51010"
+	sLabel="H4_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -598,7 +598,7 @@ Point33 {
 }
 Point34 {
 	nNumber=79
-	sLabel="H4_51010"
+	sLabel="H5_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -616,7 +616,7 @@ Point34 {
 }
 Point35 {
 	nNumber=80
-	sLabel="H5_51010"
+	sLabel="H6_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -634,7 +634,7 @@ Point35 {
 }
 Point36 {
 	nNumber=81
-	sLabel="H6_51010"
+	sLabel="H7_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -652,7 +652,7 @@ Point36 {
 }
 Point37 {
 	nNumber=82
-	sLabel="H7_51010"
+	sLabel="H8_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -670,7 +670,7 @@ Point37 {
 }
 Point38 {
 	nNumber=83
-	sLabel="H8_51010"
+	sLabel="H9_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -688,7 +688,7 @@ Point38 {
 }
 Point39 {
 	nNumber=84
-	sLabel="H9_51010"
+	sLabel="H10_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -706,7 +706,7 @@ Point39 {
 }
 Point40 {
 	nNumber=85
-	sLabel="H10_51010"
+	sLabel="H11_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -724,7 +724,7 @@ Point40 {
 }
 Point41 {
 	nNumber=86
-	sLabel="H11_51010"
+	sLabel="H12_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -742,7 +742,7 @@ Point41 {
 }
 Point42 {
 	nNumber=87
-	sLabel="H12_51010"
+	sLabel="H13_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -760,7 +760,7 @@ Point42 {
 }
 Point43 {
 	nNumber=88
-	sLabel="H13_51010"
+	sLabel="H14_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -778,7 +778,7 @@ Point43 {
 }
 Point44 {
 	nNumber=89
-	sLabel="H14_51010"
+	sLabel="H15_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -796,7 +796,7 @@ Point44 {
 }
 Point45 {
 	nNumber=90
-	sLabel="H15_51010"
+	sLabel="H16_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -814,7 +814,7 @@ Point45 {
 }
 Point46 {
 	nNumber=91
-	sLabel="H16_51010"
+	sLabel="H17_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -832,7 +832,7 @@ Point46 {
 }
 Point47 {
 	nNumber=92
-	sLabel="H17_51010"
+	sLabel="H18_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -850,7 +850,7 @@ Point47 {
 }
 Point48 {
 	nNumber=93
-	sLabel="H18_51010"
+	sLabel="H19_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -868,7 +868,7 @@ Point48 {
 }
 Point49 {
 	nNumber=94
-	sLabel="H19_51010"
+	sLabel="H20_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -886,7 +886,7 @@ Point49 {
 }
 Point50 {
 	nNumber=95
-	sLabel="H20_51010"
+	sLabel="H21_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -904,7 +904,7 @@ Point50 {
 }
 Point51 {
 	nNumber=96
-	sLabel="H21_51010"
+	sLabel="H22_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -922,7 +922,7 @@ Point51 {
 }
 Point52 {
 	nNumber=97
-	sLabel="H22_51010"
+	sLabel="H23_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -940,7 +940,7 @@ Point52 {
 }
 Point53 {
 	nNumber=98
-	sLabel="H23_51010"
+	sLabel="F1_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -958,7 +958,7 @@ Point53 {
 }
 Point54 {
 	nNumber=99
-	sLabel="F1_51010"
+	sLabel="F2_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -976,7 +976,7 @@ Point54 {
 }
 Point55 {
 	nNumber=100
-	sLabel="F2_51010"
+	sLabel="F3_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -994,7 +994,7 @@ Point55 {
 }
 Point56 {
 	nNumber=101
-	sLabel="F3_51010"
+	sLabel="F4_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1012,7 +1012,7 @@ Point56 {
 }
 Point57 {
 	nNumber=102
-	sLabel="F4_51010"
+	sLabel="F5_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1030,7 +1030,7 @@ Point57 {
 }
 Point58 {
 	nNumber=103
-	sLabel="F5_51010"
+	sLabel="F6_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1048,7 +1048,7 @@ Point58 {
 }
 Point59 {
 	nNumber=104
-	sLabel="F6_51010"
+	sLabel="F7_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1066,7 +1066,7 @@ Point59 {
 }
 Point60 {
 	nNumber=105
-	sLabel="F7_51010"
+	sLabel="F8_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1084,7 +1084,7 @@ Point60 {
 }
 Point61 {
 	nNumber=106
-	sLabel="F8_51010"
+	sLabel="F9_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1102,7 +1102,7 @@ Point61 {
 }
 Point62 {
 	nNumber=107
-	sLabel="F9_51010"
+	sLabel="F10_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1120,7 +1120,7 @@ Point62 {
 }
 Point63 {
 	nNumber=108
-	sLabel="F10_51010"
+	sLabel="F11_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1138,7 +1138,7 @@ Point63 {
 }
 Point64 {
 	nNumber=109
-	sLabel="F11_51010"
+	sLabel="F12_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1156,7 +1156,7 @@ Point64 {
 }
 Point65 {
 	nNumber=110
-	sLabel="F12_51010"
+	sLabel="F13_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1174,7 +1174,7 @@ Point65 {
 }
 Point66 {
 	nNumber=111
-	sLabel="F13_51010"
+	sLabel="F14_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1192,7 +1192,7 @@ Point66 {
 }
 Point67 {
 	nNumber=112
-	sLabel="F14_51010"
+	sLabel="F15_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1210,7 +1210,7 @@ Point67 {
 }
 Point68 {
 	nNumber=113
-	sLabel="F15_51010"
+	sLabel="F16_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1228,7 +1228,7 @@ Point68 {
 }
 Point69 {
 	nNumber=114
-	sLabel="F16_51010"
+	sLabel="F17_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1246,7 +1246,7 @@ Point69 {
 }
 Point70 {
 	nNumber=115
-	sLabel="F17_51010"
+	sLabel="F18_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1264,7 +1264,7 @@ Point70 {
 }
 Point71 {
 	nNumber=116
-	sLabel="F18_51010"
+	sLabel="F19_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1282,7 +1282,7 @@ Point71 {
 }
 Point72 {
 	nNumber=117
-	sLabel="F19_51010"
+	sLabel="F20_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1300,7 +1300,7 @@ Point72 {
 }
 Point73 {
 	nNumber=118
-	sLabel="F20_51010"
+	sLabel="F21_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1318,7 +1318,7 @@ Point73 {
 }
 Point74 {
 	nNumber=119
-	sLabel="F21_51010"
+	sLabel="F22_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1336,7 +1336,7 @@ Point74 {
 }
 Point75 {
 	nNumber=120
-	sLabel="F22_51010"
+	sLabel="F23_51010"
 	sDescription=""
 	rX=0
 	rY=0
@@ -1354,25 +1354,7 @@ Point75 {
 }
 Point76 {
 	nNumber=121
-	sLabel="F23_51010"
-	sDescription=""
-	rX=0
-	rY=0
-	rZ=0
-	rU=0
-	rV=0
-	rW=0
-	nLocal=0
-	nHand=1
-	nElbow=1
-	nWrist=1
-	nJ4Flag=0
-	nJ6Flag=0
-	bSimVisible=False
-}
-Point77 {
-	nNumber=122
-	sLabel="MagOUT_51010"
+	sLabel="OUT_51010"
 	sDescription=""
 	rX=0
 	rY=0

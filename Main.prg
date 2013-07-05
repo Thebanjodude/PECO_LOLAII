@@ -25,7 +25,7 @@ LastHolePointHotStake = 84
 FirstHolePointFlash = 85
 LastHolePointFlash = 100
 LoadPoints "points.pts"
-Power Low ' Manually set power. This will be done in PowerOnSequence()
+Power High ' Manually set power. This will be done in PowerOnSequence()
 Speed 65
 
 mainCurrentState = StateIdle ' The first state is Idle
