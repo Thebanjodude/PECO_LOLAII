@@ -1,3 +1,76 @@
-ENVT0100,LM:2013/06/24 17:20:23:682,DS:0000000133,CS:23854,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/05 17:20:45:597,DS:0000001004,CS:19770,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
-nNumberOfPoints=0
+nDisplayMode=2
+nNumberOfPoints=4
+Point1 {
+	nNumber=1
+	sLabel="PreScan"
+	sDescription=""
+	rX=28.09
+	rY=340.107
+	rZ=-23.95
+	rU=135
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point2 {
+	nNumber=2
+	sLabel="PreHotStake"
+	sDescription=""
+	rX=-243.211
+	rY=232.467
+	rZ=-24.675
+	rU=180
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point3 {
+	nNumber=3
+	sLabel="PreFlash"
+	sDescription=""
+	rX=-347.651
+	rY=-68.259
+	rZ=-21.444
+	rU=270
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point4 {
+	nNumber=4
+	sLabel="OutmagWaypoint"
+	sDescription=""
+	rX=330.184
+	rY=178.558
+	rZ=-21.596
+	rU=135
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
