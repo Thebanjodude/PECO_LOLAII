@@ -144,11 +144,11 @@ Function MBCommandTask()
 	' any communication or CRC errors will abort this background task at which
 	' time it will require a call to MBinitialize to set things up and kick
 	' this off again.
+	Wait 1
 	Do While 1
 		
 		
 		' if the port is not open try to open it
-		Wait 1
 		portStatus = ChkNet(204)
 		If portStatus < 0 Then
 			OpenNet #204 As Client
