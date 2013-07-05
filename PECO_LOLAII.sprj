@@ -1,11 +1,11 @@
-ENVT0100,LM:2013/07/05 22:15:22:278,DS:0000004123,CS:09811,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/05 23:42:44:298,DS:0000004124,CS:04868,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="7/5/2013 4:12:47 PM"
-	bBuildComplete=False
+	sLastModified="7/5/2013 5:42:41 PM"
+	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/5/2013 10:01:24 PM"
+	sTimeSavedInController="7/5/2013 11:42:41 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
@@ -42,7 +42,7 @@ ProgramFile3 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/5/2013 2:57:23 PM"
+	sTimeSavedInController="7/5/2013 10:35:30 PM"
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
@@ -72,7 +72,7 @@ ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/5/2013 9:16:18 PM"
+	sTimeSavedInController="7/5/2013 10:41:54 PM"
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
@@ -95,7 +95,7 @@ IncludeFile1 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="7/5/2013 10:12:48 PM"
+	sTimeSavedInController="7/5/2013 11:06:01 PM"
 }
 PointFile2 {
 	sName="Points2.pts"

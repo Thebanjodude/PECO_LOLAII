@@ -124,6 +124,12 @@ Else
     ReturnFlag = False
 EndIf
 
+heatStakeGo = IOTableBooleans(heatStakeGoCC, MemSw(heatStakeGoFV), MemSw(heatStakeGoF))
+If heatStakeGo = True Then
+        On (heatStakeGoH)
+    Else
+        Off (heatStakeGoH)
+    EndIf
 '---------------------
 debrisMtr = IOTableBooleans(debrisMtrCC, MemSw(debrisMtrFV), MemSw(debrisMtrF))
 If debrisMtr = True Then
