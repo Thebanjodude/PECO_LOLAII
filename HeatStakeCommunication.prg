@@ -128,6 +128,7 @@ Function MBCommandTask()
 	CurrentReadNum = 1
 	MBNumReadValues = 70
 	fastReadMax = 10		'number of times to quick read before doing a full read
+	count = 0
 	
 	' set up the TCP port on the HMI that we use to tunnel to serial ports	
 	' the IP is the HMI's IP address the port is the port that is tied to
@@ -201,7 +202,8 @@ Function MBCommandTask()
 				'invalid type
 			EndIf
 		Else
-				Print ".",
+			Print ".",
+			count = count + 1
 			Select CurrentReadNum
 
 				Case 1
@@ -235,7 +237,7 @@ Function MBCommandTask()
 					'fast above-slow below
 					' if we cycled thru the quick reads enough times, do a full read
 					If count < fastReadMax Then
-						CurrentReadNum = 1
+						CurrentReadNum = 0
 					Else
 						count = 0
 					EndIf
