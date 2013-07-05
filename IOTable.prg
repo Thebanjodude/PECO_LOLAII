@@ -832,9 +832,6 @@ RetryConnection:
         If ChkNet(201) < 0 Then ' If port is not open
             OpenNet #201 As Client
             Print "Attempted Open TCP port to HMI"
-        Else
-            ' write variable data to HMI
-'            Write #201, Chr$(12) 'this breaks the JSON interpreter
 		EndIf
 		
 heartBeat = Not heartBeat
@@ -1316,9 +1313,9 @@ If flashHomeNO <> flashHomeNOOld Then
 	Print #201, "{", Chr$(&H22) + "flashHomeNO" + Chr$(&H22), ":", Str$(flashHomeNO), "}",
 	flashHomeNOOld = flashHomeNO
 EndIf
-If flashPnlPrsnt <> FlashPnlPrsntOld Then
-	Print #201, "{", Chr$(&H22) + "flashPnlPrsnt" + Chr$(&H22), ":", Str$(flashPnlPrsnt), "}",
-	flashPnlPrsntOld = flashPnlPrsnt
+If FlashPnlPrsnt <> FlashPnlPrsntOld Then
+	Print #201, "{", Chr$(&H22) + "flashPnlPrsnt" + Chr$(&H22), ":", Str$(FlashPnlPrsnt), "}",
+	flashPnlPrsntOld = FlashPnlPrsnt
 EndIf
 If frontIntlock1 <> frontIntlock1Old Then
 	Print #201, "{", Chr$(&H22) + "frontIntlock1" + Chr$(&H22), ":", Str$(frontIntlock1), "}",
@@ -1944,13 +1941,13 @@ If pasDwellActual <> pasDwellActualOld Then
 	Print #201, "{", Chr$(&H22) + "pasDwellActual" + Chr$(&H22), ":", Str$(pasDwellActual), "}",
 	pasDwellActualOld = pasDwellActual
 EndIf
-If pasHeadInsertpickupextend <> pasHeadinsertpickupextendOld Then
-	Print #201, "{", Chr$(&H22) + "pasHeadInsertpickupextend" + Chr$(&H22), ":", Str$(pasHeadInsertpickupextend), "}",
-	pasHeadInsertpickupextendOld = pasHeadInsertpickupextend
+If pasHeadinsertpickupextend <> pasHeadinsertpickupextendOld Then
+	Print #201, "{", Chr$(&H22) + "pasHeadInsertpickupextend" + Chr$(&H22), ":", Str$(pasHeadinsertpickupextend), "}",
+	pasHeadInsertpickupextendOld = pasHeadinsertpickupextend
 EndIf
-If pasHeadInsertPickupRetract <> pasHeadinsertPickupRetractOld Then
-	Print #201, "{", Chr$(&H22) + "pasHeadInsertPickupRetract" + Chr$(&H22), ":", Str$(pasHeadInsertPickupRetract), "}",
-	pasHeadInsertPickupRetractOld = pasHeadInsertPickupRetract
+If pasHeadinsertPickupRetract <> pasHeadinsertPickupRetractOld Then
+	Print #201, "{", Chr$(&H22) + "pasHeadInsertPickupRetract" + Chr$(&H22), ":", Str$(pasHeadinsertPickupRetract), "}",
+	pasHeadInsertPickupRetractOld = pasHeadinsertPickupRetract
 EndIf
 If pasHighTempAlarm <> pasHighTempAlarmOld Then
 	Print #201, "{", Chr$(&H22) + "pasHighTempAlarm" + Chr$(&H22), ":", Str$(pasHighTempAlarm), "}",
