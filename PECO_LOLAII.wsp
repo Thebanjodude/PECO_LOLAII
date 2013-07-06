@@ -1,9 +1,7 @@
-ENVT0100,LM:2013/07/06 20:01:18:854,DS:0000003041,CS:12061,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="InMagOutMagStateMachines.prg"
-bMdiMaximized=False
+ENVT0100,LM:2013/07/06 19:57:19:085,DS:0000002958,CS:22335,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=1
@@ -36,7 +34,7 @@ ProgramFile3 {
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
@@ -80,7 +78,7 @@ ProgramFile7 {
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
@@ -91,14 +89,12 @@ ProgramFile8 {
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=0
+		nLeft=707
 		nTop=0
-		nWidth=1059
-		nHeight=530
-	}
+		nWidth=707
 }
 ProgramFile10 {
 	sName="CalibrationRoutines.prg"
@@ -114,7 +110,7 @@ ProgramFile10 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
@@ -171,10 +167,10 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=193
-		nTop=2
-		nWidth=1100
-		nHeight=705
+		nLeft=0
+		nTop=0
+		nWidth=707
+		nHeight=821
 	}
 }
 IOLabelEditor {
