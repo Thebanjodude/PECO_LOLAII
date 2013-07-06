@@ -202,7 +202,7 @@ Function MBCommandTask()
 				'invalid type
 			EndIf
 		Else
-			Print ".",
+'			Print ".",
 			count = count + 1
 			Select CurrentReadNum
 
