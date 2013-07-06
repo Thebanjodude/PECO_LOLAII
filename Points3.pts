@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/07/05 17:27:14:739,DS:0000001004,CS:19770,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/06 19:50:44:879,DS:0000001189,CS:03121,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=4
+nNumberOfPoints=5
 Point1 {
 	nNumber=1
 	sLabel="PreScan"
@@ -68,6 +68,24 @@ Point4 {
 	rW=0
 	nLocal=0
 	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point5 {
+	nNumber=14
+	sLabel=""
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0

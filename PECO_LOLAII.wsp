@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/07/06 19:21:39:356,DS:0000003022,CS:15372,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="HeatStakeCommunication.prg"
-bMdiMaximized=True
+ENVT0100,LM:2013/07/06 20:01:18:854,DS:0000003041,CS:12061,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InMagOutMagStateMachines.prg"
+bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=1060
-		nHeight=612
+		nLeft=1
+		nTop=213
+		nWidth=1059
+		nHeight=609
 	}
 }
 ProgramFile2 {
@@ -26,7 +26,7 @@ ProgramFile2 {
 ProgramFile3 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -36,19 +36,19 @@ ProgramFile3 {
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=612
+		nWidth=1392
+		nHeight=803
 	}
 }
 ProgramFile5 {
 	sName="OldCode.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -69,35 +69,35 @@ ProgramFile6 {
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=413
+		nTop=5
+		nWidth=1276
+		nHeight=765
 	}
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=612
+		nWidth=1059
+		nHeight=609
 	}
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
 	bOpened=True
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=533
+		nWidth=1059
+		nHeight=530
 	}
 }
 ProgramFile10 {
@@ -114,13 +114,13 @@ ProgramFile10 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=612
+		nWidth=1059
+		nHeight=609
 	}
 }
 nPointFileCount=3
@@ -131,8 +131,8 @@ PointFile1 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1089
+		nHeight=550
 	}
 }
 PointFile2 {
@@ -142,8 +142,8 @@ PointFile2 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=132
+		nHeight=38
 	}
 }
 PointFile3 {
@@ -153,8 +153,8 @@ PointFile3 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=549
+		nHeight=464
 	}
 }
 sActiveWindow="main.prg"
