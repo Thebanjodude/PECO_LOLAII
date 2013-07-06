@@ -330,7 +330,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Jump Prescan LimZ zLimit
 	Jump PreHotStake
 	MBWrite(pasCrowdingADDR, 0, MBTypeCoil)
-	Wait .5
+	Wait 2
 	Off nestpneu ' Make sure the nest is closed
 	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
 	suctionCupsCC = False
@@ -338,13 +338,12 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Go P(recCrowding) +Z(15) ' Relese the suction cups and move them out of the way for crowding
 	Wait .25
 	MBWrite(pasCrowdingADDR, 1, MBTypeCoil)
-	Wait .5
-	Wait 1.5
+	Wait 2
 	Go P(recCrowding)  'Go to the crowding location
 	suctionCupsCC = True
 	Wait suctionWaitTime
 	MBWrite(pasCrowdingADDR, 1, MBTypeCoil)
-	Wait .5
+	Wait 2
 	CrowdingSequence = 0
 	
 exitCrowding:

@@ -6,7 +6,7 @@ SystemProperties {
 	sCreated="1/25/2013 7:23:00 AM"
 	sLastModified="7/6/2013 1:54:44 PM"
 	bBuildComplete=True
-	bRebuildRequired=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMWKSSEHLERS"
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/5/2013 9:15:10 PM"
+	sTimeSavedInController="7/5/2013 11:42:41 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
@@ -42,7 +42,7 @@ ProgramFile3 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/5/2013 2:57:23 PM"
+	sTimeSavedInController="7/5/2013 10:35:30 PM"
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
@@ -72,7 +72,7 @@ ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/6/2013 4:38:38 PM"
+	sTimeSavedInController="7/5/2013 10:41:54 PM"
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
@@ -95,7 +95,7 @@ IncludeFile1 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="7/6/2013 4:38:38 PM"
+	sTimeSavedInController="7/5/2013 11:06:01 PM"
 }
 PointFile2 {
 	sName="Points2.pts"

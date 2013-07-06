@@ -13,17 +13,19 @@ recFlashRequired = True
 recInsertDepth = .165 ' fake for testing
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
-recInmag = 50
-recOutmag = 101
-recPreCrowding = 51
-recCrowding = 52
-recFlashDwellTime = 1
-FirstHolePointInspection = 53
-LastHolePointInspection = 68
-FirstHolePointHotStake = 69
-LastHolePointHotStake = 84
-FirstHolePointFlash = 85
-LastHolePointFlash = 100
+'recInmag = 50
+'recOutmag = 101
+recInmag = 10
+recOutmag = 13
+'recPreCrowding = 51
+'recCrowding = 52
+'recFlashDwellTime = 1
+'FirstHolePointInspection = 53
+'LastHolePointInspection = 68
+'FirstHolePointHotStake = 69
+'LastHolePointHotStake = 84
+'FirstHolePointFlash = 85
+'LastHolePointFlash = 100
 LoadPoints "points.pts"
 Power Low ' Manually set power. This will be done in PowerOnSequence()
 Speed 65
@@ -53,8 +55,8 @@ Select mainCurrentState
 		StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
 				
 		If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
-			mainCurrentState = StateCrowding
-			'mainCurrentState = StatePushPanel ' fake for testing
+			'mainCurrentState = StateCrowding
+			mainCurrentState = StatePushPanel ' fake for testing
 			Print "Pick up Successful"
 		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePopPanel

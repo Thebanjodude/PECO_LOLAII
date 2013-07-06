@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/07/05 22:12:48:868,DS:0000012583,CS:31820,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/05 23:06:01:738,DS:0000013187,CS:19203,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=57
+nNumberOfPoints=60
 Point1 {
 	nNumber=1
 	sLabel="PreScan"
@@ -75,8 +75,8 @@ Point4 {
 	bSimVisible=False
 }
 Point5 {
-	nNumber=11
-	sLabel=""
+	nNumber=10
+	sLabel="MagIN_88553"
 	sDescription=""
 	rX=0
 	rY=0
@@ -93,6 +93,60 @@ Point5 {
 	bSimVisible=False
 }
 Point6 {
+	nNumber=11
+	sLabel="CwdIN_88553"
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point7 {
+	nNumber=12
+	sLabel="CwdOUT_88553"
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point8 {
+	nNumber=13
+	sLabel="MagOUT_88553"
+	sDescription=""
+	rX=0
+	rY=0
+	rZ=0
+	rU=0
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point9 {
 	nNumber=50
 	sLabel="MagIN_88555"
 	sDescription=""
@@ -110,7 +164,7 @@ Point6 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point7 {
+Point10 {
 	nNumber=51
 	sLabel="CwdIN_88555"
 	sDescription=""
@@ -128,7 +182,7 @@ Point7 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point8 {
+Point11 {
 	nNumber=52
 	sLabel="CwdOUT_88555"
 	sDescription=""
@@ -146,7 +200,7 @@ Point8 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point9 {
+Point12 {
 	nNumber=53
 	sLabel="I1_88555"
 	sDescription=""
@@ -164,7 +218,7 @@ Point9 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point10 {
+Point13 {
 	nNumber=54
 	sLabel="I2_88555"
 	sDescription=""
@@ -182,7 +236,7 @@ Point10 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point11 {
+Point14 {
 	nNumber=55
 	sLabel="I3_88555"
 	sDescription=""
@@ -200,7 +254,7 @@ Point11 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point12 {
+Point15 {
 	nNumber=56
 	sLabel="I4_88555"
 	sDescription=""
@@ -218,7 +272,7 @@ Point12 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point13 {
+Point16 {
 	nNumber=57
 	sLabel="I5_88555"
 	sDescription=""
@@ -236,7 +290,7 @@ Point13 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point14 {
+Point17 {
 	nNumber=58
 	sLabel="I6_88555"
 	sDescription=""
@@ -254,7 +308,7 @@ Point14 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point15 {
+Point18 {
 	nNumber=59
 	sLabel="I7_88555"
 	sDescription=""
@@ -272,7 +326,7 @@ Point15 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point16 {
+Point19 {
 	nNumber=60
 	sLabel="I8_88555"
 	sDescription=""
@@ -290,7 +344,7 @@ Point16 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point17 {
+Point20 {
 	nNumber=61
 	sLabel="I9_88555"
 	sDescription=""
@@ -308,7 +362,7 @@ Point17 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point18 {
+Point21 {
 	nNumber=62
 	sLabel="I10_88555"
 	sDescription=""
@@ -326,7 +380,7 @@ Point18 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point19 {
+Point22 {
 	nNumber=63
 	sLabel="I11_88555"
 	sDescription=""
@@ -344,7 +398,7 @@ Point19 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point20 {
+Point23 {
 	nNumber=64
 	sLabel="I12_88555"
 	sDescription=""
@@ -362,7 +416,7 @@ Point20 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point21 {
+Point24 {
 	nNumber=65
 	sLabel="I13_88555"
 	sDescription=""
@@ -380,7 +434,7 @@ Point21 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point22 {
+Point25 {
 	nNumber=66
 	sLabel="I14_88555"
 	sDescription=""
@@ -398,7 +452,7 @@ Point22 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point23 {
+Point26 {
 	nNumber=67
 	sLabel="I15_88555"
 	sDescription=""
@@ -416,7 +470,7 @@ Point23 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point24 {
+Point27 {
 	nNumber=68
 	sLabel="I16_88555"
 	sDescription=""
@@ -434,7 +488,7 @@ Point24 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point25 {
+Point28 {
 	nNumber=69
 	sLabel="H1_88555"
 	sDescription=""
@@ -452,7 +506,7 @@ Point25 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point26 {
+Point29 {
 	nNumber=70
 	sLabel="H2_88555"
 	sDescription=""
@@ -470,7 +524,7 @@ Point26 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point27 {
+Point30 {
 	nNumber=71
 	sLabel="H3_88555"
 	sDescription=""
@@ -488,7 +542,7 @@ Point27 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point28 {
+Point31 {
 	nNumber=72
 	sLabel="H4_88555"
 	sDescription=""
@@ -506,7 +560,7 @@ Point28 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point29 {
+Point32 {
 	nNumber=73
 	sLabel="H5_88555"
 	sDescription=""
@@ -524,7 +578,7 @@ Point29 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point30 {
+Point33 {
 	nNumber=74
 	sLabel="H6_88555"
 	sDescription=""
@@ -542,7 +596,7 @@ Point30 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point31 {
+Point34 {
 	nNumber=75
 	sLabel="H7_88555"
 	sDescription=""
@@ -560,7 +614,7 @@ Point31 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point32 {
+Point35 {
 	nNumber=76
 	sLabel="H8_88555"
 	sDescription=""
@@ -578,7 +632,7 @@ Point32 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point33 {
+Point36 {
 	nNumber=77
 	sLabel="H9_88555"
 	sDescription=""
@@ -596,7 +650,7 @@ Point33 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point34 {
+Point37 {
 	nNumber=78
 	sLabel="H10_88555"
 	sDescription=""
@@ -614,7 +668,7 @@ Point34 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point35 {
+Point38 {
 	nNumber=79
 	sLabel="H11_88555"
 	sDescription=""
@@ -632,7 +686,7 @@ Point35 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point36 {
+Point39 {
 	nNumber=80
 	sLabel="H12_88555"
 	sDescription=""
@@ -650,7 +704,7 @@ Point36 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point37 {
+Point40 {
 	nNumber=81
 	sLabel="H13_88555"
 	sDescription=""
@@ -668,7 +722,7 @@ Point37 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point38 {
+Point41 {
 	nNumber=82
 	sLabel="H14_88555"
 	sDescription=""
@@ -686,7 +740,7 @@ Point38 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point39 {
+Point42 {
 	nNumber=83
 	sLabel="H15_88555"
 	sDescription=""
@@ -704,7 +758,7 @@ Point39 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point40 {
+Point43 {
 	nNumber=84
 	sLabel="H16_88555"
 	sDescription=""
@@ -722,7 +776,7 @@ Point40 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point41 {
+Point44 {
 	nNumber=85
 	sLabel="F1_88555"
 	sDescription=""
@@ -740,7 +794,7 @@ Point41 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point42 {
+Point45 {
 	nNumber=86
 	sLabel="F2_88555"
 	sDescription=""
@@ -758,7 +812,7 @@ Point42 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point43 {
+Point46 {
 	nNumber=87
 	sLabel="F3_88555"
 	sDescription=""
@@ -776,7 +830,7 @@ Point43 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point44 {
+Point47 {
 	nNumber=88
 	sLabel="F4_88555"
 	sDescription=""
@@ -794,7 +848,7 @@ Point44 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point45 {
+Point48 {
 	nNumber=89
 	sLabel="F5_88555"
 	sDescription=""
@@ -812,7 +866,7 @@ Point45 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point46 {
+Point49 {
 	nNumber=90
 	sLabel="F6_88555"
 	sDescription=""
@@ -830,7 +884,7 @@ Point46 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point47 {
+Point50 {
 	nNumber=91
 	sLabel="F7_88555"
 	sDescription=""
@@ -848,7 +902,7 @@ Point47 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point48 {
+Point51 {
 	nNumber=92
 	sLabel="F8_88555"
 	sDescription=""
@@ -866,7 +920,7 @@ Point48 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point49 {
+Point52 {
 	nNumber=93
 	sLabel="F9_88555"
 	sDescription=""
@@ -884,7 +938,7 @@ Point49 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point50 {
+Point53 {
 	nNumber=94
 	sLabel="F10_88555"
 	sDescription=""
@@ -902,7 +956,7 @@ Point50 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point51 {
+Point54 {
 	nNumber=95
 	sLabel="F11_88555"
 	sDescription=""
@@ -920,7 +974,7 @@ Point51 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point52 {
+Point55 {
 	nNumber=96
 	sLabel="F12_88555"
 	sDescription=""
@@ -938,7 +992,7 @@ Point52 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point53 {
+Point56 {
 	nNumber=97
 	sLabel="F13_88555"
 	sDescription=""
@@ -956,7 +1010,7 @@ Point53 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point54 {
+Point57 {
 	nNumber=98
 	sLabel="F14_88555"
 	sDescription=""
@@ -974,7 +1028,7 @@ Point54 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point55 {
+Point58 {
 	nNumber=99
 	sLabel="F15_88555"
 	sDescription=""
@@ -992,7 +1046,7 @@ Point55 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point56 {
+Point59 {
 	nNumber=100
 	sLabel="F16_88555"
 	sDescription=""
@@ -1010,7 +1064,7 @@ Point56 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point57 {
+Point60 {
 	nNumber=101
 	sLabel="MagOUT_88555"
 	sDescription=""
