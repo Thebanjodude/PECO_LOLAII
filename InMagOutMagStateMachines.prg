@@ -19,8 +19,9 @@ Do While True
 				Wait .25 ' Do nothing
 			Loop
 			
+			Print "inMagPnlRdy", inMagPnlRdy
+			
 			If inMagGoHome = True Then ' Determine which state to go to next
-				InMagPickUpSignal = False
 				NextState = StateLowering
 				inMagGoHome = False 'Clear Flag
 			Else
@@ -35,7 +36,6 @@ Do While True
 				Wait .25 ' Wait for main program to move robot out of the way
 			Loop
 			
-			InMagRobotClearSignal = False ' reset trigger
 			NextState = StatePresentNextPart
 			
 		Case StatePresentNextPart

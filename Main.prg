@@ -29,6 +29,7 @@ recOutmag = 13
 LoadPoints "points.pts"
 Power Low ' Manually set power. This will be done in PowerOnSequence()
 Speed 65
+jobDone = False
 
 mainCurrentState = StateIdle ' The first state is Idle
 

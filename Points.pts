@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/07/05 23:06:01:738,DS:0000013187,CS:19203,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/06 20:35:11:619,DS:0000013237,CS:28704,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=60
@@ -78,14 +78,14 @@ Point5 {
 	nNumber=10
 	sLabel="MagIN_88553"
 	sDescription=""
-	rX=0
-	rY=0
-	rZ=0
-	rU=0
+	rX=343.155
+	rY=423.575
+	rZ=-273.63
+	rU=141.737
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
@@ -132,14 +132,14 @@ Point8 {
 	nNumber=13
 	sLabel="MagOUT_88553"
 	sDescription=""
-	rX=0
-	rY=0
-	rZ=0
-	rU=0
+	rX=354.294
+	rY=-203.773
+	rZ=-243.568
+	rU=141.737
 	rV=0
 	rW=0
 	nLocal=0
-	nHand=1
+	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0

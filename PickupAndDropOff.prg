@@ -93,8 +93,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 		Wait .25
 	Loop
 	
-	InMagPickUpSignal = False ' reset trigger
-	
+	InMagRobotClearSignal = False ' the robot is about to visit the magazine.
 	Jump P(recInmag) +Z(5) LimZ zLimit
 	
 	Do While ZmaxTorque < .3 ' Approach the panel slowly until we hit a torque limit
@@ -103,19 +102,17 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 
 	suctionCupsCC = True ' Turn on the cups because we have engaged a panel
 	Wait suctionWaitTime ' Allow time for cups to seal on panel	
-	Jump PreScan LimZ zLimit ' Go home	
-
+	Jump PreScan LimZ zLimit ' Go home		
+	
 	PickupPanel = 0 ' We successfully picked up a panel
-	InMagRobotClearSignal = True ' Give permission for input magazine to queue up next panel
 
 exitPopPanel:
 If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	jobAbort = True
 	MemOff (jobAbortH)
 EndIf
-
+	InMagRobotClearSignal = True ' Give permission for input magazine to queue up next panel
 	SystemStatus = StateMoving
-
 
 Trap 2 'disarm trap
 
