@@ -1,10 +1,8 @@
-ENVT0100,LM:2013/07/06 19:21:39:356,DS:0000003022,CS:15372,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="HeatStakeCommunication.prg"
-bMdiMaximized=True
+ENVT0100,LM:2013/07/06 19:57:19:085,DS:0000002958,CS:22335,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -26,7 +24,7 @@ ProgramFile2 {
 ProgramFile3 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -37,7 +35,7 @@ ProgramFile3 {
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -48,7 +46,7 @@ ProgramFile4 {
 ProgramFile5 {
 	sName="OldCode.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -81,7 +79,7 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -91,13 +89,13 @@ ProgramFile8 {
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
-	bOpened=True
-	nWinState=2
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=0
+		nLeft=707
 		nTop=0
-		nWidth=1060
-		nHeight=533
+		nWidth=707
+		nHeight=821
 	}
 }
 ProgramFile10 {
@@ -115,7 +113,7 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -171,10 +169,10 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=193
-		nTop=2
-		nWidth=1100
-		nHeight=705
+		nLeft=0
+		nTop=0
+		nWidth=707
+		nHeight=821
 	}
 }
 IOLabelEditor {

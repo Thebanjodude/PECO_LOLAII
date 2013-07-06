@@ -218,11 +218,11 @@ Function MBCommandTask()
 				pasVibTrack = BTst(result, 12)
 				pasBowlFeeder = BTst(result, 13)
 				pasBlowInsert = BTst(result, 14)
-			result = modbusReadRegister(&hA7B8)
-				pasMCREStop = BTst(result, 0)
-				pasStart = BTst(result, 1)
-				pasHeadinsertPickupRetract = BTst(result, 6)
-				pasHeadinsertpickupextend = BTst(result, 7)
+'			result = modbusReadRegister(&hA7B8)
+'				pasMCREStop = BTst(result, 0)
+'				pasStart = BTst(result, 1)
+'				pasHeadinsertPickupRetract = BTst(result, 6)
+'				pasHeadinsertpickupextend = BTst(result, 7)
 			pasVerticalLocation = modbusRead32Register(&h0002) * .000000762939
 			pasPreHeatActual = modbusReadRegister(&hA147) * 0.1
 			pasDwellActual = modbusReadRegister(&hA148) * 0.1
