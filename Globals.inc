@@ -210,6 +210,7 @@ Global Boolean hole15PF, hole16PF, hole17PF, hole18PF, hole19PF
 Global Boolean hole20PF, hole21PF, hole22PF
 
 'Heat Stake vars
+Global Boolean pasCrowding
 Global Boolean pasAlarmGroup
 Global Boolean pasRemoteAlarmAcknowledge, pasRemoteAlarmAcknowledgeBtn
 Global Boolean pasHighTempAlarm

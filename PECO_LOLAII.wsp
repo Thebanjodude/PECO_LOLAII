@@ -1,0 +1,235 @@
+ENVT0100,LM:2013/07/06 19:21:39:356,DS:0000003022,CS:15372,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="HeatStakeCommunication.prg"
+bMdiMaximized=True
+ProgramFile1 {
+	sName="Main.prg"
+	bOpened=False
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=612
+	}
+}
+ProgramFile2 {
+	sName="HotStakeAndFlash.prg"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
+	}
+}
+ProgramFile3 {
+	sName="IOTable.prg"
+	bOpened=False
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=612
+	}
+}
+ProgramFile4 {
+	sName="InMagOutMagStateMachines.prg"
+	bOpened=False
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=612
+	}
+}
+ProgramFile5 {
+	sName="OldCode.prg"
+	bOpened=False
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=612
+	}
+}
+ProgramFile6 {
+	sName="SystemMonitor.prg"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
+	}
+}
+ProgramFile7 {
+	sName="PickupAndDropOff.prg"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
+	}
+}
+ProgramFile8 {
+	sName="InspectionStation.prg"
+	bOpened=False
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=612
+	}
+}
+ProgramFile9 {
+	sName="HeatStakeCommunication.prg"
+	bOpened=True
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=533
+	}
+}
+ProgramFile10 {
+	sName="CalibrationRoutines.prg"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
+	}
+}
+nIncludeFileCount=1
+IncludeFile1 {
+	sName="Globals.inc"
+	bOpened=False
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=612
+	}
+}
+nPointFileCount=3
+PointFile1 {
+	sName="Points.pts"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
+	}
+}
+PointFile2 {
+	sName="Points2.pts"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
+	}
+}
+PointFile3 {
+	sName="Points3.pts"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
+	}
+}
+sActiveWindow="main.prg"
+CmdWindow {
+	bOpened=False
+	Window {
+		nLeft=164
+		nTop=186
+		nWidth=710
+		nHeight=538
+	}
+	nWinState=0
+}
+RunWindow {
+	bOpened=False
+	Window {
+		nLeft=193
+		nTop=2
+		nWidth=1100
+		nHeight=705
+	}
+}
+IOLabelEditor {
+	bOpened=False
+	Window {
+		nLeft=61
+		nTop=65
+		nWidth=1001
+		nHeight=617
+	}
+	nWinState=0
+}
+IOMonitor {
+	bOpened=False
+	Window {
+		nLeft=1293
+		nTop=344
+		nWidth=520
+		nHeight=560
+	}
+}
+TaskMgr {
+	bOpened=False
+	Window {
+		nLeft=1087
+		nTop=645
+		nWidth=746
+		nHeight=317
+	}
+}
+Macros {
+	bOpened=False
+	Window {
+		nLeft=721
+		nTop=311
+		nWidth=478
+		nHeight=418
+	}
+}
+RobotMgr {
+	bOpened=False
+	Window {
+		nLeft=144
+		nTop=208
+		nWidth=751
+		nHeight=485
+	}
+}
+UserErrorEditor {
+	bOpened=False
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
+	}
+	nWinState=0
+}

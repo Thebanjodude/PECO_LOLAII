@@ -104,7 +104,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = Value
+	MBQueueValue(MBQueueHead) = value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -122,13 +122,10 @@ Function MBCommandTask()
 	Integer CurrentReadNum
 	Integer MBNumReadValues
 	Integer portStatus
-	Integer count
-	Integer fastReadMax
+	Long result
 	
 	CurrentReadNum = 1
-	MBNumReadValues = 70
-	fastReadMax = 10		'number of times to quick read before doing a full read
-	count = 0
+	MBNumReadValues = 49
 	
 	' set up the TCP port on the HMI that we use to tunnel to serial ports	
 	' the IP is the HMI's IP address the port is the port that is tied to
@@ -202,157 +199,135 @@ Function MBCommandTask()
 				'invalid type
 			EndIf
 		Else
-			Print ".",
-			count = count + 1
+			' priority reads
+			result = modbusReadRegister(&hA4B0)
+				pasInsertDetected = BTst(result, 4)
+				pasSteelInsert = BTst(result, 5)
+				pasShuttleMidway = BTst(result, 6)
+				pasShuttleLoadPosition = BTst(result, 8)
+				pasShuttleNoLoad = BTst(result, 9)
+				pasShuttleExtend = BTst(result, 10)
+				pasInsertInShuttle = BTst(result, 11)
+			result = modbusReadRegister(&hA479)
+				pasHeadDown = BTst(result, 4)
+				pasHeadUp = BTst(result, 5)
+				pasSlideExtend = BTst(result, 7)
+				pasInsertGripper = BTst(result, 8)
+				pas1inLoadInsertCylinder = BTst(result, 9)
+				pasBowlDumpOpen = BTst(result, 11)
+				pasVibTrack = BTst(result, 12)
+				pasBowlFeeder = BTst(result, 13)
+				pasBlowInsert = BTst(result, 14)
+			result = modbusReadRegister(&hA7B8)
+				pasMCREStop = BTst(result, 0)
+				pasStart = BTst(result, 1)
+				pasHeadinsertPickupRetract = BTst(result, 6)
+				pasHeadinsertpickupextend = BTst(result, 7)
+			pasVerticalLocation = modbusRead32Register(&h0002) * .000000762939
+			pasPreHeatActual = modbusReadRegister(&hA147) * 0.1
+			pasDwellActual = modbusReadRegister(&hA148) * 0.1
+			pasCoolActual = modbusReadRegister(&hA149) * 0.1
+			pasMessageDB = modbusReadRegister(&h0009)
+			
 			Select CurrentReadNum
-
-				Case 1
-					pasVerticalLocation = modbusRead32Register(&h0002) * .000000762939
-				Case 2
-					pasPreHeatActual = modbusReadRegister(&hA147) * 0.1
-				Case 3
-					pasDwellActual = modbusReadRegister(&hA148) * 0.1
-				Case 4
-					pasCoolActual = modbusReadRegister(&hA149) * 0.1
-				Case 5
-					pasInsertDetected = modbusReadInput(&h0384)
-				Case 6
-					pasSteelInsert = modbusReadInput(&h0385)
-				Case 7
-					pasShuttleLoadPosition = modbusReadInput(&h0388)
-				Case 8
-					pasShuttleNoLoad = modbusReadInput(&h0389)
-				Case 9
-					pasShuttleExtend = modbusReadInput(&h038A)
-				Case 10
-					pasInsertInShuttle = modbusReadInput(&h038B)
-				Case 11
-					pasShuttleMidway = modbusReadInput(&h0386)
-				Case 12
-					pasHome = modbusReadInput(&h0057)
-				Case 13
-					pasHeadinsertPickupRetract = modbusReadInput(&h3406)
-				Case 14
-					pasHeadinsertpickupextend = modbusReadInput(&h3407)
-					'fast above-slow below
-					' if we cycled thru the quick reads enough times, do a full read
-					If count < fastReadMax Then
-						CurrentReadNum = 0
-					Else
-						count = 0
-					EndIf
-				Case 15
-					pasMessageDB = modbusReadRegister(&h0009)
-				Case 16
-					pasSoftHome = modbusRead32Register(&h00FE) * .000000762939
-				Case 17
-					pasInsertPosition = modbusRead32Register(&h0100) * .000000762939
-				Case 18
-					pasInsertDepth = modbusRead32Register(&h0102) * .000000762939
-				Case 19
-					pasSoftStop = modbusRead32Register(&h0104) * .000000762939
-				Case 20
-					pasHomeIPM = modbusRead32Register(&h0106) * .0000457764
-				Case 21
-					pasInsertPickupIPM = modbusRead32Register(&h0108) * .0000457764
-				Case 22
-					pasHeatStakingIPM = modbusRead32Register(&h010A) * .0000457764
-				Case 23
-					pasInsertEngageIPM = modbusRead32Register(&h010E) * .0000457764
-				Case 24
-					pasInsertEngage = modbusRead32Register(&h0118) * .000000762939
-				Case 25
-					pasSetTempZone1 = modbusReadRegister(&h012C)
-				Case 26
-					pasSetTempZone2 = modbusReadRegister(&h012D)
-				Case 27
-					pasActualTempZone1 = modbusReadRegister(&h0132)
-				Case 28
-					pasActualTempZone2 = modbusReadRegister(&h0133)
-				Case 29
-					pasPIDsetupMaxTempZone1 = modbusReadRegister(&h0138)
-				Case 30
-					pasPIDsetupMaxTempZone2 = modbusReadRegister(&h0139)
-				Case 31
-					pasPIDsetupInTempZone1 = modbusReadRegister(&h0149)
-				Case 32
-					pasPIDsetupInTempZone2 = modbusReadRegister(&h014A)
-				Case 33
-					pasPIDsetupOffsetZone1 = modbusReadRegister(&h015A)
-				Case 34
-					pasPIDsetupOffsetZone2 = modbusReadRegister(&h015B)
-				Case 35
-					pasPIDsetupPZone1 = modbusReadRegister(&h0164)
-				Case 36
-					pasPIDsetupIZone1 = modbusReadRegister(&h0165)
-				Case 37
-					pasPIDsetupDZone1 = modbusReadRegister(&h0166)
-				Case 38
-					pasPIDsetupPZone2 = modbusReadRegister(&h016E)
-				Case 39
-					pasPIDsetupIZone2 = modbusReadRegister(&h016F)
-				Case 40
-					pasPIDsetupDZone2 = modbusReadRegister(&h0170)
-				Case 41
-					pasInsertPreheat = modbusReadRegister(&h0190) * 0.1
-				Case 42
-					pasDwell = modbusReadRegister(&h0191) * 0.1
-				Case 43
-					pasCool = modbusReadRegister(&h0192) * 0.1
-				Case 44
-					pasJogSpeed = modbusReadRegister(&h01FE) * 0.5
-				Case 45
-					pasMaxLoadmeter = modbusReadRegister(&h0265) * 0.1
-				Case 46
-					pasLoadMeter = modbusReadRegister(&h028B) * -0.1
-				Case 47
-					pasHighTempAlarm = modbusReadInput(&h0402)
-				Case 48
-					pasInsertType = modbusReadInput(&h0230)
-				Case 49
-					pasTempOnOff = modbusReadInput(&h000D)
-				Case 50
-					pasMasterTemp = modbusReadInput(&h0401)
-				Case 51
-					pasUpLimit = modbusReadInput(&h0055)
-				Case 52
-					pasLowerlimit = modbusReadInput(&h0056)
-				Case 53
-					pasMCREStop = modbusReadInput(&h3400)
-				Case 54
-					pasSlideExtend = modbusReadInput(&h0017)
-				Case 55
-					pas1inLoadInsertCylinder = modbusReadInput(&h0019)
-				Case 56
-					pasBowlDumpOpen = modbusReadInput(&h001B)
-				Case 57
-					pasBlowInsert = modbusReadInput(&h001E)
-				Case 58
-					pasVibTrack = modbusReadInput(&h001C)
-				Case 59
-					pasBowlFeeder = modbusReadInput(&h001D)
-				Case 60
-					pasInsertGripper = modbusReadInput(&h0018)
-				Case 61
-					pasOTAOnOffZone1 = modbusReadInput(&h0403)
-				Case 62
-					pasOTAOnOffZone2 = modbusReadInput(&h0404)
-				Case 63
-					pasOnOffZone1 = modbusReadInput(&h012C)
-				Case 64
-					pasOnOffZone2 = modbusReadInput(&h012D)
-				Case 65
-					pasMaxTempOnOffZone1 = modbusReadInput(&h040D)
-				Case 66
-					pasMaxTempOnOffZone2 = modbusReadInput(&h040E)
-				Case 67
-					pasMaxTempZone1 = modbusReadInput(&h0028)
-				Case 68
-					pasMaxTempZone2 = modbusReadInput(&h0029)
-				Case 69
-					pasPIDTuneDoneZone1 = modbusReadInput(&h0138)
-				Case 70
-					pasPIDTuneDoneZone2 = modbusReadInput(&h0139)
+			Case 1
+				pasHome = modbusReadInput(&h0057)
+			Case 2
+				pasSoftHome = modbusRead32Register(&h00FE) * .000000762939
+			Case 3
+				pasInsertPosition = modbusRead32Register(&h0100) * .000000762939
+			Case 4
+				pasInsertDepth = modbusRead32Register(&h0102) * .000000762939
+			Case 5
+				pasSoftStop = modbusRead32Register(&h0104) * .000000762939
+			Case 6
+				pasHomeIPM = modbusRead32Register(&h0106) * .0000457764
+			Case 7
+				pasInsertPickupIPM = modbusRead32Register(&h0108) * .0000457764
+			Case 8
+				pasHeatStakingIPM = modbusRead32Register(&h010A) * .0000457764
+			Case 9
+				pasInsertEngageIPM = modbusRead32Register(&h010E) * .0000457764
+			Case 10
+				pasInsertEngage = modbusRead32Register(&h0118) * .000000762939
+			Case 11
+				pasSetTempZone1 = modbusReadRegister(&h012C)
+			Case 12
+				pasSetTempZone2 = modbusReadRegister(&h012D)
+			Case 13
+				pasActualTempZone1 = modbusReadRegister(&h0132)
+			Case 14
+				pasActualTempZone2 = modbusReadRegister(&h0133)
+			Case 15
+				pasPIDsetupMaxTempZone1 = modbusReadRegister(&h0138)
+			Case 16
+				pasPIDsetupMaxTempZone2 = modbusReadRegister(&h0139)
+			Case 17
+				pasPIDsetupInTempZone1 = modbusReadRegister(&h0149)
+			Case 18
+				pasPIDsetupInTempZone2 = modbusReadRegister(&h014A)
+			Case 19
+				pasPIDsetupOffsetZone1 = modbusReadRegister(&h015A)
+			Case 20
+				pasPIDsetupOffsetZone2 = modbusReadRegister(&h015B)
+			Case 21
+				pasPIDsetupPZone1 = modbusReadRegister(&h0164)
+			Case 22
+				pasPIDsetupIZone1 = modbusReadRegister(&h0165)
+			Case 23
+				pasPIDsetupDZone1 = modbusReadRegister(&h0166)
+			Case 24
+				pasPIDsetupPZone2 = modbusReadRegister(&h016E)
+			Case 25
+				pasPIDsetupIZone2 = modbusReadRegister(&h016F)
+			Case 26
+				pasPIDsetupDZone2 = modbusReadRegister(&h0170)
+			Case 27
+				pasInsertPreheat = modbusReadRegister(&h0190) * 0.1
+			Case 28
+				pasDwell = modbusReadRegister(&h0191) * 0.1
+			Case 29
+				pasCool = modbusReadRegister(&h0192) * 0.1
+			Case 30
+				pasJogSpeed = modbusReadRegister(&h01FE) * 0.5
+			Case 31
+				pasMaxLoadmeter = modbusReadRegister(&h0265) * 0.1
+			Case 32
+				pasLoadMeter = modbusReadRegister(&h028B) * -0.1
+			Case 33
+				pasHighTempAlarm = modbusReadInput(&h0402)
+			Case 34
+				pasInsertType = modbusReadInput(&h0230)
+			Case 35
+				pasTempOnOff = modbusReadInput(&h000D)
+			Case 36
+				pasMasterTemp = modbusReadInput(&h0401)
+			Case 37
+				pasUpLimit = modbusReadInput(&h0055)
+			Case 38
+				pasLowerlimit = modbusReadInput(&h0056)
+			Case 39
+				pasOTAOnOffZone1 = modbusReadInput(&h0403)
+			Case 40
+				pasOTAOnOffZone2 = modbusReadInput(&h0404)
+			Case 41
+				pasOnOffZone1 = modbusReadInput(&h012C)
+			Case 42
+				pasOnOffZone2 = modbusReadInput(&h012D)
+			Case 43
+				pasMaxTempOnOffZone1 = modbusReadInput(&h040D)
+			Case 44
+				pasMaxTempOnOffZone2 = modbusReadInput(&h040E)
+			Case 45
+				pasMaxTempZone1 = modbusReadInput(&h0028)
+			Case 46
+				pasMaxTempZone2 = modbusReadInput(&h0029)
+			Case 47
+				pasPIDTuneDoneZone1 = modbusReadInput(&h0138)
+			Case 48
+				pasPIDTuneDoneZone2 = modbusReadInput(&h0139)
+			Case 49
+				pasCrowding = modbusReadInput(&h03A5)
 			Send
 			
 			CurrentReadNum = CurrentReadNum + 1
@@ -498,8 +473,8 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	modMessage(1) = MBCmdWriteRegister
 	modMessage(2) = RShift(regNum, 8) ' high byte of address
 	modMessage(3) = regNum And &hFF ' low byte of address
-	modMessage(4) = RShift(Value, 8) ' high byte of value
-	modMessage(5) = Value And &hFF ' low byte of value
+	modMessage(4) = RShift(value, 8) ' high byte of value
+	modMessage(5) = value And &hFF ' low byte of value
 	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
 	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
 	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
@@ -633,10 +608,10 @@ Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	modMessage(1) = MBCmdWriteCoil ' function code
 	modMessage(2) = RShift(coilNum, 8) ' high byte of address
 	modMessage(3) = coilNum And &hFF ' low byte of address
-	If value = True Then
+	If Value = True Then
 		modMessage(4) = &hFF; ' constant for setting coil on
 		modMessage(5) = 0;
-	ElseIf value = False Then
+	ElseIf Value = False Then
 		modMessage(4) = 0; ' constant for setting coil off
 		modMessage(5) = 0;
 	EndIf
