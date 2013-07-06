@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/07/06 17:11:40:609,DS:0000002988,CS:18977,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2013/07/06 19:21:39:356,DS:0000003022,CS:15372,MA:00-0C-29-03-E6-C5,EI:           
 sActiveChild="HeatStakeCommunication.prg"
-bMdiMaximized=False
+bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1060
+		nHeight=612
 	}
 }
 ProgramFile2 {
@@ -26,34 +26,34 @@ ProgramFile2 {
 ProgramFile3 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1060
+		nHeight=612
 	}
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1060
+		nHeight=612
 	}
 }
 ProgramFile5 {
 	sName="OldCode.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1060
+		nHeight=612
 	}
 }
 ProgramFile6 {
@@ -81,23 +81,23 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1060
+		nHeight=612
 	}
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1060
+		nHeight=533
 	}
 }
 ProgramFile10 {
@@ -115,12 +115,12 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1060
+		nHeight=612
 	}
 }
 nPointFileCount=3
