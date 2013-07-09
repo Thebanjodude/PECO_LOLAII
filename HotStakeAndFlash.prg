@@ -3,28 +3,47 @@
 Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
-
-	Integer i
-
 	SystemStatus = StateHotStakePanel
+	
+	Integer i
+	Boolean SkippedHole
+	currentHSHole = 1
 	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
 
 	For i = FirstHolePointHotStake To LastHolePointHotStake
 		
-		Jump P(i) LimZ zLimit ' Go to the next hole
+		SkippedHole = False 'Reset flag
 
-'		If hsPanelPresnt = False Then ' A boss should be engaging the anvil but it isnt...
-'			erPanelStatusUnknown = True
-'			HotStakePanel = 2
-'			SystemStatus = StateMoving
-'			Jump PreHotStake :U(CU(Here)) LimZ zLimit ' Pull back from the hot stake machine
-'			Exit Function ' exit with error
+		If SkipHoleArray(currentHSHole, 0) <> 0 Then ' When nonzero, don't populate the hole because we want to skip it
+			SkippedHole = True 'Set flag
+			Print "Skipped Hole"
+		EndIf
+
+'		If SkippedHole = False Then 'If the flag is set then we have finished all holes
+		
+			Jump P(i) LimZ zLimit ' Go to the next hole
+			
+			Wait 1
+	
+			If hsPanelPresnt = False Then ' A boss should be engaging the anvil but it isnt...
+				erPanelStatusUnknown = True
+				HotStakePanel = 2
+				Print "Boss did not engage the anvil"
+				Pause
+				SystemStatus = StateMoving
+				Jump PreHotStake :U(CU(Here)) LimZ zLimit ' Pull back from the hot stake machine
+				Exit Function ' exit with error
+			EndIf
+	
+			' Add Tanda's Heat State Function here, it should tell the HS to install an insert
+
+		'	Pause ' Added for Testing
+		
 '		EndIf
-
-		' Add Tanda's Heat State Function here, it should tell the HS to install an insert
-		Wait 1
-	'	Pause ' Added for Testing
+		
+		currentHSHole = currentHSHole + 1
+		
 	Next
 		
 exitHotStake:
@@ -41,10 +60,10 @@ Trap 2 ' disarm trap
 Fend
 Function FlashPanel(DwellTime As Real) As Integer
 	Trap 2, MemSw(jobAbortH) = True GoTo exitFlash ' arm trap
+	SystemStatus = StateFlashRemoval
 	
 	Integer i
-	
-	SystemStatus = StateFlashRemoval
+	currentFlashHole = 1
 	
 	Jump PreFlash LimZ zLimit ' Present panel to flash machine
 	
@@ -86,6 +105,8 @@ Function FlashPanel(DwellTime As Real) As Integer
 		
 		Wait 1
 '		Pause ' added in for testing
+
+		currentFlashHole = currentFlashHole + 1
 		
 	Next
 	

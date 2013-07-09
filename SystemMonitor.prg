@@ -1,7 +1,7 @@
 #include "Globals.INC"
 
 Function SystemMonitor()
-' This function constantly monitors System Pressures, voltages, interlocks, Hot Stake Machine, 
+' This function constantly monitors System Pressures, voltages, interlocks, Stake Machine,
 'CBs, E-stop, and controller errors. It reports them to the HMI for viewing and acking.
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	

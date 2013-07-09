@@ -1,12 +1,12 @@
-ENVT0100,LM:2013/07/06 21:57:27:454,DS:0000004118,CS:12414,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/09 14:57:02:351,DS:0000004116,CS:10029,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="7/6/2013 3:57:21 PM"
+	sLastModified="7/9/2013 8:57:00 AM"
 	bBuildComplete=True
-	bRebuildRequired=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="ALWKSBSCHAEFER"
@@ -30,13 +30,13 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/6/2013 9:57:21 PM"
+	sTimeSavedInController="7/9/2013 2:47:05 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/3/2013 10:42:26 PM"
+	sTimeSavedInController="7/9/2013 2:57:00 PM"
 }
 ProgramFile3 {
 	sName="IOTable.prg"
@@ -60,7 +60,7 @@ ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/3/2013 10:42:26 PM"
+	sTimeSavedInController="7/8/2013 2:22:13 PM"
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
@@ -72,7 +72,7 @@ ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/6/2013 7:38:24 PM"
+	sTimeSavedInController="7/9/2013 2:46:40 PM"
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
@@ -90,16 +90,16 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="7/6/2013 7:39:32 PM"
+	sTimeSavedInController="7/9/2013 2:47:49 PM"
 }
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="7/6/2013 8:35:11 PM"
+	sTimeSavedInController="7/8/2013 1:36:30 PM"
 }
 PointFile2 {
 	sName="Points2.pts"
-	sTimeSavedInController="7/5/2013 11:56:09 PM"
+	sTimeSavedInController="7/9/2013 2:31:15 PM"
 }
 PointFile3 {
 	sName="Points3.pts"

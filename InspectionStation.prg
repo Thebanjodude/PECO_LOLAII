@@ -11,12 +11,12 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	
 	Integer i
 	Real BossCrosssectionalArea
-'	Redim SkipHoleArray(LastHolePointInspection -FirstHolePointInspection+ 1, 0) ' Size the arrays
-'	Redim InspectionArray(LastHolePointInspection -FirstHolePointInspection+ 1, 1) 
-'	Redim PassFailArray(LastHolePointInspection -FirstHolePointInspection+ 1, 1)
+	Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays
+	Redim InspectionArray(recNumberOfHoles, 1)
+	Redim PassFailArray(recNumberOfHoles, 0)
 	
-	currentPreinspectHole = 0 ' This tells the HMI which hole we are working on during preinspection
-	currentInspectHole = 0 ' This tells the HMI which hole we are working on during inspection
+	currentPreinspectHole = 1 ' This tells the HMI which hole we are working on during preinspection
+	currentInspectHole = 1 ' This tells the HMI which hole we are working on during inspection
 
 	For i = FirstHolePointInspection To LastHolePointInspection
 		
@@ -24,16 +24,27 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 
 		Go P(i)
 		
-'		If SelectRoutine = 1 Then
-'
-'			ChangeProfile("07")
-'			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
-'			
-'			If Abs(BossCrosssectionalArea) < 250 Then ' There is already an insert so set skip flag
-'				'SkipHoleArray(currentPreinspectHole, 0) = 1
-'				Print "Hole ", currentPreinspectHole, " is already populated"
-'			EndIf
-'			
+		If SelectRoutine = 1 Then
+
+			ChangeProfile("07")
+			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
+			
+		If DeepBoss = True Then ' There are different volumes of bosses
+			If BossCrosssectionalArea > -400 Then ' There is already an insert so set skip flag
+				SkipHoleArray(currentPreinspectHole, 0) = 1
+				Print "Hole ", currentPreinspectHole, " is already populated"
+			EndIf
+		Else
+			If BossCrosssectionalArea > -300 Then ' There is already an insert so set skip flag
+				SkipHoleArray(currentPreinspectHole, 0) = 1
+				Print "Hole ", currentPreinspectHole, " is already populated"
+			EndIf
+		EndIf
+			
+
+'			ChangeProfile("00")
+'			Print "Hole error:", GetLaserMeasurement("05")
+			
 ''			If Abs(BossCrosssectionalArea) < 12345 Then ' We dont see an empty hole or a populated hole. Panel is backwards or 
 ''				erPanelStatusUnknown = True
 ''				InspectPanel = 2					' the wrong panel was put into the magazine
@@ -42,20 +53,23 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 ''			EndIf
 			
 			currentPreinspectHole = currentPreinspectHole + 1
-'			
-'		ElseIf SelectRoutine = 2 Then
-'			
-'			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
-'			currentInspectHole = currentInspectHole + 1
-'		
+			
+		ElseIf SelectRoutine = 2 Then
+			
+			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
+			currentInspectHole = currentInspectHole + 1
+
+		
 '		Else
 '			Print "Inspection argument undefined"
-'		EndIf
+		EndIf
 			
 		Go P(i) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
 		Wait .25
 	Next
 	
+	PrintInspectionArray()
+	PrintSkipArray()
 	InspectPanel = 0 ' Inspection occured without errors
 	Go PreScan :U(CU(Here))
 
@@ -320,6 +334,20 @@ Function PrintInspectionArray()
 	PrintArrayIndex = 0 	'Reset index
 	
 Fend
+Function PrintSkipArray()
+	
+	Integer n, PrintArrayIndex
+	
+	Print "#" + " Skip"
+
+	For n = 1 To recNumberOfHoles
+		Print Str$(n) + " " + Str$(SkipHoleArray(PrintArrayIndex, 0))
+		PrintArrayIndex = PrintArrayIndex + 1
+	Next
+	
+	PrintArrayIndex = 0 	'Reset index
+	
+Fend
 Function MicroMetersToInches(um As Real) As Real
 		MicroMetersToInches = um * .00003937
 Fend
@@ -331,18 +359,22 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Jump PreHotStake
 	MBWrite(pasCrowdingADDR, 0, MBTypeCoil)
 	Wait 2
-	Off nestpneu ' Make sure the nest is closed
 	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
 	suctionCupsCC = False
 	Wait suctionWaitTime ' wait for cups to release
 	Go P(recCrowding) +Z(15) ' Relese the suction cups and move them out of the way for crowding
 	Wait .25
 	MBWrite(pasCrowdingADDR, 1, MBTypeCoil)
-	Wait 2
-	Go P(recCrowding)  'Go to the crowding location
+	Wait 5
+	
+'	Do While ZmaxTorque < .3 ' Approach the panel slowly until we hit a torque limit
+'		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
+'	Loop
+	
+	Go P(recCrowding)
 	suctionCupsCC = True
 	Wait suctionWaitTime
-	MBWrite(pasCrowdingADDR, 1, MBTypeCoil)
+	MBWrite(pasCrowdingADDR, 0, MBTypeCoil)
 	Wait 2
 	CrowdingSequence = 0
 	

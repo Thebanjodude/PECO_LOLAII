@@ -8,27 +8,45 @@ PowerOnSequence() ' Initialize the system and prepare it to do a job
 'jobStart = True 'fake
 'recPartNumber = 88555 ' fake for testing
 'recPartNumber = 88558 ' fake for testing
-recNumberOfHoles = 16 ' fake for test
-recFlashRequired = True
+'recNumberOfHoles = 16 ' fake for test
+recFlashRequired = False
 recInsertDepth = .165 ' fake for testing
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
+recFlashDwellTime = 1
+
 'recInmag = 50
 'recOutmag = 101
-recInmag = 10
-recOutmag = 13
+'recInmag = 10 '88558
+'recOutmag = 13 '88558
 'recPreCrowding = 51
 'recCrowding = 52
-'recFlashDwellTime = 1
+
 'FirstHolePointInspection = 53
 'LastHolePointInspection = 68
 'FirstHolePointHotStake = 69
 'LastHolePointHotStake = 84
 'FirstHolePointFlash = 85
 'LastHolePointFlash = 100
-LoadPoints "points.pts"
-Power Low ' Manually set power. This will be done in PowerOnSequence()
-Speed 65
+'LoadPoints "points.pts"
+'DeepBoss = True
+
+recNumberOfHoles = 23 ' fake for test
+recInmag = 50
+recOutmag = 122
+recPreCrowding = 51
+recCrowding = 52
+FirstHolePointInspection = 53
+LastHolePointInspection = 75
+FirstHolePointHotStake = 76
+LastHolePointHotStake = 80
+'FirstHolePointFlash = 99
+'LastHolePointFlash = 121
+LoadPoints "points2.pts"
+DeepBoss = False
+
+Power High ' Manually set power. This will be done in PowerOnSequence()
+Speed 30
 jobDone = False
 
 mainCurrentState = StateIdle ' The first state is Idle
@@ -56,8 +74,8 @@ Select mainCurrentState
 		StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
 				
 		If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
-			'mainCurrentState = StateCrowding
-			mainCurrentState = StatePushPanel ' fake for testing
+			mainCurrentState = StateCrowding
+			'mainCurrentState = StatePushPanel ' fake for testing
 			Print "Pick up Successful"
 		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePopPanel
@@ -102,6 +120,7 @@ Select mainCurrentState
 			If StatusCheckPreinspection = 0 Then
 				mainCurrentState = StateHotStakePanel
 '				mainCurrentState = StateInspection
+'				mainCurrentState = StatePushPanel
 				Print "Preinspection executed"
 			ElseIf StatusCheckPreinspection = 2 Then
 				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle 
@@ -120,14 +139,16 @@ Select mainCurrentState
 		If StatusCheckHotStake = 0 Then
 			Print "hot stake done"
 			If recFlashRequired = False Then
-				mainCurrentState = StateInspection ' Flash not required so skip it
+				'mainCurrentState = StateInspection ' Flash not required so skip it
+				mainCurrentState = StatePushPanel
 			Else
 				mainCurrentState = StateFlashRemoval ' The next state is normally Flash Removal
 			EndIf
+			
 		ElseIf StatusCheckHotStake = 2 Then
 			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 		EndIf
-		
+				
 		If jobAbort = True Then
 			mainCurrentState = StatePushPanel ' Drop off the panel before we quit	
 		EndIf

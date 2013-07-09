@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/07/06 20:35:11:619,DS:0000013237,CS:28704,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/08 13:36:30:583,DS:0000013237,CS:31277,MA:6C-F0-49-E2-45-75,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=60
@@ -76,7 +76,7 @@ Point4 {
 }
 Point5 {
 	nNumber=10
-	sLabel="MagIN_88553"
+	sLabel="MagIN_88558"
 	sDescription=""
 	rX=343.155
 	rY=423.575
@@ -94,7 +94,7 @@ Point5 {
 }
 Point6 {
 	nNumber=11
-	sLabel="CwdIN_88553"
+	sLabel="CwdIN_88558"
 	sDescription=""
 	rX=0
 	rY=0
@@ -112,7 +112,7 @@ Point6 {
 }
 Point7 {
 	nNumber=12
-	sLabel="CwdOUT_88553"
+	sLabel="CwdOUT_88558"
 	sDescription=""
 	rX=0
 	rY=0
@@ -130,7 +130,7 @@ Point7 {
 }
 Point8 {
 	nNumber=13
-	sLabel="MagOUT_88553"
+	sLabel="MagOUT_88558"
 	sDescription=""
 	rX=354.294
 	rY=-203.773
@@ -168,7 +168,7 @@ Point10 {
 	nNumber=51
 	sLabel="CwdIN_88555"
 	sDescription=""
-	rX=-316.384
+	rX=-300.384
 	rY=-32.962
 	rZ=-81.291
 	rU=140.747

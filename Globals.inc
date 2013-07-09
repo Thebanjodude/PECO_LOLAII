@@ -94,13 +94,12 @@ Global Integer outMagCurrentState
 Global Boolean outMagMtrCC, outMagMtrDirCC, RobotPlacedPanel
 
 'Inspection Station Global Vars
-
 Global Boolean PanelPassedInspection ' Indicates if the panel passes inspection
 Global Integer x, z ' Increment for P(x) to define edge and num of holes found
 Global Real CurrentThetaHere, insertDepthTolerance
 Global Boolean PassFailArray(0, 0)
 Global Real InspectionArray(0, 0), recInmagPickupOffset
-Global Boolean SkipHoleArray(0, 0) ' This needs to be global
+Global Boolean SkipHoleArray(0, 0), DeepBoss ' This needs to be global
 Global Integer currentInspectHole, currentPreinspectHole
 #define RightSpotFace 0
 #define LeftSpotFace 1
