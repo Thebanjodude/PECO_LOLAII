@@ -1,26 +1,26 @@
-ENVT0100,LM:2013/07/09 15:06:31:670,DS:0000002994,CS:12087,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="HotStakeAndFlash.prg"
+ENVT0100,LM:2013/07/09 17:17:12:945,DS:0000003002,CS:01061,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Main.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-2
-		nTop=0
-		nWidth=990
-		nHeight=813
+		nLeft=6
+		nTop=153
+		nWidth=1100
+		nHeight=809
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=154
-		nTop=24
-		nWidth=1275
-		nHeight=699
+		nLeft=264
+		nTop=39
+		nWidth=1274
+		nHeight=696
 	}
 }
 ProgramFile3 {
@@ -28,21 +28,21 @@ ProgramFile3 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=4
+		nTop=18
+		nWidth=1263
+		nHeight=736
 	}
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=278
-		nTop=27
-		nWidth=1131
-		nHeight=609
+		nLeft=105
+		nTop=44
+		nWidth=1130
+		nHeight=605
 	}
 }
 ProgramFile5 {
@@ -58,7 +58,7 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="SystemMonitor.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=0
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=540
-		nTop=3
-		nWidth=1210
-		nHeight=813
+		nLeft=489
+		nTop=0
+		nWidth=1208
+		nHeight=815
 	}
 }
 ProgramFile9 {
@@ -94,21 +94,21 @@ ProgramFile9 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=3
-		nTop=118
-		nWidth=971
-		nHeight=596
+		nLeft=743
+		nTop=47
+		nWidth=890
+		nHeight=546
 	}
 }
 ProgramFile10 {
 	sName="CalibrationRoutines.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=107
+		nTop=290
+		nWidth=1263
+		nHeight=706
 	}
 }
 nIncludeFileCount=1
@@ -169,12 +169,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=20
-		nTop=2
-		nWidth=991
-		nHeight=770
+		nLeft=925
+		nTop=77
+		nWidth=707
+		nHeight=327
 	}
 }
 IOLabelEditor {
@@ -188,10 +188,10 @@ IOLabelEditor {
 	nWinState=0
 }
 IOMonitor {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=1166
-		nTop=173
+		nLeft=1382
+		nTop=551
 		nWidth=520
 		nHeight=353
 	}
@@ -215,7 +215,7 @@ Macros {
 	}
 }
 RobotMgr {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=234
 		nTop=60

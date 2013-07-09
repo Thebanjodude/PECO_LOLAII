@@ -26,15 +26,15 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			
 			Wait 1
 	
-			If hsPanelPresnt = False Then ' A boss should be engaging the anvil but it isnt...
-				erPanelStatusUnknown = True
-				HotStakePanel = 2
-				Print "Boss did not engage the anvil"
-				Pause
-				SystemStatus = StateMoving
-				Jump PreHotStake :U(CU(Here)) LimZ zLimit ' Pull back from the hot stake machine
-				Exit Function ' exit with error
-			EndIf
+'			If hsPanelPresnt = False Then ' A boss should be engaging the anvil but it isnt...
+'				erPanelStatusUnknown = True
+'				HotStakePanel = 2
+'				Print "Boss did not engage the anvil"
+'				Pause
+'				SystemStatus = StateMoving
+'				Jump PreHotStake :U(CU(Here)) LimZ zLimit ' Pull back from the hot stake machine
+'				Exit Function ' exit with error
+'			EndIf
 	
 			' Add Tanda's Heat State Function here, it should tell the HS to install an insert
 
