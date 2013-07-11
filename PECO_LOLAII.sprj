@@ -1,12 +1,12 @@
-ENVT0100,LM:2013/07/09 17:06:46:216,DS:0000004116,CS:06165,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/11 00:52:25:741,DS:0000004118,CS:08550,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="7/9/2013 11:06:43 AM"
-	bBuildComplete=True
-	bRebuildRequired=False
+	sLastModified="7/10/2013 6:52:25 PM"
+	bBuildComplete=False
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="ALWKSBSCHAEFER"
@@ -46,7 +46,7 @@ ProgramFile3 {
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
 	sTimeSavedInController="7/6/2013 9:40:07 PM"
 }
@@ -60,7 +60,7 @@ ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/8/2013 2:22:13 PM"
+	sTimeSavedInController="7/10/2013 3:27:22 PM"
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"

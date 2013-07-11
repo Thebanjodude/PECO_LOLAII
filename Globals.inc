@@ -40,6 +40,7 @@ Global Boolean GoFlag, ReturnFlag 'flags to make sure we dont break the drill
 #define StateWaitingUser 5
 #define StateInMagPaused 6
 
+'PickUpPanel Return Values
 #define PickupSuccessful 0
 #define InmagIlockOpen 1
 #define InmagError 2
@@ -54,6 +55,7 @@ Global Boolean GoFlag, ReturnFlag 'flags to make sure we dont break the drill
 #define StateGoHome 6
 #define StateOutMagPaused 7
 
+'DropOffPanel Return Values
 #define DropoffSuccessful 0
 #define OutmagIlockOpen 1
 #define OutmagError 2
@@ -82,6 +84,7 @@ Global Integer inMagCurrentState
 Global Boolean inMagMtrCC, inMagMtrDirCC
 Global Boolean InMagRobotClearSignal  ' Signal robot is out of the way,OK to move Inmag
 Global Boolean InMagPickUpSignal  ' Signal robot it can pick up a panel from inmag
+Global Integer InmagLastState
 
 ' Output Magazine Global Vars
 Global Boolean outMagGoHome, outMagUnloaded, OutputMagSignal, outMagMtr 'DIO to run the output magazine
@@ -526,7 +529,6 @@ Global Long pasCoolActualSet
 #define pasPIDsetupOffsetZone3ADDR &h015C
 #define pasPIDsetupOffsetZone4ADDR &h015D
 #define pasCrowdingADDR &h03A5
-
 
 ' modbus constants	
 #define MBMitsubishiAddress 4

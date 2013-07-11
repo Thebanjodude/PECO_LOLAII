@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/07/09 17:17:12:945,DS:0000003002,CS:01061,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Main.prg"
+ENVT0100,LM:2013/07/11 14:08:34:169,DS:0000003022,CS:03148,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InMagOutMagStateMachines.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
 		nLeft=6
 		nTop=153
@@ -25,8 +25,8 @@ ProgramFile2 {
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=1
 	Window {
 		nLeft=4
 		nTop=18
@@ -39,10 +39,10 @@ ProgramFile4 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=105
-		nTop=44
-		nWidth=1130
-		nHeight=605
+		nLeft=27
+		nTop=22
+		nWidth=1500
+		nHeight=843
 	}
 }
 ProgramFile5 {
@@ -58,13 +58,13 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="SystemMonitor.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=33
+		nTop=10
+		nWidth=1276
+		nHeight=629
 	}
 }
 ProgramFile7 {
@@ -80,19 +80,19 @@ ProgramFile7 {
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=489
-		nTop=0
-		nWidth=1208
-		nHeight=815
+		nLeft=-15
+		nTop=16
+		nWidth=1206
+		nHeight=811
 	}
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
 		nLeft=743
 		nTop=47
@@ -103,7 +103,7 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="CalibrationRoutines.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
 		nLeft=107
 		nTop=290
@@ -115,12 +115,12 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1276
-		nHeight=612
+		nWidth=1273
+		nHeight=602
 	}
 }
 nPointFileCount=3
@@ -171,10 +171,10 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=925
-		nTop=77
-		nWidth=707
-		nHeight=327
+		nLeft=168
+		nTop=156
+		nWidth=649
+		nHeight=353
 	}
 }
 IOLabelEditor {
@@ -190,19 +190,19 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=1382
-		nTop=551
-		nWidth=520
-		nHeight=353
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=519
-		nTop=706
-		nWidth=980
-		nHeight=278
+		nLeft=329
+		nTop=379
+		nWidth=850
+		nHeight=274
 	}
 }
 Macros {

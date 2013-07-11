@@ -13,8 +13,9 @@ Do While True
 	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine
 		
 		erInMagOpenInterlock = True 'Throw error
-		inMagCurrentState = StateInMagPaused
-'		Halt InMagControl ' pause state machine where it is		
+'		inMagCurrentState = StateInMagPaused
+		Halt InMagControl ' pause state machine where it is		
+		
 				
 '		If mainCurrentState = StatePopPanel Then
 '			Pause ' if interlock open Pause only when in pop state
@@ -22,7 +23,7 @@ Do While True
 		
 	Else
 
-'		Resume InMagControl ' When the interlock is back into position resume where we left off
+		Resume InMagControl ' When the interlock is back into position resume where we left off
 		erInMagOpenInterlock = False
 		' The state machine will automatically change to its last state
 	EndIf
@@ -231,6 +232,10 @@ EndIf
 
 If alarmMute = True Then ' Mute the alarm
 	stackLightAlrmCC = False
+EndIf
+
+If erUnknown = True Then
+	Pause
 EndIf
 		
 Loop
