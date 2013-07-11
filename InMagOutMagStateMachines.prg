@@ -21,7 +21,7 @@ Do While True
 				InMagPickUpSignal = False ' Robot cannot pick a panel from the magazine
 				inMagGoHome = False 'Clear Flag
 				NextState = StateLowering
-			ElseIf inMagPnlRdy = True Then
+			ElseIf Sw(inMagPnlRdyH) = True Then
 				InMagPickUpSignal = False ' Robot cannot pick a panel from the magazine
 				NextState = StatePartRemoved
 			Else
@@ -40,26 +40,26 @@ Do While True
 			
 		Case StatePresentNextPart
 			
-			If inMagPnlRdy = True Then ' A panel is not present, move platen up
-				inMagMtrDirCC = True 'Set direction to UP
-				inMagMtrCC = True ' Turn on motor
+			If Sw(inMagPnlRdyH) = True Then ' A panel is not present, move platen up
+				On inMagMtrDirH 'Set direction to UP
+				On inMagMtrH ' Turn on motor
 				NextState = StatePresentNextPart
 			ElseIf inMagUpLim = True Then 'If upper limit is reached then the magazine is out of panels 
 				erInMagEmpty = True ' Tell operator the magazine is empty
 				NextState = StateLowering
 			Else
-				inMagMtrCC = False ' Turn off motor
+				Off inMagMtrH ' Turn off motor
 				NextState = StatePartPresent
 			EndIf
 			
 		Case StateLowering
 		
 			If inMagLowLim = False Then ' Keep lowering until we hit the lower limit (home)
-				inMagMtrDirCC = False 'set direction to DOWN
-				inMagMtrCC = True ' Turn on motor
+				Off inMagMtrDirH 'set direction to DOWN
+				On inMagMtrH ' Turn on motor
 				NextState = StateLowering
 			Else
-				inMagMtrCC = False ' Turn off motor
+				Off inMagMtrH ' Turn off motor
 				NextState = StateWaitingUser
 			EndIf
 			
@@ -74,7 +74,7 @@ Do While True
 			EndIf
 			
 		Case StateInMagPaused
-			inMagMtrCC = False ' Turn off the motor becuase we are paused
+			Off inMagMtrH ' Turn off the motor becuase we are paused
 			
 		Default
 			inMagCurrentState = StateInMagUnknown
@@ -84,12 +84,12 @@ Do While True
 	inMagCurrentState = NextState 'Set next state to current state after we break from case statment
 		
 	' This block of code checks if an interlock has been opened. 
-	If inMagInterlock = True Then
+	If Sw(inMagInterlockH) = True Then
 		' I am not sure if this interlock is hardware controlled, it should be.
 		InmagInterlockFlag = True ' Set a flag
 		InmagLastState = inMagCurrentState ' Save the current state before we pause
 		NextState = StateInMagPaused ' Send the state machine to paused
-	ElseIf inMagInterlock = False And InmagInterlockFlag = True Then
+	ElseIf Sw(inMagInterlockH) = False And InmagInterlockFlag = True Then
 		InmagInterlockFlag = False ' Reset flag
 		inMagCurrentState = InmagLastState ' Go to the state before the interlock was open
 	EndIf
@@ -97,138 +97,7 @@ Do While True
 Loop
 
 Fend
-Function OutMagControl
-
-Integer NextState
-
-outMagCurrentState = StateOutMagWaitingUser ' On start up go to home position
-
-Do While True
-
-	Select outMagCurrentState
-		Case StateReadyToReceive
-			
-			OutMagDropOffSignal = True ' Tell robot the output mag is ready
-			' Don't leave state unless panel is detected Or user specifies go home
-			Do Until outMagGoHome = True Or RobotPlacedPanel = True 'outMagPanelRdy = False Or 
-				Wait .1 ' Do nothing
-			Loop
-
-			If outMagGoHome = True Then ' Determine which state to go to next
-				NextState = StateGoHome
-				outMagGoHome = False ' Reset Flag
-			Else
-				NextState = StateOutMagPartPresent
-			EndIf
-			
-			RobotPlacedPanel = False
-			OutMagDropOffSignal = False ' Tell robot the output mag is not ready
-
-		Case StateOutMagPartPresent
-
-			Do Until OutputMagSignal = True
-				Wait .25 ' Wait for main program to move robot out of the way
-			Loop
-			OutputMagSignal = False 'reset trigger
-			NextState = StateOutMagLowering
-
-		Case StateOutMagLowering
-			
-			Boolean PartPresentTrigger, endloop
-			
-			PartPresentTrigger = False ' Ititialize
-			endloop = False
-			
-			Do Until endloop = True Or outMagLowLim = True
-				outMagMtrDirCC = False 'Set direction to Down
-				outMagMtrCC = True
-				
-				If outMagPanelRdy = False Then
-					PartPresentTrigger = True
-				EndIf
-			
-				If PartPresentTrigger = True And outMagPanelRdy = True Then
-					endloop = True
-				EndIf
-			Loop
-
-			outMagMtrCC = False
-
-            If outMagLowLim = True Then 'Determine which state to go to next
-				NextState = StateOutMagWaitingUser
-				erOutMagFull = True
-				OutMagDropOffSignal = False
-			Else
-				NextState = StateReadyToReceive
-			EndIf
-
-		Case StateOutMagWaitingUser
-			
-			Do Until outMagUnloaded = True ' Don't leave state until magazine has been unloaded
-				Wait .1
-			Loop
-
-			NextState = StateRaising
-
-			erOutMagFull = False ' The user has ack'ed that they unloaded the output mag.
-			outMagUnloaded = False ' Reset Flag
-
-			If outMagPanelRdy = False Then
-				erOutMagFull = True ' The user has ack'ed that they unloaded the output mag.
-				outMagUnloaded = False ' Reset Flag
-				NextState = StateOutMagWaitingUser
-			EndIf
-
-		Case StateRaising
-			
-		' I edited this on accident instead of the revised versio, if you need it, get it from the repo
-
-		Case StateGoHome
-
-			Do Until outMagLowLim = True
-				outMagMtrDirCC = False 'Set direction to DOWN
-				outMagMtrCC = True
-			Loop
-
-			outMagMtrCC = False
-
-			outMagGoHome = False 'Clear Flag
-
-			NextState = StateOutMagWaitingUser
-
-		Default
-			erUnknown = True
-	Send
-
-outMagCurrentState = NextState 'Set next state to current state after we break from case statment
-
-Print "outMagCurrentState", outMagCurrentState
-Loop
-
-Fend
-Function MagTorqueErrorISR
-
-InMagTorqueLim = 12345 ' Empirically define this limit
-OutMagTorqueLim = -12345 ' Empirically define this limit
-	
-	If InMagTorqueLim > PTRQ(Zaxis) Then
-		Off (suctionCupsH) ' Stop attempt at picking up a panel
-		Jump PreScan LimZ zLimit ' Go to a safe place
-		erInMagCrowding = True
-		' Get user ack before leaving ISR	
-	EndIf
-
-		If OutMagTorqueLim < PTRQ(Zaxis) Then
-		On (suctionCupsH) ' Double check suction cups are on
-		Jump PreScan LimZ zLimit ' Go to a safe place
-		erOutMagCrowding = True
-		' Get user ack before leaving ISR	
-	EndIf
-	
-	PTCLR Zaxis ' Clear peak torque zaxis value
-
-Fend
-Function OutMagControlRefactored()
+Function OutMagControl()
 
 Integer NextState
 
@@ -344,3 +213,27 @@ Do While True
 Loop
 
 Fend
+
+Function MagTorqueErrorISR
+
+InMagTorqueLim = 12345 ' Empirically define this limit
+OutMagTorqueLim = -12345 ' Empirically define this limit
+	
+	If InMagTorqueLim > PTRQ(Zaxis) Then
+		Off (suctionCupsH) ' Stop attempt at picking up a panel
+		Jump PreScan LimZ zLimit ' Go to a safe place
+		erInMagCrowding = True
+		' Get user ack before leaving ISR	
+	EndIf
+
+		If OutMagTorqueLim < PTRQ(Zaxis) Then
+		On (suctionCupsH) ' Double check suction cups are on
+		Jump PreScan LimZ zLimit ' Go to a safe place
+		erOutMagCrowding = True
+		' Get user ack before leaving ISR	
+	EndIf
+	
+	PTCLR Zaxis ' Clear peak torque zaxis value
+
+Fend
+
