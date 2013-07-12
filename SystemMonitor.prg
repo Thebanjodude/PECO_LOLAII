@@ -10,23 +10,6 @@ Do While True
 	
 	StateOfHealth()
 	
-	If inMagInterlock = True Then ' If an interlock gets tripped then halt the state machine
-		
-		erInMagOpenInterlock = True 'Throw error
-'		inMagCurrentState = StateInMagPaused
-		Halt InMagControl ' pause state machine where it is		
-		
-				
-'		If mainCurrentState = StatePopPanel Then
-'			Pause ' if interlock open Pause only when in pop state
-'		EndIf
-		
-	Else
-
-		Resume InMagControl ' When the interlock is back into position resume where we left off
-		erInMagOpenInterlock = False
-		' The state machine will automatically change to its last state
-	EndIf
 	
 	If outMagInt = True Then ' If an interlock gets tripped then halt the state machine
 		
@@ -216,8 +199,10 @@ If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh) O
 	stackLightAlrmCC = True
 EndIf
 	
-If inMagInterlock = True Or outMagInt = True Then ' If a magazine interlock is open then turn on the yelow light
+If inMagInterlock = True Or outMagInt = True Or erInMagEmpty = True Or erOutMagFull = True Then ' If a magazine interlock is open then turn on the yelow light
 	stackLightYelCC = True
+Else
+	stackLightYelCC = False
 EndIf
 
 If (stackLightRedCC Or stackLightYelCC) Then ' Turn off the green light if the red or yellow is on

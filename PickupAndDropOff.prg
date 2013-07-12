@@ -89,14 +89,21 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	
 	Jump PreScan LimZ zLimit ' Go home
 	
+	' Make this non blocking by checking for var then exit function with pickuppanel=1, revisit
 	Do Until InMagPickUpSignal = True ' Wait for inmag to confirm a panel is ready to be picked up
 		Wait .25
 	Loop
 	
 	InMagRobotClearSignal = False ' the robot is about to visit the magazine.
-	Jump P(recInmag) +Z(5) LimZ zLimit
+	Jump P(recInmag) +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
 	
-	Do While ZmaxTorque < .3 ' Approach the panel slowly until we hit a torque limit
+	If JS = True Then ' Its possible to open an interock during the jump so check if it was opened
+		PickupPanel = 1 ' Interlock is open
+		Jump PreScan LimZ zLimit ' Go home
+		Exit Function
+	EndIf
+	
+	Do While ZmaxTorque <= .3 ' Approach the panel slowly until we hit a torque limit
 		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
 	Loop
 

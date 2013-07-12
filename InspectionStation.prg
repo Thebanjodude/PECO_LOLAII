@@ -3,7 +3,7 @@
 Function InspectPanel(SelectRoutine As Integer) As Integer
 
 '	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
-	
+	Real ZdiffFromLaserCenter, RobotZposition
 	SystemStatus = StateInspection
 '	InspectPanel = 2 ' default to fail
 	
@@ -13,6 +13,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Real BossCrosssectionalArea
 	Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays
 	Redim InspectionArray(recNumberOfHoles, 1)
+	Redim PreInspectionArray(recNumberOfHoles, 0)
 	Redim PassFailArray(recNumberOfHoles, 0)
 	
 	currentPreinspectHole = 1 ' This tells the HMI which hole we are working on during preinspection
@@ -27,18 +28,31 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		If SelectRoutine = 1 Then
 
 			ChangeProfile("07")
-			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
+			Wait .25
+			ZdiffFromLaserCenter = (GetLaserMeasurement("05") + GetLaserMeasurement("06")) / 2 ' take an average from the left and the right
+			RobotZposition = CZ(Here) ' Where are we at in robot Z when we take the laser measurement
 			
-		If DeepBoss = True Then ' There are different volumes of bosses
-			If BossCrosssectionalArea > -400 Then ' There is already an insert so set skip flag
-				SkipHoleArray(currentPreinspectHole, 0) = 1
-				Print "Hole ", currentPreinspectHole, " is already populated"
-			EndIf
-		Else
-			If BossCrosssectionalArea > -300 Then ' There is already an insert so set skip flag
-				SkipHoleArray(currentPreinspectHole, 0) = 1
-				Print "Hole ", currentPreinspectHole, " is already populated"
-			EndIf
+			Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
+			
+			ZSpotfacetoQuillOffset = RobotZposition - ZdiffFromLaserCenter
+			
+			Print "ZSpotfacetoQuillOffset:", ZSpotfacetoQuillOffset
+			
+			PreInspectionArray(currentPreinspectHole, 0) = ZSpotfacetoQuillOffset
+			
+'			ChangeProfile("07")
+'			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
+			
+'		If DeepBoss = True Then ' There are different volumes of bosses
+'			If BossCrosssectionalArea > -400 Then ' There is already an insert so set skip flag
+'				SkipHoleArray(currentPreinspectHole, 0) = 1
+'				Print "Hole ", currentPreinspectHole, " is already populated"
+'			EndIf
+'		Else
+'			If BossCrosssectionalArea > -300 Then ' There is already an insert so set skip flag
+'				SkipHoleArray(currentPreinspectHole, 0) = 1
+'				Print "Hole ", currentPreinspectHole, " is already populated"
+'			EndIf
 		EndIf
 			
 
@@ -54,30 +68,32 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			
 			currentPreinspectHole = currentPreinspectHole + 1
 			
-		ElseIf SelectRoutine = 2 Then
-			
-			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
-			currentInspectHole = currentInspectHole + 1
-
-		
-'		Else
-'			Print "Inspection argument undefined"
-		EndIf
+'		ElseIf SelectRoutine = 2 Then
+'			
+'			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
+'			currentInspectHole = currentInspectHole + 1
+'		
+''		Else
+''			Print "Inspection argument undefined"
+'		EndIf
 			
 		Go P(i) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
 		Wait .25
 	Next
 	
-	PrintInspectionArray()
-	PrintSkipArray()
+'	PrintInspectionArray()
+'	PrintSkipArray()
+
 	InspectPanel = 0 ' Inspection occured without errors
 	Go PreScan :U(CU(Here))
-
+	
+	PrintPreInspectionArray()
 '	PrintPassFailArray()
 '	PrintInspectionArray()
 '	PrintPanelArray()
 '	UnpackInspectionArrays()
 exitInspectPanel:
+
 	SystemStatus = StateMoving
 	Jump PreScan LimZ zLimit ' Go Home
 	Trap 2 'disarm trap
@@ -326,7 +342,7 @@ Function PrintInspectionArray()
 	
 	Print "#" + " " + "L" + " " + "R"
 
-	For n = 0 To recNumberOfHoles - 1
+	For n = 0 To recNumberOfHoles
 		Print Str$(n) + " " + Str$(InspectionArray(PrintArrayIndex, LeftSpotFace)) + " " + Str$(InspectionArray(PrintArrayIndex, RightSpotFace))
 		PrintArrayIndex = PrintArrayIndex + 1
 	Next
@@ -334,6 +350,21 @@ Function PrintInspectionArray()
 	PrintArrayIndex = 0 	'Reset index
 	
 Fend
+Function PrintPreInspectionArray()
+	
+	Integer n, PrintArrayIndex
+	
+	Print "#" + " " + "L" + " " + "R"
+
+	For n = 1 To recNumberOfHoles
+		Print Str$(n) + " " + Str$(PreInspectionArray(PrintArrayIndex, 0))
+		PrintArrayIndex = PrintArrayIndex + 1
+	Next
+	
+	PrintArrayIndex = 0 	'Reset index
+	
+Fend
+
 Function PrintSkipArray()
 	
 	Integer n, PrintArrayIndex

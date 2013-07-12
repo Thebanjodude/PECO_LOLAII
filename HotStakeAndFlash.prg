@@ -6,15 +6,17 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	SystemStatus = StateHotStakePanel
 	
 	Integer i
+	Real RobotZOnAnvil
 	Boolean SkippedHole
-	currentHSHole = 1
+	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
+	ZLasertoHeatStake = 291.42372 ' This is a calibrated value, it will be stored in the HMI	
 	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
 
 	For i = FirstHolePointHotStake To LastHolePointHotStake
-		
-		SkippedHole = False 'Reset flag
 
+		SkippedHole = False 'Reset flag
+		
 		If SkipHoleArray(currentHSHole, 0) <> 0 Then ' When nonzero, don't populate the hole because we want to skip it
 			SkippedHole = True 'Set flag
 			Print "Skipped Hole"
@@ -24,8 +26,6 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 		
 			Jump P(i) LimZ zLimit ' Go to the next hole
 			
-			Wait 1
-	
 '			If hsPanelPresnt = False Then ' A boss should be engaging the anvil but it isnt...
 '				erPanelStatusUnknown = True
 '				HotStakePanel = 2
@@ -35,15 +35,24 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 '				Jump PreHotStake :U(CU(Here)) LimZ zLimit ' Pull back from the hot stake machine
 '				Exit Function ' exit with error
 '			EndIf
-	
-			' Add Tanda's Heat State Function here, it should tell the HS to install an insert
+			
+			RobotZOnAnvil = CZ(Here)
+'			Print "RobotZOnAnvil", RobotZOnAnvil
+'			Print "RobotZOnAnvil - ZSpotfacetoQuillOffset", RobotZOnAnvil - ZSpotfacetoQuillOffset
 
-		'	Pause ' Added for Testing
+            HSProbePosition = (ZLasertoHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth)) /25.4
+            Print "heat stake Position:", HSProbePosition
+             
+            ' Send HSProbePosition over modbus here
+			Pause ' for testing
+	
+			SFree 1, 2, 3, 4
+			' Add Tanda's Heat State Function here, it should tell the HS to install an insert
 		
 '		EndIf
 		
 		currentHSHole = currentHSHole + 1
-		
+		SLock 1, 2, 3, 4
 	Next
 		
 exitHotStake:

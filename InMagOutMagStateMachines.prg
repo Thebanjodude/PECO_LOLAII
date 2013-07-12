@@ -39,22 +39,26 @@ Do While True
 			EndIf
 			
 		Case StatePresentNextPart
-			
+
 			If Sw(inMagPnlRdyH) = True Then ' A panel is not present, move platen up
+			
 				On inMagMtrDirH 'Set direction to UP
 				On inMagMtrH ' Turn on motor
 				NextState = StatePresentNextPart
-			ElseIf inMagUpLim = True Then 'If upper limit is reached then the magazine is out of panels 
-				erInMagEmpty = True ' Tell operator the magazine is empty
-				NextState = StateLowering
+				
+				If Sw(inMagUpLimH) = True Then 'If upper limit is reached then the magazine is out of panels 
+					erInMagEmpty = True ' Tell operator the magazine is empty
+					NextState = StateLowering
+				EndIf
+				
 			Else
 				Off inMagMtrH ' Turn off motor
 				NextState = StatePartPresent
 			EndIf
-			
+
 		Case StateLowering
 		
-			If inMagLowLim = False Then ' Keep lowering until we hit the lower limit (home)
+			If Sw(inMagLowLimH) = False Then ' Keep lowering until we hit the lower limit (home)
 				Off inMagMtrDirH 'set direction to DOWN
 				On inMagMtrH ' Turn on motor
 				NextState = StateLowering
@@ -74,21 +78,25 @@ Do While True
 			EndIf
 			
 		Case StateInMagPaused
+			
 			Off inMagMtrH ' Turn off the motor becuase we are paused
+			NextState = StateInMagPaused
 			
 		Default
+			
 			inMagCurrentState = StateInMagUnknown
+			Off inMagMtrH ' Turn off the motor becuase something unforseen has occured
 			erUnknown = True ' Tell operator there is an unknown error
 	Send
 	
 	inMagCurrentState = NextState 'Set next state to current state after we break from case statment
 		
 	' This block of code checks if an interlock has been opened. 
-	If Sw(inMagInterlockH) = True Then
+	If Sw(inMagInterlockH) = True And InmagInterlockFlag = False Then
 		' I am not sure if this interlock is hardware controlled, it should be.
 		InmagInterlockFlag = True ' Set a flag
 		InmagLastState = inMagCurrentState ' Save the current state before we pause
-		NextState = StateInMagPaused ' Send the state machine to paused
+		inMagCurrentState = StateInMagPaused ' Send the state machine to paused
 	ElseIf Sw(inMagInterlockH) = False And InmagInterlockFlag = True Then
 		InmagInterlockFlag = False ' Reset flag
 		inMagCurrentState = InmagLastState ' Go to the state before the interlock was open
@@ -97,7 +105,135 @@ Do While True
 Loop
 
 Fend
-Function OutMagControl()
+Function OutMagControl
+
+Integer NextState
+
+outMagCurrentState = StateOutMagWaitingUser ' On start up go to home position
+
+Do While True
+
+	Select outMagCurrentState
+		Case StateReadyToReceive
+
+			OutMagDropOffSignal = True ' Tell robot the output mag is ready
+			' Don't leave state unless panel is detected Or user specifies go home
+			Do Until outMagGoHome = True Or RobotPlacedPanel = True 'outMagPanelRdy = False Or 
+				Wait .1 ' Do nothing
+			Loop
+
+			If outMagGoHome = True Then ' Determine which state to go to next
+				NextState = StateGoHome
+				outMagGoHome = False ' Reset Flag
+			Else
+				NextState = StateOutMagPartPresent
+			EndIf
+
+			RobotPlacedPanel = False
+			OutMagDropOffSignal = False ' Tell robot the output mag is not ready
+
+		Case StateOutMagPartPresent
+
+			Do Until OutputMagSignal = True
+				Wait .25 ' Wait for main program to move robot out of the way
+			Loop
+			OutputMagSignal = False 'reset trigger
+			NextState = StateOutMagLowering
+
+		Case StateOutMagLowering
+
+			Boolean PartPresentTrigger, endloop
+
+			PartPresentTrigger = False ' Ititialize
+			endloop = False
+
+			Do Until endloop = True Or outMagLowLim = True
+				outMagMtrDirCC = False 'Set direction to Down
+				outMagMtrCC = True
+
+				If outMagPanelRdy = False Then
+					PartPresentTrigger = True
+				EndIf
+
+				If PartPresentTrigger = True And outMagPanelRdy = True Then
+					endloop = True
+				EndIf
+			Loop
+
+			outMagMtrCC = False
+
+            If outMagLowLim = True Then 'Determine which state to go to next
+				NextState = StateOutMagWaitingUser
+				erOutMagFull = True
+				OutMagDropOffSignal = False
+			Else
+				NextState = StateReadyToReceive
+			EndIf
+
+		Case StateOutMagWaitingUser
+
+			Do Until outMagUnloaded = True ' Don't leave state until magazine has been unloaded
+				Wait .1
+			Loop
+
+			NextState = StateRaising
+
+			erOutMagFull = False ' The user has ack'ed that they unloaded the output mag.
+			outMagUnloaded = False ' Reset Flag
+
+			If outMagPanelRdy = False Then
+				erOutMagFull = True ' The user has ack'ed that they unloaded the output mag.
+				outMagUnloaded = False ' Reset Flag
+				NextState = StateOutMagWaitingUser
+			EndIf
+
+		Case StateRaising
+
+			If outMagPanelRdy = False Then
+				NextState = StateOutMagWaitingUser
+			Else
+
+				Do Until outMagUpLim = True Or Sw(outMagPanelRdyH) = False  ' Move magazine up until we hit the upper limit
+	'				outMagMtrDirCC = True 'Set direction to UP 
+	'				outMagMtrCC = True
+					outMagMtrDirCC = True 'Set direction to UP 
+					On (outMagMtrH) ' Turn on Motor
+				Loop
+
+				Off (outMagMtrH)
+				outMagMtrCC = False 'Turn off motor
+
+				If Sw(outMagPanelRdyH) = False Then
+					NextState = StateOutMagLowering
+				Else
+					NextState = StateReadyToReceive
+				EndIf
+			EndIf
+
+		Case StateGoHome
+
+			Do Until outMagLowLim = True
+				outMagMtrDirCC = False 'Set direction to DOWN
+				outMagMtrCC = True
+			Loop
+
+			outMagMtrCC = False
+
+			outMagGoHome = False 'Clear Flag
+
+			NextState = StateOutMagWaitingUser
+
+		Default
+			erUnknown = True
+	Send
+
+outMagCurrentState = NextState 'Set next state to current state after we break from case statment
+
+Print "outMagCurrentState", outMagCurrentState
+Loop
+
+Fend
+Function OutMagControlRefactor()
 
 Integer NextState
 
@@ -114,7 +250,7 @@ Do While True
 				outMagGoHome = False ' Reset Flag
 				NextState = StateGoHome
 			ElseIf RobotPlacedPanel = True Then
-				RobotPlacedPanel = False ' Reset Flag
+				'RobotPlacedPanel = False ' Reset Flag
 				OutMagDropOffSignal = False ' Tell robot the output mag is NOT ready
 				NextState = StateOutMagPartPresent
 			Else
@@ -133,32 +269,24 @@ Do While True
 
 		Case StateOutMagLowering
 			
-			Boolean PartPresentTrigger, endloop
-			
-			PartPresentTrigger = False ' Ititialize
-			endloop = False
-			
-			Do Until endloop = True Or outMagLowLim = True
-				outMagMtrDirCC = False 'Set direction to Down
-				outMagMtrCC = True
-				
-				If outMagPanelRdy = False Then
-					PartPresentTrigger = True
-				EndIf
-			
-				If PartPresentTrigger = True And outMagPanelRdy = True Then
-					endloop = True
-				EndIf
-			Loop
-
-			outMagMtrCC = False
-
-            If outMagLowLim = True Then 'Determine which state to go to next
-				NextState = StateOutMagWaitingUser
-				erOutMagFull = True
-				OutMagDropOffSignal = False
+			If RobotPlacedPanel = True Then ' There is a panel to be moved down
+				RobotPlacedPanel = False ' Reset Flag
+				On outMagMtrDirH  'Set direction to Down
+				On outMagMtrH, .100, False ' Turn on Motor, for a short period of time with parallel ON 	
+				NextState = StateOutMagLowering
+			ElseIf Sw(outMagPanelRdyH) = False Then ' There is still a panel to be moved down
+				On outMagMtrDirH  'Set direction to Down
+				On outMagMtrH ' Turn on Motor
+				NextState = StateOutMagLowering
 			Else
+				Off outMagMtrH ' Turn off Motor		
 				NextState = StateReadyToReceive
+			EndIf
+			
+			If Sw(outMagLowLimH) = True Then ' If we try and lower the platen but the lower EOT is true then the magazine is full
+				erOutMagFull = True
+				OutMagDropOffSignal = False ' Tell the robot it cannot drop off a panel
+				NextState = StateOutMagWaitingUser
 			EndIf
 
 		Case StateOutMagWaitingUser
@@ -173,11 +301,11 @@ Do While True
 
 		Case StateRaising
 				
-				If outMagUpLim = True Or outMagPanelRdy = True Then ' Keep raisng until we hit EOT or a panel is detected
+				If outMagUpLim = False And outMagPanelRdy = False Then ' Keep raisng until we hit EOT or a panel is detected
 					outMagMtrDirCC = True 'Set direction to UP 
 					outMagMtrCC = True
 					NextState = StateRaising
-				ElseIf outMagPanelRdy = False Then
+				ElseIf outMagPanelRdy = True Then
 					' A panel is in the output magazine and it tripped the sensor. We need to move it down
 					' until it is out of the way
 					outMagMtrCC = False 'Turn off motor	
@@ -190,7 +318,7 @@ Do While True
 
 		Case StateGoHome
 
-			If outMagLowLim = False Then ' Keep lowering until we hit the lower limit (home)
+			If Sw(outMagLowLimH) = False Then ' Keep lowering until we hit the lower limit (home)
 				outMagMtrDirCC = False 'Set direction to DOWN
 				outMagMtrCC = True ' Turn on motor
 				NextState = StateGoHome

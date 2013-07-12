@@ -10,42 +10,48 @@ PowerOnSequence() ' Initialize the system and prepare it to do a job
 'recPartNumber = 88558 ' fake for testing
 recNumberOfHoles = 16 ' fake for test
 recFlashRequired = False
-recInsertDepth = .165 ' fake for testing
+recInsertDepth = 0 ' fake for testing
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
 recFlashDwellTime = 1
-recInmag = 50
-recOutmag = 101
-'recInmag = 10 '88558
-'recOutmag = 13 '88558
-recPreCrowding = 51
-recCrowding = 52
-FirstHolePointInspection = 53
-LastHolePointInspection = 68
-FirstHolePointHotStake = 69
-LastHolePointHotStake = 84
-FirstHolePointFlash = 85
-LastHolePointFlash = 100
-LoadPoints "points.pts"
-DeepBoss = True
 
-'recNumberOfHoles = 23 ' fake for test
+
 'recInmag = 50
-'recOutmag = 122
+'recOutmag = 101
+''recInmag = 10 '88558
+''recOutmag = 13 '88558
 'recPreCrowding = 51
 'recCrowding = 52
 'FirstHolePointInspection = 53
-'LastHolePointInspection = 75
-'FirstHolePointHotStake = 76
-'LastHolePointHotStake = 98
-''FirstHolePointFlash = 99
-''LastHolePointFlash = 121
-'LoadPoints "points2.pts"
-'DeepBoss = False
+'LastHolePointInspection = 68
+'FirstHolePointHotStake = 69
+'LastHolePointHotStake = 84
+'FirstHolePointFlash = 85
+'LastHolePointFlash = 100
+'LoadPoints "points.pts"
+'DeepBoss = True
+
+recNumberOfHoles = 23 ' fake for test
+recInmag = 50
+recOutmag = 122
+recPreCrowding = 51
+recCrowding = 52
+FirstHolePointInspection = 53
+LastHolePointInspection = 75
+FirstHolePointHotStake = 76
+LastHolePointHotStake = 98
+'FirstHolePointFlash = 99
+'LastHolePointFlash = 121
+LoadPoints "points2.pts"
+DeepBoss = False
 
 Power High ' Manually set power. This will be done in PowerOnSequence()
 Speed 30
 jobDone = False
+
+Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays 'fake for testing
+Redim InspectionArray(recNumberOfHoles, 1) 'fake for testing
+Redim PassFailArray(recNumberOfHoles, 0) 'fake for testing
 
 mainCurrentState = StateIdle ' The first state is Idle
 
@@ -102,6 +108,7 @@ Select mainCurrentState
 
 '		If StatusCheckCrowding = 0 Then
 			mainCurrentState = StatePreinspection
+'			mainCurrentState = StateHotStakePanel
 '		ElseIf StatusCheckCrowding = 2 Then
 '			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 '		EndIf
@@ -234,7 +241,7 @@ Function PowerOnSequence()
 	Xqt 4, SystemMonitor, NoEmgAbort
 	Xqt 5, iotransfer, NoEmgAbort
 	Xqt 6, HmiListen, NoEmgAbort
-    Xqt 7, InMagControl, Normal ' First state is lowering 
+    Xqt 7, InmagControl, Normal ' First state is lowering 
     Xqt 8, OutMagControl, Normal ' First state is raising 
 	Xqt 9, JointTorqueMonitor(), Normal
 	MBInitialize() ' Kick off the modbus
@@ -247,7 +254,7 @@ retry:
 	Speed 20 'Paramterize these numbers
 	Accel 50, 50
 	QP (On) ' turn On quick pausing	
-	Fine 1000, 1000, 1000, 1000 ' set the robot to high accuracy 	
+	Fine 10000, 10000, 10000, 10000 ' set the robot to high accuracy 	
 	
 '	Move PreScan :U(CU(CurPos)) ' go home
 '	Move PreScan ROT ' go home
