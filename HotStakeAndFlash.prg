@@ -24,7 +24,12 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 '		If SkippedHole = False Then 'If the flag is set then we have finished all holes
 		
-			Jump P(i) LimZ zLimit ' Go to the next hole
+			Jump P(i) +Z(6) LimZ zLimit  ' Go to the next hole
+			
+			SFree 1, 2
+			Do While Sw(HSPanelPresntH) = False ' Approach the panel slowly until we hit a torque limit
+				JTran 3, -.25 ' Move only the z-axis downward in .5mm increments
+			Loop
 			
 '			If hsPanelPresnt = False Then ' A boss should be engaging the anvil but it isnt...
 '				erPanelStatusUnknown = True
@@ -40,13 +45,18 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 '			Print "RobotZOnAnvil", RobotZOnAnvil
 '			Print "RobotZOnAnvil - ZSpotfacetoQuillOffset", RobotZOnAnvil - ZSpotfacetoQuillOffset
 
-            HSProbePosition = (ZLasertoHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth)) /25.4
-            Print "heat stake Position:", HSProbePosition
+            HSProbeFinalPosition = (ZLasertoHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth)) /25.4
+            Print "heat stake Position:", HSProbeFinalPosition
+            
+            MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32)
+            Wait .125
+			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32)
              
             ' Send HSProbePosition over modbus here
-			Pause ' for testing
-	
+
 			SFree 1, 2, 3, 4
+			Pause ' for testing
+			
 			' Add Tanda's Heat State Function here, it should tell the HS to install an insert
 		
 '		EndIf

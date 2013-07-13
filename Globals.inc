@@ -69,7 +69,6 @@ Global Boolean inMagGoHomeBtn, inMagIntLockAckBtn, inMagLoadedBtn
 Global Boolean jobPauseBtn, jobResumeBtn, jobStartBtn, abortJobBtn
 Global Boolean jobStopBtn, leftInterlockACKBtn, outMagGoHomeBtn
 Global Boolean outMagIntLockAckBtn, outMagUnloadedBtn, rightInterlockACKBtn, sftyFrmIlockAckBtn
-
 Global Boolean backInterlockACK, frontInterlockACK
 Global Boolean jobPause, jobResume, jobStart
 Global Boolean jobStop, leftInterlockACK
@@ -122,7 +121,7 @@ Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
 Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flashHomeNO, flashHomeNC
 Global Boolean drillGoCC, drillReturnCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
 Global Integer currentHSHole, currentFlashHole
-Global Real ZSpotfacetoQuillOffset, ZLasertoHeatStake, HSProbePosition
+Global Real ZSpotfacetoQuillOffset, ZLasertoHeatStake, HSProbeFinalPosition
 Global Real PreInspectionArray(0, 0)
 
 ' Recipe Ingredients for Panels
