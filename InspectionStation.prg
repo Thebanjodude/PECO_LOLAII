@@ -75,6 +75,8 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 '		
 ''		Else
 ''			Print "Inspection argument undefined"
+'			InspectPanel = 2 ' fail
+'			Exit Function
 '		EndIf
 			
 		Go P(i) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
@@ -333,8 +335,6 @@ Function MeasureInsertDepth(Index As Integer)
 	InspectionArray(Index, RightSpotFace) = MicroMetersToInches(GetLaserMeasurement("11"))
 '	PassFailArray(PanelArrayIndex, RightSpotFace) = PassOrFail(InspectionArray(PanelArrayIndex, RightSpotFace))
 	
-	'PrintInspectionArray()
-	
 Fend
 Function PrintInspectionArray()
 	
@@ -364,7 +364,6 @@ Function PrintPreInspectionArray()
 	PrintArrayIndex = 0 	'Reset index
 	
 Fend
-
 Function PrintSkipArray()
 	
 	Integer n, PrintArrayIndex
@@ -387,26 +386,25 @@ Function CrowdingSequence(StupidCompiler3 As Byte) As Integer
 Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 
 	Jump Prescan LimZ zLimit
-	Jump PreHotStake
-	MBWrite(pasCrowdingADDR, 0, MBTypeCoil)
-	Wait 2
+	Jump PreHotStake LimZ zLimit
+	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Make sure the crowding is open
 	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
-	suctionCupsCC = False
+	suctionCupsCC = False ' Turn off suction cups
 	Wait suctionWaitTime ' wait for cups to release
 	Go P(recCrowding) +Z(15) ' Relese the suction cups and move them out of the way for crowding
 	Wait .25
-	MBWrite(pasCrowdingADDR, 1, MBTypeCoil)
-	Wait 5
+	MBWrite(pasCrowdingADDR, 1, MBTypeCoil) ' Close crowding
+	Wait 2
 	
 '	Do While ZmaxTorque < .3 ' Approach the panel slowly until we hit a torque limit
 '		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
 '	Loop
 	
 	Go P(recCrowding)
-	suctionCupsCC = True
+	suctionCupsCC = True ' Turn on cups
 	Wait suctionWaitTime
-	MBWrite(pasCrowdingADDR, 0, MBTypeCoil)
-	Wait 2
+	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Open crowding
+	Wait 1
 	CrowdingSequence = 0
 	
 exitCrowding:

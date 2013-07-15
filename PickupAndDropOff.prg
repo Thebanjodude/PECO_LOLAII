@@ -80,7 +80,9 @@ Function PickupPanel(stupidCompiler As Byte) As Integer 'byte me
 	
 Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 
-	PickupPanel = 2 ' Default to fail
+	Integer TorqueCounter
+	PickupPanel = 2 ' Default to fail	
+	TorqueCounter = 0 ' reset counter
 
 	If inMagInterlock = True Then 'Check Interlock status
 		PickupPanel = 1 ' Interlock is open
@@ -103,10 +105,18 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 		Exit Function
 	EndIf
 	
-	Do While ZmaxTorque <= .3 ' Approach the panel slowly until we hit a torque limit
+	Xqt 9, JointTorqueMonitor(), Normal ' Kick off joint monitor	
+	Do While ZmaxTorque <= .3 Or TorqueCounter > 25 ' Approach the panel slowly until we hit a torque limit
 		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
+		TorqueCounter = TorqueCounter + 1
 	Loop
-
+	Halt JointTorqueMonitor() ' stop the joint monitor so we dont eat up cycels
+	
+'	If TorqueCounter > 25 Then
+'		PickupPanel = 2 ' Failed to pick up panel
+'		Exit Function
+'	EndIf
+	
 	suctionCupsCC = True ' Turn on the cups because we have engaged a panel
 	Wait suctionWaitTime ' Allow time for cups to seal on panel	
 	Jump PreScan LimZ zLimit ' Go home		

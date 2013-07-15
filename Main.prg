@@ -44,8 +44,8 @@ DeepBoss = True
 '______________________________________
 
 Power High ' Manually set power. This will be done in PowerOnSequence()
-Speed 30
-jobDone = False
+Speed 30 ' fake for test
+jobDone = False ' fake for test
 
 Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays 'fake for testing
 Redim InspectionArray(recNumberOfHoles, 1) 'fake for testing
@@ -93,14 +93,12 @@ Select mainCurrentState
 		
 '		If jobAbort = True Then
 '			mainCurrentState = StatePushPanel ' push a panel before going to idle
-'			print "aborting pick up)
+'			print "aborting pick up"
 '		EndIf
 				
 	Case StateCrowding
 		'This state Moves a panel from the home location, crowds it, then
 		' presents it to the laser scanner for pre-inspection
-		
-		'Bug-> abort job and leave the panel in the nest!
 		
 		StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
 
@@ -170,9 +168,9 @@ Select mainCurrentState
 		EndIf
 		
 	Case StateInspection
-		' This state uses the laser scanner to find pre-installed inserts and attempts
-		' to check if the correct panel has been put into the magazine.
-		' Add other checks
+		' This state uses the laser scanner to measure and log the depths of each insert at two places
+		' No matter the result of the InspectPanel() routine it always pushes a panel, but we need to know why
+		' it pushed-thus the different checks.
 		
 			StatusCheckInspection = InspectPanel(2) ' 2=Inspection of Install Inserts 
 			If StatusCheckInspection = 0 Then
@@ -202,7 +200,7 @@ Select mainCurrentState
 			mainCurrentState = StateIdle ' Go to idle because the operator wants to quit or job is done	
 			jobAbort = False ' reset flag
 			jobStart = False ' reset flag
-			jobDone = True ' set flag
+			jobDone = False ' reset flag
 		EndIf
 	Send
 		
@@ -241,7 +239,6 @@ Function PowerOnSequence()
 	Xqt 6, HmiListen, NoEmgAbort
     Xqt 7, InmagControl, Normal ' First state is lowering 
     Xqt 8, OutMagControl, Normal ' First state is raising 
-	Xqt 9, JointTorqueMonitor(), Normal
 	MBInitialize() ' Kick off the modbus
 retry:
 
