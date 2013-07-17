@@ -9,13 +9,15 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	Real RobotZOnAnvil
 	Boolean SkippedHole
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
+	HotStakePanel = 2 ' default to fail	
+	
 	ZLasertoHeatStake = 291.42372 ' This is a calibrated value, it will be stored in the HMI	
-		
+	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
 
 	Do Until pasMessageDB = 3
-		On heatStakeGoH, 2 ' Tell HS to go to soft home position
-		Wait 1
+		On heatStakeGoH, 1 ' Tell HS to go to soft home position
+		Wait 1.25
 	Loop
 
 	For i = FirstHolePointHotStake To LastHolePointHotStake
@@ -26,13 +28,12 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			Print "Skipped Hole"
 		EndIf
 
-'		If SkippedHole = False Then 'If the flag is set then we have finished all holes
+'		If SkippedHole = False Then 'If the flag is set then skip the hole
 		
-			Jump P(i) +Z(6) LimZ zLimit  ' Go to the next hole
-        
+			Jump P(i) +Z(5) LimZ zLimit  ' Go to the next hole        
 			SFree 1, 2 ' free X and Y
 
-			Do While Sw(HSPanelPresntH) = False ' Approach the panel slowly until we hit a torque limit
+			Do While Sw(HSPanelPresntH) = False ' Approach the panel slowly until we hit the anvil switch
 				JTran 3, -.25 ' Move only the z-axis downward in .25mm increments
 				' add timeout counter in here...
 			Loop
@@ -53,22 +54,30 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
             HSProbeFinalPosition = (ZLasertoHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth)) /25.4
             Print "heat stake Position:", HSProbeFinalPosition
             
+            If HSProbeFinalPosition < 13 Then
+				' Throw an Error
+            	Pause
+                HotStakePanel = 2 ' default to fail		
+            	Exit Function
+            EndIf
+            
             MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
  			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement point
-
-			ZmaxTorque = 0
-			PTCLR (3)
 			
 			' give modbus a chance to update the value from 3 to something else
 			Do Until pasMessageDB = 4
 				On heatStakeGoH, 1 ' Tell the HS to install 1 insert
 				Wait .5
 			Loop
+			
+			ZmaxTorque = 0
+			PTCLR (3)
 	
 			Do Until pasMessageDB = 3 ' monitor the torque when hs is installing insert
 				ZmaxTorque = PTRQ(3)
 				If ZmaxTorque > .3 Then
-					erUnknown = True
+					erUnknown = True ' replace this with a real error
+					Print "Over torque: HS vs Robot"
 					Pause
 				EndIf
 			Loop
@@ -83,16 +92,20 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 		
 exitHotStake:
 
+	MBWrite(pasHomeADDR, 1, MBTypeCoil) ' Home the heat stake machine by toggling
+	MBWrite(pasHomeADDR, 0, MBTypeCoil)
+	
+	Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
+		Wait .1
+	Loop
+
 	SystemStatus = StateMoving
 	Jump PreHotStake :U(CU(Here)) LimZ zLimit ' Pull back from the hot stake machine
 	
 	If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 		jobAbort = True
 	EndIf
-	
-	MBWrite(pasHomeADDR, 1, MBTypeCoil) ' Home the heat stake machine by toggling
-	MBWrite(pasHomeADDR, 0, MBTypeCoil)
-	
+		
 Trap 2 ' disarm trap	
 
 Fend

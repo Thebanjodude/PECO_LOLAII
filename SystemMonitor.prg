@@ -182,8 +182,13 @@ Do While True
 '		Pause
 	EndIf
 	
-' In this section I set the error in the main routine and the lights and pausing are changed here	
+	If HotStakeTempRdy = False Then
+		erHeatStakeTemp = True
+	Else
+		erHeatStakeTemp = False
+	EndIf
 	
+' In this section I set the error in the main routine and the lights and pausing are changed here	
 If erPanelStatusUnknown = True Then
 	stackLightYelCC = True
 	stackLightAlrmCC = True

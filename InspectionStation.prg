@@ -23,7 +23,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		
 		Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
 
-		Go P(i) +Z(5) ' go up another 5 because the bottoms are dropping out
+		Go P(i)
 		
 		If SelectRoutine = 1 Then
 
@@ -33,6 +33,15 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			RobotZposition = CZ(Here) ' Where are we at in robot Z when we take the laser measurement
 			
 			Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
+            
+            If Abs(ZdiffFromLaserCenter) < 25 Then
+				' Throw an Error
+				Print "Hole not within Laser Range"
+				erUnknown = True
+            	Pause
+                InspectPanel = 2 ' default to fail		
+            	Exit Function
+            EndIf
 			
 			ZSpotfacetoQuillOffset = RobotZposition - ZdiffFromLaserCenter
 			

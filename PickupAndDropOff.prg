@@ -1,6 +1,6 @@
 #include "Globals.INC"
 
-Function DropOffPanel(stupidCompiler1 As Byte) As Integer 'byte me
+Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 ' You can't return a value unless you pass it one	
 
 'Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap

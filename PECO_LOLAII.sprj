@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/07/16 22:05:31:177,DS:0000004128,CS:13674,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2013/07/17 15:08:55:470,DS:0000004131,CS:00057,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="7/16/2013 4:05:23 PM"
-	bBuildComplete=True
+	sLastModified="7/17/2013 9:08:37 AM"
+	bBuildComplete=False
 	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMWKSSEHLERS"
+	sComputerName="ALWKSBSCHAEFER"
 }
 UserProperties {
 	sVersion=""

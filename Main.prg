@@ -249,7 +249,7 @@ Function PowerOnSequence()
 	MBInitialize() ' Kick off the modbus
 retry:
 
-	ClearMemory()
+	ClearMemory() ' writes a zero to all the memIO
 
 '	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
 	
@@ -289,13 +289,9 @@ Function HotStakeTempRdy() As Boolean
 	
 	If pasPIDsetupInTempZone1 = True And pasPIDsetupInTempZone2 = True Then
 		HotStakeTempRdy = True ' ready to start job
-		erHeatStakeTemp = False
 	Else
 		HotStakeTempRdy = False ' Temperature is not in range
-		erHeatStakeTemp = True
 	EndIf
-	
-	HotStakeTempRdy = True ' fake for testing
 	
 Fend
 'Function PowerOnHomeCheck() As Boolean
@@ -341,80 +337,13 @@ Fend
 'Fend
 '
 
-Function getRobotPoints() As Integer
-'This is where PECO will put a case in for each panel they have. 	
-'From the recipe, the part number is chosen from this case statement and all the taught points are loaded up 
-'at runtime.
-
-	Select recPartNumber
-		
-		Case 88555
-			
-			LoadPoints "points.pts"
-			FirstHolePointInspection = 350
-			LastHolePointInspection = 365
-			FirstHolePointHotStake = 400
-			LastHolePointHotStake = 405
-			FirstHolePointFlash = 316
-			LastHolePointFlash = 331
-			recInmag = 45
-			recOutmag = 55
-
-			erPanelUndefined = False
-			getRobotPoints = 0
-			
-		Case 88558
-			LoadPoints "points.pts"
-			recInmag = 54
-			recOutmag = 55
-			erPanelUndefined = False
-			getRobotPoints = 0
-		
-		Default
-			' An operator chose a panel part number that has not been programmed into the system
-			erPanelUndefined = True
-			getRobotPoints = 2
-	Send
-Fend
-Function testLaser()
-	
-	Crowding = 100
-	
-Do While True
-	LoadPoints "points.pts"
-	Integer i, s
-	zLimit = -12.5
-	suctionWaitTime = 1
-	recNumberOfHoles = 3
-	s = 0
-	Motor On
-	Power High
-	Speed 50
-	Accel 50, 50
-	Redim InspectionArray(2, 1)
-	
-	CrowdingSequence(0)
-	Jump PreScan LimZ zLimit
-	
-For i = 110 To 112
-	Jump P(i) LimZ zLimit
-	MeasureInsertDepth(s)
-	s = s + 1
-	Go P(i) -Y(50)
-Next
-
-	PrintInspectionArray()
-	Jump PreScan LimZ zLimit
-Loop
-
-Fend
 Function ClearMemory()
 	
-For x = 0 To 15
-	MemOutW x, 0 ' This writes 0 to all memory locations
-Next
-
-x = 0
+	For x = 0 To 15
+		MemOutW x, 0 ' This writes 0 to all memory locations in word chunks
+	Next
+	
+	x = 0
 	
 Fend
 
