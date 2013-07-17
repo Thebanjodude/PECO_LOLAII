@@ -148,7 +148,7 @@ Global Boolean erWrongPanelDims, erWrongPanel, erWrongPanelInsert, erHmiDataAck
 Global Boolean erInMagEmpty, erInMagOpenInterlock, erOutMagCrowding, erPanelUndefined
 Global Boolean erInMagCrowding, erOutMagFull, erOutMagOpenInterlock, erBadPressureSensor
 Global Boolean erLaserScanner, erDCPower, erDCPowerHeatStake, erHeatStakeTemp
-Global Boolean erHeatStakeBreaker, erBowlFeederBreaker, erInMagBreaker
+Global Boolean erHeatStakeBreaker, erBowlFeederBreaker, erInMagBreaker ', erModbusPort, erModbusCommand,erModbusCommand
 Global Boolean erOutMagBreaker, erFlashBreaker, erDebrisRemovalBreaker
 Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180, erIllegalArmMove
 Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing, erRobotNotAtHome

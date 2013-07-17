@@ -64,7 +64,11 @@ Select mainCurrentState
 		
 		If jobStart = True Then 'And HotStakeTempRdy = 0 and CheckInitialParameters()=0 Then ' Fake for testing
 			mainCurrentState = StatePopPanel
+			MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
+			Wait .25
+			MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
 			jobStart = False ' reset flag
+			jobAbort = False 'reset flag
 		Else
 			mainCurrentState = StateIdle ' Stay in idle until ready
 		EndIf
@@ -91,10 +95,10 @@ Select mainCurrentState
 			Print "going to idle"
 		EndIf
 		
-'		If jobAbort = True Then
-'			mainCurrentState = StatePushPanel ' push a panel before going to idle
-'			print "aborting pick up"
-'		EndIf
+		If jobAbort = True Then
+			mainCurrentState = StatePushPanel ' push a panel before going to idle
+			Print "aborting pick up"
+		EndIf
 				
 	Case StateCrowding
 		'This state Moves a panel from the home location, crowds it, then
@@ -105,13 +109,14 @@ Select mainCurrentState
 '		If StatusCheckCrowding = 0 Then
 			mainCurrentState = StatePreinspection
 '			mainCurrentState = StateHotStakePanel
+'			mainCurrentState = StateFlashRemoval
 '		ElseIf StatusCheckCrowding = 2 Then
 '			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 '		EndIf
 		
-'		If jobAbort = True Then
-'			mainCurrentState = StatePushPanel ' Go drop off the panel before we quit 
-'		EndIf
+		If jobAbort = True Then
+			mainCurrentState = StatePushPanel ' Go drop off the panel before we quit 
+		EndIf
 
 	Case StatePreinspection
 		' This state uses the laser scanner to find pre-installed inserts and attempts
@@ -140,8 +145,8 @@ Select mainCurrentState
 		If StatusCheckHotStake = 0 Then
 			Print "hot stake done"
 			If recFlashRequired = False Then
-				'mainCurrentState = StateInspection ' Flash not required so skip it
-				mainCurrentState = StatePushPanel
+				mainCurrentState = StateInspection ' Flash not required so skip it
+				'mainCurrentState = StatePushPanel
 			Else
 				mainCurrentState = StateFlashRemoval ' The next state is normally Flash Removal
 			EndIf
@@ -160,6 +165,8 @@ Select mainCurrentState
 		If StatusCheckFlash = 0 Then
 			mainCurrentState = StateInspection
 		ElseIf StatusCheckFlash = 2 Then ' Go to idle because there was an error
+			' I dont know if pushing is the correct solution...? if the tool never made it home it would
+			' break it when it tried to move (cause its stuck in the hole)
 			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 		EndIf
 
@@ -242,6 +249,8 @@ Function PowerOnSequence()
 	MBInitialize() ' Kick off the modbus
 retry:
 
+	ClearMemory()
+
 '	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
 	
 	Motor On
@@ -249,7 +258,6 @@ retry:
 	Speed 20 'Paramterize these numbers
 	Accel 50, 50
 	QP (On) ' turn On quick pausing	
-	Fine 10000, 10000, 10000, 10000 ' set the robot to high accuracy 	
 	
 '	Move PreScan :U(CU(CurPos)) ' go home
 '	Move PreScan ROT ' go home
@@ -400,5 +408,14 @@ Next
 Loop
 
 Fend
+Function ClearMemory()
 	
+For x = 0 To 15
+	MemOutW x, 0 ' This writes 0 to all memory locations
+Next
+
+x = 0
+	
+Fend
+
 

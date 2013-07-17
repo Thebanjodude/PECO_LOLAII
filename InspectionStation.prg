@@ -23,7 +23,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		
 		Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
 
-		Go P(i)
+		Go P(i) +Z(5) ' go up another 5 because the bottoms are dropping out
 		
 		If SelectRoutine = 1 Then
 
@@ -42,7 +42,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			
 '			ChangeProfile("07")
 '			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
-			
+'			
 '		If DeepBoss = True Then ' There are different volumes of bosses
 '			If BossCrosssectionalArea > -400 Then ' There is already an insert so set skip flag
 '				SkipHoleArray(currentPreinspectHole, 0) = 1
@@ -53,8 +53,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 '				SkipHoleArray(currentPreinspectHole, 0) = 1
 '				Print "Hole ", currentPreinspectHole, " is already populated"
 '			EndIf
-		EndIf
-			
+'		EndIf
 
 '			ChangeProfile("00")
 '			Print "Hole error:", GetLaserMeasurement("05")
@@ -68,16 +67,14 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			
 			currentPreinspectHole = currentPreinspectHole + 1
 			
-'		ElseIf SelectRoutine = 2 Then
-'			
-'			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
-'			currentInspectHole = currentInspectHole + 1
-'		
-''		Else
-''			Print "Inspection argument undefined"
-'			InspectPanel = 2 ' fail
-'			Exit Function
-'		EndIf
+		ElseIf SelectRoutine = 2 Then
+			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
+			currentInspectHole = currentInspectHole + 1
+		Else
+			Print "Inspection argument undefined"
+			InspectPanel = 2 ' fail
+			Exit Function
+		EndIf
 			
 		Go P(i) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
 		Wait .25
@@ -89,7 +86,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	InspectPanel = 0 ' Inspection occured without errors
 	Go PreScan :U(CU(Here))
 	
-	PrintPreInspectionArray()
+'	PrintPreInspectionArray()
 '	PrintPassFailArray()
 '	PrintInspectionArray()
 '	PrintPanelArray()
@@ -277,7 +274,7 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
 	
 	Print #203, "PW" + "," + ProfileNumber$ ' Per laser scanner manual this is how you change profiles
 
-	Wait .3 ' wait for laser scanner to receive the command. This may be able to be shortened up
+	Wait .25 ' wait for laser scanner to receive the command. This may be able to be shortened up
 
     i = ChkNet(203)
     If i > 0 Then
@@ -305,7 +302,7 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
 	EndIf
                 
 	Print #203, "MS,0," + OutNumber$
-	Wait 1
+	Wait .5
 	
 ' This routine checks the buffer for a returned value from the laser scanner, 
 ' checks for the correct responce from the laser and returns requested data.
@@ -342,7 +339,7 @@ Function PrintInspectionArray()
 	
 	Print "#" + " " + "L" + " " + "R"
 
-	For n = 0 To recNumberOfHoles
+	For n = 1 To recNumberOfHoles
 		Print Str$(n) + " " + Str$(InspectionArray(PrintArrayIndex, LeftSpotFace)) + " " + Str$(InspectionArray(PrintArrayIndex, RightSpotFace))
 		PrintArrayIndex = PrintArrayIndex + 1
 	Next
@@ -354,11 +351,11 @@ Function PrintPreInspectionArray()
 	
 	Integer n, PrintArrayIndex
 	
-	Print "#" + " " + "L" + " " + "R"
+	Print "#" + " " + "ZdiffFromLaserCenter"
 
 	For n = 1 To recNumberOfHoles
-		Print Str$(n) + " " + Str$(PreInspectionArray(PrintArrayIndex, 0))
-		PrintArrayIndex = PrintArrayIndex + 1
+		Print Str$(n) + " " + Str$(PreInspectionArray(n, 0))
+
 	Next
 	
 	PrintArrayIndex = 0 	'Reset index
@@ -394,7 +391,12 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Go P(recCrowding) +Z(15) ' Relese the suction cups and move them out of the way for crowding
 	Wait .25
 	MBWrite(pasCrowdingADDR, 1, MBTypeCoil) ' Close crowding
-	Wait 2
+	'Wait 2
+
+	' wait for verification that the crowding has closed
+	Do Until pasCrowding = True
+		Wait .25
+	Loop
 	
 '	Do While ZmaxTorque < .3 ' Approach the panel slowly until we hit a torque limit
 '		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
@@ -404,7 +406,13 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	suctionCupsCC = True ' Turn on cups
 	Wait suctionWaitTime
 	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Open crowding
-	Wait 1
+	'Wait 1
+	
+	' wait for verification that the crowding has opened
+	Do Until pasCrowding = False
+		Wait .25
+	Loop
+	
 	CrowdingSequence = 0
 	
 exitCrowding:

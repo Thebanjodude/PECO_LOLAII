@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/07/15 15:09:24:498,DS:0000004126,CS:24870,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/07/16 22:05:31:177,DS:0000004128,CS:13674,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="7/15/2013 9:09:17 AM"
-	bBuildComplete=False
-	bRebuildRequired=False
+	sLastModified="7/16/2013 4:05:23 PM"
+	bBuildComplete=True
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="ALWKSBSCHAEFER"
+	sComputerName="AMWKSSEHLERS"
 }
 UserProperties {
 	sVersion=""
@@ -30,25 +30,25 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/13/2013 12:58:31 AM"
+	sTimeSavedInController="7/15/2013 11:47:34 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/13/2013 5:08:57 AM"
+	sTimeSavedInController="7/16/2013 7:01:37 PM"
 }
 ProgramFile3 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/6/2013 7:38:24 PM"
+	sTimeSavedInController="7/16/2013 4:29:42 PM"
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/12/2013 6:15:35 PM"
+	sTimeSavedInController="7/12/2013 6:15:34 PM"
 }
 ProgramFile5 {
 	sName="OldCode.prg"
@@ -60,25 +60,25 @@ ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/12/2013 3:24:05 PM"
+	sTimeSavedInController="7/15/2013 11:02:30 PM"
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/13/2013 4:55:51 AM"
+	sTimeSavedInController="7/15/2013 11:29:32 PM"
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/12/2013 7:33:54 PM"
+	sTimeSavedInController="7/16/2013 10:05:23 PM"
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/9/2013 3:34:27 PM"
+	sTimeSavedInController="7/16/2013 10:05:23 PM"
 }
 ProgramFile10 {
 	sName="CalibrationRoutines.prg"
@@ -90,7 +90,7 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="7/12/2013 11:50:33 PM"
+	sTimeSavedInController="7/15/2013 10:15:22 PM"
 }
 nPointFileCount=3
 PointFile1 {

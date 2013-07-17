@@ -821,21 +821,30 @@ Function iotransfer()
 	Real zLimitOld
 	Real ZmaxTorqueOld
 	String ctrlrErrMsgOld$
-
-    
-    
     
     ' define the connection to the HMI
 '    SetNet #201, "10.22.2.30", 1502, CRLF, NONE, 0
     SetNet #201, "10.22.251.171", 1502, CRLF, NONE, 0
 
+	TmReset (0) 'reset timer 0
+	
     Do While True
-    	
+		
+	'send I/O not more than twice per second
+	' TODO -- fix to not be a busy wait
+	Do While Tmr(0) < 0.5
+		Wait 0.1
+	Loop
+	
+	'restart the timer so that we can come back and check to 
+	'see if a 0.5 second has passed
+	TmReset 0
+	
    	OnErr GoTo RetryConnection ' on any error retry connection
   
 RetryConnection:
-      	'Wait .5 'send I/O once per second
-        If ChkNet(201) < 0 Then ' If port is not open
+      	If ChkNet(201) < 0 Then ' If port is not open
+      		Wait 2 'give things a chance to settle before opening the port
             OpenNet #201 As Client
             Print "Attempted Open TCP port to HMI"
 		EndIf
@@ -843,6 +852,14 @@ RetryConnection:
 heartBeat = Not heartBeat
 'Tx to HMI:
 ' `awk '{ gsub(/"/,"",$6) ;print $6}' printsOld | awk '{ print "If "$1" <> "$1"Old Then\n\tPrint #201, \"{\", Chr$(&H22) + \""$1"\" + Chr$(&H22), \":\", Str$("$1"), \"}\",\n\t"$1"Old = "$1"\nEndIf"}' - > printsNew
+
+'_Don' replace when updating robot.txt_____________
+If ctrlrErrMsg$ <> ctrlrErrMsgOld$ Then
+	Print #201, "{", Chr$(&H22) + "ctrlrErrMsg$" + Chr$(&H22), ":", Chr$(&H22) + ctrlrErrMsg$ + Chr$(&H22), "}",
+	ctrlrErrMsg$ = ctrlrErrMsgOld$
+EndIf
+'_____________
+
 If alarmMute <> alarmMuteOld Then
 	Print #201, "{", Chr$(&H22) + "alarmMute" + Chr$(&H22), ":", Str$(alarmMute), "}",
 	alarmMuteOld = alarmMute

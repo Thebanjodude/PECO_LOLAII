@@ -8,19 +8,6 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer 'byte me
 	DropOffPanel = 2 ' dafult to fail
 	SystemStatus = StatePushPanel
 	PanelPassedInspection = True ' fake it for testing	
-
-	panelDataTxRdy = True ' Tell HMI to readout hole data
-	
-' this is for hmi logging
-'	Wait MemSw(panelDataTxAckH) = True, 3
-'	Redim InspectionArray(0, 0) ' clear all the values in the Inspection Array
-'	panelDataTxRdy = false ' reset flag	
-'	If TW = True Then ' catch that the HMI timed out without acking
-'		DropOffPanel = False
-'		erHmiDataAck = True
-'		Print "no data ack from hmi"
-'		GoTo exitPushPanel
-'	EndIf
 	
 	If outMagInt = True Then ' Check interlock status
 		DropOffPanel = 1 ' Interlock is open		
@@ -33,6 +20,21 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer 'byte me
 	Do Until OutMagDropOffSignal = True
 		Wait .25 ' wait until the output magazine is ready
 	Loop
+
+	panelDataTxRdy = True ' Tell HMI to readout hole data
+	
+' this is for hmi logging
+	Wait MemSw(panelDataTxAckH) = True, 3
+	Redim InspectionArray(0, 0) ' clear all the values in the Inspection Array
+	panelDataTxRdy = False ' reset flag	
+'	If TW = True Then ' catch that the HMI timed out without acking
+'		DropOffPanel = False
+'		erHmiDataAck = True
+'		Print "no data ack from hmi"
+'		Pause
+''		DropOffPanel = 2
+''		Exit Function
+'	EndIf
 	
 	Jump P(recOutmag) LimZ zLimit
 	
@@ -104,13 +106,14 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 		Jump PreScan LimZ zLimit ' Go home
 		Exit Function
 	EndIf
-	
-	Xqt 9, JointTorqueMonitor(), Normal ' Kick off joint monitor	
-	Do While ZmaxTorque <= .3 Or TorqueCounter > 25 ' Approach the panel slowly until we hit a torque limit
+
+	PTCLR (3)
+	ZmaxTorque = 0
+	Do While ZmaxTorque <= .3 'Or TorqueCounter > 25 ' Approach the panel slowly until we hit a torque limit
 		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
-		TorqueCounter = TorqueCounter + 1
+'		TorqueCounter = TorqueCounter + 1
+		ZmaxTorque = PTRQ(3)
 	Loop
-	Halt JointTorqueMonitor() ' stop the joint monitor so we dont eat up cycels
 	
 '	If TorqueCounter > 25 Then
 '		PickupPanel = 2 ' Failed to pick up panel
@@ -140,7 +143,7 @@ Function JointTorqueMonitor()
 	
 	ATCLR ' Clear the buffers
     PTCLR
-        
+    
 Do While True
 	ZmaxTorque = PTRQ(3) ' Get the z axis peak torque	
 	PTCLR ' Clear the buffers	

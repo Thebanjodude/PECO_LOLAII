@@ -97,7 +97,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 		Exit Function
 	EndIf
 	
-	Print "queueing request", Address, value, Type
+	Print "queueing request", Address, Value, Type
 	
 	
 	' range check against type here if I decide to become untrusting TMH
@@ -132,7 +132,7 @@ Function MBCommandTask()
 	' the matching FPGA serial port line termination is somewhat irrelavent
 	' since we are using the binary send and receive the timeout is set to
 	' 20ms which is almost 6 times the theoritial tranfer time of the typical 7 byte transfer
-	SetNet #204, "10.22.251.171", 7352, CR, NONE, 0.1
+	SetNet #204, "10.22.251.171", 7352, CR, NONE, 3
 	OpenNet #204 As Client
 	
 	' each time through this infinite loop one modbus command will be executed.
@@ -141,10 +141,13 @@ Function MBCommandTask()
 	' any communication or CRC errors will abort this background task at which
 	' time it will require a call to MBinitialize to set things up and kick
 	' this off again.
-	Wait 1
+	
+	' give things a chance to settle
+	Wait 3
+	
+	' retart the metering timer
+	TmReset 1
 	Do While 1
-		
-		
 		' if the port is not open try to open it
 		portStatus = ChkNet(204)
 		If portStatus < 0 Then
@@ -199,36 +202,49 @@ Function MBCommandTask()
 				'invalid type
 			EndIf
 		Else
-			' priority reads
-'			result = modbusReadRegister(&hA4B0)
-'				pasInsertDetected = BTst(result, 4)
-'				pasSteelInsert = BTst(result, 5)
-'				pasShuttleMidway = BTst(result, 6)
-'				pasShuttleLoadPosition = BTst(result, 8)
-'				pasShuttleNoLoad = BTst(result, 9)
-'				pasShuttleExtend = BTst(result, 10)
-'				pasInsertInShuttle = BTst(result, 11)
-'			result = modbusReadRegister(&hA479)
-'				pasHeadDown = BTst(result, 4)
-'				pasHeadUp = BTst(result, 5)
-'				pasSlideExtend = BTst(result, 7)
-'				pasInsertGripper = BTst(result, 8)
-'				pas1inLoadInsertCylinder = BTst(result, 9)
-'				pasBowlDumpOpen = BTst(result, 11)
-'				pasVibTrack = BTst(result, 12)
-'				pasBowlFeeder = BTst(result, 13)
-'				pasBlowInsert = BTst(result, 14)
-'			result = modbusReadRegister(&hA7B8)
-'				pasMCREStop = BTst(result, 0)
-'				pasStart = BTst(result, 1)
-'				pasHeadinsertPickupRetract = BTst(result, 6)
-'				pasHeadinsertpickupextend = BTst(result, 7)
-'			pasVerticalLocation = modbusRead32Register(&h0002) * .000000762939
-'			pasPreHeatActual = modbusReadRegister(&hA147) * 0.1
-'			pasDwellActual = modbusReadRegister(&hA148) * 0.1
-'			pasCoolActual = modbusReadRegister(&hA149) * 0.1
-'			pasMessageDB = modbusReadRegister(&h0009)
+			' read not more than twice per second
+			' TODO -- change this from a busy wait to a "wait on XXX" were XXX is a free running timer
+			Do While Tmr(1) < 0.5
+				Wait 0.1
+			Loop
 			
+			'restart the timer so that we can come back and check to 
+			'see if a 0.5 second has passed
+			TmReset 1
+
+			' priority reads
+			result = modbusReadRegister(&hA4B0)
+				pasInsertDetected = BTst(result, 4)
+				pasSteelInsert = BTst(result, 5)
+				pasShuttleMidway = BTst(result, 6)
+				pasShuttleLoadPosition = BTst(result, 8)
+				pasShuttleNoLoad = BTst(result, 9)
+				pasShuttleExtend = BTst(result, 10)
+				pasInsertInShuttle = BTst(result, 11)
+			result = modbusReadRegister(&hA479)
+				pasHeadDown = BTst(result, 4)
+				pasHeadUp = BTst(result, 5)
+				pasSlideExtend = BTst(result, 7)
+				pasInsertGripper = BTst(result, 8)
+				pas1inLoadInsertCylinder = BTst(result, 9)
+				pasBowlDumpOpen = BTst(result, 11)
+				pasVibTrack = BTst(result, 12)
+				pasBowlFeeder = BTst(result, 13)
+				pasBlowInsert = BTst(result, 14)
+			result = modbusReadRegister(&hA7B8)
+				pasMCREStop = BTst(result, 0)
+				pasStart = BTst(result, 1)
+				pasHeadinsertPickupRetract = BTst(result, 6)
+				pasHeadinsertpickupextend = BTst(result, 7)
+			pasCrowding = modbusReadInput(&h03A5)
+			pasVerticalLocation = modbusRead32Register(&h0002) * .000000762939
+			pasPreHeatActual = modbusReadRegister(&hA147) * 0.1
+			pasDwellActual = modbusReadRegister(&hA148) * 0.1
+			pasCoolActual = modbusReadRegister(&hA149) * 0.1
+			pasMessageDB = modbusReadRegister(pasMessageDBADDR)
+
+			
+			' lazy reads
 			Select CurrentReadNum
 			Case 1
 				pasHome = modbusReadInput(&h0057)
@@ -326,8 +342,6 @@ Function MBCommandTask()
 				pasPIDTuneDoneZone1 = modbusReadInput(&h0138)
 			Case 48
 				pasPIDTuneDoneZone2 = modbusReadInput(&h0139)
-			Case 49
-				pasCrowding = modbusReadInput(&h03A5)
 			Send
 			
 			CurrentReadNum = CurrentReadNum + 1
@@ -525,7 +539,9 @@ Function modbusReadRegister(regNum As Long) As Long
 	
 	Long CRC
 	Integer i
+	Integer portStatus
 	Boolean validResponse
+	Integer modByteRx(1)
 	
 	'build the command and send it to PLC
 	' function code		0x03
@@ -565,7 +581,23 @@ Function modbusReadRegister(regNum As Long) As Long
 	'modResponse(4) = value returned low byte
 	'modResponse(5) = CRC low byte
 	'modResponse(6) = CRC high byte
-	ReadBin #204, modResponse(), 7
+	
+	' might have a problem here...
+'	ReadBin #204, modResponse(), 7
+	' trying this instead
+	i = 0
+	Do While True
+		portStatus = ChkNet(204)
+		If portStatus > 0 Then
+			ReadBin #204, modByteRx(), 1
+			modResponse(i) = modByteRx(0)
+		ElseIf portStatus = 0 Then
+			Exit Do
+		Else
+			Print "modbus port error: ", portStatus
+		EndIf
+		i = i + 1
+	Loop
 	
 '	If regNum = &h0FE Or regNum = &h0FF Then
 '		Print "--", regNum
@@ -608,10 +640,10 @@ Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	modMessage(1) = MBCmdWriteCoil ' function code
 	modMessage(2) = RShift(coilNum, 8) ' high byte of address
 	modMessage(3) = coilNum And &hFF ' low byte of address
-	If Value = True Then
+	If value = True Then
 		modMessage(4) = &hFF; ' constant for setting coil on
 		modMessage(5) = 0;
-	ElseIf Value = False Then
+	ElseIf value = False Then
 		modMessage(4) = 0; ' constant for setting coil off
 		modMessage(5) = 0;
 	EndIf

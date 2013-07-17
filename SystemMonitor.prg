@@ -10,7 +10,6 @@ Do While True
 	
 	StateOfHealth()
 	
-	
 	If outMagInt = True Then ' If an interlock gets tripped then halt the state machine
 		
 		erOutMagOpenInterlock = True
