@@ -34,7 +34,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			
 			Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
             
-            If Abs(ZdiffFromLaserCenter) < 25 Then
+            If Abs(ZdiffFromLaserCenter) > 25 Then
 				' Throw an Error
 				Print "Hole not within Laser Range"
 				erUnknown = True
@@ -89,17 +89,19 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		Wait .25
 	Next
 	
-'	PrintInspectionArray()
+	If SelectRoutine = 1 Then
+		PrintPreInspectionArray()
+	Else
+		PrintInspectionArray()
+	'	PrintPassFailArray()	
+	'	UnpackInspectionArrays()
+	EndIf
+
 '	PrintSkipArray()
 
 	InspectPanel = 0 ' Inspection occured without errors
 	Go PreScan :U(CU(Here))
-	
-'	PrintPreInspectionArray()
-'	PrintPassFailArray()
-'	PrintInspectionArray()
-'	PrintPanelArray()
-'	UnpackInspectionArrays()
+
 exitInspectPanel:
 
 	SystemStatus = StateMoving
@@ -175,9 +177,9 @@ Function FakeLogging()
 Fend
 Function UnpackInspectionArrays()
 	
-'Sending a JSON array is a pain so we are just unpacking the array into seperate vars 	
-hole0L = InspectionArray(0, LeftSpotFace)
+'Sending a JSON array is a pain so we are just unpacking the array into seperate vars\ 	
 hole0R = InspectionArray(0, RightSpotFace)
+hole0L = InspectionArray(0, LeftSpotFace)
 hole1R = InspectionArray(1, RightSpotFace)
 hole1L = InspectionArray(1, LeftSpotFace)
 hole2R = InspectionArray(2, RightSpotFace)
@@ -222,6 +224,8 @@ hole21R = InspectionArray(21, RightSpotFace)
 hole21L = InspectionArray(21, LeftSpotFace)
 hole22R = InspectionArray(22, RightSpotFace)
 hole22L = InspectionArray(22, LeftSpotFace)
+hole23L = InspectionArray(23, LeftSpotFace)
+hole23R = InspectionArray(23, RightSpotFace)
 
 Integer n
 
@@ -235,35 +239,35 @@ Integer n
 'Next
 	
 Fend
-'Function UnpackPassFailArray()
-'	'Sending a JSON array is a pain so we are just unpacking the array into seperate vars 
-'	'If either spotface fails then the hole fails
-'	
-'	hole0PF = PassFailArray(0, LeftSpotFace) Or PassFailArray(0, RightSpotFace)
-'	hole1PF = PassFailArray(1, LeftSpotFace) Or PassFailArray(1, RightSpotFace)
-'	hole2PF = PassFailArray(2, LeftSpotFace) Or PassFailArray(2, RightSpotFace)
-'	hole3PF = PassFailArray(3, LeftSpotFace) Or PassFailArray(3, RightSpotFace)
-'	hole4PF = PassFailArray(4, LeftSpotFace) Or PassFailArray(4, RightSpotFace)
-'	hole5PF = PassFailArray(5, LeftSpotFace) Or PassFailArray(5, RightSpotFace)
-'	hole6PF = PassFailArray(6, LeftSpotFace) Or PassFailArray(6, RightSpotFace)
-'	hole7PF = PassFailArray(7, LeftSpotFace) Or PassFailArray(7, RightSpotFace)
-'	hole8PF = PassFailArray(8, LeftSpotFace) Or PassFailArray(8, RightSpotFace)
-'	hole9PF = PassFailArray(9, LeftSpotFace) Or PassFailArray(9, RightSpotFace)
-'	hole10PF = PassFailArray(10, LeftSpotFace) Or PassFailArray(10, RightSpotFace)
-'	hole11PF = PassFailArray(11, LeftSpotFace) Or PassFailArray(11, RightSpotFace)
-'	hole12PF = PassFailArray(12, LeftSpotFace) Or PassFailArray(12, RightSpotFace)
-'	hole13PF = PassFailArray(13, LeftSpotFace) Or PassFailArray(13, RightSpotFace)
-'	hole14PF = PassFailArray(14, LeftSpotFace) Or PassFailArray(14, RightSpotFace)
-'	hole15PF = PassFailArray(15, LeftSpotFace) Or PassFailArray(15, RightSpotFace)
-'	hole16PF = PassFailArray(16, LeftSpotFace) Or PassFailArray(16, RightSpotFace)
-'	hole17PF = PassFailArray(17, LeftSpotFace) Or PassFailArray(17, RightSpotFace)
-'	hole18PF = PassFailArray(18, LeftSpotFace) Or PassFailArray(18, RightSpotFace)
-'	hole19PF = PassFailArray(19, LeftSpotFace) Or PassFailArray(19, RightSpotFace)
-'	hole20PF = PassFailArray(20, LeftSpotFace) Or PassFailArray(20, RightSpotFace)
-'	hole21PF = PassFailArray(21, LeftSpotFace) Or PassFailArray(21, RightSpotFace)
-'	hole22PF = PassFailArray(22, LeftSpotFace) Or PassFailArray(22, RightSpotFace)
-'	
-'Fend
+Function UnpackPassFailArray()
+	'If either spotface fails then the hole fails	
+	
+	hole0PF = PassFailArray(0, LeftSpotFace) Or PassFailArray(0, RightSpotFace)
+	hole1PF = PassFailArray(1, LeftSpotFace) Or PassFailArray(1, RightSpotFace)
+	hole2PF = PassFailArray(2, LeftSpotFace) Or PassFailArray(2, RightSpotFace)
+	hole3PF = PassFailArray(3, LeftSpotFace) Or PassFailArray(3, RightSpotFace)
+	hole4PF = PassFailArray(4, LeftSpotFace) Or PassFailArray(4, RightSpotFace)
+	hole5PF = PassFailArray(5, LeftSpotFace) Or PassFailArray(5, RightSpotFace)
+	hole6PF = PassFailArray(6, LeftSpotFace) Or PassFailArray(6, RightSpotFace)
+	hole7PF = PassFailArray(7, LeftSpotFace) Or PassFailArray(7, RightSpotFace)
+	hole8PF = PassFailArray(8, LeftSpotFace) Or PassFailArray(8, RightSpotFace)
+	hole9PF = PassFailArray(9, LeftSpotFace) Or PassFailArray(9, RightSpotFace)
+	hole10PF = PassFailArray(10, LeftSpotFace) Or PassFailArray(10, RightSpotFace)
+	hole11PF = PassFailArray(11, LeftSpotFace) Or PassFailArray(11, RightSpotFace)
+	hole12PF = PassFailArray(12, LeftSpotFace) Or PassFailArray(12, RightSpotFace)
+	hole13PF = PassFailArray(13, LeftSpotFace) Or PassFailArray(13, RightSpotFace)
+	hole14PF = PassFailArray(14, LeftSpotFace) Or PassFailArray(14, RightSpotFace)
+	hole15PF = PassFailArray(15, LeftSpotFace) Or PassFailArray(15, RightSpotFace)
+	hole16PF = PassFailArray(16, LeftSpotFace) Or PassFailArray(16, RightSpotFace)
+	hole17PF = PassFailArray(17, LeftSpotFace) Or PassFailArray(17, RightSpotFace)
+	hole18PF = PassFailArray(18, LeftSpotFace) Or PassFailArray(18, RightSpotFace)
+	hole19PF = PassFailArray(19, LeftSpotFace) Or PassFailArray(19, RightSpotFace)
+	hole20PF = PassFailArray(20, LeftSpotFace) Or PassFailArray(20, RightSpotFace)
+	hole21PF = PassFailArray(21, LeftSpotFace) Or PassFailArray(21, RightSpotFace)
+	hole22PF = PassFailArray(22, LeftSpotFace) Or PassFailArray(22, RightSpotFace)
+	hole23PF = PassFailArray(23, LeftSpotFace) Or PassFailArray(23, RightSpotFace)
+	
+Fend
 
 Function ChangeProfile(ProfileNumber$ As String) As Boolean
 	
@@ -400,12 +404,13 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Go P(recCrowding) +Z(15) ' Relese the suction cups and move them out of the way for crowding
 	Wait .25
 	MBWrite(pasCrowdingADDR, 1, MBTypeCoil) ' Close crowding
-	'Wait 2
 
 	' wait for verification that the crowding has closed
 	Do Until pasCrowding = True
 		Wait .25
 	Loop
+	
+	Wait 1 ' wait for the crowd to take place
 	
 '	Do While ZmaxTorque < .3 ' Approach the panel slowly until we hit a torque limit
 '		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
@@ -415,12 +420,12 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	suctionCupsCC = True ' Turn on cups
 	Wait suctionWaitTime
 	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Open crowding
-	'Wait 1
-	
+
 	' wait for verification that the crowding has opened
 	Do Until pasCrowding = False
 		Wait .25
 	Loop
+	Wait 1 ' wait for the crowd to open	
 	
 	CrowdingSequence = 0
 	

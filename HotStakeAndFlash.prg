@@ -5,7 +5,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 	SystemStatus = StateHotStakePanel
 	
-	Integer i
+	Integer i, Counter
 	Real RobotZOnAnvil
 	Boolean SkippedHole
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
@@ -33,20 +33,21 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			Jump P(i) +Z(5) LimZ zLimit  ' Go to the next hole        
 			SFree 1, 2 ' free X and Y
 
-			Do While Sw(HSPanelPresntH) = False ' Approach the panel slowly until we hit the anvil switch
+			Counter = 0 ' reset counter
+			Do While Sw(HSPanelPresntH) = False Or Counter > 30 ' Approach the panel slowly until we hit the anvil switch
 				JTran 3, -.25 ' Move only the z-axis downward in .25mm increments
-				' add timeout counter in here...
+				Counter = Counter + 1
 			Loop
 			
-'			If counter = true Then ' A boss should be engaging the anvil but it isnt...
-'				erPanelStatusUnknown = True
-'				HotStakePanel = 2 ' fail
-'				Print "Boss did not engage the anvil"
-'				SystemStatus = StateMoving
-'				Jump PreHotStake :U(CU(Here)) LimZ zLimit ' Pull back from the hot stake machine
-'				Exit Function ' exit with error
-'			EndIf
+			Print "Counter:", Counter
 			
+			If Counter > 30 Then ' A boss should be engaging the anvil but it isnt...
+				erPanelStatusUnknown = True
+				HotStakePanel = 2 ' fail
+				Print "Boss did not engage the anvil"
+				GoTo exitHotStake
+			EndIf
+
 			RobotZOnAnvil = CZ(Here) ' Get z coord when boss is on anvil
 '			Print "RobotZOnAnvil", RobotZOnAnvil
 '			Print "RobotZOnAnvil - ZSpotfacetoQuillOffset", RobotZOnAnvil - ZSpotfacetoQuillOffset
@@ -54,8 +55,8 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
             HSProbeFinalPosition = (ZLasertoHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth)) /25.4
             Print "heat stake Position:", HSProbeFinalPosition
             
-            If HSProbeFinalPosition < 13 Then
-				' Throw an Error
+            If HSProbeFinalPosition > 12.8 Then
+				erUnknown = True ' replace this with a real error
             	Pause
                 HotStakePanel = 2 ' default to fail		
             	Exit Function
@@ -93,6 +94,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 exitHotStake:
 
 	MBWrite(pasHomeADDR, 1, MBTypeCoil) ' Home the heat stake machine by toggling
+	Wait 1
 	MBWrite(pasHomeADDR, 0, MBTypeCoil)
 	
 	Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)

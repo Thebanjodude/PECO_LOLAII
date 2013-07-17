@@ -224,7 +224,7 @@ If alarmMute = True Then ' Mute the alarm
 EndIf
 
 If erUnknown = True Then
-	Pause
+'	Pause
 EndIf
 		
 Loop

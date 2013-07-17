@@ -476,6 +476,7 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	Long CRC
 	Integer i
 	Boolean validResponse
+	Integer modByteRx(1)
 	
 	'build the command and send it to PLC
 	' function code		0x06
@@ -511,7 +512,21 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	'modResponse(5) = value low byte
 	'modResponse(6) = CRC low byte
 	'modResponse(7) = CRC high byte
-	ReadBin #204, modResponse(), 8
+	'ReadBin #204, modResponse(), 8
+	
+	i = 0
+	Do While True
+		portStatus = ChkNet(204)
+		If portStatus > 0 Then
+			ReadBin #204, modByteRx(), 1
+			modResponse(i) = modByteRx(0)
+		ElseIf portStatus = 0 Then
+			Exit Do
+		Else
+			Print "modbus port error: ", portStatus
+		EndIf
+		i = i + 1
+	Loop
 	
 	' check for valid response CRC
 	validResponse = modbusResponseCRC(8)
@@ -632,6 +647,7 @@ Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	Long CRC
 	Integer i
 	Boolean validResponse
+	Integer modByteRx(1)
 	
 	portStatus = ChkNet(204)
 
@@ -682,7 +698,22 @@ Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	'modResponse(5) = value low byte
 	'modResponse(6) = CRC low byte
 	'modResponse(7) = CRC high byte
-	ReadBin #204, modResponse(), 8
+'	ReadBin #204, modResponse(), 8
+
+	i = 0
+	Do While True
+		portStatus = ChkNet(204)
+		If portStatus > 0 Then
+			ReadBin #204, modByteRx(), 1
+			modResponse(i) = modByteRx(0)
+		ElseIf portStatus = 0 Then
+			Exit Do
+		Else
+			Print "modbus port error: ", portStatus
+		EndIf
+		i = i + 1
+	Loop
+	
 	
 	' check for valid response CRC
 	validResponse = modbusResponseCRC(8)
@@ -702,6 +733,9 @@ Function modbusReadCoil(coilNum As Long)
 	Long CRC
 	Integer i
 	Boolean validResponse
+	Integer portStatus
+	Integer modByteRx(1)
+
 
 	'build the command and send it to PLC
 	modMessage(0) = MBMitsubishiAddress 'PLC modbus address change to variable when integrated with rest of code TMH
@@ -730,7 +764,23 @@ Function modbusReadCoil(coilNum As Long)
 	'modResponse(3) = data byte
 	'modResponse(4) = CRC low byte
 	'modResponse(5) = CRC high byte
-	ReadBin #204, modResponse(), 6
+
+'	ReadBin #204, modResponse(), 6
+	i = 0
+	Do While True
+		portStatus = ChkNet(204)
+		If portStatus > 0 Then
+			ReadBin #204, modByteRx(), 1
+			modResponse(i) = modByteRx(0)
+		ElseIf portStatus = 0 Then
+			Exit Do
+		Else
+			Print "modbus port error: ", portStatus
+		EndIf
+		i = i + 1
+	Loop
+
+
 	If modResponse(3) And &h01 Then
 		modbusReadCoil = True
 	Else
@@ -754,6 +804,9 @@ Function modbusReadInput(inputNum As Long)
 	Long CRC
 	Integer i
 	Boolean validResponse
+	Integer portStatus
+	Integer modByteRx(1)
+
 	
 	'build the command and send it to PLC
 	modMessage(0) = MBMitsubishiAddress 'PLC modbus address change to variable when integrated with rest of code TMH
@@ -786,7 +839,20 @@ Function modbusReadInput(inputNum As Long)
 	'modResponse(4) = CRC low byte
 	'modResponse(5) = CRC high byte
 	
-	ReadBin #204, modResponse(), 6
+	'ReadBin #204, modResponse(), 6
+	i = 0
+	Do While True
+		portStatus = ChkNet(204)
+		If portStatus > 0 Then
+			ReadBin #204, modByteRx(), 1
+			modResponse(i) = modByteRx(0)
+		ElseIf portStatus = 0 Then
+			Exit Do
+		Else
+			Print "modbus port error: ", portStatus
+		EndIf
+		i = i + 1
+	Loop
 
 	If modResponse(3) = 0 Then
 		modbusReadInput = False

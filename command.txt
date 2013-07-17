@@ -183,4 +183,5 @@ PULSE:  1:     -116 pls 2:     -140 pls 3:       -1 pls 4:        0 pls
 Low Power Mode
 	   5
 	   5	   5
+> sfree
 > 
