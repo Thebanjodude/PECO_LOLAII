@@ -62,7 +62,9 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 	DropOffPanel = DropoffSuccessful
 
 	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have pulled		
-	If jobNumPanelsDone = jobNumPanels Then
+	Print "jobNumPanelsDone: ", jobNumPanelsDone
+	Print "jobNumPanels", jobNumPanels
+	If jobNumPanelsDone >= jobNumPanels Then
 		jobDone = True ' We have finished the run, don't execute the main loop
 	EndIf
 

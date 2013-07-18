@@ -65,10 +65,11 @@ Select mainCurrentState
 		If jobStart = True Then 'And HotStakeTempRdy = 0 and CheckInitialParameters()=0 Then ' Fake for testing
 			mainCurrentState = StatePopPanel
 			MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
-			Wait .25
+			Wait .5
 			MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
 			jobStart = False ' reset flag
 			jobAbort = False 'reset flag
+			jobNumPanelsDone = 0 ' reset panel counter
 		Else
 			mainCurrentState = StateIdle ' Stay in idle until ready
 		EndIf
@@ -107,9 +108,10 @@ Select mainCurrentState
 		StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
 
 '		If StatusCheckCrowding = 0 Then
-			mainCurrentState = StatePreinspection
+'			mainCurrentState = StatePreinspection
 '			mainCurrentState = StateHotStakePanel
 '			mainCurrentState = StateFlashRemoval
+			mainCurrentState = StatePushPanel
 '		ElseIf StatusCheckCrowding = 2 Then
 '			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 '		EndIf
@@ -195,6 +197,8 @@ Select mainCurrentState
 	' This state drops off a panel into the output magazine. 		
 	
 		StatusCheckDropOff = DropOffPanel(0)
+		
+		Print "breakpoint"
 		
 		If StatusCheckDropOff = 0 Then ' We successfully dropped off a panel
 			mainCurrentState = StatePopPanel
