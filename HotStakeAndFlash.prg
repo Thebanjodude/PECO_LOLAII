@@ -93,12 +93,18 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 		
 exitHotStake:
 
-	MBWrite(pasHomeADDR, 1, MBTypeCoil) ' Home the heat stake machine by toggling
-	Wait 1
-	MBWrite(pasHomeADDR, 0, MBTypeCoil)
-	
 	Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
-		Wait .1
+		MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
+		Wait 1
+		MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
+		
+		' while the heat stake is homing the messageDB is 9
+		' so lets give it a chance to go home before we throw it into
+		'   a loop of homing where we will not see the messageDB == 2
+		Do While pasMessageDB = 9
+			'waiting for the heat stake to finish homeing
+			Wait .5
+		Loop
 	Loop
 
 	SystemStatus = StateMoving

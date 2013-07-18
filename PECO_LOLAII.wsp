@@ -1,26 +1,26 @@
-ENVT0100,LM:2013/07/17 22:20:56:808,DS:0000003038,CS:04365,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="HotStakeAndFlash.prg"
+ENVT0100,LM:2013/07/18 17:46:00:312,DS:0000003044,CS:19770,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="HeatStakeCommunication.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=109
-		nTop=71
-		nWidth=1219
-		nHeight=675
+		nLeft=345
+		nTop=32
+		nWidth=1217
+		nHeight=672
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=70
 		nTop=36
-		nWidth=1237
-		nHeight=771
+		nWidth=1236
+		nHeight=768
 	}
 }
 ProgramFile3 {
@@ -94,10 +94,10 @@ ProgramFile9 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=404
+		nLeft=0
 		nTop=0
-		nWidth=903
-		nHeight=463
+		nWidth=1107
+		nHeight=862
 	}
 }
 ProgramFile10 {
@@ -169,12 +169,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
-		nLeft=370
-		nTop=136
-		nWidth=1046
-		nHeight=700
+		nLeft=1105
+		nTop=0
+		nWidth=550
+		nHeight=862
 	}
 }
 IOLabelEditor {

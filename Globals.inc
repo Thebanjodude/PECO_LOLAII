@@ -275,7 +275,7 @@ Global Boolean pasPIDTuneDoneZone3, pasPIDTuneDoneZone3Btn
 Global Boolean pasPIDTuneFailZone1, pasPIDTuneFailZone1Btn
 Global Boolean pasPIDTuneFailZone2, pasPIDTuneFailZone2Btn
 Global Boolean pasPIDTuneFailZone3, pasPIDTuneFailZone3Btn
-Global Real pasMessageDB
+Global Integer pasMessageDB
 Global Real pasSoftHome
 Global Real pasInsertPosition
 Global Real pasInsertDepth
@@ -339,7 +339,7 @@ Global Long pasPreHeatActual
 Global Long pasDwellActual
 Global Long pasCoolActual
 Global Boolean pas1inLoadInsertCylinderBtn, pasInsertTypeBtn
-Global Real pasMessageDBSet
+Global Integer pasMessageDBSet
 Global Real pasSoftHomeSet
 Global Real pasInsertPositionSet
 Global Real pasInsertDepthSet

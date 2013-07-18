@@ -104,7 +104,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = value
+	MBQueueValue(MBQueueHead) = Value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -125,7 +125,7 @@ Function MBCommandTask()
 	Long result
 	
 	CurrentReadNum = 1
-	MBNumReadValues = 49
+	MBNumReadValues = 48
 	
 	' set up the TCP port on the HMI that we use to tunnel to serial ports	
 	' the IP is the HMI's IP address the port is the port that is tied to
@@ -668,10 +668,10 @@ Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
 	
 	' debugging simply print the contents of the message
-	Print "WriteCoilReached"
-	For i = 0 To 7
-		Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
-	Next
+'	Print "WriteCoilReached"
+'	For i = 0 To 7
+'		Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
+'	Next
 	
 	' if port is not open exit with error
 	If portStatus < 0 Then
