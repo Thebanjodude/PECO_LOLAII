@@ -28,7 +28,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			Print "Skipped Hole"
 		EndIf
 
-'		If SkippedHole = False Then 'If the flag is set then skip the hole
+		If SkippedHole = False Then 'If the flag is set then skip the hole
 		
 			Jump P(i) +Z(10) LimZ zLimit  ' Go to the next hole        
 			SFree 1, 2 ' free X and Y
@@ -85,7 +85,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 			'Pause ' for testing
 		
-'		EndIf
+		EndIf
 		
 			currentHSHole = currentHSHole + 1
 			SLock 1, 2, 3, 4 ' unlock all the joints so we can move again

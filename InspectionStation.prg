@@ -49,20 +49,20 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			
 			PreInspectionArray(currentPreinspectHole, 0) = ZSpotfacetoQuillOffset
 			
-'			ChangeProfile("07")
-'			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
-'			
-'		If DeepBoss = True Then ' There are different volumes of bosses
-'			If BossCrosssectionalArea > -400 Then ' There is already an insert so set skip flag
-'				SkipHoleArray(currentPreinspectHole, 0) = 1
-'				Print "Hole ", currentPreinspectHole, " is already populated"
-'			EndIf
-'		Else
-'			If BossCrosssectionalArea > -300 Then ' There is already an insert so set skip flag
-'				SkipHoleArray(currentPreinspectHole, 0) = 1
-'				Print "Hole ", currentPreinspectHole, " is already populated"
-'			EndIf
-'		EndIf
+			ChangeProfile("07")
+			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
+			
+		If DeepBoss = True Then ' There are different volumes of bosses
+			If BossCrosssectionalArea > -400 Then ' There is already an insert so set skip flag
+				SkipHoleArray(currentPreinspectHole, 0) = 1
+				Print "Hole ", currentPreinspectHole, " is already populated"
+			EndIf
+		Else
+			If BossCrosssectionalArea > -300 Then ' There is already an insert so set skip flag
+				SkipHoleArray(currentPreinspectHole, 0) = 1
+				Print "Hole ", currentPreinspectHole, " is already populated"
+			EndIf
+		EndIf
 
 '			ChangeProfile("00")
 '			Print "Hole error:", GetLaserMeasurement("05")
