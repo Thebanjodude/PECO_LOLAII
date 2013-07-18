@@ -30,7 +30,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 '		If SkippedHole = False Then 'If the flag is set then skip the hole
 		
-			Jump P(i) +Z(5) LimZ zLimit  ' Go to the next hole        
+			Jump P(i) +Z(10) LimZ zLimit  ' Go to the next hole        
 			SFree 1, 2 ' free X and Y
 
 			Counter = 0 ' reset counter
