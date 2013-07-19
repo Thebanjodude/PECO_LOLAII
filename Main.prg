@@ -12,6 +12,7 @@ recFlashRequired = False
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
 recFlashDwellTime = 1
+insertDepthTolerance = .006
 '______________________________________
 recNumberOfHoles = 16 ' fake for test
 recInsertDepth = 0.165 ' fake for testing
@@ -48,10 +49,6 @@ Speed 30 ' fake for test
 jobDone = False ' fake for test
 jobStart = False ' reset flag
 
-Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays 'fake for testing
-Redim InspectionArray(recNumberOfHoles, 1) 'fake for testing
-Redim PassFailArray(recNumberOfHoles, 0) 'fake for testing
-
 mainCurrentState = StateIdle ' The first state is Idle
 
 Do While True
@@ -77,6 +74,8 @@ Select mainCurrentState
 			jobStart = False ' reset flag
 			jobAbort = False 'reset flag
 			jobNumPanelsDone = 0 ' reset panel counter
+			Redim PassFailArray(23, 1) ' Clear array, always 23 rows
+			Redim InspectionArray(23, 1) 'Clear array, always 23 rows
 		Else
 			mainCurrentState = StateIdle ' Stay in idle until ready
 		EndIf
@@ -115,7 +114,8 @@ Select mainCurrentState
 		StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
 
 '		If StatusCheckCrowding = 0 Then
-			mainCurrentState = StatePreinspection
+'			mainCurrentState = StatePreinspection
+			mainCurrentState = StateInspection
 '			mainCurrentState = StateHotStakePanel
 '			mainCurrentState = StateFlashRemoval
 '			mainCurrentState = StatePushPanel
@@ -159,7 +159,6 @@ Select mainCurrentState
 			Else
 				mainCurrentState = StateFlashRemoval ' The next state is normally Flash Removal
 			EndIf
-			
 		ElseIf StatusCheckHotStake = 2 Then
 			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 		EndIf
@@ -204,8 +203,6 @@ Select mainCurrentState
 	' This state drops off a panel into the output magazine. 		
 	
 		StatusCheckDropOff = DropOffPanel(0)
-		
-		Print "breakpoint"
 		
 		If StatusCheckDropOff = 0 Then ' We successfully dropped off a panel
 			mainCurrentState = StatePopPanel

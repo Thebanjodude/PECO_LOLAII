@@ -97,14 +97,14 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 		Exit Function
 	EndIf
 	
-	Print "queueing request", Address, Value, Type
+	Print "queueing request", Address, value, Type
 	
 	
 	' range check against type here if I decide to become untrusting TMH
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = Value
+	MBQueueValue(MBQueueHead) = value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -242,7 +242,6 @@ Function MBCommandTask()
 			pasDwellActual = modbusReadRegister(&hA148) * 0.1
 			pasCoolActual = modbusReadRegister(&hA149) * 0.1
 			pasMessageDB = modbusReadRegister(pasMessageDBADDR)
-
 			
 			' lazy reads
 			Select CurrentReadNum

@@ -10,7 +10,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	Boolean SkippedHole
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 ' default to fail	
-	recHeatStakeOffset = .050 ' positive is deeper
+	recHeatStakeOffset = .100 ' positive is deeper
 	
 	ZLasertoHeatStake = 291.42372 ' This is a calibrated value, it will be stored in the HMI	
 	
@@ -35,14 +35,14 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			SFree 1, 2 ' free X and Y
 
 			Counter = 0 ' reset counter
-			Do While Sw(HSPanelPresntH) = False Or Counter > 30 ' Approach the panel slowly until we hit the anvil switch
+			Do While Sw(HSPanelPresntH) = False Or Counter > 20 ' Approach the panel slowly until we hit the anvil switch
 				JTran 3, -.25 ' Move only the z-axis downward in .25mm increments
 				Counter = Counter + 1
 			Loop
 			
-			Print "Counter:", Counter
+			Print "HS Counter:", Counter
 			
-			If Counter > 30 Then ' A boss should be engaging the anvil but it isnt...
+			If Counter > 20 Then ' A boss should be engaging the anvil but it isnt...
 				erPanelStatusUnknown = True
 				HotStakePanel = 2 ' fail
 				Print "Boss did not engage the anvil"
@@ -91,6 +91,8 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			currentHSHole = currentHSHole + 1
 			SLock 1, 2, 3, 4 ' unlock all the joints so we can move again
 	Next
+	
+	HotStakePanel = 0 ' HS station executed without a problem
 		
 exitHotStake:
 

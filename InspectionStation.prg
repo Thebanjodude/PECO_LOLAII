@@ -12,9 +12,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Integer i
 	Real BossCrosssectionalArea
 	Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays
-	Redim InspectionArray(recNumberOfHoles, 1)
 	Redim PreInspectionArray(recNumberOfHoles, 0)
-	Redim PassFailArray(recNumberOfHoles, 0)
 	
 	currentPreinspectHole = 1 ' This tells the HMI which hole we are working on during preinspection
 	currentInspectHole = 1 ' This tells the HMI which hole we are working on during inspection
@@ -93,11 +91,9 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		PrintPreInspectionArray()
 	Else
 		PrintInspectionArray()
-	'	PrintPassFailArray()	
-	'	UnpackInspectionArrays()
+		PrintPassFailArray()
+		UnpackInspectionArrays()
 	EndIf
-
-'	PrintSkipArray()
 
 	InspectPanel = 0 ' Inspection occured without errors
 	Go PreScan :U(CU(Here))
@@ -108,40 +104,36 @@ exitInspectPanel:
 	Jump PreScan LimZ zLimit ' Go Home
 	Trap 2 'disarm trap
 Fend
+Function PassOrFail(measurement As Real) As Boolean 'Pass is True	
+	' Measurement is assumed to be inches
+	
+	Real DepthInsertError
+	
+	DepthInsertError = recInsertDepth - measurement
+	Print "DepthInsertError:", DepthInsertError
+	
+' TODO: make the tolerance a variable and make it adjustable via the hmi, we have .006 but theirs is more loose	
+	If (DepthInsertError < insertDepthTolerance) Then
+		PassOrFail = True ' Passed		
+		PanelPassedInspection = True
+	Else
+		'Dont alert opperator yet, this is only on a hole by hole basis
+		PassOrFail = False
+		PanelPassedInspection = False
+	EndIf
+	
+Fend
+Function PrintPassFailArray()
+	
+	Integer n
+	
+	Print "#" + " " + "L" + " " + "R"
 
-'Function PassOrFail(measurement As Real) As Boolean 'Pass is True	
-'	
-'	Real DepthInsertError
-'	
-'	DepthInsertError = Abs(recInsertDepth - measurement)
-'	Print "DepthInsertError:", DepthInsertError
-'	
-'' TODO: make the tolerance a variable and make it adjustable via the hmi, we have .006 but theirs is more loose	
-'	If (DepthInsertError < insertDepthTolerance) Then
-'		PassOrFail = True ' Passed		
-'		PanelPassedInspection = True
-'	Else
-'		'Dont alert opperator yet, this is only on a hole by hole basis
-'		PassOrFail = False
-'		PanelPassedInspection = False
-'	EndIf
-'	
-'Fend
-
-'Function PrintPassFailArray()
-'	
-'	Integer n, PrintArrayIndex
-'	
-'	Print "#" + " " + "L" + " " + "R"
-'
-'	For n = 0 To recNumberOfHoles - 1
-'		Print Str$(n) + " " + Str$(PassFailArray(PrintArrayIndex, LeftSpotFace)) + " " + Str$(PassFailArray(PrintArrayIndex, RightSpotFace))
-'		PrintArrayIndex = PrintArrayIndex + 1
-'	Next
-'	
-'	PrintArrayIndex = 0 	'Reset index
-'	
-'Fend
+	For n = 1 To recNumberOfHoles
+		Print Str$(n) + " " + Str$(PassFailArray(n, LeftSpotFace)) + " " + Str$(PassFailArray(n, RightSpotFace))
+	Next
+	
+Fend
 
 Function FakeLogging()
 
@@ -156,6 +148,7 @@ Function FakeLogging()
 
 	PrintInspectionArray()
 	UnpackInspectionArrays()
+	UnpackPassFailArray()
 
 	panelDataTxRdy = True ' Tell HMI to readout hole data
 	
@@ -163,7 +156,6 @@ Function FakeLogging()
 	
 ' this is for hmi logging
 	Wait MemSw(panelDataTxAckH) = True, 3
-	
 	If TW = True Then ' catch that the HMI timed out without acking
 		erHmiDataAck = True
 		Print "no data ack from hmi"
@@ -336,33 +328,31 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
 Fend
 Function MeasureInsertDepth(Index As Integer)
 	
-	ChangeProfile("01")
 	'Get the Left Spot face measurement, see if it is in spec and save the data to two arrays. 
+	ChangeProfile("01")
 	InspectionArray(Index, LeftSpotFace) = MicroMetersToInches(GetLaserMeasurement("12"))
-'	PassFailArray(PanelArrayIndex, LeftSpotFace) = PassOrFail(InspectionArray(PanelArrayIndex, LeftSpotFace))
-	ChangeProfile("02")
+'	PassFailArray(Index, LeftSpotFace) = PassOrFail(InspectionArray(Index, LeftSpotFace))
+	
 	'Get the right Spot face measurement, see if it is in spec and save the data to two arrays 
+	ChangeProfile("02")
 	InspectionArray(Index, RightSpotFace) = MicroMetersToInches(GetLaserMeasurement("11"))
-'	PassFailArray(PanelArrayIndex, RightSpotFace) = PassOrFail(InspectionArray(PanelArrayIndex, RightSpotFace))
+'	PassFailArray(Index, RightSpotFace) = PassOrFail(InspectionArray(Index, RightSpotFace))
 	
 Fend
 Function PrintInspectionArray()
 	
-	Integer n, PrintArrayIndex
+	Integer n
 	
 	Print "#" + " " + "L" + " " + "R"
 
 	For n = 1 To recNumberOfHoles
-		Print Str$(n) + " " + Str$(InspectionArray(PrintArrayIndex, LeftSpotFace)) + " " + Str$(InspectionArray(PrintArrayIndex, RightSpotFace))
-		PrintArrayIndex = PrintArrayIndex + 1
+		Print Str$(n) + " " + Str$(InspectionArray(n, LeftSpotFace)) + " " + Str$(InspectionArray(n, RightSpotFace))
 	Next
-	
-	PrintArrayIndex = 0 	'Reset index
-	
+
 Fend
 Function PrintPreInspectionArray()
 	
-	Integer n, PrintArrayIndex
+	Integer n
 	
 	Print "#" + " " + "ZdiffFromLaserCenter"
 
@@ -370,22 +360,17 @@ Function PrintPreInspectionArray()
 		Print Str$(n) + " " + Str$(PreInspectionArray(n, 0))
 
 	Next
-	
-	PrintArrayIndex = 0 	'Reset index
-	
+
 Fend
 Function PrintSkipArray()
 	
-	Integer n, PrintArrayIndex
+	Integer n
 	
-	Print "#" + " Skip"
+	Print "#" + " Skipped?"
 
 	For n = 1 To recNumberOfHoles
-		Print Str$(n) + " " + Str$(SkipHoleArray(PrintArrayIndex, 0))
-		PrintArrayIndex = PrintArrayIndex + 1
+		Print Str$(n) + " " + Str$(SkipHoleArray(n, 0))
 	Next
-	
-	PrintArrayIndex = 0 	'Reset index
 	
 Fend
 Function MicroMetersToInches(um As Real) As Real

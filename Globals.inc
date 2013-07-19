@@ -103,8 +103,8 @@ Global Boolean PassFailArray(0, 0)
 Global Real InspectionArray(0, 0), recInmagPickupOffset
 Global Boolean SkipHoleArray(0, 0), DeepBoss ' This needs to be global
 Global Integer currentInspectHole, currentPreinspectHole
-#define RightSpotFace 0
-#define LeftSpotFace 1
+#define RightSpotFace 1
+#define LeftSpotFace 0
 
 'System Monitor Vars
 Global Boolean cbMonHeatStake, cbMonInMag, cbMonOutMag, cbMonDebrisRmv, cbMonSafety, cbMonPAS24vdc

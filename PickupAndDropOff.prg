@@ -25,45 +25,41 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 	
 ' this is for hmi logging
 	Wait MemSw(panelDataTxAckH) = True, 3
-	Redim InspectionArray(0, 0) ' clear all the values in the Inspection Array
 	panelDataTxRdy = False ' reset flag	
-'	If TW = True Then ' catch that the HMI timed out without acking
-'		DropOffPanel = False
-'		erHmiDataAck = True
-'		Print "no data ack from hmi"
-'		Pause
-''		DropOffPanel = 2
-''		Exit Function
-'	EndIf
-	
+	If TW = True Then ' catch that the HMI timed out without acking
+		DropOffPanel = 2
+		erHmiDataAck = True
+		Print "no data ack from hmi"
+		Pause
+	EndIf
+
 	Jump P(recOutmag) LimZ zLimit
 	
 	Off suctionCupsH ' fake
 	suctionCupsCC = False
 	Wait suctionWaitTime ' Allow time for cups to unseal
 	RobotPlacedPanel = True ' Tell the output magazine we put a panel into it
+	Redim InspectionArray(0, 0) ' clear all the values in the Inspection Array
 	Jump OutmagWaypoint LimZ zLimit
 
 	OutputMagSignal = True ' Give permission for output magazine to dequeue next panel	
 	
 	PanelPassedInspection = True 'fake
 	
-	If PanelPassedInspection = False Then
-		erPanelFailedInspection = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
-		Pause ' wait for operator to continue
-		stackLightRedCC = False ' turn off only after ack
-		stackLightAlrmCC = False
-	EndIf
+'	If PanelPassedInspection = False Then
+'		erPanelFailedInspection = True
+'		stackLightRedCC = True
+'		stackLightAlrmCC = True
+'		Pause ' wait for operator to continue
+'		stackLightRedCC = False ' turn off only after ack
+'		stackLightAlrmCC = False
+'	EndIf
 
 	SystemStatus = StateMoving
 	PanelPassedInspection = False ' rest flag
 	DropOffPanel = DropoffSuccessful
 
 	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have pulled		
-	Print "jobNumPanelsDone: ", jobNumPanelsDone
-	Print "jobNumPanels", jobNumPanels
 	If jobNumPanelsDone >= jobNumPanels Then
 		jobDone = True ' We have finished the run, don't execute the main loop
 	EndIf
@@ -139,17 +135,5 @@ EndIf
 Trap 2 'disarm trap
 
 Fend
-Function JointTorqueMonitor()
 
-' This is a function that runs as a background task. 
-	
-	ATCLR ' Clear the buffers
-    PTCLR
-    
-Do While True
-	ZmaxTorque = PTRQ(3) ' Get the z axis peak torque	
-	PTCLR ' Clear the buffers	
-Loop
-	
-Fend
 
