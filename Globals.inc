@@ -122,7 +122,7 @@ Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flas
 Global Boolean drillGoCC, drillReturnCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
 Global Integer currentHSHole, currentFlashHole
 Global Real ZSpotfacetoQuillOffset, ZLasertoHeatStake, HSProbeFinalPosition
-Global Real PreInspectionArray(0, 0)
+Global Real PreInspectionArray(0, 0), recHeatStakeOffset
 
 ' Recipe Ingredients for Panels
 #define InsertTypeUnknown 0

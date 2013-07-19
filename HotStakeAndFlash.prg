@@ -10,6 +10,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	Boolean SkippedHole
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 ' default to fail	
+	recHeatStakeOffset = .050 ' positive is deeper
 	
 	ZLasertoHeatStake = 291.42372 ' This is a calibrated value, it will be stored in the HMI	
 	
@@ -52,7 +53,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 '			Print "RobotZOnAnvil", RobotZOnAnvil
 '			Print "RobotZOnAnvil - ZSpotfacetoQuillOffset", RobotZOnAnvil - ZSpotfacetoQuillOffset
 
-            HSProbeFinalPosition = (ZLasertoHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth)) /25.4
+            HSProbeFinalPosition = (ZLasertoHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth) + InTomm(recHeatStakeOffset)) /25.4
             Print "heat stake Position:", HSProbeFinalPosition
             
             If HSProbeFinalPosition > 12.8 Then

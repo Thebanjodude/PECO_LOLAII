@@ -14,7 +14,7 @@ zLimit = -12.5 'fake
 recFlashDwellTime = 1
 '______________________________________
 recNumberOfHoles = 16 ' fake for test
-recInsertDepth = -.1 '0.165 ' fake for testing
+recInsertDepth = 0.165 ' fake for testing
 recInmag = 50
 recOutmag = 101
 recPreCrowding = 51
