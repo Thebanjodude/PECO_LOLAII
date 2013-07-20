@@ -2,10 +2,10 @@
 
 Function InspectPanel(SelectRoutine As Integer) As Integer
 
-'	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
+	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
 	Real ZdiffFromLaserCenter, RobotZposition
 	SystemStatus = StateInspection
-'	InspectPanel = 2 ' default to fail
+	InspectPanel = 2 ' default to fail
 	
 	Jump PreScan LimZ zLimit
 	
@@ -25,42 +25,42 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		
 		If SelectRoutine = 1 Then
 
-			ChangeProfile("07")
-			Wait .25
-			ZdiffFromLaserCenter = (GetLaserMeasurement("05") + GetLaserMeasurement("06")) / 2 ' take an average from the left and the right
-			RobotZposition = CZ(Here) ' Where are we at in robot Z when we take the laser measurement
-			
-			Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
-            
-            If Abs(ZdiffFromLaserCenter) > 25 Then
-				' Throw an Error
-				Print "Hole not within Laser Range"
-				erUnknown = True
-            	Pause
-                InspectPanel = 2 ' default to fail		
-            	Exit Function
-            EndIf
-			
-			ZSpotfacetoQuillOffset = RobotZposition - ZdiffFromLaserCenter
-			
-			Print "ZSpotfacetoQuillOffset:", ZSpotfacetoQuillOffset
-			
-			PreInspectionArray(currentPreinspectHole, 0) = ZSpotfacetoQuillOffset
-			
-			ChangeProfile("07")
-			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
-			
-		If DeepBoss = True Then ' There are different volumes of bosses
-			If BossCrosssectionalArea > -400 Then ' There is already an insert so set skip flag
-				SkipHoleArray(currentPreinspectHole, 0) = 1
-				Print "Hole ", currentPreinspectHole, " is already populated"
-			EndIf
-		Else
-			If BossCrosssectionalArea > -300 Then ' There is already an insert so set skip flag
-				SkipHoleArray(currentPreinspectHole, 0) = 1
-				Print "Hole ", currentPreinspectHole, " is already populated"
-			EndIf
-		EndIf
+'			ChangeProfile("07")
+'			Wait .25
+'			ZdiffFromLaserCenter = (GetLaserMeasurement("05") + GetLaserMeasurement("06")) / 2 ' take an average from the left and the right
+'			RobotZposition = CZ(Here) ' Where are we at in robot Z when we take the laser measurement
+'			
+'			Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
+'            
+'            If Abs(ZdiffFromLaserCenter) > 25 Then
+'				' Throw an Error
+'				Print "Hole not within Laser Range"
+'				erUnknown = True
+'            	Pause
+'                InspectPanel = 2 ' default to fail		
+'            	Exit Function
+'            EndIf
+'			
+'			ZSpotfacetoQuillOffset = RobotZposition - ZdiffFromLaserCenter
+'			
+'			Print "ZSpotfacetoQuillOffset:", ZSpotfacetoQuillOffset
+'			
+'			PreInspectionArray(currentPreinspectHole, 0) = ZSpotfacetoQuillOffset
+'			
+'			ChangeProfile("07")
+'			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
+'			
+'		If DeepBoss = True Then ' There are different volumes of bosses
+'			If BossCrosssectionalArea > -400 Then ' There is already an insert so set skip flag
+'				SkipHoleArray(currentPreinspectHole, 0) = 1
+'				Print "Hole ", currentPreinspectHole, " is already populated"
+'			EndIf
+'		Else
+'			If BossCrosssectionalArea > -300 Then ' There is already an insert so set skip flag
+'				SkipHoleArray(currentPreinspectHole, 0) = 1
+'				Print "Hole ", currentPreinspectHole, " is already populated"
+'			EndIf
+'		EndIf
 
 '			ChangeProfile("00")
 '			Print "Hole error:", GetLaserMeasurement("05")
@@ -77,28 +77,34 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		ElseIf SelectRoutine = 2 Then
 			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
 			currentInspectHole = currentInspectHole + 1
-		Else
-			Print "Inspection argument undefined"
-			InspectPanel = 2 ' fail
-			Exit Function
+'		Else
+'			Print "Inspection argument undefined"
+'			InspectPanel = 2 ' fail
+'			Exit Function
 		EndIf
 			
 		Go P(i) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
 		Wait .25
 	Next
 	
-	If SelectRoutine = 1 Then
-		PrintPreInspectionArray()
-	Else
-		PrintInspectionArray()
-		PrintPassFailArray()
-		UnpackInspectionArrays()
-	EndIf
+'	If SelectRoutine = 1 Then
+'		PrintPreInspectionArray()
+'	Else
+'		PrintInspectionArray()
+'		PrintPassFailArray()
+'		UnpackInspectionArrays()
+'	EndIf
 
 	InspectPanel = 0 ' Inspection occured without errors
 	Go PreScan :U(CU(Here))
 
 exitInspectPanel:
+
+	If MemSw(jobAbortH) = True Then
+		Go PreScan :U(CU(Here)) ' Pull away from the laster WITHOUT spinning (may hit laser)
+		jobAbort = True
+		MemOff (jobAbortH)
+	EndIf
 
 	SystemStatus = StateMoving
 	Jump PreScan LimZ zLimit ' Go Home
@@ -113,7 +119,7 @@ Function PassOrFail(measurement As Real) As Boolean 'Pass is True
 	Print "DepthInsertError:", DepthInsertError
 	
 ' TODO: make the tolerance a variable and make it adjustable via the hmi, we have .006 but theirs is more loose	
-	If (DepthInsertError < insertDepthTolerance) Then
+	If (Abs(DepthInsertError) < insertDepthTolerance) Then
 		PassOrFail = True ' Passed		
 		PanelPassedInspection = True
 	Else
@@ -331,12 +337,12 @@ Function MeasureInsertDepth(Index As Integer)
 	'Get the Left Spot face measurement, see if it is in spec and save the data to two arrays. 
 	ChangeProfile("01")
 	InspectionArray(Index, LeftSpotFace) = MicroMetersToInches(GetLaserMeasurement("12"))
-'	PassFailArray(Index, LeftSpotFace) = PassOrFail(InspectionArray(Index, LeftSpotFace))
+	PassFailArray(Index, LeftSpotFace) = PassOrFail(InspectionArray(Index, LeftSpotFace))
 	
 	'Get the right Spot face measurement, see if it is in spec and save the data to two arrays 
 	ChangeProfile("02")
 	InspectionArray(Index, RightSpotFace) = MicroMetersToInches(GetLaserMeasurement("11"))
-'	PassFailArray(Index, RightSpotFace) = PassOrFail(InspectionArray(Index, RightSpotFace))
+	PassFailArray(Index, RightSpotFace) = PassOrFail(InspectionArray(Index, RightSpotFace))
 	
 Fend
 Function PrintInspectionArray()
@@ -404,7 +410,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Go P(recCrowding)
 	suctionCupsCC = True ' Turn on cups
 	Wait suctionWaitTime
-	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Open crowding
+
 
 	' wait for verification that the crowding has opened
 	Do Until pasCrowding = False
@@ -418,6 +424,10 @@ exitCrowding:
 	
 If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	jobAbort = True
+	MemOff (jobAbortH) ' reset membit
+	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Open crowding
+	suctionCupsCC = False ' Turn off cups
+	Go P(recCrowding) ' move away from a panel
 EndIf
 
 Trap 2 ' Disarm trap

@@ -184,4 +184,9 @@ Low Power Mode
 	   5
 	   5	   5
 > sfree
+> on DrillReturnH
+!!Error: 1037, Cannot execute in Remote Ethernet enable except from the Remote Ethernet.
+> on DrillReturnH
+> 	On debrisMtrH
+> off debrisMtrH
 > 

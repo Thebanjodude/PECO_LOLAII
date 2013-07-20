@@ -11,7 +11,7 @@ PowerOnSequence() ' Initialize the system and prepare it to do a job
 recFlashRequired = False
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
-recFlashDwellTime = 1
+recFlashDwellTime = 0
 insertDepthTolerance = .006
 '______________________________________
 recNumberOfHoles = 16 ' fake for test
@@ -61,7 +61,11 @@ Select mainCurrentState
 	' to the idle state and waits for an operator.
 		
 		If jobStart = True Then 'And HotStakeTempRdy = 0 and CheckInitialParameters()=0 Then ' Fake for testing
-			mainCurrentState = StatePopPanel
+			'mainCurrentState = StatePopPanel
+			'mainCurrentState = StatePreinspection
+			'mainCurrentState = StateHotStakePanel
+			mainCurrentState = StateFlashRemoval
+			'mainCurrentState = StateCrowding
 			Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
 				MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
 				Wait 1
@@ -114,8 +118,8 @@ Select mainCurrentState
 		StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
 
 '		If StatusCheckCrowding = 0 Then
-'			mainCurrentState = StatePreinspection
-			mainCurrentState = StateInspection
+			mainCurrentState = StatePreinspection
+'			mainCurrentState = StateInspection
 '			mainCurrentState = StateHotStakePanel
 '			mainCurrentState = StateFlashRemoval
 '			mainCurrentState = StatePushPanel
@@ -133,8 +137,8 @@ Select mainCurrentState
 		
 			StatusCheckPreinspection = InspectPanel(1) ' 1=Preinspection 
 			If StatusCheckPreinspection = 0 Then
-				mainCurrentState = StateHotStakePanel
-'				mainCurrentState = StateInspection
+'				mainCurrentState = StateHotStakePanel
+				mainCurrentState = StateInspection
 '				mainCurrentState = StatePushPanel
 				Print "Preinspection executed"
 			ElseIf StatusCheckPreinspection = 2 Then
@@ -144,7 +148,6 @@ Select mainCurrentState
 			
 			If jobAbort = True Then
 				mainCurrentState = StatePushPanel ' Drop off the panel before we quit 
-				Print "aborting"
 			EndIf
 		
 	Case StateHotStakePanel
@@ -179,7 +182,7 @@ Select mainCurrentState
 		EndIf
 
 		If jobAbort = True Then
-			mainCurrentState = StatePushPanel ' Go to idle because the operator wants to quit
+			mainCurrentState = StatePushPanel ' Go to push then idle because the operator wants to quit
 		EndIf
 		
 	Case StateInspection
@@ -295,7 +298,7 @@ Fend
 'Fend
 Function HotStakeTempRdy() As Boolean
 	
-	If pasPIDsetupInTempZone1 = True And pasPIDsetupInTempZone2 = True Then
+	If pasOTAOnOffZone1 = True And pasOTAOnOffZone2 = True Then
 		HotStakeTempRdy = True ' ready to start job
 	Else
 		HotStakeTempRdy = False ' Temperature is not in range

@@ -9,7 +9,6 @@ Global Real zLimit ' the highest the EOAT can move without hitting periphials
 #define Preinspection 1
 #define Postinspection 2
 Global Real ZmaxTorque ' Monitors Z torque
-Global Boolean abortjob
 Global Integer Crowding
 
 'Global Integer NextState
@@ -339,7 +338,7 @@ Global Long pasPreHeatActual
 Global Long pasDwellActual
 Global Long pasCoolActual
 Global Boolean pas1inLoadInsertCylinderBtn, pasInsertTypeBtn
-Global Integer pasMessageDBSet
+Global Long pasMessageDBSet
 Global Real pasSoftHomeSet
 Global Real pasInsertPositionSet
 Global Real pasInsertDepthSet
