@@ -46,11 +46,7 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 	
 '	If PanelPassedInspection = False Then
 '		erPanelFailedInspection = True
-'		stackLightRedCC = True
-'		stackLightAlrmCC = True
 '		Pause ' wait for operator to continue
-'		stackLightRedCC = False ' turn off only after ack
-'		stackLightAlrmCC = False
 '	EndIf
 
 	SystemStatus = StateMoving

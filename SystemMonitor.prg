@@ -6,6 +6,8 @@ Function SystemMonitor()
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
+ResetErrors() ' resets all errors
+
 Do While True
 	
 	StateOfHealth()
@@ -137,8 +139,6 @@ Do While True
 	
 	If EStopOn = True Then
 		erEstop = True
-		stackLightRedCC = True
-		stackLightAlrmCC = True
 	Else
 		erEstop = False
 	EndIf
@@ -146,7 +146,6 @@ Do While True
 	'If the in/out magazine sensor diff signals are the same then we know there is a problem	
 	If (inMagLowLim And inMagLowLimN = True) Then
 		erInMagLowSensorBad = True
-		stackLightRedCC = True
 '		Pause
 	Else
 		erInMagLowSensorBad = False
@@ -154,7 +153,7 @@ Do While True
 	
 	If (inMagUpLim And inMagUpLimN = True) Then
 		erInMagUpSensorBad = True
-		stackLightRedCC = True
+
 '		Pause
 	Else
 		erInMagUpSensorBad = False
@@ -162,7 +161,7 @@ Do While True
 	
 	If (outMagLowLim And outMagLowLimN = True) Then
 		erOutMagLowSensorBad = True
-		stackLightRedCC = True
+
 '		Pause
 	Else
 		erOutMagLowSensorBad = False
@@ -170,16 +169,17 @@ Do While True
 	
 	If (outMagUpLim And outMagUpLimN = True) Then
 		erOutMagUpSensorBad = True
-		stackLightRedCC = True
 '		Pause
 	Else
 		erOutMagUpSensorBad = False
 	EndIf
 	
 	If erLaserScanner = True Then ' The laser scanner has lost comms
-		stackLightAlrmCC = True
-		stackLightRedCC = True
 '		Pause
+	EndIf
+	
+	If erUnknown = True Then
+	'	Pause
 	EndIf
 	
 	If HotStakeTempRdy = False Then
@@ -189,18 +189,16 @@ Do While True
 	EndIf
 	
 ' In this section I set the error in the main routine and the lights and pausing are changed here	
-If erPanelStatusUnknown = True Then
-	stackLightYelCC = True
-	stackLightAlrmCC = True
-EndIf
-	
-If erPanelUndefined = True Then
-	stackLightAlrmCC = True
-EndIf
-
-If airPressHigh = True Or airPressLow = True Or (airPressLow And airPressHigh) Or HotStakeTempRdy = False Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or EStopOn = True Or (inMagLowLim And inMagLowLimN = True) Or (inMagUpLim And inMagUpLimN = True) Or (outMagLowLim And outMagLowLimN = True) Or (outMagUpLim And outMagUpLimN = True) Then
+'erPanelStatusUnknown = True
+If EStopOn = True Or erLowPressure = True Or erHighPressure = True Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Then
 	stackLightRedCC = True
 	stackLightAlrmCC = True
+	If alarmMute = True Then ' Mute the alarm
+		stackLightAlrmCC = False
+	EndIf
+Else
+	stackLightRedCC = False
+	stackLightAlrmCC = False
 EndIf
 	
 If inMagInterlock = True Or outMagInt = True Or erInMagEmpty = True Or erOutMagFull = True Then ' If a magazine interlock is open then turn on the yelow light
@@ -219,13 +217,6 @@ If PauseOn = True Then
 	mainCurrentState = StatePaused
 EndIf
 
-If alarmMute = True Then ' Mute the alarm
-	stackLightAlrmCC = False
-EndIf
-
-If erUnknown = True Then
-'	Pause
-EndIf
 		
 Loop
 
@@ -285,6 +276,22 @@ Function GetSOHStatus(address As Integer, bitnumber As Integer, bitmask As Integ
 	GetSOHStatus = RShift(Stat(address) And bitmask, bitnumber)
 	
 Fend
-
+Function ResetErrors()
+	
+'sets all errors to false when we start runing. We need this so the HMI does not show the errors from the last time is was shut down.
+  erPanelFailedInspection = False; erFrontSafetyFrameOpen = False; erBackSafetyFrameOpen = False
+  erLeftSafetyFrameOpen = False; erRightSafetyFrameOpen = False; erLowPressure = False
+  erHighPressure = False; erPanelStatusUnknown = False; erWrongPanelHoles = False
+  erWrongPanelDims = False; erWrongPanel = False; erWrongPanelInsert = False; erHmiDataAck = False
+  erInMagEmpty = False; erInMagOpenInterlock = False; erOutMagCrowding = False; erPanelUndefined = False
+  erInMagCrowding = False; erOutMagFull = False; erOutMagOpenInterlock = False; erBadPressureSensor = False
+  erLaserScanner = False; erDCPower = False; erDCPowerHeatStake = False; erHeatStakeTemp = False
+  erHeatStakeBreaker = False; erBowlFeederBreaker = False; erInMagBreaker = False ';erModbusPort;erModbusCommand,erModbusCommand
+  erOutMagBreaker = False; erFlashBreaker = False; erDebrisRemovalBreaker = False
+  erPnumaticsBreaker = False; erSafetySystemBreaker = False; erRC180 = False; erIllegalArmMove = False
+  erUnknown = False; erEstop = False; erRecEntryMissing = False; erParamEntryMissing = False; erRobotNotAtHome = False
+  RecEntryMissing = False; ParamEntryMissing = False; erHMICommunication = False; erFlashStation = False
+  erInMagLowSensorBad = False; erInMagUpSensorBad = False; erOutMagLowSensorBad = False; erOutMagUpSensorBad = False
+Fend
 
 
