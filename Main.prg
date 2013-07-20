@@ -211,6 +211,8 @@ Select mainCurrentState
 			mainCurrentState = StatePopPanel
 		ElseIf StatusCheckDropOff = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePushPanel
+		ElseIf StatusCheckDropOff = 2 Then
+			Pause
 		EndIf
 		
 		If jobAbort = True Or jobDone = True Then

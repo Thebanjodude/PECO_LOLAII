@@ -3,8 +3,6 @@
 Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 ' You can't return a value unless you pass it one	
 
-'Trap 2, MemSw(jobAbortH) = True GoTo exitPushPanel ' arm trap
-
 	DropOffPanel = 2 ' dafult to fail
 	SystemStatus = StatePushPanel
 	PanelPassedInspection = True ' fake it for testing	
@@ -64,15 +62,14 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 		jobDone = True ' We have finished the run, don't execute the main loop
 	EndIf
 
-'exitPushPanel:
 	erPanelFailedInspection = False
 	erHmiDataAck = False
 	
 If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-	MemOff (jobAbortH) ' reset flag	
+	jobAbort = True
+	MemOff (jobAbortH) ' reset flag		
 EndIf
 
-Trap 2 ' disarm trap	
 
 Fend
 Function PickupPanel(stupidCompiler As Byte) As Integer 'byte me

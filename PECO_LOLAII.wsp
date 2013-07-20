@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/07/18 17:46:00:312,DS:0000003044,CS:19770,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="HeatStakeCommunication.prg"
+ENVT0100,LM:2013/07/20 19:13:00:064,DS:0000003023,CS:07958,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Main.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=345
-		nTop=32
-		nWidth=1217
-		nHeight=672
+		nLeft=82
+		nTop=48
+		nWidth=1216
+		nHeight=669
 	}
 }
 ProgramFile2 {
@@ -69,13 +69,13 @@ ProgramFile6 {
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=178
-		nTop=174
-		nWidth=1267
-		nHeight=732
+		nLeft=227
+		nTop=47
+		nWidth=1265
+		nHeight=729
 	}
 }
 ProgramFile8 {
@@ -91,7 +91,7 @@ ProgramFile8 {
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
