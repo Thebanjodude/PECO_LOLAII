@@ -70,7 +70,6 @@ If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	MemOff (jobAbortH) ' reset flag		
 EndIf
 
-
 Fend
 Function PickupPanel(stupidCompiler As Byte) As Integer 'byte me
 ' You can't return a value unless you pass it one...

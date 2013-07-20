@@ -61,10 +61,10 @@ Select mainCurrentState
 	' to the idle state and waits for an operator.
 		
 		If jobStart = True Then 'And HotStakeTempRdy = 0 and CheckInitialParameters()=0 Then ' Fake for testing
-			'mainCurrentState = StatePopPanel
+			mainCurrentState = StatePopPanel
 			'mainCurrentState = StatePreinspection
 			'mainCurrentState = StateHotStakePanel
-			mainCurrentState = StateFlashRemoval
+			'mainCurrentState = StateFlashRemoval
 			'mainCurrentState = StateCrowding
 			Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
 				MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
@@ -91,8 +91,8 @@ Select mainCurrentState
 		StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
 				
 		If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
-			mainCurrentState = StateCrowding
-			'mainCurrentState = StatePushPanel ' fake for testing
+			'mainCurrentState = StateCrowding
+			mainCurrentState = StatePushPanel ' fake for testing
 			Print "Pick up Successful"
 		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePopPanel

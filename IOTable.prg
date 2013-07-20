@@ -277,7 +277,7 @@ Function iotransfer()
     ' some vars to hold the old values
     ' this will need to be cleaned up, currently it is just a copy of all the global vars
     ' To recreate this list:  `awk '{ gsub("," ,"\n"$1);  print}' vars | awk '{sub(/$/, "Old");print}' -  | sort > varsNew` where vars is a list of vars without any #defines or blank lines or comments or so forth...  (and no arrays)
-    
+ 
 
     
 	Boolean abortJobBtnOld

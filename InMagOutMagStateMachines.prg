@@ -21,7 +21,7 @@ Do While True
 				InMagPickUpSignal = False ' Robot cannot pick a panel from the magazine
 				inMagGoHome = False 'Clear Flag
 				NextState = StateLowering
-			ElseIf Sw(inMagPnlRdyH) = True Then
+			ElseIf inMagPnlRdy = True Then
 				InMagPickUpSignal = False ' Robot cannot pick a panel from the magazine
 				NextState = StatePartRemoved
 			Else
@@ -46,24 +46,24 @@ Do While True
 				On inMagMtrH ' Turn on motor
 				NextState = StatePresentNextPart
 				
-				If Sw(inMagUpLimH) = True Then 'If upper limit is reached then the magazine is out of panels 
+				If inMagUpLim = True Then 'If upper limit is reached then the magazine is out of panels 
 					erInMagEmpty = True ' Tell operator the magazine is empty
 					NextState = StateLowering
 				EndIf
 				
 			Else
-				Off inMagMtrH ' Turn off motor
+				Off inMagMtrH  ' Turn off motor
 				NextState = StatePartPresent
 			EndIf
 
 		Case StateLowering
 		
-			If Sw(inMagLowLimH) = False Then ' Keep lowering until we hit the lower limit (home)
-				Off inMagMtrDirH 'set direction to DOWN
-				On inMagMtrH ' Turn on motor
+			If inMagLowLim = False Then ' Keep lowering until we hit the lower limit (home)
+				 inMagMtrDirCC = False 'set direction to DOWN
+				 inMagMtrCC = True ' Turn on motor
 				NextState = StateLowering
 			Else
-				Off inMagMtrH ' Turn off motor
+				inMagMtrCC = False ' Turn off motor
 				NextState = StateWaitingUser
 			EndIf
 			
@@ -79,25 +79,25 @@ Do While True
 			
 		Case StateInMagPaused
 			
-			Off inMagMtrH ' Turn off the motor becuase we are paused
+			inMagMtrCC = False ' Turn off the motor becuase we are paused
 			NextState = StateInMagPaused
 			
 		Default
 			
 			inMagCurrentState = StateInMagUnknown
-			Off inMagMtrH ' Turn off the motor becuase something unforseen has occured
+			inMagMtrCC = False ' Turn off the motor becuase something unforseen has occured
 			erUnknown = True ' Tell operator there is an unknown error
 	Send
 	
 	inMagCurrentState = NextState 'Set next state to current state after we break from case statment
 		
 	' This block of code checks if an interlock has been opened. 
-	If Sw(inMagInterlockH) = True And InmagInterlockFlag = False Then
+	If inMagInterlock = True And InmagInterlockFlag = False Then
 		' I am not sure if this interlock is hardware controlled, it should be.
 		InmagInterlockFlag = True ' Set a flag
 		InmagLastState = inMagCurrentState ' Save the current state before we pause
 		inMagCurrentState = StateInMagPaused ' Send the state machine to paused
-	ElseIf Sw(inMagInterlockH) = False And InmagInterlockFlag = True Then
+	ElseIf inMagInterlock = False And InmagInterlockFlag = True Then
 		InmagInterlockFlag = False ' Reset flag
 		inMagCurrentState = InmagLastState ' Go to the state before the interlock was open
 	EndIf
