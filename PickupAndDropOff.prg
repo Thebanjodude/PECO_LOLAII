@@ -66,7 +66,7 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 	erHmiDataAck = False
 	
 If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-	jobAbort = True
+	jobAbort = True ' set flag
 	MemOff (jobAbortH) ' reset flag		
 EndIf
 
