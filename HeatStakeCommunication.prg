@@ -93,18 +93,20 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	' if queue overflows return FALSE from function call not able to queue request
 	If (MBQueueHead + 1 = MBQueueTail) Or (MBQueueHead = MBWriteQueueSize And MBQueueTail = 0) Then
 		MBWrite = False
-		Print "overflow"
+		Print "MODBUS: write buffer overflow - write not commited"
 		Exit Function
 	EndIf
 	
-	Print "queueing request", Address, value, Type
+	Print "MODBUS: queueing request", Address, Value, Type
 	
+	' prevent multiple calls to mbwrite from stomping on each other
+'	SyncLock 1  'I will need to play with this since I'm not seeing how it is blocking -- it just throws an error according the help file...  SJE
 	
 	' range check against type here if I decide to become untrusting TMH
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = value
+	MBQueueValue(MBQueueHead) = Value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -114,25 +116,27 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	EndIf
 	
 	MBWrite = True
+'	SyncUnlock 1
 Fend
 ' function runs as a stand alone task to monitor modbus write queue
 ' and send commands to PLC
 Function MBCommandTask()
 	Boolean temp_bool
+	Boolean abSelect
 	Integer CurrentReadNum
 	Integer MBNumReadValues
 	Integer portStatus
 	Long result
 	
 	CurrentReadNum = 1
-	MBNumReadValues = 48
+	MBNumReadValues = 28
 	
 	' set up the TCP port on the HMI that we use to tunnel to serial ports	
 	' the IP is the HMI's IP address the port is the port that is tied to
 	' the matching FPGA serial port line termination is somewhat irrelavent
 	' since we are using the binary send and receive the timeout is set to
 	' 20ms which is almost 6 times the theoritial tranfer time of the typical 7 byte transfer
-	SetNet #204, "10.22.251.171", 7352, CR, NONE, 3
+	SetNet #204, "10.22.251.171", 7352, CR, NONE, .02
 	OpenNet #204 As Client
 	
 	' each time through this infinite loop one modbus command will be executed.
@@ -153,17 +157,27 @@ Function MBCommandTask()
 		If portStatus < 0 Then
 			OpenNet #204 As Client
 			portStatus = ChkNet(204)
-			Print "portStatus is: ", portStatus
+			Print "MODBUS: portStatus is: ", portStatus
 			' if we are unable to open it set an error and abort
 			If portStatus < 0 Then
+				Print "MODBUS: port error, port status is:", portStatus
 				erModbusPort = True
 				Exit Function
 			EndIf
 		EndIf
+
+		'perform reads not more than twice per second, giving priority to writes
+		Do While Tmr(1) < 0.5
+			If MBQueueHead <> MBQueueTail Then
+				'a write command has shown up, give it priority
+                Exit Do
+			EndIf
+			Wait 0.1
+		Loop
 		
 		'if the queue isn't empty there is something to do
 		If MBQueueHead <> MBQueueTail Then
-			Print "something in the queue!"
+			'Print "MODBUS: something in the queue!"
 			If MBQueueType(MBQueueTail) = MBType16 Then
 				' send one MB word command
 				modbusWriteRegister(MBQueueAddress(MBQueueTail), MBQueueValue(MBQueueTail))
@@ -200,146 +214,125 @@ Function MBCommandTask()
 				EndIf
 			Else
 				'invalid type
+				Print "MODBUS: error with write, invalid MBQueueType"
 			EndIf
 		Else
-			' read not more than twice per second
-			' TODO -- change this from a busy wait to a "wait on XXX" were XXX is a free running timer
-			Do While Tmr(1) < 0.5
-				Wait 0.1
-			Loop
+			'Process the reads
+			
+'			Print "Time since last modbus read: ", Tmr(1)
 			
 			'restart the timer so that we can come back and check to 
 			'see if a 0.5 second has passed
 			TmReset 1
 
-			' priority reads
-			result = modbusReadRegister(&hA4B0)
-				pasInsertDetected = BTst(result, 4)
-				pasSteelInsert = BTst(result, 5)
-				pasShuttleMidway = BTst(result, 6)
-				pasShuttleLoadPosition = BTst(result, 8)
-				pasShuttleNoLoad = BTst(result, 9)
-				pasShuttleExtend = BTst(result, 10)
-				pasInsertInShuttle = BTst(result, 11)
-			result = modbusReadRegister(&hA479)
-				pasHeadDown = BTst(result, 4)
-				pasHeadUp = BTst(result, 5)
-				pasSlideExtend = BTst(result, 7)
-				pasInsertGripper = BTst(result, 8)
-				pas1inLoadInsertCylinder = BTst(result, 9)
-				pasBowlDumpOpen = BTst(result, 11)
-				pasVibTrack = BTst(result, 12)
-				pasBowlFeeder = BTst(result, 13)
-				pasBlowInsert = BTst(result, 14)
-			result = modbusReadRegister(&hA7B8)
-				pasMCREStop = BTst(result, 0)
-				pasStart = BTst(result, 1)
-				pasHeadinsertPickupRetract = BTst(result, 6)
-				pasHeadinsertpickupextend = BTst(result, 7)
+			'time sensitive reads
 			pasCrowding = modbusReadInput(&h03A5)
-			pasVerticalLocation = modbusRead32Register(&h0002) * .000000762939
-			pasPreHeatActual = modbusReadRegister(&hA147) * 0.1
-			pasDwellActual = modbusReadRegister(&hA148) * 0.1
-			pasCoolActual = modbusReadRegister(&hA149) * 0.1
 			pasMessageDB = modbusReadRegister(pasMessageDBADDR)
-			
+
 			' lazy reads
 			Select CurrentReadNum
 			Case 1
-				pasHome = modbusReadInput(&h0057)
-			Case 2
-				pasSoftHome = modbusRead32Register(&h00FE) * .000000762939
-			Case 3
-				pasInsertPosition = modbusRead32Register(&h0100) * .000000762939
-			Case 4
-				pasInsertDepth = modbusRead32Register(&h0102) * .000000762939
-			Case 5
-				pasSoftStop = modbusRead32Register(&h0104) * .000000762939
-			Case 6
-				pasHomeIPM = modbusRead32Register(&h0106) * .0000457764
-			Case 7
-				pasInsertPickupIPM = modbusRead32Register(&h0108) * .0000457764
-			Case 8
-				pasHeatStakingIPM = modbusRead32Register(&h010A) * .0000457764
-			Case 9
-				pasInsertEngageIPM = modbusRead32Register(&h010E) * .0000457764
-			Case 10
-				pasInsertEngage = modbusRead32Register(&h0118) * .000000762939
+				result = modbusReadRegister(&hA4B0)
+					pasInsertDetected = BTst(result, 4)
+					pasSteelInsert = BTst(result, 5)
+					pasShuttleMidway = BTst(result, 6)
+					pasShuttleLoadPosition = BTst(result, 8)
+					pasShuttleNoLoad = BTst(result, 9)
+					pasShuttleExtend = BTst(result, 10)
+					pasInsertInShuttle = BTst(result, 11)
+				result = modbusReadRegister(&hA479)
+					pasHeadDown = BTst(result, 4)
+					pasHeadUp = BTst(result, 5)
+					pasSlideExtend = BTst(result, 7)
+					pasInsertGripper = BTst(result, 8)
+					pas1inLoadInsertCylinder = BTst(result, 9)
+					pasBowlDumpOpen = BTst(result, 11)
+					pasVibTrack = BTst(result, 12)
+					pasBowlFeeder = BTst(result, 13)
+					pasBlowInsert = BTst(result, 14)
 			Case 11
-				pasSetTempZone1 = modbusReadRegister(&h012C)
+				result = modbusReadInputRegister(&hA7B8)
+					pasMCREStop = BTst(result, 0)
+					pasStart = BTst(result, 1)
+					pasHeadinsertPickupRetract = BTst(result, 6)
+					pasHeadinsertpickupextend = BTst(result, 7)
+				pasVerticalLocation = modbusRead32Register(&h0002) * .000000762939
 			Case 12
-				pasSetTempZone2 = modbusReadRegister(&h012D)
+				pasHome = modbusReadInput(&h0057)
+				pasPreHeatActual = modbusReadRegister(&hA147) * 0.1
 			Case 13
-				pasActualTempZone1 = modbusReadRegister(&h0132)
+				pasDwellActual = modbusReadRegister(&hA148) * 0.1
+				pasCoolActual = modbusReadRegister(&hA149) * 0.1
 			Case 14
-				pasActualTempZone2 = modbusReadRegister(&h0133)
+				pasSoftHome = modbusRead32Register(&h00FE) * .000000762939
+				pasInsertPosition = modbusRead32Register(&h0100) * .000000762939
+			Case 2
+				pasInsertDepth = modbusRead32Register(&h0102) * .000000762939
+				pasSoftStop = modbusRead32Register(&h0104) * .000000762939
 			Case 15
-				pasPIDsetupMaxTempZone1 = modbusReadRegister(&h0138)
+				pasHomeIPM = modbusRead32Register(&h0106) * .0000457764
+				pasInsertPickupIPM = modbusRead32Register(&h0108) * .0000457764
 			Case 16
-				pasPIDsetupMaxTempZone2 = modbusReadRegister(&h0139)
+				pasHeatStakingIPM = modbusRead32Register(&h010A) * .0000457764
+				pasInsertEngageIPM = modbusRead32Register(&h010E) * .0000457764
+			Case 3
+				pasInsertEngage = modbusRead32Register(&h0118) * .000000762939
+				pasSetTempZone1 = modbusReadRegister(&h012C)
 			Case 17
-				pasPIDsetupInTempZone1 = modbusReadRegister(&h0149)
+				pasSetTempZone2 = modbusReadRegister(&h012D)
+				pasActualTempZone1 = modbusReadRegister(&h0132)
 			Case 18
-				pasPIDsetupInTempZone2 = modbusReadRegister(&h014A)
+				pasActualTempZone2 = modbusReadRegister(&h0133)
+				pasPIDsetupMaxTempZone1 = modbusReadRegister(&h0138)
+			Case 4
+				pasPIDsetupMaxTempZone2 = modbusReadRegister(&h0139)
+				pasPIDsetupInTempZone1 = modbusReadRegister(&h0149)
 			Case 19
+				pasPIDsetupInTempZone2 = modbusReadRegister(&h014A)
 				pasPIDsetupOffsetZone1 = modbusReadRegister(&h015A)
-			Case 20
+			Case 10
 				pasPIDsetupOffsetZone2 = modbusReadRegister(&h015B)
-			Case 21
 				pasPIDsetupPZone1 = modbusReadRegister(&h0164)
-			Case 22
+			Case 5
 				pasPIDsetupIZone1 = modbusReadRegister(&h0165)
-			Case 23
 				pasPIDsetupDZone1 = modbusReadRegister(&h0166)
-			Case 24
+			Case 20
 				pasPIDsetupPZone2 = modbusReadRegister(&h016E)
-			Case 25
 				pasPIDsetupIZone2 = modbusReadRegister(&h016F)
-			Case 26
+			Case 21
 				pasPIDsetupDZone2 = modbusReadRegister(&h0170)
-			Case 27
 				pasInsertPreheat = modbusReadRegister(&h0190) * 0.1
-			Case 28
+			Case 6
 				pasDwell = modbusReadRegister(&h0191) * 0.1
-			Case 29
 				pasCool = modbusReadRegister(&h0192) * 0.1
-			Case 30
+			Case 22
 				pasJogSpeed = modbusReadRegister(&h01FE) * 0.5
-			Case 31
 				pasMaxLoadmeter = modbusReadRegister(&h0265) * 0.1
-			Case 32
+			Case 23
 				pasLoadMeter = modbusReadRegister(&h028B) * -0.1
-			Case 33
 				pasHighTempAlarm = modbusReadInput(&h0402)
-			Case 34
+			Case 7
 				pasInsertType = modbusReadInput(&h0230)
-			Case 35
 				pasTempOnOff = modbusReadInput(&h000D)
-			Case 36
+			Case 24
 				pasMasterTemp = modbusReadInput(&h0401)
-			Case 37
 				pasUpLimit = modbusReadInput(&h0055)
-			Case 38
+			Case 25
 				pasLowerlimit = modbusReadInput(&h0056)
-			Case 39
 				pasOTAOnOffZone1 = modbusReadInput(&h0403)
-			Case 40
+			Case 8
 				pasOTAOnOffZone2 = modbusReadInput(&h0404)
-			Case 41
 				pasOnOffZone1 = modbusReadInput(&h012C)
-			Case 42
+			Case 26
 				pasOnOffZone2 = modbusReadInput(&h012D)
-			Case 43
 				pasMaxTempOnOffZone1 = modbusReadInput(&h040D)
-			Case 44
+			Case 27
 				pasMaxTempOnOffZone2 = modbusReadInput(&h040E)
-			Case 45
 				pasMaxTempZone1 = modbusReadInput(&h0028)
-			Case 46
+			Case 9
 				pasMaxTempZone2 = modbusReadInput(&h0029)
-			Case 47
 				pasPIDTuneDoneZone1 = modbusReadInput(&h0138)
-			Case 48
+			Case 28
 				pasPIDTuneDoneZone2 = modbusReadInput(&h0139)
 			Send
 			
@@ -352,7 +345,7 @@ Function MBCommandTask()
 	Loop
 Fend
 Function modbusCRC(modLength As Integer) As Long
-	
+
 	Long CRC
 	Long lowBit
 	Integer bitCount
@@ -390,10 +383,9 @@ Function modbusCRC(modLength As Integer) As Long
 	
 	'Print "resulting CRC is: ", CRC
 	modbusCRC = CRC
-	
 Fend
 Function modbusResponseCRC(modLength As Integer) As Boolean
-	
+
 	Long CRC
 	Long lowBit
 	Integer bitCount
@@ -403,7 +395,7 @@ Function modbusResponseCRC(modLength As Integer) As Boolean
 	CRC = &hFFFF
 
 	' step through the entire message
-	'Print "outer loop running from 0 to ", modLength - 1
+	'Print "outer loop running from 0 to ", modLength - 3
 	For byteCount = 0 To modLength - 3
 		' XOR current byte of message with CRC
 		CRC = CRC Xor modResponse(byteCount)
@@ -426,8 +418,8 @@ Function modbusResponseCRC(modLength As Integer) As Boolean
 			EndIf
 		Next
 	Next
-	
-	If (modResponse(modLength - 2) = CRC And &hFF) And (modResponse(modLength - 1) = RShift(CRC, 8)) Then
+
+	If (modResponse(modLength - 2) = (CRC And &hFF)) And (modResponse(modLength - 1) = RShift(CRC, 8)) Then
 		modbusResponseCRC = True
 	Else
 		modbusResponseCRC = False
@@ -471,11 +463,7 @@ Fend
 ' calling type and return value are "Long" 
 Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	
-	Integer portStatus
 	Long CRC
-	Integer i
-	Boolean validResponse
-	Integer modByteRx(1)
 	
 	'build the command and send it to PLC
 	' function code		0x06
@@ -496,11 +484,6 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	' send the message to the PLC
 	WriteBin #204, modMessage(), 8
 	
-	'clear the response buffer
-	For i = 0 To 7
-		modResponse(i) = 0
-	Next
-	
 	' process the response or timeout
 	'wait for a predefinded timeout period of time or for the expected number of characters
 	'modResponse(0) = address of master
@@ -512,27 +495,12 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	'modResponse(6) = CRC low byte
 	'modResponse(7) = CRC high byte
 	'ReadBin #204, modResponse(), 8
-	
-	i = 0
-	Do While True
-		portStatus = ChkNet(204)
-		If portStatus > 0 Then
-			ReadBin #204, modByteRx(), 1
-			modResponse(i) = modByteRx(0)
-		ElseIf portStatus = 0 Then
-			Exit Do
-		Else
-			Print "modbus port error: ", portStatus
-		EndIf
-		i = i + 1
-	Loop
-	
-	' check for valid response CRC
-	validResponse = modbusResponseCRC(8)
-	If validResponse = False Then
-		erModbusCommand = True
+	If modbusReadPort(8) = -1 Then
+		'we didn't get the response expected...
+		Print "MODBUS: failed to read(after write) plc register address: ", Hex$(regNum)
+		'exit function
 	EndIf
-	
+
 Fend
 Function modbusRead32Register(regNum As Long) As Long
 	Long msw
@@ -552,10 +520,6 @@ Fend
 Function modbusReadRegister(regNum As Long) As Long
 	
 	Long CRC
-	Integer i
-	Integer portStatus
-	Boolean validResponse
-	Integer modByteRx(1)
 	
 	'build the command and send it to PLC
 	' function code		0x03
@@ -573,18 +537,8 @@ Function modbusReadRegister(regNum As Long) As Long
 	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
 	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
 	
-	' debug
-	'For i = 0 To 7
-	'	Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
-	'Next
-	
 	' send the message to the PLC
 	WriteBin #204, modMessage(), 8
-
-	'clear the response buffer
-	For i = 0 To 7
-		modResponse(i) = 0
-	Next
 
 	'process the response or timeout 
 	'wait for a predefinded period of time for the expected number of characters
@@ -596,59 +550,72 @@ Function modbusReadRegister(regNum As Long) As Long
 	'modResponse(5) = CRC low byte
 	'modResponse(6) = CRC high byte
 	
-	' might have a problem here...
 '	ReadBin #204, modResponse(), 7
-	' trying this instead
-	i = 0
-	Do While True
-		portStatus = ChkNet(204)
-		If portStatus > 0 Then
-			ReadBin #204, modByteRx(), 1
-			modResponse(i) = modByteRx(0)
-		ElseIf portStatus = 0 Then
-			Exit Do
-		Else
-			Print "modbus port error: ", portStatus
-		EndIf
-		i = i + 1
-	Loop
-	
-'	If regNum = &h0FE Or regNum = &h0FF Then
-'		Print "--", regNum
-'		Print modResponse(0)
-'		Print modResponse(1)
-'		Print modResponse(2)
-'		Print modResponse(3)
-'		Print modResponse(4)
-'		Print modResponse(5)
-'		Print modResponse(6)
-'	EndIf
-	
-'		Print modResponse(3)
-'		Print modResponse(4)
-	
-	' check for valid response CRC
-	validResponse = modbusResponseCRC(7) ' TODO: Fix this, it returns false
-	If validResponse = False Then
-		erModbusCommand = True
+	If modbusReadPort(7) = -1 Then
+		'we didn't get the response expected...
+		Print "MODBUS: failed to read plc register address: ", Hex$(regNum)
+		'exit function
 	EndIf
-	
+
 	modbusReadRegister = LShift(modResponse(3), 8) + modResponse(4)
 
 Fend
+
+' This function is for reading a single 16 bit Modbus inpur register from the PLC
+' It will build a valid Modbus RTU request and send it to the PLC
+' using the HMI ethernet to serial dameon as a bridge.
+' It will then wait for a response from the PLC
+Function modbusReadInputRegister(regNum As Long) As Long
+	
+	Long CRC
+	
+	'build the command and send it to PLC
+	' function code		0x04
+	' address high 		0x00
+	' address low		0x02
+	' No. of Regs high 	0x01
+	' No. of Regs low	0x8F
+	modMessage(0) = MBMitsubishiAddress
+	modMessage(1) = MBCmdReadInputRegister ' function code
+	modMessage(2) = RShift(regNum, 8) ' high byte of address
+	modMessage(3) = regNum And &hFF ' low byte of address
+	modMessage(4) = 0 ' high byte of No. of regs is always zero 
+	modMessage(5) = 1 ' low byte of No. of regs is one i.e. read one register
+	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
+	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
+	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
+	
+	' send the message to the PLC
+	WriteBin #204, modMessage(), 8
+
+	'process the response or timeout 
+	'wait for a predefinded period of time for the expected number of characters
+	'modResponse(0) = address of master
+	'modResponse(1) = function. Should be 3 if no error
+	'modResponse(2) = No. Bytes returned. Should be 2 for one 16 bit register
+	'modResponse(3) = value returned high byte
+	'modResponse(4) = value returned low byte
+	'modResponse(5) = CRC low byte
+	'modResponse(6) = CRC high byte
+	
+'	ReadBin #204, modResponse(), 7
+	If modbusReadPort(7) = -1 Then
+		'we didn't get the response expected...
+		Print "MODBUS: failed to read plc register address: ", Hex$(regNum)
+		'exit function
+	EndIf
+
+	modbusReadInputRegister = LShift(modResponse(3), 8) + modResponse(4)
+
+Fend
+
 ' This function is for writing a single Modbus coil on the PLC
 ' It will build a valid Modbus RTU message and send it to the PLC
 ' using the HMI ethernet to serial dameon as a bridge
 ' It will then wait for a response and return a ??? for success or -1 for failure
 Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	
-	Integer portStatus
 	Long CRC
-	Integer i
-	Boolean validResponse
-	Integer modByteRx(1)
-	
-	portStatus = ChkNet(204)
 
 	'build the command and send it to PLC
 	modMessage(0) = MBMitsubishiAddress 'PLC modbus address change to variable when integrated with rest of code TMH
@@ -666,26 +633,8 @@ Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
 	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
 	
-	' debugging simply print the contents of the message
-'	Print "WriteCoilReached"
-'	For i = 0 To 7
-'		Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
-'	Next
-	
-	' if port is not open exit with error
-	If portStatus < 0 Then
-		modbusWriteCoil = -1 'error port should remain open
-		Print "Bailing! not port open"
-		Exit Function
-	EndIf
-	
 	' send the message to the PLC
 	WriteBin #204, modMessage(), 8
-	
-	'clear the response buffer
-	For i = 0 To 7
-		modResponse(i) = 0
-	Next
 	
 	' process the response or timeout
 	'wait for a predefinded period of time for the expected number of characters
@@ -698,29 +647,11 @@ Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	'modResponse(6) = CRC low byte
 	'modResponse(7) = CRC high byte
 '	ReadBin #204, modResponse(), 8
-
-	i = 0
-	Do While True
-		portStatus = ChkNet(204)
-		If portStatus > 0 Then
-			ReadBin #204, modByteRx(), 1
-			modResponse(i) = modByteRx(0)
-		ElseIf portStatus = 0 Then
-			Exit Do
-		Else
-			Print "modbus port error: ", portStatus
-		EndIf
-		i = i + 1
-	Loop
-	
-	
-	' check for valid response CRC
-	validResponse = modbusResponseCRC(8)
-	If validResponse = False Then
-		erModbusCommand = True
+	If modbusReadPort(8) = -1 Then
+		'we didn't get the response expected...
+		Print "MODBUS: failed to read(after write) plc address: ", Hex$(coilNum)
+		'exit function
 	EndIf
-
-	
 Fend
 
 ' This function is for reading a single Modbus coil on the PLC
@@ -730,11 +661,6 @@ Fend
 Function modbusReadCoil(coilNum As Long)
 	
 	Long CRC
-	Integer i
-	Boolean validResponse
-	Integer portStatus
-	Integer modByteRx(1)
-
 
 	'build the command and send it to PLC
 	modMessage(0) = MBMitsubishiAddress 'PLC modbus address change to variable when integrated with rest of code TMH
@@ -750,11 +676,6 @@ Function modbusReadCoil(coilNum As Long)
 	' send the message to the PLC
 	WriteBin #204, modMessage(), 8
 	
-	'clear the response buffer
-	For i = 0 To 7
-		modResponse(i) = 0
-	Next
-		
 	' process the response or timeout
 	'wait for a predefinded period of time for the expected number of characters
 	'modResponse(0) = address of master
@@ -765,33 +686,17 @@ Function modbusReadCoil(coilNum As Long)
 	'modResponse(5) = CRC high byte
 
 '	ReadBin #204, modResponse(), 6
-	i = 0
-	Do While True
-		portStatus = ChkNet(204)
-		If portStatus > 0 Then
-			ReadBin #204, modByteRx(), 1
-			modResponse(i) = modByteRx(0)
-		ElseIf portStatus = 0 Then
-			Exit Do
-		Else
-			Print "modbus port error: ", portStatus
-		EndIf
-		i = i + 1
-	Loop
-
-
+	If modbusReadPort(6) = -1 Then
+		'we didn't get the response expected...
+		Print "MODBUS: failed to read plc coil address: ", Hex$(coilNum)
+		'exit function
+	EndIf
+	
 	If modResponse(3) And &h01 Then
 		modbusReadCoil = True
 	Else
 		modbusReadCoil = False
 	EndIf
-	
-	' check for valid response CRC
-	validResponse = modbusResponseCRC(6)
-	If validResponse = False Then
-		erModbusCommand = True
-	EndIf
-	
 Fend
 
 ' This function is for reading a single Modbus input on the PLC
@@ -801,11 +706,6 @@ Fend
 Function modbusReadInput(inputNum As Long)
 	
 	Long CRC
-	Integer i
-	Boolean validResponse
-	Integer portStatus
-	Integer modByteRx(1)
-
 	
 	'build the command and send it to PLC
 	modMessage(0) = MBMitsubishiAddress 'PLC modbus address change to variable when integrated with rest of code TMH
@@ -817,19 +717,9 @@ Function modbusReadInput(inputNum As Long)
 	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
 	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
 	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
-	
-	'debug
-'	For i = 0 To 7
-'		Print "modMessage(", Str$(i), ") = ", Hex$(modMessage(i))
-'	Next
-	
+
 	' send the message to the PLC
 	WriteBin #204, modMessage(), 8
-	
-	'clear the response buffer
-	For i = 0 To 10
-		modResponse(i) = 0
-	Next
 
 	'modResponse(0) = address of master
 	'modResponse(1) = function. Should be 1 if no error
@@ -839,30 +729,109 @@ Function modbusReadInput(inputNum As Long)
 	'modResponse(5) = CRC high byte
 	
 	'ReadBin #204, modResponse(), 6
-	i = 0
-	Do While True
-		portStatus = ChkNet(204)
-		If portStatus > 0 Then
-			ReadBin #204, modByteRx(), 1
-			modResponse(i) = modByteRx(0)
-		ElseIf portStatus = 0 Then
-			Exit Do
-		Else
-			Print "modbus port error: ", portStatus
-		EndIf
-		i = i + 1
-	Loop
+	If modbusReadPort(6) = -1 Then
+		'we didn't get the response expected...
+		Print "MODBUS: failed to read plc input address: ", Hex$(inputNum)
+		'exit function
+	EndIf
 
 	If modResponse(3) = 0 Then
 		modbusReadInput = False
 	Else
 		modbusReadInput = True
 	EndIf
-	
-	' check for valid response CRC
-	validResponse = modbusResponseCRC(6)
-	If validResponse = False Then
-		erModbusCommand = True
+
+Fend
+
+'this function will provide read support from the modbus port
+' and return the number of bytes read
+' or return -1 on error
+Function modbusReadPort(length As Integer) As Integer
+	Integer i, j
+	Integer portStatus
+	Integer modByteRx(1)
+
+	'clear the response buffer
+	Redim modResponse(256)
+
+	'give the port a chance to transmit and the PLC a chance to respond
+	Wait 0.04
+
+	i = 0
+	Do While True
+		'only read off of the port what it has available
+		portStatus = ChkNet(204)
+        If portStatus > 0 Then
+			ReadBin #204, modByteRx(), 1
+			modResponse(i) = modByteRx(0)
+		ElseIf portStatus = 0 Then
+			Exit Do
+		Else
+			Print "MODBUS: modbus port error: ", portStatus
+			modbusReadPort = -1
+			Exit Function
+		EndIf
+		
+		i = i + 1
+	Loop
+
+	If i < 6 Then
+		'we failed to rx a full modbus response -- bail
+		Print "MODBUS: failed to rx full modbus response packet, only ", i, " bytes rx'd, expected ", length, " bytes"
+		modbusReadPort = -1
+		Exit Function
+	EndIf
+
+	If i > length Then
+		'for some reason we received too many bytes -- bail
+		Print "MODBUS: response from PLC was larger than expected, num bytes rx'd/bytes expected: ", i, "/", length
+		For j = 0 To i
+			Print "MODBUS: packet(", j, "): ", modResponse(j)
+		Next
+		modbusReadPort = -1
+		Exit Function
 	EndIf
 	
+	If BTst(modResponse(1), 7) = True Then
+	'If modResponse(1) > 128 Then
+		String mbError$
+		'PLC set the error bit, get the error code
+		Select modResponse(2)
+			Case 01
+				mbError$ = "0x01 - ILLEGAL FUNCTION"
+			Case 02
+				mbError$ = "0x01 - ILLEGAL DATA ADDRESS"
+			Case 03
+				mbError$ = "0x01 - ILLEGAL DATA VALUE"
+			Case 04
+				mbError$ = "0x01 - SLAVE DEVICE FAILURE"
+			Case 05
+				mbError$ = "0x01 - ACKNOWLEDGE"
+			Case 06
+				mbError$ = "0x01 - SLAVE DEVICE BUSY"
+			Case 08
+				mbError$ = "0x01 - MEMORY PARITY ERROR"
+			Case 11 ' 0x0A
+				mbError$ = "0x01 - GATEWAY PATH UNAVAILABLE"
+			Case 12 ' 0x0B
+				mbError$ = "0x01 - GATEWAY TARGET DEVICE FAILED TO RESPOND"
+			Default
+				mbError$ = "0x" + Hex$(modResponse(2)) + " - UNKNOWN MODBUS ERROR"
+		Send
+		'the function code in an error = 0x80 + function, so subtracting 0x80 gives us the function code for display purposes 
+		Print "MODBUS: error bit was set in response to read, function/exception code is: ", Hex$(modResponse(1) - (&h80)), " / ", mbError$
+		modbusReadPort = -1
+		Exit Function
+	EndIf
+	
+	' check for valid response CRC
+	If modbusResponseCRC(i) = False Then
+		Print "MODBUS: invalid CRC on read"
+		modbusReadPort = -1
+		Exit Function
+	EndIf
+	
+	'return the number of bytes read
+	modbusReadPort = i
 Fend
+
