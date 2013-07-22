@@ -226,6 +226,10 @@ errHandler:
 	Print "Error Task Number:", ctrlrTaskNumber
 	Print "Error AxisNumber:", ctrlrErrAxisNumber
 	Print "Error Number:", ctrlrErrorNum
+	
+	' we will not recover short of a reboot anyway... so....
+	Quit IOTableOutputs
+	
 	Pause
 EResume
 
