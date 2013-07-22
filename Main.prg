@@ -51,6 +51,10 @@ jobStart = False ' reset flag
 
 mainCurrentState = StateIdle ' The first state is Idle
 
+'Calibrate()
+'Print "done"
+'Pause
+
 Do While True
 
 Select mainCurrentState
@@ -80,6 +84,7 @@ Select mainCurrentState
 			jobNumPanelsDone = 0 ' reset panel counter
 			Redim PassFailArray(23, 1) ' Clear array, always 23 rows
 			Redim InspectionArray(23, 1) 'Clear array, always 23 rows
+			
 		Else
 			mainCurrentState = StateIdle ' Stay in idle until ready
 		EndIf
@@ -91,8 +96,8 @@ Select mainCurrentState
 		StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
 				
 		If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
-			'mainCurrentState = StateCrowding
-			mainCurrentState = StatePushPanel ' fake for testing
+			mainCurrentState = StateCrowding
+			'mainCurrentState = StatePushPanel ' fake for testing
 			Print "Pick up Successful"
 		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePopPanel
@@ -137,8 +142,8 @@ Select mainCurrentState
 		
 			StatusCheckPreinspection = InspectPanel(1) ' 1=Preinspection 
 			If StatusCheckPreinspection = 0 Then
-'				mainCurrentState = StateHotStakePanel
-				mainCurrentState = StateInspection
+				mainCurrentState = StateHotStakePanel
+'				mainCurrentState = StateInspection
 '				mainCurrentState = StatePushPanel
 				Print "Preinspection executed"
 			ElseIf StatusCheckPreinspection = 2 Then
@@ -359,5 +364,46 @@ Function ClearMemory()
 	x = 0
 	
 Fend
-
+Function TestHeatStake()
+	
+	Do Until jobStart = True
+		Wait .1
+	Loop
+	
+	Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
+			MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
+			Wait 1
+			MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
+			Do While pasMessageDB = 9
+			'waiting for the heat stake to finish homeing
+				Wait .5
+			Loop
+	Loop
+	
+	Do Until pasMessageDB = 3
+		On heatStakeGoH, 1 ' Tell HS to go to soft home position
+		Wait 1.25
+	Loop
+	
+	HSProbeFinalPosition = 12
+	
+Do While True
+		
+	MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
+ 	MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement
+	
+	Do Until pasMessageDB = 4
+		On heatStakeGoH, 1 ' Tell the HS to install 1 insert
+		Wait .5
+	Loop
+	
+	Do Until pasMessageDB = 4
+		Wait .1
+	Loop
+	
+	HSProbeFinalPosition = HSProbeFinalPosition + .1
+	
+Loop
+	
+Fend
 

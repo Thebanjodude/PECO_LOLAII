@@ -12,10 +12,11 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 ' default to fail	
 	recHeatStakeOffset = .100 ' positive is deeper	
-	ZLasertoHeatStake = 291.42372 ' This is a calibrated value, it will be stored in the HMI	
+'	ZLasertoHeatStake = 291.42372 ' This is a calibrated value, it will be stored in the HMI	
+	ZLasertoHeatStake = 291.77666
 	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
-
+	
 	Do Until pasMessageDB = 3
 		On heatStakeGoH, 1 ' Tell HS to go to soft home position
 		Wait 1.25
@@ -51,7 +52,6 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 			RobotZOnAnvil = CZ(Here) ' Get z coord when boss is on anvil
 '			Print "RobotZOnAnvil", RobotZOnAnvil
-'			Print "RobotZOnAnvil - ZSpotfacetoQuillOffset", RobotZOnAnvil - ZSpotfacetoQuillOffset
 
             HSProbeFinalPosition = (ZLasertoHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth) + InTomm(recHeatStakeOffset)) /25.4
             Print "heat stake Position:", HSProbeFinalPosition
@@ -69,6 +69,11 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
             
             MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
  			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement point
+ 			
+ 			Do Until pasInsertDepth = HSProbeFinalPosition
+ 				Wait .1
+ 				Print pasInsertDepth
+ 			Loop
 			
 			Trap 2 ' disable the ability to abort a job
 			' give modbus a chance to update the value from 3 to something else

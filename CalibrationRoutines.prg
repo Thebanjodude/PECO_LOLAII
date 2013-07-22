@@ -160,4 +160,41 @@ Do While True
 Loop
 
 Fend
+Function Calibrate()
+	
+Real robotZhs, robotZlaser, ZoffsetUnderLaser, recZLaserToHeatStake
+	
+' how do we initiate a calibration routine?	
+SFree 1, 2, 3, 4
+' put the EOAT under the laser	
+ChangeProfile("07") ' Chage the correct profile  
+
+Pause
+'Do Until button = True
+'	Wait .1
+'Loop
+
+robotZlaser = CZ(Here) ' get where the quill is when we take the measurement
+Print "robotZlaser:", robotZlaser
+ZoffsetUnderLaser = (GetLaserMeasurement("05") + GetLaserMeasurement("06")) / 2 ' how far away is the EOAT from the laser zero
+Print "ZoffsetUnderLaser:", ZoffsetUnderLaser
+Pause
+
+'Do Until button = True
+'	Wait .1
+'Loop
+
+robotZhs = CZ(Here) ' where is the quill when the shoulder is touching EOAT
+Print "robotZhs:", robotZhs
+
+'calculate the distance between the laser zero and hs zero
+recZLaserToHeatStake = InTomm(pasVerticalLocation) + (Abs(robotZlaser - robotZhs)) + ZoffsetUnderLaser
+
+Print "pasVerticalLocation: ", pasVerticalLocation * 25.4
+
+Print "recZLaserToHeatStake: ", recZLaserToHeatStake
+
+'tell HS to capture the measurement and save it in the database
+SLock 1, 2, 3, 4
+Fend
 
