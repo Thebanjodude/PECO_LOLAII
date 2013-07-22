@@ -535,6 +535,7 @@ Global Long pasCoolActualSet
 #define MBCmdReadCoil 1
 #define MBCmdReadInput 2
 #define MBCmdReadRegister 3
+#define MBCmdReadInputRegister 4
 #define MBCmdWriteCoil 5
 #define MBCmdWriteRegister 6
 #define MBTypeCoil 1
