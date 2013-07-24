@@ -13,6 +13,9 @@ suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
 recFlashDwellTime = 0
 insertDepthTolerance = .006
+recHeatStakeOffset = 0.000 ' positive is deeper
+recZLaserToHeatStake = 291.77666
+
 '______________________________________
 'recNumberOfHoles = 16 ' fake for test
 'recInsertDepth = 0.165 ' fake for testing
@@ -110,8 +113,9 @@ Select mainCurrentState
 		StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
 				
 		If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
-			mainCurrentState = StateCrowding
+			'mainCurrentState = StateCrowding
 			'mainCurrentState = StatePushPanel ' fake for testing
+			mainCurrentState = StateHotStakePanel
 			Print "Pick up Successful"
 		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePopPanel
@@ -171,8 +175,10 @@ Select mainCurrentState
 		
 	Case StateHotStakePanel
 		' This state iterates through each hole and installs all inserts
+			
+		HotStakePanelTEST()
 		
-		StatusCheckHotStake = HotStakePanel(0)
+		'StatusCheckHotStake = HotStakePanel(0)
 		If StatusCheckHotStake = 0 Then
 			Print "hot stake done"
 			If recFlashRequired = False Then

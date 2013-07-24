@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/07/23 22:56:03:152,DS:0000003032,CS:07685,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="HotStakeAndFlash.prg"
+ENVT0100,LM:2013/07/24 18:44:20:788,DS:0000003023,CS:01547,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Main.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-148
-		nTop=146
-		nWidth=1215
-		nHeight=665
+		nLeft=130
+		nTop=76
+		nWidth=1214
+		nHeight=662
 	}
 }
 ProgramFile2 {
@@ -17,10 +17,10 @@ ProgramFile2 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=28
-		nTop=24
-		nWidth=1550
-		nHeight=761
+		nLeft=43
+		nTop=20
+		nWidth=1258
+		nHeight=659
 	}
 }
 ProgramFile3 {
@@ -39,10 +39,10 @@ ProgramFile4 {
 	bOpened=True
 	nWinState=1
 	Window {
-		nLeft=-2
-		nTop=-1
-		nWidth=1487
-		nHeight=727
+		nLeft=-110
+		nTop=28
+		nWidth=1485
+		nHeight=723
 	}
 }
 ProgramFile5 {
@@ -83,32 +83,32 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=1
 	Window {
-		nLeft=41
-		nTop=125
-		nWidth=1357
-		nHeight=805
+		nLeft=-159
+		nTop=89
+		nWidth=1356
+		nHeight=802
 	}
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=-152
-		nTop=0
-		nWidth=1055
-		nHeight=815
+		nLeft=116
+		nTop=5
+		nWidth=1338
+		nHeight=807
 	}
 }
 ProgramFile10 {
 	sName="CalibrationRoutines.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=537
-		nTop=51
-		nWidth=1259
-		nHeight=691
+		nLeft=254
+		nTop=23
+		nWidth=1257
+		nHeight=687
 	}
 }
 nIncludeFileCount=1
@@ -171,10 +171,10 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=704
-		nTop=0
-		nWidth=817
-		nHeight=576
+		nLeft=343
+		nTop=32
+		nWidth=890
+		nHeight=625
 	}
 }
 IOLabelEditor {

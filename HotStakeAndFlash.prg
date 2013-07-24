@@ -11,9 +11,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	Boolean SkippedHole
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 ' default to fail	
-	recHeatStakeOffset = 0.000 ' positive is deeper	
 '	ZLasertoHeatStake = 291.42372 ' This is a calibrated value, it will be stored in the HMI	
-	recZLaserToHeatStake = 291.77666
 	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
 	
@@ -70,13 +68,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
             
             MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
  			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement point
- 			
- 			Do Until pasInsertDepth = HSProbeFinalPosition
- 				Wait .1
- 			Loop
-			
-			Trap 2 ' disable the ability to abort a job
-			' give modbus a chance to update the value from 3 to something else
+ 				
 			Do Until pasMessageDB = 4
 				On heatStakeGoH, 1 ' Tell the HS to install 1 insert
 				Wait .5
@@ -219,5 +211,49 @@ Fend
 Function InTomm(mm As Real) As Real
 	InTomm = mm * 25.4
 Fend
+Function HotStakePanelTEST
+	
+'HSProbeFinalPosition=
 
+Jump PreHotStake LimZ zLimit ' Present panel to hot stake
+	
+Do While True
+	
+	Do Until pasMessageDB = 3
+		On heatStakeGoH, 1 ' Tell HS to go to soft home position
+		Wait 1.25
+	Loop
+     
+	SFree 1, 2, 3, 4
+	
+	Pause
+   
+    MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
+	MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement point
+		
+	Do Until pasInsertDepth = HSProbeFinalPosition
+		Wait .1
+	Loop
+	
+	SLock 3, 4
+	Do Until pasMessageDB = 4
+		On heatStakeGoH, 1 ' Tell the HS to install 1 insert
+		Wait .5
+	Loop
+	
+	ZmaxTorque = 0
+	PTCLR (3)
+
+	Do Until pasMessageDB = 3 ' monitor the torque when hs is installing insert
+		ZmaxTorque = PTRQ(3)
+		If ZmaxTorque > .3 Then
+			erUnknown = True ' replace this with a real error
+			Print "Over torque: HS vs Robot"
+			Pause
+		EndIf
+	Loop
+
+Loop
+
+Fend
 

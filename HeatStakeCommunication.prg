@@ -106,7 +106,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = value
+	MBQueueValue(MBQueueHead) = Value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -130,6 +130,12 @@ Function MBCommandTask()
 	
 	CurrentReadNum = 1
 	MBNumReadValues = 28
+	
+	Integer count
+	Integer maxCount
+	
+	count = 0
+	maxCount = 10
 	
 	' set up the TCP port on the HMI that we use to tunnel to serial ports	
 	' the IP is the HMI's IP address the port is the port that is tied to
@@ -217,130 +223,122 @@ Function MBCommandTask()
 				Print "MODBUS: error with write, invalid MBQueueType"
 			EndIf
 		Else
-			'Process the reads
+			'Read data from the PLC
 			
-'			Print "Time since last modbus read: ", Tmr(1)
+			'Print "MODBUS: Time since last modbus read: ", Tmr(1)
 			
 			'restart the timer so that we can come back and check to 
 			'see if a 0.5 second has passed
 			TmReset 1
 
-			'time sensitive reads
-			pasCrowding = modbusReadInput(&h03A5)
-			pasMessageDB = modbusReadRegister(pasMessageDBADDR)
+			'read the data off of the PLC
+			' start at modbus address 0x0014 (PLC memory location D20)
+			' and read the next 49 regs ending at modbus address 0x044 (inclusive)
+			' (PLC memory location D68, inclusive)
+			' the result will be stored in modResponse, us modGetResult to pull values
 
-			' lazy reads
-			Select CurrentReadNum
-			Case 1
-				result = modbusReadRegister(&hA4B0)
-					pasInsertDetected = BTst(result, 4)
-					pasSteelInsert = BTst(result, 5)
-					pasShuttleMidway = BTst(result, 6)
-					pasShuttleLoadPosition = BTst(result, 8)
-					pasShuttleNoLoad = BTst(result, 9)
-					pasShuttleExtend = BTst(result, 10)
-					pasInsertInShuttle = BTst(result, 11)
-				result = modbusReadRegister(&hA479)
-					pasHeadDown = BTst(result, 4)
-					pasHeadUp = BTst(result, 5)
-					pasSlideExtend = BTst(result, 7)
-					pasInsertGripper = BTst(result, 8)
-					pas1inLoadInsertCylinder = BTst(result, 9)
-					pasBowlDumpOpen = BTst(result, 11)
-					pasVibTrack = BTst(result, 12)
-					pasBowlFeeder = BTst(result, 13)
-					pasBlowInsert = BTst(result, 14)
-			Case 11
-				result = modbusReadInputRegister(&hA7B8)
-					pasMCREStop = BTst(result, 0)
-					pasStart = BTst(result, 1)
-					pasHeadinsertPickupRetract = BTst(result, 6)
-					pasHeadinsertpickupextend = BTst(result, 7)
-				pasVerticalLocation = modbusRead32Register(&h0002) * .000000762939
-			Case 12
-				pasHome = modbusReadInput(&h0057)
-				pasPreHeatActual = modbusReadRegister(&hA147) * 0.1
-			Case 13
-				pasDwellActual = modbusReadRegister(&hA148) * 0.1
-				pasCoolActual = modbusReadRegister(&hA149) * 0.1
-			Case 14
-				pasSoftHome = modbusRead32Register(&h00FE) * .000000762939
-				pasInsertPosition = modbusRead32Register(&h0100) * .000000762939
-			Case 2
-				pasInsertDepth = modbusRead32Register(&h0102) * .000000762939
-				pasSoftStop = modbusRead32Register(&h0104) * .000000762939
-			Case 15
-				pasHomeIPM = modbusRead32Register(&h0106) * .0000457764
-				pasInsertPickupIPM = modbusRead32Register(&h0108) * .0000457764
-			Case 16
-				pasHeatStakingIPM = modbusRead32Register(&h010A) * .0000457764
-				pasInsertEngageIPM = modbusRead32Register(&h010E) * .0000457764
-			Case 3
-				pasInsertEngage = modbusRead32Register(&h0118) * .000000762939
-				pasSetTempZone1 = modbusReadRegister(&h012C)
-			Case 17
-				pasSetTempZone2 = modbusReadRegister(&h012D)
-				pasActualTempZone1 = modbusReadRegister(&h0132)
-			Case 18
-				pasActualTempZone2 = modbusReadRegister(&h0133)
-				pasPIDsetupMaxTempZone1 = modbusReadRegister(&h0138)
-			Case 4
-				pasPIDsetupMaxTempZone2 = modbusReadRegister(&h0139)
-				pasPIDsetupInTempZone1 = modbusReadRegister(&h0149)
-			Case 19
-				pasPIDsetupInTempZone2 = modbusReadRegister(&h014A)
-				pasPIDsetupOffsetZone1 = modbusReadRegister(&h015A)
-			Case 10
-				pasPIDsetupOffsetZone2 = modbusReadRegister(&h015B)
-				pasPIDsetupPZone1 = modbusReadRegister(&h0164)
-			Case 5
-				pasPIDsetupIZone1 = modbusReadRegister(&h0165)
-				pasPIDsetupDZone1 = modbusReadRegister(&h0166)
-			Case 20
-				pasPIDsetupPZone2 = modbusReadRegister(&h016E)
-				pasPIDsetupIZone2 = modbusReadRegister(&h016F)
-			Case 21
-				pasPIDsetupDZone2 = modbusReadRegister(&h0170)
-				pasInsertPreheat = modbusReadRegister(&h0190) * 0.1
-			Case 6
-				pasDwell = modbusReadRegister(&h0191) * 0.1
-				pasCool = modbusReadRegister(&h0192) * 0.1
-			Case 22
-				pasJogSpeed = modbusReadRegister(&h01FE) * 0.5
-				pasMaxLoadmeter = modbusReadRegister(&h0265) * 0.1
-			Case 23
-				pasLoadMeter = modbusReadRegister(&h028B) * -0.1
-				pasHighTempAlarm = modbusReadInput(&h0402)
-			Case 7
-				pasInsertType = modbusReadInput(&h0230)
-				pasTempOnOff = modbusReadInput(&h000D)
-			Case 24
-				pasMasterTemp = modbusReadInput(&h0401)
-				pasUpLimit = modbusReadInput(&h0055)
-			Case 25
-				pasLowerlimit = modbusReadInput(&h0056)
-				pasOTAOnOffZone1 = modbusReadInput(&h0403)
-			Case 8
-				pasOTAOnOffZone2 = modbusReadInput(&h0404)
-				pasOnOffZone1 = modbusReadInput(&h012C)
-			Case 26
-				pasOnOffZone2 = modbusReadInput(&h012D)
-				pasMaxTempOnOffZone1 = modbusReadInput(&h040D)
-			Case 27
-				pasMaxTempOnOffZone2 = modbusReadInput(&h040E)
-				pasMaxTempZone1 = modbusReadInput(&h0028)
-			Case 9
-				pasMaxTempZone2 = modbusReadInput(&h0029)
-				pasPIDTuneDoneZone1 = modbusReadInput(&h0138)
-			Case 28
-				pasPIDTuneDoneZone2 = modbusReadInput(&h0139)
-			Send
-			
-			CurrentReadNum = CurrentReadNum + 1
-
-			If CurrentReadNum > MBNumReadValues Then
-				CurrentReadNum = 1
+			If count < maxCount Then
+				'read the six time sensitive regs
+				modbusReadMultipleRegister(&h0014, 6)
+			Else
+				'do a full read, get everything else
+				modbusReadMultipleRegister(&h0014, 49)
 			EndIf
+			
+'			Print "MODBUS: Time to pull data from PLC: ", Tmr(1)
+			
+			'process the data
+			' the results should be stored in modResponse()
+			' so pull them out and map them to vars
+			pasCrowding = BTst(modResponse(5), 15)
+			pasMessageDB = LShift(modResponse(9), 8) + modResponse(10)
+			pasInsertDetected = BTst(modResponse(5), 8)
+			pasSteelInsert = BTst(modResponse(5), 9)
+			pasShuttleMidway = BTst(modResponse(5), 10)
+			pasShuttleLoadPosition = BTst(modResponse(5), 11)
+			pasShuttleNoLoad = BTst(modResponse(5), 12)
+			pasShuttleExtend = BTst(modResponse(5), 13)
+			pasInsertInShuttle = BTst(modResponse(5), 14)
+			pasHeadDown = BTst(modResponse(4), 5)
+			pasHeadUp = BTst(modResponse(4), 6)
+			pasSlideExtend = BTst(modResponse(4), 7)
+			pasInsertGripper = BTst(modResponse(3), 8)
+			pas1inLoadInsertCylinder = BTst(modResponse(3), 9)
+			pasBowlDumpOpen = BTst(modResponse(3), 10)
+			pasVibTrack = BTst(modResponse(3), 11)
+			pasBowlFeeder = BTst(modResponse(3), 12)
+			pasBlowInsert = BTst(modResponse(3), 13)
+			pasMCREStop = BTst(modResponse(8), 6)
+			pasStart = BTst(modResponse(8), 7)
+			pasHeadinsertPickupRetract = BTst(modResponse(7), 8)
+			pasHeadinsertpickupextend = BTst(modResponse(7), 9)
+			pasVerticalLocation = (LShift((LShift(modResponse(11), 8) + modResponse(12)), 16) + ((LShift(modResponse(13), 8) + modResponse(14)) And &hFFFF)) * .000000762939
+			pasHome = BTst(modResponse(6), 2)
+			
+			'check to see if we are doing a full read
+			If count >= maxCount Then
+				pasPreHeatActual = (LShift(modResponse(65), 8) + modResponse(66)) * 0.1
+				pasDwellActual = (LShift(modResponse(67), 8) + modResponse(68)) * 0.1
+				pasCoolActual = (LShift(modResponse(69), 8) + modResponse(70)) * 0.1
+				pasSoftHome = (LShift((LShift(modResponse(35), 8) + modResponse(36)), 16) + ((LShift(modResponse(37), 8) + modResponse(38)) And &hFFFF)) * .000000762939
+				pasInsertPosition = (LShift((LShift(modResponse(43), 8) + modResponse(44)), 16) + ((LShift(modResponse(45), 8) + modResponse(46)) And &hFFFF)) * .000000762939
+				pasInsertDepth = (LShift((LShift(modResponse(19), 8) + modResponse(20)), 16) + ((LShift(modResponse(21), 8) + modResponse(22)) And &hFFFF)) * .000000762939
+				pasSoftStop = (LShift((LShift(modResponse(15), 8) + modResponse(16)), 16) + ((LShift(modResponse(17), 8) + modResponse(18)) And &hFFFF)) * .000000762939
+				pasHomeIPM = (LShift((LShift(modResponse(39), 8) + modResponse(40)), 16) + ((LShift(modResponse(41), 8) + modResponse(42)) And &hFFFF)) * .0000457764
+				pasInsertPickupIPM = (LShift((LShift(modResponse(47), 8) + modResponse(48)), 16) + ((LShift(modResponse(49), 8) + modResponse(50)) And &hFFFF)) * .0000457764
+				pasHeatStakingIPM = (LShift((LShift(modResponse(23), 8) + modResponse(24)), 16) + ((LShift(modResponse(25), 8) + modResponse(26)) And &hFFFF)) * .0000457764
+				pasInsertEngageIPM = (LShift((LShift(modResponse(31), 8) + modResponse(32)), 16) + ((LShift(modResponse(33), 8) + modResponse(34)) And &hFFFF)) * .0000457764
+				pasInsertEngage = (LShift((LShift(modResponse(27), 8) + modResponse(28)), 16) + ((LShift(modResponse(29), 8) + modResponse(30)) And &hFFFF)) * .000000762939
+				pasSetTempZone1 = LShift(modResponse(59), 8) + modResponse(60)
+				pasSetTempZone2 = LShift(modResponse(63), 8) + modResponse(64)
+				pasActualTempZone1 = LShift(modResponse(57), 8) + modResponse(58)
+				pasActualTempZone2 = LShift(modResponse(61), 8) + modResponse(62)
+				pasPIDsetupMaxTempZone1 = LShift(modResponse(87), 8) + modResponse(88)
+				pasPIDsetupMaxTempZone2 = LShift(modResponse(89), 8) + modResponse(90)
+				pasPIDsetupInTempZone1 = LShift(modResponse(83), 8) + modResponse(84)
+				pasPIDsetupInTempZone2 = LShift(modResponse(85), 8) + modResponse(86)
+				pasPIDsetupOffsetZone1 = LShift(modResponse(91), 8) + modResponse(92)
+				pasPIDsetupOffsetZone2 = LShift(modResponse(93), 8) + modResponse(94)
+				pasPIDsetupPZone1 = LShift(modResponse(71), 8) + modResponse(72)
+				pasPIDsetupIZone1 = LShift(modResponse(75), 8) + modResponse(76)
+				pasPIDsetupDZone1 = LShift(modResponse(79), 8) + modResponse(80)
+				pasPIDsetupPZone2 = LShift(modResponse(73), 8) + modResponse(74)
+				pasPIDsetupIZone2 = LShift(modResponse(77), 8) + modResponse(78)
+				pasPIDsetupDZone2 = LShift(modResponse(81), 8) + modResponse(82)
+				pasInsertPreheat = (LShift(modResponse(95), 8) + modResponse(96)) * 0.1
+				pasDwell = (LShift(modResponse(97), 8) + modResponse(98)) * 0.1
+				pasCool = (LShift(modResponse(99), 8) + modResponse(100)) * 0.1
+				pasJogSpeed = (LShift(modResponse(55), 8) + modResponse(56)) * 0.5
+				pasMaxLoadmeter = (LShift(modResponse(53), 8) + modResponse(54)) * 0.1
+				pasLoadMeter = (LShift(modResponse(51), 8) + modResponse(52)) * -0.1
+				pasHighTempAlarm = BTst(modResponse(8), 1)
+				pasInsertType = BTst(modResponse(6), 7)
+				pasTempOnOff = BTst(modResponse(4), 4)
+				pasMasterTemp = BTst(modResponse(8), 0)
+				pasUpLimit = BTst(modResponse(6), 0)
+				pasLowerlimit = BTst(modResponse(6), 1)
+				pasOTAOnOffZone1 = BTst(modResponse(8), 2)
+				pasOTAOnOffZone2 = BTst(modResponse(8), 3)
+				pasOnOffZone1 = BTst(modResponse(6), 3)
+				pasOnOffZone2 = BTst(modResponse(6), 4)
+				pasMaxTempOnOffZone1 = BTst(modResponse(8), 4)
+				pasMaxTempOnOffZone2 = BTst(modResponse(8), 5)
+				pasMaxTempZone1 = BTst(modResponse(3), 14)
+				pasMaxTempZone2 = BTst(modResponse(3), 15)
+				pasPIDTuneDoneZone1 = BTst(modResponse(6), 5)
+				pasPIDTuneDoneZone2 = BTst(modResponse(6), 6)
+				pasPIDTuneFailZone1 = BTst(modResponse(4), 0)
+				pasPIDTuneFailZone2 = BTst(modResponse(4), 1)
+				pasInTempZone1 = BTst(modResponse(4), 2)
+				pasInTempZone2 = BTst(modResponse(4), 3)
+			EndIf
+			
+			count = count + 1
+			
+			If count > maxCount Then
+				count = 0
+			EndIf
+			
 		EndIf
 	Loop
 Fend
@@ -525,8 +523,8 @@ Function modbusReadRegister(regNum As Long) As Long
 	' function code		0x03
 	' address high 		0x00
 	' address low		0x02
-	' No. of Regs high 	0x01
-	' No. of Regs low	0x8F
+	' No. of Regs high 	0x00
+	' No. of Regs low	0x01
 	modMessage(0) = MBMitsubishiAddress
 	modMessage(1) = MBCmdReadRegister ' function code
 	modMessage(2) = RShift(regNum, 8) ' high byte of address
@@ -573,8 +571,8 @@ Function modbusReadInputRegister(regNum As Long) As Long
 	' function code		0x04
 	' address high 		0x00
 	' address low		0x02
-	' No. of Regs high 	0x01
-	' No. of Regs low	0x8F
+	' No. of Regs high 	0x00
+	' No. of Regs low	0x01
 	modMessage(0) = MBMitsubishiAddress
 	modMessage(1) = MBCmdReadInputRegister ' function code
 	modMessage(2) = RShift(regNum, 8) ' high byte of address
@@ -591,7 +589,7 @@ Function modbusReadInputRegister(regNum As Long) As Long
 	'process the response or timeout 
 	'wait for a predefinded period of time for the expected number of characters
 	'modResponse(0) = address of master
-	'modResponse(1) = function. Should be 3 if no error
+	'modResponse(1) = function. Should be 4 if no error
 	'modResponse(2) = No. Bytes returned. Should be 2 for one 16 bit register
 	'modResponse(3) = value returned high byte
 	'modResponse(4) = value returned low byte
@@ -608,6 +606,60 @@ Function modbusReadInputRegister(regNum As Long) As Long
 	modbusReadInputRegister = LShift(modResponse(3), 8) + modResponse(4)
 
 Fend
+
+' This function is for reading a multiple 16 bit Modbus registers from the PLC
+' It will build a valid Modbus RTU request and send it to the PLC
+' using the HMI ethernet to serial dameon as a bridge.
+' It will then wait for a response from the PLC
+' 
+' ****************************************************************************
+' **********  This function relies upon the global modResponse()  ************
+' **********  It should only be called from the MBCommandTask()   ************
+' ****************************************************************************
+Function modbusReadMultipleRegister(regNum As Long, numRegToRead As Long)
+	
+	Long CRC
+	
+	'build the command and send it to PLC
+	' function code		0x03
+	' address high 		0x00
+	' address low		0x14
+	' No. of Regs high 	0x00
+	' No. of Regs low	0x31
+	modMessage(0) = MBMitsubishiAddress
+	modMessage(1) = MBCmdReadRegister ' function code
+	modMessage(2) = RShift(regNum, 8) ' high byte of address
+	modMessage(3) = regNum And &hFF ' low byte of address
+	modMessage(4) = RShift(numRegToRead, 8) ' high byte of No. of regs
+	modMessage(5) = numRegToRead And &hFF ' low byte of No. of regs
+	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
+	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
+	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
+	
+	' send the message to the PLC
+	WriteBin #204, modMessage(), 8
+
+	'process the response or timeout 
+	'wait for a predefinded period of time for the expected number of characters
+	'modResponse(0) = address of master
+	'modResponse(1) = function. Should be 3 if no error
+	'modResponse(2) = No. Bytes returned. Should be 2 * numRegToRead
+	'modResponse(3) = first value returned high byte
+	'modResponse(4) = first value returned low byte
+	' ...
+	'modResponse(numRegToRead - 1) = last value returned high byte
+	'modResponse(numRegToRead    ) = last value returned low byte
+	'modResponse(numRegToRead + 4) = CRC low byte
+	'modResponse(numRegToRead + 5) = CRC high byte
+
+	'numRegToRead (16 bit) * 2 (mobus is 8 bit) + 6 (overhead)
+	If modbusReadPort(numRegToRead * 2 + 6) = -1 Then
+		'we didn't get the response expected...
+		Print "MODBUS: failed to read plc register address: ", Hex$(regNum)
+		'exit function
+	EndIf
+Fend
+
 
 ' This function is for writing a single Modbus coil on the PLC
 ' It will build a valid Modbus RTU message and send it to the PLC
