@@ -100,7 +100,7 @@ Global Integer x, z ' Increment for P(x) to define edge and num of holes found
 Global Real CurrentThetaHere, insertDepthTolerance
 Global Boolean PassFailArray(0, 0)
 Global Real InspectionArray(0, 0), recInmagPickupOffset
-Global Boolean SkipHoleArray(0, 0), DeepBoss ' This needs to be global
+Global Boolean SkipHoleArray(0, 0), DeepBoss, MediumBoss ' This needs to be global
 Global Integer currentInspectHole, currentPreinspectHole
 #define RightSpotFace 1
 #define LeftSpotFace 0
@@ -121,7 +121,7 @@ Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flas
 Global Boolean drillGoCC, drillReturnCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
 Global Integer currentHSHole, currentFlashHole
 Global Real ZSpotfacetoQuillOffset, ZLasertoHeatStake, HSProbeFinalPosition
-Global Real PreInspectionArray(0, 0), recHeatStakeOffset
+Global Real PreInspectionArray(0, 0)
 
 ' Recipe Ingredients for Panels
 #define InsertTypeUnknown 0
@@ -132,12 +132,13 @@ Global Real PreInspectionArray(0, 0), recHeatStakeOffset
 Global Integer recNumberOfHoles, recInsertType, recInmag, recOutmag, recCrowding, recPreCrowding
 Global Double recPartNumber
 Global Boolean recFlashRequired
-Global Real recInsertDepth, recPanelThickness
+Global Real recInsertDepth, recZLaserToHeatStake, recHeatStakeOffset
 Global Real recTempProbe, recTempTrack
-Global Integer FirstHolePointInspection, LastHolePointInspection
-Global Integer FirstHolePointHotStake, LastHolePointHotStake
-Global Integer FirstHolePointFlash, LastHolePointFlash
+Global Integer recFirstHolePointInspection, recLastHolePointInspection
+Global Integer recFirstHolePointHotStake, recLastHolePointHotStake
+Global Integer recFirstHolePointFlash, recLastHolePointFlash
 Global Real recFlashDwellTime ' How long the flash tool is in contact with the insert
+
 
 'Error Vars
 Global Boolean erPanelFailedInspection, erFrontSafetyFrameOpen, erBackSafetyFrameOpen

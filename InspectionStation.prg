@@ -17,7 +17,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	currentPreinspectHole = 1 ' This tells the HMI which hole we are working on during preinspection
 	currentInspectHole = 1 ' This tells the HMI which hole we are working on during inspection
 
-	For i = FirstHolePointInspection To LastHolePointInspection
+	For i = recFirstHolePointInspection To recLastHolePointInspection
 		
 		Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
 
@@ -54,6 +54,11 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			
 		If DeepBoss = True Then ' There are different volumes of bosses
 			If BossCrosssectionalArea > -400 Then ' There is already an insert so set skip flag
+				SkipHoleArray(currentPreinspectHole, 0) = 1
+				Print "Hole ", currentPreinspectHole, " is already populated"
+			EndIf
+		ElseIf MediumBoss = True Then ' There are different volumes of bosses
+			If BossCrosssectionalArea > -350 Then ' There is already an insert so set skip flag
 				SkipHoleArray(currentPreinspectHole, 0) = 1
 				Print "Hole ", currentPreinspectHole, " is already populated"
 			EndIf
@@ -365,7 +370,6 @@ Function PrintPreInspectionArray()
 
 	For n = 1 To recNumberOfHoles
 		Print Str$(n) + " " + Str$(PreInspectionArray(n, 0))
-
 	Next
 
 Fend
@@ -393,7 +397,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
 	suctionCupsCC = False ' Turn off suction cups
 	Wait suctionWaitTime ' wait for cups to release
-	Go P(recCrowding) +Z(15) ' Relese the suction cups and move them out of the way for crowding
+	Go P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
 	Wait .25
 	MBWrite(pasCrowdingADDR, 1, MBTypeCoil) ' Close crowding
 

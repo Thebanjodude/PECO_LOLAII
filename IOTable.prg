@@ -3004,23 +3004,20 @@ Case "recNumberOfHoles"
 Case "recOutmagPickupOffset"
     recOutmagPickupOffset = Val(Tokens$(1))
     Print "recOutmagPickupOffset:", recOutmagPickupOffset
-Case "recPanelThickness"
-    recPanelThickness = Val(tokens$(1))
-    Print "recPanelThickness:", recPanelThickness
 Case "suctionWaitTime"
-    suctionWaitTime = Val(tokens$(1))
+    suctionWaitTime = Val(Tokens$(1))
     Print "suctionWaitTime:", suctionWaitTime
 Case "systemAccel"
-    SystemAccel = Val(tokens$(1))
+    SystemAccel = Val(Tokens$(1))
     Print "systemAccel:", SystemAccel
 Case "systemSpeed"
-    SystemSpeed = Val(tokens$(1))
+    SystemSpeed = Val(Tokens$(1))
     Print "systemSpeed:", SystemSpeed
 Case "zlimit"
-    zLimit = Val(tokens$(1))
+    zLimit = Val(Tokens$(1))
     Print "zlimit:", zLimit
 Case "pas1inLoadInsertCylinderBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MBWrite(pas1inLoadInsertCylinderAddr, 1, MBTypeCoil)
     Else
         MBWrite(pas1inLoadInsertCylinderAddr, 0, MBTypeCoil)

@@ -11,9 +11,9 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	Boolean SkippedHole
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 ' default to fail	
-	recHeatStakeOffset = .100 ' positive is deeper	
+	recHeatStakeOffset = 0.000 ' positive is deeper	
 '	ZLasertoHeatStake = 291.42372 ' This is a calibrated value, it will be stored in the HMI	
-	ZLasertoHeatStake = 291.77666
+	recZLaserToHeatStake = 291.77666
 	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
 	
@@ -22,7 +22,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 		Wait 1.25
 	Loop
 
-	For i = FirstHolePointHotStake To LastHolePointHotStake
+	For i = recFirstHolePointHotStake To recLastHolePointHotStake
 
 		SkippedHole = False 'Reset flag		
 		If SkipHoleArray(currentHSHole, 0) <> 0 Then ' When nonzero, don't populate the hole because we want to skip it
@@ -32,33 +32,34 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 		If SkippedHole = False Then 'If the flag is set then skip the hole
 		
-			Jump P(i) +Z(10) LimZ zLimit  ' Go to the next hole        
+			Jump P(i) +Z(16) LimZ zLimit  ' Go to the next hole        
 			SFree 1, 2 ' free X and Y
 
 			Counter = 0 ' reset counter
-			Do While Sw(HSPanelPresntH) = False Or Counter > 20 ' Approach the panel slowly until we hit the anvil switch
+			Do While Sw(HSPanelPresntH) = False 'Or Counter > 20 ' Approach the panel slowly until we hit the anvil switch
 				JTran 3, -.25 ' Move only the z-axis downward in .25mm increments
 				Counter = Counter + 1
 			Loop
 			
 			Print "HS Counter:", Counter
 			
-			If Counter > 20 Then ' A boss should be engaging the anvil but it isnt...
-				erPanelStatusUnknown = True
-				HotStakePanel = 2 ' fail
-				Print "Boss did not engage the anvil"
-				GoTo exitHotStake
-			EndIf
+'			If Counter > 20 Then ' A boss should be engaging the anvil but it isnt...
+'				erPanelStatusUnknown = True
+'				HotStakePanel = 2 ' fail
+'				Print "Boss did not engage the anvil"
+'				SLock 1, 2, 3, 4
+'				GoTo exitHotStake
+'			EndIf
 
 			RobotZOnAnvil = CZ(Here) ' Get z coord when boss is on anvil
 '			Print "RobotZOnAnvil", RobotZOnAnvil
 
-            HSProbeFinalPosition = (ZLasertoHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth) + InTomm(recHeatStakeOffset)) /25.4
+            HSProbeFinalPosition = (recZLaserToHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth) + InTomm(recHeatStakeOffset)) /25.4
             Print "heat stake Position:", HSProbeFinalPosition
             
             Print "recInsertDepth", recInsertDepth, "inches"
             Print "recHeatStakeOffset", recHeatStakeOffset, "inches"
-            Print HSProbeFinalPosition, ",", ZLasertoHeatStake, ",", RobotZOnAnvil, ",", PreInspectionArray(currentHSHole, 0), ",", InTomm(recInsertDepth), ",", InTomm(recHeatStakeOffset)
+            Print HSProbeFinalPosition, ",", recZLaserToHeatStake, ",", RobotZOnAnvil, ",", PreInspectionArray(currentHSHole, 0), ",", InTomm(recInsertDepth), ",", InTomm(recHeatStakeOffset)
             
             If HSProbeFinalPosition > 12.8 Then
 				erUnknown = True ' replace this with a real error
@@ -72,7 +73,6 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
  			
  			Do Until pasInsertDepth = HSProbeFinalPosition
  				Wait .1
- 				Print pasInsertDepth
  			Loop
 			
 			Trap 2 ' disable the ability to abort a job
@@ -143,7 +143,7 @@ Function FlashPanel(DwellTime As Real) As Integer
 	'On debrisMtrH 'Turn on Vacuum
 	debrisMtrCC = True
 	
-	For i = FirstHolePointFlash To LastHolePointFlash
+	For i = recFirstHolePointFlash To recLastHolePointFlash
 		
 		Jump P(i) LimZ zLimit
 		

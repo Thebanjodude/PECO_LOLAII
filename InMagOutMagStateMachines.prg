@@ -236,6 +236,7 @@ Fend
 Function OutMagControlRefactor()
 
 Integer NextState
+Boolean OutmagInterlockFlag
 
 outMagCurrentState = StateOutMagWaitingUser ' When we power on the magazine waits for the operator
 
@@ -250,7 +251,6 @@ Do While True
 				outMagGoHome = False ' Reset Flag
 				NextState = StateGoHome
 			ElseIf RobotPlacedPanel = True Then
-				'RobotPlacedPanel = False ' Reset Flag
 				OutMagDropOffSignal = False ' Tell robot the output mag is NOT ready
 				NextState = StateOutMagPartPresent
 			Else
@@ -271,19 +271,20 @@ Do While True
 			
 			If RobotPlacedPanel = True Then ' There is a panel to be moved down
 				RobotPlacedPanel = False ' Reset Flag
-				On outMagMtrDirH  'Set direction to Down
-				On outMagMtrH, .100, False ' Turn on Motor, for a short period of time with parallel ON 	
+				outMagMtrDirCC = False  'Set direction to Down
+				outMagMtrCC = True ' Turn on Motor	
 				NextState = StateOutMagLowering
 			ElseIf Sw(outMagPanelRdyH) = False Then ' There is still a panel to be moved down
-				On outMagMtrDirH  'Set direction to Down
-				On outMagMtrH ' Turn on Motor
+				outMagMtrDirCC = False  'Set direction to Down
+				outMagMtrCC = True ' Turn on Motor	
 				NextState = StateOutMagLowering
 			Else
-				Off outMagMtrH ' Turn off Motor		
+				outMagMtrCC = False ' Turn on Motor		
 				NextState = StateReadyToReceive
 			EndIf
 			
-			If Sw(outMagLowLimH) = True Then ' If we try and lower the platen but the lower EOT is true then the magazine is full
+			If outMagLowLim = True Then ' If we try and lower the platen but the lower EOT is true then the magazine is full
+				outMagMtrCC = False ' Turn off Motor	
 				erOutMagFull = True
 				OutMagDropOffSignal = False ' Tell the robot it cannot drop off a panel
 				NextState = StateOutMagWaitingUser
@@ -301,24 +302,24 @@ Do While True
 
 		Case StateRaising
 				
-				If outMagUpLim = False And outMagPanelRdy = False Then ' Keep raisng until we hit EOT or a panel is detected
+				If outMagUpLim = False And Sw(outMagPanelRdyH) = True Then ' Keep raisng until we hit EOT or a panel is detected
 					outMagMtrDirCC = True 'Set direction to UP 
 					outMagMtrCC = True
 					NextState = StateRaising
-				ElseIf outMagPanelRdy = True Then
+				ElseIf Sw(outMagPanelRdyH) = False Then
 					' A panel is in the output magazine and it tripped the sensor. We need to move it down
 					' until it is out of the way
-					outMagMtrCC = False 'Turn off motor	
+					Off outMagMtrH  'Turn off motor	
 					NextState = StateOutMagLowering
-				ElseIf outMagUpLim = False Then
+				ElseIf outMagUpLim = True Then
 					' The platen is at the very top without any panels in the magazine
-					outMagMtrCC = False 'Turn off motor
+					Off outMagMtrH  'Turn off motor	
 					NextState = StateReadyToReceive
 				EndIf
 
 		Case StateGoHome
 
-			If Sw(outMagLowLimH) = False Then ' Keep lowering until we hit the lower limit (home)
+			If outMagLowLim = False Then ' Keep lowering until we hit the lower limit (home)
 				outMagMtrDirCC = False 'Set direction to DOWN
 				outMagMtrCC = True ' Turn on motor
 				NextState = StateGoHome
@@ -330,13 +331,26 @@ Do While True
 			
 		Case StateOutMagPaused
 			outMagMtrCC = False ' Turn off motor becuase we are paused
-
+			NextState = StateOutMagPaused
+			
 		Default
 			outMagCurrentState = StateOutMagUnknown
 			erUnknown = True
+			outMagMtrCC = False ' Turn off motor
 	Send
 
 	outMagCurrentState = NextState 'Set next state to current state after we break from case statment
+		
+	' This block of code checks if an interlock has been opened. 
+	If outMagInt = True And OutmagInterlockFlag = False Then
+		' I am not sure if this interlock is hardware controlled, it should be.
+		OutmagInterlockFlag = True ' Set a flag
+		OutmagLastState = outMagCurrentState ' Save the current state before we pause
+		outMagCurrentState = StateInMagPaused ' Send the state machine to paused
+	ElseIf outMagInt = False And OutmagInterlockFlag = True Then
+		OutmagInterlockFlag = False ' Reset flag
+		outMagCurrentState = OutmagLastState ' Go to the state before the interlock was open
+	EndIf
 
 Loop
 

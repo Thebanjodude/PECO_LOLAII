@@ -162,7 +162,7 @@ Loop
 Fend
 Function Calibrate()
 	
-Real robotZhs, robotZlaser, ZoffsetUnderLaser, recZLaserToHeatStake
+Real robotZhs, robotZlaser, ZoffsetUnderLaser
 	
 ' how do we initiate a calibration routine?	
 SFree 1, 2, 3, 4
@@ -190,8 +190,7 @@ Print "robotZhs:", robotZhs
 'calculate the distance between the laser zero and hs zero
 recZLaserToHeatStake = InTomm(pasVerticalLocation) + (Abs(robotZlaser - robotZhs)) + ZoffsetUnderLaser
 
-Print "pasVerticalLocation: ", pasVerticalLocation * 25.4
-
+Print "pasVerticalLocation: ", pasVerticalLocation
 Print "recZLaserToHeatStake: ", recZLaserToHeatStake
 
 'tell HS to capture the measurement and save it in the database

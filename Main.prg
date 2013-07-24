@@ -14,36 +14,50 @@ zLimit = -12.5 'fake
 recFlashDwellTime = 0
 insertDepthTolerance = .006
 '______________________________________
-recNumberOfHoles = 16 ' fake for test
-recInsertDepth = 0.165 ' fake for testing
-recInmag = 50
-recOutmag = 101
-recPreCrowding = 51
-recCrowding = 52
-FirstHolePointInspection = 53
-LastHolePointInspection = 68
-FirstHolePointHotStake = 69
-LastHolePointHotStake = 84
-FirstHolePointFlash = 85
-LastHolePointFlash = 100
-LoadPoints "points.pts"
-DeepBoss = True
+'recNumberOfHoles = 16 ' fake for test
+'recInsertDepth = 0.165 ' fake for testing
+'recInmag = 50
+'recOutmag = 101
+'recPreCrowding = 51
+'recCrowding = 52
+'recFirstHolePointInspection = 53
+'recLastHolePointInspection = 68
+'recFirstHolePointHotStake = 69
+'recLastHolePointHotStake = 84
+'recFirstHolePointFlash = 85
+'recLastHolePointFlash = 100
+'LoadPoints "points.pts"
+'DeepBoss = True
 '_____________________________________
 'recNumberOfHoles = 23 ' fake for test
 'recInmag = 50
 'recOutmag = 122
 'recPreCrowding = 51
 'recCrowding = 52
-'FirstHolePointInspection = 53
-'LastHolePointInspection = 75
-'FirstHolePointHotStake = 76
-'LastHolePointHotStake = 98
-'FirstHolePointFlash = 99
-'LastHolePointFlash = 121
+'recFirstHolePointInspection = 53
+'recLastHolePointInspection = 75
+'recFirstHolePointHotStake = 76
+'recLastHolePointHotStake = 98
+'recFirstHolePointFlash = 99
+'recLastHolePointFlash = 121
 'LoadPoints "points2.pts"
 'DeepBoss = False
 '______________________________________
-
+recNumberOfHoles = 14 ' fake for test
+recInsertDepth = 0.030 ' fake for testing
+recInmag = 103
+recOutmag = 148
+recPreCrowding = 104
+recCrowding = 105
+recFirstHolePointInspection = 106
+recLastHolePointInspection = 119
+recFirstHolePointHotStake = 120
+recLastHolePointHotStake = 133
+recFirstHolePointFlash = 134
+recLastHolePointFlash = 147
+LoadPoints "points.pts"
+MediumBoss = True
+'___________________________________________
 Power High ' Manually set power. This will be done in PowerOnSequence()
 Speed 30 ' fake for test
 jobDone = False ' fake for test
@@ -262,8 +276,8 @@ Function PowerOnSequence()
 	Xqt 4, SystemMonitor, NoEmgAbort
 	Xqt 5, iotransfer, NoEmgAbort
 	Xqt 6, HmiListen, NoEmgAbort
-    Xqt 7, InmagControl, Normal ' First state is lowering 
-    Xqt 8, OutMagControl, Normal ' First state is raising 
+    Xqt 7, InmagControl, Normal
+    Xqt 8, OutMagControlRefactor(), Normal
 	MBInitialize() ' Kick off the modbus
 retry:
 

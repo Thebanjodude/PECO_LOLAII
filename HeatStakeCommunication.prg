@@ -97,7 +97,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 		Exit Function
 	EndIf
 	
-	Print "MODBUS: queueing request", Address, Value, Type
+'	Print "MODBUS: queueing request", Address, Value, Type
 	
 	' prevent multiple calls to mbwrite from stomping on each other
 '	SyncLock 1  'I will need to play with this since I'm not seeing how it is blocking -- it just throws an error according the help file...  SJE
@@ -106,7 +106,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = Value
+	MBQueueValue(MBQueueHead) = value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -755,7 +755,7 @@ Function modbusReadPort(length As Integer) As Integer
 	Redim modResponse(256)
 
 	'give the port a chance to transmit and the PLC a chance to respond
-	Wait 0.04
+	Wait 0.1
 
 	i = 0
 	Do While True
