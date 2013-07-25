@@ -1,9 +1,9 @@
-ENVT0100,LM:2013/07/24 18:44:20:788,DS:0000003023,CS:01547,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Main.prg"
+ENVT0100,LM:2013/07/25 17:32:00:810,DS:0000003044,CS:11099,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="HeatStakeCommunication.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=130
@@ -14,7 +14,7 @@ ProgramFile1 {
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=43
@@ -36,7 +36,7 @@ ProgramFile3 {
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=1
 	Window {
 		nLeft=-110
@@ -69,7 +69,7 @@ ProgramFile6 {
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=1
 	Window {
 		nLeft=0
@@ -80,7 +80,7 @@ ProgramFile7 {
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=1
 	Window {
 		nLeft=-159
@@ -91,13 +91,13 @@ ProgramFile8 {
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=116
-		nTop=5
-		nWidth=1338
-		nHeight=807
+		nLeft=0
+		nTop=0
+		nWidth=1133
+		nHeight=822
 	}
 }
 ProgramFile10 {
@@ -114,7 +114,7 @@ ProgramFile10 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=1
 	Window {
 		nLeft=-9
