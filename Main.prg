@@ -15,6 +15,7 @@ recFlashDwellTime = 0
 insertDepthTolerance = .006
 recHeatStakeOffset = 0.000 ' positive is deeper
 recZLaserToHeatStake = 291.77666
+SFree 1, 2, 3, 4
 
 '______________________________________
 'recNumberOfHoles = 16 ' fake for test
