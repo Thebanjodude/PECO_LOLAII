@@ -1,12 +1,12 @@
-ENVT0100,LM:2013/07/25 17:29:46:881,DS:0000004125,CS:28682,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2013/07/26 01:44:23:745,DS:0000004125,CS:14875,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="7/25/2013 11:29:40 AM"
+	sLastModified="7/25/2013 7:44:21 PM"
 	bBuildComplete=True
-	bRebuildRequired=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMWKSSEHLERS"
@@ -78,7 +78,7 @@ ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/25/2013 5:29:40 PM"
+	sTimeSavedInController="7/26/2013 1:44:21 AM"
 }
 ProgramFile10 {
 	sName="CalibrationRoutines.prg"

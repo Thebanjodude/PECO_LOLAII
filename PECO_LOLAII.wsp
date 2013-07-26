@@ -1,6 +1,4 @@
-ENVT0100,LM:2013/07/25 17:32:00:810,DS:0000003044,CS:11099,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="HeatStakeCommunication.prg"
-bMdiMaximized=False
+ENVT0100,LM:2013/07/26 01:45:22:745,DS:0000002982,CS:30211,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -37,7 +35,7 @@ ProgramFile3 {
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bOpened=False
-	nWinState=1
+	nWinState=0
 	Window {
 		nLeft=-110
 		nTop=28
@@ -70,7 +68,7 @@ ProgramFile6 {
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=1
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=111
@@ -81,7 +79,7 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=1
+	nWinState=0
 	Window {
 		nLeft=-159
 		nTop=89
@@ -91,13 +89,13 @@ ProgramFile8 {
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1133
-		nHeight=822
+		nWidth=1276
+		nHeight=818
 	}
 }
 ProgramFile10 {
@@ -115,7 +113,7 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=1
+	nWinState=0
 	Window {
 		nLeft=-9
 		nTop=119
@@ -171,10 +169,10 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=343
-		nTop=32
-		nWidth=890
-		nHeight=625
+		nLeft=347
+		nTop=30
+		nWidth=1056
+		nHeight=736
 	}
 }
 IOLabelEditor {

@@ -127,7 +127,7 @@ Function MBCommandTask()
 	Integer maxCount
 	
 	count = 0
-	maxCount = 9
+	maxCount = 12
 	
 	' set up the TCP port on the HMI that we use to tunnel to serial ports	
 	' the IP is the HMI's IP address the port is the port that is tied to
@@ -236,55 +236,51 @@ Function MBCommandTask()
 			If modbusReadMultipleRegister(&h0014, 49) Then
 				
 				'Print "MODBUS: Time to pull data from PLC: ", Tmr(1)
-				
+
 				'process the data
 				' the results should be stored in modResponse()
 				' so pull them out and map them to vars
 				
 				' these are the vars we want to update every cycle
-				pasCrowding = BTst(modResponse(5), 15)
+				pasCrowding = BTst(modResponse(6), 7)
 				pasMessageDB = LShift(modResponse(9), 8) + modResponse(10)
-				pasInsertDetected = BTst(modResponse(5), 8)
-				pasSteelInsert = BTst(modResponse(5), 9)
-				pasShuttleMidway = BTst(modResponse(5), 10)
-				pasShuttleLoadPosition = BTst(modResponse(5), 11)
-				pasShuttleNoLoad = BTst(modResponse(5), 12)
-				pasShuttleExtend = BTst(modResponse(5), 13)
-				pasInsertInShuttle = BTst(modResponse(5), 14)
-				pasHeadDown = BTst(modResponse(4), 5)
-				pasHeadUp = BTst(modResponse(4), 6)
-				pasSlideExtend = BTst(modResponse(4), 7)
-				pasInsertGripper = BTst(modResponse(3), 8)
-				pas1inLoadInsertCylinder = BTst(modResponse(3), 9)
-				pasBowlDumpOpen = BTst(modResponse(3), 10)
-				pasVibTrack = BTst(modResponse(3), 11)
-				pasBowlFeeder = BTst(modResponse(3), 12)
-				pasBlowInsert = BTst(modResponse(3), 13)
-				pasMCREStop = BTst(modResponse(8), 6)
-				pasStart = BTst(modResponse(8), 7)
-				pasHeadinsertPickupRetract = BTst(modResponse(7), 8)
-				pasHeadinsertpickupextend = BTst(modResponse(7), 9)
-				pasVerticalLocation = (LShift((LShift(modResponse(11), 8) + modResponse(12)), 16) + ((LShift(modResponse(13), 8) + modResponse(14)) And &hFFFF)) * .000000762939
-				pasHome = BTst(modResponse(6), 2)
-				
+				pasVerticalLocation = (LShift((LShift(modResponse(17), 8) + modResponse(18)), 16) + ((LShift(modResponse(15), 8) + modResponse(15)) And &hFFFF)) * .000000762939
+				pasHeadinsertPickupRetract = BTst(modResponse(8), 0)
+				pasHeadinsertpickupextend = BTst(modResponse(8), 1)
+				pasSlideExtend = BTst(modResponse(3), 7)
+				pasInsertGripper = BTst(modResponse(4), 0)
+				pas1inLoadInsertCylinder = BTst(modResponse(4), 1)
+				pasBowlDumpOpen = BTst(modResponse(4), 2)
+				pasVibTrack = BTst(modResponse(4), 3)
+				pasBowlFeeder = BTst(modResponse(4), 4)
+				pasBlowInsert = BTst(modResponse(4), 5)
+				pasInsertDetected = BTst(modResponse(6), 0)
+				pasSteelInsert = BTst(modResponse(6), 1)
+				pasShuttleMidway = BTst(modResponse(6), 2)
+				pasShuttleLoadPosition = BTst(modResponse(6), 3)
+				pasShuttleNoLoad = BTst(modResponse(6), 4)
+				pasShuttleExtend = BTst(modResponse(6), 5)
+				pasInsertInShuttle = BTst(modResponse(6), 6)
+				pasHome = BTst(modResponse(5), 2)
+					
 				'process the less time sensitive reads
 				Select count
 				Case 0
-					pasPreHeatActual = (LShift(modResponse(65), 8) + modResponse(66)) * 0.1
-					pasDwellActual = (LShift(modResponse(67), 8) + modResponse(68)) * 0.1
-					pasCoolActual = (LShift(modResponse(69), 8) + modResponse(70)) * 0.1
-					pasSoftHome = (LShift((LShift(modResponse(35), 8) + modResponse(36)), 16) + ((LShift(modResponse(37), 8) + modResponse(38)) And &hFFFF)) * .000000762939
+					pasPreHeatActual = (LShift(modResponse(66), 8) + modResponse(65)) * 0.1
+					pasDwellActual = (LShift(modResponse(68), 8) + modResponse(67)) * 0.1
+					pasCoolActual = (LShift(modResponse(70), 8) + modResponse(69)) * 0.1
+                    pasSoftHome = (LShift((LShift(modResponse(37), 8) + modResponse(38)), 16) + ((LShift(modResponse(35), 8) + modResponse(36)) And &hFFFF)) * .000000762939
 				Case 1
-					pasInsertPosition = (LShift((LShift(modResponse(43), 8) + modResponse(44)), 16) + ((LShift(modResponse(45), 8) + modResponse(46)) And &hFFFF)) * .000000762939
-					pasInsertDepth = (LShift((LShift(modResponse(19), 8) + modResponse(20)), 16) + ((LShift(modResponse(21), 8) + modResponse(22)) And &hFFFF)) * .000000762939
-					pasSoftStop = (LShift((LShift(modResponse(15), 8) + modResponse(16)), 16) + ((LShift(modResponse(17), 8) + modResponse(18)) And &hFFFF)) * .000000762939
+					pasInsertPosition = (LShift((LShift(modResponse(45), 8) + modResponse(46)), 16) + ((LShift(modResponse(43), 8) + modResponse(44)) And &hFFFF)) * .000000762939
+					pasInsertDepth = (LShift((LShift(modResponse(21), 8) + modResponse(22)), 16) + ((LShift(modResponse(19), 8) + modResponse(20)) And &hFFFF)) * .000000762939
+					pasSoftStop = (LShift((LShift(modResponse(13), 8) + modResponse(14)), 16) + ((LShift(modResponse(11), 8) + modResponse(12)) And &hFFFF)) * .000000762939
 				Case 2
-					pasHomeIPM = (LShift((LShift(modResponse(39), 8) + modResponse(40)), 16) + ((LShift(modResponse(41), 8) + modResponse(42)) And &hFFFF)) * .0000457764
-					pasInsertPickupIPM = (LShift((LShift(modResponse(47), 8) + modResponse(48)), 16) + ((LShift(modResponse(49), 8) + modResponse(50)) And &hFFFF)) * .0000457764
-					pasHeatStakingIPM = (LShift((LShift(modResponse(23), 8) + modResponse(24)), 16) + ((LShift(modResponse(25), 8) + modResponse(26)) And &hFFFF)) * .0000457764
+					pasHomeIPM = (LShift((LShift(modResponse(41), 8) + modResponse(42)), 16) + ((LShift(modResponse(39), 8) + modResponse(40)) And &hFFFF)) * .0000457764
+					pasInsertPickupIPM = (LShift((LShift(modResponse(49), 8) + modResponse(50)), 16) + ((LShift(modResponse(47), 8) + modResponse(48)) And &hFFFF)) * .0000457764
+					pasHeatStakingIPM = (LShift((LShift(modResponse(25), 8) + modResponse(26)), 16) + ((LShift(modResponse(23), 8) + modResponse(24)) And &hFFFF)) * .0000457764
 				Case 3
-					pasInsertEngageIPM = (LShift((LShift(modResponse(31), 8) + modResponse(32)), 16) + ((LShift(modResponse(33), 8) + modResponse(34)) And &hFFFF)) * .0000457764
-					pasInsertEngage = (LShift((LShift(modResponse(27), 8) + modResponse(28)), 16) + ((LShift(modResponse(29), 8) + modResponse(30)) And &hFFFF)) * .000000762939
+					pasInsertEngageIPM = (LShift((LShift(modResponse(33), 8) + modResponse(34)), 16) + ((LShift(modResponse(31), 8) + modResponse(32)) And &hFFFF)) * .0000457764
+					pasInsertEngage = (LShift((LShift(modResponse(29), 8) + modResponse(30)), 16) + ((LShift(modResponse(27), 8) + modResponse(28)) And &hFFFF)) * .000000762939
 					pasSetTempZone1 = LShift(modResponse(59), 8) + modResponse(60)
 					pasSetTempZone2 = LShift(modResponse(63), 8) + modResponse(64)
 				Case 4
@@ -311,28 +307,32 @@ Function MBCommandTask()
 					pasMaxLoadmeter = (LShift(modResponse(53), 8) + modResponse(54)) * 0.1
 				Case 7
 					pasLoadMeter = (LShift(modResponse(51), 8) + modResponse(52)) * -0.1
-					pasHighTempAlarm = BTst(modResponse(8), 1)
-					pasInsertType = BTst(modResponse(6), 7)
-					pasTempOnOff = BTst(modResponse(4), 4)
-					pasMasterTemp = BTst(modResponse(8), 0)
-					pasUpLimit = BTst(modResponse(6), 0)
-					pasLowerlimit = BTst(modResponse(6), 1)
+					pasHighTempAlarm = BTst(modResponse(7), 1)
+					pasInsertType = BTst(modResponse(5), 7)
+					pasTempOnOff = BTst(modResponse(3), 4)
+					pasMasterTemp = BTst(modResponse(7), 0)
+					pasUpLimit = BTst(modResponse(5), 0)
+					pasLowerlimit = BTst(modResponse(5), 1)
 				Case 8
-					pasOTAOnOffZone1 = BTst(modResponse(8), 2)
-					pasOTAOnOffZone2 = BTst(modResponse(8), 3)
-					pasOnOffZone1 = BTst(modResponse(6), 3)
-					pasOnOffZone2 = BTst(modResponse(6), 4)
-					pasMaxTempOnOffZone1 = BTst(modResponse(8), 4)
-					pasMaxTempOnOffZone2 = BTst(modResponse(8), 5)
-					pasMaxTempZone1 = BTst(modResponse(3), 14)
+					pasOTAOnOffZone1 = BTst(modResponse(7), 2)
+					pasOTAOnOffZone2 = BTst(modResponse(7), 3)
+					pasOnOffZone1 = BTst(modResponse(5), 3)
+					pasOnOffZone2 = BTst(modResponse(5), 4)
+					pasMaxTempOnOffZone1 = BTst(modResponse(7), 4)
+					pasMaxTempOnOffZone2 = BTst(modResponse(7), 5)
+					pasMaxTempZone1 = BTst(modResponse(4), 6)
 				Case 9
-					pasMaxTempZone2 = BTst(modResponse(3), 15)
-					pasPIDTuneDoneZone1 = BTst(modResponse(6), 5)
-					pasPIDTuneDoneZone2 = BTst(modResponse(6), 6)
-					pasPIDTuneFailZone1 = BTst(modResponse(4), 0)
-					pasPIDTuneFailZone2 = BTst(modResponse(4), 1)
-					pasInTempZone1 = BTst(modResponse(4), 2)
-					pasInTempZone2 = BTst(modResponse(4), 3)
+					pasMaxTempZone2 = BTst(modResponse(4), 7)
+					pasPIDTuneDoneZone1 = BTst(modResponse(5), 5)
+					pasPIDTuneDoneZone2 = BTst(modResponse(5), 6)
+					pasPIDTuneFailZone1 = BTst(modResponse(3), 0)
+					pasPIDTuneFailZone2 = BTst(modResponse(3), 1)
+					pasInTempZone1 = BTst(modResponse(3), 2)
+					pasInTempZone2 = BTst(modResponse(3), 3)
+					pasHeadDown = BTst(modResponse(3), 5)
+					pasHeadUp = BTst(modResponse(3), 6)
+					pasMCREStop = BTst(modResponse(7), 6)
+					pasStart = BTst(modResponse(7), 7)
 				Send
 				
 				count = count + 1
@@ -811,7 +811,7 @@ Function modbusReadPort(length As Integer) As Integer
 	Redim modResponse(256)
 
 	'give the port a chance to transmit and the PLC a chance to respond
-	Wait 0.1
+	Wait 0.2
 
 ' fall back solution
 '	i = 0
@@ -853,9 +853,9 @@ Function modbusReadPort(length As Integer) As Integer
 	If i > length Then
 		'for some reason we received too many bytes -- bail
 		Print "MODBUS: response from PLC was larger than expected, num bytes rx'd/bytes expected: ", i, "/", length
-		For j = 0 To i
-			Print "MODBUS: packet(", j, "): ", modResponse(j)
-		Next
+'		For j = 0 To i
+'			Print "MODBUS: packet(", j, "): ", modResponse(j)
+'		Next
 		modbusReadPort = -1
 		Exit Function
 	EndIf
