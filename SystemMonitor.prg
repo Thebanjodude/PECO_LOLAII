@@ -202,7 +202,7 @@ EndIf
 If PauseOn = True Then
 	mainCurrentState = StatePaused
 EndIf
-		
+	
 Loop
 
 	errHandler:

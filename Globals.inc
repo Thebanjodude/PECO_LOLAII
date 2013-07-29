@@ -29,6 +29,7 @@ Global Boolean GoFlag, ReturnFlag 'flags to make sure we dont break the drill
 #define StateInspection 8
 #define StatePushPanel 9
 #define StateCrowding 10
+#define StateEmptyingBowlandTrack 11
 
 'Inmag States
 #define StateInMagUnknown 0
@@ -112,7 +113,7 @@ Global Boolean stackLightRedCC, stackLightYelCC, stackLightGrnCC, stackLightAlrm
 Global Boolean airPressHigh, airPressLow
 Global Boolean backIntlock1, frontIntlock1, leftIntlock1, rightIntlock
 Global Boolean backIntlock2, frontIntlock2, leftIntlock2
-Global Boolean heartBeat, dc24vOK
+Global Boolean heartBeat, dc24vOK, pasEmptyBowlFeederandTrack, pasEmptyBowlFeederandTrackBTN
 
 'Hot Stake and Flash Removal Global Vars
 Global Boolean heatStakeGoCC, heatStakeGo
@@ -217,7 +218,7 @@ Global Boolean pasCrowding
 Global Boolean pasAlarmGroup
 Global Boolean pasRemoteAlarmAcknowledge, pasRemoteAlarmAcknowledgeBtn
 Global Boolean pasHighTempAlarm
-Global Boolean pasInsertType
+Global Boolean pasInsertType, pasEmptyingSequenceDone
 Global Boolean pasGoHome, pasGoHomeBtn
 Global Boolean pasInsertDetected
 Global Boolean pasSteelInsert
@@ -530,6 +531,7 @@ Global Long pasCoolActualSet
 #define pasPIDsetupOffsetZone3ADDR &h015C
 #define pasPIDsetupOffsetZone4ADDR &h015D
 #define pasCrowdingADDR &h03A5
+'#define pasEmptyBowlFeederandTrackADDR &hXXXX
 
 ' modbus constants	
 #define MBMitsubishiAddress 4

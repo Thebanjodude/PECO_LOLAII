@@ -102,7 +102,8 @@ Select mainCurrentState
 			jobNumPanelsDone = 0 ' reset panel counter
 			Redim PassFailArray(23, 1) ' Clear array, always 23 rows
 			Redim InspectionArray(23, 1) 'Clear array, always 23 rows
-			
+		ElseIf pasEmptyBowlFeederandTrack = True Then
+			mainCurrentState = StateEmptyingBowlandTrack
 		Else
 			mainCurrentState = StateIdle ' Stay in idle until ready
 		EndIf
@@ -248,6 +249,17 @@ Select mainCurrentState
 			jobStart = False ' reset flag
 			jobDone = False ' reset flag
 		EndIf
+		
+	Case StateEmptyingBowlandTrack
+			' The button on the HMI should be greyed out if the state is not in idle
+			' Setting this register in the PLC initiates a sequence that empties the bowl feeder and track
+			' MBWrite(pasEmptyBowlFeederandTrackAddr, 1, MBType16) 
+			
+			If pasEmptyingSequenceDone = True Then
+				mainCurrentState = StateIdle ' go back to idle because we are finished
+			Else
+				mainCurrentState = StateEmptyingBowlandTrack
+			EndIf
 	Send
 		
 Loop
