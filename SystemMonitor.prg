@@ -12,21 +12,6 @@ Do While True
 	
 	StateOfHealth()
 	
-	If outMagInt = True Then ' If an interlock gets tripped then halt the state machine
-		
-		erOutMagOpenInterlock = True
-		outMagCurrentState = StateOutMagPaused
-'		Halt OutMagControl
-		
-'		If mainCurrentState = StatePushPanel Then
-'			Pause ' pause robot movement to avoid pinchpoint
-'		EndIf
-		
-	Else
-'	 	Resume OutMagControl ' When the interlock is back into position resume where we left off
-	 	erOutMagOpenInterlock = False
-	EndIf
-		
 	If frontIntlock1 = True Then
 		erFrontSafetyFrameOpen = True
 	Else
@@ -192,9 +177,10 @@ Do While True
 'erPanelStatusUnknown = True
 If EStopOn = True Or erLowPressure = True Or erHighPressure = True Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Then
 	stackLightRedCC = True
-	stackLightAlrmCC = True
 	If alarmMute = True Then ' Mute the alarm
 		stackLightAlrmCC = False
+	Else
+		stackLightAlrmCC = True
 	EndIf
 Else
 	stackLightRedCC = False
@@ -216,7 +202,6 @@ EndIf
 If PauseOn = True Then
 	mainCurrentState = StatePaused
 EndIf
-
 		
 Loop
 

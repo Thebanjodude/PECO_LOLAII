@@ -1,4 +1,6 @@
-ENVT0100,LM:2013/07/26 01:45:22:745,DS:0000002982,CS:30211,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2013/07/29 15:38:14:203,DS:0000003028,CS:08468,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Globals.inc"
+bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -23,13 +25,13 @@ ProgramFile2 {
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=160
-		nTop=81
-		nWidth=1253
-		nHeight=711
+		nLeft=254
+		nTop=22
+		nWidth=1252
+		nHeight=708
 	}
 }
 ProgramFile4 {
@@ -89,7 +91,7 @@ ProgramFile8 {
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=0
@@ -112,13 +114,13 @@ ProgramFile10 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-9
-		nTop=119
-		nWidth=1262
-		nHeight=575
+		nLeft=209
+		nTop=45
+		nWidth=1261
+		nHeight=655
 	}
 }
 nPointFileCount=3

@@ -74,17 +74,17 @@ Do While True
 'Dont Delete when updating-------------
 stackLightAlrm = IOTableBooleans(stackLightAlrmCC, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
 If stackLightAlrm = True Then
-	If alarmTog = True Then
-			If alarmMute = False Then
+'	If alarmTog = True Then
+'			If alarmMute = False Then
 				On (stackLightAlrmH)
-			EndIf
-	Else
-		alarmTog = True
-		alarmMute = False
-	EndIf
+'			EndIf
+'	Else
+'		alarmTog = True
+'		alarmMute = False
+'	EndIf
 Else
 	Off (stackLightAlrmH)
-	alarmTog = False
+'	alarmTog = False
 EndIf
 
 drillGo = IOTableBooleans(drillGoCC, MemSw(drillGoFV), MemSw(drillGoF))
@@ -281,550 +281,548 @@ Function iotransfer()
     ' some vars to hold the old values
     ' this will need to be cleaned up, currently it is just a copy of all the global vars
     ' To recreate this list:  `awk '{ gsub("," ,"\n"$1);  print}' vars | awk '{sub(/$/, "Old");print}' -  | sort > varsNew` where vars is a list of vars without any #defines or blank lines or comments or so forth...  (and no arrays)
- 
-
-    
-	Boolean abortJobBtnOld
-	Boolean abortjobOld
-	Boolean airPressHighOld
-	Boolean airPressLowOld
-	Boolean alarmMuteBtnOld
-	Boolean alarmMuteOld
-	Boolean alarmTogOld
-	Boolean backInterlockACKBtnOld
-	Boolean backInterlockACKOld
-	Boolean backIntlock1Old
-	Boolean backIntlock2Old
-	Boolean cbMonDebrisRmvOld
-	Boolean cbMonHeatStakeOld
-	Boolean cbMonInMagOld
-	Boolean cbMonOutMagOld
-	Boolean cbMonPAS24vdcOld
-	Boolean cbMonSafetyOld
-	Boolean dc24vOKOld
-	Boolean debrisMtrCCOld
-	Boolean debrisMtrOld
-	Boolean drillGoCCOld
-	Boolean drillGoOld
-	Boolean drillReturnCCOld
-	Boolean drillReturnOld
-	Boolean edgeDetectGoOld
-	Boolean edgeDetectHiOld
-	Boolean edgeDetectLoOld
-	Boolean erBackSafetyFrameOpenOld
-	Boolean erBadPressureSensorOld
-	Boolean erBowlFeederBreakerOld
-	Boolean erDCPowerHeatStakeOld
-	Boolean erDCPowerOld
-	Boolean erDebrisRemovalBreakerOld
-	Boolean erEstopOld
-	Boolean erFlashBreakerOld
-	Boolean erFlashStationOld
-	Boolean erFrontSafetyFrameOpenOld
-	Boolean erHeatStakeBreakerOld
-	Boolean erHeatStakeTempOld
-	Boolean erHighPressureOld
-	Boolean erHMICommunicationOld
-	Boolean erHmiDataAckOld
-	Boolean erIllegalArmMoveOld
-	Boolean erInMagBreakerOld
-	Boolean erInMagCrowdingOld
-	Boolean erInMagEmptyOld
-	Boolean erInMagLowSensorBadOld
-	Boolean erInMagOpenInterlockOld
-	Boolean erInMagUpSensorBadOld
-	Boolean erLaserScannerOld
-	Boolean erLeftSafetyFrameOpenOld
-	Boolean erLowPressureOld
-	Boolean erModbusCommandOld
-	Boolean erModbusPortOld
-	Boolean erModbusTimeoutOld
-	Boolean erOutMagBreakerOld
-	Boolean erOutMagCrowdingOld
-	Boolean erOutMagFullOld
-	Boolean erOutMagLowSensorBadOld
-	Boolean erOutMagOpenInterlockOld
-	Boolean erOutMagUpSensorBadOld
-	Boolean erPanelFailedInspectionOld
-	Boolean erPanelStatusUnknownOld
-	Boolean erPanelUndefinedOld
-	Boolean erParamEntryMissingOld
-	Boolean erPnumaticsBreakerOld
-	Boolean erRC180Old
-	Boolean erRecEntryMissingOld
-	Boolean erRightSafetyFrameOpenOld
-	Boolean erRobotNotAtHomeOld
-	Boolean errorStatusOld
-	Boolean erSafetySystemBreakerOld
-	Boolean erUnknownOld
-	Boolean erWrongPanelDimsOld
-	Boolean erWrongPanelHolesOld
-	Boolean erWrongPanelInsertOld
-	Boolean erWrongPanelOld
-	Boolean eStopResetCCOld
-	Boolean eStopResetOld
-	Boolean eStopStatusOld
-	Boolean FlashHomeCCOld
-	Boolean flashHomeNCOld
-	Boolean flashHomeNOOld
-	Boolean flashPanelPresntOld
-	Boolean FlashPnlPrsntOld
-	Boolean frontInterlockACKBtnOld
-	Boolean frontInterlockACKOld
-	Boolean frontIntlock1Old
-	Boolean frontIntlock2Old
-	Boolean GoFlagOld
-	Boolean heartBeatOld
-	Boolean heatStakeGoCCOld
-	Boolean heatStakeGoOld
-	Boolean hole0PFOld
-	Boolean hole10PFOld
-	Boolean hole11PFOld
-	Boolean hole12PFOld
-	Boolean hole13PFOld
-	Boolean hole14PFOld
-	Boolean hole15PFOld
-	Boolean hole16PFOld
-	Boolean hole17PFOld
-	Boolean hole18PFOld
-	Boolean hole19PFOld
-	Boolean hole1PFOld
-	Boolean hole20PFOld
-	Boolean hole21PFOld
-	Boolean hole22PFOld
-	Boolean hole2PFOld
-	Boolean hole3PFOld
-	Boolean hole4PFOld
-	Boolean hole5PFOld
-	Boolean hole6PFOld
-	Boolean hole7PFOld
-	Boolean hole8PFOld
-	Boolean hole9PFOld
-	Boolean holeDetectedOld
-	Boolean homePositionStatusOld
-	Boolean hsInstallInsrtOld
-	Boolean hsPanelPresntOld
-	Boolean inMagGoHomeBtnOld
-	Boolean inMagGoHomeOld
-	Boolean inMagInterlockOld
-	Boolean inMagIntLockAckBtnOld
-	Boolean inMagIntLockAckOld
-	Boolean inMagLoadedBtnOld
-	Boolean inMagLoadedOld
-	Boolean inMagLowLimNOld
-	Boolean inMagLowLimOld
-	Boolean inMagMtrCCOld
-	Boolean inMagMtrDirCCOld
-	Boolean inMagMtrDirOld
-	Boolean inMagMtrOld
-	Boolean InMagPickUpSignalOld
-	Boolean inMagPnlRdyOld
-	Boolean InMagRobotClearSignalOld
-	Boolean inMagUpLimNOld
-	Boolean inMagUpLimOld
-	Boolean jobAbortBtnOld
-	Boolean jobDoneOld
-	Boolean jobPauseBtnOld
-	Boolean jobPauseOld
-	Boolean jobResumeBtnOld
-	Boolean jobResumeOld
-	Boolean jobStartBtnOld
-	Boolean jobStartOld
-	Boolean jobStopBtnOld
-	Boolean jobStopOld
-	Boolean joint1StatusOld
-	Boolean joint2StatusOld
-	Boolean joint3StatusOld
-	Boolean joint4StatusOld
-	Boolean leftInterlockACKBtnOld
-	Boolean leftInterlockACKOld
-	Boolean leftIntlock1Old
-	Boolean leftIntlock2Old
-	Boolean maintModeOld
-	Boolean monEstop1Old
-	Boolean monEstop2Old
-	Boolean motorOnStatusOld
-	Boolean motorPowerStatusOld
-	Boolean OutMagDropOffSignalOld
-	Boolean outMagGoHomeBtnOld
-	Boolean outMagGoHomeOld
-	Boolean outMagIntLockAckBtnOld
-	Boolean outMagIntLockAckOld
-	Boolean outMagIntOld
-	Boolean outMagLowLimNOld
-	Boolean outMagLowLimOld
-	Boolean outMagMtrCCOld
-	Boolean outMagMtrDirCCOld
-	Boolean outMagMtrDirOld
-	Boolean outMagMtrOld
-	Boolean outMagPanelRdyOld
-	Boolean OutMagRobotClearSignalOld
-	Boolean outMagUnloadedBtnOld
-	Boolean outMagUnloadedOld
-	Boolean outMagUpLimNOld
-	Boolean outMagUpLimOld
-	Boolean OutputMagSignalOld
-	Boolean panelDataTxACKBtnOld
-	Boolean panelDataTxACKOld
-	Boolean panelDataTxRdyOld
-	Boolean PanelPassedInspectionOld
-	Boolean ParamEntryMissingOld
-	Boolean pas1inLoadInsertCylinderBtnOld
-	Boolean pas1inLoadInsertCylinderOld
-	Boolean pasAlarmGroupOld
-	Boolean pasBlowInsertBtnOld
-	Boolean pasBlowInsertOld
-	Boolean pasBowlDumpOpenBtnOld
-	Boolean pasBowlDumpOpenOld
-	Boolean pasBowlFeederBtnOld
-	Boolean pasBowlFeederOld
-	Boolean pasGoHomeBtnOld
-	Boolean pasGoHomeOld
-	Boolean pasHeadDownBtnOld
-	Boolean pasHeadDownOld
-	Boolean pasHeadinsertpickupextendOld
-	Boolean pasHeadinsertPickupRetractOld
-	Boolean pasHeadUpBtnOld
-	Boolean pasHeadUpOld
-	Boolean pasHighTempAlarmOld
-	Boolean pasHomeBtnOld
-	Boolean pasHomeOld
-	Boolean pasInsertDetectedOld
-	Boolean pasInsertGripperBtnOld
-	Boolean pasInsertGripperOld
-	Boolean pasInsertInShuttleOld
-	Boolean pasInsertTypeBtnOld
-	Boolean pasInsertTypeOld
-	Boolean pasInTempZone1Old
-	Boolean pasInTempZone2Old
-	Boolean pasInTempZone3Old
-	Boolean pasInTempZone4Old
-	Boolean pasLowerlimitBtnOld
-	Boolean pasLowerlimitOld
-	Boolean pasMasterTempBtnOld
-	Boolean pasMasterTempOld
-	Boolean pasMaxTempOnOffZone1BtnOld
-	Boolean pasMaxTempOnOffZone1Old
-	Boolean pasMaxTempOnOffZone2BtnOld
-	Boolean pasMaxTempOnOffZone2Old
-	Boolean pasMaxTempOnOffZone3BtnOld
-	Boolean pasMaxTempOnOffZone3Old
-	Boolean pasMaxTempOnOffZone4BtnOld
-	Boolean pasMaxTempOnOffZone4Old
-	Boolean pasMaxTempZone1Old
-	Boolean pasMaxTempZone2Old
-	Boolean pasMaxTempZone3Old
-	Boolean pasMaxTempZone4Old
-	Boolean pasMCREStopBtnOld
-	Boolean pasMCREStopOld
-	Boolean pasOnOffZone1BtnOld
-	Boolean pasOnOffZone1Old
-	Boolean pasOnOffZone2BtnOld
-	Boolean pasOnOffZone2Old
-	Boolean pasOnOffZone3BtnOld
-	Boolean pasOnOffZone3Old
-	Boolean pasOnOffZone4BtnOld
-	Boolean pasOnOffZone4Old
-	Boolean pasOTAOnOffZone1BtnOld
-	Boolean pasOTAOnOffZone1Old
-	Boolean pasOTAOnOffZone2BtnOld
-	Boolean pasOTAOnOffZone2Old
-	Boolean pasOTAOnOffZone3BtnOld
-	Boolean pasOTAOnOffZone3Old
-	Boolean pasOTAOnOffZone4BtnOld
-	Boolean pasOTAOnOffZone4Old
-	Boolean pasPIDTuneDoneZone1BtnOld
-	Boolean pasPIDTuneDoneZone1Old
-	Boolean pasPIDTuneDoneZone2BtnOld
-	Boolean pasPIDTuneDoneZone2Old
-	Boolean pasPIDTuneDoneZone3BtnOld
-	Boolean pasPIDTuneDoneZone3Old
-	Boolean pasPIDTuneFailZone1BtnOld
-	Boolean pasPIDTuneFailZone1Old
-	Boolean pasPIDTuneFailZone2BtnOld
-	Boolean pasPIDTuneFailZone2Old
-	Boolean pasPIDTuneFailZone3BtnOld
-	Boolean pasPIDTuneFailZone3Old
-	Boolean pasRemoteAlarmAcknowledgeBtnOld
-	Boolean pasRemoteAlarmAcknowledgeOld
-	Boolean pasResetHighTempBtnOld
-	Boolean pasResetHighTempOld
-	Boolean pasResetMaxBtnOld
-	Boolean pasResetMaxOld
-	Boolean pasShuttleExtendOld
-	Boolean pasShuttleLoadPositionOld
-	Boolean pasShuttleMidwayOld
-	Boolean pasShuttleNoLoadOld
-	Boolean pasSlideExtendBtnOld
-	Boolean pasSlideExtendOld
-	Boolean pasStartBtnOld
-	Boolean pasStartOld
-	Boolean pasStartPIDTuneZone1BtnOld
-	Boolean pasStartPIDTuneZone1Old
-	Boolean pasStartPIDTuneZone2BtnOld
-	Boolean pasStartPIDTuneZone2Old
-	Boolean pasStartPIDTuneZone4BtnOld
-	Boolean pasStartPIDTuneZone4Old
-	Boolean pasSteelInsertOld
-	Boolean pasTempOnOffBtnOld
-	Boolean pasTempOnOffOld
-	Boolean pasUpLimitBtnOld
-	Boolean pasUpLimitOld
-	Boolean pasVibTrackBtnOld
-	Boolean pasVibTrackOld
-	Boolean pauseFlagOld
-	Boolean pauseStatusOld
-	Boolean RecEntryMissingOld
-	Boolean recFlashRequiredOld
-	Boolean ReturnFlagOld
-	Boolean rightInterlockACKBtnOld
-	Boolean rightInterlockACKOld
-	Boolean rightIntlockOld
-	Boolean RobotPlacedPanelOld
-	Boolean safeGuardInputOld
-	Boolean sftyFrmIlockAckBtnOld
-	Boolean sftyFrmIlockAckOld
-	Boolean SkippedLastHoleOld
-	Boolean stackLightAlrmCCOld
-	Boolean stackLightAlrmOld
-	Boolean stackLightGrnCCOld
-	Boolean stackLightGrnOld
-	Boolean stackLightRedCCOld
-	Boolean stackLightRedOld
-	Boolean stackLightYelCCOld
-	Boolean stackLightYelOld
-	Boolean suctionCupsCCOld
-	Boolean suctionCupsOld
-	Boolean tasksRunningStatusOld
-	Boolean teachModeStatusOld
-	Double recPartNumberOld
-	Integer CrowdingOld
-	Integer ctrlrErrAxisNumberOld
-	Integer ctrlrErrorNumOld
-	Integer ctrlrLineNumberOld
-	Integer ctrlrTaskNumberOld
-	Integer currentFlashHoleOld
-	Integer currentHSHoleOld
-	Integer currentInspectHoleOld
-	Integer currentPreinspectHoleOld
-	Integer FirstHolePointFlashOld
-	Integer FirstHolePointHotStakeOld
-	Integer FirstHolePointInspectionOld
-	Integer inMagCurrentStateOld
-	Integer jobAbortOld
-	Integer jobNumPanelsDoneOld
-	Integer jobNumPanelsOld
-	Integer LastHolePointFlashOld
-	Integer LastHolePointHotStakeOld
-	Integer LastHolePointInspectionOld
-	Integer mainCurrentStateOld
-	Integer outMagCurrentStateOld
-	Integer OutmagLastStateOld
-	Integer recCrowdingOld
-	Integer recInmagOld
-	Integer recInsertTypeOld
-	Integer recNumberOfHolesOld
-	Integer recOutmagOld
-	Integer recPreCrowdingOld
-	Integer StatusCheckCrowdingOld
-	Integer StatusCheckDropOffOld
-	Integer StatusCheckFlashOld
-	Integer StatusCheckHotStakeOld
-	Integer StatusCheckInspectionOld
-	Integer StatusCheckPickUpOld
-	Integer StatusCheckPreinspectionOld
-	Integer SystemAccelOld
-	Integer SystemSpeedOld
-	Integer systemStatusOld
-	Integer xOld
-	Integer zOld
-	Long pasActualTempZone1Old
-	Long pasActualTempZone1SetOld
-	Long pasActualTempZone2Old
-	Long pasActualTempZone2SetOld
-	Long pasCoolActualOld
-	Long pasCoolActualSetOld
-	Long pasCoolOld
-	Long pasCoolSetOld
-	Long pasDwellActualOld
-	Long pasDwellActualSetOld
-	Long pasDwellOld
-	Long pasDwellSetOld
-	Long pasInsertPreheatOld
-	Long pasInsertPreheatSetOld
-	Long pasJogSpeedOld
-	Long pasJogSpeedSetOld
-	Long pasLoadMeterOld
-	Long pasLoadMeterSetOld
-	Long pasMaxLoadmeterOld
-	Long pasMaxLoadmeterSetOld
-	Long pasPIDsetupActualZone1Old
-	Long pasPIDsetupActualZone1SetOld
-	Long pasPIDsetupActualZone2Old
-	Long pasPIDsetupActualZone2SetOld
-	Long pasPIDsetupActualZone3Old
-	Long pasPIDsetupActualZone3SetOld
-	Long pasPIDsetupActualZone4Old
-	Long pasPIDsetupActualZone4SetOld
-	Long pasPIDsetupDZone1Old
-	Long pasPIDsetupDZone1SetOld
-	Long pasPIDsetupDZone2Old
-	Long pasPIDsetupDZone2SetOld
-	Long pasPIDsetupDZone3Old
-	Long pasPIDsetupDZone3SetOld
-	Long pasPIDsetupDZone4Old
-	Long pasPIDsetupDZone4SetOld
-	Long pasPIDsetupInTempZone1Old
-	Long pasPIDsetupInTempZone1SetOld
-	Long pasPIDsetupInTempZone2Old
-	Long pasPIDsetupInTempZone2SetOld
-	Long pasPIDsetupInTempZone3Old
-	Long pasPIDsetupInTempZone3SetOld
-	Long pasPIDsetupInTempZone4Old
-	Long pasPIDsetupInTempZone4SetOld
-	Long pasPIDsetupIZone1Old
-	Long pasPIDsetupIZone1SetOld
-	Long pasPIDsetupIZone2Old
-	Long pasPIDsetupIZone2SetOld
-	Long pasPIDsetupIZone3Old
-	Long pasPIDsetupIZone3SetOld
-	Long pasPIDsetupIZone4Old
-	Long pasPIDsetupIZone4SetOld
-	Long pasPIDsetupMaxTempZone1Old
-	Long pasPIDsetupMaxTempZone1SetOld
-	Long pasPIDsetupMaxTempZone2Old
-	Long pasPIDsetupMaxTempZone2SetOld
-	Long pasPIDsetupMaxTempZone3Old
-	Long pasPIDsetupMaxTempZone3SetOld
-	Long pasPIDsetupMaxTempZone4Old
-	Long pasPIDsetupMaxTempZone4SetOld
-	Long pasPIDsetupOffsetZone1Old
-	Long pasPIDsetupOffsetZone1SetOld
-	Long pasPIDsetupOffsetZone2Old
-	Long pasPIDsetupOffsetZone2SetOld
-	Long pasPIDsetupOffsetZone3Old
-	Long pasPIDsetupOffsetZone3SetOld
-	Long pasPIDsetupOffsetZone4Old
-	Long pasPIDsetupOffsetZone4SetOld
-	Long pasPIDsetupPZone1Old
-	Long pasPIDsetupPZone1SetOld
-	Long pasPIDsetupPZone2Old
-	Long pasPIDsetupPZone2SetOld
-	Long pasPIDsetupPZone3Old
-	Long pasPIDsetupPZone3SetOld
-	Long pasPIDsetupPZone4Old
-	Long pasPIDsetupPZone4SetOld
-	Long pasPIDsetupSetPointZone1Old
-	Long pasPIDsetupSetPointZone1SetOld
-	Long pasPIDsetupSetPointZone2Old
-	Long pasPIDsetupSetPointZone2SetOld
-	Long pasPIDsetupSetPointZone3Old
-	Long pasPIDsetupSetPointZone3SetOld
-	Long pasPIDsetupSetPointZone4Old
-	Long pasPIDsetupSetPointZone4SetOld
-	Long pasPIDShowDZone1Old
-	Long pasPIDShowDZone1SetOld
-	Long pasPIDShowDZone2Old
-	Long pasPIDShowDZone2SetOld
-	Long pasPIDShowIZone1Old
-	Long pasPIDShowIZone1SetOld
-	Long pasPIDShowIZone2Old
-	Long pasPIDShowIZone2SetOld
-	Long pasPIDShowPZone1Old
-	Long pasPIDShowPZone1SetOld
-	Long pasPIDShowPZone2Old
-	Long pasPIDShowPZone2SetOld
-	Long pasPreHeatActualOld
-	Long pasPreHeatActualSetOld
-	Long pasRecipeOld
-	Long pasRecipeSetOld
-	Long pasSetTempZone2Old
-	Long pasSetTempZone2SetOld
-	Real CurrentThetaHereOld
-	Real hole0LOld
-	Real hole0ROld
-	Real hole10LOld
-	Real hole10ROld
-	Real hole11LOld
-	Real hole11ROld
-	Real hole12LOld
-	Real hole12ROld
-	Real hole13LOld
-	Real hole13ROld
-	Real hole14LOld
-	Real hole14ROld
-	Real hole15LOld
-	Real hole15ROld
-	Real hole16LOld
-	Real hole16ROld
-	Real hole17LOld
-	Real hole17ROld
-	Real hole18LOld
-	Real hole18ROld
-	Real hole19LOld
-	Real hole19ROld
-	Real hole1LOld
-	Real hole1ROld
-	Real hole20LOld
-	Real hole20ROld
-	Real hole21LOld
-	Real hole21ROld
-	Real hole22LOld
-	Real hole22ROld
-	Real hole2LOld
-	Real hole2ROld
-	Real hole3LOld
-	Real hole3ROld
-	Real hole4LOld
-	Real hole4ROld
-	Real hole5LOld
-	Real hole5ROld
-	Real hole6LOld
-	Real hole6ROld
-	Real hole7LOld
-	Real hole7ROld
-	Real hole8LOld
-	Real hole8ROld
-	Real hole9LOld
-	Real hole9ROld
-	Real InMagTorqueLimOld
-	Real insertDepthToleranceOld
-	Real OutMagTorqueLimOld
-	Real pasHeatStakingIPMOld
-	Real pasHeatStakingIPMSetOld
-	Real pasHomeIPMOld
-	Real pasHomeIPMSetOld
-	Real pasInsertDepthOld
-	Real pasInsertDepthSetOld
-	Real pasInsertEngageIPMOld
-	Real pasInsertEngageIPMSetOld
-	Real pasInsertEngageOld
-	Real pasInsertEngageSetOld
-	Real pasInsertPickupIPMOld
-	Real pasInsertPickupIPMSetOld
-	Real pasInsertPositionOld
-	Real pasInsertPositionSetOld
-	Real pasMessageDBOld
-	Real pasMessageDBSetOld
-	Real pasSetTempZone1Old
-	Real pasSetTempZone1SetOld
-	Real pasSoftHomeOld
-	Real pasSoftHomeSetOld
-	Real pasSoftStopOld
-	Real pasSoftStopSetOld
-	Real pasVerticalLocationOld
-	Real pasVerticalLocationSetOld
-	Real recFlashDwellTimeOld
-	Real recInmagPickupOffsetOld
-	Real recInsertDepthOld
-	Real recOutmagPickupOffsetOld
-	Real recPanelThicknessOld
-	Real recTempProbeOld
-	Real recTempTrackOld
-	Real suctionWaitTimeOld
-	Real zLimitOld
-	Real ZmaxTorqueOld
-	String ctrlrErrMsgOld$
+   
+'	Boolean abortJobBtnOld
+'	Boolean abortjobOld
+'	Boolean airPressHighOld
+'	Boolean airPressLowOld
+'	Boolean alarmMuteBtnOld
+'	Boolean alarmMuteOld
+'	Boolean alarmTogOld
+'	Boolean backInterlockACKBtnOld
+'	Boolean backInterlockACKOld
+'	Boolean backIntlock1Old
+'	Boolean backIntlock2Old
+'	Boolean cbMonDebrisRmvOld
+'	Boolean cbMonHeatStakeOld
+'	Boolean cbMonInMagOld
+'	Boolean cbMonOutMagOld
+'	Boolean cbMonPAS24vdcOld
+'	Boolean cbMonSafetyOld
+'	Boolean dc24vOKOld
+'	Boolean debrisMtrCCOld
+'	Boolean debrisMtrOld
+'	Boolean drillGoCCOld
+'	Boolean drillGoOld
+'	Boolean drillReturnCCOld
+'	Boolean drillReturnOld
+'	Boolean edgeDetectGoOld
+'	Boolean edgeDetectHiOld
+'	Boolean edgeDetectLoOld
+'	Boolean erBackSafetyFrameOpenOld
+'	Boolean erBadPressureSensorOld
+'	Boolean erBowlFeederBreakerOld
+'	Boolean erDCPowerHeatStakeOld
+'	Boolean erDCPowerOld
+'	Boolean erDebrisRemovalBreakerOld
+'	Boolean erEstopOld
+'	Boolean erFlashBreakerOld
+'	Boolean erFlashStationOld
+'	Boolean erFrontSafetyFrameOpenOld
+'	Boolean erHeatStakeBreakerOld
+'	Boolean erHeatStakeTempOld
+'	Boolean erHighPressureOld
+'	Boolean erHMICommunicationOld
+'	Boolean erHmiDataAckOld
+'	Boolean erIllegalArmMoveOld
+'	Boolean erInMagBreakerOld
+'	Boolean erInMagCrowdingOld
+'	Boolean erInMagEmptyOld
+'	Boolean erInMagLowSensorBadOld
+'	Boolean erInMagOpenInterlockOld
+'	Boolean erInMagUpSensorBadOld
+'	Boolean erLaserScannerOld
+'	Boolean erLeftSafetyFrameOpenOld
+'	Boolean erLowPressureOld
+'	Boolean erModbusCommandOld
+'	Boolean erModbusPortOld
+'	Boolean erModbusTimeoutOld
+'	Boolean erOutMagBreakerOld
+'	Boolean erOutMagCrowdingOld
+'	Boolean erOutMagFullOld
+'	Boolean erOutMagLowSensorBadOld
+'	Boolean erOutMagOpenInterlockOld
+'	Boolean erOutMagUpSensorBadOld
+'	Boolean erPanelFailedInspectionOld
+'	Boolean erPanelStatusUnknownOld
+'	Boolean erPanelUndefinedOld
+'	Boolean erParamEntryMissingOld
+'	Boolean erPnumaticsBreakerOld
+'	Boolean erRC180Old
+'	Boolean erRecEntryMissingOld
+'	Boolean erRightSafetyFrameOpenOld
+'	Boolean erRobotNotAtHomeOld
+'	Boolean errorStatusOld
+'	Boolean erSafetySystemBreakerOld
+'	Boolean erUnknownOld
+'	Boolean erWrongPanelDimsOld
+'	Boolean erWrongPanelHolesOld
+'	Boolean erWrongPanelInsertOld
+'	Boolean erWrongPanelOld
+'	Boolean eStopResetCCOld
+'	Boolean eStopResetOld
+'	Boolean eStopStatusOld
+'	Boolean FlashHomeCCOld
+'	Boolean flashHomeNCOld
+'	Boolean flashHomeNOOld
+'	Boolean flashPanelPresntOld
+'	Boolean FlashPnlPrsntOld
+'	Boolean frontInterlockACKBtnOld
+'	Boolean frontInterlockACKOld
+'	Boolean frontIntlock1Old
+'	Boolean frontIntlock2Old
+'	Boolean GoFlagOld
+'	Boolean heartBeatOld
+'	Boolean heatStakeGoCCOld
+'	Boolean heatStakeGoOld
+'	Boolean hole0PFOld
+'	Boolean hole10PFOld
+'	Boolean hole11PFOld
+'	Boolean hole12PFOld
+'	Boolean hole13PFOld
+'	Boolean hole14PFOld
+'	Boolean hole15PFOld
+'	Boolean hole16PFOld
+'	Boolean hole17PFOld
+'	Boolean hole18PFOld
+'	Boolean hole19PFOld
+'	Boolean hole1PFOld
+'	Boolean hole20PFOld
+'	Boolean hole21PFOld
+'	Boolean hole22PFOld
+'	Boolean hole2PFOld
+'	Boolean hole3PFOld
+'	Boolean hole4PFOld
+'	Boolean hole5PFOld
+'	Boolean hole6PFOld
+'	Boolean hole7PFOld
+'	Boolean hole8PFOld
+'	Boolean hole9PFOld
+'	Boolean holeDetectedOld
+'	Boolean homePositionStatusOld
+'	Boolean hsInstallInsrtOld
+'	Boolean hsPanelPresntOld
+'	Boolean inMagGoHomeBtnOld
+'	Boolean inMagGoHomeOld
+'	Boolean inMagInterlockOld
+'	Boolean inMagIntLockAckBtnOld
+'	Boolean inMagIntLockAckOld
+'	Boolean inMagLoadedBtnOld
+'	Boolean inMagLoadedOld
+'	Boolean inMagLowLimNOld
+'	Boolean inMagLowLimOld
+'	Boolean inMagMtrCCOld
+'	Boolean inMagMtrDirCCOld
+'	Boolean inMagMtrDirOld
+'	Boolean inMagMtrOld
+'	Boolean InMagPickUpSignalOld
+'	Boolean inMagPnlRdyOld
+'	Boolean InMagRobotClearSignalOld
+'	Boolean inMagUpLimNOld
+'	Boolean inMagUpLimOld
+'	Boolean jobAbortBtnOld
+'	Boolean jobDoneOld
+'	Boolean jobPauseBtnOld
+'	Boolean jobPauseOld
+'	Boolean jobResumeBtnOld
+'	Boolean jobResumeOld
+'	Boolean jobStartBtnOld
+'	Boolean jobStartOld
+'	Boolean jobStopBtnOld
+'	Boolean jobStopOld
+'	Boolean joint1StatusOld
+'	Boolean joint2StatusOld
+'	Boolean joint3StatusOld
+'	Boolean joint4StatusOld
+'	Boolean leftInterlockACKBtnOld
+'	Boolean leftInterlockACKOld
+'	Boolean leftIntlock1Old
+'	Boolean leftIntlock2Old
+'	Boolean maintModeOld
+'	Boolean monEstop1Old
+'	Boolean monEstop2Old
+'	Boolean motorOnStatusOld
+'	Boolean motorPowerStatusOld
+'	Boolean OutMagDropOffSignalOld
+'	Boolean outMagGoHomeBtnOld
+'	Boolean outMagGoHomeOld
+'	Boolean outMagIntLockAckBtnOld
+'	Boolean outMagIntLockAckOld
+'	Boolean outMagIntOld
+'	Boolean outMagLowLimNOld
+'	Boolean outMagLowLimOld
+'	Boolean outMagMtrCCOld
+'	Boolean outMagMtrDirCCOld
+'	Boolean outMagMtrDirOld
+'	Boolean outMagMtrOld
+'	Boolean outMagPanelRdyOld
+'	Boolean OutMagRobotClearSignalOld
+'	Boolean outMagUnloadedBtnOld
+'	Boolean outMagUnloadedOld
+'	Boolean outMagUpLimNOld
+'	Boolean outMagUpLimOld
+'	Boolean OutputMagSignalOld
+'	Boolean panelDataTxACKBtnOld
+'	Boolean panelDataTxACKOld
+'	Boolean panelDataTxRdyOld
+'	Boolean PanelPassedInspectionOld
+'	Boolean ParamEntryMissingOld
+'	Boolean pas1inLoadInsertCylinderBtnOld
+'	Boolean pas1inLoadInsertCylinderOld
+'	Boolean pasAlarmGroupOld
+'	Boolean pasBlowInsertBtnOld
+'	Boolean pasBlowInsertOld
+'	Boolean pasBowlDumpOpenBtnOld
+'	Boolean pasBowlDumpOpenOld
+'	Boolean pasBowlFeederBtnOld
+'	Boolean pasBowlFeederOld
+'	Boolean pasGoHomeBtnOld
+'	Boolean pasGoHomeOld
+'	Boolean pasHeadDownBtnOld
+'	Boolean pasHeadDownOld
+'	Boolean pasHeadinsertpickupextendOld
+'	Boolean pasHeadinsertPickupRetractOld
+'	Boolean pasHeadUpBtnOld
+'	Boolean pasHeadUpOld
+'	Boolean pasHighTempAlarmOld
+'	Boolean pasHomeBtnOld
+'	Boolean pasHomeOld
+'	Boolean pasInsertDetectedOld
+'	Boolean pasInsertGripperBtnOld
+'	Boolean pasInsertGripperOld
+'	Boolean pasInsertInShuttleOld
+'	Boolean pasInsertTypeBtnOld
+'	Boolean pasInsertTypeOld
+'	Boolean pasInTempZone1Old
+'	Boolean pasInTempZone2Old
+'	Boolean pasInTempZone3Old
+'	Boolean pasInTempZone4Old
+'	Boolean pasLowerlimitBtnOld
+'	Boolean pasLowerlimitOld
+'	Boolean pasMasterTempBtnOld
+'	Boolean pasMasterTempOld
+'	Boolean pasMaxTempOnOffZone1BtnOld
+'	Boolean pasMaxTempOnOffZone1Old
+'	Boolean pasMaxTempOnOffZone2BtnOld
+'	Boolean pasMaxTempOnOffZone2Old
+'	Boolean pasMaxTempOnOffZone3BtnOld
+'	Boolean pasMaxTempOnOffZone3Old
+'	Boolean pasMaxTempOnOffZone4BtnOld
+'	Boolean pasMaxTempOnOffZone4Old
+'	Boolean pasMaxTempZone1Old
+'	Boolean pasMaxTempZone2Old
+'	Boolean pasMaxTempZone3Old
+'	Boolean pasMaxTempZone4Old
+'	Boolean pasMCREStopBtnOld
+'	Boolean pasMCREStopOld
+'	Boolean pasOnOffZone1BtnOld
+'	Boolean pasOnOffZone1Old
+'	Boolean pasOnOffZone2BtnOld
+'	Boolean pasOnOffZone2Old
+'	Boolean pasOnOffZone3BtnOld
+'	Boolean pasOnOffZone3Old
+'	Boolean pasOnOffZone4BtnOld
+'	Boolean pasOnOffZone4Old
+'	Boolean pasOTAOnOffZone1BtnOld
+'	Boolean pasOTAOnOffZone1Old
+'	Boolean pasOTAOnOffZone2BtnOld
+'	Boolean pasOTAOnOffZone2Old
+'	Boolean pasOTAOnOffZone3BtnOld
+'	Boolean pasOTAOnOffZone3Old
+'	Boolean pasOTAOnOffZone4BtnOld
+'	Boolean pasOTAOnOffZone4Old
+'	Boolean pasPIDTuneDoneZone1BtnOld
+'	Boolean pasPIDTuneDoneZone1Old
+'	Boolean pasPIDTuneDoneZone2BtnOld
+'	Boolean pasPIDTuneDoneZone2Old
+'	Boolean pasPIDTuneDoneZone3BtnOld
+'	Boolean pasPIDTuneDoneZone3Old
+'	Boolean pasPIDTuneFailZone1BtnOld
+'	Boolean pasPIDTuneFailZone1Old
+'	Boolean pasPIDTuneFailZone2BtnOld
+'	Boolean pasPIDTuneFailZone2Old
+'	Boolean pasPIDTuneFailZone3BtnOld
+'	Boolean pasPIDTuneFailZone3Old
+'	Boolean pasRemoteAlarmAcknowledgeBtnOld
+'	Boolean pasRemoteAlarmAcknowledgeOld
+'	Boolean pasResetHighTempBtnOld
+'	Boolean pasResetHighTempOld
+'	Boolean pasResetMaxBtnOld
+'	Boolean pasResetMaxOld
+'	Boolean pasShuttleExtendOld
+'	Boolean pasShuttleLoadPositionOld
+'	Boolean pasShuttleMidwayOld
+'	Boolean pasShuttleNoLoadOld
+'	Boolean pasSlideExtendBtnOld
+'	Boolean pasSlideExtendOld
+'	Boolean pasStartBtnOld
+'	Boolean pasStartOld
+'	Boolean pasStartPIDTuneZone1BtnOld
+'	Boolean pasStartPIDTuneZone1Old
+'	Boolean pasStartPIDTuneZone2BtnOld
+'	Boolean pasStartPIDTuneZone2Old
+'	Boolean pasStartPIDTuneZone4BtnOld
+'	Boolean pasStartPIDTuneZone4Old
+'	Boolean pasSteelInsertOld
+'	Boolean pasTempOnOffBtnOld
+'	Boolean pasTempOnOffOld
+'	Boolean pasUpLimitBtnOld
+'	Boolean pasUpLimitOld
+'	Boolean pasVibTrackBtnOld
+'	Boolean pasVibTrackOld
+'	Boolean pauseFlagOld
+'	Boolean pauseStatusOld
+'	Boolean RecEntryMissingOld
+'	Boolean recFlashRequiredOld
+'	Boolean ReturnFlagOld
+'	Boolean rightInterlockACKBtnOld
+'	Boolean rightInterlockACKOld
+'	Boolean rightIntlockOld
+'	Boolean RobotPlacedPanelOld
+'	Boolean safeGuardInputOld
+'	Boolean sftyFrmIlockAckBtnOld
+'	Boolean sftyFrmIlockAckOld
+'	Boolean SkippedLastHoleOld
+'	Boolean stackLightAlrmCCOld
+'	Boolean stackLightAlrmOld
+'	Boolean stackLightGrnCCOld
+'	Boolean stackLightGrnOld
+'	Boolean stackLightRedCCOld
+'	Boolean stackLightRedOld
+'	Boolean stackLightYelCCOld
+'	Boolean stackLightYelOld
+'	Boolean suctionCupsCCOld
+'	Boolean suctionCupsOld
+'	Boolean tasksRunningStatusOld
+'	Boolean teachModeStatusOld
+'	Double recPartNumberOld
+'	Integer CrowdingOld
+'	Integer ctrlrErrAxisNumberOld
+'	Integer ctrlrErrorNumOld
+'	Integer ctrlrLineNumberOld
+'	Integer ctrlrTaskNumberOld
+'	Integer currentFlashHoleOld
+'	Integer currentHSHoleOld
+'	Integer currentInspectHoleOld
+'	Integer currentPreinspectHoleOld
+'	Integer FirstHolePointFlashOld
+'	Integer FirstHolePointHotStakeOld
+'	Integer FirstHolePointInspectionOld
+'	Integer inMagCurrentStateOld
+'	Integer jobAbortOld
+'	Integer jobNumPanelsDoneOld
+'	Integer jobNumPanelsOld
+'	Integer LastHolePointFlashOld
+'	Integer LastHolePointHotStakeOld
+'	Integer LastHolePointInspectionOld
+'	Integer mainCurrentStateOld
+'	Integer outMagCurrentStateOld
+'	Integer OutmagLastStateOld
+'	Integer recCrowdingOld
+'	Integer recInmagOld
+'	Integer recInsertTypeOld
+'	Integer recNumberOfHolesOld
+'	Integer recOutmagOld
+'	Integer recPreCrowdingOld
+'	Integer StatusCheckCrowdingOld
+'	Integer StatusCheckDropOffOld
+'	Integer StatusCheckFlashOld
+'	Integer StatusCheckHotStakeOld
+'	Integer StatusCheckInspectionOld
+'	Integer StatusCheckPickUpOld
+'	Integer StatusCheckPreinspectionOld
+'	Integer SystemAccelOld
+'	Integer SystemSpeedOld
+'	Integer systemStatusOld
+'	Integer xOld
+'	Integer zOld
+'	Long pasActualTempZone1Old
+'	Long pasActualTempZone1SetOld
+'	Long pasActualTempZone2Old
+'	Long pasActualTempZone2SetOld
+'	Long pasCoolActualOld
+'	Long pasCoolActualSetOld
+'	Long pasCoolOld
+'	Long pasCoolSetOld
+'	Long pasDwellActualOld
+'	Long pasDwellActualSetOld
+'	Long pasDwellOld
+'	Long pasDwellSetOld
+'	Long pasInsertPreheatOld
+'	Long pasInsertPreheatSetOld
+'	Long pasJogSpeedOld
+'	Long pasJogSpeedSetOld
+'	Long pasLoadMeterOld
+'	Long pasLoadMeterSetOld
+'	Long pasMaxLoadmeterOld
+'	Long pasMaxLoadmeterSetOld
+'	Long pasPIDsetupActualZone1Old
+'	Long pasPIDsetupActualZone1SetOld
+'	Long pasPIDsetupActualZone2Old
+'	Long pasPIDsetupActualZone2SetOld
+'	Long pasPIDsetupActualZone3Old
+'	Long pasPIDsetupActualZone3SetOld
+'	Long pasPIDsetupActualZone4Old
+'	Long pasPIDsetupActualZone4SetOld
+'	Long pasPIDsetupDZone1Old
+'	Long pasPIDsetupDZone1SetOld
+'	Long pasPIDsetupDZone2Old
+'	Long pasPIDsetupDZone2SetOld
+'	Long pasPIDsetupDZone3Old
+'	Long pasPIDsetupDZone3SetOld
+'	Long pasPIDsetupDZone4Old
+'	Long pasPIDsetupDZone4SetOld
+'	Long pasPIDsetupInTempZone1Old
+'	Long pasPIDsetupInTempZone1SetOld
+'	Long pasPIDsetupInTempZone2Old
+'	Long pasPIDsetupInTempZone2SetOld
+'	Long pasPIDsetupInTempZone3Old
+'	Long pasPIDsetupInTempZone3SetOld
+'	Long pasPIDsetupInTempZone4Old
+'	Long pasPIDsetupInTempZone4SetOld
+'	Long pasPIDsetupIZone1Old
+'	Long pasPIDsetupIZone1SetOld
+'	Long pasPIDsetupIZone2Old
+'	Long pasPIDsetupIZone2SetOld
+'	Long pasPIDsetupIZone3Old
+'	Long pasPIDsetupIZone3SetOld
+'	Long pasPIDsetupIZone4Old
+'	Long pasPIDsetupIZone4SetOld
+'	Long pasPIDsetupMaxTempZone1Old
+'	Long pasPIDsetupMaxTempZone1SetOld
+'	Long pasPIDsetupMaxTempZone2Old
+'	Long pasPIDsetupMaxTempZone2SetOld
+'	Long pasPIDsetupMaxTempZone3Old
+'	Long pasPIDsetupMaxTempZone3SetOld
+'	Long pasPIDsetupMaxTempZone4Old
+'	Long pasPIDsetupMaxTempZone4SetOld
+'	Long pasPIDsetupOffsetZone1Old
+'	Long pasPIDsetupOffsetZone1SetOld
+'	Long pasPIDsetupOffsetZone2Old
+'	Long pasPIDsetupOffsetZone2SetOld
+'	Long pasPIDsetupOffsetZone3Old
+'	Long pasPIDsetupOffsetZone3SetOld
+'	Long pasPIDsetupOffsetZone4Old
+'	Long pasPIDsetupOffsetZone4SetOld
+'	Long pasPIDsetupPZone1Old
+'	Long pasPIDsetupPZone1SetOld
+'	Long pasPIDsetupPZone2Old
+'	Long pasPIDsetupPZone2SetOld
+'	Long pasPIDsetupPZone3Old
+'	Long pasPIDsetupPZone3SetOld
+'	Long pasPIDsetupPZone4Old
+'	Long pasPIDsetupPZone4SetOld
+'	Long pasPIDsetupSetPointZone1Old
+'	Long pasPIDsetupSetPointZone1SetOld
+'	Long pasPIDsetupSetPointZone2Old
+'	Long pasPIDsetupSetPointZone2SetOld
+'	Long pasPIDsetupSetPointZone3Old
+'	Long pasPIDsetupSetPointZone3SetOld
+'	Long pasPIDsetupSetPointZone4Old
+'	Long pasPIDsetupSetPointZone4SetOld
+'	Long pasPIDShowDZone1Old
+'	Long pasPIDShowDZone1SetOld
+'	Long pasPIDShowDZone2Old
+'	Long pasPIDShowDZone2SetOld
+'	Long pasPIDShowIZone1Old
+'	Long pasPIDShowIZone1SetOld
+'	Long pasPIDShowIZone2Old
+'	Long pasPIDShowIZone2SetOld
+'	Long pasPIDShowPZone1Old
+'	Long pasPIDShowPZone1SetOld
+'	Long pasPIDShowPZone2Old
+'	Long pasPIDShowPZone2SetOld
+'	Long pasPreHeatActualOld
+'	Long pasPreHeatActualSetOld
+'	Long pasRecipeOld
+'	Long pasRecipeSetOld
+'	Long pasSetTempZone2Old
+'	Long pasSetTempZone2SetOld
+'	Real CurrentThetaHereOld
+'	Real hole0LOld
+'	Real hole0ROld
+'	Real hole10LOld
+'	Real hole10ROld
+'	Real hole11LOld
+'	Real hole11ROld
+'	Real hole12LOld
+'	Real hole12ROld
+'	Real hole13LOld
+'	Real hole13ROld
+'	Real hole14LOld
+'	Real hole14ROld
+'	Real hole15LOld
+'	Real hole15ROld
+'	Real hole16LOld
+'	Real hole16ROld
+'	Real hole17LOld
+'	Real hole17ROld
+'	Real hole18LOld
+'	Real hole18ROld
+'	Real hole19LOld
+'	Real hole19ROld
+'	Real hole1LOld
+'	Real hole1ROld
+'	Real hole20LOld
+'	Real hole20ROld
+'	Real hole21LOld
+'	Real hole21ROld
+'	Real hole22LOld
+'	Real hole22ROld
+'	Real hole2LOld
+'	Real hole2ROld
+'	Real hole3LOld
+'	Real hole3ROld
+'	Real hole4LOld
+'	Real hole4ROld
+'	Real hole5LOld
+'	Real hole5ROld
+'	Real hole6LOld
+'	Real hole6ROld
+'	Real hole7LOld
+'	Real hole7ROld
+'	Real hole8LOld
+'	Real hole8ROld
+'	Real hole9LOld
+'	Real hole9ROld
+'	Real InMagTorqueLimOld
+'	Real insertDepthToleranceOld
+'	Real OutMagTorqueLimOld
+'	Real pasHeatStakingIPMOld
+'	Real pasHeatStakingIPMSetOld
+'	Real pasHomeIPMOld
+'	Real pasHomeIPMSetOld
+'	Real pasInsertDepthOld
+'	Real pasInsertDepthSetOld
+'	Real pasInsertEngageIPMOld
+'	Real pasInsertEngageIPMSetOld
+'	Real pasInsertEngageOld
+'	Real pasInsertEngageSetOld
+'	Real pasInsertPickupIPMOld
+'	Real pasInsertPickupIPMSetOld
+'	Real pasInsertPositionOld
+'	Real pasInsertPositionSetOld
+'	Real pasMessageDBOld
+'	Real pasMessageDBSetOld
+'	Real pasSetTempZone1Old
+'	Real pasSetTempZone1SetOld
+'	Real pasSoftHomeOld
+'	Real pasSoftHomeSetOld
+'	Real pasSoftStopOld
+'	Real pasSoftStopSetOld
+'	Real pasVerticalLocationOld
+'	Real pasVerticalLocationSetOld
+'	Real recFlashDwellTimeOld
+'	Real recInmagPickupOffsetOld
+'	Real recInsertDepthOld
+'	Real recOutmagPickupOffsetOld
+'	Real recPanelThicknessOld
+'	Real recTempProbeOld
+'	Real recTempTrackOld
+'	Real suctionWaitTimeOld
+'	Real zLimitOld
+'	Real ZmaxTorqueOld
+'	String ctrlrErrMsgOld$
     
     ' define the connection to the HMI
 '    SetNet #201, "10.22.2.30", 1502, CRLF, NONE, 0
@@ -2073,12 +2071,6 @@ If pasVerticalLocation <> pasVerticalLocationOld Then
 	pasVerticalLocationOld = pasVerticalLocation
 EndIf
 
-
-
-
-
-
-
 'dont delete when updating
 '  --SJE - Why?  They are in the list above...
 'Print #201, "{", Chr$(&H22) + "monEstop1" + Chr$(&H22), ":", Str$(monEstop1), "}",
@@ -2094,9 +2086,9 @@ Function setVars(response$ As String)
     String prepend$
     match$ = "{:} " + Chr$(&H22)
     
-	numTokens = ParseStr(response$, tokens$(), match$)
-	If numTokens <> 2 Then ' TODO for ben, something is running too fast
-		Print "error---", response$, " -- ", numTokens
+	NumTokens = ParseStr(response$, Tokens$(), match$)
+	If NumTokens <> 2 Then ' TODO for ben, something is running too fast
+		Print "error---", response$, " -- ", NumTokens
 	EndIf
 '	Print tokens$(0), " : ", tokens$(1)
 	
@@ -2105,7 +2097,7 @@ Function setVars(response$ As String)
  
 '_____Dont delete while updating 
 Case "jobAbortBtn"
-   If tokens$(1) = "true" Then
+   If Tokens$(1) = "true" Then
        jobAbortBtn = True
        MemOn (jobAbortH)
    Else
@@ -2115,7 +2107,7 @@ Case "jobAbortBtn"
 '__________________
 
 Case "alarmMuteBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         alarmMuteBtn = True
         alarmMute = True
     Else
@@ -2123,7 +2115,7 @@ Case "alarmMuteBtn"
     EndIf
     Print "alarmMuteBtn:", alarmMuteBtn
 Case "backInterlockACKBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         backInterlockACKBtn = True
         backInterlockACK = True
     Else
@@ -2131,7 +2123,7 @@ Case "backInterlockACKBtn"
     EndIf
     Print "backInterlockACKBtn:", backInterlockACKBtn
 Case "frontInterlockACKBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         frontInterlockACKBtn = True
         frontInterlockACK = True
     Else
@@ -2139,7 +2131,7 @@ Case "frontInterlockACKBtn"
     EndIf
     Print "frontInterlockACKBtn:", frontInterlockACKBtn
 Case "inMagGoHomeBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         inMagGoHomeBtn = True
         inMagGoHome = True
     Else
@@ -2171,7 +2163,7 @@ Case "jobAbortBtn"
     EndIf
     Print "jobAbortBtn:", jobAbortBtn
 Case "jobStartBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         jobStartBtn = True
         jobStart = True
     Else
@@ -2179,7 +2171,7 @@ Case "jobStartBtn"
     EndIf
     Print "jobStartBtn:", jobStartBtn
 Case "leftInterlockACKBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         leftInterlockACKBtn = True
         leftInterlockACK = True
     Else
@@ -2187,7 +2179,7 @@ Case "leftInterlockACKBtn"
     EndIf
     Print "leftInterlockACKBtn:", leftInterlockACKBtn
 Case "outMagGoHomeBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         outMagGoHomeBtn = True
         outMagGoHome = True
     Else
@@ -2195,7 +2187,7 @@ Case "outMagGoHomeBtn"
     EndIf
     Print "outMagGoHomeBtn:", outMagGoHomeBtn
 Case "outMagIntLockAckBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         outMagIntLockAckBtn = True
         outMagIntLockAck = True
     Else
@@ -2290,31 +2282,31 @@ Case "cbMonDebrisRmvF"
         MemOff (cbMonDebrisRmvF)
     EndIf
 Case "cbMonDebrisRmvFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonDebrisRmvFV)
     Else
         MemOff (cbMonDebrisRmvFV)
     EndIf
 Case "cbMonHeatStakeF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonHeatStakeF)
     Else
         MemOff (cbMonHeatStakeF)
     EndIf
 Case "cbMonHeatStakeFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonHeatStakeFV)
     Else
         MemOff (cbMonHeatStakeFV)
     EndIf
 Case "cbMonInMagF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonInMagF)
     Else
         MemOff (cbMonInMagF)
     EndIf
 Case "cbMonInMagFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonInMagFV)
     Else
         MemOff (cbMonInMagFV)
@@ -2332,628 +2324,628 @@ Case "cbMonOutMagFV"
         MemOff (cbMonOutMagFV)
     EndIf
 Case "cbMonPAS24vdcF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonPAS24vdcF)
     Else
         MemOff (cbMonPAS24vdcF)
     EndIf
 Case "cbMonPAS24vdcFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonPAS24vdcFV)
     Else
         MemOff (cbMonPAS24vdcFV)
     EndIf
 Case "cbMonSafetyF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonSafetyF)
     Else
         MemOff (cbMonSafetyF)
     EndIf
 Case "cbMonSafetyFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonSafetyFV)
     Else
         MemOff (cbMonSafetyFV)
     EndIf
 Case "dc24vOKF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (dc24vOKF)
     Else
         MemOff (dc24vOKF)
     EndIf
 Case "dc24vOKFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (dc24vOKFV)
     Else
         MemOff (dc24vOKFV)
     EndIf
 Case "edgeDetectGoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectGoF)
     Else
         MemOff (edgeDetectGoF)
     EndIf
 Case "edgeDetectGoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectGoFV)
     Else
         MemOff (edgeDetectGoFV)
     EndIf
 Case "edgeDetectHiF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectHiF)
     Else
         MemOff (edgeDetectHiF)
     EndIf
 Case "edgeDetectHiFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectHiFV)
     Else
         MemOff (edgeDetectHiFV)
     EndIf
 Case "edgeDetectLoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectLoF)
     Else
         MemOff (edgeDetectLoF)
     EndIf
 Case "edgeDetectLoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (edgeDetectLoFV)
     Else
         MemOff (edgeDetectLoFV)
     EndIf
 Case "flashHomeNCF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (flashHomeNCF)
     Else
         MemOff (flashHomeNCF)
     EndIf
 Case "flashHomeNCFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (flashHomeNCFV)
     Else
         MemOff (flashHomeNCFV)
     EndIf
 Case "flashHomeNOF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (flashHomeNOF)
     Else
         MemOff (flashHomeNOF)
     EndIf
 Case "flashHomeNOFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (flashHomeNOFV)
     Else
         MemOff (flashHomeNOFV)
     EndIf
 Case "flashPnlPrsntF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (FlashPnlPrsntF)
     Else
         MemOff (FlashPnlPrsntF)
     EndIf
 Case "flashPnlPrsntFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (FlashPnlPrsntFV)
     Else
         MemOff (FlashPnlPrsntFV)
     EndIf
 Case "frontIntlock1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock1F)
     Else
         MemOff (frontIntlock1F)
     EndIf
 Case "frontIntlock1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock1FV)
     Else
         MemOff (frontIntlock1FV)
     EndIf
 Case "frontIntlock2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock2F)
     Else
         MemOff (frontIntlock2F)
     EndIf
 Case "frontIntlock2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (frontIntlock2FV)
     Else
         MemOff (frontIntlock2FV)
     EndIf
 Case "holeDetectedF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (holeDetectedF)
     Else
         MemOff (holeDetectedF)
     EndIf
 Case "holeDetectedFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (holeDetectedFV)
     Else
         MemOff (holeDetectedFV)
     EndIf
 Case "hsPanelPresntF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (hsPanelPresntF)
     Else
         MemOff (hsPanelPresntF)
     EndIf
 Case "hsPanelPresntFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (hsPanelPresntFV)
     Else
         MemOff (hsPanelPresntFV)
     EndIf
 Case "inMagInterlockF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagInterlockF)
     Else
         MemOff (inMagInterlockF)
     EndIf
 Case "inMagInterlockFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagInterlockFV)
     Else
         MemOff (inMagInterlockFV)
     EndIf
 Case "inMagLowLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowLimF)
     Else
         MemOff (inMagLowLimF)
     EndIf
 Case "inMagLowLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowLimFV)
     Else
         MemOff (inMagLowLimFV)
     EndIf
 Case "inMagLowLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowLimNF)
     Else
         MemOff (inMagLowLimNF)
     EndIf
 Case "inMagLowLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagLowLimNFV)
     Else
         MemOff (inMagLowLimNFV)
     EndIf
 Case "inMagPnlRdyF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagPnlRdyF)
     Else
         MemOff (inMagPnlRdyF)
     EndIf
 Case "inMagPnlRdyFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagPnlRdyFV)
     Else
         MemOff (inMagPnlRdyFV)
     EndIf
 Case "inMagUpLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimF)
     Else
         MemOff (inMagUpLimF)
     EndIf
 Case "inMagUpLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimFV)
     Else
         MemOff (inMagUpLimFV)
     EndIf
 Case "inMagUpLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimNF)
     Else
         MemOff (inMagUpLimNF)
     EndIf
 Case "inMagUpLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagUpLimNFV)
     Else
         MemOff (inMagUpLimNFV)
     EndIf
 Case "leftIntlock1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock1F)
     Else
         MemOff (leftIntlock1F)
     EndIf
 Case "leftIntlock1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock1FV)
     Else
         MemOff (leftIntlock1FV)
     EndIf
 Case "leftIntlock2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock2F)
     Else
         MemOff (leftIntlock2F)
     EndIf
 Case "leftIntlock2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (leftIntlock2FV)
     Else
         MemOff (leftIntlock2FV)
     EndIf
 Case "maintModeF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (maintModeF)
     Else
         MemOff (maintModeF)
     EndIf
 Case "maintModeFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (maintModeFV)
     Else
         MemOff (maintModeFV)
     EndIf
 Case "monEstop1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (monEstop1F)
     Else
         MemOff (monEstop1F)
     EndIf
 Case "monEstop1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (monEstop1FV)
     Else
         MemOff (monEstop1FV)
     EndIf
 Case "monEstop2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (monEstop2F)
     Else
         MemOff (monEstop2F)
     EndIf
 Case "monEstop2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (monEstop2FV)
     Else
         MemOff (monEstop2FV)
     EndIf
 Case "outMagIntF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagIntF)
     Else
         MemOff (outMagIntF)
     EndIf
 Case "outMagIntFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagIntFV)
     Else
         MemOff (outMagIntFV)
     EndIf
 Case "outMagLowLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimF)
     Else
         MemOff (outMagLowLimF)
     EndIf
 Case "outMagLowLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimFV)
     Else
         MemOff (outMagLowLimFV)
     EndIf
 Case "outMagLowLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimNF)
     Else
         MemOff (outMagLowLimNF)
     EndIf
 Case "outMagLowLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagLowLimNFV)
     Else
         MemOff (outMagLowLimNFV)
     EndIf
 Case "outMagPanelRdyF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagPanelRdyF)
     Else
         MemOff (outMagPanelRdyF)
     EndIf
 Case "outMagPanelRdyFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagPanelRdyFV)
     Else
         MemOff (outMagPanelRdyFV)
     EndIf
 Case "outMagUpLimF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimF)
     Else
         MemOff (outMagUpLimF)
     EndIf
 Case "outMagUpLimFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimFV)
     Else
         MemOff (outMagUpLimFV)
     EndIf
 Case "outMagUpLimNF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimNF)
     Else
         MemOff (outMagUpLimNF)
     EndIf
 Case "outMagUpLimNFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagUpLimNFV)
     Else
         MemOff (outMagUpLimNFV)
     EndIf
 Case "rightIntlockF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (rightIntlockF)
     Else
         MemOff (rightIntlockF)
     EndIf
 Case "rightIntlockFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (rightIntlockFV)
     Else
         MemOff (rightIntlockFV)
     EndIf
 Case "debrisMtrF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (debrisMtrF)
     Else
         MemOff (debrisMtrF)
     EndIf
 Case "debrisMtrFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (debrisMtrFV)
     Else
         MemOff (debrisMtrFV)
     EndIf
 Case "drillGoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (drillGoF)
     Else
         MemOff (drillGoF)
     EndIf
 Case "drillGoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (drillGoFV)
     Else
         MemOff (drillGoFV)
     EndIf
 Case "drillReturnF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (drillReturnF)
     Else
         MemOff (drillReturnF)
     EndIf
 Case "drillReturnFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (drillReturnFV)
     Else
         MemOff (drillReturnFV)
     EndIf
 Case "eStopResetF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (eStopResetF)
     Else
         MemOff (eStopResetF)
     EndIf
 Case "eStopResetFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (eStopResetFV)
     Else
         MemOff (eStopResetFV)
     EndIf
 Case "heatStakeGoF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (heatStakeGoF)
     Else
         MemOff (heatStakeGoF)
     EndIf
 Case "heatStakeGoFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (heatStakeGoFV)
     Else
         MemOff (heatStakeGoFV)
     EndIf
 Case "inMagMtrF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrF)
     Else
         MemOff (inMagMtrF)
     EndIf
 Case "inMagMtrFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrFV)
     Else
         MemOff (inMagMtrFV)
     EndIf
 Case "inMagMtrDirF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrDirF)
     Else
         MemOff (inMagMtrDirF)
     EndIf
 Case "inMagMtrDirFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (inMagMtrDirFV)
     Else
         MemOff (inMagMtrDirFV)
     EndIf
 Case "outMagMtrF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrF)
     Else
         MemOff (outMagMtrF)
     EndIf
 Case "outMagMtrFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrFV)
     Else
         MemOff (outMagMtrFV)
     EndIf
 Case "outMagMtrDirF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrDirF)
     Else
         MemOff (outMagMtrDirF)
     EndIf
 Case "outMagMtrDirFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (outMagMtrDirFV)
     Else
         MemOff (outMagMtrDirFV)
     EndIf
 Case "stackLightAlrmF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightAlrmF)
     Else
         MemOff (stackLightAlrmF)
     EndIf
 Case "stackLightAlrmFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightAlrmFV)
     Else
         MemOff (stackLightAlrmFV)
     EndIf
 Case "stackLightGrnF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightGrnF)
     Else
         MemOff (stackLightGrnF)
     EndIf
 Case "stackLightGrnFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightGrnFV)
     Else
         MemOff (stackLightGrnFV)
     EndIf
 Case "stackLightRedF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightRedF)
     Else
         MemOff (stackLightRedF)
     EndIf
 Case "stackLightRedFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightRedFV)
     Else
         MemOff (stackLightRedFV)
     EndIf
 Case "stackLightYelF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightYelF)
     Else
         MemOff (stackLightYelF)
     EndIf
 Case "stackLightYelFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (stackLightYelFV)
     Else
         MemOff (stackLightYelFV)
     EndIf
 Case "suctionCupsF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (suctionCupsF)
     Else
         MemOff (suctionCupsF)
     EndIf
 Case "suctionCupsFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (suctionCupsFV)
     Else
         MemOff (suctionCupsFV)
     EndIf
 Case "insertDepthTolerance"
-    insertDepthTolerance = Val(tokens$(1))
+    insertDepthTolerance = Val(Tokens$(1))
     Print "insertDepthTolerance:", insertDepthTolerance
 Case "jobNumPanels"
-    jobNumPanels = Val(tokens$(1))
+    jobNumPanels = Val(Tokens$(1))
     Print "jobNumPanels:", jobNumPanels
 Case "pasCoolSet"
-    MBWrite(pasCoolAddr, seconds2Modbus(Val(tokens$(1))), MBType16)
+    MBWrite(pasCoolAddr, seconds2Modbus(Val(Tokens$(1))), MBType16)
     Print "pasCoolSet:", pasCoolSet
 Case "pasDwellSet"
-    MBWrite(pasDwellAddr, seconds2Modbus(Val(tokens$(1))), MBType16)
+    MBWrite(pasDwellAddr, seconds2Modbus(Val(Tokens$(1))), MBType16)
     Print "pasDwellSet:", pasDwellSet
 Case "pasHeatStakingIPMSet"
-    MBWrite(pasHeatStakingIPMAddr, feedRate2Modbus(Val(tokens$(1))), MBType32)
+    MBWrite(pasHeatStakingIPMAddr, feedRate2Modbus(Val(Tokens$(1))), MBType32)
     Print "pasHeatStakingIPMSet:", pasHeatStakingIPMSet
 Case "pasHomeIPMSet"
-    MBWrite(pasHomeIPMAddr, feedRate2Modbus(Val(tokens$(1))), MBType32)
+    MBWrite(pasHomeIPMAddr, feedRate2Modbus(Val(Tokens$(1))), MBType32)
     Print "pasHomeIPMSet:", pasHomeIPMSet
 Case "pasInsertDepthSet"
-    MBWrite(pasInsertDepthAddr, inches2Modbus(Val(tokens$(1))), MBType32)
+    MBWrite(pasInsertDepthAddr, inches2Modbus(Val(Tokens$(1))), MBType32)
     Print "pasInsertDepthSet:", pasInsertDepthSet
 Case "pasInsertEngageSet"
-    MBWrite(pasInsertEngageAddr, inches2Modbus(Val(tokens$(1))), MBType32)
+    MBWrite(pasInsertEngageAddr, inches2Modbus(Val(Tokens$(1))), MBType32)
     Print "pasInsertEngageSet:", pasInsertEngageSet
 Case "pasInsertEngageIPMSet"
-    MBWrite(pasInsertEngageIPMAddr, feedRate2Modbus(Val(tokens$(1))), MBType32)
+    MBWrite(pasInsertEngageIPMAddr, feedRate2Modbus(Val(Tokens$(1))), MBType32)
     Print "pasInsertEngageIPMSet:", pasInsertEngageIPMSet
 Case "pasInsertPickupIPMSet"
-    MBWrite(pasInsertPickupIPMAddr, feedRate2Modbus(Val(tokens$(1))), MBType32)
+    MBWrite(pasInsertPickupIPMAddr, feedRate2Modbus(Val(Tokens$(1))), MBType32)
     Print "pasInsertPickupIPMSet:", pasInsertPickupIPMSet
 Case "pasInsertPositionSet"
-    MBWrite(pasInsertPositionAddr, inches2Modbus(Val(tokens$(1))), MBType32)
+    MBWrite(pasInsertPositionAddr, inches2Modbus(Val(Tokens$(1))), MBType32)
     Print "pasInsertPositionSet:", pasInsertPositionSet
 Case "pasInsertPreheatSet"
-    MBWrite(pasInsertPreheatAddr, seconds2Modbus(Val(tokens$(1))), MBType16)
+    MBWrite(pasInsertPreheatAddr, seconds2Modbus(Val(Tokens$(1))), MBType16)
     Print "pasInsertPreheatSet:", pasInsertPreheatSet
 Case "pasJogSpeedSet"
-    MBWrite(pasJogSpeedAddr, JogRate2Modbus(Val(tokens$(1))), MBType16)
+    MBWrite(pasJogSpeedAddr, JogRate2Modbus(Val(Tokens$(1))), MBType16)
     Print "pasJogSpeedSet:", pasJogSpeedSet
 Case "pasPIDsetupDZone1Set"
-    MBWrite(pasPIDsetupDZone1Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupDZone1Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupDZone1Set:", pasPIDsetupDZone1Set
 Case "pasPIDsetupDZone2Set"
-    MBWrite(pasPIDsetupDZone2Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupDZone2Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupDZone2Set:", pasPIDsetupDZone2Set
 Case "pasPIDsetupIZone1Set"
-    MBWrite(pasPIDsetupIZone1Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupIZone1Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupIZone1Set:", pasPIDsetupIZone1Set
 Case "pasPIDsetupIZone2Set"
-    MBWrite(pasPIDsetupIZone2Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupIZone2Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupIZone2Set:", pasPIDsetupIZone2Set
 Case "pasPIDsetupMaxTempZone1Set"
-    MBWrite(pasPIDsetupMaxTempZone1Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupMaxTempZone1Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupMaxTempZone1Set:", pasPIDsetupMaxTempZone1Set
 Case "pasPIDsetupMaxTempZone2Set"
-    MBWrite(pasPIDsetupMaxTempZone2Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupMaxTempZone2Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupMaxTempZone2Set:", pasPIDsetupMaxTempZone2Set
 Case "pasPIDsetupOffsetZone1Set"
-    MBWrite(pasPIDsetupOffsetZone1Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupOffsetZone1Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupOffsetZone1Set:", pasPIDsetupOffsetZone1Set
 Case "pasPIDsetupOffsetZone2Set"
-    MBWrite(pasPIDsetupOffsetZone2Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupOffsetZone2Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupOffsetZone2Set:", pasPIDsetupOffsetZone2Set
 Case "pasPIDsetupPZone1Set"
-    MBWrite(pasPIDsetupPZone1Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupPZone1Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupPZone1Set:", pasPIDsetupPZone1Set
 Case "pasPIDsetupPZone2Set"
-    MBWrite(pasPIDsetupPZone2Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupPZone2Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupPZone2Set:", pasPIDsetupPZone2Set
 Case "pasPIDsetupSetPointZone1Set"
-    MBWrite(pasPIDsetupSetPointZone1Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupSetPointZone1Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupSetPointZone1Set:", pasPIDsetupSetPointZone1Set
 Case "pasPIDsetupSetPointZone2Set"
-    MBWrite(pasPIDsetupSetPointZone2Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDsetupSetPointZone2Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDsetupSetPointZone2Set:", pasPIDsetupSetPointZone2Set
 Case "pasPIDShowDZone1Set"
-    MBWrite(pasPIDShowDZone1Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDShowDZone1Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDShowDZone1Set:", pasPIDShowDZone1Set
 Case "pasPIDShowDZone2Set"
-    MBWrite(pasPIDShowDZone2Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDShowDZone2Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDShowDZone2Set:", pasPIDShowDZone2Set
 Case "pasPIDShowIZone1Set"
-    MBWrite(pasPIDShowIZone1Addr, Val(tokens$(1)), MBType16)
+    MBWrite(pasPIDShowIZone1Addr, Val(Tokens$(1)), MBType16)
     Print "pasPIDShowIZone1Set:", pasPIDShowIZone1Set
 Case "pasPIDShowIZone2Set"
     MBWrite(pasPIDShowIZone2Addr, Val(Tokens$(1)), MBType16)
@@ -3011,13 +3003,13 @@ Case "systemAccel"
     SystemAccel = Val(Tokens$(1))
     Print "systemAccel:", SystemAccel
 Case "systemSpeed"
-    SystemSpeed = Val(Tokens$(1))
+    SystemSpeed = Val(tokens$(1))
     Print "systemSpeed:", SystemSpeed
 Case "zlimit"
-    zLimit = Val(Tokens$(1))
+    zLimit = Val(tokens$(1))
     Print "zlimit:", zLimit
 Case "pas1inLoadInsertCylinderBtn"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MBWrite(pas1inLoadInsertCylinderAddr, 1, MBTypeCoil)
     Else
         MBWrite(pas1inLoadInsertCylinderAddr, 0, MBTypeCoil)
@@ -3059,7 +3051,7 @@ Case "pasHeadDownBtn"
     EndIf
     Print "pasHeadDownBtn:", pasHeadDownBtn
 Case "pasHeadUpBtn"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MBWrite(pasHeadUpAddr, 1, MBTypeCoil)
     Else
         MBWrite(pasHeadUpAddr, 0, MBTypeCoil)
@@ -3101,7 +3093,7 @@ Case "pasMaxTempOnOffZone2Btn"
     EndIf
     Print "pasMaxTempOnOffZone2Btn:", pasMaxTempOnOffZone2Btn
 Case "pasOnOffZone1Btn"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MBWrite(pasOnOffZone1Addr, 1, MBTypeCoil)
     Else
         MBWrite(pasOnOffZone1Addr, 0, MBTypeCoil)

@@ -28,7 +28,7 @@ Function TestMB()
 	String testString$
 	Integer modLength
 	 
-	' Initialize modbus variables including read address vector
+' Initialize modbus variables including read address vector
 '	MBInitialize()
 	
 	' stuff the queue with writes of various types at full speed
