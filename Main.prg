@@ -97,7 +97,6 @@ Select mainCurrentState
 					Wait .5
 				Loop
 			Loop
-			jobStart = False ' reset flag
 			jobAbort = False 'reset flag
 			jobNumPanelsDone = 0 ' reset panel counter
 			Redim PassFailArray(23, 1) ' Clear array, always 23 rows
