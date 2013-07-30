@@ -102,6 +102,7 @@ Select mainCurrentState
 			Redim PassFailArray(23, 1) ' Clear array, always 23 rows
 			Redim InspectionArray(23, 1) 'Clear array, always 23 rows
 		ElseIf pasEmptyBowlFeederandTrack = True Then
+			TmReset (3) ' reset timer 3 before we switch states
 			mainCurrentState = StateEmptyingBowlandTrack
 		Else
 			mainCurrentState = StateIdle ' Stay in idle until ready
@@ -254,7 +255,7 @@ Select mainCurrentState
 			' Setting this register in the PLC initiates a sequence that empties the bowl feeder and track
 			' MBWrite(pasEmptyBowlFeederandTrackAddr, 1, MBType16) 
 			
-			If pasEmptyingSequenceDone = True Then
+			If pasEmptyingSequenceDone = True Or Tmr(3) >= 600 Then
 				mainCurrentState = StateIdle ' go back to idle because we are finished
 			Else
 				mainCurrentState = StateEmptyingBowlandTrack
