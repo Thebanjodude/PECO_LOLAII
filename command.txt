@@ -197,4 +197,6 @@ Low Power Mode
 !!Error: 3100, Syntax error.
 > tmreset0
 !!Error: 3100, Syntax error.
+> rnd(10)
+!!Error: 3100, Syntax error.
 > 

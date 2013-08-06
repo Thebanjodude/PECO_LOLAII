@@ -1,24 +1,26 @@
-ENVT0100,LM:2013/08/01 23:26:39:739,DS:0000002976,CS:05414,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/08/06 23:57:23:871,DS:0000003025,CS:10533,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Main.prg"
+bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=19
-		nTop=15
-		nWidth=1211
-		nHeight=651
+		nLeft=175
+		nTop=47
+		nWidth=1350
+		nHeight=837
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=43
-		nTop=20
-		nWidth=1258
-		nHeight=659
+		nLeft=28
+		nTop=224
+		nWidth=1254
+		nHeight=651
 	}
 }
 ProgramFile3 {
@@ -67,13 +69,13 @@ ProgramFile6 {
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=111
-		nWidth=1190
-		nHeight=725
+		nLeft=33
+		nTop=455
+		nWidth=1329
+		nHeight=722
 	}
 }
 ProgramFile8 {
@@ -81,21 +83,21 @@ ProgramFile8 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=47
-		nTop=171
-		nWidth=1353
-		nHeight=794
+		nLeft=28
+		nTop=127
+		nWidth=1325
+		nHeight=791
 	}
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=10
-		nTop=-7
-		nWidth=1274
-		nHeight=832
+		nLeft=382
+		nTop=20
+		nWidth=1273
+		nHeight=829
 	}
 }
 ProgramFile10 {
@@ -103,10 +105,10 @@ ProgramFile10 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=387
-		nTop=43
-		nWidth=1252
-		nHeight=677
+		nLeft=103
+		nTop=266
+		nWidth=1455
+		nHeight=843
 	}
 }
 nIncludeFileCount=1
@@ -164,7 +166,7 @@ CmdWindow {
 		nWidth=727
 		nHeight=638
 	}
-	nWinState=1
+	nWinState=0
 }
 RunWindow {
 	bOpened=False
@@ -197,10 +199,10 @@ IOMonitor {
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=861
-		nTop=689
-		nWidth=801
-		nHeight=274
+		nLeft=688
+		nTop=309
+		nWidth=799
+		nHeight=300
 	}
 }
 Macros {
@@ -215,8 +217,8 @@ Macros {
 RobotMgr {
 	bOpened=False
 	Window {
-		nLeft=28
-		nTop=272
+		nLeft=142
+		nTop=225
 		nWidth=751
 		nHeight=485
 	}
