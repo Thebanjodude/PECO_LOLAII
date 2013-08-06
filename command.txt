@@ -189,4 +189,12 @@ Low Power Mode
 > on DrillReturnH
 > 	On debrisMtrH
 > off debrisMtrH
+> time
+14:54:08
+> time
+14:54:16
+> tmr 2
+!!Error: 3100, Syntax error.
+> tmreset0
+!!Error: 3100, Syntax error.
 > 
