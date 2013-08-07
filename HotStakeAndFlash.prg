@@ -11,7 +11,6 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	Boolean SkippedHole
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 ' default to fail	
-'	ZLasertoHeatStake = 291.42372 ' This is a calibrated value, it will be stored in the HMI	
 	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
 	
@@ -69,6 +68,8 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
             MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
  			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement point
  				
+ 			'GoTo skiphotstake ' fake for testing
+ 				
 			Do Until pasMessageDB = 4
 				On heatStakeGoH, 1 ' Tell the HS to install 1 insert
 				Wait .5
@@ -86,6 +87,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 				EndIf
 			Loop
 			
+'	skiphotstake: ' fake for testing
 			Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 
 		EndIf

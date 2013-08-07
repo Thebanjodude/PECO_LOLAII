@@ -393,7 +393,9 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 
 	Jump Prescan LimZ zLimit
 	Jump PreHotStake LimZ zLimit
+	
 	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Make sure the crowding is open
+	Wait 3
 	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
 	suctionCupsCC = False ' Turn off suction cups
 	Wait suctionWaitTime ' wait for cups to release
@@ -402,15 +404,11 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	MBWrite(pasCrowdingADDR, 1, MBTypeCoil) ' Close crowding
 
 	' wait for verification that the crowding has closed
-	Do Until pasCrowding = True
-		Wait .25
-	Loop
-	
-	Wait 1 ' wait for the crowd to take place
-	
-'	Do While ZmaxTorque < .3 ' Approach the panel slowly until we hit a torque limit
-'		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
+'	Do Until pasCrowding = True
+'		Wait .25
 '	Loop
+	
+	Wait 3 ' wait for the crowd to take place
 	
 	Go P(recCrowding)
 	suctionCupsCC = True ' Turn on cups
@@ -418,10 +416,12 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 
 	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) 'Open crowding
 	' wait for verification that the crowding has opened
-	Do Until pasCrowding = False
-		Wait .25
-	Loop
-	Wait 1 ' wait for the crowd to open	
+' this do loop got stuck during testing, skip over for now	
+
+'	Do Until pasCrowding = False
+'		Wait .25
+'	Loop
+	Wait 3 ' wait for the crowd to open	
 	
 	CrowdingSequence = 0
 	

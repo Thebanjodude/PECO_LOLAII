@@ -2092,7 +2092,7 @@ Function setVars(response$ As String)
 	EndIf
 '	Print tokens$(0), " : ", tokens$(1)
 	
-	Select tokens$(0)
+	Select Tokens$(0)
  'Rx from HMI:
  
 '_____Dont delete while updating 
@@ -2195,7 +2195,7 @@ Case "outMagIntLockAckBtn"
     EndIf
     Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 Case "outMagUnloadedBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         outMagUnloadedBtn = True
         outMagUnloaded = True
     Else
@@ -2240,43 +2240,43 @@ Case "airPressHighFV"
         MemOff (airPressHighFV)
     EndIf
 Case "airPressLowF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (airPressLowF)
     Else
         MemOff (airPressLowF)
     EndIf
 Case "airPressLowFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (airPressLowFV)
     Else
         MemOff (airPressLowFV)
     EndIf
 Case "backIntlock1F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock1F)
     Else
         MemOff (backIntlock1F)
     EndIf
 Case "backIntlock1FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock1FV)
     Else
         MemOff (backIntlock1FV)
     EndIf
 Case "backIntlock2F"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock2F)
     Else
         MemOff (backIntlock2F)
     EndIf
 Case "backIntlock2FV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (backIntlock2FV)
     Else
         MemOff (backIntlock2FV)
     EndIf
 Case "cbMonDebrisRmvF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonDebrisRmvF)
     Else
         MemOff (cbMonDebrisRmvF)
@@ -2312,13 +2312,13 @@ Case "cbMonInMagFV"
         MemOff (cbMonInMagFV)
     EndIf
 Case "cbMonOutMagF"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonOutMagF)
     Else
         MemOff (cbMonOutMagF)
     EndIf
 Case "cbMonOutMagFV"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MemOn (cbMonOutMagFV)
     Else
         MemOff (cbMonOutMagFV)
@@ -2666,79 +2666,79 @@ Case "outMagUpLimF"
         MemOff (outMagUpLimF)
     EndIf
 Case "outMagUpLimFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagUpLimFV)
     Else
         MemOff (outMagUpLimFV)
     EndIf
 Case "outMagUpLimNF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagUpLimNF)
     Else
         MemOff (outMagUpLimNF)
     EndIf
 Case "outMagUpLimNFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (outMagUpLimNFV)
     Else
         MemOff (outMagUpLimNFV)
     EndIf
 Case "rightIntlockF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (rightIntlockF)
     Else
         MemOff (rightIntlockF)
     EndIf
 Case "rightIntlockFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (rightIntlockFV)
     Else
         MemOff (rightIntlockFV)
     EndIf
 Case "debrisMtrF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (debrisMtrF)
     Else
         MemOff (debrisMtrF)
     EndIf
 Case "debrisMtrFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (debrisMtrFV)
     Else
         MemOff (debrisMtrFV)
     EndIf
 Case "drillGoF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (drillGoF)
     Else
         MemOff (drillGoF)
     EndIf
 Case "drillGoFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (drillGoFV)
     Else
         MemOff (drillGoFV)
     EndIf
 Case "drillReturnF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (drillReturnF)
     Else
         MemOff (drillReturnF)
     EndIf
 Case "drillReturnFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (drillReturnFV)
     Else
         MemOff (drillReturnFV)
     EndIf
 Case "eStopResetF"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (eStopResetF)
     Else
         MemOff (eStopResetF)
     EndIf
 Case "eStopResetFV"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MemOn (eStopResetFV)
     Else
         MemOff (eStopResetFV)
@@ -2863,9 +2863,54 @@ Case "suctionCupsFV"
     Else
         MemOff (suctionCupsFV)
     EndIf
-Case "insertDepthTolerance"
-    insertDepthTolerance = Val(Tokens$(1))
-    Print "insertDepthTolerance:", insertDepthTolerance
+Case "recTempProbe"
+    recTempProbe = Val(Tokens$(1))
+    Print "recTempProbe:", recTempProbe
+Case "recTempTrack"
+    recTempTrack = Val(Tokens$(1))
+    Print "recTempTrack:", recTempTrack
+Case "recFirstHolePointInspection"
+    recFirstHolePointInspection = Val(Tokens$(1))
+    Print "recFirstHolePointInspection:", recFirstHolePointInspection
+Case "recLastHolePointInspection"
+    recLastHolePointInspection = Val(Tokens$(1))
+    Print "recLastHolePointInspection:", recLastHolePointInspection
+Case "recFirstHolePointHotStake"
+    recFirstHolePointHotStake = Val(Tokens$(1))
+    Print "recFirstHolePointHotStake:"
+Case "recLastHolePointHotStake"
+    recLastHolePointHotStake = Val(Tokens$(1))
+    Print "recLastHolePointHotStake:", recLastHolePointHotStake
+Case "recFirstHolePointFlash"
+    recFirstHolePointFlash = Val(Tokens$(1))
+    Print "recFirstHolePointFlash:", recFirstHolePointFlash
+Case "recLastHolePointFlash"
+    recLastHolePointFlash = Val(Tokens$(1))
+    Print "recLastHolePointFlash:"
+Case "recFlashDwellTime"
+    recFlashDwellTime = Val(Tokens$(1))
+    Print "recFlashDwellTime:"
+Case "recHeatStakeOffset"
+    recHeatStakeOffset = Val(Tokens$(1))
+    Print "recHeatStakeOffset:"
+Case "recBossCrossArea"
+    recBossCrossArea = Val(Tokens$(1))
+    Print "recBossCrossArea:", recBossCrossArea
+Case "recPointsTable"
+    recPointsTable = Val(Tokens$(1))
+    Print "recPointsTable:", recPointsTable
+Case "recInmag"
+    recInmag = Val(Tokens$(1))
+    Print "recInmag:", recInmag
+Case "recOutmag"
+    recOutmag = Val(Tokens$(1))
+    Print "recOutmag:", recOutmag
+Case "recCrowding"
+    recCrowding = Val(Tokens$(1))
+    Print "recCrowding:", recCrowding
+Case "recPreCrowding"
+    recPreCrowding = Val(Tokens$(1))
+    Print "recPreCrowding:", recPreCrowding
 Case "jobNumPanels"
     jobNumPanels = Val(Tokens$(1))
     Print "jobNumPanels:", jobNumPanels
@@ -3003,20 +3048,20 @@ Case "systemAccel"
     SystemAccel = Val(Tokens$(1))
     Print "systemAccel:", SystemAccel
 Case "systemSpeed"
-    SystemSpeed = Val(tokens$(1))
+    SystemSpeed = Val(Tokens$(1))
     Print "systemSpeed:", SystemSpeed
 Case "zlimit"
-    zLimit = Val(tokens$(1))
+    zLimit = Val(Tokens$(1))
     Print "zlimit:", zLimit
 Case "pas1inLoadInsertCylinderBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MBWrite(pas1inLoadInsertCylinderAddr, 1, MBTypeCoil)
     Else
         MBWrite(pas1inLoadInsertCylinderAddr, 0, MBTypeCoil)
     EndIf
     Print "pas1inLoadInsertCylinderBtn:", pas1inLoadInsertCylinderBtn
 Case "pasBlowInsertBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MBWrite(pasBlowInsertAddr, 1, MBTypeCoil)
     Else
         MBWrite(pasBlowInsertAddr, 0, MBTypeCoil)
@@ -3051,7 +3096,7 @@ Case "pasHeadDownBtn"
     EndIf
     Print "pasHeadDownBtn:", pasHeadDownBtn
 Case "pasHeadUpBtn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MBWrite(pasHeadUpAddr, 1, MBTypeCoil)
     Else
         MBWrite(pasHeadUpAddr, 0, MBTypeCoil)
@@ -3093,7 +3138,7 @@ Case "pasMaxTempOnOffZone2Btn"
     EndIf
     Print "pasMaxTempOnOffZone2Btn:", pasMaxTempOnOffZone2Btn
 Case "pasOnOffZone1Btn"
-    If tokens$(1) = "true" Then
+    If Tokens$(1) = "true" Then
         MBWrite(pasOnOffZone1Addr, 1, MBTypeCoil)
     Else
         MBWrite(pasOnOffZone1Addr, 0, MBTypeCoil)
@@ -3163,20 +3208,19 @@ Case "pasStartPIDTuneZone2Btn"
     EndIf
     Print "pasStartPIDTuneZone2Btn:", pasStartPIDTuneZone2Btn
 Case "pasTempOnOffBtn"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MBWrite(pasTempOnOffAddr, 1, MBTypeCoil)
     Else
         MBWrite(pasTempOnOffAddr, 0, MBTypeCoil)
     EndIf
     Print "pasTempOnOffBtn:", pasTempOnOffBtn
 Case "pasVibTrackBtn"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         MBWrite(pasVibTrackAddr, 1, MBTypeCoil)
     Else
         MBWrite(pasVibTrackAddr, 0, MBTypeCoil)
     EndIf
     Print "pasVibTrackBtn:", pasVibTrackBtn
-
 Default
 	' TMH for now print come back and do something useful
 	Print "Invalid Token received"

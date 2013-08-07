@@ -8,13 +8,12 @@ PowerOnSequence() ' Initialize the system and prepare it to do a job
 'jobStart = True 'fake
 'recInmag = 10 '88558
 'recOutmag = 13 '88558
-recFlashRequired = False
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
-recFlashDwellTime = 0
+'recFlashDwellTime = 0
 insertDepthTolerance = .006
-recHeatStakeOffset = 0.000 ' positive is deeper
-recZLaserToHeatStake = 291.77666
+'recHeatStakeOffset = 0.000 ' positive is deeper
+recZLaserToHeatStake = 289.084
 '______________________________________
 'recNumberOfHoles = 16 ' fake for test
 'recInsertDepth = 0.165 ' fake for testing
@@ -45,20 +44,21 @@ recZLaserToHeatStake = 291.77666
 'LoadPoints "points2.pts"
 'DeepBoss = False
 '______________________________________
-recNumberOfHoles = 14 ' fake for test
-recInsertDepth = 0.030 ' fake for testing
-recInmag = 103
-recOutmag = 148
-recPreCrowding = 104
-recCrowding = 105
-recFirstHolePointInspection = 106
-recLastHolePointInspection = 119
-recFirstHolePointHotStake = 120
-recLastHolePointHotStake = 133
-recFirstHolePointFlash = 134
-recLastHolePointFlash = 147
+'recNumberOfHoles = 14 ' fake for test
+'recInsertDepth = 0.030 ' fake for testing
+'recInmag = 103
+'recOutmag = 148
+'recPreCrowding = 104
+'recCrowding = 105
+'recFirstHolePointInspection = 106
+'recLastHolePointInspection = 119
+'recFirstHolePointHotStake = 120
+'recLastHolePointHotStake = 133
+'recFirstHolePointFlash = 134
+'recLastHolePointFlash = 147
+'recFlashRequired = False
 LoadPoints "points.pts"
-MediumBoss = True
+'MediumBoss = True
 '___________________________________________
 Power High ' Manually set power. This will be done in PowerOnSequence()
 Speed 30 ' fake for test
@@ -91,7 +91,7 @@ Select mainCurrentState
 				Wait 1
 				MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
 				Do While pasMessageDB = 9
-			'waiting for the heat stake to finish homeing
+					'waiting for the heat stake to finish homeing
 					Wait .5
 				Loop
 			Loop

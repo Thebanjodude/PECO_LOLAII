@@ -106,7 +106,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = Value
+	MBQueueValue(MBQueueHead) = value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -221,7 +221,7 @@ Function MBCommandTask()
 			' ...the delay comes in when we try to process that data, so we are going to parcel the processing
 			' out a little bit, but do a full read each time since it has no impact on cycle time
 			
-			Print "MODBUS: Time since last modbus read: ", Tmr(1)
+			'Print "MODBUS: Time since last modbus read: ", Tmr(1)
 			
 			'restart the timer so that we can come back and check to 
 			'see if a 0.5 second has passed
@@ -243,6 +243,8 @@ Function MBCommandTask()
 				
 				' these are the vars we want to update every cycle
 				pasCrowding = BTst(modResponse(6), 7)
+				'Print "pasCrowding:", pasCrowding
+				'Print modResponse(5), modResponse(6)
 				pasMessageDB = LShift(modResponse(9), 8) + modResponse(10)
 				pasVerticalLocation = (LShift((LShift(modResponse(17), 8) + modResponse(18)), 16) + ((LShift(modResponse(15), 8) + modResponse(15)) And &hFFFF)) * .000000762939
 				pasHeadinsertPickupRetract = BTst(modResponse(8), 0)
