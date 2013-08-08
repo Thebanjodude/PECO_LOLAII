@@ -52,22 +52,10 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			ChangeProfile("07")
 			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
 			
-		If DeepBoss = True Then ' There are different volumes of bosses
-			If BossCrosssectionalArea > -400 Then ' There is already an insert so set skip flag
+			If BossCrosssectionalArea > recBossCrossArea Then ' There is already an insert so set skip flag
 				SkipHoleArray(currentPreinspectHole, 0) = 1
 				Print "Hole ", currentPreinspectHole, " is already populated"
 			EndIf
-		ElseIf MediumBoss = True Then ' There are different volumes of bosses
-			If BossCrosssectionalArea > -350 Then ' There is already an insert so set skip flag
-				SkipHoleArray(currentPreinspectHole, 0) = 1
-				Print "Hole ", currentPreinspectHole, " is already populated"
-			EndIf
-		Else
-			If BossCrosssectionalArea > -300 Then ' There is already an insert so set skip flag
-				SkipHoleArray(currentPreinspectHole, 0) = 1
-				Print "Hole ", currentPreinspectHole, " is already populated"
-			EndIf
-		EndIf
 
 			ChangeProfile("00")
 			Print "Hole error:", GetLaserMeasurement("05")
