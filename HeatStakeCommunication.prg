@@ -106,7 +106,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = value
+	MBQueueValue(MBQueueHead) = Value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -242,28 +242,26 @@ Function MBCommandTask()
 				' so pull them out and map them to vars
 				
 				' these are the vars we want to update every cycle
-				pasCrowding = BTst(modResponse(6), 7)
-				'Print "pasCrowding:", pasCrowding
-				'Print modResponse(5), modResponse(6)
+				pasCrowding = BTst(modResponse(5), 7)
 				pasMessageDB = LShift(modResponse(9), 8) + modResponse(10)
 				pasVerticalLocation = (LShift((LShift(modResponse(17), 8) + modResponse(18)), 16) + ((LShift(modResponse(15), 8) + modResponse(15)) And &hFFFF)) * .000000762939
-				pasHeadinsertPickupRetract = BTst(modResponse(8), 0)
-				pasHeadinsertpickupextend = BTst(modResponse(8), 1)
-				pasSlideExtend = BTst(modResponse(3), 7)
-				pasInsertGripper = BTst(modResponse(4), 0)
+				pasHeadinsertPickupRetract = BTst(modResponse(7), 0)
+				pasHeadinsertpickupextend = BTst(modResponse(7), 1)
+				pasSlideExtend = BTst(modResponse(4), 7)
+				pasInsertGripper = BTst(modResponse(3), 0)
 				pas1inLoadInsertCylinder = BTst(modResponse(4), 1)
-				pasBowlDumpOpen = BTst(modResponse(4), 2)
-				pasVibTrack = BTst(modResponse(4), 3)
-				pasBowlFeeder = BTst(modResponse(4), 4)
-				pasBlowInsert = BTst(modResponse(4), 5)
-				pasInsertDetected = BTst(modResponse(6), 0)
-				pasSteelInsert = BTst(modResponse(6), 1)
-				pasShuttleMidway = BTst(modResponse(6), 2)
-				pasShuttleLoadPosition = BTst(modResponse(6), 3)
-				pasShuttleNoLoad = BTst(modResponse(6), 4)
-				pasShuttleExtend = BTst(modResponse(6), 5)
-				pasInsertInShuttle = BTst(modResponse(6), 6)
-				pasHome = BTst(modResponse(5), 2)
+				pasBowlDumpOpen = BTst(modResponse(3), 2)
+				pasVibTrack = BTst(modResponse(3), 3)
+				pasBowlFeeder = BTst(modResponse(3), 4)
+				pasBlowInsert = BTst(modResponse(3), 5)
+				pasInsertDetected = BTst(modResponse(5), 0)
+				pasSteelInsert = BTst(modResponse(5), 1)
+				pasShuttleMidway = BTst(modResponse(5), 2)
+				pasShuttleLoadPosition = BTst(modResponse(5), 3)
+				pasShuttleNoLoad = BTst(modResponse(5), 4)
+				pasShuttleExtend = BTst(modResponse(5), 5)
+				pasInsertInShuttle = BTst(modResponse(5), 6)
+				pasHome = BTst(modResponse(6), 2)
 					
 				'process the less time sensitive reads
 				Select count
@@ -309,32 +307,32 @@ Function MBCommandTask()
 					pasMaxLoadmeter = (LShift(modResponse(53), 8) + modResponse(54)) * 0.1
 				Case 7
 					pasLoadMeter = (LShift(modResponse(51), 8) + modResponse(52)) * -0.1
-					pasHighTempAlarm = BTst(modResponse(7), 1)
-					pasInsertType = BTst(modResponse(5), 7)
-					pasTempOnOff = BTst(modResponse(3), 4)
-					pasMasterTemp = BTst(modResponse(7), 0)
-					pasUpLimit = BTst(modResponse(5), 0)
-					pasLowerlimit = BTst(modResponse(5), 1)
+					pasHighTempAlarm = BTst(modResponse(8), 1)
+					pasInsertType = BTst(modResponse(6), 7)
+					pasTempOnOff = BTst(modResponse(4), 4)
+					pasMasterTemp = BTst(modResponse(8), 0)
+					pasUpLimit = BTst(modResponse(6), 0)
+					pasLowerlimit = BTst(modResponse(6), 1)
 				Case 8
-					pasOTAOnOffZone1 = BTst(modResponse(7), 2)
-					pasOTAOnOffZone2 = BTst(modResponse(7), 3)
-					pasOnOffZone1 = BTst(modResponse(5), 3)
-					pasOnOffZone2 = BTst(modResponse(5), 4)
-					pasMaxTempOnOffZone1 = BTst(modResponse(7), 4)
-					pasMaxTempOnOffZone2 = BTst(modResponse(7), 5)
-					pasMaxTempZone1 = BTst(modResponse(4), 6)
+					pasOTAOnOffZone1 = BTst(modResponse(8), 2)
+					pasOTAOnOffZone2 = BTst(modResponse(8), 3)
+					pasOnOffZone1 = BTst(modResponse(6), 3)
+					pasOnOffZone2 = BTst(modResponse(6), 4)
+					pasMaxTempOnOffZone1 = BTst(modResponse(8), 4)
+					pasMaxTempOnOffZone2 = BTst(modResponse(8), 5)
+					pasMaxTempZone1 = BTst(modResponse(3), 6)
 				Case 9
-					pasMaxTempZone2 = BTst(modResponse(4), 7)
-					pasPIDTuneDoneZone1 = BTst(modResponse(5), 5)
-					pasPIDTuneDoneZone2 = BTst(modResponse(5), 6)
-					pasPIDTuneFailZone1 = BTst(modResponse(3), 0)
-					pasPIDTuneFailZone2 = BTst(modResponse(3), 1)
-					pasInTempZone1 = BTst(modResponse(3), 2)
-					pasInTempZone2 = BTst(modResponse(3), 3)
-					pasHeadDown = BTst(modResponse(3), 5)
-					pasHeadUp = BTst(modResponse(3), 6)
-					pasMCREStop = BTst(modResponse(7), 6)
-					pasStart = BTst(modResponse(7), 7)
+					pasMaxTempZone2 = BTst(modResponse(3), 7)
+					pasPIDTuneDoneZone1 = BTst(modResponse(6), 5)
+					pasPIDTuneDoneZone2 = BTst(modResponse(6), 6)
+					pasPIDTuneFailZone1 = BTst(modResponse(6), 0)
+					pasPIDTuneFailZone2 = BTst(modResponse(6), 1)
+					pasInTempZone1 = BTst(modResponse(4), 2)
+					pasInTempZone2 = BTst(modResponse(4), 3)
+					pasHeadDown = BTst(modResponse(4), 5)
+					pasHeadUp = BTst(modResponse(4), 6)
+					pasMCREStop = BTst(modResponse(8), 6)
+					pasStart = BTst(modResponse(8), 7)
 				Send
 				
 				count = count + 1
