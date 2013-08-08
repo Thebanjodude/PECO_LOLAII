@@ -1,9 +1,10 @@
 ENVT0100,LM:2013/08/08 00:07:17:932,DS:0000003031,CS:18789,MA:6C-F0-49-E2-45-75,EI:           
 sActiveChild="HotStakeAndFlash.prg"
 bMdiMaximized=False
+
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=205
@@ -14,7 +15,7 @@ ProgramFile1 {
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=75
@@ -80,7 +81,7 @@ ProgramFile7 {
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=33
@@ -94,10 +95,17 @@ ProgramFile9 {
 	bOpened=True
 	nWinState=0
 	Window {
+<<<<<<< HEAD
 		nLeft=78
 		nTop=31
 		nWidth=1267
 		nHeight=815
+=======
+		nLeft=382
+		nTop=20
+		nWidth=1272
+		nHeight=826
+>>>>>>> cb513cfa02f7a59d64a43a413e09d45ba3e48e8a
 	}
 }
 ProgramFile10 {
