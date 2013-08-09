@@ -42,8 +42,10 @@ Do While True
 
 			If Sw(inMagPnlRdyH) = True Then ' A panel is not present, move platen up
 			
-				On inMagMtrDirH 'Set direction to UP
-				On inMagMtrH ' Turn on motor
+				'On inMagMtrDirH 'Set direction to UP
+				'On inMagMtrH ' Turn on motor
+				inMagMtrCC = True
+				inMagMtrDirCC = True
 				NextState = StatePresentNextPart
 				
 				If inMagUpLim = True Then 'If upper limit is reached then the magazine is out of panels 
@@ -53,6 +55,7 @@ Do While True
 				
 			Else
 				Off inMagMtrH  ' Turn off motor
+				inMagMtrCC = False
 				NextState = StatePartPresent
 			EndIf
 
