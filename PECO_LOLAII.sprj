@@ -1,11 +1,11 @@
-ENVT0100,LM:2013/08/13 17:48:37:390,DS:0000004124,CS:07745,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/08/13 18:47:49:246,DS:0000004124,CS:27763,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="8/13/2013 11:48:31 AM"
-	bBuildComplete=False
+	sLastModified="8/13/2013 12:47:46 PM"
+	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
@@ -36,7 +36,7 @@ ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="8/7/2013 9:09:34 PM"
+	sTimeSavedInController="8/13/2013 5:48:31 PM"
 }
 ProgramFile3 {
 	sName="IOTable.prg"
@@ -48,7 +48,7 @@ ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="8/13/2013 5:08:05 PM"
+	sTimeSavedInController="8/13/2013 6:47:46 PM"
 }
 ProgramFile5 {
 	sName="OldCode.prg"
@@ -84,7 +84,7 @@ ProgramFile10 {
 	sName="CalibrationRoutines.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="7/23/2013 4:45:02 PM"
+	sTimeSavedInController="8/13/2013 5:48:31 PM"
 }
 nIncludeFileCount=1
 IncludeFile1 {

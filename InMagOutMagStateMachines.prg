@@ -282,7 +282,7 @@ Do While True
 				outMagMtrCC = True ' Turn on Motor	
 				NextState = StateOutMagLowering
 			Else
-				outMagMtrCC = False ' Turn on Motor		
+				outMagMtrCC = False ' Turn off Motor		
 				NextState = StateReadyToReceive
 			EndIf
 			
@@ -313,10 +313,12 @@ Do While True
 					' A panel is in the output magazine and it tripped the sensor. We need to move it down
 					' until it is out of the way
 					Off outMagMtrH  'Turn off motor	
+					outMagMtrCC = False
 					NextState = StateOutMagLowering
 				ElseIf outMagUpLim = True Then
 					' The platen is at the very top without any panels in the magazine
 					Off outMagMtrH  'Turn off motor	
+					outMagMtrCC = False
 					NextState = StateReadyToReceive
 				EndIf
 
@@ -349,7 +351,7 @@ Do While True
 		' I am not sure if this interlock is hardware controlled, it should be.
 		OutmagInterlockFlag = True ' Set a flag
 		OutmagLastState = outMagCurrentState ' Save the current state before we pause
-		outMagCurrentState = StateInMagPaused ' Send the state machine to paused
+		outMagCurrentState = StateOutMagPaused ' Send the state machine to paused
 	ElseIf outMagInt = False And OutmagInterlockFlag = True Then
 		OutmagInterlockFlag = False ' Reset flag
 		outMagCurrentState = OutmagLastState ' Go to the state before the interlock was open
