@@ -60,8 +60,6 @@ recZLaserToHeatStake = 289.084
 LoadPoints "points.pts"
 'MediumBoss = True
 '___________________________________________
-Power High ' Manually set power. This will be done in PowerOnSequence()
-Speed 30 ' fake for test
 jobDone = False ' fake for test
 jobStart = False ' reset flag
 
@@ -86,6 +84,7 @@ Select mainCurrentState
 			'mainCurrentState = StateHotStakePanel
 			'mainCurrentState = StateFlashRemoval
 			'mainCurrentState = StateCrowding
+			ChoosePointsTable()
 			Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
 				MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
 				Wait 1
@@ -301,8 +300,8 @@ retry:
 '	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
 	
 	Motor On
-	Power Low
-	Speed 20 'Paramterize these numbers
+	Power High
+	Speed 30 'Paramterize these numbers
 	Accel 50, 50
 	QP (On) ' turn On quick pausing	
 	
@@ -434,5 +433,8 @@ Do While True
 	
 Loop
 	
+Fend
+Function ChoosePointsTable()
+	' Choose which points table to use
 Fend
 

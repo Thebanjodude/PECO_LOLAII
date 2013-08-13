@@ -45,6 +45,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 '				HotStakePanel = 2 ' fail
 '				Print "Boss did not engage the anvil"
 '				SLock 1, 2, 3, 4
+				'Speed SystemSpeed
 '				GoTo exitHotStake
 '			EndIf
 
@@ -94,6 +95,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 		
 			currentHSHole = currentHSHole + 1
 			SLock 1, 2, 3, 4 ' unlock all the joints so we can move again
+			Speed SystemSpeed
 	Next
 	
 	HotStakePanel = 0 ' HS station executed without a problem
@@ -103,6 +105,7 @@ exitHotStake:
 	If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 		jobAbort = True
 		SLock 1, 2, 3, 4 ' unlock all the joints so we can move again
+		Speed SystemSpeed
 		MemOff (jobAbortH) ' turn off abort bit
 	EndIf
 

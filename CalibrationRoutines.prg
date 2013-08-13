@@ -195,5 +195,6 @@ Print "recZLaserToHeatStake: ", recZLaserToHeatStake
 
 'tell HS to capture the measurement and save it in the database
 SLock 1, 2, 3, 4
+Speed SystemSpeed
 Fend
 
