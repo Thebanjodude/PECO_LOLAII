@@ -3,17 +3,20 @@
 Function main()
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
-PowerOnSequence() ' Initialize the system and prepare it to do a job
-
 'jobStart = True 'fake
 'recInmag = 10 '88558
 'recOutmag = 13 '88558
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
+SystemSpeed = 50
 'recFlashDwellTime = 0
-insertDepthTolerance = .006
-'recHeatStakeOffset = 0.000 ' positive is deeper
+'insertDepthTolerance = .010
+recHeatStakeOffset = 0.0000 ' positive is deeper
 recZLaserToHeatStake = 289.084
+recFlashRequired = False
+LoadPoints "points2.pts"
+
+PowerOnSequence() ' Initialize the system and prepare it to do a job
 '______________________________________
 'recNumberOfHoles = 16 ' fake for test
 'recInsertDepth = 0.165 ' fake for testing
@@ -56,8 +59,7 @@ recZLaserToHeatStake = 289.084
 'recLastHolePointHotStake = 133
 'recFirstHolePointFlash = 134
 'recLastHolePointFlash = 147
-'recFlashRequired = False
-LoadPoints "points.pts"
+
 'MediumBoss = True
 '___________________________________________
 jobDone = False ' fake for test
@@ -301,8 +303,8 @@ retry:
 	
 	Motor On
 	Power High
-	Speed 30 'Paramterize these numbers
-	Accel 50, 50
+	Speed SystemSpeed
+	Accel 50, 50 'Paramterize these numbers
 	QP (On) ' turn On quick pausing	
 	
 '	Move PreScan :U(CU(CurPos)) ' go home
