@@ -111,6 +111,8 @@ Select mainCurrentState
 	' This state picks up a panel from the input magazine. Then takes the panel to the home	
 	' position. 
 	
+		ChoosePointsTable() ' Load points table that panel is programed under
+	
 		StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
 				
 		If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
@@ -438,5 +440,16 @@ Loop
 Fend
 Function ChoosePointsTable()
 	' Choose which points table to use
+
+	If recPointsTable = 1 Then
+		LoadPoints "points.pts"
+	ElseIf recPointsTable = 2 Then
+		LoadPoints "points2.pts"
+	ElseIf recPointsTable = 3 Then
+		LoadPoints "points3.pts"
+	Else
+		erUnknown = True
+		Print "point Table is Unknown"
+	EndIf
 Fend
 
