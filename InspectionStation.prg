@@ -10,7 +10,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Jump PreScan LimZ zLimit
 	
 	Integer i
-	Real BossCrosssectionalArea
+	Real BossCrosssectionalArea, LeftHeight, RightHeight
 	Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays
 	Redim PreInspectionArray(recNumberOfHoles, 0)
 	
@@ -27,8 +27,17 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 
 			ChangeProfile("07")
 			Wait .25
-			ZdiffFromLaserCenter = (GetLaserMeasurement("05") + GetLaserMeasurement("06")) / 2 ' take an average from the left and the right
-			RobotZposition = CZ(Here) ' Where are we at in robot Z when we take the laser measurement
+'			ZdiffFromLaserCenter = (GetLaserMeasurement("05") + GetLaserMeasurement("06")) / 2 ' take an average from the left and the right
+'			RobotZposition = CZ(Here) ' Where are we at in robot Z when we take the laser measurement
+			
+			LeftHeight = GetLaserMeasurement("05")
+			RightHeight = GetLaserMeasurement("06")
+			
+			If LeftHeight > RightHeight Then ' Pick the lower point
+				ZdiffFromLaserCenter = RightHeight
+			Else
+				ZdiffFromLaserCenter = LeftHeight
+			EndIf
 			
 			Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
             
