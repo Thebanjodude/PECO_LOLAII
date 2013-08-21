@@ -67,7 +67,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
             EndIf
             
             MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
- 			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement point
+ 			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .325), MBType32) ' Set engagement point
  				
  			'GoTo skiphotstake ' fake for testing
  				

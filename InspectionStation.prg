@@ -5,7 +5,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
 	Real ZdiffFromLaserCenter, RobotZposition
 	SystemStatus = StateInspection
-	InspectPanel = 2 ' default to fail
+	InspectPanel = 2 ' default to fail 
 	
 	Jump PreScan LimZ zLimit
 	

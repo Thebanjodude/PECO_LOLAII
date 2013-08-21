@@ -199,4 +199,17 @@ Low Power Mode
 !!Error: 3100, Syntax error.
 > rnd(10)
 !!Error: 3100, Syntax error.
+> encrst 1
+!!Error: 3100, Syntax error.
+> encreset 
+!!Error: 3101, Parameter count error.
+> encreset 1,2,3,4
+> reboot
+!!Error: 3100, Syntax error.
+> encreset 1,2
+!!Error: 2234, Cannot reset the encoder with motor in the on state.
+> encreset 1,2
+> calib 1,2
+> calib 3,4
 > 
+

@@ -8,13 +8,13 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 'recOutmag = 13 '88558
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
-SystemSpeed = 50
+SystemSpeed = 25
 'recFlashDwellTime = 0
 'insertDepthTolerance = .010
-recHeatStakeOffset = 0.0000 ' positive is deeper
-recZLaserToHeatStake = 289.084
+recHeatStakeOffset = 0.12000 ' positive is deeper
+recZLaserToHeatStake = 290.821
 recFlashRequired = False
-LoadPoints "points2.pts"
+'LoadPoints "points2.pts"
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 '______________________________________
@@ -98,6 +98,7 @@ Select mainCurrentState
 			Loop
 			jobAbort = False 'reset flag
 			jobNumPanelsDone = 0 ' reset panel counter
+			panelDataTxRdy = False ' make sure var is set to false so it changes when we want HMI to read out data
 			Redim PassFailArray(23, 1) ' Clear array, always 23 rows
 			Redim InspectionArray(23, 1) 'Clear array, always 23 rows
 		ElseIf pasEmptyBowlFeederandTrack = True Then
@@ -300,8 +301,10 @@ Function PowerOnSequence()
 retry:
 
 	ClearMemory() ' writes a zero to all the memIO
+	
+	retry:
 
-'	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
+	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
 	
 	Motor On
 	Power High
@@ -344,49 +347,39 @@ Function HotStakeTempRdy() As Boolean
 	EndIf
 	
 Fend
-'Function PowerOnHomeCheck() As Boolean
-'	
-'	Real distx, disty, distz, distance
+Function PowerOnHomeCheck() As Boolean
+	
+	Real distx, disty, distz, distance
 ' TODO: Parameterize these #defines?
-'	#define startUpDistMax 300 '+/-150mm from home position
-'	
-'	distx = Abs(CX(CurPos) - CX(PreScan))
-'	disty = Abs(CY(CurPos) - CY(PreScan))
-'	
-'	distance = Sqr(distx * distx + disty * disty) ' How the hell do you square numbers?
-'
-'	If distance > startUpDistMax Then 'Check is the position is close to home. If not throw error
-'		erRobotNotAtHome = True
-'		PowerOnHomeCheck = False
-''		Print "Distance NOT OK, distance"
-'	Else
-'		erRobotNotAtHome = False
-'		PowerOnHomeCheck = True
-''		Print "Distance OK"
-'	EndIf
-'	
-'	Print Hand(Here)
-'	
-'	If Hand(Here) = 1 Then ' throw the error if the arm is in "righty" orientation
-'		erRobotNotAtHome = True
-'		PowerOnHomeCheck = False
-'		Print "Arm Orientation NOT OK"
-'	Else
-'		erRobotNotAtHome = False
-'		PowerOnHomeCheck = True
-'		Print "Arm Orientation OK"
-'	EndIf
-'	
-'	If PowerOnHomeCheck = False Then ' When false, free all the joints so opperator can move
-'		Motor On
-'		SFree 1, 2, 3, 4
-'		Print "move robot to home position"
-'		Pause
-'	EndIf
-'		
-'Fend
-'
+	#define startUpDistMax 150 '+/-150mm from home position
+	
+	distx = Abs(CX(CurPos) - CX(PreScan))
+	disty = Abs(CY(CurPos) - CY(PreScan))
+	
+	distance = Sqr(distx * distx + disty * disty) ' How the hell do you square numbers?
+	
+	Print "distance away from home: ", distance
 
+	If distance > startUpDistMax Or Hand(Here) = 1 Then  'Check is the position is close to home. If not throw error
+		erRobotNotAtHome = True
+		PowerOnHomeCheck = False
+		Print "Distance NOT OK Or Arm Orientation NOT OK"
+	Else
+		erRobotNotAtHome = False
+		PowerOnHomeCheck = True
+		Print "Distance OK and Arm Orientation OK"
+	EndIf
+	
+	'	Print Hand(Here)
+	
+	If PowerOnHomeCheck = False Then ' When false, free all the joints so opperator can move
+		Motor On
+		SFree 1, 2, 3, 4
+		Print "move robot to home position"
+		Pause
+	EndIf
+		
+Fend
 Function ClearMemory()
 	
 	For x = 0 To 15

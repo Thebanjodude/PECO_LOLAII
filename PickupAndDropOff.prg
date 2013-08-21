@@ -25,7 +25,6 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 	Wait MemSw(panelDataTxAckH) = True, 3
 	panelDataTxRdy = False ' reset flag	
 	If TW = True Then ' catch that the HMI timed out without acking
-		DropOffPanel = 2
 		erHmiDataAck = True
 		Print "no data ack from hmi"
 		Pause
