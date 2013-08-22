@@ -29,12 +29,12 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 		If SkippedHole = False Then 'If the flag is set then skip the hole
 		
-			Jump P(i) +Z(25) LimZ zLimit  ' Go to the next hole        
+			Jump P(i) +Z(15) LimZ zLimit  ' Go to the next hole        
 			SFree 1, 2 ' free X and Y
 
 			Counter = 0 ' reset counter
 			Do While Sw(HSPanelPresntH) = False 'Or Counter > 20 ' Approach the panel slowly until we hit the anvil switch
-				JTran 3, -.25 ' Move only the z-axis downward in .25mm increments
+				JTran 3, -.05 ' Move only the z-axis downward in increments
 				Counter = Counter + 1
 			Loop
 			
