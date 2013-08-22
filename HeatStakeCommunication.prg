@@ -657,7 +657,7 @@ Function modbusReadMultipleRegister(regNum As Long, numRegToRead As Long) As Boo
 	'numRegToRead (16 bit) * 2 (mobus is 8 bit) + 6 (overhead)
 	If modbusReadPort(numRegToRead * 2 + 6) = -1 Then
 		'we didn't get the response expected...
-		Print "MODBUS: failed to read plc register addresses: ", Hex$(regNum), " - ", Hex$(regNum + numRegToRead)
+		'Print "MODBUS: failed to read plc register addresses: ", Hex$(regNum), " - ", Hex$(regNum + numRegToRead)
 		modbusReadMultipleRegister = False
 		Exit Function
 	EndIf
@@ -894,7 +894,7 @@ Function modbusReadPort(length As Integer) As Integer
 	
 	' check for valid response CRC
 	If modbusResponseCRC(i) = False Then
-		Print "MODBUS: invalid CRC on read"
+		'Print "MODBUS: invalid CRC on read"
 		modbusReadPort = -1
 		Exit Function
 	EndIf

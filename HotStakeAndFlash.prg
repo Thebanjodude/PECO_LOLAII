@@ -59,7 +59,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
             Print "recHeatStakeOffset", recHeatStakeOffset, "inches"
             Print HSProbeFinalPosition, ",", recZLaserToHeatStake, ",", RobotZOnAnvil, ",", PreInspectionArray(currentHSHole, 0), ",", InTomm(recInsertDepth), ",", InTomm(recHeatStakeOffset)
             
-            If HSProbeFinalPosition > 12.8 Then
+            If HSProbeFinalPosition > 12.4 Then
 				erUnknown = True ' replace this with a real error
             	Pause
                 HotStakePanel = 2 ' default to fail		
@@ -69,7 +69,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
             EndIf
             
             MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
- 			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .325), MBType32) ' Set engagement point
+ 			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .35), MBType32) ' Set engagement point
  				
  			'GoTo skiphotstake ' fake for testing
  				

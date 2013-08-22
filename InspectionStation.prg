@@ -28,7 +28,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			ChangeProfile("07")
 			Wait .25
 '			ZdiffFromLaserCenter = (GetLaserMeasurement("05") + GetLaserMeasurement("06")) / 2 ' take an average from the left and the right
-'			RobotZposition = CZ(Here) ' Where are we at in robot Z when we take the laser measurement
+			RobotZposition = CZ(Here) ' Where are we at in robot Z when we take the laser measurement
 			
 			LeftHeight = GetLaserMeasurement("05")
 			RightHeight = GetLaserMeasurement("06")
@@ -48,6 +48,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 				erUnknown = True
             	Pause
                 InspectPanel = 2 ' default to fail		
+                Go PreScan :U(CU(Here))
             	Exit Function
             EndIf
 			
