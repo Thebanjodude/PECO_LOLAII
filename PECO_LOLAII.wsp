@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/08/20 22:57:56:443,DS:0000002986,CS:28747,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Main.prg"
+ENVT0100,LM:2013/08/21 23:57:57:356,DS:0000003024,CS:01649,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="Run - Remote Console"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=15
-		nTop=-1
-		nWidth=1190
-		nHeight=629
+		nLeft=76
+		nTop=171
+		nWidth=1377
+		nHeight=626
 	}
 }
 ProgramFile2 {
@@ -19,8 +19,8 @@ ProgramFile2 {
 	Window {
 		nLeft=82
 		nTop=2
-		nWidth=1242
-		nHeight=784
+		nWidth=1240
+		nHeight=781
 	}
 }
 ProgramFile3 {
@@ -28,10 +28,10 @@ ProgramFile3 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=328
+		nTop=19
+		nWidth=1375
+		nHeight=605
 	}
 }
 ProgramFile4 {
@@ -72,21 +72,21 @@ ProgramFile7 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=37
+		nTop=216
+		nWidth=1260
+		nHeight=593
 	}
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=278
-		nTop=295
-		nWidth=1096
-		nHeight=623
+		nLeft=72
+		nTop=353
+		nWidth=1513
+		nHeight=619
 	}
 }
 ProgramFile9 {
@@ -169,12 +169,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=131
-		nTop=145
-		nWidth=705
-		nHeight=486
+		nLeft=41
+		nTop=117
+		nWidth=836
+		nHeight=571
 	}
 }
 IOLabelEditor {
@@ -199,10 +199,10 @@ IOMonitor {
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=1015
+		nTop=102
+		nWidth=940
+		nHeight=275
 	}
 }
 Macros {
@@ -217,8 +217,8 @@ Macros {
 RobotMgr {
 	bOpened=False
 	Window {
-		nLeft=1
-		nTop=112
+		nLeft=646
+		nTop=240
 		nWidth=751
 		nHeight=485
 	}

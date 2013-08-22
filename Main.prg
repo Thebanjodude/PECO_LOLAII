@@ -11,8 +11,8 @@ zLimit = -12.5 'fake
 SystemSpeed = 25
 'recFlashDwellTime = 0
 'insertDepthTolerance = .010
-recHeatStakeOffset = 0.12000 ' positive is deeper
-recZLaserToHeatStake = 290.821
+recHeatStakeOffset = 0.0000 ' positive is deeper
+recZLaserToHeatStake = 289.151
 recFlashRequired = False
 'LoadPoints "points2.pts"
 

@@ -63,6 +63,8 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 				erUnknown = True ' replace this with a real error
             	Pause
                 HotStakePanel = 2 ' default to fail		
+               	SLock 1, 2, 3, 4 ' unlock all the joints so we can move again
+				Speed SystemSpeed
             	Exit Function
             EndIf
             
