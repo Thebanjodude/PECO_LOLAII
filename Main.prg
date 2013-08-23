@@ -3,7 +3,6 @@
 Function main()
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
-
 'jobStart = True 'fake
 'recInmag = 10 '88558
 'recOutmag = 13 '88558
@@ -68,9 +67,9 @@ jobStart = False ' reset flag
 
 mainCurrentState = StateIdle ' The first state is Idle
 
-'Calibrate()
-'Print "done"
-'Pause
+Calibrate()
+Print "done"
+Pause
 
 Do While True
 

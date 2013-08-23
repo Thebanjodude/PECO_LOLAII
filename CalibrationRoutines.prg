@@ -188,7 +188,7 @@ robotZhs = CZ(Here) ' where is the quill when the shoulder is touching EOAT
 Print "robotZhs:", robotZhs
 
 'calculate the distance between the laser zero and hs zero
-recZLaserToHeatStake = InTomm(pasVerticalLocation) + (Abs(robotZlaser - robotZhs)) - ZoffsetUnderLaser
+recZLaserToHeatStake = InTomm(pasVerticalLocation) + (Abs(robotZlaser - robotZhs)) + ZoffsetUnderLaser
 
 Print "pasVerticalLocation: ", pasVerticalLocation
 Print "recZLaserToHeatStake: ", recZLaserToHeatStake
