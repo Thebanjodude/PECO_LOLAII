@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/08/23 16:01:18:322,DS:0000004129,CS:19315,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/08/23 18:39:45:620,DS:0000004129,CS:23152,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="8/23/2013 10:01:15 AM"
+	sLastModified="8/23/2013 12:39:42 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -30,13 +30,13 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="8/23/2013 3:49:28 PM"
+	sTimeSavedInController="8/23/2013 5:51:07 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="8/23/2013 3:03:00 PM"
+	sTimeSavedInController="8/23/2013 6:39:42 PM"
 }
 ProgramFile3 {
 	sName="IOTable.prg"

@@ -8,10 +8,10 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 'recOutmag = 13 '88558
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
-SystemSpeed = 25
+SystemSpeed = 45
 'recFlashDwellTime = 0
 'insertDepthTolerance = .010
-recHeatStakeOffset = 0.0000 ' positive is deeper
+recHeatStakeOffset = 0.060000 ' positive is deeper
 recZLaserToHeatStake = 289.151
 recFlashRequired = False
 'LoadPoints "points2.pts"
@@ -67,9 +67,9 @@ jobStart = False ' reset flag
 
 mainCurrentState = StateIdle ' The first state is Idle
 
-Calibrate()
-Print "done"
-Pause
+'Calibrate()
+'Print "done"
+'Pause
 
 Do While True
 
