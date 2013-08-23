@@ -3,6 +3,7 @@
 Function main()
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
+
 'jobStart = True 'fake
 'recInmag = 10 '88558
 'recOutmag = 13 '88558

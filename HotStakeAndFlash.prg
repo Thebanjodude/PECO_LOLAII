@@ -52,7 +52,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			RobotZOnAnvil = CZ(Here) ' Get z coord when boss is on anvil
 '			Print "RobotZOnAnvil", RobotZOnAnvil
 
-            HSProbeFinalPosition = (recZLaserToHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth) + InTomm(recHeatStakeOffset)) /25.4
+            HSProbeFinalPosition = mmToin((recZLaserToHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth) + InTomm(recHeatStakeOffset)))
             Print "heat stake Position:", HSProbeFinalPosition
             
             Print "recInsertDepth", recInsertDepth, "inches"
@@ -215,8 +215,11 @@ exitFlash:
 
 	Trap 2 ' disarm trap
 Fend
-Function InTomm(mm As Real) As Real
-	InTomm = mm * 25.4
+Function InTomm(inches As Real) As Real
+	InTomm = inches * 25.4
+Fend
+Function mmToin(mm As Real) As Real
+	mmToin = mm * 0.0393701
 Fend
 Function HotStakePanelTEST
 	
