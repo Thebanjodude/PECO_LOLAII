@@ -110,9 +110,10 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 		EndIf
 		
-			currentHSHole = currentHSHole + 1
-			SLock 1, 2, 3, 4 ' unlock all the joints so we can move again
-			Speed SystemSpeed
+		currentHSHole = currentHSHole + 1
+		SLock 1, 2, 3, 4 ' unlock all the joints so we can move again
+		Speed SystemSpeed
+		
 	Next
 	
 	HotStakePanel = 0 ' HS station executed without a problem
@@ -236,49 +237,5 @@ Fend
 Function mmToin(mm As Real) As Real
 	mmToin = mm * 0.0393701
 Fend
-Function HotStakePanelTEST
-	
-'HSProbeFinalPosition=
 
-Jump PreHotStake LimZ zLimit ' Present panel to hot stake
-	
-Do While True
-	
-	Do Until pasMessageDB = 3
-		On heatStakeGoH, 1 ' Tell HS to go to soft home position
-		Wait 1.25
-	Loop
-     
-	SFree 1, 2, 3, 4
-	
-	Pause
-   
-    MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
-	MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement point
-		
-	Do Until pasInsertDepth = HSProbeFinalPosition
-		Wait .1
-	Loop
-	
-	SLock 3, 4
-	Do Until pasMessageDB = 4
-		On heatStakeGoH, 1 ' Tell the HS to install 1 insert
-		Wait .5
-	Loop
-	
-	ZmaxTorque = 0
-	PTCLR (3)
-
-	Do Until pasMessageDB = 3 ' monitor the torque when hs is installing insert
-		ZmaxTorque = PTRQ(3)
-		If ZmaxTorque > .3 Then
-			erUnknown = True ' replace this with a real error
-			Print "Over torque: HS vs Robot"
-			Pause
-		EndIf
-	Loop
-
-Loop
-
-Fend
 

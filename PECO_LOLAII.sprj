@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/08/26 15:11:25:038,DS:0000004128,CS:11044,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/08/26 17:29:28:053,DS:0000004129,CS:18293,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="8/26/2013 9:11:21 AM"
+	sLastModified="8/26/2013 11:29:24 AM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -30,13 +30,13 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="8/26/2013 3:11:21 PM"
+	sTimeSavedInController="8/26/2013 3:23:28 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="8/26/2013 2:31:12 PM"
+	sTimeSavedInController="8/26/2013 3:22:59 PM"
 }
 ProgramFile3 {
 	sName="IOTable.prg"
@@ -60,7 +60,7 @@ ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="8/22/2013 3:31:47 PM"
+	sTimeSavedInController="8/26/2013 5:29:24 PM"
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"

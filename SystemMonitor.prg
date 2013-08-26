@@ -173,9 +173,17 @@ Do While True
 		erHeatStakeTemp = False
 	EndIf
 	
+	If flashHomeNO = False And flashHomeNC = False Then
+		erFlashStation = True
+	ElseIf flashHomeNO = True And flashHomeNC = True Then
+		erFlashStation = True
+	Else
+		erFlashStation = False
+	EndIf
+	
 ' In this section I set the error in the main routine and the lights and pausing are changed here	
 'erPanelStatusUnknown = True
-If EStopOn = True Or erHmiDataAck = True Or erUnknown = True Or erLowPressure = True Or erHighPressure = True Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Then
+If EStopOn = True Or erHmiDataAck = True Or erUnknown = True Or erLowPressure = True Or erHighPressure = True Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or erFlashStation = True Then
 	stackLightRedCC = True
 	If alarmMute = True Then ' Mute the alarm
 		stackLightAlrmCC = False
@@ -186,6 +194,8 @@ Else
 	stackLightRedCC = False
 	stackLightAlrmCC = False
 EndIf
+
+
 	
 If inMagInterlock = True Or outMagInt = True Or erInMagEmpty = True Or erOutMagFull = True Then ' If a magazine interlock is open then turn on the yelow light
 	stackLightYelCC = True

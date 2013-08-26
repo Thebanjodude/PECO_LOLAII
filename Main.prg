@@ -8,7 +8,7 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 'recOutmag = 13 '88558
 suctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
-SystemSpeed = 45
+SystemSpeed = 55
 'recFlashDwellTime = 0
 'insertDepthTolerance = .010
 recHeatStakeOffset = 0.060000 ' positive is deeper
