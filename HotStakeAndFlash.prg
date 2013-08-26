@@ -53,11 +53,12 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 '			Print "RobotZOnAnvil", RobotZOnAnvil
 
             HSProbeFinalPosition = mmToin((recZLaserToHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth) + InTomm(recHeatStakeOffset)))
-            Print "heat stake Position:", HSProbeFinalPosition
+            Print "heat stake Position ", HSProbeFinalPosition
+            Print "RobotZOnAnvil ", RobotZOnAnvil
             
-            Print "recInsertDepth", recInsertDepth, "inches"
-            Print "recHeatStakeOffset", recHeatStakeOffset, "inches"
-            Print HSProbeFinalPosition, ",", recZLaserToHeatStake, ",", RobotZOnAnvil, ",", PreInspectionArray(currentHSHole, 0), ",", InTomm(recInsertDepth), ",", InTomm(recHeatStakeOffset)
+            'Print "recInsertDepth", recInsertDepth, "inches"
+            'Print "recHeatStakeOffset", recHeatStakeOffset, "inches"
+            'Print HSProbeFinalPosition, ",", recZLaserToHeatStake, ",", RobotZOnAnvil, ",", PreInspectionArray(currentHSHole, 0), ",", InTomm(recInsertDepth), ",", InTomm(recHeatStakeOffset)
             
             If HSProbeFinalPosition > 12.4 Then
 				erUnknown = True ' replace this with a real error

@@ -22,7 +22,7 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 	panelDataTxRdy = True ' Tell HMI to readout hole data
 	
 ' this is for hmi logging
-	Wait MemSw(panelDataTxAckH) = True, 3
+	Wait MemSw(panelDataTxAckH) = True, 10
 	panelDataTxRdy = False ' reset flag	
 	If TW = True Then ' catch that the HMI timed out without acking
 		erHmiDataAck = True
