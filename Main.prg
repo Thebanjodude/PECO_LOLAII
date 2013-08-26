@@ -454,7 +454,7 @@ Function ChoosePointsTable()
 Fend
 Function LaserPanelSurfacePositioningTest
 	
-	Real LeftSide, RightSide, HeightOffset, CalibratedHeight, FinalHeight
+	Real LeftSide, RightSide, HeightOffset, CalibratedHeight, FinalHeight, RandomOffset
 	CalibratedHeight = 5.5 'mm
 	zLimit = -86
 	
@@ -462,11 +462,20 @@ Function LaserPanelSurfacePositioningTest
 	Speed 25
 	Power Low
 	
+	If Rnd(100) > 50 Then ' make a random number +/- 5mm
+		RandomOffset = (Rnd(50) * -1) / 10
+	Else
+		RandomOffset = Rnd(50) / 10
+	EndIf
+	
 	Go PreScan2
-	Go EOATUnderLaser
+	Go EOATUnderLaser +Z(RandomOffset)
 	
 	LeftSide = GetLaserMeasurement("05")
 	RightSide = GetLaserMeasurement("06")
+	
+	Print "LeftSide: ", LeftSide
+	Print "RightSide: ", RightSide
 	
 	If RightSide > LeftSide Then
 		HeightOffset = RightSide
@@ -483,11 +492,11 @@ Function LaserPanelSurfacePositioningTest
 
 	Go PreBrkt
 	'go to the brkt, go under it, the go to the correct height
-	Wait 2
+	Wait 1
 	Go PreBrkt :Z(FinalHeight)
-	Pause
+	Wait 1
 	Go PreScan2
-	Pause
+
 		
 Fend
 
