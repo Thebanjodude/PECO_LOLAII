@@ -17,6 +17,13 @@ recFlashRequired = False
 'LoadPoints "points2.pts"
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
+
+Do While True
+	If jobStart = True Then
+		LaserPanelSurfacePositioningTest()
+	EndIf
+Loop
+
 '______________________________________
 'recNumberOfHoles = 16 ' fake for test
 'recInsertDepth = 0.165 ' fake for testing
@@ -444,5 +451,43 @@ Function ChoosePointsTable()
 		erUnknown = True
 		Print "point Table is Unknown"
 	EndIf
+Fend
+Function LaserPanelSurfacePositioningTest
+	
+	Real LeftSide, RightSide, HeightOffset, CalibratedHeight, FinalHeight
+	CalibratedHeight = 5.5 'mm
+	zLimit = -86
+	
+	LoadPoints "points.pts" ' Load points table
+	Speed 25
+	Power Low
+	
+	Go PreScan2
+	Go EOATUnderLaser
+	
+	LeftSide = GetLaserMeasurement("05")
+	RightSide = GetLaserMeasurement("06")
+	
+	If RightSide > LeftSide Then
+		HeightOffset = RightSide
+	Else
+		HeightOffset = LeftSide
+	EndIf
+	
+	FinalHeight = CZ(Here) + CalibratedHeight - HeightOffset
+	Print "FinalHeight: ", FinalHeight
+	
+	Go PreScan2
+	
+	' Calibrated distance between brkt height and laser zero is 6.15mm
+
+	Go PreBrkt
+	'go to the brkt, go under it, the go to the correct height
+	Wait 2
+	Go PreBrkt :Z(FinalHeight)
+	Pause
+	Go PreScan2
+	Pause
+		
 Fend
 
