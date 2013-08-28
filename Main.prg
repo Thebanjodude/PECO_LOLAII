@@ -11,7 +11,7 @@ zLimit = -12.5 'fake
 SystemSpeed = 55
 'recFlashDwellTime = 0
 'insertDepthTolerance = .010
-recHeatStakeOffset = 0.060000 ' positive is deeper
+recHeatStakeOffset = 0.00000 ' positive is deeper
 recZLaserToHeatStake = 289.151
 recFlashRequired = False
 'LoadPoints "points2.pts"
@@ -496,7 +496,6 @@ Function LaserPanelSurfacePositioningTest
 	Go PreBrkt :Z(FinalHeight)
 	Wait 1
 	Go PreScan2
-
 		
 Fend
 

@@ -10,7 +10,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Jump PreScan LimZ zLimit
 	
 	Integer i
-	Real BossCrosssectionalArea, LeftHeight, RightHeight
+	Real BossCrosssectionalArea, LeftHeight, RightHeight, TouchEarsHeight, HeightDiffLaserToEars
 	Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays
 	Redim PreInspectionArray(recNumberOfHoles, 0)
 	
@@ -39,7 +39,11 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 				ZdiffFromLaserCenter = LeftHeight
 			EndIf
 			
-			Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
+			TouchEarsHeight = CZ(Here) + HeightDiffLaserToEars - ZdiffFromLaserCenter
+			PreInspectionArray(currentPreinspectHole, 0) = TouchEarsHeight
+			Print "TouchEarsHeight: ", TouchEarsHeight
+			
+			'Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
             
             'Check if the hole is positioned in the laser correctly 
             If Abs(ZdiffFromLaserCenter) > 25 Then
@@ -52,11 +56,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
             	Exit Function
             EndIf
 			
-			ZSpotfacetoQuillOffset = RobotZposition - ZdiffFromLaserCenter
-			
-			Print "ZSpotfacetoQuillOffset:", ZSpotfacetoQuillOffset
-			
-			PreInspectionArray(currentPreinspectHole, 0) = ZSpotfacetoQuillOffset
+
 					
 ' The following code block detects if an insert is in the hole already.			
 			ChangeProfile("07")

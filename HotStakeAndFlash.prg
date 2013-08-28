@@ -7,7 +7,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	SystemStatus = StateHotStakePanel
 	
 	Integer i, Counter
-	Real RobotZOnAnvil
+	Real RobotZOnAnvil, ProbeToEarsOffset
 	Boolean SkippedHole
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 ' default to fail	
@@ -29,38 +29,19 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 		If SkippedHole = False Then 'If the flag is set then skip the hole
 		
-			Jump P(i) +Z(15) LimZ zLimit  ' Go to the next hole        
-			SFree 1, 2 ' free X and Y
-
-			Counter = 0 ' reset counter
-			Do While Sw(HSPanelPresntH) = False 'Or Counter > 20 ' Approach the panel slowly until we hit the anvil switch
-				JTran 3, -.05 ' Move only the z-axis downward in increments
-				Counter = Counter + 1
-			Loop
+			Jump P(i) -Z(15) LimZ zLimit  ' Go to the next hole, go a little lower than the taught point        	
 			
-			Print "HS Counter:", Counter
+			Go P(i) :Z(PreInspectionArray(currentHSHole, 0)) ' Now move up so the ears are lightly touching the panel			
 			
-'			If Counter > 20 Then ' A boss should be engaging the anvil but it isnt...
-'				erPanelStatusUnknown = True
-'				HotStakePanel = 2 ' fail
-'				Print "Boss did not engage the anvil"
-'				SLock 1, 2, 3, 4
-				'Speed SystemSpeed
-'				GoTo exitHotStake
-'			EndIf
-
-			RobotZOnAnvil = CZ(Here) ' Get z coord when boss is on anvil
-'			Print "RobotZOnAnvil", RobotZOnAnvil
-
-            HSProbeFinalPosition = mmToin((recZLaserToHeatStake - (RobotZOnAnvil - PreInspectionArray(currentHSHole, 0)) + InTomm(recInsertDepth) + InTomm(recHeatStakeOffset)))
-            Print "heat stake Position ", HSProbeFinalPosition
-            Print "RobotZOnAnvil ", RobotZOnAnvil
-            
-            'Print "recInsertDepth", recInsertDepth, "inches"
-            'Print "recHeatStakeOffset", recHeatStakeOffset, "inches"
-            'Print HSProbeFinalPosition, ",", recZLaserToHeatStake, ",", RobotZOnAnvil, ",", PreInspectionArray(currentHSHole, 0), ",", InTomm(recInsertDepth), ",", InTomm(recHeatStakeOffset)
-            
-            If HSProbeFinalPosition > 12.4 Then
+		
+			MBWrite(pasBowlDumpOpenAddr, 1, MBTypeCoil) 'Extend the pancake valve
+			
+			HSProbeFinalPosition = ProbeToEarsOffset + recInsertDepth + recHeatStakeOffset 'calculate HS position
+			
+			MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
+ 			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .35), MBType32) ' Set engagement point
+           
+            If HSProbeFinalPosition > 12.4 Then ' Check if we are going to send the probe too far.
 				erUnknown = True ' replace this with a real error
             	Pause
                 HotStakePanel = 2 ' default to fail		
@@ -82,9 +63,6 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 					Loop
             	Exit Function
             EndIf
-            
-            MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
- 			MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .35), MBType32) ' Set engagement point
  				
  			'GoTo skiphotstake ' fake for testing
  				
@@ -96,7 +74,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			ZmaxTorque = 0
 			PTCLR (3)
 	
-			Do Until pasMessageDB = 3 ' monitor the torque when hs is installing insert
+			Do Until pasMessageDB = 3 ' Monitor the torque when hs is installing insert
 				ZmaxTorque = PTRQ(3)
 				If ZmaxTorque > .3 Then
 					erUnknown = True ' replace this with a real error
@@ -106,6 +84,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			Loop
 			
 '	skiphotstake: ' fake for testing
+			MBWrite(pasBowlDumpOpenAddr, 0, MBTypeCoil) 'Extend the pancake valve
 			Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 
 		EndIf
