@@ -6,9 +6,10 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 'jobStart = True 'fake
 'recInmag = 10 '88558
 'recOutmag = 13 '88558
-suctionWaitTime = 2 'fake
+recSuctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
 SystemSpeed = 55
+SystemAccel = 30
 'recFlashDwellTime = 0
 'insertDepthTolerance = .010
 recHeatStakeOffset = 0.00000 ' positive is deeper
@@ -17,12 +18,6 @@ recFlashRequired = False
 'LoadPoints "points2.pts"
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
-
-Do While True
-	If jobStart = True Then
-		LaserPanelSurfacePositioningTest()
-	EndIf
-Loop
 
 '______________________________________
 'recNumberOfHoles = 16 ' fake for test
@@ -87,27 +82,32 @@ Select mainCurrentState
 	' to come up to temp. Also, if any of the other states encounters a major error, it returns	
 	' to the idle state and waits for an operator.
 		
-		If jobStart = True Then 'And HotStakeTempRdy = 0 and CheckInitialParameters()=0 Then ' Fake for testing
-			mainCurrentState = StatePopPanel
-			'mainCurrentState = StatePreinspection
-			'mainCurrentState = StateHotStakePanel
-			'mainCurrentState = StateFlashRemoval
-			'mainCurrentState = StateCrowding
-			ChoosePointsTable()
-			Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
-				MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
-				Wait 1
-				MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
-				Do While pasMessageDB = 9
-					'waiting for the heat stake to finish homeing
-					Wait .5
+		If jobStart = True Then
+            If CheckInitialParameters() = 0 Then 'And HotStakeTempRdy = 0 
+				mainCurrentState = StatePopPanel
+				'mainCurrentState = StatePreinspection
+				'mainCurrentState = StateHotStakePanel
+				'mainCurrentState = StateFlashRemoval
+				'mainCurrentState = StateCrowding
+				ChoosePointsTable()
+				Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
+					MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
+					Wait 1
+					MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
+					Do While pasMessageDB = 9
+						'waiting for the heat stake to finish homeing
+						Wait .5
+					Loop
 				Loop
-			Loop
-			jobAbort = False 'reset flag
-			jobNumPanelsDone = 0 ' reset panel counter
-			panelDataTxRdy = False ' make sure var is set to false so it changes when we want HMI to read out data
-			Redim PassFailArray(23, 1) ' Clear array, always 23 rows
-			Redim InspectionArray(23, 1) 'Clear array, always 23 rows
+				jobAbort = False 'reset flag
+				jobNumPanelsDone = 0 ' reset panel counter
+				panelDataTxRdy = False ' make sure var is set to false so it changes when we want HMI to read out data
+				Redim PassFailArray(23, 1) ' Clear array, always 23 rows
+				Redim InspectionArray(23, 1) 'Clear array, always 23 rows
+			Else
+				mainCurrentState = StateIdle
+				jobStart = False
+			EndIf
 		ElseIf pasEmptyBowlFeederandTrack = True Then
 			TmReset (3) ' reset timer 3 before we switch states
 			mainCurrentState = StateEmptyingBowlandTrack
@@ -316,7 +316,7 @@ retry:
 	Motor On
 	Power High
 	Speed SystemSpeed
-	Accel 50, 50 'Paramterize these numbers
+	Accel SystemAccel, SystemAccel 'Paramterize these numbers
 	QP (On) ' turn On quick pausing	
 	
 '	Move PreScan :U(CU(CurPos)) ' go home
@@ -324,27 +324,37 @@ retry:
 
 	
 Fend
-'Function CheckInitialParameters() As Boolean
-''check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
-''check if the hmi has pushed all the parameter values to the controller, if not throw an error 
-'
-'	'add in check that panelarray is nonzero
-'	
-'	If recInsertDepth = 0 Or recInsertType = 0 Or recNumberOfHoles = 0 Or recTempProbe = 0 Or recTempTrack = 0 Then
-'		CheckInitialParameters = False
-'	Else
-'		CheckInitialParameters = True
-'	EndIf
-'	
-'	If AnvilZlimit = 0 Or suctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Then
-'		CheckInitialParameters = False
-'	Else
-'		CheckInitialParameters = True
-'	EndIf
-'	
-'CheckInitialParameters = True 'fake for testing
-'
-'Fend
+Function CheckInitialParameters() As Integer
+'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
+'check if the hmi has pushed all the parameter values to the controller, if not throw an error 
+	
+	If recNumberOfHoles = 0 Or recInsertType = 0 Or recBossCrossArea = 0 Then
+		CheckInitialParameters = 2
+		erRecEntryMissing = True
+		Print "recNumberOfHoles = 0 Or recInsertType = 0 Or recBossCrossArea = 0 Or recTempTrack = 0"
+	ElseIf recInmag = 0 Or recOutmag = 0 Or recCrowding = 0 Or recPreCrowding = 0 Then
+		CheckInitialParameters = 2
+		erRecEntryMissing = True
+		Print "recInmag = 0 Or recOutmag = 0 Or recCrowding = 0 Or recPreCrowding = "
+	ElseIf recFirstHolePointInspection = 0 Or recLastHolePointInspection = 0 Or recFirstHolePointHotStake = 0 Or recLastHolePointHotStake = 0 Or recFirstHolePointFlash = 0 Or recLastHolePointFlash = 0 Then
+		CheckInitialParameters = 2
+		erRecEntryMissing = True
+		Print "recFirstHolePointInspection = 0 Or recLastHolePointInspection = 0 Or recFirstHolePointHotStake = 0 Or recLastHolePointHotStake = 0 Or recFirstHolePointFlash = 0 Or recLastHolePointFlash = 0"
+	ElseIf recPointsTable > 3 Then
+		CheckInitialParameters = 2
+		erRecEntryMissing = True
+		Print "recPointsTable > 3"
+	ElseIf recSuctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Or zLimit = 0 Then
+		CheckInitialParameters = 2
+		erParamEntryMissing = True
+		Print "recSuctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Or zLimit = 0"
+	Else
+		CheckInitialParameters = 0
+		erRecEntryMissing = False
+		erParamEntryMissing = False
+	EndIf
+
+Fend
 Function HotStakeTempRdy() As Boolean
 	
 	If pasOTAOnOffZone1 = True And pasOTAOnOffZone2 = True Then
@@ -455,7 +465,7 @@ Fend
 Function LaserPanelSurfacePositioningTest
 	
 	Real LeftSide, RightSide, HeightOffset, CalibratedHeight, FinalHeight, RandomOffset
-	CalibratedHeight = 5.5 'mm
+	CalibratedHeight = -3.54 'mm
 	zLimit = -86
 	
 	LoadPoints "points.pts" ' Load points table
@@ -470,7 +480,7 @@ Function LaserPanelSurfacePositioningTest
 	
 	Go PreScan2
 	Go EOATUnderLaser +Z(RandomOffset)
-	
+	ChangeProfile
 	LeftSide = GetLaserMeasurement("05")
 	RightSide = GetLaserMeasurement("06")
 	

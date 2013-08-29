@@ -12,8 +12,12 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 ' default to fail	
 	
+	ProbeToEarsOffset = 11.2222
+	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
 	
+	Off panelEarLockH ' make sure the valve is off so there is room to put the panel between the cylinder and the ears
+		
 	Do Until pasMessageDB = 3
 		On heatStakeGoH, 1 ' Tell HS to go to soft home position
 		Wait 1.25
@@ -32,9 +36,8 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			Jump P(i) -Z(15) LimZ zLimit  ' Go to the next hole, go a little lower than the taught point        	
 			
 			Go P(i) :Z(PreInspectionArray(currentHSHole, 0)) ' Now move up so the ears are lightly touching the panel			
-			
-		
-			MBWrite(pasBowlDumpOpenAddr, 1, MBTypeCoil) 'Extend the pancake valve
+				
+			On panelEarLockH ' lock the panel in place
 			
 			HSProbeFinalPosition = ProbeToEarsOffset + recInsertDepth + recHeatStakeOffset 'calculate HS position
 			
@@ -84,7 +87,9 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			Loop
 			
 '	skiphotstake: ' fake for testing
-			MBWrite(pasBowlDumpOpenAddr, 0, MBTypeCoil) 'Extend the pancake valve
+
+			Off panelEarLockH ' relese panel
+			
 			Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 
 		EndIf

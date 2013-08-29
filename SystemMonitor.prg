@@ -190,6 +190,9 @@ If EStopOn = True Or erHmiDataAck = True Or erUnknown = True Or erLowPressure = 
 	Else
 		stackLightAlrmCC = True
 	EndIf
+	
+ElseIf erRecEntryMissing = True Or erParamEntryMissing = True Then
+	stackLightRedCC = True
 Else
 	stackLightRedCC = False
 	stackLightAlrmCC = False

@@ -819,7 +819,7 @@ Function iotransfer()
 '	Real recPanelThicknessOld
 '	Real recTempProbeOld
 '	Real recTempTrackOld
-'	Real suctionWaitTimeOld
+'	Real recSuctionWaitTimeOld
 '	Real zLimitOld
 '	Real ZmaxTorqueOld
 '	String ctrlrErrMsgOld$
@@ -2086,18 +2086,18 @@ Function setVars(response$ As String)
     String prepend$
     match$ = "{:} " + Chr$(&H22)
     
-	NumTokens = ParseStr(response$, Tokens$(), match$)
-	If NumTokens <> 2 Then ' TODO for ben, something is running too fast
-		Print "error---", response$, " -- ", NumTokens
+	numTokens = ParseStr(response$, tokens$(), match$)
+	If numTokens <> 2 Then ' TODO for ben, something is running too fast
+		Print "error---", response$, " -- ", numTokens
 	EndIf
 '	Print tokens$(0), " : ", tokens$(1)
 	
-	Select Tokens$(0)
+	Select tokens$(0)
  'Rx from HMI:
  
 '_____Dont delete while updating 
 Case "jobAbortBtn"
-   If Tokens$(1) = "true" Then
+   If tokens$(1) = "true" Then
        jobAbortBtn = True
        MemOn (jobAbortH)
    Else
@@ -2107,7 +2107,7 @@ Case "jobAbortBtn"
 '__________________
 
 Case "alarmMuteBtn"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         alarmMuteBtn = True
         alarmMute = True
     Else
@@ -2115,7 +2115,7 @@ Case "alarmMuteBtn"
     EndIf
     Print "alarmMuteBtn:", alarmMuteBtn
 Case "backInterlockACKBtn"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         backInterlockACKBtn = True
         backInterlockACK = True
     Else
@@ -2123,7 +2123,7 @@ Case "backInterlockACKBtn"
     EndIf
     Print "backInterlockACKBtn:", backInterlockACKBtn
 Case "frontInterlockACKBtn"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         frontInterlockACKBtn = True
         frontInterlockACK = True
     Else
@@ -2131,7 +2131,7 @@ Case "frontInterlockACKBtn"
     EndIf
     Print "frontInterlockACKBtn:", frontInterlockACKBtn
 Case "inMagGoHomeBtn"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         inMagGoHomeBtn = True
         inMagGoHome = True
     Else
@@ -2879,52 +2879,55 @@ Case "recFirstHolePointHotStake"
     recFirstHolePointHotStake = Val(Tokens$(1))
     Print "recFirstHolePointHotStake:"
 Case "recLastHolePointHotStake"
-    recLastHolePointHotStake = Val(Tokens$(1))
+    recLastHolePointHotStake = Val(tokens$(1))
     Print "recLastHolePointHotStake:", recLastHolePointHotStake
 Case "recFirstHolePointFlash"
-    recFirstHolePointFlash = Val(Tokens$(1))
+    recFirstHolePointFlash = Val(tokens$(1))
     Print "recFirstHolePointFlash:", recFirstHolePointFlash
 Case "recLastHolePointFlash"
-    recLastHolePointFlash = Val(Tokens$(1))
+    recLastHolePointFlash = Val(tokens$(1))
     Print "recLastHolePointFlash:"
 Case "recFlashDwellTime"
-    recFlashDwellTime = Val(Tokens$(1))
+    recFlashDwellTime = Val(tokens$(1))
     Print "recFlashDwellTime:"
 Case "recHeatStakeOffset"
-    recHeatStakeOffset = Val(Tokens$(1))
+    recHeatStakeOffset = Val(tokens$(1))
     Print "recHeatStakeOffset:"
 Case "recBossCrossArea"
-    recBossCrossArea = Val(Tokens$(1))
+    recBossCrossArea = Val(tokens$(1))
     Print "recBossCrossArea:", recBossCrossArea
 Case "recPointsTable"
-    recPointsTable = Val(Tokens$(1))
+    recPointsTable = Val(tokens$(1))
     Print "recPointsTable:", recPointsTable
 Case "recInmag"
-    recInmag = Val(Tokens$(1))
+    recInmag = Val(tokens$(1))
     Print "recInmag:", recInmag
 Case "recOutmag"
-    recOutmag = Val(Tokens$(1))
+    recOutmag = Val(tokens$(1))
     Print "recOutmag:", recOutmag
 Case "recCrowding"
-    recCrowding = Val(Tokens$(1))
+    recCrowding = Val(tokens$(1))
     Print "recCrowding:", recCrowding
 Case "recPreCrowding"
-    recPreCrowding = Val(Tokens$(1))
+    recPreCrowding = Val(tokens$(1))
     Print "recPreCrowding:", recPreCrowding
+Case "recSuctionWaitTime"
+	recSuctionWaitTime = Val(tokens$(1))
+    Print "recSuctionWaitTime:", recSuctionWaitTime
 Case "jobNumPanels"
-    jobNumPanels = Val(Tokens$(1))
+    jobNumPanels = Val(tokens$(1))
     Print "jobNumPanels:", jobNumPanels
 Case "pasCoolSet"
-    MBWrite(pasCoolAddr, seconds2Modbus(Val(Tokens$(1))), MBType16)
+    MBWrite(pasCoolAddr, seconds2Modbus(Val(tokens$(1))), MBType16)
     Print "pasCoolSet:", pasCoolSet
 Case "pasDwellSet"
-    MBWrite(pasDwellAddr, seconds2Modbus(Val(Tokens$(1))), MBType16)
+    MBWrite(pasDwellAddr, seconds2Modbus(Val(tokens$(1))), MBType16)
     Print "pasDwellSet:", pasDwellSet
 Case "pasHeatStakingIPMSet"
-    MBWrite(pasHeatStakingIPMAddr, feedRate2Modbus(Val(Tokens$(1))), MBType32)
+    MBWrite(pasHeatStakingIPMAddr, feedRate2Modbus(Val(tokens$(1))), MBType32)
     Print "pasHeatStakingIPMSet:", pasHeatStakingIPMSet
 Case "pasHomeIPMSet"
-    MBWrite(pasHomeIPMAddr, feedRate2Modbus(Val(Tokens$(1))), MBType32)
+    MBWrite(pasHomeIPMAddr, feedRate2Modbus(Val(tokens$(1))), MBType32)
     Print "pasHomeIPMSet:", pasHomeIPMSet
 Case "pasInsertDepthSet"
     MBWrite(pasInsertDepthAddr, inches2Modbus(Val(Tokens$(1))), MBType32)
@@ -3014,38 +3017,38 @@ Case "pasSoftHomeSet"
     MBWrite(pasSoftHomeAddr, inches2Modbus(Val(Tokens$(1))), MBType32)
     Print "pasSoftHomeSet:", pasSoftHomeSet
 Case "pasSoftStopSet"
-    MBWrite(pasSoftStopAddr, inches2Modbus(Val(Tokens$(1))), MBType32)
+    MBWrite(pasSoftStopAddr, inches2Modbus(Val(tokens$(1))), MBType32)
     Print "pasSoftStopSet:", pasSoftStopSet
 Case "recFlashRequired"
-    If Tokens$(1) = "true" Then
+    If tokens$(1) = "true" Then
         recFlashRequired = True
     Else
         recFlashRequired = False
     EndIf
     Print "recFlashRequired:", recFlashRequired
 Case "recInmagPickupOffset"
-    recInmagPickupOffset = Val(Tokens$(1))
+    recInmagPickupOffset = Val(tokens$(1))
     Print "recInmagPickupOffset:", recInmagPickupOffset
 Case "recInsertDepth"
-    recInsertDepth = Val(Tokens$(1))
+    recInsertDepth = Val(tokens$(1))
     Print "recInsertDepth:", recInsertDepth
 Case "recFlashDwellTime"
-    recFlashDwellTime = Val(Tokens$(1))
+    recFlashDwellTime = Val(tokens$(1))
     Print "recFlashDwellTime:", recFlashDwellTime
 Case "recInsertType"
-    recInsertType = Val(Tokens$(1))
+    recInsertType = Val(tokens$(1))
     Print "recInsertType:", recInsertType
 Case "recNumberOfHoles"
-    recNumberOfHoles = Val(Tokens$(1))
+    recNumberOfHoles = Val(tokens$(1))
     Print "recNumberOfHoles:", recNumberOfHoles
 Case "recOutmagPickupOffset"
-    recOutmagPickupOffset = Val(Tokens$(1))
+    recOutmagPickupOffset = Val(tokens$(1))
     Print "recOutmagPickupOffset:", recOutmagPickupOffset
-Case "suctionWaitTime"
-    suctionWaitTime = Val(Tokens$(1))
-    Print "suctionWaitTime:", suctionWaitTime
+Case "recSuctionWaitTime"
+    recSuctionWaitTime = Val(tokens$(1))
+    Print "recSuctionWaitTime:", recSuctionWaitTime
 Case "systemAccel"
-    SystemAccel = Val(Tokens$(1))
+    SystemAccel = Val(tokens$(1))
     Print "systemAccel:", SystemAccel
 Case "systemSpeed"
     SystemSpeed = Val(Tokens$(1))

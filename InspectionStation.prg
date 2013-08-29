@@ -397,7 +397,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Wait 3
 	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
 	suctionCupsCC = False ' Turn off suction cups
-	Wait suctionWaitTime ' wait for cups to release
+	Wait recSuctionWaitTime ' wait for cups to release
 	Go P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
 	Wait .25
 	MBWrite(pasCrowdingADDR, 1, MBTypeCoil) ' Close crowding
@@ -411,7 +411,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	
 	Go P(recCrowding)
 	suctionCupsCC = True ' Turn on cups
-	Wait suctionWaitTime
+	Wait recSuctionWaitTime
 
 	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) 'Open crowding
 	' wait for verification that the crowding has opened
