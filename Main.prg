@@ -317,6 +317,7 @@ retry:
 	Power High
 	Speed SystemSpeed
 	Accel SystemAccel, SystemAccel 'Paramterize these numbers
+	SpeedS 500
 	QP (On) ' turn On quick pausing	
 	
 '	Move PreScan :U(CU(CurPos)) ' go home
@@ -328,10 +329,10 @@ Function CheckInitialParameters() As Integer
 'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
 'check if the hmi has pushed all the parameter values to the controller, if not throw an error 
 	
-	If recNumberOfHoles = 0 Or recInsertType = 0 Or recBossCrossArea = 0 Then
+	If recBossCrossArea = 0 Then 'recNumberOfHoles = 0 Or recInsertType = 0 Or
 		CheckInitialParameters = 2
 		erRecEntryMissing = True
-		Print "recNumberOfHoles = 0 Or recInsertType = 0 Or recBossCrossArea = 0 Or recTempTrack = 0"
+		Print " recBossCrossArea = 0" 'recNumberOfHoles = 0 Or recInsertType = 0 Or
 	ElseIf recInmag = 0 Or recOutmag = 0 Or recCrowding = 0 Or recPreCrowding = 0 Then
 		CheckInitialParameters = 2
 		erRecEntryMissing = True
@@ -470,7 +471,7 @@ Function LaserPanelSurfacePositioningTest
 	
 	LoadPoints "points.pts" ' Load points table
 	Speed 25
-	Power Low
+	'Power Low
 	
 	If Rnd(100) > 50 Then ' make a random number +/- 5mm
 		RandomOffset = (Rnd(50) * -1) / 10

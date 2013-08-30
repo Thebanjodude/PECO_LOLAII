@@ -14,6 +14,8 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays
 	Redim PreInspectionArray(recNumberOfHoles, 0)
 	
+	HeightDiffLaserToEars = -2.39 'mm
+	
 	currentPreinspectHole = 1 ' This tells the HMI which hole we are working on during preinspection
 	currentInspectHole = 1 ' This tells the HMI which hole we are working on during inspection
 
