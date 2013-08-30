@@ -39,13 +39,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 				ZdiffFromLaserCenter = LeftHeight
 			EndIf
 			
-			TouchEarsHeight = CZ(Here) + HeightDiffLaserToEars - ZdiffFromLaserCenter
-			PreInspectionArray(currentPreinspectHole, 0) = TouchEarsHeight
-			Print "TouchEarsHeight: ", TouchEarsHeight
-			
-			'Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
-            
-            'Check if the hole is positioned in the laser correctly 
+		    'Check if the hole is positioned in the laser correctly 
             If Abs(ZdiffFromLaserCenter) > 25 Then
 				' Throw an Error
 				Print "Hole not within Laser Range"
@@ -56,8 +50,12 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
             	Exit Function
             EndIf
 			
-
-					
+			TouchEarsHeight = CZ(Here) + HeightDiffLaserToEars - ZdiffFromLaserCenter ' this is the final z we are going to 
+			PreInspectionArray(currentPreinspectHole, 0) = TouchEarsHeight ' save it into an array for later
+			Print "TouchEarsHeight: ", TouchEarsHeight
+			
+			'Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
+ 					
 ' The following code block detects if an insert is in the hole already.			
 			ChangeProfile("07")
 			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
@@ -68,8 +66,8 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 				Print "Hole ", currentPreinspectHole, " is already populated"
 			EndIf
 
-			ChangeProfile("00")
-			Print "Hole error:", GetLaserMeasurement("05")
+'			ChangeProfile("00")
+'			Print "Hole error:", GetLaserMeasurement("05")
 			
 '			If Abs(BossCrosssectionalArea) < 12345 Then ' We dont see an empty hole or a populated hole. Panel is backwards or 
 '				erPanelStatusUnknown = True

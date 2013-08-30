@@ -12,7 +12,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 ' default to fail	
 	
-	ProbeToEarsOffset = 11.2222
+	ProbeToEarsOffset = 11.2222 ' inches
 	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
 	
@@ -33,7 +33,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
 		If SkippedHole = False Then 'If the flag is set then skip the hole
 		
-			Jump P(i) -Z(15) LimZ zLimit  ' Go to the next hole, go a little lower than the taught point        	
+			Jump P(i) -Z(10) LimZ zLimit  ' Go to the next hole, go a little lower than the taught point        	
 			
 			Go P(i) :Z(PreInspectionArray(currentHSHole, 0)) ' Now move up so the ears are lightly touching the panel			
 				
@@ -67,7 +67,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
             	Exit Function
             EndIf
  				
- 			'GoTo skiphotstake ' fake for testing
+ 			GoTo skiphotstake ' fake for testing
  				
 			Do Until pasMessageDB = 4
 				On heatStakeGoH, 1 ' Tell the HS to install 1 insert
@@ -86,7 +86,8 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 				EndIf
 			Loop
 			
-'	skiphotstake: ' fake for testing
+	skiphotstake: ' fake for testing	
+			Wait 1 ' fake for testing
 
 			Off panelEarLockH ' relese panel
 			

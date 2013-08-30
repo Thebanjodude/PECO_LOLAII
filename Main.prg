@@ -480,7 +480,8 @@ Function LaserPanelSurfacePositioningTest
 	
 	Go PreScan2
 	Go EOATUnderLaser +Z(RandomOffset)
-	ChangeProfile
+	
+	ChangeProfile("07")
 	LeftSide = GetLaserMeasurement("05")
 	RightSide = GetLaserMeasurement("06")
 	
