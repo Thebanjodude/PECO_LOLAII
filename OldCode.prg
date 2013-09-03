@@ -1767,3 +1767,53 @@
 '	EndIf
 '	
 'Fend
+
+'Function LaserPanelSurfacePositioningTest
+'	
+'	Real LeftSide, RightSide, HeightOffset, CalibratedHeight, FinalHeight, RandomOffset
+'	CalibratedHeight = -3.54 'mm
+'	zLimit = -86
+'	
+'	LoadPoints "points.pts" ' Load points table
+'	Speed 25
+'	'Power Low
+'	
+'	If Rnd(100) > 50 Then ' make a random number +/- 5mm
+'		RandomOffset = (Rnd(50) * -1) / 10
+'	Else
+'		RandomOffset = Rnd(50) / 10
+'	EndIf
+'	
+'	Go PreScan2
+'	Go EOATUnderLaser +Z(RandomOffset)
+'	
+'	ChangeProfile("07")
+'	LeftSide = GetLaserMeasurement("05")
+'	RightSide = GetLaserMeasurement("06")
+'	
+'	Print "LeftSide: ", LeftSide
+'	Print "RightSide: ", RightSide
+'	
+'	If RightSide > LeftSide Then
+'		HeightOffset = RightSide
+'	Else
+'		HeightOffset = LeftSide
+'	EndIf
+'	
+'	FinalHeight = CZ(Here) + CalibratedHeight - HeightOffset
+'	Print "FinalHeight: ", FinalHeight
+'	
+'	Go PreScan2
+'	
+'	' Calibrated distance between brkt height and laser zero is 6.15mm
+'
+'	Go PreBrkt
+'	'go to the brkt, go under it, the go to the correct height
+'	Wait 1
+'	Go PreBrkt :Z(FinalHeight)
+'	Wait 1
+'	Go PreScan2
+'		
+'Fend
+
+
