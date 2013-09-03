@@ -312,7 +312,7 @@ Function iotransfer()
 '	Boolean erBackSafetyFrameOpenOld
 '	Boolean erBadPressureSensorOld
 '	Boolean erBowlFeederBreakerOld
-'	Boolean erDCPowerHeatStakeOld
+'	Boolean erDCHeatStakeOld
 '	Boolean erDCPowerOld
 '	Boolean erDebrisRemovalBreakerOld
 '	Boolean erEstopOld

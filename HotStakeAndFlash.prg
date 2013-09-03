@@ -2,8 +2,6 @@
 
 Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 
-	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
-	' While the HS is in state 4, installing an insert, I revoke the ability to abort.
 	SystemStatus = StateHotStakePanel
 	
 	Integer i, Counter
@@ -13,18 +11,20 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	HotStakePanel = 2 ' default to fail	
 	
 	ClearPanelLip = 7 'mm
-	ProbeToEarsOffset = 11.2222 ' inches
+	ProbeToEarsOffset = 11.5055 ' inches
 	
 	Jump PreHotStake -Z(15) LimZ zLimit ' Present panel to hot stake
 	
 	Off panelEarLockH ' make sure the valve is off so there is room to put the panel between the cylinder and the ears
-	
-' fake for testing		
-'	Do Until pasMessageDB = 3
-'		On heatStakeGoH, 1 ' Tell HS to go to soft home position
-'		Wait 1.25
-'	Loop
+		
+	Do Until pasMessageDB = 3
+		On heatStakeGoH, 1 ' Tell HS to go to soft home position
+		Wait 1.25
+	Loop
 
+	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
+	' While the HS is in state 4, installing an insert, I revoke the ability to abort.
+	
 	For i = recFirstHolePointHotStake To recLastHolePointHotStake
 
 		SkippedHole = False 'Reset flag		
@@ -77,8 +77,8 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
             	Exit Function
             EndIf
  				
- 			GoTo skiphotstake ' fake for testing
- 				
+ 			'GoTo skiphotstake ' fake for testing
+ 			Trap 2 ' disarm trap	
 			Do Until pasMessageDB = 4
 				On heatStakeGoH, 1 ' Tell the HS to install 1 insert
 				Wait .5
@@ -96,16 +96,16 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 				EndIf
 			Loop
 			
-	skiphotstake: ' fake for testing	
+			Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
+			
+	'skiphotstake: ' fake for testing	
 
-			Wait 3
+		'	Wait 3
 			Off panelEarLockH ' relese panel
 			Wait .25
 			
 			Move P(i) -Z(ClearPanelLip)
             Move PreHotStake :U(CU(P(i))) :Z(CZ(P(i)) - ClearPanelLip) ' rotate to the correct theta position    
-			
-			Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 
 		EndIf
 		
@@ -122,7 +122,10 @@ exitHotStake:
 
 	If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 		jobAbort = True
+		Off panelEarLockH ' lock the panel in place
 		SLock 1, 2, 3, 4 ' unlock all the joints so we can move again
+		Move P(i) -Z(ClearPanelLip) ' move down to clear the lip
+        Move PreHotStake :U(CU(P(i))) :Z(CZ(P(i)) - ClearPanelLip) ' Pull out of the ears
 		Speed SystemSpeed
 		MemOff (jobAbortH) ' turn off abort bit
 	EndIf
