@@ -3,68 +3,20 @@
 Function main()
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
-'jobStart = True 'fake
-'recInmag = 10 '88558
-'recOutmag = 13 '88558
+
 recSuctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
 SystemSpeed = 55
 SystemAccel = 30
-'recFlashDwellTime = 0
-'insertDepthTolerance = .010
+insertDepthTolerance = .010
 recHeatStakeOffset = 0.00000 ' positive is deeper
 recZLaserToHeatStake = 289.151
 recFlashRequired = False
-'LoadPoints "points2.pts"
+
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
-'______________________________________
-'recNumberOfHoles = 16 ' fake for test
-'recInsertDepth = 0.165 ' fake for testing
-'recInmag = 50
-'recOutmag = 101
-'recPreCrowding = 51
-'recCrowding = 52
-'recFirstHolePointInspection = 53
-'recLastHolePointInspection = 68
-'recFirstHolePointHotStake = 69
-'recLastHolePointHotStake = 84
-'recFirstHolePointFlash = 85
-'recLastHolePointFlash = 100
-'LoadPoints "points.pts"
-'DeepBoss = True
-'_____________________________________
-'recNumberOfHoles = 23 ' fake for test
-'recInmag = 50
-'recOutmag = 122
-'recPreCrowding = 51
-'recCrowding = 52
-'recFirstHolePointInspection = 53
-'recLastHolePointInspection = 75
-'recFirstHolePointHotStake = 76
-'recLastHolePointHotStake = 98
-'recFirstHolePointFlash = 99
-'recLastHolePointFlash = 121
-'LoadPoints "points2.pts"
-'DeepBoss = False
-'______________________________________
-'recNumberOfHoles = 14 ' fake for test
-'recInsertDepth = 0.030 ' fake for testing
-'recInmag = 103
-'recOutmag = 148
-'recPreCrowding = 104
-'recCrowding = 105
-'recFirstHolePointInspection = 106
-'recLastHolePointInspection = 119
-'recFirstHolePointHotStake = 120
-'recLastHolePointHotStake = 133
-'recFirstHolePointFlash = 134
-'recLastHolePointFlash = 147
-
-'MediumBoss = True
-'___________________________________________
-jobDone = False ' fake for test
+jobDone = False ' reset flag
 jobStart = False ' reset flag
 
 mainCurrentState = StateIdle ' The first state is Idle
