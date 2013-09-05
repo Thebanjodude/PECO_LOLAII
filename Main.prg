@@ -3,66 +3,18 @@
 Function main()
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
-'jobStart = True 'fake
-'recInmag = 10 '88558
-'recOutmag = 13 '88558
-suctionWaitTime = 2 'fake
-zLimit = -12.5 'fake
-SystemSpeed = 55
-'recFlashDwellTime = 0
-'insertDepthTolerance = .010
-recHeatStakeOffset = 0.060000 ' positive is deeper
-recZLaserToHeatStake = 289.151
+insertDepthTolerance = .010
 recFlashRequired = False
 'LoadPoints "points2.pts"
+recPointsTable = 1
+recSuctionWaitTime = 1
+SystemSpeed = 55
+SystemAccel = 50
+zLimit = -12.5 'fake
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
-'______________________________________
-'recNumberOfHoles = 16 ' fake for test
-'recInsertDepth = 0.165 ' fake for testing
-'recInmag = 50
-'recOutmag = 101
-'recPreCrowding = 51
-'recCrowding = 52
-'recFirstHolePointInspection = 53
-'recLastHolePointInspection = 68
-'recFirstHolePointHotStake = 69
-'recLastHolePointHotStake = 84
-'recFirstHolePointFlash = 85
-'recLastHolePointFlash = 100
-'LoadPoints "points.pts"
-'DeepBoss = True
-'_____________________________________
-'recNumberOfHoles = 23 ' fake for test
-'recInmag = 50
-'recOutmag = 122
-'recPreCrowding = 51
-'recCrowding = 52
-'recFirstHolePointInspection = 53
-'recLastHolePointInspection = 75
-'recFirstHolePointHotStake = 76
-'recLastHolePointHotStake = 98
-'recFirstHolePointFlash = 99
-'recLastHolePointFlash = 121
-'LoadPoints "points2.pts"
-'DeepBoss = False
-'______________________________________
-'recNumberOfHoles = 14 ' fake for test
-'recInsertDepth = 0.030 ' fake for testing
-'recInmag = 103
-'recOutmag = 148
-'recPreCrowding = 104
-'recCrowding = 105
-'recFirstHolePointInspection = 106
-'recLastHolePointInspection = 119
-'recFirstHolePointHotStake = 120
-'recLastHolePointHotStake = 133
-'recFirstHolePointFlash = 134
-'recLastHolePointFlash = 147
 
-'MediumBoss = True
-'___________________________________________
-jobDone = False ' fake for test
+jobDone = False ' reset flag
 jobStart = False ' reset flag
 
 mainCurrentState = StateIdle ' The first state is Idle
@@ -80,34 +32,36 @@ Select mainCurrentState
 	' to come up to temp. Also, if any of the other states encounters a major error, it returns	
 	' to the idle state and waits for an operator.
 		
-		If jobStart = True Then 'And HotStakeTempRdy = 0 and CheckInitialParameters()=0 Then ' Fake for testing
-			mainCurrentState = StatePopPanel
-			'mainCurrentState = StatePreinspection
-			'mainCurrentState = StateHotStakePanel
-			'mainCurrentState = StateFlashRemoval
-			'mainCurrentState = StateCrowding
-			ChoosePointsTable()
-			Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
-				MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
-				Wait 1
-				MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
-				Do While pasMessageDB = 9
-					'waiting for the heat stake to finish homeing
-					Wait .5
-				Loop
-			Loop
-			jobAbort = False 'reset flag
-			jobNumPanelsDone = 0 ' reset panel counter
-			panelDataTxRdy = False ' make sure var is set to false so it changes when we want HMI to read out data
-			Redim PassFailArray(23, 1) ' Clear array, always 23 rows
-			Redim InspectionArray(23, 1) 'Clear array, always 23 rows
-		ElseIf pasEmptyBowlFeederandTrack = True Then
-			TmReset (3) ' reset timer 3 before we switch states
-			mainCurrentState = StateEmptyingBowlandTrack
-		Else
-			mainCurrentState = StateIdle ' Stay in idle until ready
-		EndIf
+		If jobStart = True Then 'And HotStakeTempRdy = 0  ' Fake for testing
 		
+			If CheckInitialParameters() = 0 Then
+				mainCurrentState = StatePopPanel
+				'mainCurrentState = StatePreinspection
+				'mainCurrentState = StateHotStakePanel
+				'mainCurrentState = StateFlashRemoval
+				'mainCurrentState = StateCrowding
+				ChoosePointsTable()
+				Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
+					MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
+					Wait 1
+					MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
+					Do While pasMessageDB = 9
+						'waiting for the heat stake to finish homeing
+						Wait .5
+					Loop
+				Loop
+				jobAbort = False 'reset flag
+				jobNumPanelsDone = 0 ' reset panel counter
+				panelDataTxRdy = False ' make sure var is set to false so it changes when we want HMI to read out data
+				Redim PassFailArray(23, 1) ' Clear array, always 23 rows
+				Redim InspectionArray(23, 1) 'Clear array, always 23 rows
+			ElseIf pasEmptyBowlFeederandTrack = True Then
+				TmReset (3) ' reset timer 3 before we switch states
+				mainCurrentState = StateEmptyingBowlandTrack
+			Else
+				mainCurrentState = StateIdle ' Stay in idle until ready
+			EndIf
+		EndIf
 	Case StatePopPanel
 	' This state picks up a panel from the input magazine. Then takes the panel to the home	
 	' position. 
@@ -309,7 +263,7 @@ retry:
 	Motor On
 	Power High
 	Speed SystemSpeed
-	Accel 50, 50 'Paramterize these numbers
+	Accel SystemAccel, SystemAccel 'Paramterize these numbers
 	QP (On) ' turn On quick pausing	
 	
 '	Move PreScan :U(CU(CurPos)) ' go home
@@ -317,27 +271,37 @@ retry:
 
 	
 Fend
-'Function CheckInitialParameters() As Boolean
-''check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
-''check if the hmi has pushed all the parameter values to the controller, if not throw an error 
-'
-'	'add in check that panelarray is nonzero
-'	
-'	If recInsertDepth = 0 Or recInsertType = 0 Or recNumberOfHoles = 0 Or recTempProbe = 0 Or recTempTrack = 0 Then
-'		CheckInitialParameters = False
-'	Else
-'		CheckInitialParameters = True
-'	EndIf
-'	
-'	If AnvilZlimit = 0 Or suctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Then
-'		CheckInitialParameters = False
-'	Else
-'		CheckInitialParameters = True
-'	EndIf
-'	
-'CheckInitialParameters = True 'fake for testing
-'
-'Fend
+Function CheckInitialParameters() As Integer
+'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
+'check if the hmi has pushed all the parameter values to the controller, if not throw an error 
+
+	If recBossCrossArea = 0 Then 'recNumberOfHoles = 0 Or recInsertType = 0 Or
+		CheckInitialParameters = 2
+		erRecEntryMissing = True
+		Print " recBossCrossArea = 0" 'recNumberOfHoles = 0 Or recInsertType = 0 Or
+	ElseIf recInmag = 0 Or recOutmag = 0 Or recCrowding = 0 Or recPreCrowding = 0 Then
+		CheckInitialParameters = 2
+		erRecEntryMissing = True
+		Print "recInmag = 0 Or recOutmag = 0 Or recCrowding = 0 Or recPreCrowding = "
+	ElseIf recFirstHolePointInspection = 0 Or recLastHolePointInspection = 0 Or recFirstHolePointHotStake = 0 Or recLastHolePointHotStake = 0 Or recFirstHolePointFlash = 0 Or recLastHolePointFlash = 0 Then
+		CheckInitialParameters = 2
+		erRecEntryMissing = True
+		Print "recFirstHolePointInspection = 0 Or recLastHolePointInspection = 0 Or recFirstHolePointHotStake = 0 Or recLastHolePointHotStake = 0 Or recFirstHolePointFlash = 0 Or recLastHolePointFlash = 0"
+	ElseIf recPointsTable > 3 Or recPointsTable = 0 Then
+		CheckInitialParameters = 2
+		erRecEntryMissing = True
+		Print "0 < recPointsTable < 3"
+	ElseIf recSuctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Or zLimit = 0 Then
+		CheckInitialParameters = 2
+		erParamEntryMissing = True
+		Print "recSuctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Or zLimit = 0"
+	Else
+		CheckInitialParameters = 0
+		erRecEntryMissing = False
+		erParamEntryMissing = False
+	EndIf
+
+Fend
 Function HotStakeTempRdy() As Boolean
 	
 	If pasOTAOnOffZone1 = True And pasOTAOnOffZone2 = True Then
@@ -351,7 +315,7 @@ Function PowerOnHomeCheck() As Boolean
 	
 	Real distx, disty, distz, distance
 ' TODO: Parameterize these #defines?
-	#define startUpDistMax 150 '+/-150mm from home position
+	#define startUpDistMax 100 '+/-100mm from home position
 	
 	distx = Abs(CX(CurPos) - CX(PreScan))
 	disty = Abs(CY(CurPos) - CY(PreScan))
@@ -441,7 +405,7 @@ Function ChoosePointsTable()
 	ElseIf recPointsTable = 3 Then
 		LoadPoints "points3.pts"
 	Else
-		erUnknown = True
+	'	erUnknown = True
 		Print "point Table is Unknown"
 	EndIf
 Fend

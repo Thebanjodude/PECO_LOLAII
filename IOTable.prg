@@ -819,7 +819,7 @@ Function iotransfer()
 '	Real recPanelThicknessOld
 '	Real recTempProbeOld
 '	Real recTempTrackOld
-'	Real suctionWaitTimeOld
+'	RealrecSuctionWaitTimeOld
 '	Real zLimitOld
 '	Real ZmaxTorqueOld
 '	String ctrlrErrMsgOld$
@@ -3041,9 +3041,9 @@ Case "recNumberOfHoles"
 Case "recOutmagPickupOffset"
     recOutmagPickupOffset = Val(Tokens$(1))
     Print "recOutmagPickupOffset:", recOutmagPickupOffset
-Case "suctionWaitTime"
-    suctionWaitTime = Val(Tokens$(1))
-    Print "suctionWaitTime:", suctionWaitTime
+Case "recSuctionWaitTime"
+   recSuctionWaitTime = Val(Tokens$(1))
+    Print "recSuctionWaitTime:", recSuctionWaitTime
 Case "systemAccel"
     SystemAccel = Val(Tokens$(1))
     Print "systemAccel:", SystemAccel

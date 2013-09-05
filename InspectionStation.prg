@@ -41,7 +41,11 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			currentPreinspectHole = currentPreinspectHole + 1
 			
 		ElseIf SelectRoutine = 2 Then
+			
 			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
+			PrintInspectionArray()
+			PrintPassFailArray()
+			UnpackInspectionArrays()
 			currentInspectHole = currentInspectHole + 1
 		EndIf
 			
@@ -49,21 +53,13 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		Wait .25
 	Next
 	
-	If SelectRoutine = 1 Then
-		PrintPreInspectionArray()
-	Else
-		PrintInspectionArray()
-		PrintPassFailArray()
-		UnpackInspectionArrays()
-	EndIf
-
 	InspectPanel = 0 ' Inspection occured without errors
 	Go PreScan :U(CU(Here))
 
 exitInspectPanel:
 
 	If MemSw(jobAbortH) = True Then
-		Go PreScan :U(CU(Here)) ' Pull away from the laster WITHOUT spinning (may hit laser)
+		Go PreScan :U(CU(Here)) ' Pull away from the laser WITHOUT spinning (may hit laser)
 		jobAbort = True
 		MemOff (jobAbortH)
 	EndIf

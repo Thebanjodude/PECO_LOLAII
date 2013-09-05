@@ -34,7 +34,7 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 	
 	Off suctionCupsH ' fake
 	suctionCupsCC = False
-	Wait suctionWaitTime ' Allow time for cups to unseal
+	Wait recSuctionWaitTime ' Allow time for cups to unseal
 	RobotPlacedPanel = True ' Tell the output magazine we put a panel into it
 	Redim InspectionArray(0, 0) ' clear all the values in the Inspection Array
 	Jump OutmagWaypoint LimZ zLimit
@@ -110,7 +110,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 '	EndIf
 	
 	suctionCupsCC = True ' Turn on the cups because we have engaged a panel
-	Wait suctionWaitTime ' Allow time for cups to seal on panel	
+	Wait recSuctionWaitTime ' Allow time for cups to seal on panel	
 	Jump PreScan LimZ zLimit ' Go home		
 	
 	PickupPanel = 0 ' We successfully picked up a panel
