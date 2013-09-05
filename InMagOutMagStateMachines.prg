@@ -276,6 +276,7 @@ Do While True
 				RobotPlacedPanel = False ' Reset Flag
 				outMagMtrDirCC = False  'Set direction to Down
 				outMagMtrCC = True ' Turn on Motor	
+				Wait .25
 				NextState = StateOutMagLowering
 			ElseIf Sw(outMagPanelRdyH) = False Then ' There is still a panel to be moved down
 				outMagMtrDirCC = False  'Set direction to Down

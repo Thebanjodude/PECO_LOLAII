@@ -11,8 +11,7 @@ SystemAccel = 30
 insertDepthTolerance = .010
 recHeatStakeOffset = 0.00000 ' positive is deeper
 recZLaserToHeatStake = 289.151
-recFlashRequired = False
-
+'recPointsTable = 1 'fake
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
@@ -280,6 +279,8 @@ Fend
 Function CheckInitialParameters() As Integer
 'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
 'check if the hmi has pushed all the parameter values to the controller, if not throw an error 
+
+	Print "recPointsTable ", recPointsTable
 	
 	If recBossCrossArea = 0 Then 'recNumberOfHoles = 0 Or recInsertType = 0 Or
 		CheckInitialParameters = 2

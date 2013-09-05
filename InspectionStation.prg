@@ -431,7 +431,7 @@ If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	MemOff (jobAbortH) ' reset membit
 	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Open crowding
 	suctionCupsCC = False ' Turn off cups
-	Go P(recCrowding) ' move away from a panel
+	Jump PreHotStake LimZ zlimit ' move away from a panel
 EndIf
 
 Trap 2 ' Disarm trap

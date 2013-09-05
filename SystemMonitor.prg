@@ -164,7 +164,7 @@ Do While True
 	EndIf
 	
 	If erUnknown = True Then
-	'	Pause
+		Pause
 	EndIf
 	
 	If HotStakeTempRdy = False Then
