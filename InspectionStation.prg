@@ -25,17 +25,25 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			ChangeProfile("07")
 			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
 			
+'			If Abs(BossCrosssectionalArea) < -9999 Then ' We dont see an empty hole or a populated hole. Panel is backwards or 
+'				erPanelStatusUnknown = True
+'				InspectPanel = 2					' the wrong panel was put into the magazine
+'				'back out of the laser	
+'				Exit For
+'			EndIf
+			
 			Print "BossCrosssectionalArea: ", BossCrosssectionalArea
 			If BossCrosssectionalArea > recBossCrossArea Then ' There is already an insert so set skip flag
 				SkipHoleArray(currentPreinspectHole, 0) = 1
 				Print "Hole ", currentPreinspectHole, " is already populated"
 			EndIf
 			
-'			If Abs(BossCrosssectionalArea) < 12345 Then ' We dont see an empty hole or a populated hole. Panel is backwards or 
+'			If BossCrosssectionalArea = -9999 Then ' Check if there is a panel under the laser
 '				erPanelStatusUnknown = True
 '				InspectPanel = 2					' the wrong panel was put into the magazine
-'				'back out of the laser	
-'				Exit For
+'				Trap 2 'disarm trap
+'				jump PreScan :U(CU(Here)) limz zlimit' Pull away from the laser WITHOUT spinning (may hit laser)
+'				Exit function
 '			EndIf
 			
 			currentPreinspectHole = currentPreinspectHole + 1
