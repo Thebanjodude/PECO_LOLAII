@@ -1,26 +1,26 @@
-ENVT0100,LM:2013/08/21 23:57:57:356,DS:0000003024,CS:01649,MA:6C-F0-49-E2-45-75,EI:           
-sActiveChild="Run - Remote Console"
+ENVT0100,LM:2013/09/05 15:32:48:355,DS:0000003036,CS:15717,MA:6C-F0-49-E2-45-75,EI:           
+sActiveChild="InspectionStation.prg"
 bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=1
 	Window {
-		nLeft=76
-		nTop=171
-		nWidth=1377
-		nHeight=626
+		nLeft=60
+		nTop=40
+		nWidth=1473
+		nHeight=700
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
 	bOpened=True
-	nWinState=1
+	nWinState=0
 	Window {
-		nLeft=82
-		nTop=2
-		nWidth=1240
-		nHeight=781
+		nLeft=74
+		nTop=34
+		nWidth=1407
+		nHeight=710
 	}
 }
 ProgramFile3 {
@@ -28,21 +28,21 @@ ProgramFile3 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=328
-		nTop=19
-		nWidth=1375
-		nHeight=605
+		nLeft=-16
+		nTop=148
+		nWidth=1370
+		nHeight=682
 	}
 }
 ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=1
 	Window {
-		nLeft=135
-		nTop=2
-		nWidth=1346
-		nHeight=757
+		nLeft=97
+		nTop=29
+		nWidth=1344
+		nHeight=750
 	}
 }
 ProgramFile5 {
@@ -50,10 +50,10 @@ ProgramFile5 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=27
+		nTop=21
+		nWidth=1260
+		nHeight=593
 	}
 }
 ProgramFile6 {
@@ -61,32 +61,32 @@ ProgramFile6 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=205
+		nTop=91
+		nWidth=1265
+		nHeight=587
 	}
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=37
-		nTop=216
-		nWidth=1260
-		nHeight=593
+		nLeft=149
+		nTop=63
+		nWidth=1255
+		nHeight=583
 	}
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=72
-		nTop=353
-		nWidth=1513
-		nHeight=619
+		nLeft=74
+		nTop=62
+		nWidth=1406
+		nHeight=682
 	}
 }
 ProgramFile9 {
@@ -94,10 +94,10 @@ ProgramFile9 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=26
-		nTop=59
-		nWidth=1242
-		nHeight=611
+		nLeft=52
+		nTop=184
+		nWidth=1238
+		nHeight=600
 	}
 }
 ProgramFile10 {
@@ -105,22 +105,22 @@ ProgramFile10 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=203
-		nTop=62
-		nWidth=1244
-		nHeight=593
+		nLeft=-3
+		nTop=94
+		nWidth=1242
+		nHeight=698
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
-	nWinState=1
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=-61
-		nTop=0
-		nWidth=1242
-		nHeight=590
+		nLeft=213
+		nTop=95
+		nWidth=1237
+		nHeight=576
 	}
 }
 nPointFileCount=3
@@ -159,22 +159,22 @@ PointFile3 {
 }
 sActiveWindow="main.prg"
 CmdWindow {
-	bOpened=False
-	Window {
-		nLeft=-399
-		nTop=100
-		nWidth=1244
-		nHeight=605
-	}
-	nWinState=0
-}
-RunWindow {
 	bOpened=True
 	Window {
-		nLeft=41
-		nTop=117
-		nWidth=836
-		nHeight=571
+		nLeft=11
+		nTop=114
+		nWidth=1242
+		nHeight=602
+	}
+	nWinState=1
+}
+RunWindow {
+	bOpened=False
+	Window {
+		nLeft=793
+		nTop=81
+		nWidth=742
+		nHeight=723
 	}
 }
 IOLabelEditor {
@@ -190,19 +190,19 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=1321
+		nTop=554
+		nWidth=520
+		nHeight=353
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=1015
-		nTop=102
-		nWidth=940
-		nHeight=275
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
 	}
 }
 Macros {
@@ -217,8 +217,8 @@ Macros {
 RobotMgr {
 	bOpened=False
 	Window {
-		nLeft=646
-		nTop=240
+		nLeft=425
+		nTop=90
 		nWidth=751
 		nHeight=485
 	}
