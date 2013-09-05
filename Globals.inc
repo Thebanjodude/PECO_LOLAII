@@ -134,7 +134,7 @@ Global Integer recNumberOfHoles, recInsertType, recInmag, recOutmag, recCrowding
 Global Double recPartNumber
 Global Boolean recFlashRequired
 Global Real recInsertDepth, recZLaserToHeatStake, recHeatStakeOffset
-Global Real recTempProbe, recTempTrack, recBossCrossArea
+Global Real recTempProbe, recTempTrack, recBossCrossArea, recSuctionWaitTime
 Global Integer recFirstHolePointInspection, recLastHolePointInspection
 Global Integer recFirstHolePointHotStake, recLastHolePointHotStake, recPointsTable
 Global Integer recFirstHolePointFlash, recLastHolePointFlash

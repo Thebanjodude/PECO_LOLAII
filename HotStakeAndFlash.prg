@@ -53,7 +53,8 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 '				GoTo exitHotStake
 '			EndIf
 	                     				
- 			'GoTo skiphotstake ' fake for testing
+ 			GoTo skiphotstake ' fake for testing
+ 			
  			Trap 2 ' disarm trap	
 			Do Until pasMessageDB = 4
 				On heatStakeGoH, 1 ' Tell the HS to install 1 insert
@@ -73,13 +74,14 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			
 			Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 			
-	'skiphotstake: ' fake for testing	
+	skiphotstake: ' fake for testing	
+		Wait 1 ' fake for testing
 
 		EndIf
 		
 		currentHSHole = currentHSHole + 1
 		SLock 1, 2, 3, 4 ' unlock all the joints so we can move again
-		Speed SystemSpeed
+		Speed SystemSpeed ' reset speed since slock initializes it
 		
 	Next
 	
@@ -90,7 +92,7 @@ exitHotStake:
 	If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 		jobAbort = True
 		SLock 1, 2, 3, 4 ' unlock all the joints so we can move again
-		Speed SystemSpeed
+		Speed SystemSpeed ' reset speed since slock initializes it
 		MemOff (jobAbortH) ' turn off abort bit
 	EndIf
 
