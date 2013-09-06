@@ -26,10 +26,15 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			SkippedHole = True 'Set flag
 			Print "Skipped Hole"
 		EndIf
+		
+		If currentHSHole = 3 Or currentHSHole = 4 Or currentHSHole = 5 Or currentHSHole = 11 Or currentHSHole = 12 Then ' The keys are in the way of fixed ears so skip 'em
+			SkippedHole = True 'Set flag
+			Print "Skipped Hole"
+		EndIf
 
 		If SkippedHole = False Then 'If the flag is set then skip the hole
 		
-			Jump P(i) +Z(15) LimZ zLimit  ' Go to the next hole        
+			Jump P(i) +Z(10) LimZ zLimit  ' Go to the next hole        
 			SFree 1, 2 ' free X and Y
 
 			Counter = 0 ' reset counter
@@ -69,6 +74,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 			Loop
 			
 	skiphotstake: ' fake for testing
+	Wait 1 ' fake for testing
 			Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 
 		EndIf

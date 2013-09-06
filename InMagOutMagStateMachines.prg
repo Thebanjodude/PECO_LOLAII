@@ -369,7 +369,6 @@ Do While True
 Loop
 
 Fend
-
 Function MagTorqueErrorISR
 
 InMagTorqueLim = 12345 ' Empirically define this limit
