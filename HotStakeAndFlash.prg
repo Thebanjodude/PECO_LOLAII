@@ -54,7 +54,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 '				GoTo exitHotStake
 '			EndIf
  				
- 			GoTo skiphotstake ' fake for testing
+' 			GoTo skiphotstake ' fake for testing
  				
 			Do Until pasMessageDB = 4
 				On heatStakeGoH, 1 ' Tell the HS to install 1 insert
@@ -73,8 +73,8 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 				EndIf
 			Loop
 			
-	skiphotstake: ' fake for testing
-	Wait 1 ' fake for testing
+'	skiphotstake: ' fake for testing
+'	Wait 1 ' fake for testing
 			Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 
 		EndIf
