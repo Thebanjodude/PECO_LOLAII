@@ -30,14 +30,14 @@ Function DropOffPanel(stupidCompiler1 As Byte) As Integer
 		Pause
 	EndIf
 	
-	Xqt OutputMagTorqueSense, NoPause
-	Jump P(recOutmag) LimZ zLimit Sense MemSw(outmagOvrTorq) = True
+	Xqt OutputMagTorqueSense, NoPause ' during this jump check if we hit anything
+	Jump P(recOutmag) LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
+		If JS = True Then
+			Pause ' we hit somthing so pause
+		EndIf
+	MemOff (outmagOvrTorq) ' reset bit
 	Quit OutputMagTorqueSense
-	
-	If JS = True Then
-		Pause
-	EndIf
-	
+
 	Off suctionCupsH ' fake
 	suctionCupsCC = False
 	Wait recSuctionWaitTime ' Allow time for cups to unseal
@@ -132,5 +132,19 @@ EndIf
 Trap 2 'disarm trap
 
 Fend
+Function OutputMagTorqueSense
+	
+	PTCLR ' clear
+	
+Do While True
+	
+	Print "Outmag Placement Torque: ", PTRQ(3)
+	If PTRQ(3) > 0.3 Then
+		'MemOn (outmagOvrTorq)
+		'erOutMagCrowding = True
+	EndIf
 
+Loop
+
+Fend
 

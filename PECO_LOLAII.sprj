@@ -1,12 +1,12 @@
-ENVT0100,LM:2013/09/06 13:48:39:350,DS:0000004116,CS:06729,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/09/06 14:58:36:186,DS:0000004117,CS:14598,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="9/6/2013 7:48:29 AM"
+	sLastModified="9/6/2013 8:58:32 AM"
 	bBuildComplete=True
-	bRebuildRequired=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="ALWKSBSCHAEFER"
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/6/2013 1:48:09 PM"
+	sTimeSavedInController="9/6/2013 2:58:32 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
@@ -48,7 +48,7 @@ ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/5/2013 6:46:45 PM"
+	sTimeSavedInController="9/6/2013 2:46:26 PM"
 }
 ProgramFile5 {
 	sName="OldCode.prg"
@@ -60,19 +60,19 @@ ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/5/2013 7:39:00 PM"
+	sTimeSavedInController="9/6/2013 2:33:17 PM"
 }
 ProgramFile7 {
 	sName="PickupAndDropOff.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/6/2013 1:48:29 PM"
+	sTimeSavedInController="9/6/2013 2:35:54 PM"
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/6/2013 1:44:54 PM"
+	sTimeSavedInController="9/6/2013 2:29:59 PM"
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
@@ -95,7 +95,7 @@ IncludeFile1 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="9/5/2013 2:50:01 PM"
+	sTimeSavedInController="9/6/2013 2:52:43 PM"
 }
 PointFile2 {
 	sName="Points2.pts"

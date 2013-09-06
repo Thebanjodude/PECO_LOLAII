@@ -278,11 +278,13 @@ Do While True
 				If Sw(outMagPanelRdyH) = True Then
 					outMagMtrDirCC = False  'Set direction to Down
 					outMagMtrCC = True ' Turn on Motor					
-					Do Until Sw(outMagPanelRdyH) = False
+					TmReset (10)
+					Do Until Sw(outMagPanelRdyH) = False Or Tmr(10) > .25
 						Wait .1
+						Print "looking for panel..."
 					Loop
 				EndIf
-
+				
 				NextState = StateOutMagLowering
 			ElseIf Sw(outMagPanelRdyH) = False Then ' There is still a panel to be moved down
 				outMagMtrDirCC = False  'Set direction to Down

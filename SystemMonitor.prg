@@ -168,7 +168,7 @@ Do While True
 	EndIf
 	
 	If erOutMagCrowding = True Then
-		Pause
+	'	Pause
 	EndIf
 	
 	If HotStakeTempRdy = False Then
@@ -198,8 +198,6 @@ Else
 	stackLightRedCC = False
 	stackLightAlrmCC = False
 EndIf
-
-
 	
 If inMagInterlock = True Or outMagInt = True Or erInMagEmpty = True Or erOutMagFull = True Then ' If a magazine interlock is open then turn on the yelow light
 	stackLightYelCC = True
