@@ -1,6 +1,5 @@
 ' System Global Vars and #defines
 Global Integer SystemSpeed, SystemAccel, mainCurrentState
-Global Real suctionWaitTime ' Time in seconds it takes for the EOAT to make a good suction on a panel
 Global Boolean suctionCups, suctionCupsCC, holeDetected, maintMode
 Global Integer systemStatus ' Integer that tells opperator what state the sytem is in-see State tab in IOT
 Global Real zLimit ' the highest the EOAT can move without hitting periphials
@@ -134,7 +133,7 @@ Global Integer recNumberOfHoles, recInsertType, recInmag, recOutmag, recCrowding
 Global Double recPartNumber
 Global Boolean recFlashRequired
 Global Real recInsertDepth, recZLaserToHeatStake, recHeatStakeOffset
-Global Real recTempProbe, recTempTrack, recBossCrossArea
+Global Real recTempProbe, recTempTrack, recBossCrossArea, recSuctionWaitTime
 Global Integer recFirstHolePointInspection, recLastHolePointInspection
 Global Integer recFirstHolePointHotStake, recLastHolePointHotStake, recPointsTable
 Global Integer recFirstHolePointFlash, recLastHolePointFlash
@@ -1082,7 +1081,7 @@ Global Long pasCoolActualSet
 '	Global Preserve Real recPanelThicknessOld
 '	Global Preserve Real recTempProbeOld
 '	Global Preserve Real recTempTrackOld
-'	Global Preserve Real suctionWaitTimeOld
+'	Global Preserve RealrecSuctionWaitTimeOld
 '	Global Preserve Real zLimitOld
 '	Global Preserve Real ZmaxTorqueOld
 '	Global Preserve String ctrlrErrMsgOld$
@@ -1624,7 +1623,7 @@ Global Long pasCoolActualSet
 	Global Real recPanelThicknessOld
 	Global Real recTempProbeOld
 	Global Real recTempTrackOld
-	Global Real suctionWaitTimeOld
+	Global Real recSuctionWaitTimeOld
 	Global Real zLimitOld
 	Global Real ZmaxTorqueOld
 	Global String ctrlrErrMsgOld$

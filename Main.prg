@@ -6,9 +6,9 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 'jobStart = True 'fake
 'recInmag = 10 '88558
 'recOutmag = 13 '88558
-suctionWaitTime = 2 'fake
+recSuctionWaitTime = 2 'fake
 zLimit = -12.5 'fake
-SystemSpeed = 55
+SystemSpeed = 35
 'recFlashDwellTime = 0
 'insertDepthTolerance = .010
 recHeatStakeOffset = 0.060000 ' positive is deeper
@@ -329,7 +329,7 @@ Fend
 '		CheckInitialParameters = True
 '	EndIf
 '	
-'	If AnvilZlimit = 0 Or suctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Then
+'	If AnvilZlimit = 0 OrrecSuctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Then
 '		CheckInitialParameters = False
 '	Else
 '		CheckInitialParameters = True
@@ -445,4 +445,18 @@ Function ChoosePointsTable()
 		Print "point Table is Unknown"
 	EndIf
 Fend
+Function OutputMagTorqueSense
+	
+	PTCLR ' clear
+	
+Do While True
+	
+	If PTRQ(3) > 0.3 Then
+		MemOn (outmagOvrTorq)
+		erOutMagCrowding = True
+	EndIf
+Loop
+
+Fend
+	
 

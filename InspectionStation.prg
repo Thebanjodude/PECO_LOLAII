@@ -3,16 +3,13 @@
 Function InspectPanel(SelectRoutine As Integer) As Integer
 
 	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
-	Real ZdiffFromLaserCenter, RobotZposition
 	SystemStatus = StateInspection
 	InspectPanel = 2 ' default to fail 
+	Integer i
+	Real BossCrosssectionalArea
+	Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays
 	
 	Jump PreScan LimZ zLimit
-	
-	Integer i
-	Real BossCrosssectionalArea, LeftHeight, RightHeight
-	Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays
-	Redim PreInspectionArray(recNumberOfHoles, 0)
 	
 	currentPreinspectHole = 1 ' This tells the HMI which hole we are working on during preinspection
 	currentInspectHole = 1 ' This tells the HMI which hole we are working on during inspection
@@ -20,94 +17,57 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	For i = recFirstHolePointInspection To recLastHolePointInspection
 		
 		Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
-
 		Go P(i)
 		
 		If SelectRoutine = 1 Then
 
-			ChangeProfile("07")
-			Wait .25
-'			ZdiffFromLaserCenter = (GetLaserMeasurement("05") + GetLaserMeasurement("06")) / 2 ' take an average from the left and the right
-			RobotZposition = CZ(Here) ' Where are we at in robot Z when we take the laser measurement
-			
-			LeftHeight = GetLaserMeasurement("05")
-			RightHeight = GetLaserMeasurement("06")
-			
-			If LeftHeight > RightHeight Then ' Pick the lower point
-				ZdiffFromLaserCenter = RightHeight
-			Else
-				ZdiffFromLaserCenter = LeftHeight
-			EndIf
-			
-			Print "ZdiffFromLaserCenter, RobotZposition:", ZdiffFromLaserCenter, RobotZposition
-            
-            'Check if the hole is positioned in the laser correctly 
-            If Abs(ZdiffFromLaserCenter) > 25 Then
-				' Throw an Error
-				Print "Hole not within Laser Range"
-				erUnknown = True
-            	Pause
-                InspectPanel = 2 ' default to fail		
-                Go PreScan :U(CU(Here))
-            	Exit Function
-            EndIf
-			
-			ZSpotfacetoQuillOffset = RobotZposition - ZdiffFromLaserCenter
-			
-			Print "ZSpotfacetoQuillOffset:", ZSpotfacetoQuillOffset
-			
-			PreInspectionArray(currentPreinspectHole, 0) = ZSpotfacetoQuillOffset
-					
-' The following code block detects if an insert is in the hole already.			
+			' The following code block detects if an insert is in the hole already.			
 			ChangeProfile("07")
 			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
 			
-			Print "BossCrosssectionalArea: ", BossCrosssectionalArea
-			If BossCrosssectionalArea > recBossCrossArea Then ' There is already an insert so set skip flag
-				SkipHoleArray(currentPreinspectHole, 0) = 1
-				Print "Hole ", currentPreinspectHole, " is already populated"
-			EndIf
-
-			ChangeProfile("00")
-			Print "Hole error:", GetLaserMeasurement("05")
-			
-'			If Abs(BossCrosssectionalArea) < 12345 Then ' We dont see an empty hole or a populated hole. Panel is backwards or 
+'			If Abs(BossCrosssectionalArea) < -9999 Then ' We dont see an empty hole or a populated hole. Panel is backwards or 
 '				erPanelStatusUnknown = True
 '				InspectPanel = 2					' the wrong panel was put into the magazine
 '				'back out of the laser	
 '				Exit For
 '			EndIf
 			
+			Print "BossCrosssectionalArea: ", BossCrosssectionalArea
+			If BossCrosssectionalArea > recBossCrossArea Then ' There is already an insert so set skip flag
+				SkipHoleArray(currentPreinspectHole, 0) = 1
+				Print "Hole ", currentPreinspectHole, " is already populated"
+			EndIf
+			
+'			If BossCrosssectionalArea = -9999 Then ' Check if there is a panel under the laser
+'				erPanelStatusUnknown = True
+'				InspectPanel = 2					' the wrong panel was put into the magazine
+'				Trap 2 'disarm trap
+'				jump PreScan :U(CU(Here)) limz zlimit' Pull away from the laser WITHOUT spinning (may hit laser)
+'				Exit function
+'			EndIf
+			
 			currentPreinspectHole = currentPreinspectHole + 1
 			
 		ElseIf SelectRoutine = 2 Then
+			
 			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
+			PrintInspectionArray()
+			PrintPassFailArray()
+			UnpackInspectionArrays()
 			currentInspectHole = currentInspectHole + 1
-'		Else
-'			Print "Inspection argument undefined"
-'			InspectPanel = 2 ' fail
-'			Exit Function
 		EndIf
 			
-		Go P(i) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
+		Go P(i) :U(CU(Here)) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
 		Wait .25
 	Next
 	
-	If SelectRoutine = 1 Then
-		PrintPreInspectionArray()
-	Else
-		PrintInspectionArray()
-		PrintPassFailArray()
-		UnpackInspectionArrays()
-	EndIf
-
 	InspectPanel = 0 ' Inspection occured without errors
 	Go PreScan :U(CU(Here))
 
 exitInspectPanel:
 
 	If MemSw(jobAbortH) = True Then
-		Go PreScan :U(CU(Here)) ' Pull away from the laster WITHOUT spinning (may hit laser)
+		Go PreScan :U(CU(Here)) ' Pull away from the laser WITHOUT spinning (may hit laser)
 		jobAbort = True
 		MemOff (jobAbortH)
 	EndIf
@@ -397,8 +357,8 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Wait 3
 	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
 	suctionCupsCC = False ' Turn off suction cups
-	Wait suctionWaitTime ' wait for cups to release
-	Go P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
+	Wait recSuctionWaitTime ' wait for cups to release
+	Jump P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
 	Wait .25
 	MBWrite(pasCrowdingADDR, 1, MBTypeCoil) ' Close crowding
 
@@ -411,7 +371,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	
 	Go P(recCrowding)
 	suctionCupsCC = True ' Turn on cups
-	Wait suctionWaitTime
+	Wait recSuctionWaitTime
 
 	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) 'Open crowding
 	' wait for verification that the crowding has opened
@@ -431,7 +391,7 @@ If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	MemOff (jobAbortH) ' reset membit
 	MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Open crowding
 	suctionCupsCC = False ' Turn off cups
-	Go P(recCrowding) ' move away from a panel
+	Jump PreHotStake LimZ zLimit ' move away from a panel
 EndIf
 
 Trap 2 ' Disarm trap

@@ -167,6 +167,10 @@ Do While True
 	'	Pause
 	EndIf
 	
+	If erOutMagCrowding = True Then
+		Pause
+	EndIf
+	
 	If HotStakeTempRdy = False Then
 		erHeatStakeTemp = True
 	Else
@@ -183,7 +187,7 @@ Do While True
 	
 ' In this section I set the error in the main routine and the lights and pausing are changed here	
 'erPanelStatusUnknown = True
-If EStopOn = True Or erHmiDataAck = True Or erUnknown = True Or erLowPressure = True Or erHighPressure = True Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or erFlashStation = True Then
+If EStopOn = True Or erHmiDataAck = True Or erUnknown = True Or erOutMagCrowding = True Or erLowPressure = True Or erHighPressure = True Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or erFlashStation = True Then
 	stackLightRedCC = True
 	If alarmMute = True Then ' Mute the alarm
 		stackLightAlrmCC = False
