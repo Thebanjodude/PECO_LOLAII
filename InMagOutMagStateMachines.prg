@@ -279,7 +279,7 @@ Do While True
 					outMagMtrDirCC = False  'Set direction to Down
 					outMagMtrCC = True ' Turn on Motor					
 					TmReset (10)
-					Do Until Sw(outMagPanelRdyH) = False Or Tmr(10) > .25
+					Do Until Sw(outMagPanelRdyH) = False Or Tmr(10) > .2
 						Wait .1
 						Print "looking for panel..."
 					Loop

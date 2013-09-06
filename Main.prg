@@ -7,6 +7,7 @@ OnErr GoTo errHandler ' Define where to go when a controller error occurs
 recSuctionWaitTime = 1 'fake
 zLimit = -12.5 'fake
 SystemSpeed = 35
+SystemAccel = 35
 'recFlashDwellTime = 0
 insertDepthTolerance = .010
 recFlashRequired = False
@@ -264,12 +265,11 @@ retry:
 	Motor On
 	Power High
 	Speed SystemSpeed
-	Accel 50, 50 'Paramterize these numbers
+	Accel SystemAccel, SystemAccel 'Paramterize these numbers
 	QP (On) ' turn On quick pausing	
 	
 '	Move PreScan :U(CU(CurPos)) ' go home
 '	Move PreScan ROT ' go home
-
 	
 Fend
 Function CheckInitialParameters() As Integer

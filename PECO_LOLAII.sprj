@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/09/06 14:58:36:186,DS:0000004117,CS:14598,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/09/06 15:06:26:032,DS:0000004117,CS:13581,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="9/6/2013 8:58:32 AM"
+	sLastModified="9/6/2013 9:06:22 AM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/6/2013 2:58:32 PM"
+	sTimeSavedInController="9/6/2013 3:06:22 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
@@ -48,7 +48,7 @@ ProgramFile4 {
 	sName="InMagOutMagStateMachines.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/6/2013 2:46:26 PM"
+	sTimeSavedInController="9/6/2013 3:01:54 PM"
 }
 ProgramFile5 {
 	sName="OldCode.prg"
