@@ -3,6 +3,8 @@
 Function main()
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
+On suctionCupsH ' fake
+
 'jobStart = True 'fake
 recSuctionWaitTime = 1 'fake
 zLimit = -12.5 'fake
@@ -17,6 +19,10 @@ PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 jobDone = False ' reset flag
 jobStart = False ' reset flag
+
+
+TeachPointsUnderLaser()
+Quit All
 
 mainCurrentState = StateIdle ' The first state is Idle
 
@@ -397,7 +403,7 @@ Loop
 	
 Fend
 Function ChoosePointsTable()
-	' Choose which points table to use
+	' Choose which points table to load
 
 	If recPointsTable = 1 Then
 		LoadPoints "points.pts"
@@ -410,6 +416,140 @@ Function ChoosePointsTable()
 		Print "point Table is Unknown"
 	EndIf
 Fend
+Function SavePointsTable()
+	' Choose which points table to save
 
+	If recPointsTable = 1 Then
+		SavePoints "points.pts"
+	ElseIf recPointsTable = 2 Then
+		SavePoints "points2.pts"
+	ElseIf recPointsTable = 3 Then
+		SavePoints "points3.pts"
+	Else
+		erUnknown = True
+		Print "point Table is Unknown"
+	EndIf
+Fend
+Function TeachPointsUnderLaser()
+' This function will only work in the operator aligns the hole with minimal error in all 3 axis's
+On suctionCupsH
+suctionCupsCC = True
+Pause
+
+' all tolerances are +/- mm
+#define Xtolerance .5
+#define Ytolerance .5
+#define Ztolerance 5
+
+Real XLaserError, XLaserTolerance
+Real YLaserError, YLaserTolerance
+Real ZLaserError, ZLaserTolerance
+Real tempY1, tempY2
+Integer i
+
+recFirstHolePointInspection = 6
+recLastHolePointInspection = 6
+recPointsTable = 3
+
+Motor On
+Power Low
+
+ChoosePointsTable() ' load correct points table
+ChangeProfile("00") ' Change profile on the laser
+
+For i = recFirstHolePointInspection To recLastHolePointInspection
+' add checks for laser out of range (-9999's)
+
+	SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
+	Pause ' wait for operator to continue
+	SLock 1, 2, 3, 4 ' lock motors
 	
+redoZ:
+	ZLaserError = GetLaserMeasurement("06")
+	Print "ZLaserError: ", ZLaserError
+	If ZLaserError = -999.999 Then
+		Print "Laser Z not in range, please adjust"
+		SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
+		Pause ' wait for operator to continue
+		GoTo redoZ
+	EndIf
+	
+	If Abs(ZLaserError) > ZLaserTolerance Then
+	
+'	Do While Abs(ZLaserError) > ZLaserTolerance
+		JTran 3, -1 * ZLaserError
+		Wait .25
+		ZLaserError = GetLaserMeasurement("06")
+		Print "ZLaserError: ", ZLaserError
+'	Loop
+	EndIf
+	
+	Print "Z is done"
+	P(i) = Here ' save the point 
+	
+redoY:
+	YLaserError = GetLaserMeasurement("05")
+	Print "YLaserError: ", YLaserError
+	If YLaserError = -999.999 Then
+		Print "Laser Y not in range, please adjust"
+		SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
+		Pause ' wait for operator to continue
+		GoTo redoY
+	EndIf
+	
+' the problem with this is that I can't determine which way to correct (becuase it's a circle).	
+' the problem with this method is if we cross the diameter with our .1mm move	
+
+	tempY1 = GetLaserMeasurement("05")
+	Print "tempY1", tempY1
+	Move P(i) +Y(0.1) ' move a little to see if we are 
+	tempY2 = GetLaserMeasurement("05")
+	Print "tempY2", tempY2
+	
+	YLaserError = GetLaserMeasurement("05")
+	If Abs(YLaserError) > YLaserTolerance Then
+	
+'	Do While Abs(YLaserError) > YLaserTolerance
+		If tempY1 < tempY2 Then
+			Move P(i) +Y(-1 * YLaserError)
+		Else
+			Move P(i) +Y(YLaserError)
+		EndIf
+'	Loop
+	EndIf
+	
+	Wait .25
+	YLaserError = GetLaserMeasurement("05")
+	Print "YLaserError: ", YLaserError
+	
+	Print "Y is done"
+	P(i) = Here ' save the point 
+	
+redoX:
+	XLaserError = GetLaserMeasurement("07")
+	Print "XLaserError: ", XLaserError
+	If XLaserError = -999.999 Then
+		Print "Laser X not in range, please adjust"
+		SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
+		Pause ' wait for operator to continue
+		GoTo redoX
+	EndIf
+	
+	If Abs(XLaserError) > XLaserTolerance Then
+'	Do While Abs(XLaserError) < XLaserTolerance
+		Move P(i) +X(-1 * XLaserError / 2)
+		Wait .25
+		XLaserError = GetLaserMeasurement("07")
+		Print "XLaserError: ", XLaserError
+'	Loop
+	EndIf
+	
+	Print "X is done"
+	P(i) = Here ' save the point 
+	
+Next
+
+	SFree 1, 2, 3, 4
+	SavePointsTable() ' save the points table
+Fend
 

@@ -1,94 +1,105 @@
-ENVT0100,LM:2013/08/20 20:53:25:488,DS:0000001189,CS:07720,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/09/09 21:57:28:914,DS:0000001450,CS:01652,MA:00-30-64-0E-A2-62,EI:           
 sVersion="1.0.0"
-nDisplayMode=2
-nNumberOfPoints=5
+nNumberOfPoints=6
 Point1 {
 	nNumber=1
 	sLabel="PreScan"
 	sDescription=""
-	rX=28.09
-	rY=340.107
-	rZ=-23.95
-	rU=135
-	rV=0
-	rW=0
+	rX=28.090000
+	rY=340.106995
+	rZ=-23.950001
+	rU=135.000000
+	rV=0.000000
+	rW=0.000000
 	nLocal=0
 	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
 	nJ6Flag=0
-	bSimVisible=False
 }
 Point2 {
 	nNumber=2
 	sLabel="PreHotStake"
 	sDescription=""
-	rX=-257.154
-	rY=248.127
-	rZ=-13
-	rU=181.098
-	rV=0
-	rW=0
+	rX=-257.153992
+	rY=248.126999
+	rZ=-13.000000
+	rU=181.098007
+	rV=0.000000
+	rW=0.000000
 	nLocal=0
 	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
 	nJ6Flag=0
-	bSimVisible=False
 }
 Point3 {
 	nNumber=3
 	sLabel="PreFlash"
 	sDescription=""
-	rX=-347.651
-	rY=-68.259
-	rZ=-21.444
-	rU=270
-	rV=0
-	rW=0
+	rX=-347.651001
+	rY=-68.259003
+	rZ=-21.444000
+	rU=270.000000
+	rV=0.000000
+	rW=0.000000
 	nLocal=0
 	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
 	nJ6Flag=0
-	bSimVisible=False
 }
 Point4 {
 	nNumber=4
 	sLabel="OutmagWaypoint"
 	sDescription=""
-	rX=330.184
-	rY=178.558
-	rZ=-21.596
-	rU=135
-	rV=0
-	rW=0
+	rX=330.183990
+	rY=178.557999
+	rZ=-21.596001
+	rU=135.000000
+	rV=0.000000
+	rW=0.000000
 	nLocal=0
 	nHand=2
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
 	nJ6Flag=0
-	bSimVisible=False
 }
 Point5 {
+	nNumber=6
+	sLabel=""
+	sDescription=""
+	rX=32.233410
+	rY=403.034882
+	rZ=-25.368504
+	rU=142.261841
+	rV=0.000000
+	rW=0.000000
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+}
+Point6 {
 	nNumber=14
 	sLabel=""
 	sDescription=""
-	rX=0
-	rY=0
-	rZ=0
-	rU=0
-	rV=0
-	rW=0
+	rX=0.000000
+	rY=0.000000
+	rZ=0.000000
+	rU=0.000000
+	rV=0.000000
+	rW=0.000000
 	nLocal=0
 	nHand=1
 	nElbow=1
 	nWrist=1
 	nJ4Flag=0
 	nJ6Flag=0
-	bSimVisible=False
 }
