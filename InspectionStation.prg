@@ -396,5 +396,48 @@ EndIf
 Trap 2 ' Disarm trap
 
 Fend
-
+'
+'Function tempSimulation
+'	
+'	'assuming surfce measurement temperature
+'	'assume convection cooling in still air
+'	'assume perfect cube
+'	
+'	
+'	Real SpecificHeat, mass, Pwr, TempAmbient, DeltaTime, TempCurrent, TempRise
+'	Integer h
+'	
+'	mass = 1 'kg
+'	SpecificHeat = 920.5 '(J/kg*C)
+'	PowerIn = 100 ' Watts
+'	PowerOut = 0 ' Watts
+'	TempAmbient = 25.0 'C	
+'	DeltaTime = 60 'Seconds
+'	TempCurrent = 0 'C
+'	TempRise = 0 'C
+'	SurfaceArea= 'ft^2
+'	TempDiff = 0
+'	HeatTempCoeff = 15 'w/(m^2*
+'	
+'	TempCurrent = TempAmbient
+'
+'Do While True
+'	
+'	If On Then
+'		TempRise = (InPwr * DeltaTime) / (mass * SpecificHeat)
+'		TempCurrent = TempCurrent + TempRise
+'		Print TempCurrent
+'	Else
+'		TempDiff = TempCurrent - TempAmbient
+'		PowerOut=
+'		TempFall=
+'		TempCurrent = TempCurrent - TempFall
+'	EndIf
+'Loop
+'	
+'	
+'Fend
+Function CalculateTemp
+	
+Fend
 

@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/09/06 18:30:05:109,DS:0000004118,CS:24695,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/09/13 20:13:05:216,DS:0000004121,CS:31810,MA:6C-F0-49-E2-45-75,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="9/6/2013 12:30:01 PM"
+	sLastModified="9/13/2013 2:12:40 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/6/2013 5:34:30 PM"
+	sTimeSavedInController="9/9/2013 10:05:17 PM"
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
@@ -72,13 +72,13 @@ ProgramFile8 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/6/2013 2:29:59 PM"
+	sTimeSavedInController="9/13/2013 8:12:40 PM"
 }
 ProgramFile9 {
 	sName="HeatStakeCommunication.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="8/22/2013 3:28:16 PM"
+	sTimeSavedInController="9/9/2013 7:41:09 PM"
 }
 ProgramFile10 {
 	sName="CalibrationRoutines.prg"
@@ -95,7 +95,7 @@ IncludeFile1 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="9/6/2013 3:51:48 PM"
+	sTimeSavedInController="9/6/2013 3:52:54 PM"
 }
 PointFile2 {
 	sName="Points2.pts"
@@ -103,14 +103,14 @@ PointFile2 {
 }
 PointFile3 {
 	sName="Points3.pts"
-	sTimeSavedInController="8/20/2013 8:53:25 PM"
+	sTimeSavedInController="9/9/2013 9:57:28 PM"
 }
 OperatorSettings {
 	OperatorWindow {
 		sTitle="Operator Window"
 		nWinState=0
 		sFontName="Courier New"
-		rFontSize=10
+		rFontSize=20.25
 		bFontBold=False
 		bRobotMgrButton=True
 		bPauseContButtons=True
