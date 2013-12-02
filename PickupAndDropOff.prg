@@ -88,7 +88,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	
 	Jump PreScan LimZ zLimit ' Go home
 	
-	' Make this non blocking by checking for var then exit function with pickuppanel=1, revisit
+	' Make this non blocking by checking for var then exit function with pickuppanel=1, revisit l8r
 	Do Until InMagPickUpSignal = True ' Wait for inmag to confirm a panel is ready to be picked up
 		Wait .25
 	Loop

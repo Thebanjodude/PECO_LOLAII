@@ -12,23 +12,24 @@ SystemSpeed = 25
 SystemAccel = 35
 'recFlashDwellTime = 0
 insertDepthTolerance = .010
-recFlashRequired = False
 recPointsTable = 1
+
+recPopPanelRequired = False
+recCrowdingRequired = False
+recPreinspectionRequired = False
+recFlashRequired = False
+recHotStakePanelRequired = False
+recInspectionRequired = False
+recPushPanelRequired = False
 
 PowerOnSequence() ' Initialize the system and prepare it to do a job
 
 jobDone = False ' reset flag
 jobStart = False ' reset flag
 
-
-'TeachPointsUnderLaser()
-'Quit All
+'TeachPointsUnderLaser() ' prototype teaching code (get it close and hone in on it)
 
 mainCurrentState = StateIdle ' The first state is Idle
-
-'Calibrate()
-'Print "done"
-'Pause
 
 Do While True
 
@@ -43,11 +44,7 @@ Select mainCurrentState
 		
 			If CheckInitialParameters() = 0 Then
 				mainCurrentState = StatePopPanel
-				'mainCurrentState = StatePreinspection
-				'mainCurrentState = StateHotStakePanel
-				'mainCurrentState = StateFlashRemoval
-				'mainCurrentState = StateCrowding
-				ChoosePointsTable()
+				ChoosePointsTable() ' Change to the correct points table for the selected panel
 				Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
 					MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
 					Wait 1
@@ -74,14 +71,12 @@ Select mainCurrentState
 	' This state picks up a panel from the input magazine. Then takes the panel to the home	
 	' position. 
 	
-		ChoosePointsTable() ' Load points table that panel is programed under
+	If recPopPanelRequired = True Then 'Check if we want to skip this state
 	
 		StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
 				
 		If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
 			mainCurrentState = StateCrowding
-			'mainCurrentState = StatePushPanel ' fake for testing
-			'mainCurrentState = StateHotStakePanel
 			Print "Pick up Successful"
 		ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
 			mainCurrentState = StatePopPanel
@@ -91,10 +86,12 @@ Select mainCurrentState
 			mainCurrentState = StateIdle ' Go to idle because there was an error 
 			Print "Pickup failed"
 		Else
-			mainCurrentState = StateIdle ' Go to idle because its the only thing to do
+			mainCurrentState = StateIdle ' Somthing crazy happened. Go to idle because its the only thing to do
 			Print "going to idle"
 		EndIf
 		
+	EndIf
+	
 		If jobAbort = True Then
 			mainCurrentState = StatePushPanel ' push a panel before going to idle
 			Print "aborting pick up"
@@ -104,44 +101,47 @@ Select mainCurrentState
 		'This state Moves a panel from the home location, crowds it, then
 		' presents it to the laser scanner for pre-inspection
 		
+	If recCrowdingRequired = True Then 'Check if we want to skip this state
+	
 		StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
 
-'		If StatusCheckCrowding = 0 Then
-'			mainCurrentState = StatePreinspection
-'			mainCurrentState = StateInspection
-'			mainCurrentState = StateHotStakePanel
-'			mainCurrentState = StateFlashRemoval
-			mainCurrentState = StatePushPanel
-'		ElseIf StatusCheckCrowding = 2 Then
+		If StatusCheckCrowding = 0 Then
+			mainCurrentState = StatePreinspection
+'		ElseIf StatusCheckCrowding = 2 Then ' I have no way of knowing if crowding failed in this step
 '			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
-'		EndIf
+		EndIf
 		
+	EndIf
+	
 		If jobAbort = True Then
 			mainCurrentState = StatePushPanel ' Go drop off the panel before we quit 
 		EndIf
-
+	
 	Case StatePreinspection
 		' This state uses the laser scanner to find pre-installed inserts and attempts
 		' to check if the correct panel has been put into the magazine.
 		
+	If recPreinspectionRequired = True Then 'Check if we want to skip this state
+		
 			StatusCheckPreinspection = InspectPanel(1) ' 1=Preinspection 
 			If StatusCheckPreinspection = 0 Then
 				mainCurrentState = StateHotStakePanel
-'				mainCurrentState = StateInspection
-'				mainCurrentState = StatePushPanel
 				Print "Preinspection executed"
-			ElseIf StatusCheckPreinspection = 2 Then
+			ElseIf StatusCheckPreinspection = 2 Then ' failed preinspection
 				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle 
 				' go to this state if we cant find all the holes 
 			EndIf
-			
+	EndIf
+	
 			If jobAbort = True Then
 				mainCurrentState = StatePushPanel ' Drop off the panel before we quit 
 			EndIf
 		
 	Case StateHotStakePanel
 		' This state iterates through each hole and installs all inserts
-			
+		
+	If recHotStakePanelRequired = True Then 'Check if we want to skip this state
+	
 		StatusCheckHotStake = HotStakePanel(0)
 		If StatusCheckHotStake = 0 Then
 			Print "hot stake done"
@@ -154,13 +154,17 @@ Select mainCurrentState
 		ElseIf StatusCheckHotStake = 2 Then
 			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 		EndIf
-				
+		
+	EndIf
+	
 		If jobAbort = True Then
 			mainCurrentState = StatePushPanel ' Drop off the panel before we quit	
 		EndIf
 		
 	Case StateFlashRemoval
 
+	If recFlashRequired = True Then 'Check if we want to skip this state
+		
 		StatusCheckFlash = FlashPanel(recFlashDwellTime)
 		If StatusCheckFlash = 0 Then
 			mainCurrentState = StateInspection
@@ -169,7 +173,9 @@ Select mainCurrentState
 			' break it when it tried to move (cause its stuck in the hole)
 			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 		EndIf
-
+		
+	EndIf
+	
 		If jobAbort = True Then
 			mainCurrentState = StatePushPanel ' Go to push then idle because the operator wants to quit
 		EndIf
@@ -178,22 +184,27 @@ Select mainCurrentState
 		' This state uses the laser scanner to measure and log the depths of each insert at two places
 		' No matter the result of the InspectPanel() routine it always pushes a panel, but we need to know why
 		' it pushed-thus the different checks.
+	If recInspectionRequired = True Then 'Check if we want to skip this state
 		
-			StatusCheckInspection = InspectPanel(2) ' 2=Inspection of Install Inserts 
-			If StatusCheckInspection = 0 Then
-				mainCurrentState = StatePushPanel
-				Print "Inspection Executed"
-			ElseIf StatusCheckPreinspection = 2 Then
-				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
-			EndIf
+		StatusCheckInspection = InspectPanel(2) ' 2=Inspection of Install Inserts 
+		If StatusCheckInspection = 0 Then
+			mainCurrentState = StatePushPanel
+			Print "Inspection Executed"
+		ElseIf StatusCheckPreinspection = 2 Then
+			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
+		EndIf
 			
+	EndIf
+	
 		If jobAbort = True Then
 			mainCurrentState = StatePushPanel ' Go to idle because the operator wants to quit	
 		EndIf
 		
 	Case StatePushPanel
 	' This state drops off a panel into the output magazine. 		
-	
+	 
+	If recPushPanelRequired = True Then 'Check if we want to skip this state
+		
 		StatusCheckDropOff = DropOffPanel(0)
 		
 		If StatusCheckDropOff = 0 Then ' We successfully dropped off a panel
@@ -204,6 +215,8 @@ Select mainCurrentState
 			Pause
 		EndIf
 		
+	EndIf
+	
 		If jobAbort = True Or jobDone = True Then
 			Jump PreScan LimZ zLimit ' go home
 			mainCurrentState = StateIdle ' Go to idle because the operator wants to quit or job is done	
@@ -357,7 +370,6 @@ Function ClearMemory()
 	For x = 0 To 15
 		MemOutW x, 0 ' This writes 0 to all memory locations in word chunks
 	Next
-	
 	x = 0
 	
 Fend

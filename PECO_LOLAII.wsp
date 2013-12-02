@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/12/02 18:36:44:444,DS:0000003036,CS:23657,MA:00-50-56-C0-00-01,EI:           
+ENVT0100,LM:2013/12/02 21:56:23:796,DS:0000003038,CS:09538,MA:00-50-56-C0-00-01,EI:           
 sActiveChild="Main.prg"
 bMdiMaximized=False
 ProgramFile1 {
@@ -6,10 +6,10 @@ ProgramFile1 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=153
-		nTop=16
-		nWidth=1360
-		nHeight=755
+		nLeft=1
+		nTop=1
+		nWidth=1326
+		nHeight=824
 	}
 }
 ProgramFile2 {
@@ -74,19 +74,19 @@ ProgramFile7 {
 	Window {
 		nLeft=107
 		nTop=82
-		nWidth=1084
-		nHeight=563
+		nWidth=1083
+		nHeight=559
 	}
 }
 ProgramFile8 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=-4
-		nTop=-2
-		nWidth=1355
-		nHeight=774
+		nLeft=-123
+		nTop=124
+		nWidth=1353
+		nHeight=770
 	}
 }
 ProgramFile9 {
@@ -105,10 +105,10 @@ ProgramFile10 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=85
-		nTop=66
-		nWidth=1239
-		nHeight=691
+		nLeft=65
+		nTop=96
+		nWidth=1275
+		nHeight=687
 	}
 }
 nIncludeFileCount=1
@@ -117,10 +117,10 @@ IncludeFile1 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=11
-		nTop=99
-		nWidth=1229
-		nHeight=559
+		nLeft=-26
+		nTop=80
+		nWidth=1228
+		nHeight=555
 	}
 }
 nPointFileCount=3

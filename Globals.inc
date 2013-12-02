@@ -131,7 +131,8 @@ Global Real PreInspectionArray(0, 0)
 #define YCoord 1
 Global Integer recNumberOfHoles, recInsertType, recInmag, recOutmag, recCrowding, recPreCrowding
 Global Double recPartNumber
-Global Boolean recFlashRequired
+Global Boolean recFlashRequired, recPopPanelRequired, recPreinspectionRequired, recCrowdingRequired
+Global Boolean recHotStakePanelRequired, recInspectionRequired, recPushPanelRequired
 Global Real recInsertDepth, recZLaserToHeatStake, recHeatStakeOffset
 Global Real recTempProbe, recTempTrack, recBossCrossArea, recSuctionWaitTime
 Global Integer recFirstHolePointInspection, recLastHolePointInspection
