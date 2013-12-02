@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/09/05 19:10:54:780,DS:0000014147,CS:17019,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/11/11 18:12:44:479,DS:0000014221,CS:25423,MA:6C-F0-49-E2-45-75,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -248,7 +248,7 @@ OutputBitLabels {
 	}
 	Label9 {
 		nBit=104
-		sLabel="nestpneu"
+		sLabel="activeCooling"
 		sDescription=""
 	}
 	Label10 {
@@ -289,7 +289,7 @@ OutputWordLabels {
 	nNumberOfLabels=0
 }
 MemoryBitLabels {
-	nNumberOfLabels=135
+	nNumberOfLabels=136
 	Label1 {
 		nBit=0
 		sLabel="airPressLowF"
@@ -963,6 +963,11 @@ MemoryBitLabels {
 	Label135 {
 		nBit=155
 		sLabel="flashHomeNCF"
+		sDescription=""
+	}
+	Label136 {
+		nBit=216
+		sLabel="WatlowDO"
 		sDescription=""
 	}
 }

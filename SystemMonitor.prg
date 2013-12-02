@@ -6,7 +6,7 @@ Function SystemMonitor()
 
 OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
-ResetErrors() ' resets all errors
+ResetErrors() ' resets all errors upon power on
 
 Do While True
 	

@@ -8,7 +8,7 @@ On suctionCupsH ' fake
 'jobStart = True 'fake
 recSuctionWaitTime = 1 'fake
 zLimit = -12.5 'fake
-SystemSpeed = 35
+SystemSpeed = 25
 SystemAccel = 35
 'recFlashDwellTime = 0
 insertDepthTolerance = .010
@@ -21,8 +21,8 @@ jobDone = False ' reset flag
 jobStart = False ' reset flag
 
 
-TeachPointsUnderLaser()
-Quit All
+'TeachPointsUnderLaser()
+'Quit All
 
 mainCurrentState = StateIdle ' The first state is Idle
 
@@ -107,11 +107,11 @@ Select mainCurrentState
 		StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
 
 '		If StatusCheckCrowding = 0 Then
-			mainCurrentState = StatePreinspection
+'			mainCurrentState = StatePreinspection
 '			mainCurrentState = StateInspection
 '			mainCurrentState = StateHotStakePanel
 '			mainCurrentState = StateFlashRemoval
-'			mainCurrentState = StatePushPanel
+			mainCurrentState = StatePushPanel
 '		ElseIf StatusCheckCrowding = 2 Then
 '			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
 '		EndIf
@@ -270,6 +270,7 @@ retry:
 	
 	Motor On
 	Power High
+	
 	Speed SystemSpeed
 	Accel SystemAccel, SystemAccel 'Paramterize these numbers
 	QP (On) ' turn On quick pausing	
