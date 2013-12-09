@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/12/02 21:56:23:796,DS:0000003038,CS:09538,MA:00-50-56-C0-00-01,EI:           
+ENVT0100,LM:2013/12/02 22:44:57:565,DS:0000003036,CS:07486,MA:6C-F0-49-E2-45-75,EI:           
 sActiveChild="Main.prg"
 bMdiMaximized=False
 ProgramFile1 {
@@ -114,13 +114,13 @@ ProgramFile10 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-26
-		nTop=80
-		nWidth=1228
-		nHeight=555
+		nLeft=25
+		nTop=44
+		nWidth=1227
+		nHeight=726
 	}
 }
 nPointFileCount=3

@@ -12,6 +12,7 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	currentHSHole = 1 ' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 ' default to fail	
 	
+	Jump PreScan LimZ zLimit ' just to make sure we are home	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
 	
 	Do Until pasMessageDB = 3
@@ -112,6 +113,7 @@ exitHotStake:
 		
 	SystemStatus = StateMoving
 	Jump PreHotStake :U(CU(Here)) LimZ zLimit ' Pull back from the hot stake machine
+	Jump preScan LimZ zLimit ' go home
 		
 Trap 2 ' disarm trap	
 
@@ -123,6 +125,8 @@ Function FlashPanel(DwellTime As Real) As Integer
 	Integer i
 	currentFlashHole = 1
 	
+	Jump preScan LimZ zLimit ' make sure we are in the right position before we jump to flash station
+	Jump PreHotStake LimZ zLimit ' waypoint so we don't hit anything	
 	Jump PreFlash LimZ zLimit ' Present panel to flash machine
 	'On debrisMtrH 'Turn on Vacuum
 	debrisMtrCC = True
@@ -196,7 +200,10 @@ exitFlash:
 '	Off debrisMtrH 'Turn off Vacuum
 	debrisMtrCC = False
 	SystemStatus = StateMoving
-	Jump PreFlash :U(CU(Here)) LimZ zLimit ' go home
+	
+	Jump PreFlash :U(CU(Here)) LimZ zLimit ' going home
+	Jump PreHotStake LimZ zLimit ' waypoint
+	Jump prescan LimZ zLimit ' go home
 
 	Trap 2 ' disarm trap
 Fend
