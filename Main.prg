@@ -16,8 +16,8 @@ recPointsTable = 1
 recPopPanelRequired = True
 recCrowdingRequired = True
 recPreinspectionRequired = True
-recFlashRequired = False
-recHotStakePanelRequired = False
+'recFlashRequired = True ' this is actually a recipe variable
+recHotStakePanelRequired = True
 recInspectionRequired = True
 recPushPanelRequired = True
 

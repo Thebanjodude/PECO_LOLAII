@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/12/02 22:44:57:565,DS:0000003036,CS:07486,MA:6C-F0-49-E2-45-75,EI:           
+ENVT0100,LM:2013/12/10 18:21:44:234,DS:0000003032,CS:00299,MA:00-50-56-C0-00-01,EI:           
 sActiveChild="Main.prg"
 bMdiMaximized=False
 ProgramFile1 {
@@ -8,8 +8,8 @@ ProgramFile1 {
 	Window {
 		nLeft=1
 		nTop=1
-		nWidth=1326
-		nHeight=824
+		nWidth=1324
+		nHeight=820
 	}
 }
 ProgramFile2 {
@@ -17,21 +17,21 @@ ProgramFile2 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=92
-		nTop=54
-		nWidth=1399
-		nHeight=688
+		nLeft=166
+		nTop=82
+		nWidth=1397
+		nHeight=685
 	}
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=-108
-		nTop=148
-		nWidth=1369
-		nHeight=678
+		nLeft=18
+		nTop=128
+		nWidth=1368
+		nHeight=674
 	}
 }
 ProgramFile4 {
@@ -73,9 +73,9 @@ ProgramFile7 {
 	nWinState=0
 	Window {
 		nLeft=107
-		nTop=82
-		nWidth=1083
-		nHeight=559
+		nTop=16
+		nWidth=1104
+		nHeight=778
 	}
 }
 ProgramFile8 {
@@ -83,10 +83,10 @@ ProgramFile8 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=-123
-		nTop=124
-		nWidth=1353
-		nHeight=770
+		nLeft=125
+		nTop=12
+		nWidth=1351
+		nHeight=767
 	}
 }
 ProgramFile9 {
@@ -169,12 +169,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=687
-		nTop=61
-		nWidth=710
-		nHeight=661
+		nLeft=849
+		nTop=47
+		nWidth=773
+		nHeight=718
 	}
 }
 IOLabelEditor {
@@ -190,19 +190,19 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=736
-		nTop=413
+		nLeft=565
+		nTop=234
 		nWidth=520
-		nHeight=357
+		nHeight=353
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=772
-		nTop=270
-		nWidth=978
-		nHeight=302
+		nLeft=2240
+		nTop=170
+		nWidth=976
+		nHeight=339
 	}
 }
 Macros {
