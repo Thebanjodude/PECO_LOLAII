@@ -71,6 +71,8 @@ If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	MemOff (jobAbortH) ' reset flag		
 EndIf
 
+Jump prescan LimZ zLimit ' go home
+
 Fend
 Function PickupPanel(stupidCompiler As Byte) As Integer 'byte me
 ' You can't return a value unless you pass it one...
@@ -86,6 +88,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 		Exit Function
 	EndIf
 	
+	suctionCupsCC = False ' Before we pick up a panel make sure we dont have a panel already
 	Jump PreScan LimZ zLimit ' Go home
 	
 	' Make this non blocking by checking for var then exit function with pickuppanel=1, revisit l8r
