@@ -187,33 +187,33 @@ Do While True
 	
 ' In this section I set the error in the main routine and the lights and pausing are changed here	
 'erPanelStatusUnknown = True
-If EStopOn = True Or erHmiDataAck = True Or erParamEntryMissing = True Or erRecEntryMissing = True Or erUnknown = True Or erOutMagCrowding = True Or erLowPressure = True Or erHighPressure = True Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or erFlashStation = True Then
-	stackLightRedCC = True
-	If alarmMute = True Then ' Mute the alarm
-		stackLightAlrmCC = False
+	If EStopOn = True Or erHmiDataAck = True Or erParamEntryMissing = True Or erRecEntryMissing = True Or erUnknown = True Or erOutMagCrowding = True Or erLowPressure = True Or erHighPressure = True Or cbMonHeatStake = False Or cbMonInMag = False Or cbMonOutMag = False Or cbMonDebrisRmv = False Or cbMonSafety = False Or cbMonPAS24vdc = False Or erFlashStation = True Then
+		stackLightRedCC = True
+		If alarmMute = True Then ' Mute the alarm
+			stackLightAlrmCC = False
+		Else
+			stackLightAlrmCC = True
+		EndIf
 	Else
-		stackLightAlrmCC = True
+		stackLightRedCC = False
+		stackLightAlrmCC = False
 	EndIf
-Else
-	stackLightRedCC = False
-	stackLightAlrmCC = False
-EndIf
 	
-If inMagInterlock = True Or outMagInt = True Or erInMagEmpty = True Or erOutMagFull = True Then ' If a magazine interlock is open then turn on the yelow light
-	stackLightYelCC = True
-Else
-	stackLightYelCC = False
-EndIf
+	If inMagInterlock = True Or outMagInt = True Or erInMagEmpty = True Or erOutMagFull = True Then ' If a magazine interlock is open then turn on the yelow light
+		stackLightYelCC = True
+	Else
+		stackLightYelCC = False
+	EndIf
 
-If (stackLightRedCC Or stackLightYelCC) Then ' Turn off the green light if the red or yellow is on
-	stackLightGrnCC = False
-Else
-	stackLightGrnCC = True
-EndIf
+	If (stackLightRedCC Or stackLightYelCC) Then ' Turn off the green light if the red or yellow is on
+		stackLightGrnCC = False
+	Else
+		stackLightGrnCC = True
+	EndIf
 
-If PauseOn = True Then
-	mainCurrentState = StatePaused
-EndIf
+	If PauseOn = True Then
+		mainCurrentState = StatePaused
+	EndIf
 	
 Loop
 
