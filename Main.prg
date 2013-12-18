@@ -1,256 +1,256 @@
 #include "Globals.INC"
 
 Function main()
-OnErr GoTo errHandler ' Define where to go when a controller error occurs	
-
-'jobStart = True 'fake
-recSuctionWaitTime = 1 'fake
-zLimit = -12.5 'fake
-SystemSpeed = 25
-SystemAccel = 35
-'recFlashDwellTime = 0
-insertDepthTolerance = .010
-recPointsTable = 1
-
-'Testing Area for State skipping
-recPopPanelRequired = True
-recCrowdingRequired = True
-recPreinspectionRequired = True
-'recFlashRequired = True ' this is actually a recipe variable
-recHotStakePanelRequired = True
-recInspectionRequired = True
-recPushPanelRequired = True
-
-PowerOnSequence() ' Initialize the system and prepare it to do a job
-
-jobDone = False ' reset flag
-jobStart = False ' reset flag
-
-'TeachPointsUnderLaser() ' prototype teaching code (get it close and hone in on it)
-
-mainCurrentState = StateIdle ' The first state is Idle
-
-Do While True
-
-Select mainCurrentState
-
-	Case StateIdle
-	' This state waits for the operator to start a job and the heat stake machine 
-	' to come up to temp. Also, if any of the other states encounters a major error, it returns	
-	' to the idle state and waits for an operator.
-		
-		If jobStart = True Then 'And HotStakeTempRdy = 0 Then ' Fake for testing'
-		
-			If CheckInitialParameters() = 0 Then
-				mainCurrentState = StatePopPanel
-				ChoosePointsTable() ' Change to the correct points table for the selected panel
-
-' Not sure what we are doing about the PAS database...
-'				Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
-'					MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
-'					Wait 1
-'					MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
-'					Do While pasMessageDB = 9
-'						'waiting for the heat stake to finish homeing
-'						Wait .5
-'					Loop
-'				Loop
-
-				jobAbort = False 'reset flag
-				jobNumPanelsDone = 0 ' reset panel counter
-				panelDataTxRdy = False ' make sure var is set to false so it changes when we want HMI to read out data
-				Redim PassFailArray(23, 1) ' Clear array, always 23 rows
-				Redim InspectionArray(23, 1) 'Clear array, always 23 rows
-			EndIf
-		ElseIf pasEmptyBowlFeederandTrack = True Then
-			TmReset (3) ' reset timer 3 before we switch states
-			mainCurrentState = StateEmptyingBowlandTrack
-		Else
-			mainCurrentState = StateIdle ' Stay in idle until commanded 
-		EndIf
-		
-	Case StatePopPanel
-	' This state picks up a panel from the input magazine. Then takes the panel to the home	
-	' position. 
+	OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 	
-		If recPopPanelRequired = True Then 'Check if we want to skip this state
+	'jobStart = True 'fake
+	recSuctionWaitTime = 1 'fake
+	zLimit = -12.5 'fake
+	SystemSpeed = 25
+	SystemAccel = 35
+	'recFlashDwellTime = 0
+	insertDepthTolerance = .010
+	recPointsTable = 1
+	
+	'Testing Area for State skipping
+	recPopPanelRequired = True
+	recCrowdingRequired = True
+	recPreinspectionRequired = True
+	'recFlashRequired = True ' this is actually a recipe variable
+	recHotStakePanelRequired = True
+	recInspectionRequired = True
+	recPushPanelRequired = True
+	
+	PowerOnSequence() ' Initialize the system and prepare it to do a job
+	
+	jobDone = False ' reset flag
+	jobStart = False ' reset flag
+	
+	'TeachPointsUnderLaser() ' prototype teaching code (get it close and hone in on it)
+	
+	mainCurrentState = StateIdle ' The first state is Idle
+	
+	Do While True
+	
+		Select mainCurrentState
 		
-			StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
-					
-			If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
-				mainCurrentState = StateCrowding
-				Print "Pick up Successful"
-			ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
-				mainCurrentState = StatePopPanel
-				Print "Waiting for Interlock"
-			ElseIf StatusCheckPickUp = 2 Then
-				Jump PreScan LimZ zLimit ' go back home
-				mainCurrentState = StateIdle ' Go to idle because there was an error 
-				Print "Pickup failed"
-			Else
-				mainCurrentState = StateIdle ' Somthing crazy happened. Go to idle because its the only thing to do
-				Print "going to idle"
-			EndIf
-		Else
-			mainCurrentState = StateCrowding 'skip pickup panel, go to next state
-		EndIf
-		
-			If jobAbort = True Then
-				mainCurrentState = StatePushPanel ' push a panel before going to idle
-				Print "aborting pick up"
-			EndIf
+			Case StateIdle
+			' This state waits for the operator to start a job and the heat stake machine 
+			' to come up to temp. Also, if any of the other states encounters a major error, it returns	
+			' to the idle state and waits for an operator.
 				
-	Case StateCrowding
-		'This state Moves a panel from the home location, crowds it, then
-		' presents it to the laser scanner for pre-inspection
+				If jobStart = True Then 'And HotStakeTempRdy = 0 Then ' Fake for testing'
+				
+					If CheckInitialParameters() = 0 Then
+						mainCurrentState = StatePopPanel
+						ChoosePointsTable() ' Change to the correct points table for the selected panel
 		
-		If recCrowdingRequired = True Then 'Check if we want to skip this state
+		' Not sure what we are doing about the PAS database...
+		'				Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
+		'					MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
+		'					Wait 1
+		'					MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
+		'					Do While pasMessageDB = 9
+		'						'waiting for the heat stake to finish homeing
+		'						Wait .5
+		'					Loop
+		'				Loop
 		
-			StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
-	
-			If StatusCheckCrowding = 0 Then
-				mainCurrentState = StatePreinspection
-	'		ElseIf StatusCheckCrowding = 2 Then ' I have no way of knowing if crowding failed in this step (until ser)
-	'			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
-			EndIf
-		Else
-			mainCurrentState = StatePreinspection 'skip crowding, go to next state
-		EndIf
-		
-			If jobAbort = True Then
-				mainCurrentState = StatePushPanel ' Go drop off the panel before we quit 
-			EndIf
-	
-	Case StatePreinspection
-		' This state uses the laser scanner to find pre-installed inserts and attempts
-		' to check if the correct panel has been put into the magazine.
-		
-		If recPreinspectionRequired = True Then 'Check if we want to skip this state
-			
-				StatusCheckPreinspection = InspectPanel(1) ' 1=Preinspection 
-				If StatusCheckPreinspection = 0 Then
-					mainCurrentState = StateHotStakePanel
-					Print "Preinspection executed"
-				ElseIf StatusCheckPreinspection = 2 Then ' failed preinspection
-					mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle 
-					' go to this state if we cant find all the holes 
-				EndIf
-		Else
-			mainCurrentState = StateHotStakePanel 'skip preinspection, go to next state
-		EndIf
-	
-		If jobAbort = True Then
-			mainCurrentState = StatePushPanel ' Drop off the panel before we quit 
-		EndIf
-		
-	Case StateHotStakePanel
-		' This state iterates through each hole and installs all inserts
-		
-		If recHotStakePanelRequired = True Then 'Check if we want to skip this state
-		
-			StatusCheckHotStake = HotStakePanel(0)
-			If StatusCheckHotStake = 0 Then
-				Print "hot stake done"
-				If recFlashRequired = False Then
-					mainCurrentState = StateInspection ' Flash not required so skip it
-					'mainCurrentState = StatePushPanel
+						jobAbort = False 'reset flag
+						jobNumPanelsDone = 0 ' reset panel counter
+						panelDataTxRdy = False ' make sure var is set to false so it changes when we want HMI to read out data
+						Redim PassFailArray(23, 1) ' Clear array, always 23 rows
+						Redim InspectionArray(23, 1) 'Clear array, always 23 rows
+					EndIf
+				ElseIf pasEmptyBowlFeederandTrack = True Then
+					TmReset (3) ' reset timer 3 before we switch states
+					mainCurrentState = StateEmptyingBowlandTrack
 				Else
-					mainCurrentState = StateFlashRemoval ' The next state is normally Flash Removal
+					mainCurrentState = StateIdle ' Stay in idle until commanded 
 				EndIf
-			ElseIf StatusCheckHotStake = 2 Then
-				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
-			EndIf
-		Else
-			mainCurrentState = StateFlashRemoval 'skip hot stake, go to next state	
-		EndIf
-	
-		If jobAbort = True Then
-			mainCurrentState = StatePushPanel ' Drop off the panel before we quit	
-		EndIf
-		
-	Case StateFlashRemoval
-
-		If recFlashRequired = True Then 'Check if we want to skip this state
+				
+			Case StatePopPanel
+			' This state picks up a panel from the input magazine. Then takes the panel to the home	
+			' position. 
 			
-			StatusCheckFlash = FlashPanel(recFlashDwellTime)
-			If StatusCheckFlash = 0 Then
-				mainCurrentState = StateInspection
-			ElseIf StatusCheckFlash = 2 Then ' Go to idle because there was an error
-				' I dont know if pushing is the correct solution...? if the tool never made it home it would
-				' break it when it tried to move (cause its stuck in the hole)
-				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
-			EndIf
-		Else
-			mainCurrentState = StateInspection 'skip flash, go to next state	
-		EndIf
-	
-		If jobAbort = True Then
-			mainCurrentState = StatePushPanel ' Go to push then idle because the operator wants to quit
-		EndIf
-		
-	Case StateInspection
-		' This state uses the laser scanner to measure and log the depths of each insert at two places
-		' No matter the result of the InspectPanel() routine it always pushes a panel, but we need to know why
-		' it pushed-thus the different checks.
-		If recInspectionRequired = True Then 'Check if we want to skip this state
+				If recPopPanelRequired = True Then 'Check if we want to skip this state
+				
+					StatusCheckPickUp = PickupPanel(0) ' Call the function that picks up a panel
+							
+					If StatusCheckPickUp = 0 Then ' Panel was picked up successfully
+						mainCurrentState = StateCrowding
+						Print "Pick up Successful"
+					ElseIf StatusCheckPickUp = 1 Then ' Keep trying until the interlock is closed
+						mainCurrentState = StatePopPanel
+						Print "Waiting for Interlock"
+					ElseIf StatusCheckPickUp = 2 Then
+						Jump PreScan LimZ zLimit ' go back home
+						mainCurrentState = StateIdle ' Go to idle because there was an error 
+						Print "Pickup failed"
+					Else
+						mainCurrentState = StateIdle ' Somthing crazy happened. Go to idle because its the only thing to do
+						Print "going to idle"
+					EndIf
+				Else
+					mainCurrentState = StateCrowding 'skip pickup panel, go to next state
+				EndIf
+				
+					If jobAbort = True Then
+						mainCurrentState = StatePushPanel ' push a panel before going to idle
+						Print "aborting pick up"
+					EndIf
+						
+			Case StateCrowding
+				'This state Moves a panel from the home location, crowds it, then
+				' presents it to the laser scanner for pre-inspection
+				
+				If recCrowdingRequired = True Then 'Check if we want to skip this state
+				
+					StatusCheckCrowding = CrowdingSequence(0) ' Add return ints for crowd seq for errors...
 			
-			StatusCheckInspection = InspectPanel(2) ' 2=Inspection of Install Inserts 
-			If StatusCheckInspection = 0 Then
-				mainCurrentState = StatePushPanel
-				Print "Inspection Executed"
-			ElseIf StatusCheckPreinspection = 2 Then
-				mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
-			EndIf
-		Else
-			mainCurrentState = StatePushPanel 'skip inspection, go to next state			
-		EndIf
-	
-		If jobAbort = True Then
-			mainCurrentState = StatePushPanel ' Go to idle because the operator wants to quit	
-		EndIf
-		
-	Case StatePushPanel
-	' This state drops off a panel into the output magazine. 		
-	 
-		If recPushPanelRequired = True Then 'Check if we want to skip this state
+					If StatusCheckCrowding = 0 Then
+						mainCurrentState = StatePreinspection
+			'		ElseIf StatusCheckCrowding = 2 Then ' I have no way of knowing if crowding failed in this step (until ser)
+			'			mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
+					EndIf
+				Else
+					mainCurrentState = StatePreinspection 'skip crowding, go to next state
+				EndIf
+				
+					If jobAbort = True Then
+						mainCurrentState = StatePushPanel ' Go drop off the panel before we quit 
+					EndIf
 			
-			StatusCheckDropOff = DropOffPanel(0)
+			Case StatePreinspection
+				' This state uses the laser scanner to find pre-installed inserts and attempts
+				' to check if the correct panel has been put into the magazine.
+				
+				If recPreinspectionRequired = True Then 'Check if we want to skip this state
+					
+						StatusCheckPreinspection = InspectPanel(1) ' 1=Preinspection 
+						If StatusCheckPreinspection = 0 Then
+							mainCurrentState = StateHotStakePanel
+							Print "Preinspection executed"
+						ElseIf StatusCheckPreinspection = 2 Then ' failed preinspection
+							mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle 
+							' go to this state if we cant find all the holes 
+						EndIf
+				Else
+					mainCurrentState = StateHotStakePanel 'skip preinspection, go to next state
+				EndIf
 			
-			If StatusCheckDropOff = 0 Then ' We successfully dropped off a panel
-				mainCurrentState = StatePopPanel
-			ElseIf StatusCheckDropOff = 1 Then ' Keep trying until the interlock is closed
-				mainCurrentState = StatePushPanel
-			ElseIf StatusCheckDropOff = 2 Then
-				Pause
-			EndIf
-		Else
-			mainCurrentState = StateIdle 'skip drop off, go to idle
-		EndIf
-	
-		If jobAbort = True Or jobDone = True Then
-			Jump PreScan LimZ zLimit ' go home
-			mainCurrentState = StateIdle ' Go to idle because the operator wants to quit or job is done	
-			jobAbort = False ' reset flag
-			jobStart = False ' reset flag
-			jobDone = False ' reset flag
-		EndIf
+				If jobAbort = True Then
+					mainCurrentState = StatePushPanel ' Drop off the panel before we quit 
+				EndIf
+				
+			Case StateHotStakePanel
+				' This state iterates through each hole and installs all inserts
+				
+				If recHotStakePanelRequired = True Then 'Check if we want to skip this state
+				
+					StatusCheckHotStake = HotStakePanel(0)
+					If StatusCheckHotStake = 0 Then
+						Print "hot stake done"
+						If recFlashRequired = False Then
+							mainCurrentState = StateInspection ' Flash not required so skip it
+							'mainCurrentState = StatePushPanel
+						Else
+							mainCurrentState = StateFlashRemoval ' The next state is normally Flash Removal
+						EndIf
+					ElseIf StatusCheckHotStake = 2 Then
+						mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
+					EndIf
+				Else
+					mainCurrentState = StateFlashRemoval 'skip hot stake, go to next state	
+				EndIf
+			
+				If jobAbort = True Then
+					mainCurrentState = StatePushPanel ' Drop off the panel before we quit	
+				EndIf
+				
+			Case StateFlashRemoval
 		
-	Case StateEmptyingBowlandTrack
-			' The button on the HMI should be greyed out if the state is not in idle
-			' Setting this register in the PLC initiates a sequence that empties the bowl feeder and track
-			' MBWrite(pasEmptyBowlFeederandTrackAddr, 1, MBType16) 
-'		This is handled by the PLC, we will set a bit to start and another when done
-'		Once the PLC is done, we will be able to leave this state
-
-'		If pasEmptyingSequenceDone = True Or Tmr(3) >= 600 Then
-			mainCurrentState = StateIdle ' go back to idle because we are finished
-'		Else
-'			mainCurrentState = StateEmptyingBowlandTrack
-'		EndIf
-Send
-
-Loop
-
+				If recFlashRequired = True Then 'Check if we want to skip this state
+					
+					StatusCheckFlash = FlashPanel(recFlashDwellTime)
+					If StatusCheckFlash = 0 Then
+						mainCurrentState = StateInspection
+					ElseIf StatusCheckFlash = 2 Then ' Go to idle because there was an error
+						' I dont know if pushing is the correct solution...? if the tool never made it home it would
+						' break it when it tried to move (cause its stuck in the hole)
+						mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
+					EndIf
+				Else
+					mainCurrentState = StateInspection 'skip flash, go to next state	
+				EndIf
+			
+				If jobAbort = True Then
+					mainCurrentState = StatePushPanel ' Go to push then idle because the operator wants to quit
+				EndIf
+				
+			Case StateInspection
+				' This state uses the laser scanner to measure and log the depths of each insert at two places
+				' No matter the result of the InspectPanel() routine it always pushes a panel, but we need to know why
+				' it pushed-thus the different checks.
+				If recInspectionRequired = True Then 'Check if we want to skip this state
+					
+					StatusCheckInspection = InspectPanel(2) ' 2=Inspection of Install Inserts 
+					If StatusCheckInspection = 0 Then
+						mainCurrentState = StatePushPanel
+						Print "Inspection Executed"
+					ElseIf StatusCheckPreinspection = 2 Then
+						mainCurrentState = StatePushPanel ' Drop off a panel before we go to idle
+					EndIf
+				Else
+					mainCurrentState = StatePushPanel 'skip inspection, go to next state			
+				EndIf
+			
+				If jobAbort = True Then
+					mainCurrentState = StatePushPanel ' Go to idle because the operator wants to quit	
+				EndIf
+				
+			Case StatePushPanel
+			' This state drops off a panel into the output magazine. 		
+			 
+				If recPushPanelRequired = True Then 'Check if we want to skip this state
+					
+					StatusCheckDropOff = DropOffPanel(0)
+					
+					If StatusCheckDropOff = 0 Then ' We successfully dropped off a panel
+						mainCurrentState = StatePopPanel
+					ElseIf StatusCheckDropOff = 1 Then ' Keep trying until the interlock is closed
+						mainCurrentState = StatePushPanel
+					ElseIf StatusCheckDropOff = 2 Then
+						Pause
+					EndIf
+				Else
+					mainCurrentState = StateIdle 'skip drop off, go to idle
+				EndIf
+			
+				If jobAbort = True Or jobDone = True Then
+					Jump PreScan LimZ zLimit ' go home
+					mainCurrentState = StateIdle ' Go to idle because the operator wants to quit or job is done	
+					jobAbort = False ' reset flag
+					jobStart = False ' reset flag
+					jobDone = False ' reset flag
+				EndIf
+				
+			Case StateEmptyingBowlandTrack
+					' The button on the HMI should be greyed out if the state is not in idle
+					' Setting this register in the PLC initiates a sequence that empties the bowl feeder and track
+					' MBWrite(pasEmptyBowlFeederandTrackAddr, 1, MBType16) 
+		'		This is handled by the PLC, we will set a bit to start and another when done
+		'		Once the PLC is done, we will be able to leave this state
+		
+		'		If pasEmptyingSequenceDone = True Or Tmr(3) >= 600 Then
+					mainCurrentState = StateIdle ' go back to idle because we are finished
+		'		Else
+		'			mainCurrentState = StateEmptyingBowlandTrack
+		'		EndIf
+		Send
+	
+	Loop
+	
 	errHandler:
 		
 		'Assign things of interest to var names
