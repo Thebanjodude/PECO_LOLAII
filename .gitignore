@@ -8,6 +8,9 @@
 # we might end up needing these files, but for now don't track them
 *.obj
 
+# ingore whatever this is about
+*.dat
+
 ##############
 ## Misc Files
 ##############
