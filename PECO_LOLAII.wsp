@@ -1,6 +1,6 @@
-ENVT0100,LM:2013/12/10 18:21:44:234,DS:0000003032,CS:00299,MA:00-50-56-C0-00-01,EI:           
-sActiveChild="Main.prg"
-bMdiMaximized=False
+ENVT0100,LM:2013/12/18 20:27:33:249,DS:0000002740,CS:10000,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="HotStakeAndFlash.prg"
+bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
@@ -8,30 +8,30 @@ ProgramFile1 {
 	Window {
 		nLeft=1
 		nTop=1
-		nWidth=1324
-		nHeight=820
+		nWidth=1323
+		nHeight=817
 	}
 }
 ProgramFile2 {
 	sName="HotStakeAndFlash.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=2
 	Window {
 		nLeft=166
 		nTop=82
-		nWidth=1397
-		nHeight=685
+		nWidth=1396
+		nHeight=682
 	}
 }
 ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=18
 		nTop=128
-		nWidth=1368
-		nHeight=674
+		nWidth=1367
+		nHeight=671
 	}
 }
 ProgramFile4 {
@@ -46,17 +46,6 @@ ProgramFile4 {
 	}
 }
 ProgramFile5 {
-	sName="OldCode.prg"
-	bOpened=False
-	nWinState=0
-	Window {
-		nLeft=27
-		nTop=21
-		nWidth=1260
-		nHeight=593
-	}
-}
-ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bOpened=False
 	nWinState=0
@@ -67,7 +56,7 @@ ProgramFile6 {
 		nHeight=573
 	}
 }
-ProgramFile7 {
+ProgramFile6 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
 	nWinState=0
@@ -78,29 +67,18 @@ ProgramFile7 {
 		nHeight=778
 	}
 }
-ProgramFile8 {
+ProgramFile7 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=125
 		nTop=12
-		nWidth=1351
-		nHeight=767
+		nWidth=1349
+		nHeight=763
 	}
 }
-ProgramFile9 {
-	sName="HeatStakeCommunication.prg"
-	bOpened=False
-	nWinState=0
-	Window {
-		nLeft=158
-		nTop=151
-		nWidth=1415
-		nHeight=593
-	}
-}
-ProgramFile10 {
+ProgramFile8 {
 	sName="CalibrationRoutines.prg"
 	bOpened=False
 	nWinState=0
@@ -114,13 +92,13 @@ ProgramFile10 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=25
 		nTop=44
-		nWidth=1227
-		nHeight=726
+		nWidth=1226
+		nHeight=722
 	}
 }
 nPointFileCount=3
@@ -169,7 +147,7 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=849
 		nTop=47
@@ -199,10 +177,10 @@ IOMonitor {
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=2240
-		nTop=170
-		nWidth=976
-		nHeight=339
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
 	}
 }
 Macros {

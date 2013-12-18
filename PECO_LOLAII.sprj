@@ -1,15 +1,15 @@
-ENVT0100,LM:2013/12/10 18:21:35:452,DS:0000004132,CS:29796,MA:00-50-56-C0-00-01,EI:           
+ENVT0100,LM:2013/12/18 20:27:42:495,DS:0000003850,CS:15435,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="12/10/2013 11:21:32 AM"
-	bBuildComplete=True
-	bRebuildRequired=False
+	sLastModified="12/18/2013 1:26:38 PM"
+	bBuildComplete=False
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="ALWKSBSCHAEFER"
+	sComputerName="AMWKSSEHLERS"
 }
 UserProperties {
 	sVersion=""
@@ -25,7 +25,7 @@ UserErrorsFile {
 	sName="UserErrors.dat"
 	nChecksum=0
 }
-nProgramFileCount=10
+nProgramFileCount=8
 ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
@@ -51,36 +51,24 @@ ProgramFile4 {
 	sTimeSavedInController="9/6/2013 3:57:21 PM"
 }
 ProgramFile5 {
-	sName="OldCode.prg"
-	bCompiled=True
-	bStoreInController=True
-	sTimeSavedInController="9/5/2013 2:50:01 PM"
-}
-ProgramFile6 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
 	sTimeSavedInController="11/18/2013 9:04:03 PM"
 }
-ProgramFile7 {
+ProgramFile6 {
 	sName="PickupAndDropOff.prg"
 	bCompiled=True
 	bStoreInController=True
 	sTimeSavedInController="12/10/2013 3:38:59 PM"
 }
-ProgramFile8 {
+ProgramFile7 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
 	sTimeSavedInController="12/10/2013 5:48:44 PM"
 }
-ProgramFile9 {
-	sName="HeatStakeCommunication.prg"
-	bCompiled=True
-	bStoreInController=True
-	sTimeSavedInController="9/9/2013 7:41:09 PM"
-}
-ProgramFile10 {
+ProgramFile8 {
 	sName="CalibrationRoutines.prg"
 	bCompiled=True
 	bStoreInController=True

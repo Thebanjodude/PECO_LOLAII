@@ -239,12 +239,14 @@ Select mainCurrentState
 			' The button on the HMI should be greyed out if the state is not in idle
 			' Setting this register in the PLC initiates a sequence that empties the bowl feeder and track
 			' MBWrite(pasEmptyBowlFeederandTrackAddr, 1, MBType16) 
-			
-		If pasEmptyingSequenceDone = True Or Tmr(3) >= 600 Then
+'		This is handled by the PLC, we will set a bit to start and another when done
+'		Once the PLC is done, we will be able to leave this state
+
+'		If pasEmptyingSequenceDone = True Or Tmr(3) >= 600 Then
 			mainCurrentState = StateIdle ' go back to idle because we are finished
-		Else
-			mainCurrentState = StateEmptyingBowlandTrack
-		EndIf
+'		Else
+'			mainCurrentState = StateEmptyingBowlandTrack
+'		EndIf
 Send
 
 Loop
@@ -390,44 +392,44 @@ Function TestHeatStake()
 	'**********************************disabled function**********************************
 	'*************************************************************************************
 
-	Do Until jobStart = True
-		Wait .1
-	Loop
-	
-	Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
-			MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
-			Wait 1
-			MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
-			Do While pasMessageDB = 9
-			'waiting for the heat stake to finish homeing
-				Wait .5
-			Loop
-	Loop
-	
-	Do Until pasMessageDB = 3
-		On heatStakeGoH, 1 ' Tell HS to go to soft home position
-		Wait 1.25
-	Loop
-	
-	HSProbeFinalPosition = 12
-	
-	Do While True
-			
-		MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
-	 	MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement
-		
-		Do Until pasMessageDB = 4
-			On heatStakeGoH, 1 ' Tell the HS to install 1 insert
-			Wait .5
-		Loop
-		
-		Do Until pasMessageDB = 4
-			Wait .1
-		Loop
-		
-		HSProbeFinalPosition = HSProbeFinalPosition + .1
-		
-	Loop
+'	Do Until jobStart = True
+'		Wait .1
+'	Loop
+'	
+'	Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
+'			MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
+'			Wait 1
+'			MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
+'			Do While pasMessageDB = 9
+'			'waiting for the heat stake to finish homeing
+'				Wait .5
+'			Loop
+'	Loop
+'	
+'	Do Until pasMessageDB = 3
+'		On heatStakeGoH, 1 ' Tell HS to go to soft home position
+'		Wait 1.25
+'	Loop
+'	
+'	HSProbeFinalPosition = 12
+'	
+'	Do While True
+'			
+'		MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
+'	 	MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement
+'		
+'		Do Until pasMessageDB = 4
+'			On heatStakeGoH, 1 ' Tell the HS to install 1 insert
+'			Wait .5
+'		Loop
+'		
+'		Do Until pasMessageDB = 4
+'			Wait .1
+'		Loop
+'		
+'		HSProbeFinalPosition = HSProbeFinalPosition + .1
+'		
+'	Loop
 
 	EndOfTestHeatStake: ' label for end of of function
 Fend

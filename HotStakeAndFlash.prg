@@ -15,10 +15,11 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
 	Jump PreScan LimZ zLimit ' just to make sure we are home	
 	Jump PreHotStake LimZ zLimit ' Present panel to hot stake
 	
-	Do Until pasMessageDB = 3
-		On heatStakeGoH, 1 ' Tell HS to go to soft home position
-		Wait 1.25
-	Loop
+	'update to new PLC interface
+'	Do Until pasMessageDB = 3
+'		On heatStakeGoH, 1 ' Tell HS to go to soft home position
+'		Wait 1.25
+'	Loop
 
 	For i = recFirstHolePointHotStake To recLastHolePointHotStake
 
@@ -57,22 +58,24 @@ Function HotStakePanel(StupidCompiler2 As Byte) As Integer
  				
 ' 			GoTo skiphotstake ' fake for testing
  				
-			Do Until pasMessageDB = 4
-				On heatStakeGoH, 1 ' Tell the HS to install 1 insert
-				Wait .5
-			Loop
+ 		'update to new plc interface
+'			Do Until pasMessageDB = 4
+'				On heatStakeGoH, 1 ' Tell the HS to install 1 insert
+'				Wait .5
+'			Loop
 			
 			ZmaxTorque = 0
 			PTCLR (3)
 	
-			Do Until pasMessageDB = 3 ' monitor the torque when hs is installing insert
-				ZmaxTorque = PTRQ(3)
-				If ZmaxTorque > .3 Then
-					erUnknown = True ' replace this with a real error
-					Print "Over torque: HS vs Robot"
-					Pause
-				EndIf
-			Loop
+	'	update to new PLC interface
+'			Do Until pasMessageDB = 3 ' monitor the torque when hs is installing insert
+'				ZmaxTorque = PTRQ(3)
+'				If ZmaxTorque > .3 Then
+'					erUnknown = True ' replace this with a real error
+'					Print "Over torque: HS vs Robot"
+'					Pause
+'				EndIf
+'			Loop
 			
 '	skiphotstake: ' fake for testing
 '	Wait 1 ' fake for testing
@@ -97,19 +100,20 @@ exitHotStake:
 		MemOff (jobAbortH) ' turn off abort bit
 	EndIf
 
-	Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
-		MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
-		Wait 1
-		MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
-		
-		' while the heat stake is homing the messageDB is 9
-		' so lets give it a chance to go home before we throw it into
-		'   a loop of homing where we will not see the messageDB == 2
-		Do While pasMessageDB = 9
-			'waiting for the heat stake to finish homeing
-			Wait .5
-		Loop
-	Loop
+'	update to new PLC interface
+'	Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
+'		MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
+'		Wait 1
+'		MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
+'		
+'		' while the heat stake is homing the messageDB is 9
+'		' so lets give it a chance to go home before we throw it into
+'		'   a loop of homing where we will not see the messageDB == 2
+'		Do While pasMessageDB = 9
+'			'waiting for the heat stake to finish homeing
+'			Wait .5
+'		Loop
+'	Loop
 		
 	SystemStatus = StateMoving
 	Jump PreHotStake :U(CU(Here)) LimZ zLimit ' Pull back from the hot stake machine
