@@ -353,7 +353,6 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Jump Prescan LimZ zLimit
 	Jump PreHotStake LimZ zLimit
 	
-	'MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Make sure the crowding is open
 	Off (CrowdingH) ' Make sure the crowding is open
 	Wait 3
 	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
@@ -361,7 +360,6 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Wait recSuctionWaitTime ' wait for cups to release
 	Jump P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
 	Wait .25
-	'MBWrite(pasCrowdingADDR, 1, MBTypeCoil) ' Close crowding
 	On (CrowdingH) ' Close crowding
 	
 	' wait for verification that the crowding has closed
@@ -375,7 +373,6 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	suctionCupsCC = True ' Turn on cups
 	Wait recSuctionWaitTime
 
-	'MBWrite(pasCrowdingADDR, 0, MBTypeCoil) 'Open crowding
 	Off (CrowdingH) ' Open crowding
 	' wait for verification that the crowding has opened
 ' this do loop got stuck during testing, skip over for now	
@@ -392,7 +389,6 @@ exitCrowding:
 If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	jobAbort = True
 	MemOff (jobAbortH) ' reset membit
-	'MBWrite(pasCrowdingADDR, 0, MBTypeCoil) ' Open crowding
 	Off (CrowdingH) ' Open crowding	
 EndIf
 
