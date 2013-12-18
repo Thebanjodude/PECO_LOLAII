@@ -101,6 +101,7 @@ Global Real CurrentThetaHere, insertDepthTolerance
 Global Boolean PassFailArray(0, 0)
 Global Real InspectionArray(0, 0), recInmagPickupOffset
 Global Boolean SkipHoleArray(0, 0), DeepBoss, MediumBoss ' This needs to be global
+Global Boolean panelDataTxRdy, panelDataTxACK
 Global Integer currentInspectHole, currentPreinspectHole
 #define RightSpotFace 1
 #define LeftSpotFace 0
@@ -114,12 +115,18 @@ Global Boolean backIntlock1, frontIntlock1, leftIntlock1, rightIntlock
 Global Boolean backIntlock2, frontIntlock2, leftIntlock2
 Global Boolean heartBeat, dc24vOK
 
-'Hot Stake and Flash Removal Global Vars
-Global Boolean heatStakeGoCC, heatStakeGo
-Global Boolean SkippedLastHole, hsInstallInsrt, flashPanelPresnt, hsPanelPresnt
+'Flash Removal Global Vars
+Global Boolean SkippedLastHole, flashPanelPresnt
 Global Boolean drillGo, drillReturn, FlashPnlPrsnt, debrisMtr, FlashHomeCC, flashHomeNO, flashHomeNC
-Global Boolean drillGoCC, drillReturnCC, debrisMtrCC, panelDataTxRdy, panelDataTxACK
-Global Integer currentHSHole, currentFlashHole
+Global Boolean drillGoCC, drillReturnCC, debrisMtrCC
+Global Integer currentFlashHole
+
+'Heat Stake Global Vars
+Global Boolean hsPanelPresnt
+Global Boolean boot, gotoReady, doInsertion, DoneInserting, startDump, doneDumping
+Global Boolean bootCC, gotoReadyCC, doInsertionCC, doneInsertingCC, startDumpCC, doneDumpingCC
+Global Boolean bootDelay, idle, ready, inserting, dumping
+Global Integer currentHSHole
 Global Real ZSpotfacetoQuillOffset, ZLasertoHeatStake, HSProbeFinalPosition
 Global Real PreInspectionArray(0, 0)
 
@@ -525,9 +532,4 @@ Global Real recSuctionWaitTimeOld
 Global Real zLimitOld
 Global Real ZmaxTorqueOld
 Global String ctrlrErrMsgOld$
-
-
-
-
-
 

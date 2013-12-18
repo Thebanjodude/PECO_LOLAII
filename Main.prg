@@ -3,12 +3,10 @@
 Function main()
 	OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 	
-	'jobStart = True 'fake
 	recSuctionWaitTime = 1 'fake
 	zLimit = -12.5 'fake
 	SystemSpeed = 25
 	SystemAccel = 35
-	'recFlashDwellTime = 0
 	insertDepthTolerance = .010
 	recPointsTable = 1
 	
@@ -45,28 +43,12 @@ Function main()
 						mainCurrentState = StatePopPanel
 						ChoosePointsTable() ' Change to the correct points table for the selected panel
 		
-		' Not sure what we are doing about the PAS database...
-		'				Do Until pasMessageDB = 2 ' wait for the HS to get home before we move (this wastes a lot of time)
-		'					MBWrite(pasGoHomeAddr, 1, MBTypeCoil) ' Home the heat stake machine by toggling
-		'					Wait 1
-		'					MBWrite(pasGoHomeAddr, 0, MBTypeCoil)
-		'					Do While pasMessageDB = 9
-		'						'waiting for the heat stake to finish homeing
-		'						Wait .5
-		'					Loop
-		'				Loop
-		
 						jobAbort = False 'reset flag
 						jobNumPanelsDone = 0 ' reset panel counter
 						panelDataTxRdy = False ' make sure var is set to false so it changes when we want HMI to read out data
 						Redim PassFailArray(23, 1) ' Clear array, always 23 rows
 						Redim InspectionArray(23, 1) 'Clear array, always 23 rows
 					EndIf
-				ElseIf pasEmptyBowlFeederandTrack = True Then
-					TmReset (3) ' reset timer 3 before we switch states
-					mainCurrentState = StateEmptyingBowlandTrack
-				Else
-					mainCurrentState = StateIdle ' Stay in idle until commanded 
 				EndIf
 				
 			Case StatePopPanel
@@ -237,16 +219,11 @@ Function main()
 				
 			Case StateEmptyingBowlandTrack
 					' The button on the HMI should be greyed out if the state is not in idle
-					' Setting this register in the PLC initiates a sequence that empties the bowl feeder and track
-					' MBWrite(pasEmptyBowlFeederandTrackAddr, 1, MBType16) 
 		'		This is handled by the PLC, we will set a bit to start and another when done
 		'		Once the PLC is done, we will be able to leave this state
 		
 		'		If pasEmptyingSequenceDone = True Or Tmr(3) >= 600 Then
 					mainCurrentState = StateIdle ' go back to idle because we are finished
-		'		Else
-		'			mainCurrentState = StateEmptyingBowlandTrack
-		'		EndIf
 		Send
 	
 	Loop
@@ -284,7 +261,13 @@ Function PowerOnSequence()
 	Xqt 6, HmiListen, NoEmgAbort
     Xqt 7, InmagControl, Normal
     Xqt 8, OutMagControlRefactor(), Normal
-	'MBInitialize() ' Kick off the modbus
+
+	' Start the PLC
+	Wait bootDelayH
+	bootCC = True 'Let the PLC know that it is safe to boot
+	Wait idleH
+	bootCC = False 'PLC has booted, reset the boot flag
+	
 retry:
 
 	ClearMemory() ' writes a zero to all the memIO

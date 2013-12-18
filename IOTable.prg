@@ -45,6 +45,12 @@ Do While True
 	outMagUpLim = IOTableBooleans(Sw(outMagUpLimH), MemSw(outMagUpLimFV), MemSw(outMagUpLimF))
 	outMagUpLimN = IOTableBooleans(Sw(outMagUpLimNH), MemSw(outMagUpLimNFV), MemSw(outMagUpLimNF))
 	rightIntlock = IOTableBooleans(Sw(rightIntlockH), MemSw(rightIntlockFV), MemSw(rightIntlockF))
+	
+	bootDelay = IOTableBooleans(Sw(bootDelayH), MemSw(bootDelayFV), MemSw(bootDelayF))
+	idle = IOTableBooleans(Sw(idleH), MemSw(idleFV), MemSw(idleF))
+	ready = IOTableBooleans(Sw(readyH), MemSw(readyFV), MemSw(readyF))
+	inserting = IOTableBooleans(Sw(insertingH), MemSw(insertingFV), MemSw(insertingF))
+	dumping = IOTableBooleans(Sw(dumpingH), MemSw(dumpingFV), MemSw(dumpingF))
 Loop
 	errHandler:
 		
@@ -88,13 +94,49 @@ Do While True
 	    Off (DrillReturnH)
 	    ReturnFlag = False
 	EndIf
-	
-	heatStakeGo = IOTableBooleans(heatStakeGoCC, MemSw(heatStakeGoFV), MemSw(heatStakeGoF))
-	If heatStakeGo = True Then
-	        On (heatStakeGoH)
-	    Else
-	        Off (heatStakeGoH)
-	    EndIf
+
+	boot = IOTableBooleans(bootCC, MemSw(bootFV), MemSw(bootF))
+	If boot = True Then
+			On (bootH)
+		Else
+			Off (bootH)
+		EndIf
+	    
+	gotoReady = IOTableBooleans(gotoReadyCC, MemSw(gotoReadyFV), MemSw(gotoReadyF))
+	If gotoReady = True Then
+			On (gotoReadyH)
+		Else
+			Off (gotoReadyH)
+		EndIf
+	    
+	doInsertion = IOTableBooleans(doInsertionCC, MemSw(doInsertionFV), MemSw(doInsertionF))
+	If doInsertion = True Then
+			On (doInsertionH)
+		Else
+			Off (doInsertionH)
+		EndIf
+	    
+	doneInserting = IOTableBooleans(doneInsertingCC, MemSw(doneInsertingFV), MemSw(doneInsertingF))
+	If DoneInserting = True Then
+			On (doneInsertingH)
+		Else
+			Off (doneInsertingH)
+		EndIf
+	    
+	startDump = IOTableBooleans(startDumpCC, MemSw(startDumpFV), MemSw(startDumpF))
+	If startDump = True Then
+			On (startDumpH)
+		Else
+			Off (startDumpH)
+		EndIf
+	    
+	doneDumping = IOTableBooleans(doneDumpingCC, MemSw(doneDumpingFV), MemSw(doneDumpingF))
+	If doneDumping = True Then
+			On (doneDumpingH)
+		Else
+			Off (doneDumpingH)
+		EndIf
+
 	'---------------------
 	debrisMtr = IOTableBooleans(debrisMtrCC, MemSw(debrisMtrFV), MemSw(debrisMtrF))
 	If debrisMtr = True Then
@@ -114,12 +156,12 @@ Do While True
 	    Else
 	        Off (eStopResetH)
 	    EndIf
-	heatStakeGo = IOTableBooleans(heatStakeGoCC, MemSw(heatStakeGoFV), MemSw(heatStakeGoF))
-	If heatStakeGo = True Then
-	        On (heatStakeGoH)
-	    Else
-	        Off (heatStakeGoH)
-	    EndIf
+'	heatStakeGo = IOTableBooleans(heatStakeGoCC, MemSw(heatStakeGoFV), MemSw(heatStakeGoF))
+'	If heatStakeGo = True Then
+'	        On (heatStakeGoH)
+'	    Else
+'	        Off (heatStakeGoH)
+'	    EndIf
 	inMagMtr = IOTableBooleans(inMagMtrCC, MemSw(inMagMtrFV), MemSw(inMagMtrF))
 	If inMagMtr = True Then
 	        On (inMagMtrH)
@@ -868,10 +910,10 @@ Function iotransfer()
 		Print #201, "{", Chr$(&H22) + "eStopReset" + Chr$(&H22), ":", Str$(eStopReset), "}",
 		eStopResetOld = eStopReset
 	EndIf
-	If heatStakeGo <> heatStakeGoOld Then
-		Print #201, "{", Chr$(&H22) + "heatStakeGo" + Chr$(&H22), ":", Str$(heatStakeGo), "}",
-		heatStakeGoOld = heatStakeGo
-	EndIf
+'	If heatStakeGo <> heatStakeGoOld Then
+'		Print #201, "{", Chr$(&H22) + "heatStakeGo" + Chr$(&H22), ":", Str$(heatStakeGo), "}",
+'		heatStakeGoOld = heatStakeGo
+'	EndIf
 	If inMagMtr <> inMagMtrOld Then
 		Print #201, "{", Chr$(&H22) + "inMagMtr" + Chr$(&H22), ":", Str$(inMagMtr), "}",
 		inMagMtrOld = inMagMtr
@@ -1223,7 +1265,7 @@ Function setVars(response$ As String)
 	    EndIf
 	    Print "outMagGoHomeBtn:", outMagGoHomeBtn
 	Case "outMagIntLockAckBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        outMagIntLockAckBtn = True
 	        outMagIntLockAck = True
 	    Else
@@ -1231,7 +1273,7 @@ Function setVars(response$ As String)
 	    EndIf
 	    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 	Case "outMagUnloadedBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        outMagUnloadedBtn = True
 	        outMagUnloaded = True
 	    Else
@@ -1239,7 +1281,7 @@ Function setVars(response$ As String)
 	    EndIf
 	    Print "outMagUnloadedBtn:", outMagUnloadedBtn
 	Case "panelDataTxACKBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        panelDataTxACKBtn = True
 	        panelDataTxACK = True
 	        MemOn (panelDataTxAckH)
@@ -1248,7 +1290,7 @@ Function setVars(response$ As String)
 	    EndIf
 	    Print "panelDataTxACKBtn:", panelDataTxACKBtn
 	Case "rightInterlockACKBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        rightInterlockACKBtn = True
 	        rightInterlockACK = True
 	    Else
@@ -1256,7 +1298,7 @@ Function setVars(response$ As String)
 	    EndIf
 	    Print "rightInterlockACKBtn:", rightInterlockACKBtn
 	Case "sftyFrmIlockAckBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        sftyFrmIlockAckBtn = True
 	        sftyFrmIlockAck = True
 	    Else
@@ -1264,728 +1306,728 @@ Function setVars(response$ As String)
 	    EndIf
 	    Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
 	Case "airPressHighF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (airPressHighF)
 	    Else
 	        MemOff (airPressHighF)
 	    EndIf
 	Case "airPressHighFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (airPressHighFV)
 	    Else
 	        MemOff (airPressHighFV)
 	    EndIf
 	Case "airPressLowF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (airPressLowF)
 	    Else
 	        MemOff (airPressLowF)
 	    EndIf
 	Case "airPressLowFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (airPressLowFV)
 	    Else
 	        MemOff (airPressLowFV)
 	    EndIf
 	Case "backIntlock1F"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (backIntlock1F)
 	    Else
 	        MemOff (backIntlock1F)
 	    EndIf
 	Case "backIntlock1FV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (backIntlock1FV)
 	    Else
 	        MemOff (backIntlock1FV)
 	    EndIf
 	Case "backIntlock2F"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (backIntlock2F)
 	    Else
 	        MemOff (backIntlock2F)
 	    EndIf
 	Case "backIntlock2FV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (backIntlock2FV)
 	    Else
 	        MemOff (backIntlock2FV)
 	    EndIf
 	Case "cbMonDebrisRmvF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonDebrisRmvF)
 	    Else
 	        MemOff (cbMonDebrisRmvF)
 	    EndIf
 	Case "cbMonDebrisRmvFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonDebrisRmvFV)
 	    Else
 	        MemOff (cbMonDebrisRmvFV)
 	    EndIf
 	Case "cbMonHeatStakeF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonHeatStakeF)
 	    Else
 	        MemOff (cbMonHeatStakeF)
 	    EndIf
 	Case "cbMonHeatStakeFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonHeatStakeFV)
 	    Else
 	        MemOff (cbMonHeatStakeFV)
 	    EndIf
 	Case "cbMonInMagF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonInMagF)
 	    Else
 	        MemOff (cbMonInMagF)
 	    EndIf
 	Case "cbMonInMagFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonInMagFV)
 	    Else
 	        MemOff (cbMonInMagFV)
 	    EndIf
 	Case "cbMonOutMagF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonOutMagF)
 	    Else
 	        MemOff (cbMonOutMagF)
 	    EndIf
 	Case "cbMonOutMagFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonOutMagFV)
 	    Else
 	        MemOff (cbMonOutMagFV)
 	    EndIf
 	Case "cbMonPAS24vdcF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonPAS24vdcF)
 	    Else
 	        MemOff (cbMonPAS24vdcF)
 	    EndIf
 	Case "cbMonPAS24vdcFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonPAS24vdcFV)
 	    Else
 	        MemOff (cbMonPAS24vdcFV)
 	    EndIf
 	Case "cbMonSafetyF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonSafetyF)
 	    Else
 	        MemOff (cbMonSafetyF)
 	    EndIf
 	Case "cbMonSafetyFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (cbMonSafetyFV)
 	    Else
 	        MemOff (cbMonSafetyFV)
 	    EndIf
 	Case "dc24vOKF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (dc24vOKF)
 	    Else
 	        MemOff (dc24vOKF)
 	    EndIf
 	Case "dc24vOKFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (dc24vOKFV)
 	    Else
 	        MemOff (dc24vOKFV)
 	    EndIf
 	Case "edgeDetectGoF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (edgeDetectGoF)
 	    Else
 	        MemOff (edgeDetectGoF)
 	    EndIf
 	Case "edgeDetectGoFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (edgeDetectGoFV)
 	    Else
 	        MemOff (edgeDetectGoFV)
 	    EndIf
 	Case "edgeDetectHiF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (edgeDetectHiF)
 	    Else
 	        MemOff (edgeDetectHiF)
 	    EndIf
 	Case "edgeDetectHiFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (edgeDetectHiFV)
 	    Else
 	        MemOff (edgeDetectHiFV)
 	    EndIf
 	Case "edgeDetectLoF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (edgeDetectLoF)
 	    Else
 	        MemOff (edgeDetectLoF)
 	    EndIf
 	Case "edgeDetectLoFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (edgeDetectLoFV)
 	    Else
 	        MemOff (edgeDetectLoFV)
 	    EndIf
 	Case "flashHomeNCF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (flashHomeNCF)
 	    Else
 	        MemOff (flashHomeNCF)
 	    EndIf
 	Case "flashHomeNCFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (flashHomeNCFV)
 	    Else
 	        MemOff (flashHomeNCFV)
 	    EndIf
 	Case "flashHomeNOF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (flashHomeNOF)
 	    Else
 	        MemOff (flashHomeNOF)
 	    EndIf
 	Case "flashHomeNOFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (flashHomeNOFV)
 	    Else
 	        MemOff (flashHomeNOFV)
 	    EndIf
 	Case "flashPnlPrsntF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (FlashPnlPrsntF)
 	    Else
 	        MemOff (FlashPnlPrsntF)
 	    EndIf
 	Case "flashPnlPrsntFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (FlashPnlPrsntFV)
 	    Else
 	        MemOff (FlashPnlPrsntFV)
 	    EndIf
 	Case "frontIntlock1F"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (frontIntlock1F)
 	    Else
 	        MemOff (frontIntlock1F)
 	    EndIf
 	Case "frontIntlock1FV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (frontIntlock1FV)
 	    Else
 	        MemOff (frontIntlock1FV)
 	    EndIf
 	Case "frontIntlock2F"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (frontIntlock2F)
 	    Else
 	        MemOff (frontIntlock2F)
 	    EndIf
 	Case "frontIntlock2FV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (frontIntlock2FV)
 	    Else
 	        MemOff (frontIntlock2FV)
 	    EndIf
 	Case "holeDetectedF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (holeDetectedF)
 	    Else
 	        MemOff (holeDetectedF)
 	    EndIf
 	Case "holeDetectedFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (holeDetectedFV)
 	    Else
 	        MemOff (holeDetectedFV)
 	    EndIf
 	Case "hsPanelPresntF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (hsPanelPresntF)
 	    Else
 	        MemOff (hsPanelPresntF)
 	    EndIf
 	Case "hsPanelPresntFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (hsPanelPresntFV)
 	    Else
 	        MemOff (hsPanelPresntFV)
 	    EndIf
 	Case "inMagInterlockF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagInterlockF)
 	    Else
 	        MemOff (inMagInterlockF)
 	    EndIf
 	Case "inMagInterlockFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagInterlockFV)
 	    Else
 	        MemOff (inMagInterlockFV)
 	    EndIf
 	Case "inMagLowLimF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagLowLimF)
 	    Else
 	        MemOff (inMagLowLimF)
 	    EndIf
 	Case "inMagLowLimFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagLowLimFV)
 	    Else
 	        MemOff (inMagLowLimFV)
 	    EndIf
 	Case "inMagLowLimNF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagLowLimNF)
 	    Else
 	        MemOff (inMagLowLimNF)
 	    EndIf
 	Case "inMagLowLimNFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagLowLimNFV)
 	    Else
 	        MemOff (inMagLowLimNFV)
 	    EndIf
 	Case "inMagPnlRdyF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagPnlRdyF)
 	    Else
 	        MemOff (inMagPnlRdyF)
 	    EndIf
 	Case "inMagPnlRdyFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagPnlRdyFV)
 	    Else
 	        MemOff (inMagPnlRdyFV)
 	    EndIf
 	Case "inMagUpLimF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagUpLimF)
 	    Else
 	        MemOff (inMagUpLimF)
 	    EndIf
 	Case "inMagUpLimFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagUpLimFV)
 	    Else
 	        MemOff (inMagUpLimFV)
 	    EndIf
 	Case "inMagUpLimNF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagUpLimNF)
 	    Else
 	        MemOff (inMagUpLimNF)
 	    EndIf
 	Case "inMagUpLimNFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagUpLimNFV)
 	    Else
 	        MemOff (inMagUpLimNFV)
 	    EndIf
 	Case "leftIntlock1F"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (leftIntlock1F)
 	    Else
 	        MemOff (leftIntlock1F)
 	    EndIf
 	Case "leftIntlock1FV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (leftIntlock1FV)
 	    Else
 	        MemOff (leftIntlock1FV)
 	    EndIf
 	Case "leftIntlock2F"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (leftIntlock2F)
 	    Else
 	        MemOff (leftIntlock2F)
 	    EndIf
 	Case "leftIntlock2FV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (leftIntlock2FV)
 	    Else
 	        MemOff (leftIntlock2FV)
 	    EndIf
 	Case "maintModeF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (maintModeF)
 	    Else
 	        MemOff (maintModeF)
 	    EndIf
 	Case "maintModeFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (maintModeFV)
 	    Else
 	        MemOff (maintModeFV)
 	    EndIf
 	Case "monEstop1F"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (monEstop1F)
 	    Else
 	        MemOff (monEstop1F)
 	    EndIf
 	Case "monEstop1FV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (monEstop1FV)
 	    Else
 	        MemOff (monEstop1FV)
 	    EndIf
 	Case "monEstop2F"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (monEstop2F)
 	    Else
 	        MemOff (monEstop2F)
 	    EndIf
 	Case "monEstop2FV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (monEstop2FV)
 	    Else
 	        MemOff (monEstop2FV)
 	    EndIf
 	Case "outMagIntF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagIntF)
 	    Else
 	        MemOff (outMagIntF)
 	    EndIf
 	Case "outMagIntFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagIntFV)
 	    Else
 	        MemOff (outMagIntFV)
 	    EndIf
 	Case "outMagLowLimF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagLowLimF)
 	    Else
 	        MemOff (outMagLowLimF)
 	    EndIf
 	Case "outMagLowLimFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagLowLimFV)
 	    Else
 	        MemOff (outMagLowLimFV)
 	    EndIf
 	Case "outMagLowLimNF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagLowLimNF)
 	    Else
 	        MemOff (outMagLowLimNF)
 	    EndIf
 	Case "outMagLowLimNFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagLowLimNFV)
 	    Else
 	        MemOff (outMagLowLimNFV)
 	    EndIf
 	Case "outMagPanelRdyF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagPanelRdyF)
 	    Else
 	        MemOff (outMagPanelRdyF)
 	    EndIf
 	Case "outMagPanelRdyFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagPanelRdyFV)
 	    Else
 	        MemOff (outMagPanelRdyFV)
 	    EndIf
 	Case "outMagUpLimF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagUpLimF)
 	    Else
 	        MemOff (outMagUpLimF)
 	    EndIf
 	Case "outMagUpLimFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagUpLimFV)
 	    Else
 	        MemOff (outMagUpLimFV)
 	    EndIf
 	Case "outMagUpLimNF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagUpLimNF)
 	    Else
 	        MemOff (outMagUpLimNF)
 	    EndIf
 	Case "outMagUpLimNFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagUpLimNFV)
 	    Else
 	        MemOff (outMagUpLimNFV)
 	    EndIf
 	Case "rightIntlockF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (rightIntlockF)
 	    Else
 	        MemOff (rightIntlockF)
 	    EndIf
 	Case "rightIntlockFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (rightIntlockFV)
 	    Else
 	        MemOff (rightIntlockFV)
 	    EndIf
 	Case "debrisMtrF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (debrisMtrF)
 	    Else
 	        MemOff (debrisMtrF)
 	    EndIf
 	Case "debrisMtrFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (debrisMtrFV)
 	    Else
 	        MemOff (debrisMtrFV)
 	    EndIf
 	Case "drillGoF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (drillGoF)
 	    Else
 	        MemOff (drillGoF)
 	    EndIf
 	Case "drillGoFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (drillGoFV)
 	    Else
 	        MemOff (drillGoFV)
 	    EndIf
 	Case "drillReturnF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (drillReturnF)
 	    Else
 	        MemOff (drillReturnF)
 	    EndIf
 	Case "drillReturnFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (drillReturnFV)
 	    Else
 	        MemOff (drillReturnFV)
 	    EndIf
 	Case "eStopResetF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (eStopResetF)
 	    Else
 	        MemOff (eStopResetF)
 	    EndIf
 	Case "eStopResetFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (eStopResetFV)
 	    Else
 	        MemOff (eStopResetFV)
 	    EndIf
 	Case "heatStakeGoF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (heatStakeGoF)
 	    Else
 	        MemOff (heatStakeGoF)
 	    EndIf
 	Case "heatStakeGoFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (heatStakeGoFV)
 	    Else
 	        MemOff (heatStakeGoFV)
 	    EndIf
 	Case "inMagMtrF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagMtrF)
 	    Else
 	        MemOff (inMagMtrF)
 	    EndIf
 	Case "inMagMtrFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagMtrFV)
 	    Else
 	        MemOff (inMagMtrFV)
 	    EndIf
 	Case "inMagMtrDirF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagMtrDirF)
 	    Else
 	        MemOff (inMagMtrDirF)
 	    EndIf
 	Case "inMagMtrDirFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (inMagMtrDirFV)
 	    Else
 	        MemOff (inMagMtrDirFV)
 	    EndIf
 	Case "outMagMtrF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagMtrF)
 	    Else
 	        MemOff (outMagMtrF)
 	    EndIf
 	Case "outMagMtrFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagMtrFV)
 	    Else
 	        MemOff (outMagMtrFV)
 	    EndIf
 	Case "outMagMtrDirF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagMtrDirF)
 	    Else
 	        MemOff (outMagMtrDirF)
 	    EndIf
 	Case "outMagMtrDirFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (outMagMtrDirFV)
 	    Else
 	        MemOff (outMagMtrDirFV)
 	    EndIf
 	Case "stackLightAlrmF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightAlrmF)
 	    Else
 	        MemOff (stackLightAlrmF)
 	    EndIf
 	Case "stackLightAlrmFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightAlrmFV)
 	    Else
 	        MemOff (stackLightAlrmFV)
 	    EndIf
 	Case "stackLightGrnF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightGrnF)
 	    Else
 	        MemOff (stackLightGrnF)
 	    EndIf
 	Case "stackLightGrnFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightGrnFV)
 	    Else
 	        MemOff (stackLightGrnFV)
 	    EndIf
 	Case "stackLightRedF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightRedF)
 	    Else
 	        MemOff (stackLightRedF)
 	    EndIf
 	Case "stackLightRedFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightRedFV)
 	    Else
 	        MemOff (stackLightRedFV)
 	    EndIf
 	Case "stackLightYelF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightYelF)
 	    Else
 	        MemOff (stackLightYelF)
 	    EndIf
 	Case "stackLightYelFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightYelFV)
 	    Else
 	        MemOff (stackLightYelFV)
 	    EndIf
 	Case "suctionCupsF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (suctionCupsF)
 	    Else
 	        MemOff (suctionCupsF)
 	    EndIf
 	Case "suctionCupsFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (suctionCupsFV)
 	    Else
 	        MemOff (suctionCupsFV)
 	    EndIf
 	Case "recTempProbe"
-	    recTempProbe = Val(tokens$(1))
+	    recTempProbe = Val(Tokens$(1))
 	    Print "recTempProbe:", recTempProbe
 	Case "recTempTrack"
-	    recTempTrack = Val(tokens$(1))
+	    recTempTrack = Val(Tokens$(1))
 	    Print "recTempTrack:", recTempTrack
 	Case "recFirstHolePointInspection"
-	    recFirstHolePointInspection = Val(tokens$(1))
+	    recFirstHolePointInspection = Val(Tokens$(1))
 	    Print "recFirstHolePointInspection:", recFirstHolePointInspection
 	Case "recLastHolePointInspection"
-	    recLastHolePointInspection = Val(tokens$(1))
+	    recLastHolePointInspection = Val(Tokens$(1))
 	    Print "recLastHolePointInspection:", recLastHolePointInspection
 	Case "recFirstHolePointHotStake"
-	    recFirstHolePointHotStake = Val(tokens$(1))
+	    recFirstHolePointHotStake = Val(Tokens$(1))
 	    Print "recFirstHolePointHotStake:"
 	Case "recLastHolePointHotStake"
-	    recLastHolePointHotStake = Val(tokens$(1))
+	    recLastHolePointHotStake = Val(Tokens$(1))
 	    Print "recLastHolePointHotStake:", recLastHolePointHotStake
 	Case "recFirstHolePointFlash"
-	    recFirstHolePointFlash = Val(tokens$(1))
+	    recFirstHolePointFlash = Val(Tokens$(1))
 	    Print "recFirstHolePointFlash:", recFirstHolePointFlash
 	Case "recLastHolePointFlash"
-	    recLastHolePointFlash = Val(tokens$(1))
+	    recLastHolePointFlash = Val(Tokens$(1))
 	    Print "recLastHolePointFlash:"
 	Case "recFlashDwellTime"
-	    recFlashDwellTime = Val(tokens$(1))
+	    recFlashDwellTime = Val(Tokens$(1))
 	    Print "recFlashDwellTime:"
 	Case "recHeatStakeOffset"
-	    recHeatStakeOffset = Val(tokens$(1))
+	    recHeatStakeOffset = Val(Tokens$(1))
 	    Print "recHeatStakeOffset:"
 	Case "recBossCrossArea"
-	    recBossCrossArea = Val(tokens$(1))
+	    recBossCrossArea = Val(Tokens$(1))
 	    Print "recBossCrossArea:", recBossCrossArea
 	Case "recPointsTable"
-	    recPointsTable = Val(tokens$(1))
+	    recPointsTable = Val(Tokens$(1))
 	    Print "recPointsTable:", recPointsTable
 	Case "recInmag"
-	    recInmag = Val(tokens$(1))
+	    recInmag = Val(Tokens$(1))
 	    Print "recInmag:", recInmag
 	Case "recOutmag"
-	    recOutmag = Val(tokens$(1))
+	    recOutmag = Val(Tokens$(1))
 	    Print "recOutmag:", recOutmag
 	Case "recCrowding"
-	    recCrowding = Val(tokens$(1))
+	    recCrowding = Val(Tokens$(1))
 	    Print "recCrowding:", recCrowding
 	Case "recPreCrowding"
-	    recPreCrowding = Val(tokens$(1))
+	    recPreCrowding = Val(Tokens$(1))
 	    Print "recPreCrowding:", recPreCrowding
 	Case "jobNumPanels"
-	    jobNumPanels = Val(tokens$(1))
+	    jobNumPanels = Val(Tokens$(1))
 	    Print "jobNumPanels:", jobNumPanels
 	Case "recFlashRequired"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        recFlashRequired = True
 	    Else
 	        recFlashRequired = False
 	    EndIf
 	    Print "recFlashRequired:", recFlashRequired
 	Case "recInmagPickupOffset"
-	    recInmagPickupOffset = Val(tokens$(1))
+	    recInmagPickupOffset = Val(Tokens$(1))
 	    Print "recInmagPickupOffset:", recInmagPickupOffset
 	Case "recInsertDepth"
-	    recInsertDepth = Val(tokens$(1))
+	    recInsertDepth = Val(Tokens$(1))
 	    Print "recInsertDepth:", recInsertDepth
 	Case "recFlashDwellTime"
-	    recFlashDwellTime = Val(tokens$(1))
+	    recFlashDwellTime = Val(Tokens$(1))
 	    Print "recFlashDwellTime:", recFlashDwellTime
 	Case "recInsertType"
-	    recInsertType = Val(tokens$(1))
+	    recInsertType = Val(Tokens$(1))
 	    Print "recInsertType:", recInsertType
 	Case "recNumberOfHoles"
-	    recNumberOfHoles = Val(tokens$(1))
+	    recNumberOfHoles = Val(Tokens$(1))
 	    Print "recNumberOfHoles:", recNumberOfHoles
 	Case "recOutmagPickupOffset"
-	    recOutmagPickupOffset = Val(tokens$(1))
+	    recOutmagPickupOffset = Val(Tokens$(1))
 	    Print "recOutmagPickupOffset:", recOutmagPickupOffset
 	Case "suctionWaitTime"
-	   recSuctionWaitTime = Val(tokens$(1))
+	   recSuctionWaitTime = Val(Tokens$(1))
 	    Print "suctionWaitTime:", recSuctionWaitTime
 	Case "systemAccel"
-	    SystemAccel = Val(tokens$(1))
+	    SystemAccel = Val(Tokens$(1))
 	    Print "systemAccel:", SystemAccel
 	Case "systemSpeed"
-	    SystemSpeed = Val(tokens$(1))
+	    SystemSpeed = Val(Tokens$(1))
 	    Print "systemSpeed:", SystemSpeed
 	Case "zlimit"
-	    zLimit = Val(tokens$(1))
+	    zLimit = Val(Tokens$(1))
 	    Print "zlimit:", zLimit
 	Default
 		' TMH for now print come back and do something useful

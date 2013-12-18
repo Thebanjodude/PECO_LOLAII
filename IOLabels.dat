@@ -1,7 +1,7 @@
-ENVT0100,LM:2013/12/10 17:47:38:845,DS:0000014217,CS:19526,MA:00-50-56-C0-00-01,EI:           
+ENVT0100,LM:2013/12/18 23:03:17:444,DS:0000016536,CS:29767,MA:00-0C-29-03-E6-C5,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
-	nNumberOfLabels=39
+	nNumberOfLabels=44
 	Label1 {
 		nBit=8
 		sLabel="monEstop1H"
@@ -197,6 +197,31 @@ InputBitLabels {
 		sLabel="outMagIntH"
 		sDescription=""
 	}
+	Label40 {
+		nBit=112
+		sLabel="bootDelayH"
+		sDescription=""
+	}
+	Label41 {
+		nBit=113
+		sLabel="idleH"
+		sDescription=""
+	}
+	Label42 {
+		nBit=114
+		sLabel="readyH"
+		sDescription=""
+	}
+	Label43 {
+		nBit=115
+		sLabel="insertingH"
+		sDescription=""
+	}
+	Label44 {
+		nBit=116
+		sLabel="dumpingH"
+		sDescription=""
+	}
 }
 InputByteLabels {
 	nNumberOfLabels=0
@@ -205,7 +230,7 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=15
+	nNumberOfLabels=21
 	Label1 {
 		nBit=0
 		sLabel="eStopResetH"
@@ -281,6 +306,36 @@ OutputBitLabels {
 		sLabel="stackLightAlrmH"
 		sDescription=""
 	}
+	Label16 {
+		nBit=112
+		sLabel="bootH"
+		sDescription=""
+	}
+	Label17 {
+		nBit=113
+		sLabel="gotoReadyH"
+		sDescription=""
+	}
+	Label18 {
+		nBit=114
+		sLabel="doInsertionH"
+		sDescription=""
+	}
+	Label19 {
+		nBit=115
+		sLabel="doneInsertingH"
+		sDescription=""
+	}
+	Label20 {
+		nBit=116
+		sLabel="startDumpH"
+		sDescription=""
+	}
+	Label21 {
+		nBit=117
+		sLabel="doneDumpingH"
+		sDescription=""
+	}
 }
 OutputByteLabels {
 	nNumberOfLabels=0
@@ -289,7 +344,7 @@ OutputWordLabels {
 	nNumberOfLabels=0
 }
 MemoryBitLabels {
-	nNumberOfLabels=136
+	nNumberOfLabels=158
 	Label1 {
 		nBit=0
 		sLabel="airPressLowF"
@@ -966,6 +1021,116 @@ MemoryBitLabels {
 		sDescription=""
 	}
 	Label136 {
+		nBit=157
+		sLabel="bootFV"
+		sDescription=""
+	}
+	Label137 {
+		nBit=158
+		sLabel="bootF"
+		sDescription=""
+	}
+	Label138 {
+		nBit=159
+		sLabel="gotoReadyFV"
+		sDescription=""
+	}
+	Label139 {
+		nBit=160
+		sLabel="gotoReadyF"
+		sDescription=""
+	}
+	Label140 {
+		nBit=161
+		sLabel="doInsertionFV"
+		sDescription=""
+	}
+	Label141 {
+		nBit=162
+		sLabel="doInsertionF"
+		sDescription=""
+	}
+	Label142 {
+		nBit=163
+		sLabel="doneInsertingFV"
+		sDescription=""
+	}
+	Label143 {
+		nBit=164
+		sLabel="doneInsertingF"
+		sDescription=""
+	}
+	Label144 {
+		nBit=165
+		sLabel="startDumpFV"
+		sDescription=""
+	}
+	Label145 {
+		nBit=166
+		sLabel="startDumpF"
+		sDescription=""
+	}
+	Label146 {
+		nBit=167
+		sLabel="doneDumpingFV"
+		sDescription=""
+	}
+	Label147 {
+		nBit=168
+		sLabel="doneDumpingF"
+		sDescription=""
+	}
+	Label148 {
+		nBit=170
+		sLabel="bootDelayFV"
+		sDescription=""
+	}
+	Label149 {
+		nBit=171
+		sLabel="bootDelayF"
+		sDescription=""
+	}
+	Label150 {
+		nBit=172
+		sLabel="idleFV"
+		sDescription=""
+	}
+	Label151 {
+		nBit=173
+		sLabel="idleF"
+		sDescription=""
+	}
+	Label152 {
+		nBit=174
+		sLabel="readyFV"
+		sDescription=""
+	}
+	Label153 {
+		nBit=175
+		sLabel="readyF"
+		sDescription=""
+	}
+	Label154 {
+		nBit=176
+		sLabel="insertingFV"
+		sDescription=""
+	}
+	Label155 {
+		nBit=177
+		sLabel="insertingF"
+		sDescription=""
+	}
+	Label156 {
+		nBit=178
+		sLabel="dumpingFV"
+		sDescription=""
+	}
+	Label157 {
+		nBit=179
+		sLabel="dumpingF"
+		sDescription=""
+	}
+	Label158 {
 		nBit=216
 		sLabel="WatlowDO"
 		sDescription=""
