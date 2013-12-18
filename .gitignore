@@ -9,7 +9,7 @@
 *.obj
 
 # ingore whatever this is about
-*.dat
+PECO_LOLAII.dat
 
 ##############
 ## Misc Files
