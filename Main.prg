@@ -282,7 +282,7 @@ Function PowerOnSequence()
 	Xqt 6, HmiListen, NoEmgAbort
     Xqt 7, InmagControl, Normal
     Xqt 8, OutMagControlRefactor(), Normal
-	MBInitialize() ' Kick off the modbus
+	'MBInitialize() ' Kick off the modbus
 retry:
 
 	ClearMemory() ' writes a zero to all the memIO
@@ -335,11 +335,9 @@ Function CheckInitialParameters() As Integer
 Fend
 Function HotStakeTempRdy() As Boolean
 	
-	If pasOTAOnOffZone1 = True And pasOTAOnOffZone2 = True Then
+	' TODO - once code is done in PLC communicate it back to the robot
 		HotStakeTempRdy = True ' ready to start job
-	Else
-		HotStakeTempRdy = False ' Temperature is not in range
-	EndIf
+'		HotStakeTempRdy = False ' Temperature is not in range
 	
 Fend
 Function PowerOnHomeCheck() As Boolean
@@ -385,6 +383,13 @@ Function ClearMemory()
 Fend
 Function TestHeatStake()
 	
+	'Do not use this function, modbus is currently disabled
+	GoTo EndOfTestHeatStake
+	
+	'*************************************************************************************
+	'**********************************disabled function**********************************
+	'*************************************************************************************
+
 	Do Until jobStart = True
 		Wait .1
 	Loop
@@ -406,24 +411,25 @@ Function TestHeatStake()
 	
 	HSProbeFinalPosition = 12
 	
-Do While True
+	Do While True
+			
+		MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
+	 	MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement
 		
-	MBWrite(pasInsertDepthAddr, inches2Modbus(HSProbeFinalPosition), MBType32) ' Send final weld depth
- 	MBWrite(pasInsertEngageAddr, inches2Modbus(HSProbeFinalPosition - .65), MBType32) ' Set engagement
-	
-	Do Until pasMessageDB = 4
-		On heatStakeGoH, 1 ' Tell the HS to install 1 insert
-		Wait .5
+		Do Until pasMessageDB = 4
+			On heatStakeGoH, 1 ' Tell the HS to install 1 insert
+			Wait .5
+		Loop
+		
+		Do Until pasMessageDB = 4
+			Wait .1
+		Loop
+		
+		HSProbeFinalPosition = HSProbeFinalPosition + .1
+		
 	Loop
-	
-	Do Until pasMessageDB = 4
-		Wait .1
-	Loop
-	
-	HSProbeFinalPosition = HSProbeFinalPosition + .1
-	
-Loop
-	
+
+	EndOfTestHeatStake: ' label for end of of function
 Fend
 Function ChoosePointsTable()
 	' Choose which points table to load
