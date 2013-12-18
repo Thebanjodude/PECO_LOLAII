@@ -1,5 +1,5 @@
-ENVT0100,LM:2013/12/18 20:27:33:249,DS:0000002740,CS:10000,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="HotStakeAndFlash.prg"
+ENVT0100,LM:2013/12/18 20:57:37:450,DS:0000003008,CS:07740,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="HeatStake.prg *"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -13,28 +13,17 @@ ProgramFile1 {
 	}
 }
 ProgramFile2 {
-	sName="HotStakeAndFlash.prg"
-	bOpened=True
-	nWinState=2
-	Window {
-		nLeft=166
-		nTop=82
-		nWidth=1396
-		nHeight=682
-	}
-}
-ProgramFile3 {
 	sName="IOTable.prg"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
 		nLeft=18
 		nTop=128
-		nWidth=1367
-		nHeight=671
+		nWidth=1365
+		nHeight=667
 	}
 }
-ProgramFile4 {
+ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
 	bOpened=False
 	nWinState=0
@@ -45,7 +34,7 @@ ProgramFile4 {
 		nHeight=746
 	}
 }
-ProgramFile5 {
+ProgramFile4 {
 	sName="SystemMonitor.prg"
 	bOpened=False
 	nWinState=0
@@ -56,18 +45,18 @@ ProgramFile5 {
 		nHeight=573
 	}
 }
-ProgramFile6 {
+ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=107
 		nTop=16
-		nWidth=1104
-		nHeight=778
+		nWidth=1103
+		nHeight=774
 	}
 }
-ProgramFile7 {
+ProgramFile6 {
 	sName="InspectionStation.prg"
 	bOpened=False
 	nWinState=2
@@ -78,15 +67,48 @@ ProgramFile7 {
 		nHeight=763
 	}
 }
-ProgramFile8 {
+ProgramFile7 {
 	sName="CalibrationRoutines.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=65
 		nTop=96
-		nWidth=1275
-		nHeight=687
+		nWidth=1274
+		nHeight=684
+	}
+}
+ProgramFile8 {
+	sName="MiscFunctions.prg"
+	bOpened=True
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=613
+	}
+}
+ProgramFile9 {
+	sName="FlashRemoval.prg"
+	bOpened=True
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=613
+	}
+}
+ProgramFile10 {
+	sName="HeatStake.prg"
+	bOpened=True
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=613
 	}
 }
 nIncludeFileCount=1
