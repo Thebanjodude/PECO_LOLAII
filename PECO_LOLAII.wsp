@@ -1,5 +1,5 @@
-ENVT0100,LM:2013/12/18 20:57:37:450,DS:0000003008,CS:07740,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="HeatStake.prg *"
+ENVT0100,LM:2013/12/19 01:55:13:968,DS:0000003422,CS:09792,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="Crowding.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -7,20 +7,20 @@ ProgramFile1 {
 	nWinState=0
 	Window {
 		nLeft=1
-		nTop=1
-		nWidth=1323
-		nHeight=817
+		nTop=0
+		nWidth=706
+		nHeight=813
 	}
 }
 ProgramFile2 {
 	sName="IOTable.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=18
 		nTop=128
-		nWidth=1365
-		nHeight=667
+		nWidth=1361
+		nHeight=660
 	}
 }
 ProgramFile3 {
@@ -47,24 +47,24 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
 		nLeft=107
 		nTop=16
-		nWidth=1103
-		nHeight=774
+		nWidth=1099
+		nHeight=767
 	}
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
 		nLeft=125
 		nTop=12
-		nWidth=1349
-		nHeight=763
+		nWidth=1348
+		nHeight=759
 	}
 }
 ProgramFile7 {
@@ -80,19 +80,19 @@ ProgramFile7 {
 }
 ProgramFile8 {
 	sName="MiscFunctions.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=613
+		nWidth=1059
+		nHeight=610
 	}
 }
 ProgramFile9 {
 	sName="FlashRemoval.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -102,13 +102,46 @@ ProgramFile9 {
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
 		nWidth=1060
 		nHeight=613
+	}
+}
+ProgramFile11 {
+	sName="Startup.prg"
+	bOpened=False
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=605
+	}
+}
+ProgramFile12 {
+	sName="MainStates.prg"
+	bOpened=True
+	nWinState=0
+	Window {
+		nLeft=707
+		nTop=0
+		nWidth=707
+		nHeight=813
+	}
+}
+ProgramFile13 {
+	sName="Crowding.prg"
+	bOpened=True
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
 	}
 }
 nIncludeFileCount=1
@@ -119,8 +152,8 @@ IncludeFile1 {
 	Window {
 		nLeft=25
 		nTop=44
-		nWidth=1226
-		nHeight=722
+		nWidth=1224
+		nHeight=715
 	}
 }
 nPointFileCount=3
@@ -169,12 +202,12 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=849
-		nTop=47
-		nWidth=773
-		nHeight=718
+		nLeft=201
+		nTop=90
+		nWidth=917
+		nHeight=510
 	}
 }
 IOLabelEditor {
@@ -182,10 +215,10 @@ IOLabelEditor {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1060
+		nHeight=613
 	}
-	nWinState=0
+	nWinState=2
 }
 IOMonitor {
 	bOpened=False

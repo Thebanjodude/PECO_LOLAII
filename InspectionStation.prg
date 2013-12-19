@@ -346,58 +346,126 @@ Fend
 Function MicroMetersToInches(um As Real) As Real
 		MicroMetersToInches = um * .00003937
 Fend
-Function CrowdingSequence(StupidCompiler3 As Byte) As Integer
+Function TeachPointsUnderLaser()
+' This function will only work in the operator aligns the hole with minimal error in all 3 axis's
+On suctionCupsH
+suctionCupsCC = True
+Pause
 
-Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
+' all tolerances are +/- mm
+#define Xtolerance .5
+#define Ytolerance .5
+#define Ztolerance 5
 
-	Jump Prescan LimZ zLimit
-	Jump PreHotStake LimZ zLimit
+Real XLaserError, XLaserTolerance
+Real YLaserError, YLaserTolerance
+Real ZLaserError, ZLaserTolerance
+Real tempY1, tempY2
+Integer i
+
+recFirstHolePointInspection = 6
+recLastHolePointInspection = 6
+recPointsTable = 3
+
+Motor On
+Power Low
+
+ChoosePointsTable() ' load correct points table
+ChangeProfile("00") ' Change profile on the laser
+
+For i = recFirstHolePointInspection To recLastHolePointInspection
+' add checks for laser out of range (-9999's)
+
+	SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
+	Pause ' wait for operator to continue
+	SLock 1, 2, 3, 4 ' lock motors
 	
-	Off (CrowdingH) ' Make sure the crowding is open
-	Wait 3
-	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
-	suctionCupsCC = False ' Turn off suction cups
-	Wait recSuctionWaitTime ' wait for cups to release
-	Jump P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
+redoZ:
+	ZLaserError = GetLaserMeasurement("06")
+	Print "ZLaserError: ", ZLaserError
+	If ZLaserError = -999.999 Then
+		Print "Laser Z not in range, please adjust"
+		SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
+		Pause ' wait for operator to continue
+		GoTo redoZ
+	EndIf
+	
+	If Abs(ZLaserError) > ZLaserTolerance Then
+	
+'	Do While Abs(ZLaserError) > ZLaserTolerance
+		JTran 3, -1 * ZLaserError
+		Wait .25
+		ZLaserError = GetLaserMeasurement("06")
+		Print "ZLaserError: ", ZLaserError
+'	Loop
+	EndIf
+	
+	Print "Z is done"
+	P(i) = Here ' save the point 
+	
+redoY:
+	YLaserError = GetLaserMeasurement("05")
+	Print "YLaserError: ", YLaserError
+	If YLaserError = -999.999 Then
+		Print "Laser Y not in range, please adjust"
+		SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
+		Pause ' wait for operator to continue
+		GoTo redoY
+	EndIf
+	
+' the problem with this is that I can't determine which way to correct (becuase it's a circle).	
+' the problem with this method is if we cross the diameter with our .1mm move	
+
+	tempY1 = GetLaserMeasurement("05")
+	Print "tempY1", tempY1
+	Move P(i) +Y(0.1) ' move a little to see if we are 
+	tempY2 = GetLaserMeasurement("05")
+	Print "tempY2", tempY2
+	
+	YLaserError = GetLaserMeasurement("05")
+	If Abs(YLaserError) > YLaserTolerance Then
+	
+'	Do While Abs(YLaserError) > YLaserTolerance
+		If tempY1 < tempY2 Then
+			Move P(i) +Y(-1 * YLaserError)
+		Else
+			Move P(i) +Y(YLaserError)
+		EndIf
+'	Loop
+	EndIf
+	
 	Wait .25
-	On (CrowdingH) ' Close crowding
+	YLaserError = GetLaserMeasurement("05")
+	Print "YLaserError: ", YLaserError
 	
-	' wait for verification that the crowding has closed
-'	Do Until pasCrowding = True
-'		Wait .25
+	Print "Y is done"
+	P(i) = Here ' save the point 
+	
+redoX:
+	XLaserError = GetLaserMeasurement("07")
+	Print "XLaserError: ", XLaserError
+	If XLaserError = -999.999 Then
+		Print "Laser X not in range, please adjust"
+		SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
+		Pause ' wait for operator to continue
+		GoTo redoX
+	EndIf
+	
+	If Abs(XLaserError) > XLaserTolerance Then
+'	Do While Abs(XLaserError) < XLaserTolerance
+		Move P(i) +X(-1 * XLaserError / 2)
+		Wait .25
+		XLaserError = GetLaserMeasurement("07")
+		Print "XLaserError: ", XLaserError
 '	Loop
+	EndIf
 	
-	Wait 3 ' wait for the crowd to take place
+	Print "X is done"
+	P(i) = Here ' save the point 
 	
-	Go P(recCrowding)
-	suctionCupsCC = True ' Turn on cups
-	Wait recSuctionWaitTime
+Next
 
-	Off (CrowdingH) ' Open crowding
-	' wait for verification that the crowding has opened
-' this do loop got stuck during testing, skip over for now	
-
-'	Do Until pasCrowding = False
-'		Wait .25
-'	Loop
-	Wait 3 ' wait for the crowd to open	
-	
-	CrowdingSequence = 0
-	
-exitCrowding:
-	
-If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-	jobAbort = True
-	MemOff (jobAbortH) ' reset membit
-	Off (CrowdingH) ' Open crowding	
-EndIf
-
-	Jump PreHotStake LimZ zLimit ' move away from a panel
-	Jump PreScan LimZ zLimit ' Go Home
-
-Trap 2 ' Disarm trap
-
+	SFree 1, 2, 3, 4
+	SavePointsTable() ' save the points table
 Fend
-
-
 

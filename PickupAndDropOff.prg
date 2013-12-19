@@ -1,7 +1,6 @@
 #include "Globals.INC"
 
-Function DropOffPanel(stupidCompiler1 As Byte) As Integer
-' You can't return a value unless you pass it one	
+Function DropOffPanel() As Integer
 
 	DropOffPanel = 2 ' dafult to fail
 	SystemStatus = StatePushPanel
@@ -74,8 +73,7 @@ EndIf
 Jump prescan LimZ zLimit ' go home
 
 Fend
-Function PickupPanel(stupidCompiler As Byte) As Integer 'byte me
-' You can't return a value unless you pass it one...
+Function PickupPanel() As Integer 'byte me
 	
 Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 

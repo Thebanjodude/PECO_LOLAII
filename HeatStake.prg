@@ -1,6 +1,6 @@
 #include "Globals.INC"
 
-Function HotStakePanel(StupidCompiler2 As Byte) As Integer
+Function HotStakePanel() As Integer
 
 	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
 	' While the HS is in state 4, installing an insert, I revoke the ability to abort.

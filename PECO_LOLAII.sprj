@@ -1,11 +1,11 @@
-ENVT0100,LM:2013/12/18 23:07:03:350,DS:0000004126,CS:06772,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2013/12/19 02:27:50:724,DS:0000004543,CS:06005,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="12/18/2013 4:07:03 PM"
-	bBuildComplete=False
+	sLastModified="12/18/2013 7:27:41 PM"
+	bBuildComplete=True
 	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
@@ -25,85 +25,103 @@ UserErrorsFile {
 	sName="UserErrors.dat"
 	nChecksum=0
 }
-nProgramFileCount=10
+nProgramFileCount=13
 ProgramFile1 {
 	sName="Main.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="12/10/2013 6:21:32 PM"
+	sTimeSavedInController="12/19/2013 2:09:50 AM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/6/2013 1:47:36 PM"
+	sTimeSavedInController="12/18/2013 11:05:47 PM"
 }
 ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/6/2013 3:57:21 PM"
+	sTimeSavedInController="12/18/2013 6:39:05 PM"
 }
 ProgramFile4 {
 	sName="SystemMonitor.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="11/18/2013 9:04:03 PM"
+	sTimeSavedInController="12/18/2013 8:34:23 PM"
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="12/10/2013 3:38:59 PM"
+	sTimeSavedInController="12/19/2013 2:27:41 AM"
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="12/10/2013 5:48:44 PM"
+	sTimeSavedInController="12/19/2013 1:57:58 AM"
 }
 ProgramFile7 {
 	sName="CalibrationRoutines.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="12/2/2013 8:00:31 PM"
+	sTimeSavedInController="12/18/2013 6:39:05 PM"
 }
 ProgramFile8 {
 	sName="MiscFunctions.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/1/0001 7:00:00 AM"
+	sTimeSavedInController="12/18/2013 11:16:29 PM"
 }
 ProgramFile9 {
 	sName="FlashRemoval.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/1/0001 7:00:00 AM"
+	sTimeSavedInController="12/18/2013 8:58:24 PM"
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/1/0001 7:00:00 AM"
+	sTimeSavedInController="12/19/2013 2:27:41 AM"
+}
+ProgramFile11 {
+	sName="Startup.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="12/19/2013 12:50:52 AM"
+}
+ProgramFile12 {
+	sName="MainStates.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="12/19/2013 2:27:41 AM"
+}
+ProgramFile13 {
+	sName="Crowding.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="12/19/2013 1:57:58 AM"
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="12/2/2013 7:27:46 PM"
+	sTimeSavedInController="12/18/2013 11:06:28 PM"
 }
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="9/6/2013 3:52:54 PM"
+	sTimeSavedInController="12/18/2013 6:39:05 PM"
 }
 PointFile2 {
 	sName="Points2.pts"
-	sTimeSavedInController="9/6/2013 5:07:49 PM"
+	sTimeSavedInController="12/18/2013 6:39:05 PM"
 }
 PointFile3 {
 	sName="Points3.pts"
-	sTimeSavedInController="9/9/2013 9:57:28 PM"
+	sTimeSavedInController="12/18/2013 6:39:05 PM"
 }
 OperatorSettings {
 	OperatorWindow {
