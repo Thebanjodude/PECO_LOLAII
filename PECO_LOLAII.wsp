@@ -1,5 +1,5 @@
-ENVT0100,LM:2013/12/19 17:21:24:775,DS:0000003430,CS:11566,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="HeatStake.prg"
+ENVT0100,LM:2013/12/19 18:03:20:636,DS:0000003431,CS:08789,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="MainStates.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -48,7 +48,7 @@ ProgramFile4 {
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=107
 		nTop=16
@@ -103,12 +103,12 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=True
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1058
-		nHeight=606
+		nWidth=1057
+		nHeight=602
 	}
 }
 ProgramFile11 {
@@ -125,7 +125,7 @@ ProgramFile11 {
 ProgramFile12 {
 	sName="MainStates.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=707
 		nTop=0
@@ -136,7 +136,7 @@ ProgramFile12 {
 ProgramFile13 {
 	sName="Crowding.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0

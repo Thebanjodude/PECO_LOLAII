@@ -71,12 +71,12 @@ Function preinspectionState(currentState As Integer) As Integer
 
 	Select InspectPanel(1)						' 1=Preinspection TODO - change this to a #define
 		Case 0
-			mainCurrentState = StateHotStakePanel
+			currentState = StateHotStakePanel
 			Print "Preinspection executed"
 		Case 2									' failed preinspection
-			mainCurrentState = StatePushPanel 	' Drop off a panel before we go to idle 
+			currentState = StatePushPanel 	' Drop off a panel before we go to idle 
 		Default
-			mainCurrentState = StatePushPanel
+			currentState = StatePushPanel
 	Send
 	
 	preinspectionStateEnd:
