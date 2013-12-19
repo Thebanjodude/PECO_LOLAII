@@ -62,7 +62,7 @@ Function HotStakePanel() As Integer
 		Speed SystemSpeed
 		
 		'Wait readyH								' give the PLC time to get back to ready state
-		Wait Sw(3)
+		Wait Sw(2)
 '		If Not ready Then						' something has gone wrong with the plc
 '			Exit For
 '		EndIf
