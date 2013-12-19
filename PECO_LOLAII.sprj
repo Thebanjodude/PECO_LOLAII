@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/12/19 02:27:50:724,DS:0000004543,CS:06005,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2013/12/19 17:21:16:878,DS:0000004544,CS:00592,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="12/18/2013 7:27:41 PM"
+	sLastModified="12/19/2013 10:19:37 AM"
 	bBuildComplete=True
 	bRebuildRequired=True
 	bClearControllerProject=False
@@ -84,7 +84,7 @@ ProgramFile10 {
 	sName="HeatStake.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="12/19/2013 2:27:41 AM"
+	sTimeSavedInController="12/19/2013 5:19:37 PM"
 }
 ProgramFile11 {
 	sName="Startup.prg"

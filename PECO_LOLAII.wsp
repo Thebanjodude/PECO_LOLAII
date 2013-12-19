@@ -1,5 +1,5 @@
-ENVT0100,LM:2013/12/19 01:55:13:968,DS:0000003422,CS:09792,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="Crowding.prg"
+ENVT0100,LM:2013/12/19 17:21:24:775,DS:0000003430,CS:11566,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="HeatStake.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -15,7 +15,7 @@ ProgramFile1 {
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=18
 		nTop=128
@@ -47,8 +47,8 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=107
 		nTop=16
@@ -58,7 +58,7 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=125
@@ -70,7 +70,7 @@ ProgramFile6 {
 ProgramFile7 {
 	sName="CalibrationRoutines.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=65
 		nTop=96
@@ -81,7 +81,7 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -92,7 +92,7 @@ ProgramFile8 {
 ProgramFile9 {
 	sName="FlashRemoval.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -102,19 +102,19 @@ ProgramFile9 {
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=613
+		nWidth=1058
+		nHeight=606
 	}
 }
 ProgramFile11 {
 	sName="Startup.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -129,26 +129,26 @@ ProgramFile12 {
 	Window {
 		nLeft=707
 		nTop=0
-		nWidth=707
-		nHeight=813
+		nWidth=705
+		nHeight=809
 	}
 }
 ProgramFile13 {
 	sName="Crowding.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=1060
+		nHeight=605
 	}
 }
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=25
 		nTop=44
@@ -202,23 +202,23 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=201
 		nTop=90
-		nWidth=917
-		nHeight=510
+		nWidth=999
+		nHeight=553
 	}
 }
 IOLabelEditor {
-	bOpened=False
+	bOpened=True
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=613
+		nWidth=1059
+		nHeight=610
 	}
-	nWinState=2
+	nWinState=0
 }
 IOMonitor {
 	bOpened=False
