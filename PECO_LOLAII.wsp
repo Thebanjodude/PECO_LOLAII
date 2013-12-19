@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/12/19 18:03:20:636,DS:0000003431,CS:08789,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2013/12/19 20:01:29:607,DS:0000003428,CS:22351,MA:00-0C-29-03-E6-C5,EI:           
 sActiveChild="MainStates.prg"
 bMdiMaximized=True
 ProgramFile1 {
@@ -8,8 +8,8 @@ ProgramFile1 {
 	Window {
 		nLeft=1
 		nTop=0
-		nWidth=706
-		nHeight=813
+		nWidth=704
+		nHeight=809
 	}
 }
 ProgramFile2 {
@@ -47,13 +47,13 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=107
 		nTop=16
-		nWidth=1099
-		nHeight=767
+		nWidth=1097
+		nHeight=763
 	}
 }
 ProgramFile6 {
@@ -113,13 +113,13 @@ ProgramFile10 {
 }
 ProgramFile11 {
 	sName="Startup.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=605
+		nWidth=1059
+		nHeight=602
 	}
 }
 ProgramFile12 {
@@ -129,8 +129,8 @@ ProgramFile12 {
 	Window {
 		nLeft=707
 		nTop=0
-		nWidth=705
-		nHeight=809
+		nWidth=703
+		nHeight=806
 	}
 }
 ProgramFile13 {
@@ -147,13 +147,13 @@ ProgramFile13 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=25
 		nTop=44
-		nWidth=1224
-		nHeight=715
+		nWidth=1223
+		nHeight=711
 	}
 }
 nPointFileCount=3
