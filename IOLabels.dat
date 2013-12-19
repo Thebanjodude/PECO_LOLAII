@@ -1,225 +1,225 @@
-ENVT0100,LM:2013/12/18 23:03:17:444,DS:0000016536,CS:29767,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2013/12/19 21:07:50:507,DS:0000016526,CS:04384,MA:00-21-70-9F-9C-9E,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=44
 	Label1 {
+		nBit=0
+		sLabel="bootDelayH"
+		sDescription=""
+	}
+	Label2 {
+		nBit=1
+		sLabel="idleH"
+		sDescription=""
+	}
+	Label3 {
+		nBit=2
+		sLabel="readyH"
+		sDescription=""
+	}
+	Label4 {
+		nBit=3
+		sLabel="insertingH"
+		sDescription=""
+	}
+	Label5 {
+		nBit=4
+		sLabel="dumpingH"
+		sDescription=""
+	}
+	Label6 {
 		nBit=8
 		sLabel="monEstop1H"
 		sDescription=""
 	}
-	Label2 {
+	Label7 {
 		nBit=9
 		sLabel="monEstop2H"
 		sDescription=""
 	}
-	Label3 {
+	Label8 {
 		nBit=10
 		sLabel="frontIntlock1H"
 		sDescription=""
 	}
-	Label4 {
+	Label9 {
 		nBit=11
 		sLabel="frontIntlock2H"
 		sDescription=""
 	}
-	Label5 {
+	Label10 {
 		nBit=12
 		sLabel="backIntlock1H"
 		sDescription=""
 	}
-	Label6 {
+	Label11 {
 		nBit=13
 		sLabel="backIntlock2H"
 		sDescription=""
 	}
-	Label7 {
+	Label12 {
 		nBit=14
 		sLabel="leftIntlock1H"
 		sDescription=""
 	}
-	Label8 {
+	Label13 {
 		nBit=15
 		sLabel="leftIntlock2H"
 		sDescription=""
 	}
-	Label9 {
+	Label14 {
 		nBit=16
 		sLabel="rightIntlockH"
 		sDescription=""
 	}
-	Label10 {
+	Label15 {
 		nBit=18
 		sLabel="MaintModeH"
 		sDescription=""
 	}
-	Label11 {
+	Label16 {
 		nBit=22
 		sLabel="AirPressHighH"
 		sDescription=""
 	}
-	Label12 {
+	Label17 {
 		nBit=23
 		sLabel="AirPressLowH"
 		sDescription=""
 	}
-	Label13 {
+	Label18 {
 		nBit=64
 		sLabel="cbMonHeatStakeH"
 		sDescription=""
 	}
-	Label14 {
+	Label19 {
 		nBit=66
 		sLabel="cbMonInMagH"
 		sDescription=""
 	}
-	Label15 {
+	Label20 {
 		nBit=67
 		sLabel="cbMonOutMagH"
 		sDescription=""
 	}
-	Label16 {
+	Label21 {
 		nBit=68
 		sLabel="cbMonSafetyH"
 		sDescription=""
 	}
-	Label17 {
+	Label22 {
 		nBit=69
 		sLabel="cbMonDebrisRmvH"
 		sDescription=""
 	}
-	Label18 {
+	Label23 {
 		nBit=72
 		sLabel="dc24vOKH"
 		sDescription=""
 	}
-	Label19 {
+	Label24 {
 		nBit=73
 		sLabel="cbMonPAS24vdcH"
 		sDescription=""
 	}
-	Label20 {
+	Label25 {
 		nBit=74
 		sLabel="holeDetectedH"
 		sDescription=""
 	}
-	Label21 {
+	Label26 {
 		nBit=75
 		sLabel="edgeDetectHiH"
 		sDescription=""
 	}
-	Label22 {
+	Label27 {
 		nBit=76
 		sLabel="edgeDetectLoH"
 		sDescription=""
 	}
-	Label23 {
+	Label28 {
 		nBit=77
 		sLabel="edgeDetectGoH"
 		sDescription=""
 	}
-	Label24 {
+	Label29 {
 		nBit=81
 		sLabel="HSPanelPresntH"
 		sDescription=""
 	}
-	Label25 {
+	Label30 {
 		nBit=82
 		sLabel="FlashPnlPrsntH"
 		sDescription=""
 	}
-	Label26 {
+	Label31 {
 		nBit=83
 		sLabel="FlashHomeNOH"
 		sDescription=""
 	}
-	Label27 {
+	Label32 {
 		nBit=84
 		sLabel="FlashHomeNCH"
 		sDescription=""
 	}
-	Label28 {
+	Label33 {
 		nBit=86
 		sLabel="inMagPnlRdyH"
 		sDescription=""
 	}
-	Label29 {
+	Label34 {
 		nBit=87
 		sLabel="outMagPanelRdyH"
 		sDescription=""
 	}
-	Label30 {
+	Label35 {
 		nBit=96
 		sLabel="inMagUpLimH"
 		sDescription=""
 	}
-	Label31 {
+	Label36 {
 		nBit=97
 		sLabel="inMagUpLimNH"
 		sDescription=""
 	}
-	Label32 {
+	Label37 {
 		nBit=98
 		sLabel="inMagLowLimH"
 		sDescription=""
 	}
-	Label33 {
+	Label38 {
 		nBit=99
 		sLabel="inMagLowLimNH"
 		sDescription=""
 	}
-	Label34 {
+	Label39 {
 		nBit=103
 		sLabel="inMagInterlockH"
 		sDescription=""
 	}
-	Label35 {
+	Label40 {
 		nBit=104
 		sLabel="outMagUpLimH"
 		sDescription=""
 	}
-	Label36 {
+	Label41 {
 		nBit=105
 		sLabel="outMagUpLimNH"
 		sDescription=""
 	}
-	Label37 {
+	Label42 {
 		nBit=106
 		sLabel="outMagLowLimH"
 		sDescription=""
 	}
-	Label38 {
+	Label43 {
 		nBit=107
 		sLabel="outMagLowLimNH"
 		sDescription=""
 	}
-	Label39 {
+	Label44 {
 		nBit=111
 		sLabel="outMagIntH"
-		sDescription=""
-	}
-	Label40 {
-		nBit=112
-		sLabel="bootDelayH"
-		sDescription=""
-	}
-	Label41 {
-		nBit=113
-		sLabel="idleH"
-		sDescription=""
-	}
-	Label42 {
-		nBit=114
-		sLabel="readyH"
-		sDescription=""
-	}
-	Label43 {
-		nBit=115
-		sLabel="insertingH"
-		sDescription=""
-	}
-	Label44 {
-		nBit=116
-		sLabel="dumpingH"
 		sDescription=""
 	}
 }

@@ -19,7 +19,7 @@ Function HotStakePanel() As Integer
 	Jump PreScan LimZ zLimit 		' just to make sure we are home	
 	Jump PreHotStake LimZ zLimit 	' Present panel to hot stake
 	
-	gotoReady = True				' Tell PLC to start the insertion process
+	gotoReadyCC = True				' Tell PLC to start the insertion process
 	
 	Do Until ready					' ready signal from PLC
 		Wait 1.25
@@ -42,12 +42,15 @@ Function HotStakePanel() As Integer
 				JTran 3, -.5 					' Move only the z-axis downward in increments
 			Loop
 			
-			doInsertion = True
-			Wait .5
-			Do Until Not inserting
+			doInsertionCC = True
+
+			Wait insertingH
+			'Wait Sw(3)
+
+			Do While inserting
 				Wait .5
 			Loop
-			doInsertion = False
+			doInsertionCC = False
 
 			ZmaxTorque = 0
 			PTCLR (3)
@@ -58,9 +61,10 @@ Function HotStakePanel() As Integer
 		SLock 1, 2, 3, 4 						' lock all the joints so we can move again
 		Speed SystemSpeed
 		
-		If Not ready Then						' something has gone wrong with the plc
-			Exit For
-		EndIf
+		Wait readyH								' give the PLC time to get back to ready state
+'		If Not ready Then						' something has gone wrong with the plc
+'			Exit For
+'		EndIf
 		
 	Next
 	
@@ -75,12 +79,12 @@ exitHotStake:
 		MemOff (jobAbortH) 				' turn off abort bit
 	EndIf
 
-	DoneInserting = True				' Tell the PLC to leave the inserting state
+	doneInsertingCC = True				' Tell the PLC to leave the inserting state
 	Do Until idle						' indication that the plc is idle
 		Wait .5
 	Loop
-	gotoReady = False					' reset flag
-	DoneInserting = False				' reset flag
+	gotoReadyCC = False					' reset flag
+	doneInsertingCC = False				' reset flag
 		
 	SystemStatus = StateMoving
 	Jump PreHotStake :U(CU(Here)) LimZ zLimit 	' Pull back from the hot stake machine
