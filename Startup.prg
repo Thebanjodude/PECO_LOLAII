@@ -16,9 +16,11 @@ Function PowerOnSequence()
     Xqt 8, OutMagControlRefactor(), Normal
 
 	' Start the PLC
-	Wait bootDelayH
+	'Wait bootDelayH
+	Wait Sw(0)
 	bootCC = True 'Let the PLC know that it is safe to boot
-	Wait idleH
+	'Wait idleH
+	Wait Sw(1)
 	bootCC = False 'PLC has booted, reset the boot flag
 	
 retry:

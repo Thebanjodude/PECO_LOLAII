@@ -44,8 +44,8 @@ Function HotStakePanel() As Integer
 			
 			doInsertionCC = True
 
-			Wait insertingH
-			'Wait Sw(3)
+			'Wait insertingH
+			Wait Sw(3)
 
 			Do While inserting
 				Wait .5
@@ -61,7 +61,8 @@ Function HotStakePanel() As Integer
 		SLock 1, 2, 3, 4 						' lock all the joints so we can move again
 		Speed SystemSpeed
 		
-		Wait readyH								' give the PLC time to get back to ready state
+		'Wait readyH								' give the PLC time to get back to ready state
+		Wait Sw(3)
 '		If Not ready Then						' something has gone wrong with the plc
 '			Exit For
 '		EndIf
@@ -78,6 +79,10 @@ exitHotStake:
 		Speed SystemSpeed
 		MemOff (jobAbortH) 				' turn off abort bit
 	EndIf
+		
+	SystemStatus = StateMoving
+	Jump PreHotStake :U(CU(Here)) LimZ zLimit 	' Pull back from the hot stake machine
+	Jump preScan LimZ zLimit 					' go home
 
 	doneInsertingCC = True				' Tell the PLC to leave the inserting state
 	Do Until idle						' indication that the plc is idle
@@ -85,10 +90,6 @@ exitHotStake:
 	Loop
 	gotoReadyCC = False					' reset flag
 	doneInsertingCC = False				' reset flag
-		
-	SystemStatus = StateMoving
-	Jump PreHotStake :U(CU(Here)) LimZ zLimit 	' Pull back from the hot stake machine
-	Jump preScan LimZ zLimit 					' go home
 		
 Trap 2 ' disarm trap	
 
