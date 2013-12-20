@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/12/19 21:07:50:507,DS:0000016526,CS:04384,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2013/12/20 17:29:17:616,DS:0000016514,CS:02621,MA:00-0C-29-03-E6-C5,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=44
@@ -237,103 +237,103 @@ OutputBitLabels {
 		sDescription=""
 	}
 	Label2 {
+		nBit=1
+		sLabel="bootH"
+		sDescription=""
+	}
+	Label3 {
+		nBit=2
+		sLabel="gotoReadyH"
+		sDescription=""
+	}
+	Label4 {
+		nBit=3
+		sLabel="doInsertionH"
+		sDescription=""
+	}
+	Label5 {
+		nBit=4
+		sLabel="doneInsertingH"
+		sDescription=""
+	}
+	Label6 {
+		nBit=5
+		sLabel="startDumpH"
+		sDescription=""
+	}
+	Label7 {
+		nBit=6
+		sLabel="doneDumpingH"
+		sDescription=""
+	}
+	Label8 {
 		nBit=8
 		sLabel="heatStakeGoH"
 		sDescription=""
 	}
-	Label3 {
+	Label9 {
 		nBit=96
 		sLabel="inMagMtrDirH"
 		sDescription=""
 	}
-	Label4 {
+	Label10 {
 		nBit=97
 		sLabel="inMagMtrH"
 		sDescription=""
 	}
-	Label5 {
+	Label11 {
 		nBit=98
 		sLabel="outMagMtrDirH"
 		sDescription=""
 	}
-	Label6 {
+	Label12 {
 		nBit=99
 		sLabel="outMagMtrH"
 		sDescription=""
 	}
-	Label7 {
+	Label13 {
 		nBit=102
 		sLabel="debrisMtrH"
 		sDescription=""
 	}
-	Label8 {
+	Label14 {
 		nBit=103
 		sLabel="suctionCupsH"
 		sDescription=""
 	}
-	Label9 {
+	Label15 {
 		nBit=104
 		sLabel="CrowdingH"
 		sDescription=""
 	}
-	Label10 {
+	Label16 {
 		nBit=105
 		sLabel="DrillGoH"
 		sDescription=""
 	}
-	Label11 {
+	Label17 {
 		nBit=106
 		sLabel="DrillReturnH"
 		sDescription=""
 	}
-	Label12 {
+	Label18 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label13 {
+	Label19 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label14 {
+	Label20 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label15 {
+	Label21 {
 		nBit=110
 		sLabel="stackLightAlrmH"
-		sDescription=""
-	}
-	Label16 {
-		nBit=112
-		sLabel="bootH"
-		sDescription=""
-	}
-	Label17 {
-		nBit=113
-		sLabel="gotoReadyH"
-		sDescription=""
-	}
-	Label18 {
-		nBit=114
-		sLabel="doInsertionH"
-		sDescription=""
-	}
-	Label19 {
-		nBit=115
-		sLabel="doneInsertingH"
-		sDescription=""
-	}
-	Label20 {
-		nBit=116
-		sLabel="startDumpH"
-		sDescription=""
-	}
-	Label21 {
-		nBit=117
-		sLabel="doneDumpingH"
 		sDescription=""
 	}
 }

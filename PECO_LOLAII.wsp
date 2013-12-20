@@ -1,10 +1,10 @@
-ENVT0100,LM:2013/12/19 20:42:39:484,DS:0000003428,CS:22351,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="MainStates.prg"
-bMdiMaximized=True
+ENVT0100,LM:2013/12/20 17:30:47:773,DS:0000003437,CS:26143,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="I/O Label Editor"
+bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=1
 		nTop=0
@@ -47,8 +47,8 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=107
 		nTop=16
@@ -102,8 +102,8 @@ ProgramFile9 {
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -113,8 +113,8 @@ ProgramFile10 {
 }
 ProgramFile11 {
 	sName="Startup.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -124,7 +124,7 @@ ProgramFile11 {
 }
 ProgramFile12 {
 	sName="MainStates.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=2
 	Window {
 		nLeft=707
@@ -147,8 +147,8 @@ ProgramFile13 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=25
 		nTop=44
@@ -218,7 +218,7 @@ IOLabelEditor {
 		nWidth=1059
 		nHeight=610
 	}
-	nWinState=0
+	nWinState=2
 }
 IOMonitor {
 	bOpened=False
