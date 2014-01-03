@@ -328,6 +328,7 @@ Global Boolean hole1PFOld
 Global Boolean hole20PFOld
 Global Boolean hole21PFOld
 Global Boolean hole22PFOld
+Global Boolean hole23PFOld
 Global Boolean hole2PFOld
 Global Boolean hole3PFOld
 Global Boolean hole4PFOld
@@ -502,6 +503,8 @@ Global Real hole21LOld
 Global Real hole21ROld
 Global Real hole22LOld
 Global Real hole22ROld
+Global Real hole23LOld
+Global Real hole23ROld
 Global Real hole2LOld
 Global Real hole2ROld
 Global Real hole3LOld
