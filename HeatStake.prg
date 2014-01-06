@@ -22,7 +22,7 @@ Function HotStakePanel() As Integer
 	gotoReadyCC = True				' Tell PLC to start the insertion process
 	
 	Do Until ready					' ready signal from PLC
-		Wait 1.25
+		Wait .25
 	Loop
 
 	For i = recFirstHolePointHotStake To recLastHolePointHotStake
@@ -55,12 +55,13 @@ Function HotStakePanel() As Integer
 			ZmaxTorque = 0
 			PTCLR (3)
 
+			SLock 1, 2, 3, 4 						' lock all the joints so we can move again
+			Speed SystemSpeed
+	
 		EndIf
 		
 		currentHSHole = currentHSHole + 1
-		SLock 1, 2, 3, 4 						' lock all the joints so we can move again
-		Speed SystemSpeed
-		
+	
 		'Wait readyH								' give the PLC time to get back to ready state
 		Wait Sw(2)
 '		If Not ready Then						' something has gone wrong with the plc
