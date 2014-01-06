@@ -1,26 +1,24 @@
-ENVT0100,LM:2014/01/06 18:46:49:190,DS:0000003434,CS:20065,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="IOTable.prg"
-bMdiMaximized=True
+ENVT0100,LM:2014/01/06 19:31:35:005,DS:0000003390,CS:17721,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1165
-		nHeight=563
+		nWidth=1164
+		nHeight=559
 	}
 }
 ProgramFile2 {
 	sName="IOTable.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=2
 	Window {
 		nLeft=18
 		nTop=128
-		nWidth=1359
-		nHeight=653
+		nWidth=1358
+		nHeight=650
 	}
 }
 ProgramFile3 {
@@ -47,13 +45,13 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=107
 		nTop=16
-		nWidth=1096
-		nHeight=759
+		nWidth=1095
+		nHeight=756
 	}
 }
 ProgramFile6 {
@@ -63,8 +61,8 @@ ProgramFile6 {
 	Window {
 		nLeft=25
 		nTop=25
-		nWidth=1164
-		nHeight=559
+		nWidth=1163
+		nHeight=555
 	}
 }
 ProgramFile7 {
@@ -81,12 +79,12 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1059
-		nHeight=610
+		nWidth=1058
+		nHeight=606
 	}
 }
 ProgramFile9 {
@@ -124,13 +122,13 @@ ProgramFile11 {
 }
 ProgramFile12 {
 	sName="MainStates.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=50
 		nTop=50
-		nWidth=1165
-		nHeight=563
+		nWidth=1164
+		nHeight=559
 	}
 }
 ProgramFile13 {
@@ -148,7 +146,7 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=75
 		nTop=75
@@ -218,7 +216,7 @@ IOLabelEditor {
 		nWidth=1059
 		nHeight=610
 	}
-	nWinState=2
+	nWinState=0
 }
 IOMonitor {
 	bOpened=False

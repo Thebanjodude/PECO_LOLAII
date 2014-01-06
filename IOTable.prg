@@ -1307,6 +1307,7 @@ Function setVars(response$ As String)
 	        MemOn (panelDataTxAckH)
 	    Else
 	        panelDataTxACKBtn = False
+	        MemOff (panelDataTxAckH)
 	    EndIf
 	    Print "panelDataTxACKBtn:", panelDataTxACKBtn
 	Case "rightInterlockACKBtn"
