@@ -1,26 +1,26 @@
-ENVT0100,LM:2014/01/06 16:45:02:655,DS:0000003428,CS:19730,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="HeatStake.prg"
+ENVT0100,LM:2014/01/06 18:46:49:190,DS:0000003434,CS:20065,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="IOTable.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=1
+		nLeft=0
 		nTop=0
-		nWidth=702
-		nHeight=806
+		nWidth=1165
+		nHeight=563
 	}
 }
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=18
 		nTop=128
-		nWidth=1360
-		nHeight=657
+		nWidth=1359
+		nHeight=653
 	}
 }
 ProgramFile3 {
@@ -47,24 +47,24 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=107
 		nTop=16
-		nWidth=1097
-		nHeight=763
+		nWidth=1096
+		nHeight=759
 	}
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
-		nLeft=125
-		nTop=12
-		nWidth=1347
-		nHeight=756
+		nLeft=25
+		nTop=25
+		nWidth=1164
+		nHeight=559
 	}
 }
 ProgramFile7 {
@@ -102,13 +102,13 @@ ProgramFile9 {
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
-	bOpened=True
-	nWinState=2
+	bOpened=False
+	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=1056
-		nHeight=599
+		nLeft=100
+		nTop=100
+		nWidth=1165
+		nHeight=563
 	}
 }
 ProgramFile11 {
@@ -127,10 +127,10 @@ ProgramFile12 {
 	bOpened=True
 	nWinState=0
 	Window {
-		nLeft=707
-		nTop=0
-		nWidth=701
-		nHeight=803
+		nLeft=50
+		nTop=50
+		nWidth=1165
+		nHeight=563
 	}
 }
 ProgramFile13 {
@@ -147,13 +147,13 @@ ProgramFile13 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
-		nLeft=25
-		nTop=44
-		nWidth=1219
-		nHeight=705
+		nLeft=75
+		nTop=75
+		nWidth=1164
+		nHeight=559
 	}
 }
 nPointFileCount=3
@@ -206,12 +206,12 @@ RunWindow {
 	Window {
 		nLeft=201
 		nTop=90
-		nWidth=1088
-		nHeight=600
+		nWidth=1185
+		nHeight=651
 	}
 }
 IOLabelEditor {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=0
 		nTop=0

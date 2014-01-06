@@ -46,7 +46,7 @@ Function DropOffPanel() As Integer
 
 	OutputMagSignal = True ' Give permission for output magazine to dequeue next panel	
 	
-	PanelPassedInspection = True 'fake
+'	PanelPassedInspection = True 'fake
 	
 '	If PanelPassedInspection = False Then
 '		erPanelFailedInspection = True
