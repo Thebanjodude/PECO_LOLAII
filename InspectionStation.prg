@@ -9,6 +9,12 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Real BossCrosssectionalArea
 	Redim SkipHoleArray(recNumberOfHoles, 0) ' Size the arrays
 	
+	Redim InspectionArray(0, 0) ' clear all the values in the Inspection Array
+	Redim PassFailArray(0, 0)   ' clear all the values in the PassFail Array
+	
+	Redim PassFailArray(23, 1) 		' Clear array, always 23 rows
+    Redim InspectionArray(23, 1)	' Clear array, always 23 rows
+	
 	Jump PreScan LimZ zLimit
 	
 	currentPreinspectHole = 1 ' This tells the HMI which hole we are working on during preinspection
@@ -51,8 +57,8 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		ElseIf SelectRoutine = 2 Then
 			
 			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
-			PrintInspectionArray()
-			PrintPassFailArray()
+'			PrintInspectionArray()
+'			PrintPassFailArray()
 			UnpackInspectionArrays()
 			currentInspectHole = currentInspectHole + 1
 		EndIf

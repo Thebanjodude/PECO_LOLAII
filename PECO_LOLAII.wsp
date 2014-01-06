@@ -1,4 +1,6 @@
-ENVT0100,LM:2014/01/06 19:31:35:005,DS:0000003390,CS:17721,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/06 21:51:51:126,DS:0000003442,CS:31341,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="InspectionStation.prg"
+bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -12,12 +14,12 @@ ProgramFile1 {
 }
 ProgramFile2 {
 	sName="IOTable.prg"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
 		nLeft=18
 		nTop=128
-		nWidth=1358
+		nWidth=1292
 		nHeight=650
 	}
 }
@@ -45,8 +47,8 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
 		nLeft=107
 		nTop=16
@@ -56,7 +58,7 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=2
 	Window {
 		nLeft=25
@@ -79,7 +81,7 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -100,7 +102,7 @@ ProgramFile9 {
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=100
@@ -122,8 +124,8 @@ ProgramFile11 {
 }
 ProgramFile12 {
 	sName="MainStates.prg"
-	bOpened=False
-	nWinState=2
+	bOpened=True
+	nWinState=0
 	Window {
 		nLeft=50
 		nTop=50
@@ -145,7 +147,7 @@ ProgramFile13 {
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=75

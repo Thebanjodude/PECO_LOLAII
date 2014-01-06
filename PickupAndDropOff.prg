@@ -41,7 +41,7 @@ Function DropOffPanel() As Integer
 	suctionCupsCC = False
 	Wait recSuctionWaitTime ' Allow time for cups to unseal
 	RobotPlacedPanel = True ' Tell the output magazine we put a panel into it
-	Redim InspectionArray(0, 0) ' clear all the values in the Inspection Array
+
 	Jump OutmagWaypoint LimZ zLimit
 
 	OutputMagSignal = True ' Give permission for output magazine to dequeue next panel	

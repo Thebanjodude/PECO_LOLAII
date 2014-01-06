@@ -11,8 +11,6 @@ Function idleState(currentState As Integer) As Integer
 			jobAbort = False 				' reset flag
 			jobNumPanelsDone = 0 			' reset panel counter
 			panelDataTxRdy = False 			' make sure var is set to false so it changes when we want HMI to read out data
-			Redim PassFailArray(23, 1) 		' Clear array, always 23 rows
-			Redim InspectionArray(23, 1)	' Clear array, always 23 rows
 	EndIf
 	idleState = currentState				' update the state value
 Fend
