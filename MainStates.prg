@@ -5,12 +5,17 @@ Function idleState(currentState As Integer) As Integer
 	' Also, if any of the other states encounters a major error, it returns
 	' to the idle state and waits for an operator.
 
-	If jobStart = True And CheckInitialParameters = 0 Then
+	If jobStart = True Then
+		' the And contstruct doesn't short circuit when the first boolean fails...
+		'   which means lots and lots of failure messages until the HMI pushes recipies values.
+		'   So, lets check for the initial parameters after we start our first job.
+		If CheckInitialParameters = 0 Then
 			currentState = StatePopPanel
 			ChoosePointsTable() 			' Change to the correct points table for the selected panel
 			jobAbort = False 				' reset flag
 			jobNumPanelsDone = 0 			' reset panel counter
 			panelDataTxRdy = False 			' make sure var is set to false so it changes when we want HMI to read out data
+		EndIf
 	EndIf
 	idleState = currentState				' update the state value
 Fend
