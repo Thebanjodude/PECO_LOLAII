@@ -1,3 +1,17 @@
+' Used Timers
+' TMR-
+'	0  -  IOT (hmi comms) - iotransfer()
+'	1  -  
+'	2  -  
+'	3  -  dump delay (obsoleted)
+'	4  -  
+'	5  -  
+'	6  -  
+'	7  -  
+'	8  -  
+'	9  -  
+'	10 -  OutMagControlRefactor() - delay before sensing a panel
+
 ' System Global Vars and #defines
 Global Integer SystemSpeed, SystemAccel, mainCurrentState
 Global Boolean suctionCups, suctionCupsCC, holeDetected, maintMode
