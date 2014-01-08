@@ -7,9 +7,10 @@ Function FlashPanel(DwellTime As Real) As Integer
 	Integer i
 	currentFlashHole = 1
 	
-	Jump preScan LimZ zLimit ' make sure we are in the right position before we jump to flash station
-	Jump PreHotStake LimZ zLimit ' waypoint so we don't hit anything	
-	Jump PreFlash LimZ zLimit ' Present panel to flash machine
+	If Not HomeCheck Then findHome
+	Move PreHotStake CP
+	Move PreFlash
+
 	'On debrisMtrH 'Turn on Vacuum
 	debrisMtrCC = True
 	
@@ -17,17 +18,6 @@ Function FlashPanel(DwellTime As Real) As Integer
 		
 		Jump P(i) LimZ zLimit
 		
-'		If flashPanelPresnt = False Then ' A boss should be engaging the anvil but it isnt...
-'			erPanelStatusUnknown = True
-'			FlashPanel = 2 ' exit with error
-'			SystemStatus = StateMoving
-'			Jump PreFlash :U(CU(Here)) LimZ zLimit ' Back out of the flash station
-'			Exit Function
-'		EndIf
-'		
-'		drillGoCC = True 'Begin stroking the drill (requires a toggle)
-'		drillGoCC = False
-
 		On DrillGoH, 1 'Stroke Tool
 		
 		Wait DwellTime + 2.25 '2.25 is the time it takes to bottom out.
@@ -59,7 +49,6 @@ Function FlashPanel(DwellTime As Real) As Integer
 		EndIf
 		
 		Wait 1
-'		Pause ' added in for testing
 
 		currentFlashHole = currentFlashHole + 1
 		
@@ -83,9 +72,7 @@ exitFlash:
 	debrisMtrCC = False
 	SystemStatus = StateMoving
 	
-	Jump PreFlash :U(CU(Here)) LimZ zLimit ' going home
-	Jump PreHotStake LimZ zLimit ' waypoint
-	Jump prescan LimZ zLimit ' go home
+	findHome
 
 	Trap 2 ' disarm trap
 Fend
