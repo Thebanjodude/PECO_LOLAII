@@ -67,6 +67,80 @@ exitInspectPanel:
 	findHome
 	Trap 2 'disarm trap
 Fend
+Function GetLaserMeasurement(OutNumber$ As String) As Real
+                
+    Integer i, NumTokens
+    String Tokens$(0), response$, responceCR$
+    
+	If ChkNet(203) < 0 Then ' If port is not open
+		OpenNet #203 As Client
+		Print "Attempted Open TCP port to HMI"
+	EndIf
+                
+	Print #203, "MS,0," + OutNumber$
+	Wait .5
+	
+' This routine checks the buffer for a returned value from the laser scanner, 
+' checks for the correct responce from the laser and returns requested data.
+    i = ChkNet(203)
+    If i > 0 Then
+    	Read #203, response$, i
+'    	Print response$ ' for testing
+      	NumTokens = ParseStr(response$, Tokens$(), ",")
+	     	If response$ = "MS" + Chr$(&hd) Then ' throw an error if we dont get the proper responce
+	      		erLaserScanner = True
+	      		Print "Laser Scanner error"
+	      	Else
+	      		erLaserScanner = False
+	      	EndIf
+  		GetLaserMeasurement = Val(Tokens$(1)) ' return value
+    EndIf
+
+Fend
+Function MeasureInsertDepth(Index As Integer)
+	
+	'Get the Left Spot face measurement, see if it is in spec and save the data to two arrays. 
+	ChangeProfile("01")
+	InspectionArray(Index, LeftSpotFace) = MicroMetersToInches(GetLaserMeasurement("12"))
+	PassFailArray(Index, LeftSpotFace) = PassOrFail(InspectionArray(Index, LeftSpotFace))
+	
+	'Get the right Spot face measurement, see if it is in spec and save the data to two arrays 
+	ChangeProfile("02")
+	InspectionArray(Index, RightSpotFace) = MicroMetersToInches(GetLaserMeasurement("11"))
+	PassFailArray(Index, RightSpotFace) = PassOrFail(InspectionArray(Index, RightSpotFace))
+	
+Fend
+Function ChangeProfile(ProfileNumber$ As String) As Boolean
+	
+'This function changes the active profile of the laser scanner. Just tell it which profile you want it to run. 
+'Set up profiles in its IDE
+
+    Integer i, NumTokens
+    String Tokens$(0)
+    String response$
+        
+	If ChkNet(203) < 0 Then ' If port is not open
+		OpenNet #203 As Client
+		Print "Attempted Open TCP port to HMI"
+	EndIf
+	
+	Print #203, "PW" + "," + ProfileNumber$ ' Per laser scanner manual this is how you change profiles
+
+	Wait .25 ' wait for laser scanner to receive the command. This may be able to be shortened up
+
+    i = ChkNet(203)
+    If i > 0 Then
+    	Read #203, response$, i
+    	'Print response$
+    		If response$ = "PW" + Chr$(&hd) Then
+				erLaserScanner = False
+	      	Else
+	      		erLaserScanner = True
+	      		Print "Laser Scanner error"
+	      	EndIf
+	EndIf
+	 
+Fend
 Function PassOrFail(measurement As Real) As Boolean 'Pass is True	
 	' Measurement is assumed to be inches
 	
@@ -77,10 +151,8 @@ Function PassOrFail(measurement As Real) As Boolean 'Pass is True
 	
 ' TODO: make the tolerance a variable and make it adjustable via the hmi, we have .006 but theirs is more loose	
 	If (Abs(DepthInsertError) < insertDepthTolerance) Then
-		PassOrFail = True ' Passed		
-		PanelPassedInspection = True
+		PassOrFail = True ' Passed
 	Else
-		'Dont alert opperator yet, this is only on a hole by hole basis
 		PassOrFail = False
 		PanelPassedInspection = False
 	EndIf
@@ -220,81 +292,6 @@ Function UnpackPassFailArray()
 	hole21PF = PassFailArray(21, LeftSpotFace) Or PassFailArray(21, RightSpotFace)
 	hole22PF = PassFailArray(22, LeftSpotFace) Or PassFailArray(22, RightSpotFace)
 	hole23PF = PassFailArray(23, LeftSpotFace) Or PassFailArray(23, RightSpotFace)
-	
-Fend
-
-Function ChangeProfile(ProfileNumber$ As String) As Boolean
-	
-'This function changes the active profile of the laser scanner. Just tell it which profile you want it to run. 
-'Set up profiles in its IDE
-
-    Integer i, NumTokens
-    String Tokens$(0)
-    String response$
-        
-	If ChkNet(203) < 0 Then ' If port is not open
-		OpenNet #203 As Client
-		Print "Attempted Open TCP port to HMI"
-	EndIf
-	
-	Print #203, "PW" + "," + ProfileNumber$ ' Per laser scanner manual this is how you change profiles
-
-	Wait .25 ' wait for laser scanner to receive the command. This may be able to be shortened up
-
-    i = ChkNet(203)
-    If i > 0 Then
-    	Read #203, response$, i
-    	'Print response$
-    		If response$ = "PW" + Chr$(&hd) Then
-				erLaserScanner = False
-	      	Else
-	      		erLaserScanner = True
-	      		Print "Laser Scanner error"
-	      	EndIf
-	EndIf
-	 
-Fend
-Function GetLaserMeasurement(OutNumber$ As String) As Real
-                
-    Integer i, NumTokens
-    String Tokens$(0), response$, responceCR$
-    
-	If ChkNet(203) < 0 Then ' If port is not open
-		OpenNet #203 As Client
-		Print "Attempted Open TCP port to HMI"
-	EndIf
-                
-	Print #203, "MS,0," + OutNumber$
-	Wait .5
-	
-' This routine checks the buffer for a returned value from the laser scanner, 
-' checks for the correct responce from the laser and returns requested data.
-    i = ChkNet(203)
-    If i > 0 Then
-    	Read #203, response$, i
-'    	Print response$ ' for testing
-      	NumTokens = ParseStr(response$, Tokens$(), ",")
-	     	If response$ = "MS" + Chr$(&hd) Then ' throw an error if we dont get the proper responce
-	      		erLaserScanner = True
-	      		Print "Laser Scanner error"
-	      	Else
-	      		erLaserScanner = False
-	      	EndIf
-  		GetLaserMeasurement = Val(Tokens$(1)) ' return value
-    EndIf
-
-Fend
-Function MeasureInsertDepth(Index As Integer)
-	
-	'Get the Left Spot face measurement, see if it is in spec and save the data to two arrays. 
-	ChangeProfile("01")
-	InspectionArray(Index, LeftSpotFace) = MicroMetersToInches(GetLaserMeasurement("12"))
-	PassFailArray(Index, LeftSpotFace) = PassOrFail(InspectionArray(Index, LeftSpotFace))
-	
-	'Get the right Spot face measurement, see if it is in spec and save the data to two arrays 
-	ChangeProfile("02")
-	InspectionArray(Index, RightSpotFace) = MicroMetersToInches(GetLaserMeasurement("11"))
-	PassFailArray(Index, RightSpotFace) = PassOrFail(InspectionArray(Index, RightSpotFace))
 	
 Fend
 Function PrintInspectionArray()
