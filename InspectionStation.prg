@@ -78,14 +78,16 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
 	EndIf
                 
 	Print #203, "MS,0," + OutNumber$
-	Wait .5
 	
-' This routine checks the buffer for a returned value from the laser scanner, 
-' checks for the correct responce from the laser and returns requested data.
     i = ChkNet(203)
-    If i > 0 Then
+	Do Until i > 0
+	    i = ChkNet(203)
+	    If i < 0 Then Exit Function 'port error
+	    Wait 0.05
+	Loop
+
+    If i > 0 Then  'should be, but just in case...
     	Read #203, response$, i
-'    	Print response$ ' for testing
       	NumTokens = ParseStr(response$, Tokens$(), ",")
 	     	If response$ = "MS" + Chr$(&hd) Then ' throw an error if we dont get the proper responce
 	      		erLaserScanner = True
@@ -126,10 +128,14 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
 	
 	Print #203, "PW" + "," + ProfileNumber$ ' Per laser scanner manual this is how you change profiles
 
-	Wait .25 ' wait for laser scanner to receive the command. This may be able to be shortened up
-
     i = ChkNet(203)
-    If i > 0 Then
+	Do Until i > 0
+	    i = ChkNet(203)
+	    If i < 0 Then Exit Function 'port error
+	    Wait 0.05
+	Loop
+
+    If i > 0 Then  'should be, but just in case...
     	Read #203, response$, i
     	'Print response$
     		If response$ = "PW" + Chr$(&hd) Then
