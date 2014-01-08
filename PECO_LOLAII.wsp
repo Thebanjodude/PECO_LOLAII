@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/08 01:09:00:765,DS:0000003392,CS:04458,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/08 15:35:04:582,DS:0000003392,CS:04968,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -79,7 +79,7 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=6
 		nTop=321
@@ -112,7 +112,7 @@ ProgramFile10 {
 ProgramFile11 {
 	sName="Startup.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0

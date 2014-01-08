@@ -16,6 +16,8 @@ Function idleState(currentState As Integer) As Integer
 			jobNumPanelsDone = 0 			' reset panel counter
 			panelDataTxRdy = False 			' make sure var is set to false so it changes when we want HMI to read out data
 		EndIf
+	Else
+		Wait 0.5
 	EndIf
 	idleState = currentState				' update the state value
 Fend
