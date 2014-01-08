@@ -7,7 +7,7 @@ Function main()
 	'Set system vars
 	recSuctionWaitTime = 1 'fake
 	zLimit = -12.5 'fake
-	SystemSpeed = 25
+	SystemSpeed = 100
 	SystemAccel = 35
 	insertDepthTolerance = .010
 	recPointsTable = 1
