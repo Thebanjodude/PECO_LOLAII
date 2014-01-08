@@ -1,8 +1,8 @@
-ENVT0100,LM:2014/01/08 00:44:40:612,DS:0000003392,CS:04970,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/08 01:09:00:765,DS:0000003392,CS:04458,MA:00-21-70-9F-9C-9E,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -46,7 +46,7 @@ ProgramFile4 {
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=17
 		nTop=9
@@ -79,7 +79,7 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=6
 		nTop=321
@@ -134,7 +134,7 @@ ProgramFile12 {
 ProgramFile13 {
 	sName="Crowding.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -146,7 +146,7 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=75
 		nTop=75

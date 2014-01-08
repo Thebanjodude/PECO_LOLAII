@@ -33,6 +33,7 @@ Function PowerOnSequence()
 	QP (On) ' turn On quick pausing	
 	
 	HomeCheck
+	findHome
 
 Fend
 Function CheckInitialParameters() As Integer

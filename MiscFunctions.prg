@@ -78,8 +78,8 @@ Function findHome
 	
 	' pull up the probe just in case it was on something
 	' ...or push down with the probe, might want to figure out what to do about that --TODO
-	Move XY(posX, posY, posZ, CU(Here))
-	Move XY(posX, posY, posZ, CU(PreScan))
+	Go XY(posX, posY, posZ, CU(Here)) /L
+	Go XY(posX, posY, posZ, CU(PreScan)) /L
 	
 	' make sure we are NOT at home (in XY, homecheck doesn't check Z or U)
 	If HomeCheck Then Exit Function
