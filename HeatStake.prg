@@ -16,7 +16,7 @@ Function HotStakePanel() As Integer
 		GoTo exitHotStake
 	EndIf
 	
-	Jump PreScan LimZ zLimit 		' just to make sure we are home	
+	If Not HomeCheck Then findHome
 	Jump PreHotStake LimZ zLimit 	' Present panel to hot stake
 	
 	gotoReadyCC = True				' Tell PLC to start the insertion process
@@ -56,7 +56,6 @@ Function HotStakePanel() As Integer
 			PTCLR (3)
 
 			SLock 1, 2, 3, 4 						' lock all the joints so we can move again
-			Speed SystemSpeed
 	
 		EndIf
 		
@@ -77,13 +76,12 @@ exitHotStake:
 	If MemSw(jobAbortH) = True Then 	'Check if the operator wants to abort the job
 		jobAbort = True
 		SLock 1, 2, 3, 4 				' lock all the joints so we can move again
-		Speed SystemSpeed
 		MemOff (jobAbortH) 				' turn off abort bit
 	EndIf
 		
 	SystemStatus = StateMoving
-	Jump PreHotStake :U(CU(Here)) LimZ zLimit 	' Pull back from the hot stake machine
-	Jump preScan LimZ zLimit 					' go home
+
+	findHome
 
 	doneInsertingCC = True				' Tell the PLC to leave the inserting state
 	Do Until idle						' indication that the plc is idle
