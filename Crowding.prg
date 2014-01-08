@@ -4,22 +4,24 @@ Function CrowdingSequence() As Integer
 
 Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 
-	Jump Prescan LimZ zLimit
-	Jump PreHotStake LimZ zLimit
+	' Make sure the crowding is open
+	Off (CrowdingH)
+	TmReset 1
 	
-	Off (CrowdingH) ' Make sure the crowding is open
-	Wait 3
-	Jump P(recPreCrowding) LimZ zLimit 'Jump to the crowding location
+	' make sure we start from home
+	If Not HomeCheck Then findHome
+	
+	Go PreHotStake CP
+	Do Until Tmr(1) > 3
+		Wait 0.1
+	Loop
+	Move P(recPreCrowding)
+	
 	suctionCupsCC = False ' Turn off suction cups
 	Wait recSuctionWaitTime ' wait for cups to release
 	Jump P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
-	Wait .25
+
 	On (CrowdingH) ' Close crowding
-	
-	' wait for verification that the crowding has closed
-'	Do Until pasCrowding = True
-'		Wait .25
-'	Loop
 	
 	Wait 3 ' wait for the crowd to take place
 	
@@ -28,13 +30,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Wait recSuctionWaitTime
 
 	Off (CrowdingH) ' Open crowding
-	' wait for verification that the crowding has opened
-' this do loop got stuck during testing, skip over for now	
-
-'	Do Until pasCrowding = False
-'		Wait .25
-'	Loop
-	Wait 3 ' wait for the crowd to open	
+	Wait 3 ' wait for the crowding to open	
 	
 	CrowdingSequence = 0
 	
@@ -46,9 +42,8 @@ If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	Off (CrowdingH) ' Open crowding	
 EndIf
 
-	Jump PreHotStake LimZ zLimit ' move away from a panel
-	Jump PreScan LimZ zLimit ' Go Home
-
+	findHome
+	
 Trap 2 ' Disarm trap
 
 Fend
