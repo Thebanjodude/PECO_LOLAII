@@ -74,12 +74,6 @@ Function findHome
 	
 	posX = CX(Here)
 	posY = CY(Here)
-	posZ = CZ(PreScan)
-	
-	' pull up the probe just in case it was on something
-	' ...or push down with the probe, might want to figure out what to do about that --TODO
-	Go XY(posX, posY, posZ, CU(Here)) /L
-	Go XY(posX, posY, posZ, CU(PreScan)) /L
 	
 	' make sure we are NOT at home (in XY, homecheck doesn't check Z or U)
 	If HomeCheck Then Exit Function
@@ -99,17 +93,25 @@ Function findHome
 	
 	Select quad
 		Case 0
-			Move PreFlash CP
-			Move PreHotStake CP
-			Move PreScan
+			posZ = CZ(PreFlash)
+            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go PreFlash CP
+			Go PreHotStake CP
+			Go PreScan
 		Case 1
-			Move OutmagWaypoint CP
-			Move PreScan
+			posZ = CZ(OutmagWaypoint)
+            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go OutmagWaypoint CP
+			Go PreScan
 		Case 2
-			Move PreHotStake CP
-			Move PreScan
+			posZ = CZ(PreHotStake)
+            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go PreHotStake CP
+			Go PreScan
 		Case 3
-			Move PreScan
+			posZ = CZ(PreScan)
+            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go PreScan
 	Send
 	
 	HomeCheck  'clears errors from not being at home

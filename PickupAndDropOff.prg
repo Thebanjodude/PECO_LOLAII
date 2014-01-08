@@ -44,7 +44,9 @@ Function DropOffPanel() As Integer
 	Wait recSuctionWaitTime ' Allow time for cups to unseal
 	RobotPlacedPanel = True ' Tell the output magazine we put a panel into it
 
-	Jump OutmagWaypoint LimZ zLimit
+Speed 25
+findHome
+	'Jump OutmagWaypoint LimZ zLimit
 
 	OutputMagSignal = True ' Give permission for output magazine to dequeue next panel	
 

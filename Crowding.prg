@@ -12,10 +12,10 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	If Not HomeCheck Then findHome
 	
 	Go PreHotStake CP
-	Do Until Tmr(1) > 3
+	Do Until Tmr(1) > 0.5
 		Wait 0.1
 	Loop
-	Move P(recPreCrowding)
+	Jump P(recPreCrowding)
 	
 	suctionCupsCC = False ' Turn off suction cups
 	Wait recSuctionWaitTime ' wait for cups to release
@@ -30,7 +30,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Wait recSuctionWaitTime
 
 	Off (CrowdingH) ' Open crowding
-	Wait 3 ' wait for the crowding to open	
+	Wait 0.5 ' wait for the crowding to open	
 	
 	CrowdingSequence = 0
 	

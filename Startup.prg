@@ -30,6 +30,8 @@ Function PowerOnSequence()
 	
 	Speed SystemSpeed
 	Accel SystemAccel, SystemAccel 'Paramterize these numbers
+	SpeedS SystemSpeed
+	AccelS SystemAccel, SystemAccel
 	QP (On) ' turn On quick pausing	
 	
 	HomeCheck
