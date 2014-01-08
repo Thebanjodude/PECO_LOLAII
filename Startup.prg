@@ -22,14 +22,8 @@ Function PowerOnSequence()
 	'Wait idleH
 	Wait Sw(1)
 	bootCC = False 'PLC has booted, reset the boot flag
-	
-retry:
 
 	ClearMemory() ' writes a zero to all the memIO
-	
-	retry:
-
-	If PowerOnHomeCheck() = False Then GoTo retry ' Don't let the robot move unless its near home
 	
 	Motor On
 	Power High
@@ -38,9 +32,8 @@ retry:
 	Accel SystemAccel, SystemAccel 'Paramterize these numbers
 	QP (On) ' turn On quick pausing	
 	
-'	Move PreScan :U(CU(CurPos)) ' go home
-'	Move PreScan ROT ' go home
-	
+	HomeCheck
+
 Fend
 Function CheckInitialParameters() As Integer
 'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
@@ -79,39 +72,6 @@ Function HotStakeTempRdy() As Boolean
 		HotStakeTempRdy = True ' ready to start job
 '		HotStakeTempRdy = False ' Temperature is not in range
 	
-Fend
-Function PowerOnHomeCheck() As Boolean
-	
-	Real distx, disty, distz, distance
-' TODO: Parameterize these #defines?
-	#define startUpDistMax 150 '+/-150mm from home position
-	
-	distx = Abs(CX(CurPos) - CX(PreScan))
-	disty = Abs(CY(CurPos) - CY(PreScan))
-	
-	distance = Sqr(distx * distx + disty * disty) ' How the hell do you square numbers?
-	
-	Print "distance away from home: ", distance
-
-	If distance > startUpDistMax Or Hand(Here) = 1 Then  'Check is the position is close to home. If not throw error
-		erRobotNotAtHome = True
-		PowerOnHomeCheck = False
-		Print "Distance NOT OK Or Arm Orientation NOT OK"
-	Else
-		erRobotNotAtHome = False
-		PowerOnHomeCheck = True
-		Print "Distance OK and Arm Orientation OK"
-	EndIf
-	
-	'	Print Hand(Here)
-	
-	If PowerOnHomeCheck = False Then ' When false, free all the joints so opperator can move
-		Motor On
-		SFree 1, 2, 3, 4
-		Print "move robot to home position"
-		Pause
-	EndIf
-		
 Fend
 Function ClearMemory()
 	

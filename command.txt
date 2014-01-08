@@ -1,1 +1,11 @@
+>homedef
+!!Error: 3100, Syntax error.
+> HomeDef
+!!Error: 3100, Syntax error.
+> if homedef = false then
+!!Error: 3804, Specified command cannot be executed from the Command window.
+> jump PreScan
+!!Error: 1037, Cannot execute in Remote Ethernet enable except from the Remote Ethernet.
+> homeset Pls(1), Pls(2), Pls(3), Pls(4)
 
+> 
