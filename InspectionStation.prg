@@ -15,28 +15,25 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Redim PassFailArray(23, 1) 		' Clear array, always 23 rows
     Redim InspectionArray(23, 1)	' Clear array, always 23 rows
 	
-	Jump PreScan LimZ zLimit
+	If Not HomeCheck Then findHome
 	
 	currentPreinspectHole = 1 ' This tells the HMI which hole we are working on during preinspection
 	currentInspectHole = 1 ' This tells the HMI which hole we are working on during inspection
 
+	'if needed the profile will be changed by the inspection function
+	ChangeProfile("07")
+
 	For i = recFirstHolePointInspection To recLastHolePointInspection
 		
-		Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
+		' see if we can get away without using this
+		'Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
 		Go P(i)
 		
 		If SelectRoutine = 1 Then
 
 			' The following code block detects if an insert is in the hole already.			
-			ChangeProfile("07")
+
 			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
-			
-'			If Abs(BossCrosssectionalArea) < -9999 Then ' We dont see an empty hole or a populated hole. Panel is backwards or 
-'				erPanelStatusUnknown = True
-'				InspectPanel = 2					' the wrong panel was put into the magazine
-'				'back out of the laser	
-'				Exit For
-'			EndIf
 			
 			Print "BossCrosssectionalArea: ", BossCrosssectionalArea
 			If BossCrosssectionalArea > recBossCrossArea Then ' There is already an insert so set skip flag
@@ -44,31 +41,19 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 				Print "Hole ", currentPreinspectHole, " is already populated"
 			EndIf
 			
-'			If BossCrosssectionalArea = -9999 Then ' Check if there is a panel under the laser
-'				erPanelStatusUnknown = True
-'				InspectPanel = 2					' the wrong panel was put into the magazine
-'				Trap 2 'disarm trap
-'				jump PreScan :U(CU(Here)) limz zlimit' Pull away from the laser WITHOUT spinning (may hit laser)
-'				Exit function
-'			EndIf
-			
 			currentPreinspectHole = currentPreinspectHole + 1
 			
 		ElseIf SelectRoutine = 2 Then
 			
 			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
-'			PrintInspectionArray()
-'			PrintPassFailArray()
 			UnpackInspectionArrays()
 			currentInspectHole = currentInspectHole + 1
 		EndIf
 			
 		Go P(i) :U(CU(Here)) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
-		Wait .25
 	Next
 	
 	InspectPanel = 0 ' Inspection occured without errors
-	Go PreScan :U(CU(Here))
 
 exitInspectPanel:
 
@@ -79,7 +64,7 @@ exitInspectPanel:
 	EndIf
 
 	SystemStatus = StateMoving
-	Jump PreScan LimZ zLimit ' Go Home
+	findHome
 	Trap 2 'disarm trap
 Fend
 Function PassOrFail(measurement As Real) As Boolean 'Pass is True	
@@ -246,9 +231,7 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
     Integer i, NumTokens
     String Tokens$(0)
     String response$
-    
-'    SetNet #201, "10.22.251.171", 7351, CRLF, NONE, 0
-    
+        
 	If ChkNet(203) < 0 Then ' If port is not open
 		OpenNet #203 As Client
 		Print "Attempted Open TCP port to HMI"
@@ -275,8 +258,6 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
                 
     Integer i, NumTokens
     String Tokens$(0), response$, responceCR$
-    
-'	SetNet #203, "10.22.251.171", 7351, CRLF, NONE, 0
     
 	If ChkNet(203) < 0 Then ' If port is not open
 		OpenNet #203 As Client
