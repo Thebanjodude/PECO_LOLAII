@@ -2,7 +2,7 @@
 
 Function DropOffPanel() As Integer
 
-	DropOffPanel = 2 ' dafult to fail
+	DropOffPanel = 2 ' default to fail
 	SystemStatus = StatePushPanel
 	PanelPassedInspection = True ' fake it for testing	
 	
@@ -11,16 +11,18 @@ Function DropOffPanel() As Integer
 		Exit Function
 	EndIf
 	
-	Jump PreScan LimZ zLimit
+	If Not HomeCheck Then findHome
 	Jump OutmagWaypoint LimZ zLimit
 	
 	Do Until OutMagDropOffSignal = True
 		Wait .25 ' wait until the output magazine is ready
+		' --TODO-- add signal to operator that something is wrong
 	Loop
 
-	panelDataTxRdy = True ' Tell HMI to readout hole data
+
+	' --TODO-- Add panel fail code here
 	
-' this is for hmi logging
+	panelDataTxRdy = True ' Tell HMI to readout hole data
 	Wait MemSw(panelDataTxAckH) = True, 10
 	panelDataTxRdy = False ' reset flag	
 	If TW = True Then ' catch that the HMI timed out without acking
@@ -37,7 +39,7 @@ Function DropOffPanel() As Integer
 	MemOff (outmagOvrTorq) ' reset bit
 	Quit OutputMagTorqueSense
 
-	Off suctionCupsH ' fake
+'	Off suctionCupsH ' fake
 	suctionCupsCC = False
 	Wait recSuctionWaitTime ' Allow time for cups to unseal
 	RobotPlacedPanel = True ' Tell the output magazine we put a panel into it
@@ -45,16 +47,8 @@ Function DropOffPanel() As Integer
 	Jump OutmagWaypoint LimZ zLimit
 
 	OutputMagSignal = True ' Give permission for output magazine to dequeue next panel	
-	
-'	PanelPassedInspection = True 'fake
-	
-'	If PanelPassedInspection = False Then
-'		erPanelFailedInspection = True
-'		Pause ' wait for operator to continue
-'	EndIf
 
 	SystemStatus = StateMoving
-	PanelPassedInspection = False ' rest flag
 	DropOffPanel = DropoffSuccessful
 
 	jobNumPanelsDone = jobNumPanelsDone + 1 ' Increment how many panels we have pulled		
@@ -70,7 +64,7 @@ If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
 	MemOff (jobAbortH) ' reset flag		
 EndIf
 
-Jump prescan LimZ zLimit ' go home
+findHome
 
 Fend
 Function PickupPanel() As Integer 'byte me
