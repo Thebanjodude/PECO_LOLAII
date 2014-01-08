@@ -172,9 +172,7 @@ Function pushPanelState(currentState As Integer) As Integer
 			currentState = StateIdle
 	Send
 
-	' TODO -- check to ensure that the jump doesn't cause issues with the rest of this state
 	If jobAbort = True Or jobDone = True Then
-		Jump PreScan LimZ zLimit ' go home
 		currentState = StateIdle ' Go to idle because the operator wants to quit or job is done	
 		jobAbort = False ' reset flag
 		jobStart = False ' reset flag
