@@ -111,5 +111,7 @@ Function findHome
 		Case 3
 			Move PreScan
 	Send
+	
+	HomeCheck  'clears errors from not being at home
 Fend
 
