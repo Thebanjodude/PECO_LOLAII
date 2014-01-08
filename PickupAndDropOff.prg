@@ -87,7 +87,9 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	EndIf
 	
 	suctionCupsCC = False ' Before we pick up a panel make sure we dont have a panel already
-	Jump PreScan LimZ zLimit ' Go home
+	If Not HomeCheck Then
+		findHome ' Go home
+	EndIf
 	
 	' Make this non blocking by checking for var then exit function with pickuppanel=1, revisit l8r
 	Do Until InMagPickUpSignal = True ' Wait for inmag to confirm a panel is ready to be picked up
