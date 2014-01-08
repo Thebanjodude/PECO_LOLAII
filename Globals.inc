@@ -1,7 +1,7 @@
 ' Used Timers
 ' TMR-
 '	0  -  IOT (hmi comms) - iotransfer()
-'	1  -  
+'	1  -  Crowding open delay -- crowdingSequence()
 '	2  -  
 '	3  -  dump delay (obsoleted)
 '	4  -  
@@ -11,6 +11,11 @@
 '	8  -  
 '	9  -  
 '	10 -  OutMagControlRefactor() - delay before sensing a panel
+'	11 -  
+'	12 -  
+'	13 -  
+'	14 -  
+'	15 -  
 
 ' System Global Vars and #defines
 Global Integer SystemSpeed, SystemAccel, mainCurrentState
