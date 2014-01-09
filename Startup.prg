@@ -78,10 +78,12 @@ Function HotStakeTempRdy() As Boolean
 Fend
 Function ClearMemory()
 	
-	For x = 0 To 15
-		MemOutW x, 0 ' This writes 0 to all memory locations in word chunks
+	Integer i
+	
+	For i = 0 To 15
+		MemOutW i, 0 ' This writes 0 to all memory locations in word chunks
 	Next
-	x = 0
+	i = 0
 	
 Fend
 

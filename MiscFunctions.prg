@@ -7,9 +7,11 @@ Fend
 Function exp(num As Real, exponent As Integer) As Real
 	' since x^0 == 1
 	exp = 1.0
-	For x = 0 To exponent - 1 Step 1
+	Integer i
+	
+	For i = 0 To exponent - 1 Step 1
 		exp = exp * num
-	Next x
+	Next i
 Fend
 Function mmToin(mm As Real) As Real
 	mmToin = mm * 0.0393701

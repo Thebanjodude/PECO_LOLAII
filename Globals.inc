@@ -115,7 +115,6 @@ Global Boolean outMagMtrCC, outMagMtrDirCC, RobotPlacedPanel
 
 'Inspection Station Global Vars
 Global Boolean PanelPassedInspection ' Indicates if the panel passes inspection
-Global Integer x, z ' Increment for P(x) to define edge and num of holes found
 Global Real CurrentThetaHere, insertDepthTolerance
 Global Boolean PassFailArray(0, 0)
 Global Real InspectionArray(0, 0), recInmagPickupOffset
