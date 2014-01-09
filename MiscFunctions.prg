@@ -4,15 +4,6 @@
 Function InTomm(inches As Real) As Real
 	InTomm = inches * 25.4
 Fend
-Function exp(num As Real, exponent As Integer) As Real
-	' since x^0 == 1
-	exp = 1.0
-	Integer i
-	
-	For i = 0 To exponent - 1 Step 1
-		exp = exp * num
-	Next i
-Fend
 Function mmToin(mm As Real) As Real
 	mmToin = mm * 0.0393701
 Fend
@@ -53,7 +44,7 @@ Function HomeCheck() As Boolean
 	distx = Abs(CX(CurPos) - CX(PreScan))
 	disty = Abs(CY(CurPos) - CY(PreScan))
 	
-	distance = Sqr(exp(distx, 2) + exp(disty, 2))
+	distance = Sqr(distx ** 2 + disty ** 2)
 	
 	Print "distance away from home: ", distance
 

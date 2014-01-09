@@ -1,12 +1,12 @@
-ENVT0100,LM:2014/01/09 15:24:05:612,DS:0000004718,CS:03635,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/09 15:56:47:772,DS:0000004719,CS:19997,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="1/9/2014 8:23:56 AM"
+	sLastModified="1/9/2014 8:56:45 AM"
 	bBuildComplete=True
-	bRebuildRequired=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMWKSSEHLERS"
@@ -72,7 +72,7 @@ ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/9/2014 3:21:51 PM"
+	sTimeSavedInController="1/9/2014 3:56:45 PM"
 }
 ProgramFile9 {
 	sName="FlashRemoval.prg"
