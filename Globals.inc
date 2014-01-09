@@ -222,6 +222,17 @@ Global Boolean joint1Status, joint2Status, joint3Status, joint4Status, safeGuard
 #define SafeGuardMask &H400000
 
 
+' PositionFunction globals
+Global Integer PanelHoleCount
+Global Double PanelHoleX(25)
+Global Double PanelHoleY(25)
+Global Double PanelHoleRadius(25)
+Global Double PanelHoleRotation(25)
+Global Double PanelHoleTangent(25)
+Global Double PanelPickupErrorX
+Global Double PanelPickupErrorY
+Global Double PanelPickupErrorTheta
+
 'Left and Right Spotface Measurements=> send to HMI
 Global Real hole0R, hole0L, hole1R, hole1L, hole2R, hole2L, hole3R, hole3L, hole4R, hole4L
 Global Real hole5R, hole5L, hole6R, hole6L, hole7R, hole7L, hole8R, hole8L, hole9R, hole9L

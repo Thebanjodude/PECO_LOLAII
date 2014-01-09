@@ -1,10 +1,10 @@
-ENVT0100,LM:2014/01/09 15:56:47:772,DS:0000004719,CS:19997,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/09 22:55:20:123,DS:0000004993,CS:19051,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="1/9/2014 8:56:45 AM"
+	sLastModified="1/9/2014 3:55:17 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -25,12 +25,12 @@ UserErrorsFile {
 	sName="UserErrors.dat"
 	nChecksum=0
 }
-nProgramFileCount=13
+nProgramFileCount=15
 ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/8/2014 7:03:13 PM"
+	sTimeSavedInController="1/9/2014 10:55:17 PM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
@@ -104,11 +104,23 @@ ProgramFile13 {
 	bStoreInController=True
 	sTimeSavedInController="1/8/2014 11:06:36 PM"
 }
+ProgramFile14 {
+	sName="PositionFunctions.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/9/2014 10:01:07 PM"
+}
+ProgramFile15 {
+	sName="Test.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/9/2014 10:55:16 PM"
+}
 nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="1/9/2014 3:23:56 PM"
+	sTimeSavedInController="1/9/2014 5:45:23 PM"
 }
 nPointFileCount=3
 PointFile1 {

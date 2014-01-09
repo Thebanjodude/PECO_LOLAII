@@ -27,6 +27,10 @@ Function main()
 	jobStart = False ' reset flag
 	
 	'TeachPointsUnderLaser() ' prototype teaching code (get it close and hone in on it)
+
+	Pause
+	Call runTest
+	Exit Function
 	
 	mainCurrentState = StateIdle ' The first state is Idle
 	

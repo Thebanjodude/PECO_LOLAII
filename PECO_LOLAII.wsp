@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/08 22:04:17:317,DS:0000003392,CS:07012,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/09 22:55:38:728,DS:0000003675,CS:20598,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -6,14 +6,14 @@ ProgramFile1 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1161
-		nHeight=552
+		nWidth=1157
+		nHeight=545
 	}
 }
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=18
 		nTop=128
@@ -46,7 +46,7 @@ ProgramFile4 {
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=17
 		nTop=9
@@ -57,12 +57,12 @@ ProgramFile5 {
 ProgramFile6 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=25
 		nTop=25
-		nWidth=1161
-		nHeight=552
+		nWidth=1159
+		nHeight=549
 	}
 }
 ProgramFile7 {
@@ -72,8 +72,8 @@ ProgramFile7 {
 	Window {
 		nLeft=65
 		nTop=96
-		nWidth=1274
-		nHeight=684
+		nWidth=1273
+		nHeight=681
 	}
 }
 ProgramFile8 {
@@ -83,8 +83,8 @@ ProgramFile8 {
 	Window {
 		nLeft=6
 		nTop=321
-		nWidth=857
-		nHeight=442
+		nWidth=855
+		nHeight=434
 	}
 }
 ProgramFile9 {
@@ -101,12 +101,12 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=100
 		nTop=100
-		nWidth=1165
-		nHeight=563
+		nWidth=1164
+		nHeight=559
 	}
 }
 ProgramFile11 {
@@ -116,8 +116,8 @@ ProgramFile11 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1056
-		nHeight=591
+		nWidth=1055
+		nHeight=588
 	}
 }
 ProgramFile12 {
@@ -133,6 +133,28 @@ ProgramFile12 {
 }
 ProgramFile13 {
 	sName="Crowding.prg"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1059
+		nHeight=602
+	}
+}
+ProgramFile14 {
+	sName="PositionFunctions.prg"
+	bOpened=False
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1059
+		nHeight=602
+	}
+}
+ProgramFile15 {
+	sName="Test.prg"
 	bOpened=False
 	nWinState=2
 	Window {
@@ -150,8 +172,8 @@ IncludeFile1 {
 	Window {
 		nLeft=75
 		nTop=75
-		nWidth=1163
-		nHeight=555
+		nWidth=1159
+		nHeight=549
 	}
 }
 nPointFileCount=3
