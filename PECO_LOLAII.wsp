@@ -1,4 +1,6 @@
-ENVT0100,LM:2014/01/09 22:55:38:728,DS:0000003675,CS:20598,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/10 01:04:01:960,DS:0000003720,CS:11120,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="Test.prg"
+bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -57,7 +59,7 @@ ProgramFile5 {
 ProgramFile6 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=25
 		nTop=25
@@ -79,7 +81,7 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=6
 		nTop=321
@@ -101,7 +103,7 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=100
 		nTop=100
@@ -112,7 +114,7 @@ ProgramFile10 {
 ProgramFile11 {
 	sName="Startup.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -155,11 +157,11 @@ ProgramFile14 {
 }
 ProgramFile15 {
 	sName="Test.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=2
 	Window {
-		nLeft=0
-		nTop=0
+		nLeft=-3
+		nTop=4
 		nWidth=1059
 		nHeight=602
 	}
@@ -168,7 +170,7 @@ nIncludeFileCount=1
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=75
 		nTop=75

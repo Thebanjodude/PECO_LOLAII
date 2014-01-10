@@ -13,7 +13,11 @@ Function runTest
 	
 	LoadPanelInfo
 	PanelFindPickupError
-	
+
+	' EOAT is 135deg from 0 Theta
+	' math is ~~~ off
+	PanelPickupErrorTheta = 135 + 180
+
 	'error correction
 	PanelRecipeRotate(PanelPickupErrorTheta)
 	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
@@ -21,18 +25,22 @@ Function runTest
 	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
 	xy2RadiusRotationTangent
 	
-	'move to location
-	For hole = 1 To PanelHoleCount
-		'PanelHoleToXYZT(hole, 150, 450, 0, -PanelHoleTangent(hole))
-		'PanelHoleToXYZT(hole, CX(laserPoint), CY(laserPoint), 0, -PanelHoleTangent(hole))
-		PanelHoleToXYZT(hole, -90, 622, CZ(PreScan), 90 - PanelHoleTangent(hole))
+	Do While True
 		Pause
-	Next
+		'move to location
+		For hole = 1 To PanelHoleCount
+			'PanelHoleToXYZT(hole, 150, 450, 0, -PanelHoleTangent(hole))
+			'PanelHoleToXYZT(hole, CX(laserPoint), CY(laserPoint), 0, -PanelHoleTangent(hole))
+			PanelHoleToXYZT(hole, 30, 622, CZ(PreScan), 90 - PanelHoleTangent(hole))
+			'Pause
+			Wait 1
+		Next
 	
-'	For hole = 1 To PanelHoleCount
-'		PanelHoleToXYZT(hole, -440, 440, CZ(PreScan), 135 - PanelHoleTangent(hole))
-'		Pause
-'	Next
+	'	For hole = 1 To PanelHoleCount
+	'		PanelHoleToXYZT(hole, -440, 440, CZ(PreScan), 135 - PanelHoleTangent(hole))
+	'		Pause
+	'	Next
+	Loop
 Fend
 ' mock for loading recipe values
 Function loadRecipe
@@ -77,22 +85,22 @@ Function loadRecipe
 	PanelHoleY(12) = InTomm(1.021)
 
 	PanelHoleX(13) = InTomm(-8.740)
-	PanelHoleY(13) = InTomm(1.021)
+	PanelHoleY(13) = InTomm(-1.021)
 	
 	PanelHoleX(14) = InTomm(-7.800)
-	PanelHoleY(14) = InTomm(2.764)
+	PanelHoleY(14) = InTomm(-2.764)
 	
 	PanelHoleX(15) = InTomm(-6.200)
-	PanelHoleY(15) = InTomm(3.854)
+	PanelHoleY(15) = InTomm(-3.854)
 	
 	PanelHoleX(16) = InTomm(-4.350)
-	PanelHoleY(16) = InTomm(4.450)
+	PanelHoleY(16) = InTomm(-4.450)
 	
 	PanelHoleX(17) = InTomm(-2.420)
-	PanelHoleY(17) = InTomm(4.744)
+	PanelHoleY(17) = InTomm(-4.744)
 
 	PanelHoleX(18) = InTomm(-0.460)
-	PanelHoleY(18) = InTomm(4.846)
+	PanelHoleY(18) = InTomm(-4.846)
 
 	PanelHoleX(19) = InTomm(1.460)
 	PanelHoleY(19) = InTomm(-4.814)

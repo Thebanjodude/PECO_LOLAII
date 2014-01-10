@@ -5,7 +5,7 @@
 ' ---------TODO--Replace with recipe values-------
 Function LoadPanelInfo()
 	
-	loadRecipe
+	Call loadRecipe
 
 Fend
 

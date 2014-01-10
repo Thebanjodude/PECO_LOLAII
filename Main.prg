@@ -28,7 +28,6 @@ Function main()
 	
 	'TeachPointsUnderLaser() ' prototype teaching code (get it close and hone in on it)
 
-	Pause
 	Call runTest
 	Exit Function
 	
