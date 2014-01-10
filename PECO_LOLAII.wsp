@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/10 02:42:12:731,DS:0000003683,CS:21374,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/10 01:42:27:086,DS:0000003675,CS:23160,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -46,7 +46,7 @@ ProgramFile4 {
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=17
 		nTop=9
@@ -145,7 +145,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -252,10 +252,10 @@ IOMonitor {
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=383
-		nTop=258
-		nWidth=855
-		nHeight=312
+		nLeft=0
+		nTop=0
+		nWidth=0
+		nHeight=0
 	}
 }
 Macros {
