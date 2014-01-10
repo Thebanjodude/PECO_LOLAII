@@ -1,8 +1,8 @@
-ENVT0100,LM:2014/01/10 02:42:12:731,DS:0000003683,CS:21374,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/10 23:12:43:816,DS:0000003683,CS:21372,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -46,7 +46,7 @@ ProgramFile4 {
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=17
 		nTop=9
@@ -123,7 +123,7 @@ ProgramFile11 {
 ProgramFile12 {
 	sName="MainStates.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=50
 		nTop=50
@@ -145,7 +145,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -156,7 +156,7 @@ ProgramFile14 {
 ProgramFile15 {
 	sName="Test.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=5
 		nTop=4

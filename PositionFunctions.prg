@@ -65,7 +65,17 @@ Function xy2RadiusRotationTangent()
 	Real angle
 	Real deltaX
 	Real deltaY
-		
+
+	' to make wrap around easier store a copy for the highest number hole values in array postion zero
+	'  and a copy of the lowest number hole (always 1) in the array postion one higher than the hole count
+	PanelHoleX(0) = PanelHoleX(PanelHoleCount)
+	PanelHoleY(0) = PanelHoleY(PanelHoleCount)
+	PanelHoleX(PanelHoleCount + 1) = PanelHoleX(1)
+	PanelHoleY(PanelHoleCount + 1) = PanelHoleY(1)
+	
+	'just to be safe
+	PanelHoleTangent(0) = 360
+	
 	For hole = 1 To PanelHoleCount
 
 		' the radius is the hypotenuse of the angle formed by the x and y values
@@ -101,13 +111,6 @@ Function xy2RadiusRotationTangent()
 		' first find the angle relative to the x-axis of the line connecting the adjacent holes
 		' this is alot like the calculations above but just finding the angle from one adjacent hole to the other
 		' adjacent hole as though one was the center of the panel
-
-		' to make wrap around easier store a copy for the highest number hole values in array postion zero
-		'  and a copy of the lowest number hole (always 1) in the array postion one higher than the hole count
-		PanelHoleX(0) = PanelHoleX(PanelHoleCount)
-		PanelHoleY(0) = PanelHoleY(PanelHoleCount)
-		PanelHoleX(PanelHoleCount + 1) = PanelHoleX(1)
-		PanelHoleY(PanelHoleCount + 1) = PanelHoleY(1)
 		
 		' find the difference between the x and y positions of the two adjacent holes		
 		deltaX = PanelHoleX(hole + 1) - PanelHoleX(hole - 1)
@@ -134,14 +137,16 @@ Function xy2RadiusRotationTangent()
 			angle = 90 - angle ' rotation from negative y-axis around to the angle we found above
 			angle = angle + 270 ' add in the rotation through the other three quadrants
 		EndIf
+
+		PanelHoleTangent(hole) = angle - 90   ' store the angle tangent to the calculated angle
 		
-		'If we wrap take diff	
-		If angle < 90 Then
-			angle = 360 + angle
+		' we increment the hole count in a clockwise manner (for those of you who remember analog clocks...)		
+		'   this means that each successive tangent should be more negative than the previous one
+		'   so we are going to use -360 to handle the wrap
+		If PanelHoleTangent(hole - 1) < PanelHoleTangent(hole) Then
+			PanelHoleTangent(hole) = PanelHoleTangent(hole) - 360
 		EndIf
 		
-		PanelHoleTangent(hole) = angle - 90   ' store the angle tangent to the calculated angle
-			
 		'Print "Hole ", hole, " has radius ", PanelHoleRadius(hole), " and rotation ", PanelHoleRotation(hole), " Tangent is ", PanelHoleTangent(hole)
 	
 	Next
@@ -158,6 +163,7 @@ Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double,
 	rotY = (-PanelHoleX(hole) * Sin(DegToRad(Theta))) + (-PanelHoleY(hole) * Cos(DegToRad(Theta)))
 	
 	' now put the quill at that point with the x,y offset to the hole
+	Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
 	Go XY(x + rotX, y + rotY, z, Theta) /L
 
 Fend
