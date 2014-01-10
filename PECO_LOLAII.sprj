@@ -1,0 +1,253 @@
+ENVT0100,LM:2014/01/10 02:39:39:208,DS:0000004993,CS:11642,MA:00-21-70-9F-9C-9E,EI:           
+SystemProperties {
+	sRC50Version="5.4.4"
+	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
+	bSimple=False
+	sCreated="1/25/2013 7:23:00 AM"
+	sLastModified="1/9/2014 7:39:35 PM"
+	bBuildComplete=True
+	bRebuildRequired=False
+	bClearControllerProject=False
+	bClearGlobalPreserves=False
+	sComputerName="AMLAPFASTEK"
+}
+UserProperties {
+	sVersion=""
+	sDescription=""
+	sNotes=""
+	sParserEmulationVersion=""
+}
+IOLabelFile {
+	sName="IOLabels.dat"
+	nChecksum=0
+}
+UserErrorsFile {
+	sName="UserErrors.dat"
+	nChecksum=0
+}
+nProgramFileCount=15
+ProgramFile1 {
+	sName="Main.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/9/2014 11:31:28 PM"
+}
+ProgramFile2 {
+	sName="IOTable.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/6/2014 7:30:58 PM"
+}
+ProgramFile3 {
+	sName="InMagOutMagStateMachines.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="12/18/2013 6:39:04 PM"
+}
+ProgramFile4 {
+	sName="SystemMonitor.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="12/18/2013 8:34:22 PM"
+}
+ProgramFile5 {
+	sName="PickupAndDropOff.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/8/2014 11:06:36 PM"
+}
+ProgramFile6 {
+	sName="InspectionStation.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/8/2014 8:45:22 PM"
+}
+ProgramFile7 {
+	sName="CalibrationRoutines.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="12/18/2013 6:39:04 PM"
+}
+ProgramFile8 {
+	sName="MiscFunctions.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/9/2014 3:56:44 PM"
+}
+ProgramFile9 {
+	sName="FlashRemoval.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/8/2014 7:46:16 PM"
+}
+ProgramFile10 {
+	sName="HeatStake.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/8/2014 7:42:08 PM"
+}
+ProgramFile11 {
+	sName="Startup.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/9/2014 3:17:28 PM"
+}
+ProgramFile12 {
+	sName="MainStates.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/8/2014 8:49:52 PM"
+}
+ProgramFile13 {
+	sName="Crowding.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/8/2014 11:06:36 PM"
+}
+ProgramFile14 {
+	sName="PositionFunctions.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/10/2014 12:48:58 AM"
+}
+ProgramFile15 {
+	sName="Test.prg"
+	bCompiled=True
+	bStoreInController=True
+	sTimeSavedInController="1/10/2014 2:39:35 AM"
+}
+nIncludeFileCount=1
+IncludeFile1 {
+	sName="Globals.inc"
+	bStoreInController=True
+	sTimeSavedInController="1/9/2014 5:45:22 PM"
+}
+nPointFileCount=3
+PointFile1 {
+	sName="Points.pts"
+	sTimeSavedInController="12/18/2013 6:39:04 PM"
+}
+PointFile2 {
+	sName="Points2.pts"
+	sTimeSavedInController="12/18/2013 6:39:04 PM"
+}
+PointFile3 {
+	sName="Points3.pts"
+	sTimeSavedInController="12/18/2013 6:39:04 PM"
+}
+OperatorSettings {
+	OperatorWindow {
+		sTitle="Operator Window"
+		nWinState=0
+		sFontName="Courier New"
+		rFontSize=20.25
+		bFontBold=False
+		bRobotMgrButton=True
+		bPauseContButtons=True
+		bIOMonitorButton=True
+		bSystemHistoryButton=True
+		bSimulatorButton=True
+		Program0 {
+			sName="Program"
+			bEnabled=True
+		}
+		Program1 {
+			sName="Program 1"
+			bEnabled=True
+		}
+		Program2 {
+			sName="Program 2"
+			bEnabled=True
+		}
+		Program3 {
+			sName="Program 3"
+			bEnabled=True
+		}
+		Program4 {
+			sName="Program 4"
+			bEnabled=True
+		}
+		Program5 {
+			sName="Program 5"
+			bEnabled=True
+		}
+		Program6 {
+			sName="Program 6"
+			bEnabled=True
+		}
+		Program7 {
+			sName="Program 7"
+			bEnabled=True
+		}
+		bDisplayVision=False
+	}
+	RobotManager {
+		bAllowTeach=True
+		bAllowMotionCmds=True
+		bAllowDeletePoints=True
+		bAllowEditPoints=True
+		bAllowSFree=True
+		bAllowHome=True
+		bPromptNewPointInfo=True
+		bTeachDefinedOnly=True
+		bControlPanelTab=True
+		bJogTab=True
+		bPointsTab=True
+		bArchTab=False
+		bLocalsTab=False
+		bToolsTab=False
+		bArmsTab=False
+		bECPTab=False
+		bBoxesTab=False
+		bPlanesTab=False
+		bWeightTab=False
+		bInertiaTab=False
+		bXYZLimitsTab=False
+		bRangeTab=False
+		bHomeConfigTab=False
+	}
+	IOMonitor {
+		bStandardViewTab=True
+		bCustomView1Tab=True
+		bCustomView2Tab=False
+		bCustomView3Tab=False
+		bAllowChangeOutputs=False
+	}
+}
+IOCustomView1 {
+	sName=""
+	bVisible=False
+	nNumberOfRows=5
+	Row0 {
+		nIOGroup=0
+		nPort=112
+	}
+	Row1 {
+		nIOGroup=0
+		nPort=113
+	}
+	Row2 {
+		nIOGroup=0
+		nPort=114
+	}
+	Row3 {
+		nIOGroup=0
+		nPort=115
+	}
+	Row4 {
+		nIOGroup=0
+		nPort=116
+	}
+}
+IOCustomView2 {
+	sName=""
+	bVisible=False
+	nNumberOfRows=0
+}
+IOCustomView3 {
+	sName=""
+	bVisible=False
+	nNumberOfRows=0
+}
+nVisFileCount=0
+nGuiBuilderFileCount=0
