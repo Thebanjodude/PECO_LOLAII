@@ -6,6 +6,58 @@
 !!Error: 3804, Specified command cannot be executed from the Command window.
 > jump PreScan
 !!Error: 1037, Cannot execute in Remote Ethernet enable except from the Remote Ethernet.
+!!Error: 3100, Syntax error.
+> 
 > homeset Pls(1), Pls(2), Pls(3), Pls(4)
 
+> PanelPickupErrorY = 12.5
+>PanelPickupErrorY = 0 
+> print panelPickupErrorY
+ 0
+> PanelPickupErrorY = 12.4
+> PanelPickupErrorY = 12.5
+> PanelPickupErrorY = 6
+> PanelPickupErrorTheata = 15
+!!Error: 3100, Syntax error.
+> PanelPickupErrorTheta = 15
+> PanelPickupErrorTheta = 135 + 15
+> PanelPickupErrorTheta = 135 -7
+> PanelPickupErrorTheta = 0
+> PanelPickupErrorY = 0
+> 
+> 
+> PanelPickupErrorTheta = 320
+> 
+> PanelPickupErrorTheta = 310
+> PanelPickupErrorTheata = 315 - 3.821 'crowding error
+!!Error: 3100, Syntax error.
+> PanelPickupErrorTheta = 315 - 3.821 ' crowding error
+> 
+> 
+> 
+> print PanelPickupErrorThetat
+!!Error: 2513, Specified point label is not defined.
+> print PanelPickupErrorTheta
+ 311.179
+> PanelPickupErrorY = 1.5
+> 
+> 
+> 
+> 
+> 
+> PanelPickupErrorTheta = 311.179
+> PanelPickupErrorY = 3.3
+> PanelPickupErrorX = 0.65
+> 
+> PanelPickupErrorTheta = 313
+> PanelPickupErrorTheta = 318
+> PanelPickupErrorTheta = 314
+> PanelPickupErrorTheta = 315
+> PanelPickupErrorY=5
+> PanelPickupErrorx=3
+> PanelPickupErrorX=-3
+> PanelPickupErrorTheta = 311
+> PanelPickupErrorTheta = 312
+> PanelPickupErrorTheta = 313
+> PanelPickupErrorY = 10
 > 

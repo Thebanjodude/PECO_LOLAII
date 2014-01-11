@@ -1,11 +1,11 @@
-ENVT0100,LM:2014/01/10 23:43:59:442,DS:0000004995,CS:14649,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/11 01:07:09:070,DS:0000004994,CS:05740,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="1/9/2014 7:39:35 PM"
-	bBuildComplete=False
+	sLastModified="1/10/2014 6:07:05 PM"
+	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
@@ -114,7 +114,7 @@ ProgramFile15 {
 	sName="Test.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/10/2014 11:11:05 PM"
+	sTimeSavedInController="1/11/2014 1:07:05 AM"
 }
 nIncludeFileCount=1
 IncludeFile1 {
