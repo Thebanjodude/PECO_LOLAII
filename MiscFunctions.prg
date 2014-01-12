@@ -46,16 +46,16 @@ Function HomeCheck() As Boolean
 	
 	distance = Sqr(distx ** 2 + disty ** 2)
 	
-	Print "distance away from home: ", distance
+'	Print "distance away from home: ", distance
 
 	If distance > startUpDistMax Or Hand(Here) = 1 Then  'Check is the position is close to home. If not throw error
 		erRobotNotAtHome = True
 		HomeCheck = False
-		Print "Distance NOT OK Or Arm Orientation NOT OK"
+'		Print "Distance NOT OK Or Arm Orientation NOT OK"
 	Else
 		erRobotNotAtHome = False
 		HomeCheck = True
-		Print "Distance OK and Arm Orientation OK"
+'		Print "Distance OK and Arm Orientation OK"
 	EndIf
 		
 Fend

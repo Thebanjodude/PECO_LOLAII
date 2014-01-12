@@ -237,8 +237,8 @@ Global Double PanelPickupErrorX
 Global Double PanelPickupErrorY
 Global Double PanelPickupErrorTheta
 Global Double holeTolerance '+/- mm to center of hole
-' the EOAT is 135deg off of zero and the panel recipes are 180deg off
-#define PanelOffsetTheta 315
+Global Double EOATcorrection
+Global Double magazineCorrection
 
 'Left and Right Spotface Measurements=> send to HMI
 Global Real hole0R, hole0L, hole1R, hole1L, hole2R, hole2L, hole3R, hole3L, hole4R, hole4L

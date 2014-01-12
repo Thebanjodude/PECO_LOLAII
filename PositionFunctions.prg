@@ -74,12 +74,16 @@ Function PanelRecipeRotate(Theta As Double)
 	Integer hole
 	Double sinTheta
 	Double cosTheta
+	Double newTheta
 	Double newX
 	Double newY
+	
+	'add in the offsets needed to put everything on the same cord system as the robot
+	newTheta = Theta + EOATcorrection + magazineCorrection
 		
 	'pre calculate these	
-	sinTheta = Sin(DegToRad(Theta))
-	cosTheta = Cos(DegToRad(Theta))
+	sinTheta = Sin(DegToRad(newTheta))
+	cosTheta = Cos(DegToRad(newTheta))
 	
 	For hole = 1 To PanelHoleCount
 		newX = (PanelHoleX(hole) * cosTheta) - (PanelHoleY(hole) * sinTheta)

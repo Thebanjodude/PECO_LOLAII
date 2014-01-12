@@ -3,12 +3,18 @@
 ' a place to hold test code
 
 Function runTest
-
 	Integer hole
-	Double PanelPickupErrorTheta_old, PanelPickupErrorX_old, PanelPickupErrorY_old
-		
+			
 	holeTolerance = 0.5
 	
+' the EOAT is 135deg off of zero and the panel recipes are 180deg off
+'#define PanelOffsetTheta 315
+' sorta, its really panels are placed into the magazine 90deg off counterclockwise
+' and the eoat is 45deg off clockwise
+' so we need a correction of -45deg
+	EOATcorrection = 45
+	magazineCorrection = -90
+
 	Pause
 	
 	LoadPanelInfo
@@ -18,10 +24,10 @@ Function runTest
 	CrowdingSequence
 	
 	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
-	Print "precalculating...."
-	xy2RadiusRotationTangent
-	
-	PanelFindPickupError
+'	Print "precalculating...."
+'	xy2RadiusRotationTangent
+'	
+'	PanelFindPickupError
 	
 	'error correction
 	PanelRecipeRotate(PanelPickupErrorTheta)
