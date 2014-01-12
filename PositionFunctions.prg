@@ -19,6 +19,8 @@ Function PanelFindPickupError
 
 	Real width, widthPrevious, tempx
 	Real xShouldBe, yShouldBe
+	Real errorY, errorX
+	Real Theta, sinTheta, cosTheta
 	Integer hole
 	Boolean foundCenter
 	
@@ -50,6 +52,7 @@ Function PanelFindPickupError
 			If tempx > -holeTolerance And tempx < holeTolerance Then foundCenter = True
 		Loop
 		
+		errorY = xShouldBe - CX(CurPos)
 		PanelPickupErrorY = xShouldBe - CX(CurPos)
 		'PanelPickupErrorY = yShouldBe - CY(CurPos)
 		Print "y error = ", PanelPickupErrorY
@@ -81,14 +84,32 @@ Function PanelFindPickupError
 			EndIf
 		Loop
 		
-		PanelPickupErrorX = yShouldBe - CY(CurPos)
+		errorX = yShouldBe - CY(CurPos)
+		'PanelPickupErrorX = yShouldBe - CY(CurPos)
 		'PanelPickupErrorX = xShouldBe - CX(CurPos)
 		Print "X error = ", PanelPickupErrorX
 		'PanelPickupErrorY = yShouldBe - CY(CurPos)
 		'Print "Y error = ", PanelPickupErrorY
 '	Next
-	Call changeSpeed(fast)
+
 	Print "done with error correction detection"
+	Print "------------------------"
+	'add in the offsets needed to put everything on the same cord system as the robot
+	Theta = PanelPickupErrorTheta + EOATcorrection + magazineCorrection
+		
+	'pre calculate these	
+	sinTheta = Sin(DegToRad(Theta))
+	cosTheta = Cos(DegToRad(Theta))
+	
+	PanelPickupErrorX = (errorX / cosTheta) - (errorY / sinTheta)
+	PanelPickupErrorY = (errorX / sinTheta) + (errorY / cosTheta)
+
+	Print "error x = ", PanelPickupErrorX
+	Print "error y = ", PanelPickupErrorY
+	Print "----------------------------"
+
+	Call changeSpeed(fast)
+
 Fend
 ' rotate the panel matrix about the origin
 Function PanelRecipeRotate(Theta As Double)
