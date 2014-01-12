@@ -60,4 +60,6 @@
 > PanelPickupErrorTheta = 312
 > PanelPickupErrorTheta = 313
 > PanelPickupErrorY = 10
+> print panelholex(1)
+ 151.44925160464
 > 

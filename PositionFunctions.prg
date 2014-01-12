@@ -18,6 +18,7 @@ Function PanelFindPickupError
 	PanelPickupErrorTheta = 0
 
 	Real width, widthPrevious, tempx
+	Real xShouldBe, yShouldBe
 	Integer hole
 	Boolean foundCenter
 	
@@ -28,10 +29,16 @@ Function PanelFindPickupError
 	hole = 1 ' should only need to find 1 hole for xy offset, will need two for theta
 	' check the position of the first two holes
 	' This should find the hole location/error within +/- ??mm
-		PanelHoleToXYZT(hole, 30, 610, CZ(PreScan), -90 - PanelHoleTangent(hole))
+		Print "error correction Hole", hole,
+'		PanelHoleToXYZT(hole, 25, 615, CZ(PreScan), -90 - PanelHoleTangent(hole))
+		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
 		
+		xShouldBe = CX(CurPos)
+		yShouldBe = CY(CurPos)
+		
+		'Print "finding X..."
+		Print "finding Y..."
 		'find x pickup error
-		foundCenter = False
 		tempx = GetLaserMeasurement("07") / 2
 		Do While Not foundCenter
 			' output 7 should return a + or - number indicating the magnitude of error from center
@@ -39,34 +46,49 @@ Function PanelFindPickupError
 			' this should only take one pass...
 			Go CurPos -X(tempx)
 			tempx = GetLaserMeasurement("07") / 2
+			Print "tempx= ", tempx
 			If tempx > -holeTolerance And tempx < holeTolerance Then foundCenter = True
 		Loop
 		
-		PanelPickupErrorX = CX(CurPos) - PanelHoleX(hole)
+		PanelPickupErrorY = xShouldBe - CX(CurPos)
+		'PanelPickupErrorY = yShouldBe - CY(CurPos)
+		Print "y error = ", PanelPickupErrorY
+		'PanelPickupErrorX = xShouldBe - CX(CurPos)
+		'Print "X error = ", PanelPickupErrorX
 		
-		'find Y pickup error
 		foundCenter = False
 		width = 0
 		widthPrevious = 0
+		Integer stepSize
+		stepSize = 1
 		
+		Print "finding X..."
+		'Print "finding Y..."
+		' attempt to ensure that we start on the outside of the panel
+		Go CurPos -Y(0.5) /L
 		Do While Not foundCenter
-			width = GetLaserMeasurement("05")
-
-			If width < widthPrevious Then
-				Go CurPos -Y(0.1) /L
-			Else
-				Go CurPos +Y(0.1) /L
-			EndIf
-
 			widthPrevious = width
-	
-			' check to see if we are in tolerance
-			If width + holeTolerance > widthPrevious And width - holeTolerance < widthPrevious Then foundCenter = True
+			width = -GetLaserMeasurement("04") + GetLaserMeasurement("03")
+			Print "width of hole:  ", width
+
+			If width > widthPrevious Then
+				'we are still moving into the hole
+				Go CurPos +Y(stepSize) /L
+			Else
+				'we have passed the center of the hole, move back by half a step
+				Go CurPos -Y(stepSize / 2) /L
+				foundCenter = True
+			EndIf
 		Loop
 		
-		PanelPickupErrorY = CY(CurPos) - PanelHoleY(hole)
+		PanelPickupErrorX = yShouldBe - CY(CurPos)
+		'PanelPickupErrorX = xShouldBe - CX(CurPos)
+		Print "X error = ", PanelPickupErrorX
+		'PanelPickupErrorY = yShouldBe - CY(CurPos)
+		'Print "Y error = ", PanelPickupErrorY
 '	Next
 	Call changeSpeed(fast)
+	Print "done with error correction detection"
 Fend
 ' rotate the panel matrix about the origin
 Function PanelRecipeRotate(Theta As Double)

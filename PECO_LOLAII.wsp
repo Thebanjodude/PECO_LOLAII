@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/12 19:13:15:055,DS:0000003680,CS:04099,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/12 22:05:42:282,DS:0000003685,CS:26703,MA:00-21-70-9F-9C-9E,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -81,8 +81,8 @@ ProgramFile8 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=6
-		nTop=321
+		nLeft=71
+		nTop=103
 		nWidth=855
 		nHeight=434
 	}
@@ -147,10 +147,10 @@ ProgramFile14 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=1059
-		nHeight=602
+		nLeft=8
+		nTop=11
+		nWidth=986
+		nHeight=552
 	}
 }
 ProgramFile15 {
@@ -158,10 +158,10 @@ ProgramFile15 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=5
-		nTop=4
-		nWidth=1057
-		nHeight=595
+		nLeft=6
+		nTop=19
+		nWidth=1007
+		nHeight=515
 	}
 }
 nIncludeFileCount=1
@@ -170,10 +170,10 @@ IncludeFile1 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=75
-		nTop=75
-		nWidth=1159
-		nHeight=549
+		nLeft=74
+		nTop=15
+		nWidth=920
+		nHeight=521
 	}
 }
 nPointFileCount=3
@@ -182,8 +182,8 @@ PointFile1 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=746
-		nTop=7
+		nLeft=265
+		nTop=37
 		nWidth=664
 		nHeight=464
 	}
@@ -214,9 +214,9 @@ sActiveWindow="main.prg"
 CmdWindow {
 	bOpened=False
 	Window {
-		nLeft=2
-		nTop=2
-		nWidth=1240
+		nLeft=60
+		nTop=137
+		nWidth=680
 		nHeight=196
 	}
 	nWinState=0
@@ -224,9 +224,9 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=3
-		nTop=187
-		nWidth=1291
+		nLeft=138
+		nTop=168
+		nWidth=880
 		nHeight=385
 	}
 }

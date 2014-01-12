@@ -5,7 +5,7 @@
 Function runTest
 	Integer hole
 			
-	holeTolerance = 0.5
+	holeTolerance = 0.1
 	
 ' the EOAT is 135deg off of zero and the panel recipes are 180deg off
 '#define PanelOffsetTheta 315
@@ -14,6 +14,8 @@ Function runTest
 ' so we need a correction of -45deg
 	EOATcorrection = 45
 	magazineCorrection = -90
+
+	Call changeSpeed(slow)
 
 	Pause
 	
@@ -24,14 +26,22 @@ Function runTest
 	CrowdingSequence
 	
 	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
-'	Print "precalculating...."
-'	xy2RadiusRotationTangent
-'	
-'	PanelFindPickupError
+	Print "precalculating...."
+'	PanelPickupErrorTheta = -3.819
+	PanelPickupErrorTheta = 0
+'    PanelRecipeRotate(0) 'account for system theta error
+    PanelRecipeRotate(PanelPickupErrorTheta)
+	xy2RadiusRotationTangent
+	
+	PanelFindPickupError
 	
 	'error correction
+	LoadPanelInfo
 	PanelRecipeRotate(PanelPickupErrorTheta)
+
+	Print "hole 1 data -- x: ", PanelHoleX(1), " y:", PanelHoleY(1)
 	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
+	Print "hole 1 data -- x: ", PanelHoleX(1), " y:", PanelHoleY(1)
 	
 	'recalculate with error correction applied
 	Print "Applying error corrections..."
@@ -39,20 +49,21 @@ Function runTest
 	
 	Call changeSpeed(slow)
 
+Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CX(CurPos), " u:", CU(CurPos)
 	Do While True
 		Pause
 		
 		'move to location
 		For hole = 1 To PanelHoleCount
 			Print "Laser-hole:  ", hole,
-			PanelHoleToXYZT(hole, 30, 610, CZ(PreScan), -90 - PanelHoleTangent(hole))
-			'Pause
+			PanelHoleToXYZT(hole, CX(laser), CY(laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
+			Pause
 			Wait 1
 		Next
 	
 '		For hole = 1 To PanelHoleCount
 '			Print "Heatstake-Hole:  ", hole,
-'			PanelHoleToXYZT(hole, -440, 440, CZ(PreHotStake), -45 - PanelHoleTangent(hole))
+'			PanelHoleToXYZT(hole, CX(hotstake), CY(hotstake), CZ(PreHotStake), -45 - PanelHoleTangent(hole))
 '			'Pause
 '			Wait 1
 '		Next

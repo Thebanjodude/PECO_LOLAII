@@ -1,12 +1,12 @@
-ENVT0100,LM:2014/01/12 19:29:22:043,DS:0000004996,CS:11794,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/12 22:00:45:856,DS:0000004995,CS:08564,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="1/12/2014 12:29:05 PM"
+	sLastModified="1/12/2014 3:00:42 PM"
 	bBuildComplete=True
-	bRebuildRequired=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMLAPFASTEK"
@@ -108,13 +108,13 @@ ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/12/2014 7:29:05 PM"
+	sTimeSavedInController="1/12/2014 9:35:05 PM"
 }
 ProgramFile15 {
 	sName="Test.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/12/2014 7:28:38 PM"
+	sTimeSavedInController="1/12/2014 10:00:42 PM"
 }
 nIncludeFileCount=1
 IncludeFile1 {
@@ -125,11 +125,11 @@ IncludeFile1 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="12/18/2013 6:39:04 PM"
+	sTimeSavedInController="1/12/2014 9:09:51 PM"
 }
 PointFile2 {
 	sName="Points2.pts"
-	sTimeSavedInController="12/18/2013 6:39:04 PM"
+	sTimeSavedInController="1/12/2014 9:10:15 PM"
 }
 PointFile3 {
 	sName="Points3.pts"
