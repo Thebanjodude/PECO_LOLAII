@@ -28,6 +28,10 @@ Global Real zLimit ' the highest the EOAT can move without hitting periphials
 #define Postinspection 2
 Global Real ZmaxTorque ' Monitors Z torque
 Global Integer Crowding
+' System speeds
+#define slow 1
+#define fast 2
+
 
 'Global Integer NextState
 Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog, alarmMuteBtn
@@ -232,6 +236,8 @@ Global Double PanelHoleTangent(25)
 Global Double PanelPickupErrorX
 Global Double PanelPickupErrorY
 Global Double PanelPickupErrorTheta
+' the EOAT is 135deg off of zero and the panel recipes are 180deg off
+#define PanelOffsetTheta 315
 
 'Left and Right Spotface Measurements=> send to HMI
 Global Real hole0R, hole0L, hole1R, hole1L, hole2R, hole2L, hole3R, hole3L, hole4R, hole4L

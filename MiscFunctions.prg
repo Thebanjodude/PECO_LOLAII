@@ -109,4 +109,21 @@ Function findHome
 	
 	HomeCheck  'clears errors from not being at home
 Fend
+Function changeSpeed(gotoSpeed As Integer)
+	Select gotoSpeed
+		Case slow
+			Accel 20, 20
+			AccelS 20, 20
+			Speed 10
+			SpeedS 10
+		Case fast
+			Accel 50, 50
+			AccelS 50, 50
+			Speed 100
+			SpeedS 100
+		Default
+			Print "error selecting speed, defaulting to slow"
+			Call changeSpeed(slow)
+	Send
+Fend
 
