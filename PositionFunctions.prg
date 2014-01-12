@@ -9,19 +9,64 @@ Function LoadPanelInfo()
 
 Fend
 
-'--------------MOCK-----------------
-'-----------TODO-- write code to detect this with the laser (or find old code and modify it...)
+' attempt to find the xyTheta pickup error
 Function PanelFindPickupError
 
-	' this is where we would detect offsets
-'	PanelPickupErrorX = 20
-'	PanelPickupErrorY = 20
-'	PanelPickupErrorTheta = 18
-
+	'clear existing pickup error
 	PanelPickupErrorX = 0
 	PanelPickupErrorY = 0
 	PanelPickupErrorTheta = 0
 
+	Real width, widthPrevious, tempx
+	Integer hole
+	Boolean foundCenter
+	
+	ChangeProfile("00") ' Change profile on the laser
+	Call changeSpeed(slow)
+
+'	For hole = 1 To 2
+	hole = 1 ' should only need to find 1 hole for xy offset, will need two for theta
+	' check the position of the first two holes
+	' This should find the hole location/error within +/- ??mm
+		PanelHoleToXYZT(hole, 30, 610, CZ(PreScan), -90 - PanelHoleTangent(hole))
+		
+		'find x pickup error
+		foundCenter = False
+		tempx = GetLaserMeasurement("07") / 2
+		Do While Not foundCenter
+			' output 7 should return a + or - number indicating the magnitude of error from center
+			' move the panel on the x axis by the error value until the error is within tolerance
+			' this should only take one pass...
+			Go CurPos -X(tempx)
+			tempx = GetLaserMeasurement("07") / 2
+			If tempx > -holeTolerance And tempx < holeTolerance Then foundCenter = True
+		Loop
+		
+		PanelPickupErrorX = CX(CurPos) - PanelHoleX(hole)
+		
+		'find Y pickup error
+		foundCenter = False
+		width = 0
+		widthPrevious = 0
+		
+		Do While Not foundCenter
+			width = GetLaserMeasurement("05")
+
+			If width < widthPrevious Then
+				Go CurPos -Y(0.1) /L
+			Else
+				Go CurPos +Y(0.1) /L
+			EndIf
+
+			widthPrevious = width
+	
+			' check to see if we are in tolerance
+			If width + holeTolerance > widthPrevious And width - holeTolerance < widthPrevious Then foundCenter = True
+		Loop
+		
+		PanelPickupErrorY = CY(CurPos) - PanelHoleY(hole)
+'	Next
+	Call changeSpeed(fast)
 Fend
 ' rotate the panel matrix about the origin
 Function PanelRecipeRotate(Theta As Double)

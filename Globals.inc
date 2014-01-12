@@ -236,6 +236,7 @@ Global Double PanelHoleTangent(25)
 Global Double PanelPickupErrorX
 Global Double PanelPickupErrorY
 Global Double PanelPickupErrorTheta
+Global Double holeTolerance '+/- mm to center of hole
 ' the EOAT is 135deg off of zero and the panel recipes are 180deg off
 #define PanelOffsetTheta 315
 

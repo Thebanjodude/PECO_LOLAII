@@ -6,15 +6,8 @@ Function runTest
 
 	Integer hole
 	Double PanelPickupErrorTheta_old, PanelPickupErrorX_old, PanelPickupErrorY_old
-
-	PanelPickupErrorTheta_old = 0
-	PanelPickupErrorX_old = 0
-	PanelPickupErrorY_old = 0
-
-	Accel 20, 20
-	AccelS 20, 20
-	Speed 10
-	SpeedS 10
+		
+	holeTolerance = 0.5
 	
 	Pause
 	
@@ -24,58 +17,39 @@ Function runTest
 	PickupPanel
 	CrowdingSequence
 	
+	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
+	Print "precalculating...."
+	xy2RadiusRotationTangent
+	
 	PanelFindPickupError
-
-	' EOAT is 135deg from 0 Theta
-	' panel recipe is 180deg off
-	PanelPickupErrorTheta = 135 + 180
-	PanelPickupErrorTheta_old = PanelPickupErrorTheta
 	
 	'error correction
 	PanelRecipeRotate(PanelPickupErrorTheta)
 	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
 	
-	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
+	'recalculate with error correction applied
+	Print "Applying error corrections..."
 	xy2RadiusRotationTangent
 	
+	Call changeSpeed(slow)
+
 	Do While True
 		Pause
 		
-		If PanelPickupErrorTheta <> PanelPickupErrorTheta_old Or PanelPickupErrorX <> PanelPickupErrorX_old Or PanelPickupErrorY <> PanelPickupErrorY_old Then
-			Print "wait for it...."
-
-			'reset the panel matrix
-			LoadPanelInfo
-
-			PanelPickupErrorTheta_old = PanelPickupErrorTheta
-			PanelPickupErrorX_old = PanelPickupErrorX
-			PanelPickupErrorY_old = PanelPickupErrorY
-
-			'error correction
-			PanelRecipeRotate(PanelPickupErrorTheta)
-			PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
-			
-			xy2RadiusRotationTangent
-			
-			Print "...and done!"
-		EndIf
-		
 		'move to location
 		For hole = 1 To PanelHoleCount
-			'PanelHoleToXYZT(hole, CX(laserPoint), CY(laserPoint), 0, -PanelHoleTangent(hole))
 			Print "Laser-hole:  ", hole,
-			'PanelHoleToXYZT(hole, 30, 610, CZ(PreScan), -135 - PanelHoleTangent(hole))
 			PanelHoleToXYZT(hole, 30, 610, CZ(PreScan), -90 - PanelHoleTangent(hole))
 			'Pause
 			Wait 1
 		Next
 	
-		For hole = 1 To PanelHoleCount
-			Print "Heatstake-Hole:  ", hole,
-			PanelHoleToXYZT(hole, -440, 440, CZ(PreHotStake), -45 - PanelHoleTangent(hole))
-			'Pause
-			Wait 1
-		Next
+'		For hole = 1 To PanelHoleCount
+'			Print "Heatstake-Hole:  ", hole,
+'			PanelHoleToXYZT(hole, -440, 440, CZ(PreHotStake), -45 - PanelHoleTangent(hole))
+'			'Pause
+'			Wait 1
+'		Next
 
 	Loop
 Fend

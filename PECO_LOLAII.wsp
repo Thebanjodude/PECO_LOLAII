@@ -1,4 +1,6 @@
-ENVT0100,LM:2014/01/11 01:19:22:012,DS:0000003680,CS:04099,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/12 17:12:38:801,DS:0000003737,CS:28169,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="Run - Remote Console"
+bMdiMaximized=False
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -222,7 +224,7 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
 		nLeft=3
 		nTop=187
