@@ -89,12 +89,14 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
     If i > 0 Then  'should be, but just in case...
     	Read #203, response$, i
       	NumTokens = ParseStr(response$, Tokens$(), ",")
-	     	If response$ = "MS" + Chr$(&hd) Then ' throw an error if we dont get the proper responce
-	      		erLaserScanner = True
-	      		Print "Laser Scanner error"
-	      	Else
-	      		erLaserScanner = False
-	      	EndIf
+     	
+     	If response$ = "MS" + Chr$(&hd) Then ' throw an error if we dont get the proper responce
+      		erLaserScanner = True
+      		Print "Laser Scanner error"
+      	Else
+      		erLaserScanner = False
+      	EndIf
+      	
   		GetLaserMeasurement = Val(Tokens$(1)) ' return value
     EndIf
 
@@ -137,13 +139,14 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
 
     If i > 0 Then  'should be, but just in case...
     	Read #203, response$, i
+
     	'Print response$
-    		If response$ = "PW" + Chr$(&hd) Then
-				erLaserScanner = False
-	      	Else
-	      		erLaserScanner = True
-	      		Print "Laser Scanner error"
-	      	EndIf
+		If response$ = "PW" + Chr$(&hd) Then
+			erLaserScanner = False
+      	Else
+      		erLaserScanner = True
+      		Print "Laser Scanner error"
+      	EndIf
 	EndIf
 	 
 Fend
