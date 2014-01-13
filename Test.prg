@@ -27,8 +27,8 @@ Function runTest
 	
 	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
 	Print "precalculating...."
-'	PanelPickupErrorTheta = 3.819
-	PanelPickupErrorTheta = 0
+	PanelPickupErrorTheta = 1
+'	PanelPickupErrorTheta = 0
 '    PanelRecipeRotate(0) 'account for system theta error
     PanelRecipeRotate(PanelPickupErrorTheta)
 	xy2RadiusRotationTangent

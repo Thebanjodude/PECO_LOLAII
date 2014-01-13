@@ -62,4 +62,8 @@
 > PanelPickupErrorY = 10
 > print panelholex(1)
  151.44925160464
+> print sin(degtorad(90))
+ 1
+> print cos(degtorad(90))
+ 6.1230317691119E-017
 > 

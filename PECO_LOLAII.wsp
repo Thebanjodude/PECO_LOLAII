@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/12 23:41:47:363,DS:0000003688,CS:15394,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/13 01:45:18:764,DS:0000003686,CS:10558,MA:00-21-70-9F-9C-9E,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -158,8 +158,8 @@ ProgramFile15 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=117
-		nTop=111
+		nLeft=13
+		nTop=43
 		nWidth=1005
 		nHeight=511
 	}
@@ -224,8 +224,8 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=138
-		nTop=168
+		nLeft=123
+		nTop=174
 		nWidth=880
 		nHeight=385
 	}
@@ -272,8 +272,8 @@ RobotMgr {
 	Window {
 		nLeft=56
 		nTop=111
-		nWidth=751
-		nHeight=485
+		nWidth=689
+		nHeight=451
 	}
 }
 UserErrorEditor {
