@@ -38,8 +38,8 @@ Function PanelFindPickupError
 		xShouldBe = CX(CurPos)
 		yShouldBe = CY(CurPos)
 		
-		'Print "finding X..."
-		Print "finding Y..."
+		Print "finding X..."
+		'Print "finding Y..."
 		'find x pickup error
 		tempx = GetLaserMeasurement("07") / 2
 		Do While Not foundCenter
@@ -52,10 +52,13 @@ Function PanelFindPickupError
 			If tempx > -holeTolerance And tempx < holeTolerance Then foundCenter = True
 		Loop
 		
-		errorY = xShouldBe - CX(CurPos)
-		PanelPickupErrorY = xShouldBe - CX(CurPos)
+		'errorX = xShouldBe - CX(CurPos)
+		errorX = CX(CurPos) - xShouldBe
+		Print "X error = ", errorX
+		Print "Y error = ", errorY
+		'PanelPickupErrorY = xShouldBe - CX(CurPos)
 		'PanelPickupErrorY = yShouldBe - CY(CurPos)
-		Print "y error = ", PanelPickupErrorY
+		'Print "y error = ", PanelPickupErrorY
 		'PanelPickupErrorX = xShouldBe - CX(CurPos)
 		'Print "X error = ", PanelPickupErrorX
 		
@@ -65,8 +68,8 @@ Function PanelFindPickupError
 		Integer stepSize
 		stepSize = 1
 		
-		Print "finding X..."
-		'Print "finding Y..."
+		'Print "finding X..."
+		Print "finding Y..."
 		' attempt to ensure that we start on the outside of the panel
 		Go CurPos -Y(0.5) /L
 		Do While Not foundCenter
@@ -84,10 +87,13 @@ Function PanelFindPickupError
 			EndIf
 		Loop
 		
-		errorX = yShouldBe - CY(CurPos)
+		'errorY = yShouldBe - CY(CurPos)
+		errorY = CY(CurPos) - yShouldBe
+		Print "X error = ", errorX
+		Print "Y error = ", errorY
 		'PanelPickupErrorX = yShouldBe - CY(CurPos)
 		'PanelPickupErrorX = xShouldBe - CX(CurPos)
-		Print "X error = ", PanelPickupErrorX
+		'Print "X error = ", PanelPickupErrorX
 		'PanelPickupErrorY = yShouldBe - CY(CurPos)
 		'Print "Y error = ", PanelPickupErrorY
 '	Next
@@ -95,17 +101,25 @@ Function PanelFindPickupError
 	Print "done with error correction detection"
 	Print "------------------------"
 	'add in the offsets needed to put everything on the same cord system as the robot
-	Theta = PanelPickupErrorTheta + EOATcorrection + magazineCorrection
+	'Theta = PanelPickupErrorTheta + EOATcorrection + magazineCorrection
+	'Theta = 90
+	'Print "Theta = ", Theta
 		
 	'pre calculate these	
-	sinTheta = Sin(DegToRad(Theta))
-	cosTheta = Cos(DegToRad(Theta))
+	'sinTheta = Sin(DegToRad(Theta))
+	'cosTheta = Cos(DegToRad(Theta))
 	
-	PanelPickupErrorX = (errorX / cosTheta) - (errorY / sinTheta)
-	PanelPickupErrorY = (errorX / sinTheta) + (errorY / cosTheta)
+	'PanelPickupErrorX = (errorX / cosTheta) - (errorY / sinTheta)
+	'PanelPickupErrorY = (errorX / sinTheta) + (errorY / cosTheta)
+	PanelPickupErrorX = -errorY
+	PanelPickupErrorY = errorX
+	'(a, b) ->
+	'-b, a ~ Q2
+	'-a,-b ~ Q3
+	' b,-a ~ Q4
 
-	Print "error x = ", PanelPickupErrorX
-	Print "error y = ", PanelPickupErrorY
+	Print "panel error x = ", PanelPickupErrorX
+	Print "panel error y = ", PanelPickupErrorY
 	Print "----------------------------"
 
 	Call changeSpeed(fast)

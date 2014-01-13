@@ -12,7 +12,7 @@ Function runTest
 ' sorta, its really panels are placed into the magazine 90deg off counterclockwise
 ' and the eoat is 45deg off clockwise
 ' so we need a correction of -45deg
-	EOATcorrection = 45
+	EOATcorrection = 38
 	magazineCorrection = -90
 
 	Call changeSpeed(slow)
@@ -27,7 +27,7 @@ Function runTest
 	
 	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
 	Print "precalculating...."
-'	PanelPickupErrorTheta = -3.819
+'	PanelPickupErrorTheta = 3.819
 	PanelPickupErrorTheta = 0
 '    PanelRecipeRotate(0) 'account for system theta error
     PanelRecipeRotate(PanelPickupErrorTheta)
@@ -37,10 +37,11 @@ Function runTest
 	
 	'error correction
 	LoadPanelInfo
-	PanelRecipeRotate(PanelPickupErrorTheta)
+	'PanelRecipeRotate(PanelPickupErrorTheta)
 
 	Print "hole 1 data -- x: ", PanelHoleX(1), " y:", PanelHoleY(1)
 	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
+	PanelRecipeRotate(PanelPickupErrorTheta)
 	Print "hole 1 data -- x: ", PanelHoleX(1), " y:", PanelHoleY(1)
 	
 	'recalculate with error correction applied
@@ -49,7 +50,7 @@ Function runTest
 	
 	Call changeSpeed(slow)
 
-Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CX(CurPos), " u:", CU(CurPos)
+Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(CurPos), " u:", CU(CurPos)
 	Do While True
 		Pause
 		
@@ -57,7 +58,7 @@ Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CX(C
 		For hole = 1 To PanelHoleCount
 			Print "Laser-hole:  ", hole,
 			PanelHoleToXYZT(hole, CX(laser), CY(laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
-			Pause
+			'Pause
 			Wait 1
 		Next
 	

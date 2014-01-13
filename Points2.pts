@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/12 21:10:15:215,DS:0000018273,CS:27403,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/13 00:11:26:326,DS:0000018247,CS:23357,MA:00-21-70-9F-9C-9E,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=83
@@ -9,7 +9,7 @@ Point1 {
 	rX=28.09
 	rY=340.107
 	rZ=-23.95
-	rU=135
+	rU=142
 	rV=0
 	rW=0
 	nLocal=0
@@ -81,7 +81,7 @@ Point5 {
 	rX=30
 	rY=610
 	rZ=-20
-	rU=135
+	rU=0
 	rV=0
 	rW=0
 	nLocal=0
@@ -135,7 +135,7 @@ Point8 {
 	rX=341.084
 	rY=418.817
 	rZ=-264.918
-	rU=139.819
+	rU=142
 	rV=0
 	rW=0
 	nLocal=0
@@ -153,7 +153,7 @@ Point9 {
 	rX=-300.384
 	rY=-32.962
 	rZ=-81.291
-	rU=140.747
+	rU=142
 	rV=0
 	rW=0
 	nLocal=0
@@ -171,7 +171,7 @@ Point10 {
 	rX=-311.116
 	rY=-15.076
 	rZ=-86.722
-	rU=140.729
+	rU=142
 	rV=0
 	rW=0
 	nLocal=0
@@ -189,7 +189,7 @@ Point11 {
 	rX=320.295
 	rY=417.812
 	rZ=-260.113
-	rU=139.855
+	rU=142
 	rV=0
 	rW=0
 	nLocal=0
@@ -207,7 +207,7 @@ Point12 {
 	rX=-296.88
 	rY=-59
 	rZ=-89.246
-	rU=140.353
+	rU=142
 	rV=0
 	rW=0
 	nLocal=0
@@ -225,7 +225,7 @@ Point13 {
 	rX=-297.982
 	rY=-22.223
 	rZ=-98.703
-	rU=138.821
+	rU=142
 	rV=0
 	rW=0
 	nLocal=0
