@@ -68,9 +68,10 @@ Function findTheta(angA As Real, sideB As Real, sideC As Real) As Real
 
 	sideA = findSideA(angA, sideB, sideC)
 	
+	' TODO-- ensure that angA isn't greater than 90 deg
 	' law of sines
 	' sin(B)/b = sin(A)/a
-	angB = RadToDeg(Asin(Sin(angA) * sideB / sideA))
+	angB = RadToDeg(Asin(Sin(DegToRad(angA)) * sideB / sideA))
 	
 	' in case it comes up	
 	' 180 = angA + angB + angC
@@ -86,46 +87,81 @@ Fend
 
 ' attempt to find the xyTheta pickup error
 Function PanelFindPickupError
-	Real errorY(3), errorX(3), errorTheta(3)
-	Real theta(3)
+	Real errorY, errorX, errorTheta
+	Real Theta, sinTheta, cosTheta
+	Real Xcord, Ycord
+	Real transX, transY
+	Real idealAngle(3), realAngle(3)
 	Integer hole
-
+	
 	ChangeProfile("00") ' Change profile on the laser
 	Call changeSpeed(slow)
+
+	'add in the offsets needed to put everything on the same cord system as the robot
+	Theta = PanelPickupErrorTheta + EOATcorrection + magazineCorrection
+	sinTheta = Sin(DegToRad(Theta))
+	cosTheta = Cos(DegToRad(Theta))
 
 	Print "finding first two holes for error detection"
 	For hole = 1 To 2
 	' check the position of the first two holes
 		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
-		
-		errorX(hole) = PanelFindXerror
-		errorY(hole) = PanelFindYerror
-'		errorTheta(hole) = findTheta(90, errorX(hole), errorY(hole))
 
+		' find ideal XY from current XY
+		Xcord = CX(CurPos)
+		Ycord = CY(CurPos)
+		transX = (Xcord / cosTheta) - (Ycord / sinTheta)
+		transY = (Xcord / sinTheta) + (Ycord / cosTheta)
+		' find angle from orgin to hole
+		idealAngle(hole) = findTheta(90, transX, transY)
+		
+		' find the real hole location
+		errorX = PanelFindXerror
+		errorY = PanelFindYerror
+		' transform it to the panel space
+		transX = (errorX / cosTheta) - (errorY / sinTheta)
+		transY = (errorX / sinTheta) + (errorY / cosTheta)
+		' find the angle from orgin to hole
+		realAngle(hole) = findTheta(90, transX, transY)
+
+		Print "Xcord = ", Xcord
+		Print "Ycord = ", Ycord
+		Print "transX = ", transX
+		Print "transY = ", transY
+		Print "idealAngle(hole) =", idealAngle(hole)
+		Print "errorX =", errorX
+		Print "errorY =", errorY
+		Print "transX =", transX
+		Print "transY =", transY
+		Print "realAngle(hole) =", realAngle(hole)
  	Next
 
-	' assume that errors that we are finding in robot cord space can be applied to panel cord space
-	' we know the absolute values of the x and y errors for two locations
+	idealAngle(0) = idealAngle(1) - idealAngle(2)
+	realAngle(0) = realAngle(1) - realAngle(2)
+	errorTheta = idealAngle(0) - realAngle(0)
+	Print "errorTheta =", errorTheta
 
-'	Print "found Theta offset, recalculating"
-'	LoadPanelInfo
-'    PanelRecipeRotate(PanelPickupErrorTheta)
-'	xy2RadiusRotationTangent
+	Print "found Theta offset, recalculating"
+	LoadPanelInfo
+    PanelRecipeRotate(errorTheta)
+	xy2RadiusRotationTangent
 
 	Print "finding XY offsets"
 	hole = 1
 	PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
-	errorX(0) = PanelFindXerror
-	errorY(0) = PanelFindYerror
+	errorX = PanelFindXerror
+	errorY = PanelFindYerror
 
 	Print "done with error correction detection"
 	Print "------------------------"
 
-	PanelPickupErrorX = -errorY(0)
-	PanelPickupErrorY = errorX(0)
+	PanelPickupErrorX = -errorY
+	PanelPickupErrorY = errorX
+	panelpickuperrortheta = errorTheta
 
 	Print "panel error x = ", PanelPickupErrorX
 	Print "panel error y = ", PanelPickupErrorY
+	Print "panel error t = ", PanelPickupErrorTheta
 	Print "----------------------------"
 
 	Call changeSpeed(fast)
