@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/13 03:10:08:031,DS:0000003688,CS:12586,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/13 05:17:29:386,DS:0000003685,CS:28239,MA:00-21-70-9F-9C-9E,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -158,8 +158,8 @@ ProgramFile15 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=195
-		nTop=192
+		nLeft=26
+		nTop=29
 		nWidth=1003
 		nHeight=507
 	}
@@ -224,9 +224,9 @@ CmdWindow {
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=123
+		nLeft=11
 		nTop=174
-		nWidth=880
+		nWidth=992
 		nHeight=385
 	}
 }

@@ -60,12 +60,12 @@ Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(C
 			Wait 1
 		Next
 	
-'		For hole = 1 To PanelHoleCount
-'			Print "Heatstake-Hole:  ", hole,
-'			PanelHoleToXYZT(hole, CX(hotstake), CY(hotstake), CZ(PreHotStake), -45 - PanelHoleTangent(hole))
-'			'Pause
-'			Wait 1
-'		Next
+		For hole = 1 To PanelHoleCount
+			Print "Heatstake-Hole:  ", hole,
+			PanelHoleToXYZT(hole, CX(hotstake), CY(hotstake), CZ(PreHotStake), -45 - PanelHoleTangent(hole))
+			'Pause
+			Wait 1
+		Next
 
 	Loop
 Fend
