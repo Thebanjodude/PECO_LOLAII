@@ -62,14 +62,28 @@ Function PanelFindYerror As Real
 	PanelFindYerror = CY(CurPos) - yShouldBe
 Fend
 
-' find the theta error
-Function PanelFindThetaError As Real
+' helper function to calculate theta
+Function findTheta(angA As Real, sideB As Real, sideC As Real) As Real
+	Real sideA, angB, angC
 	
+	' law of Cosines
+	' a **2 = b **2 + c**2 - 2bc * cos(A)
+	sideA = Sqr(sideB ** 2 + sideC ** 2 - 2 * sideB * sideC * Cos(DegToRad(angA)))
+
+	' law of sines
+	' sin(B)/b = sin(A)/a
+	angB = RadToDeg(Asin(Sin(angA) * sideB / sideA))
+	
+	' in case it comes up	
+	' 180 = angA + angB + angC
+	' angC = 180 - angA - angB
+	
+	findTheta = angB
 Fend
 
 ' attempt to find the xyTheta pickup error
 Function PanelFindPickupError
-	Real errorY(3), errorX(3)
+	Real errorY(3), errorX(3), errorTheta(3)
 	Integer hole
 
 	ChangeProfile("00") ' Change profile on the laser
@@ -82,10 +96,15 @@ Function PanelFindPickupError
 		
 		errorX(hole) = PanelFindXerror
 		errorY(hole) = PanelFindYerror
+		errorTheta(hole) = findTheta(90, errorX(hole), errorY(hole))
 	Next
+
+	' assume that errors that we are finding in robot cord space can be applied to panel cord space
+	' we know the absolute values of the x and y errors for two locations
+	'  and the difference between them should be the panel offset
+	PanelPickupErrorTheta = errorTheta(1) - errorTheta(2)
 	
-	PanelPickupErrorTheta = PanelFindThetaError
-	
+	Print "errorTheta = ", PanelPickupErrorTheta, " : errorTheta(1) = ", errorTheta(1), " : errorTheta(2) = ", errorTheta(2)
 	Print "found Theta offset, recalculating"
     PanelRecipeRotate(PanelPickupErrorTheta)
 	xy2RadiusRotationTangent

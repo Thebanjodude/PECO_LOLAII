@@ -66,4 +66,18 @@
  1
 > print cos(degtorad(90))
  6.1230317691119E-017
+> print sin(90)
+ 0.89399666360056
+> asin(0.89399666360056)
+!!Error: 3100, Syntax error.
+> print asin(0.89399666360056)
+ 1.106186954104pri
+> print asin(0.7122)
+ 0.79262725525526
+> print radtodeg(asin(0.7122))
+ 45.414196453165
+> print cos(90)
+ -0.44807361612917
+> print cos(degtorad(90))
+ 6.1230317691119E-017
 > 
