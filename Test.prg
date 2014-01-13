@@ -25,11 +25,13 @@ Function runTest
 	PickupPanel
 	CrowdingSequence
 	
+	'clear existing pickup error
+	PanelPickupErrorX = 0
+	PanelPickupErrorY = 0
+	PanelPickupErrorTheta = 0
+
 	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
 	Print "precalculating...."
-	PanelPickupErrorTheta = 1
-'	PanelPickupErrorTheta = 0
-'    PanelRecipeRotate(0) 'account for system theta error
     PanelRecipeRotate(PanelPickupErrorTheta)
 	xy2RadiusRotationTangent
 	
@@ -37,12 +39,8 @@ Function runTest
 	
 	'error correction
 	LoadPanelInfo
-	'PanelRecipeRotate(PanelPickupErrorTheta)
-
-	Print "hole 1 data -- x: ", PanelHoleX(1), " y:", PanelHoleY(1)
 	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
 	PanelRecipeRotate(PanelPickupErrorTheta)
-	Print "hole 1 data -- x: ", PanelHoleX(1), " y:", PanelHoleY(1)
 	
 	'recalculate with error correction applied
 	Print "Applying error corrections..."

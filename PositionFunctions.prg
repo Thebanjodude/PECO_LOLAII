@@ -9,114 +9,97 @@ Function LoadPanelInfo()
 
 Fend
 
-' attempt to find the xyTheta pickup error
-Function PanelFindPickupError
-
-	'clear existing pickup error
-	PanelPickupErrorX = 0
-	PanelPickupErrorY = 0
-	PanelPickupErrorTheta = 0
-
-	Real width, widthPrevious, tempx
-	Real xShouldBe, yShouldBe
-	Real errorY, errorX
-	Real Theta, sinTheta, cosTheta
-	Integer hole
+Function PanelFindXerror As Real
+	Real xShouldBe, tempx
 	Boolean foundCenter
 	
+	xShouldBe = CX(CurPos)
+
+	Print "finding X..."
+	tempx = GetLaserMeasurement("07") / 2
+	Do While Not foundCenter
+		' output 7 should return a + or - number indicating the magnitude of error from center
+		' move the panel on the x axis by 1/2 the error value until the error is within tolerance
+		Go CurPos -X(tempx)
+		tempx = GetLaserMeasurement("07") / 2
+		Print "tempx= ", tempx
+		If tempx > -holeTolerance And tempx < holeTolerance Then foundCenter = True
+	Loop
+	PanelFindXerror = CX(CurPos) - xShouldBe
+Fend
+
+' find the y pickup error
+Function PanelFindYerror As Real
+	Real width, widthPrevious
+	Real yShouldBe
+	Boolean foundCenter
+	Integer stepSize
+
+	stepSize = 1
+	yShouldBe = CY(CurPos)
+	foundCenter = False
+	width = 0
+	widthPrevious = 0
+
+	Print "finding Y..."
+	' attempt to ensure that we start on the outside of the panel
+	Go CurPos -Y(0.5) /L
+	Do While Not foundCenter
+		widthPrevious = width
+		width = -GetLaserMeasurement("04") + GetLaserMeasurement("03")
+		Print "width of hole:  ", width
+
+		If width > widthPrevious Then
+			'we are still moving into the hole
+			Go CurPos +Y(stepSize) /L
+		Else
+			'we have passed the center of the hole, move back by half a step
+			Go CurPos -Y(stepSize / 2) /L
+			foundCenter = True
+		EndIf
+	Loop
+	
+	PanelFindYerror = CY(CurPos) - yShouldBe
+Fend
+
+' find the theta error
+Function PanelFindThetaError As Real
+	
+Fend
+
+' attempt to find the xyTheta pickup error
+Function PanelFindPickupError
+	Real errorY(3), errorX(3)
+	Integer hole
+
 	ChangeProfile("00") ' Change profile on the laser
 	Call changeSpeed(slow)
 
-'	For hole = 1 To 2
-	hole = 1 ' should only need to find 1 hole for xy offset, will need two for theta
+	Print "finding first two holes for error detection"
+	For hole = 1 To 2
 	' check the position of the first two holes
-	' This should find the hole location/error within +/- ??mm
-		Print "error correction Hole", hole,
-'		PanelHoleToXYZT(hole, 25, 615, CZ(PreScan), -90 - PanelHoleTangent(hole))
 		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
 		
-		xShouldBe = CX(CurPos)
-		yShouldBe = CY(CurPos)
-		
-		Print "finding X..."
-		'Print "finding Y..."
-		'find x pickup error
-		tempx = GetLaserMeasurement("07") / 2
-		Do While Not foundCenter
-			' output 7 should return a + or - number indicating the magnitude of error from center
-			' move the panel on the x axis by the error value until the error is within tolerance
-			' this should only take one pass...
-			Go CurPos -X(tempx)
-			tempx = GetLaserMeasurement("07") / 2
-			Print "tempx= ", tempx
-			If tempx > -holeTolerance And tempx < holeTolerance Then foundCenter = True
-		Loop
-		
-		'errorX = xShouldBe - CX(CurPos)
-		errorX = CX(CurPos) - xShouldBe
-		Print "X error = ", errorX
-		Print "Y error = ", errorY
-		'PanelPickupErrorY = xShouldBe - CX(CurPos)
-		'PanelPickupErrorY = yShouldBe - CY(CurPos)
-		'Print "y error = ", PanelPickupErrorY
-		'PanelPickupErrorX = xShouldBe - CX(CurPos)
-		'Print "X error = ", PanelPickupErrorX
-		
-		foundCenter = False
-		width = 0
-		widthPrevious = 0
-		Integer stepSize
-		stepSize = 1
-		
-		'Print "finding X..."
-		Print "finding Y..."
-		' attempt to ensure that we start on the outside of the panel
-		Go CurPos -Y(0.5) /L
-		Do While Not foundCenter
-			widthPrevious = width
-			width = -GetLaserMeasurement("04") + GetLaserMeasurement("03")
-			Print "width of hole:  ", width
+		errorX(hole) = PanelFindXerror
+		errorY(hole) = PanelFindYerror
+	Next
+	
+	PanelPickupErrorTheta = PanelFindThetaError
+	
+	Print "found Theta offset, recalculating"
+    PanelRecipeRotate(PanelPickupErrorTheta)
+	xy2RadiusRotationTangent
 
-			If width > widthPrevious Then
-				'we are still moving into the hole
-				Go CurPos +Y(stepSize) /L
-			Else
-				'we have passed the center of the hole, move back by half a step
-				Go CurPos -Y(stepSize / 2) /L
-				foundCenter = True
-			EndIf
-		Loop
-		
-		'errorY = yShouldBe - CY(CurPos)
-		errorY = CY(CurPos) - yShouldBe
-		Print "X error = ", errorX
-		Print "Y error = ", errorY
-		'PanelPickupErrorX = yShouldBe - CY(CurPos)
-		'PanelPickupErrorX = xShouldBe - CX(CurPos)
-		'Print "X error = ", PanelPickupErrorX
-		'PanelPickupErrorY = yShouldBe - CY(CurPos)
-		'Print "Y error = ", PanelPickupErrorY
-'	Next
+	Print "finding XY offsets"
+	PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
+	errorX(0) = PanelFindXerror
+	errorY(0) = PanelFindYerror
 
 	Print "done with error correction detection"
 	Print "------------------------"
-	'add in the offsets needed to put everything on the same cord system as the robot
-	'Theta = PanelPickupErrorTheta + EOATcorrection + magazineCorrection
-	'Theta = 90
-	'Print "Theta = ", Theta
-		
-	'pre calculate these	
-	'sinTheta = Sin(DegToRad(Theta))
-	'cosTheta = Cos(DegToRad(Theta))
-	
-	'PanelPickupErrorX = (errorX / cosTheta) - (errorY / sinTheta)
-	'PanelPickupErrorY = (errorX / sinTheta) + (errorY / cosTheta)
-	PanelPickupErrorX = -errorY
-	PanelPickupErrorY = errorX
-	'(a, b) ->
-	'-b, a ~ Q2
-	'-a,-b ~ Q3
-	' b,-a ~ Q4
+
+	PanelPickupErrorX = -errorY(0)
+	PanelPickupErrorY = errorX(0)
 
 	Print "panel error x = ", PanelPickupErrorX
 	Print "panel error y = ", PanelPickupErrorY
