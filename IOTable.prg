@@ -1201,7 +1201,7 @@ Function setVars(response$ As String)
 	   Else
 	       jobAbortBtn = False
 	   EndIf
-	   Print "jobAbortBtn:", jobAbortBtn
+	   'Print "jobAbortBtn:", jobAbortBtn
 	'__________________
 	
 	Case "alarmMuteBtn"
@@ -1211,7 +1211,7 @@ Function setVars(response$ As String)
 	    Else
 	        alarmMuteBtn = False
 	    EndIf
-	    Print "alarmMuteBtn:", alarmMuteBtn
+	    'Print "alarmMuteBtn:", alarmMuteBtn
 	Case "backInterlockACKBtn"
 	    If tokens$(1) = "true" Then
 	        backInterlockACKBtn = True
@@ -1219,7 +1219,7 @@ Function setVars(response$ As String)
 	    Else
 	        backInterlockACKBtn = False
 	    EndIf
-	    Print "backInterlockACKBtn:", backInterlockACKBtn
+	    'Print "backInterlockACKBtn:", backInterlockACKBtn
 	Case "frontInterlockACKBtn"
 	    If tokens$(1) = "true" Then
 	        frontInterlockACKBtn = True
@@ -1227,7 +1227,7 @@ Function setVars(response$ As String)
 	    Else
 	        frontInterlockACKBtn = False
 	    EndIf
-	    Print "frontInterlockACKBtn:", frontInterlockACKBtn
+	    'Print "frontInterlockACKBtn:", frontInterlockACKBtn
 	Case "inMagGoHomeBtn"
 	    If tokens$(1) = "true" Then
 	        inMagGoHomeBtn = True
@@ -1235,7 +1235,7 @@ Function setVars(response$ As String)
 	    Else
 	        inMagGoHomeBtn = False
 	    EndIf
-	    Print "inMagGoHomeBtn:", inMagGoHomeBtn
+	    'Print "inMagGoHomeBtn:", inMagGoHomeBtn
 	Case "inMagIntLockAckBtn"
 	    If tokens$(1) = "true" Then
 	        inMagIntLockAckBtn = True
@@ -1243,7 +1243,7 @@ Function setVars(response$ As String)
 	    Else
 	        inMagIntLockAckBtn = False
 	    EndIf
-	    Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
+	    'Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
 	Case "inMagLoadedBtn"
 	    If tokens$(1) = "true" Then
 	        inMagLoadedBtn = True
@@ -1251,7 +1251,7 @@ Function setVars(response$ As String)
 	    Else
 	        inMagLoadedBtn = False
 	    EndIf
-	    Print "inMagLoadedBtn:", inMagLoadedBtn
+	    'Print "inMagLoadedBtn:", inMagLoadedBtn
 	Case "jobAbortBtn"
 	    If tokens$(1) = "true" Then
 	        jobAbortBtn = True
@@ -1259,7 +1259,7 @@ Function setVars(response$ As String)
 	    Else
 	        jobAbortBtn = False
 	    EndIf
-	    Print "jobAbortBtn:", jobAbortBtn
+	    'Print "jobAbortBtn:", jobAbortBtn
 	Case "jobStartBtn"
 	    If tokens$(1) = "true" Then
 	        jobStartBtn = True
@@ -1267,7 +1267,7 @@ Function setVars(response$ As String)
 	    Else
 	        jobStartBtn = False
 	    EndIf
-	    Print "jobStartBtn:", jobStartBtn
+	    'Print "jobStartBtn:", jobStartBtn
 	Case "leftInterlockACKBtn"
 	    If tokens$(1) = "true" Then
 	        leftInterlockACKBtn = True
@@ -1275,7 +1275,7 @@ Function setVars(response$ As String)
 	    Else
 	        leftInterlockACKBtn = False
 	    EndIf
-	    Print "leftInterlockACKBtn:", leftInterlockACKBtn
+	    'Print "leftInterlockACKBtn:", leftInterlockACKBtn
 	Case "outMagGoHomeBtn"
 	    If tokens$(1) = "true" Then
 	        outMagGoHomeBtn = True
@@ -1283,7 +1283,7 @@ Function setVars(response$ As String)
 	    Else
 	        outMagGoHomeBtn = False
 	    EndIf
-	    Print "outMagGoHomeBtn:", outMagGoHomeBtn
+	    'Print "outMagGoHomeBtn:", outMagGoHomeBtn
 	Case "outMagIntLockAckBtn"
 	    If tokens$(1) = "true" Then
 	        outMagIntLockAckBtn = True
@@ -1291,7 +1291,7 @@ Function setVars(response$ As String)
 	    Else
 	        outMagIntLockAckBtn = False
 	    EndIf
-	    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
+	    'Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 	Case "outMagUnloadedBtn"
 	    If tokens$(1) = "true" Then
 	        outMagUnloadedBtn = True
@@ -1299,7 +1299,7 @@ Function setVars(response$ As String)
 	    Else
 	        outMagUnloadedBtn = False
 	    EndIf
-	    Print "outMagUnloadedBtn:", outMagUnloadedBtn
+	    'Print "outMagUnloadedBtn:", outMagUnloadedBtn
 	Case "panelDataTxACKBtn"
 	    If tokens$(1) = "true" Then
 	        panelDataTxACKBtn = True
@@ -1309,7 +1309,7 @@ Function setVars(response$ As String)
 	        panelDataTxACKBtn = False
 	        MemOff (panelDataTxAckH)
 	    EndIf
-	    Print "panelDataTxACKBtn:", panelDataTxACKBtn
+	    'Print "panelDataTxACKBtn:", panelDataTxACKBtn
 	Case "rightInterlockACKBtn"
 	    If tokens$(1) = "true" Then
 	        rightInterlockACKBtn = True
@@ -1317,7 +1317,7 @@ Function setVars(response$ As String)
 	    Else
 	        rightInterlockACKBtn = False
 	    EndIf
-	    Print "rightInterlockACKBtn:", rightInterlockACKBtn
+	    'Print "rightInterlockACKBtn:", rightInterlockACKBtn
 	Case "sftyFrmIlockAckBtn"
 	    If tokens$(1) = "true" Then
 	        sftyFrmIlockAckBtn = True
@@ -1325,7 +1325,7 @@ Function setVars(response$ As String)
 	    Else
 	        sftyFrmIlockAckBtn = False
 	    EndIf
-	    Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
+	    'Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
 	Case "airPressHighF"
 	    If tokens$(1) = "true" Then
 	        MemOn (airPressHighF)
@@ -1964,92 +1964,92 @@ Function setVars(response$ As String)
 	    EndIf
 	Case "recTempProbe"
 	    recTempProbe = Val(tokens$(1))
-	    Print "recTempProbe:", recTempProbe
+	    'Print "recTempProbe:", recTempProbe
 	Case "recTempTrack"
 	    recTempTrack = Val(tokens$(1))
-	    Print "recTempTrack:", recTempTrack
+	    'Print "recTempTrack:", recTempTrack
 	Case "recFirstHolePointInspection"
 	    recFirstHolePointInspection = Val(tokens$(1))
-	    Print "recFirstHolePointInspection:", recFirstHolePointInspection
+	    'Print "recFirstHolePointInspection:", recFirstHolePointInspection
 	Case "recLastHolePointInspection"
 	    recLastHolePointInspection = Val(tokens$(1))
-	    Print "recLastHolePointInspection:", recLastHolePointInspection
+	    'Print "recLastHolePointInspection:", recLastHolePointInspection
 	Case "recFirstHolePointHotStake"
 	    recFirstHolePointHotStake = Val(tokens$(1))
-	    Print "recFirstHolePointHotStake:"
+	    'Print "recFirstHolePointHotStake:"
 	Case "recLastHolePointHotStake"
 	    recLastHolePointHotStake = Val(tokens$(1))
-	    Print "recLastHolePointHotStake:", recLastHolePointHotStake
+	    'Print "recLastHolePointHotStake:", recLastHolePointHotStake
 	Case "recFirstHolePointFlash"
 	    recFirstHolePointFlash = Val(tokens$(1))
-	    Print "recFirstHolePointFlash:", recFirstHolePointFlash
+	    'Print "recFirstHolePointFlash:", recFirstHolePointFlash
 	Case "recLastHolePointFlash"
 	    recLastHolePointFlash = Val(tokens$(1))
-	    Print "recLastHolePointFlash:"
+	    'Print "recLastHolePointFlash:"
 	Case "recFlashDwellTime"
 	    recFlashDwellTime = Val(tokens$(1))
-	    Print "recFlashDwellTime:"
+	    'Print "recFlashDwellTime:"
 	Case "recHeatStakeOffset"
 	    recHeatStakeOffset = Val(tokens$(1))
-	    Print "recHeatStakeOffset:"
+	    'Print "recHeatStakeOffset:"
 	Case "recBossCrossArea"
 	    recBossCrossArea = Val(tokens$(1))
-	    Print "recBossCrossArea:", recBossCrossArea
+	    'Print "recBossCrossArea:", recBossCrossArea
 	Case "recPointsTable"
 	    recPointsTable = Val(tokens$(1))
-	    Print "recPointsTable:", recPointsTable
+	    'Print "recPointsTable:", recPointsTable
 	Case "recInmag"
 	    recInmag = Val(tokens$(1))
-	    Print "recInmag:", recInmag
+	    'Print "recInmag:", recInmag
 	Case "recOutmag"
 	    recOutmag = Val(tokens$(1))
-	    Print "recOutmag:", recOutmag
+	    'Print "recOutmag:", recOutmag
 	Case "recCrowding"
 	    recCrowding = Val(tokens$(1))
-	    Print "recCrowding:", recCrowding
+	    'Print "recCrowding:", recCrowding
 	Case "recPreCrowding"
 	    recPreCrowding = Val(tokens$(1))
-	    Print "recPreCrowding:", recPreCrowding
+	    'Print "recPreCrowding:", recPreCrowding
 	Case "jobNumPanels"
 	    jobNumPanels = Val(tokens$(1))
-	    Print "jobNumPanels:", jobNumPanels
+	    'Print "jobNumPanels:", jobNumPanels
 	Case "recFlashRequired"
 	    If tokens$(1) = "true" Then
 	        recFlashRequired = True
 	    Else
 	        recFlashRequired = False
 	    EndIf
-	    Print "recFlashRequired:", recFlashRequired
+	    'Print "recFlashRequired:", recFlashRequired
 	Case "recInmagPickupOffset"
 	    recInmagPickupOffset = Val(tokens$(1))
-	    Print "recInmagPickupOffset:", recInmagPickupOffset
+	    'Print "recInmagPickupOffset:", recInmagPickupOffset
 	Case "recInsertDepth"
 	    recInsertDepth = Val(tokens$(1))
-	    Print "recInsertDepth:", recInsertDepth
+	    'Print "recInsertDepth:", recInsertDepth
 	Case "recFlashDwellTime"
 	    recFlashDwellTime = Val(tokens$(1))
-	    Print "recFlashDwellTime:", recFlashDwellTime
+	    'Print "recFlashDwellTime:", recFlashDwellTime
 	Case "recInsertType"
 	    recInsertType = Val(tokens$(1))
-	    Print "recInsertType:", recInsertType
+	    'Print "recInsertType:", recInsertType
 	Case "recNumberOfHoles"
 	    recNumberOfHoles = Val(tokens$(1))
-	    Print "recNumberOfHoles:", recNumberOfHoles
+	    'Print "recNumberOfHoles:", recNumberOfHoles
 	Case "recOutmagPickupOffset"
 	    recOutmagPickupOffset = Val(tokens$(1))
-	    Print "recOutmagPickupOffset:", recOutmagPickupOffset
+	    'Print "recOutmagPickupOffset:", recOutmagPickupOffset
 	Case "suctionWaitTime"
 	   recSuctionWaitTime = Val(tokens$(1))
-	    Print "suctionWaitTime:", recSuctionWaitTime
+	    'Print "suctionWaitTime:", recSuctionWaitTime
 	Case "systemAccel"
 	    SystemAccel = Val(tokens$(1))
-	    Print "systemAccel:", SystemAccel
+	    'Print "systemAccel:", SystemAccel
 	Case "systemSpeed"
 	    SystemSpeed = Val(tokens$(1))
-	    Print "systemSpeed:", SystemSpeed
+	    'Print "systemSpeed:", SystemSpeed
 	Case "zlimit"
 	    zLimit = Val(tokens$(1))
-	    Print "zlimit:", zLimit
+	    'Print "zlimit:", zLimit
 	Default
 		' TMH for now print come back and do something useful
 		Print "Invalid Token received"

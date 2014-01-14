@@ -5,7 +5,9 @@
 Function runTest
 	Integer hole
 			
-	holeTolerance = 0.1
+	holeTolerance = 0.01
+	'stepsize = 0.1
+	stepsize = 0.25
 	
 ' the EOAT is 135deg off of zero and the panel recipes are 180deg off
 '#define PanelOffsetTheta 315
@@ -14,8 +16,9 @@ Function runTest
 ' so we need a correction of -45deg
 	EOATcorrection = 38
 	magazineCorrection = -90
+	systemThetaError = EOATcorrection + magazineCorrection
 
-	Call changeSpeed(slow)
+	Call changeSpeed(fast)
 
 	Pause
 	
@@ -30,42 +33,31 @@ Function runTest
 	PanelPickupErrorY = 0
 	PanelPickupErrorTheta = 0
 
-	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
-	Print "precalculating...."
-    PanelRecipeRotate(PanelPickupErrorTheta)
-	xy2RadiusRotationTangent
-	
+	Call changeSpeed(slow)
+
 	PanelFindPickupError
-	
-	'error correction
-	LoadPanelInfo
-	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
-	PanelRecipeRotate(PanelPickupErrorTheta)
-	
-	'recalculate with error correction applied
-	Print "Applying error corrections..."
-	xy2RadiusRotationTangent
 	
 	Call changeSpeed(slow)
 
 Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(CurPos), " u:", CU(CurPos)
 	Do While True
 		Pause
-		
+			
 		'move to location
 		For hole = 1 To PanelHoleCount
-			Print "Laser-hole:  ", hole,
+			'Print "Laser-hole:  ", hole,
 			PanelHoleToXYZT(hole, CX(laser), CY(laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
+			If hole = 1 Then Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(CurPos), " u:", CU(CurPos)
 			'Pause
-			Wait 1
+			'Wait 1
 		Next
 	
-		For hole = 1 To PanelHoleCount
-			Print "Heatstake-Hole:  ", hole,
-			PanelHoleToXYZT(hole, CX(hotstake), CY(hotstake), CZ(PreHotStake), -45 - PanelHoleTangent(hole))
-			'Pause
-			Wait 1
-		Next
+'		For hole = 1 To PanelHoleCount
+'			Print "Heatstake-Hole:  ", hole,
+'			PanelHoleToXYZT(hole, CX(hotstake), CY(hotstake), CZ(PreHotStake), -45 - PanelHoleTangent(hole))
+'			'Pause
+'			Wait 1
+'		Next
 
 	Loop
 Fend

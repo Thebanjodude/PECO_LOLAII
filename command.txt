@@ -79,5 +79,37 @@
 > print cos(90)
  -0.44807361612917
 > print cos(degtorad(90))
- 6.1230317691119E-017
+ 6.1230317691119E-017p
+> print inchtomm(8.0)
+!!Error: 3207, Formula is missing.
+> print intomm(9)
+!!Error: 2305, Cannot execute a Call statement from tprinthe command window.
+> print 8.85 * 25.4
+ 224.79
+> print 8.35 * 25.4
+ 212.09
+> print -1.95 * 25.4
+ -49.53sin(degtorad(38-90))
+!!Error: 3100, Syntax error.
+> 
+> 
+> print sin(degtorad(38-90))
+ -0.78801075360672
+> print cos(degtorad(38-90))
+ 0.61566147532566
+> print (224.79 * 0.616) 
+ 138.47064
+> print (224.79 * -0.788)
+ -177.13452
+> print (212.09 * 0.616) - (-49.53 * -0.788)
+ 91.6178
+> print (212.09*-0.788) + (-49.53*0.616)
+ -197.6374
+> panelpickuperrortheta = 3
+> panelpickuperrory = 8
+> panelpickuperrorx = -7
+> print -85.5469 - -84.7439
+ -0.803
+> print -78.0417 - -77.9739
+ -0.067800000000005
 > 
