@@ -42,26 +42,13 @@ Function PanelFindPickupError
 	Real recipeAngle, realAngle
 	Real realHoleX(3), realHoleY(3)
 	Real tempX, tempY, tempUcos, tempUsin
-	Integer hole, oldHoleCount
-	
-	oldHoleCount = PanelHoleCount
-	
+	Integer hole
+
 	ChangeProfile("00") ' Change profile on the laser
 	Call changeSpeed(slow)
 	
-	'find recipe theta between hole 1 and hole 2
-	' this needs to happen before any hole transforms (ie original recipe values)
-	'
-	'                     (X_hole1 - X_hole2)
-	'  recipeAngle = tan-1(-----------------)
-	'                     (Y_hole1 - Y_hole2)
-	'
 	LoadPanelInfo
-'	recipeAngle = RadToDeg(Atan((PanelHoleX(1) - PanelHoleX(2)) / (PanelHoleY(1) - PanelHoleY(2))))
-	
-'	Print "panel hole 1XY:", PanelHoleX(1), ",", PanelHoleY(1)
-'	Print "panel hole 2XY:", PanelHoleX(2), ",", PanelHoleY(2)
-	
+
 	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
 	' this will allow us to move the holes close to where they need to be
 	' the system theta error is accounted for in panelRecipeRotate()
@@ -69,74 +56,54 @@ Function PanelFindPickupError
     PanelRecipeRotate(PanelPickupErrorTheta)
 	xy2RadiusRotationTangent
 
+	'find recipe theta between hole 1 and hole 2
+	' this needs to happen before any hole transforms (ie original recipe values)
+	'
+	'                     (X_hole1 - X_hole2)
+	'  recipeAngle = tan-1(-----------------)
+	'                     (Y_hole1 - Y_hole2)
+	'
 	recipeAngle = RadToDeg(Atan((PanelHoleX(1) - PanelHoleX(2)) / (PanelHoleY(1) - PanelHoleY(2))))
-	
-'	Print "panel hole 1XY:", PanelHoleX(1), ",", PanelHoleY(1)
-'	Print "panel hole 2XY:", PanelHoleX(2), ",", PanelHoleY(2)
 	
 	Print "finding first two holes for error detection"
 	For hole = 1 To 2
 		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
 
-		' find the real hole location -- run it twice for accuracy
+		' find the real hole location
 		PanelFindXerror
 		PanelFindYerror
-'		PanelFindXerror
-'		PanelFindYerror
+
 		' transform it to the panel space
-		tempx = CX(CurPos)
+		tempX = CX(CurPos)
 		tempY = CY(CurPos)
 		tempUcos = Cos(DegToRad(-PanelHoleRotation(hole)))
 		tempUsin = Sin(DegToRad(-PanelHoleRotation(hole)))
 		realHoleX(hole) = tempx * tempUcos - tempY * tempUsin
 		realHoleY(hole) = tempx * tempUsin + tempY * tempUcos
-		
-'		Print "panel hole tangent: ", PanelHoleTangent(hole)
-'		Print "panel hole rotation: ", PanelHoleRotation(hole)
-'		Print "temp hole ", hole, "XY:", tempX, ",", tempY
-'		Print "realhole ", hole, "XY: ", realHoleX(hole), ",", realHoleY(hole)
  	Next
 	
-	' angleA + angleB + angleC = 180
 	realAngle = RadToDeg(Atan((realHoleX(1) - realHoleX(2)) / (realHoleY(1) - realHoleY(2))))
 	errorTheta = recipeAngle - realAngle
 
-	Print "recipeAngle =", recipeAngle
-	Print "realAngle =", realAngle
-	Print "errorTheta =", errorTheta
-
 '	Print "found Theta offset, recalculating"
-'	LoadPanelInfo
+	LoadPanelInfo
 	
 	PanelPickupErrorTheta = -errorTheta
 
-'    PanelRecipeRotate(PanelPickupErrorTheta)
-'	xy2RadiusRotationTangent
+	PanelRecipeRotate(PanelPickupErrorTheta)
+	xy2RadiusRotationTangent
 
 	Print "finding XY offsets"
 	PanelHoleToXYZT(1, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(1))
-'Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(CurPos), " u:", CU(CurPos)
-'	PanelFindXerror
-'	PanelFindYerror
+
 	errorX = PanelFindXerror
 	errorY = PanelFindYerror
-'	PanelPickupErrorX = PanelFindXerror
-'	PanelPickupErrorY = PanelFindYerror
-'Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(CurPos), " u:", CU(CurPos)
-
-	Print "done with error correction detection"
-	Print "------------------------"
 
 	PanelPickupErrorX = -errorY
 	PanelPickupErrorY = errorX
-	
-'	tempUcos = Cos(DegToRad(-PanelHoleRotation(1)))
-'	tempUsin = Sin(DegToRad(-PanelHoleRotation(1)))
-'	PanelPickupErrorX = errorX * tempUcos - errorY * tempUsin
-'	PanelPickupErrorY = errorX * tempUsin + errorY * tempUcos
-	
-	'PanelPickupErrorTheta = -errorTheta
 
+	Print "done with error correction detection"
+	Print "------------------------"
 	Print "panel error x = ", PanelPickupErrorX
 	Print "panel error y = ", PanelPickupErrorY
 	Print "panel error t = ", PanelPickupErrorTheta
@@ -144,7 +111,6 @@ Function PanelFindPickupError
 
 	Print "loading error correction values"
 	LoadPanelInfo
-'	PanelRecipeRotate(PanelPickupErrorTheta)
 	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
 	PanelRecipeRotate(PanelPickupErrorTheta)
 
@@ -153,7 +119,6 @@ Function PanelFindPickupError
 	xy2RadiusRotationTangent
 
 	Call changeSpeed(fast)
-	PanelHoleCount = oldHoleCount
 Fend
 
 ' rotate the panel matrix about the origin
