@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/14 17:07:59:766,DS:0000003682,CS:04354,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/14 18:45:51:173,DS:0000003682,CS:06662,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -149,8 +149,8 @@ ProgramFile14 {
 	Window {
 		nLeft=2
 		nTop=6
-		nWidth=952
-		nHeight=542
+		nWidth=951
+		nHeight=539
 	}
 }
 ProgramFile15 {

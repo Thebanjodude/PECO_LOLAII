@@ -51,13 +51,16 @@ Function PanelFindPickupError
 '		realHoleY(count) = tempX * tempUsin + tempY * tempUcos
 
 		' find the real hole location and rotate the error around the quill
-		tempX = PanelFindXerror - CX(CurPos)
-		tempY = PanelFindYerror - CY(CurPos)
+'		tempX = PanelFindXerror - CX(CurPos)
+'		tempY = PanelFindYerror - CY(CurPos)
+' already translated to give only the error NOT absolute location
+		tempX = PanelFindXerror
+		tempY = PanelFindYerror
 
 		tempUcos = Cos(DegToRad(-PanelHoleRotation(hole)))
 		tempUsin = Sin(DegToRad(-PanelHoleRotation(hole)))
-		realHoleX(count) = tempX * tempUcos - tempY * tempUsin + CX(CurPos)
-		realHoleY(count) = tempX * tempUsin + tempY * tempUcos + CY(CurPos)
+		realHoleX(count) = tempx * tempUcos - tempY * tempUsin + CX(CurPos)
+		realHoleY(count) = tempx * tempUsin + tempY * tempUcos + CY(CurPos)
 
 		' this should give us a hole less than 90deg away for better theta correction
 		'hole = PanelHoleCount /4 - 1
