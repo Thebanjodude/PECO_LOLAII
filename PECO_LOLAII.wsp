@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/14 08:45:42:487,DS:0000003680,CS:02591,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/14 17:07:59:766,DS:0000003682,CS:04354,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -170,10 +170,10 @@ IncludeFile1 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=74
-		nTop=15
-		nWidth=920
-		nHeight=521
+		nLeft=248
+		nTop=196
+		nWidth=918
+		nHeight=518
 	}
 }
 nPointFileCount=3

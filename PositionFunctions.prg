@@ -9,40 +9,13 @@ Function LoadPanelInfo()
 
 Fend
 
-' helper function to calculate theta
-Function findTheta(angA As Real, sideB As Real, sideC As Real) As Real
-	Real sideA, angB, angC
-	
-	' law of Cosines
-	' a **2 = b **2 + c**2 - 2bc * cos(A)
-	'sideA = Sqr(sideB ** 2 + sideC ** 2 - 2 * sideB * sideC * Cos(DegToRad(angA)))
-
-	sideA = findSideA(angA, sideB, sideC)
-	
-	' TODO-- ensure that angA isn't greater than 90 deg
-	' law of sines
-	' sin(B)/b = sin(A)/a
-	angB = RadToDeg(Asin(Sin(DegToRad(angA)) * sideB / sideA))
-	
-	' in case it comes up	
-	' 180 = angA + angB + angC
-	' angC = 180 - angA - angB
-	
-	findTheta = angB
-Fend
-Function findSideA(angA As Real, sideB As Real, sideC As Real) As Real
-	' law of Cosines
-	' a **2 = b **2 + c**2 - 2bc * cos(A)
-	findSideA = Sqr(sideB ** 2 + sideC ** 2 - 2 * sideB * sideC * Cos(DegToRad(angA)))
-Fend
-
 ' attempt to find the xyTheta pickup error
 Function PanelFindPickupError
 	Real errorY, errorX, errorTheta
 	Real recipeAngle, realAngle
 	Real realHoleX(3), realHoleY(3)
 	Real tempX, tempY, tempUcos, tempUsin
-	Integer hole
+	Integer hole, count
 
 	ChangeProfile("00") ' Change profile on the laser
 	Call changeSpeed(slow)
@@ -56,59 +29,53 @@ Function PanelFindPickupError
     PanelRecipeRotate(PanelPickupErrorTheta)
 	xy2RadiusRotationTangent
 
-	'find recipe theta between hole 1 and hole 2
-	' this needs to happen before any hole transforms (ie original recipe values)
+	Print "finding two holes for error detection"
+	
+	'we want to run thru this code twice
+	count = 1
+	hole = 1
+	Do While count < 2
+		Print "hole:", hole
+		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
+
+'		' find the real hole location
+'		PanelFindXerror
+'		PanelFindYerror
+'
+'		' transform it to the panel space
+'		tempX = CX(CurPos)
+'		tempY = CY(CurPos)
+'		tempUcos = Cos(DegToRad(-PanelHoleRotation(hole)))
+'		tempUsin = Sin(DegToRad(-PanelHoleRotation(hole)))
+'		realHoleX(count) = tempX * tempUcos - tempY * tempUsin
+'		realHoleY(count) = tempX * tempUsin + tempY * tempUcos
+
+		' find the real hole location and rotate the error around the quill
+		tempX = PanelFindXerror - CX(CurPos)
+		tempY = PanelFindYerror - CY(CurPos)
+
+		tempUcos = Cos(DegToRad(-PanelHoleRotation(hole)))
+		tempUsin = Sin(DegToRad(-PanelHoleRotation(hole)))
+		realHoleX(count) = tempX * tempUcos - tempY * tempUsin + CX(CurPos)
+		realHoleY(count) = tempX * tempUsin + tempY * tempUcos + CY(CurPos)
+
+		' this should give us a hole less than 90deg away for better theta correction
+		'hole = PanelHoleCount /4 - 1
+		hole = 2
+		If hole < 2 Then hole = 2
+
+		count = count + 1
+	Loop
+	
+	'find recipe theta between hole 1 and last hole found
 	'
 	'                     (X_hole1 - X_hole2)
 	'  recipeAngle = tan-1(-----------------)
 	'                     (Y_hole1 - Y_hole2)
 	'
-'	recipeAngle = RadToDeg(Atan((PanelHoleX(1) - PanelHoleX(2)) / (PanelHoleY(1) - PanelHoleY(2))))
-	
-	Print "finding two holes for error detection"
-'	For hole = 1 To 2
-'need to turn this into a function
-	hole = 1
-		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
 
-		' find the real hole location
-		PanelFindXerror
-		PanelFindYerror
-
-		' transform it to the panel space
-		tempx = CX(CurPos)
-		tempY = CY(CurPos)
-		tempUcos = Cos(DegToRad(-PanelHoleRotation(hole)))
-		tempUsin = Sin(DegToRad(-PanelHoleRotation(hole)))
-		realHoleX(hole) = tempx * tempUcos - tempY * tempUsin
-		realHoleY(hole) = tempx * tempUsin + tempY * tempUcos
-'</end of needed function>
-' 	Next
-	' this should give us a hole less than 90deg away for better theta correction
-	'hole = PanelHoleCount /4 + 1
-	'hole = PanelHoleCount /4 - 1
-	hole = 2
-	If hole < 2 Then hole = 2
-	Print "hole:", hole
-'<dup code>
+	'hole should be set to the last hole found
 	recipeAngle = RadToDeg(Atan((PanelHoleX(1) - PanelHoleX(hole)) / (PanelHoleY(1) - PanelHoleY(hole))))
-		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
-
-		' find the real hole location
-		PanelFindXerror
-		PanelFindYerror
-
-		' transform it to the panel space
-		tempx = CX(CurPos)
-		tempY = CY(CurPos)
-		tempUcos = Cos(DegToRad(-PanelHoleRotation(hole)))
-		tempUsin = Sin(DegToRad(-PanelHoleRotation(hole)))
-		realHoleX(2) = tempx * tempUcos - tempY * tempUsin
-		realHoleY(2) = tempx * tempUsin + tempY * tempUcos
-'</end dup code>	
-	
-	
-	
 	realAngle = RadToDeg(Atan((realHoleX(1) - realHoleX(2)) / (realHoleY(1) - realHoleY(2))))
 	errorTheta = recipeAngle - realAngle
 
