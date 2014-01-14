@@ -1,10 +1,10 @@
-ENVT0100,LM:2014/01/14 07:43:47:373,DS:0000004996,CS:18211,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/14 08:42:20:970,DS:0000004995,CS:30510,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="1/14/2014 12:43:44 AM"
+	sLastModified="1/14/2014 1:42:18 AM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -108,7 +108,7 @@ ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/14/2014 7:43:44 AM"
+	sTimeSavedInController="1/14/2014 8:42:18 AM"
 }
 ProgramFile15 {
 	sName="Test.prg"

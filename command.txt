@@ -112,4 +112,40 @@
  -0.803
 > print -78.0417 - -77.9739
  -0.067800000000005
+> print 180-90-14.3814
+ 75.6186
+> print 308 - 294.85
+ 13.15
+> print 180-90-75.6185
+ 14.3815
+> recipeAngle = RadToDeg(Atan((PanelHoleX(2) - PanelHoleX(1)) / (PanelHoleY(2) - PanelHoleY(1))))
+!!Error: 3100, Syntax error.
+> print RadToDeg(Atan((PanelHoleX(2) - PanelHoleX(1)) / (PanelHoleY(2) - PanelHoleY(1))))
+!!Error: 2242, Zero '0' was used as a divisor.
+> print cos(degtorad(-218))
+ -0.78801075360672
+> print sin(degtorad(-218))
+ 0.61566147532566
+> print 36.617-30
+ 6.617
+> print 392.715-385.21
+ 7.505
+> print (6.617 * -0.788) - (7.505 * 0.61555)
+ -9.83389875
+> print (36.61 * -0.788) - (392.715 * 0.61566)
+ -270.6275969
+> print sin(degtorad(315-218))
+ 0.99254615164132
+> print cos(degtorad(315-218))
+ -0.12186934340515
+> print (6.617 * -0.12186934340515) - (7.505 *0.99254615164132)
+ -8.25546831338p
+> print (36.6107 * -0.12186934340515) - (392.715 *0.99254615164132)
+ -394.24948391242
+> print 28.2282 - 6.5
+ 21.7282
+> print 23 /4 + 1
+ 6
+> print 23 /4 -1 
+ 4
 > 

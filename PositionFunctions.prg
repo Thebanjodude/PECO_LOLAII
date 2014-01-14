@@ -63,10 +63,12 @@ Function PanelFindPickupError
 	'  recipeAngle = tan-1(-----------------)
 	'                     (Y_hole1 - Y_hole2)
 	'
-	recipeAngle = RadToDeg(Atan((PanelHoleX(1) - PanelHoleX(2)) / (PanelHoleY(1) - PanelHoleY(2))))
+'	recipeAngle = RadToDeg(Atan((PanelHoleX(1) - PanelHoleX(2)) / (PanelHoleY(1) - PanelHoleY(2))))
 	
-	Print "finding first two holes for error detection"
-	For hole = 1 To 2
+	Print "finding two holes for error detection"
+'	For hole = 1 To 2
+'need to turn this into a function
+	hole = 1
 		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
 
 		' find the real hole location
@@ -74,18 +76,52 @@ Function PanelFindPickupError
 		PanelFindYerror
 
 		' transform it to the panel space
-		tempX = CX(CurPos)
+		tempx = CX(CurPos)
 		tempY = CY(CurPos)
 		tempUcos = Cos(DegToRad(-PanelHoleRotation(hole)))
 		tempUsin = Sin(DegToRad(-PanelHoleRotation(hole)))
 		realHoleX(hole) = tempx * tempUcos - tempY * tempUsin
 		realHoleY(hole) = tempx * tempUsin + tempY * tempUcos
- 	Next
+'</end of needed function>
+' 	Next
+	' this should give us a hole less than 90deg away for better theta correction
+	'hole = PanelHoleCount /4 + 1
+	'hole = PanelHoleCount /4 - 1
+	hole = 2
+	If hole < 2 Then hole = 2
+	Print "hole:", hole
+'<dup code>
+	recipeAngle = RadToDeg(Atan((PanelHoleX(1) - PanelHoleX(hole)) / (PanelHoleY(1) - PanelHoleY(hole))))
+		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
+
+		' find the real hole location
+		PanelFindXerror
+		PanelFindYerror
+
+		' transform it to the panel space
+		tempx = CX(CurPos)
+		tempY = CY(CurPos)
+		tempUcos = Cos(DegToRad(-PanelHoleRotation(hole)))
+		tempUsin = Sin(DegToRad(-PanelHoleRotation(hole)))
+		realHoleX(2) = tempx * tempUcos - tempY * tempUsin
+		realHoleY(2) = tempx * tempUsin + tempY * tempUcos
+'</end dup code>	
+	
+	
 	
 	realAngle = RadToDeg(Atan((realHoleX(1) - realHoleX(2)) / (realHoleY(1) - realHoleY(2))))
 	errorTheta = recipeAngle - realAngle
 
-'	Print "found Theta offset, recalculating"
+	Print "panel hole 1 XY:", PanelHoleX(1), ",", PanelHoleY(1)
+	Print "panel hole", hole, " XY:", PanelHoleX(hole), ",", PanelHoleY(hole)
+	Print "real hole 1 XY:", realHoleX(1), ",", realHoleY(1)
+	Print "real hole 2 XY:", realHoleX(2), ",", realHoleY(2)
+	
+
+	Print "recipe angle:", recipeAngle
+	Print "realangle: ", realAngle
+
+	Print "found Theta offset, recalculating"
 	LoadPanelInfo
 	
 	PanelPickupErrorTheta = -errorTheta
@@ -117,6 +153,8 @@ Function PanelFindPickupError
 	'recalculate with error correction applied
 	Print "Applying error corrections..."
 	xy2RadiusRotationTangent
+	
+	Print "Done with error correction."
 
 	Call changeSpeed(fast)
 Fend
