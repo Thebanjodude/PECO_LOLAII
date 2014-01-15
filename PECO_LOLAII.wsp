@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/14 18:45:51:173,DS:0000003682,CS:06662,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/15 16:18:52:336,DS:0000003685,CS:27972,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -149,8 +149,8 @@ ProgramFile14 {
 	Window {
 		nLeft=2
 		nTop=6
-		nWidth=951
-		nHeight=539
+		nWidth=949
+		nHeight=531
 	}
 }
 ProgramFile15 {
@@ -160,8 +160,8 @@ ProgramFile15 {
 	Window {
 		nLeft=37
 		nTop=8
-		nWidth=1001
-		nHeight=504
+		nWidth=999
+		nHeight=497
 	}
 }
 nIncludeFileCount=1
@@ -195,8 +195,8 @@ PointFile2 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=132
+		nHeight=38
 	}
 }
 PointFile3 {
@@ -226,8 +226,8 @@ RunWindow {
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=960
-		nHeight=549
+		nWidth=1046
+		nHeight=595
 	}
 }
 IOLabelEditor {

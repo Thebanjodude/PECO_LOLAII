@@ -13,8 +13,7 @@ Fend
 Function PanelFindPickupError
 	Real errorY, errorX, errorTheta
 	Real recipeAngle, realAngle
-	Real realHoleX(3), realHoleY(3)
-	Real tempX, tempY, tempUcos, tempUsin
+	Real realHoleX(2), realHoleY(2)
 	Integer hole, count
 
 	ChangeProfile("00") ' Change profile on the laser
@@ -32,35 +31,15 @@ Function PanelFindPickupError
 	Print "finding two holes for error detection"
 	
 	'we want to run thru this code twice
-	count = 1
+	count = 0
 	hole = 1
 	Do While count < 2
 		Print "hole:", hole
 		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
 
-'		' find the real hole location
-'		PanelFindXerror
-'		PanelFindYerror
-'
-'		' transform it to the panel space
-'		tempX = CX(CurPos)
-'		tempY = CY(CurPos)
-'		tempUcos = Cos(DegToRad(-PanelHoleRotation(hole)))
-'		tempUsin = Sin(DegToRad(-PanelHoleRotation(hole)))
-'		realHoleX(count) = tempX * tempUcos - tempY * tempUsin
-'		realHoleY(count) = tempX * tempUsin + tempY * tempUcos
-
-		' find the real hole location and rotate the error around the quill
-'		tempX = PanelFindXerror - CX(CurPos)
-'		tempY = PanelFindYerror - CY(CurPos)
-' already translated to give only the error NOT absolute location
-		tempX = PanelFindXerror
-		tempY = PanelFindYerror
-
-		tempUcos = Cos(DegToRad(-PanelHoleRotation(hole)))
-		tempUsin = Sin(DegToRad(-PanelHoleRotation(hole)))
-		realHoleX(count) = tempx * tempUcos - tempY * tempUsin + CX(CurPos)
-		realHoleY(count) = tempx * tempUsin + tempY * tempUcos + CY(CurPos)
+		' find the real hole location
+		realHoleX(count) = PanelFindXerror + PanelHoleX(hole)
+		realHoleY(count) = PanelFindYerror + PanelHoleY(hole)
 
 		' this should give us a hole less than 90deg away for better theta correction
 		'hole = PanelHoleCount /4 - 1
@@ -79,17 +58,17 @@ Function PanelFindPickupError
 
 	'hole should be set to the last hole found
 	recipeAngle = RadToDeg(Atan((PanelHoleX(1) - PanelHoleX(hole)) / (PanelHoleY(1) - PanelHoleY(hole))))
-	realAngle = RadToDeg(Atan((realHoleX(1) - realHoleX(2)) / (realHoleY(1) - realHoleY(2))))
+	realAngle = RadToDeg(Atan((realHoleX(0) - realHoleX(1)) / (realHoleY(0) - realHoleY(1))))
 	errorTheta = recipeAngle - realAngle
 
 	Print "panel hole 1 XY:", PanelHoleX(1), ",", PanelHoleY(1)
 	Print "panel hole", hole, " XY:", PanelHoleX(hole), ",", PanelHoleY(hole)
-	Print "real hole 1 XY:", realHoleX(1), ",", realHoleY(1)
-	Print "real hole 2 XY:", realHoleX(2), ",", realHoleY(2)
+	Print "real hole 1 XY:", realHoleX(0), ",", realHoleY(0)
+	Print "real hole 2 XY:", realHoleX(1), ",", realHoleY(1)
 	
 
 	Print "recipe angle:", recipeAngle
-	Print "realangle: ", realAngle
+	Print "real angle: ", realAngle
 
 	Print "found Theta offset, recalculating"
 	LoadPanelInfo
