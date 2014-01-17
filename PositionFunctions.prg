@@ -94,16 +94,16 @@ Function PanelFindPickupError
 	Print "panel error t = ", PanelPickupErrorTheta
 	Print "----------------------------"
 
-	Print "loading error correction values"
-	LoadPanelInfo
-	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
-	PanelRecipeRotate(PanelPickupErrorTheta)
+'	Print "loading error correction values"
+'	LoadPanelInfo
+'	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
+'	PanelRecipeRotate(PanelPickupErrorTheta)
 
 	'recalculate with error correction applied
-	Print "Applying error corrections..."
-	xy2RadiusRotationTangent
+'	Print "Applying error corrections..."
+'	xy2RadiusRotationTangent
 	
-	Print "Done with error correction."
+'	Print "Done with error correction."
 
 	Call changeSpeed(fast)
 Fend
@@ -250,6 +250,10 @@ Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double,
 	'rotate about the hole 
 	rotX = (-PanelHoleX(hole) * Cos(DegToRad(Theta))) - (-PanelHoleY(hole) * Sin(DegToRad(Theta)))
 	rotY = (-PanelHoleX(hole) * Sin(DegToRad(Theta))) + (-PanelHoleY(hole) * Cos(DegToRad(Theta)))
+	
+	'add pickup err	
+	rotX = rotX + PanelPickupErrorX
+	rotY = rotY + PanelPickupErrorY
 	
 	' now put the quill at that point with the x,y offset to the hole
 '	Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
