@@ -20,7 +20,7 @@ Function PanelFindPickupError
 	Call changeSpeed(slow)
 	
 	LoadPanelInfo
-
+	
 	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
 	' this will allow us to move the holes close to where they need to be
 	' the system theta error is accounted for in panelRecipeRotate()
@@ -30,13 +30,17 @@ Function PanelFindPickupError
 
 	Print "finding two holes for error detection"
 	
-	'we want to run thru this code twice
+	'we want to run thru this code twice to find two holes
 	count = 0
 	hole = 1
 	Do While count < 2
 		Print "hole:", hole
 		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
 
+		' TODO-- we might want to find the hole in robot space after we unwind from laser positioning
+		'	see the XY error detection code to see how to do this
+		
+		
 		' find the real hole location
 		realHoleX(count) = PanelFindXerror + PanelHoleX(hole)
 		realHoleY(count) = PanelFindYerror + PanelHoleY(hole)
@@ -70,6 +74,7 @@ Function PanelFindPickupError
 	Print "recipe angle:", recipeAngle
 	Print "real angle: ", realAngle
 
+	' apply theta error correction
 	Print "found Theta offset, recalculating"
 	LoadPanelInfo
 	
@@ -78,14 +83,27 @@ Function PanelFindPickupError
 	PanelRecipeRotate(PanelPickupErrorTheta)
 	xy2RadiusRotationTangent
 
+	' find XY error
 	Print "finding XY offsets"
-	PanelHoleToXYZT(1, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(1))
 
-	errorX = PanelFindXerror
-	errorY = PanelFindYerror
+	Real correctedX, correctedY
+	Real negCos, negSin
+	Real laserTheta
+	
+	laserTheta = -90 - PanelHoleTangent(1)
+	negCos = Cos(DegToRad(-laserTheta))
+	negSin = Sin(DegToRad(-laserTheta))
+	
+	PanelHoleToXYZT(1, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
 
-	PanelPickupErrorX = -errorY
-	PanelPickupErrorY = errorX
+	PanelFindXerror
+	PanelFindYerror
+
+	correctedX = (-(CX(CurPos) - CX(laser)) * negCos) - (-(CY(CurPos) - CY(laser)) * negSin)
+	correctedY = (-(CX(CurPos) - CX(laser)) * negSin) + (-(CY(CurPos) - CY(laser)) * negCos)
+
+	PanelPickupErrorX = correctedX
+	PanelPickupErrorY = correctedY
 
 	Print "done with error correction detection"
 	Print "------------------------"
@@ -94,16 +112,14 @@ Function PanelFindPickupError
 	Print "panel error t = ", PanelPickupErrorTheta
 	Print "----------------------------"
 
-'	Print "loading error correction values"
-'	LoadPanelInfo
-'	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
-'	PanelRecipeRotate(PanelPickupErrorTheta)
+	Print "loading XY error correction values"
+	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
 
-	'recalculate with error correction applied
-'	Print "Applying error corrections..."
-'	xy2RadiusRotationTangent
+	' recalculate with error correction applied
+	Print "Applying error corrections..."
+	xy2RadiusRotationTangent
 	
-'	Print "Done with error correction."
+	Print "Done with error correction."
 
 	Call changeSpeed(fast)
 Fend
@@ -167,34 +183,34 @@ Function xy2RadiusRotationTangent()
 	
 	For hole = 1 To PanelHoleCount
 
-		' the radius is the hypotenuse of the angle formed by the x and y values
-		PanelHoleRadius(hole) = Sqr((PanelHoleX(hole) ** 2) + (PanelHoleY(hole) ** 2))
-		
-		' the angle between the x-axis and the hole is the arctangent of y divided by x	
-		' if x is zero (hole is on the y axis) then the angle is 90 degrees just poke it in to avoid div by zero error
-		If PanelHoleX(hole) = 0 Then
-			angle = 90
-		Else
-			angle = Abs(RadToDeg(Atan(PanelHoleY(hole) / PanelHoleX(hole))))
-		EndIf
-		
-		' for the first quadrant we are done. For the others we still have some math to do
-		' if we are in the second quadrant 
-		If (PanelHoleX(hole) <= 0) And (PanelHoleY(hole) > 0) Then 'include positive y-axis in this quadrant
-			angle = 90 - angle ' rotation from positive y-axis around to the angle we found above
-			angle = angle + 90 ' add in the 90 degrees of rotation from the first quadrant
-			
-		' else if we are in the third quadrant
-		ElseIf (PanelHoleX(hole) < 0) And (PanelHoleY(hole) <= 0) Then ' include negative x-axis in this quadrant
-			angle = angle + 180 ' angle down from the negative x-axis plus 180 degrees rotation from quadrants one and two
-			
-		' else if we are in the forth quadrant
-		ElseIf (PanelHoleX(hole) >= 0) And (PanelHoleY(hole) < 0) Then ' include negative y-axis in this quadrant
-			angle = 90 - angle ' rotation from negative y-axis around to the angle we found above
-			angle = angle + 270 ' add in the rotation through the other three quadrants
-		EndIf
-			
-		PanelHoleRotation(hole) = angle ' store the angle we calculated
+'		' the radius is the hypotenuse of the angle formed by the x and y values
+'		PanelHoleRadius(hole) = Sqr((PanelHoleX(hole) ** 2) + (PanelHoleY(hole) ** 2))
+'		
+'		' the angle between the x-axis and the hole is the arctangent of y divided by x	
+'		' if x is zero (hole is on the y axis) then the angle is 90 degrees just poke it in to avoid div by zero error
+'		If PanelHoleX(hole) = 0 Then
+'			angle = 90
+'		Else
+'			angle = Abs(RadToDeg(Atan(PanelHoleY(hole) / PanelHoleX(hole))))
+'		EndIf
+'		
+'		' for the first quadrant we are done. For the others we still have some math to do
+'		' if we are in the second quadrant 
+'		If (PanelHoleX(hole) <= 0) And (PanelHoleY(hole) > 0) Then 'include positive y-axis in this quadrant
+'			angle = 90 - angle ' rotation from positive y-axis around to the angle we found above
+'			angle = angle + 90 ' add in the 90 degrees of rotation from the first quadrant
+'			
+'		' else if we are in the third quadrant
+'		ElseIf (PanelHoleX(hole) < 0) And (PanelHoleY(hole) <= 0) Then ' include negative x-axis in this quadrant
+'			angle = angle + 180 ' angle down from the negative x-axis plus 180 degrees rotation from quadrants one and two
+'			
+'		' else if we are in the forth quadrant
+'		ElseIf (PanelHoleX(hole) >= 0) And (PanelHoleY(hole) < 0) Then ' include negative y-axis in this quadrant
+'			angle = 90 - angle ' rotation from negative y-axis around to the angle we found above
+'			angle = angle + 270 ' add in the rotation through the other three quadrants
+'		EndIf
+'			
+'		PanelHoleRotation(hole) = angle ' store the angle we calculated
 		
 		' the approximate tangent is the angle perpendicular to the line connecting the two adjacent holes
 		' first find the angle relative to the x-axis of the line connecting the adjacent holes
@@ -250,13 +266,18 @@ Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double,
 	'rotate about the hole 
 	rotX = (-PanelHoleX(hole) * Cos(DegToRad(Theta))) - (-PanelHoleY(hole) * Sin(DegToRad(Theta)))
 	rotY = (-PanelHoleX(hole) * Sin(DegToRad(Theta))) + (-PanelHoleY(hole) * Cos(DegToRad(Theta)))
+
+'PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
+'	rotX = (PanelHoleX(hole) * Cos(DegToRad(Theta))) - (PanelHoleY(hole) * Sin(DegToRad(Theta)))
+'	rotY = (PanelHoleX(hole) * Sin(DegToRad(Theta))) + (PanelHoleY(hole) * Cos(DegToRad(Theta)))
+
 	
 	'add pickup err	
 	rotX = rotX + PanelPickupErrorX
 	rotY = rotY + PanelPickupErrorY
 	
 	' now put the quill at that point with the x,y offset to the hole
-'	Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
+	Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
 	Go XY(x + rotX, y + rotY, z, Theta) /L
 
 Fend

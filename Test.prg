@@ -30,7 +30,7 @@ Function runTest
 	
 	'clear existing pickup error
 	PanelPickupErrorX = 0
-	PanelPickupErrorY = 0
+	PanelPickupErrorY = 8
 	PanelPickupErrorTheta = 0
 
 	Call changeSpeed(slow)
