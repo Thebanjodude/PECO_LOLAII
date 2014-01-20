@@ -32,7 +32,10 @@ Function DropOffPanel() As Integer
 	EndIf
 	
 	Xqt OutputMagTorqueSense, NoPause ' during this jump check if we hit anything
-	Jump P(recOutmag) LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
+	
+	' see if we can use a global point
+	'Jump P(recOutmag) LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
+	Jump P(magout_51010) LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
 		If JS = True Then
 			Pause ' we hit somthing so pause
 		EndIf
@@ -93,7 +96,10 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	Loop
 	
 	InMagRobotClearSignal = False ' the robot is about to visit the magazine.
-	Jump P(recInmag) +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
+		
+	' see if we can use a global point to pickup panels
+	'Jump P(recInmag) +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
+	Jump P(magin_51010) +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
 	
 	If JS = True Then ' Its possible to open an interock during the jump so check if it was opened
 		PickupPanel = 1 ' Interlock is open

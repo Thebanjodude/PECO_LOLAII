@@ -31,6 +31,8 @@ Function main()
 	Call runTest
 	Exit Function
 	
+	Call changeSpeed(slow)
+	
 	mainCurrentState = StateIdle ' The first state is Idle
 	
 	Do While True

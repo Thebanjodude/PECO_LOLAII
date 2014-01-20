@@ -15,17 +15,25 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Do Until Tmr(1) > 0.5
 		Wait 0.1
 	Loop
-	Jump P(recPreCrowding)
+	
+	' lets see if we can use a global point
+	'Jump P(recPreCrowding)
+	Jump P(cwdin_51010)
 	
 	suctionCupsCC = False ' Turn off suction cups
 	Wait recSuctionWaitTime ' wait for cups to release
-	Jump P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
+
+	' lets see if we can use a global point
+	'Jump P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
+	Jump P(cwdout_51010) +Z(30) ' Relese the suction cups and move them out of the way for crowding
 
 	On (CrowdingH) ' Close crowding
 	
 	Wait 3 ' wait for the crowd to take place
 	
-	Go P(recCrowding)
+	' lets see if we can use a global point
+	'Go P(recCrowding)
+	Go P(cwdout_51010)
 	suctionCupsCC = True ' Turn on cups
 	Wait recSuctionWaitTime
 

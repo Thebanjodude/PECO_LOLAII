@@ -4,9 +4,77 @@
 ' ------------MOCK------------
 ' ---------TODO--Replace with recipe values-------
 Function LoadPanelInfo()
-	
-	Call loadRecipe
+	' load the following vars with the corrected values
+	'  this might be pulled into LoadRecipe
+	'  --Just remember that the recipe values need to be translated to robot space....
 
+'	Global Preserve Integer PanelHoleCount
+'	Global Preserve Double PanelHoleX(25)
+'	Global Preserve Double PanelHoleY(25)
+'	Global Preserve Double PanelHoleTangent(25)
+'	Global Preserve Double PanelPickupErrorX
+'	Global Preserve Double PanelPickupErrorY
+'	Global Preserve Double PanelPickupErrorTheta
+	
+	'for now
+	Call LoadRecipe
+	
+Fend
+
+' ------------MOCK------------
+' ---------TODO--Replace with recipe values from HMI-------
+Function LoadRecipe
+		
+	' panel pn:  51010
+	PanelHoleCount = 23
+	
+	PanelHoleX(1) = InTomm(8.850)
+	PanelHoleY(1) = InTomm(0.000)
+	PanelHoleX(2) = InTomm(8.350)
+	PanelHoleY(2) = InTomm(-1.950)
+	PanelHoleX(3) = InTomm(7.090)
+	PanelHoleY(3) = InTomm(-3.360)
+	PanelHoleX(4) = InTomm(5.320)
+	PanelHoleY(4) = InTomm(-4.190)
+	PanelHoleX(5) = InTomm(3.410)
+	PanelHoleY(5) = InTomm(-4.629)
+	PanelHoleX(6) = InTomm(1.460)
+	PanelHoleY(6) = InTomm(-4.814)
+	PanelHoleX(7) = InTomm(-0.460)
+	PanelHoleY(7) = InTomm(-4.846)
+	PanelHoleX(8) = InTomm(-2.420)
+	PanelHoleY(8) = InTomm(-4.744)
+	PanelHoleX(9) = InTomm(-4.350)
+	PanelHoleY(9) = InTomm(-4.450)
+	PanelHoleX(10) = InTomm(-6.200)
+	PanelHoleY(10) = InTomm(-3.854)
+	PanelHoleX(11) = InTomm(-7.800)
+	PanelHoleY(11) = InTomm(-2.764)
+	PanelHoleX(12) = InTomm(-8.740)
+	PanelHoleY(12) = InTomm(-1.021)
+	PanelHoleX(13) = InTomm(-8.740)
+	PanelHoleY(13) = InTomm(1.021)
+	PanelHoleX(14) = InTomm(-7.800)
+	PanelHoleY(14) = InTomm(2.764)
+	PanelHoleX(15) = InTomm(-6.200)
+	PanelHoleY(15) = InTomm(3.854)
+	PanelHoleX(16) = InTomm(-4.350)
+	PanelHoleY(16) = InTomm(4.450)
+	PanelHoleX(17) = InTomm(-2.420)
+	PanelHoleY(17) = InTomm(4.744)
+	PanelHoleX(18) = InTomm(-0.460)
+	PanelHoleY(18) = InTomm(4.846)
+	PanelHoleX(19) = InTomm(1.460)
+	PanelHoleY(19) = InTomm(4.814)
+	PanelHoleX(20) = InTomm(3.410)
+	PanelHoleY(20) = InTomm(4.629)
+	PanelHoleX(21) = InTomm(5.320)
+	PanelHoleY(21) = InTomm(4.190)
+	PanelHoleX(22) = InTomm(7.090)
+	PanelHoleY(22) = InTomm(3.360)
+	PanelHoleX(23) = InTomm(8.350)
+	PanelHoleY(23) = InTomm(1.950)
+	
 Fend
 
 ' attempt to find the xyTheta pickup error
@@ -19,7 +87,7 @@ Function PanelFindPickupError
 	ChangeProfile("00") ' Change profile on the laser
 	Call changeSpeed(slow)
 	
-	LoadPanelInfo
+    LoadRecipe
 	
 	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
 	' this will allow us to move the holes close to where they need to be
@@ -76,7 +144,7 @@ Function PanelFindPickupError
 
 	' apply theta error correction
 	Print "found Theta offset, recalculating"
-	LoadPanelInfo
+	LoadRecipe
 	
 	PanelPickupErrorTheta = -errorTheta
 
@@ -183,35 +251,6 @@ Function xy2RadiusRotationTangent()
 	
 	For hole = 1 To PanelHoleCount
 
-'		' the radius is the hypotenuse of the angle formed by the x and y values
-'		PanelHoleRadius(hole) = Sqr((PanelHoleX(hole) ** 2) + (PanelHoleY(hole) ** 2))
-'		
-'		' the angle between the x-axis and the hole is the arctangent of y divided by x	
-'		' if x is zero (hole is on the y axis) then the angle is 90 degrees just poke it in to avoid div by zero error
-'		If PanelHoleX(hole) = 0 Then
-'			angle = 90
-'		Else
-'			angle = Abs(RadToDeg(Atan(PanelHoleY(hole) / PanelHoleX(hole))))
-'		EndIf
-'		
-'		' for the first quadrant we are done. For the others we still have some math to do
-'		' if we are in the second quadrant 
-'		If (PanelHoleX(hole) <= 0) And (PanelHoleY(hole) > 0) Then 'include positive y-axis in this quadrant
-'			angle = 90 - angle ' rotation from positive y-axis around to the angle we found above
-'			angle = angle + 90 ' add in the 90 degrees of rotation from the first quadrant
-'			
-'		' else if we are in the third quadrant
-'		ElseIf (PanelHoleX(hole) < 0) And (PanelHoleY(hole) <= 0) Then ' include negative x-axis in this quadrant
-'			angle = angle + 180 ' angle down from the negative x-axis plus 180 degrees rotation from quadrants one and two
-'			
-'		' else if we are in the forth quadrant
-'		ElseIf (PanelHoleX(hole) >= 0) And (PanelHoleY(hole) < 0) Then ' include negative y-axis in this quadrant
-'			angle = 90 - angle ' rotation from negative y-axis around to the angle we found above
-'			angle = angle + 270 ' add in the rotation through the other three quadrants
-'		EndIf
-'			
-'		PanelHoleRotation(hole) = angle ' store the angle we calculated
-		
 		' the approximate tangent is the angle perpendicular to the line connecting the two adjacent holes
 		' first find the angle relative to the x-axis of the line connecting the adjacent holes
 		' this is alot like the calculations above but just finding the angle from one adjacent hole to the other
@@ -251,9 +290,6 @@ Function xy2RadiusRotationTangent()
 		If PanelHoleTangent(hole - 1) < PanelHoleTangent(hole) Then
 			PanelHoleTangent(hole) = PanelHoleTangent(hole) - 360
 		EndIf
-		
-		'Print "Hole ", hole, " has radius ", PanelHoleRadius(hole), " and rotation ", PanelHoleRotation(hole), " Tangent is ", PanelHoleTangent(hole)
-	
 	Next
 Fend
 ' This function will move a panel hole over an x,y coordinate in robot space with the specified rotation

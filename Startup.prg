@@ -34,7 +34,6 @@ Function PowerOnSequence()
 	AccelS SystemAccel, SystemAccel
 	QP (On) ' turn On quick pausing	
 	
-	HomeCheck
 	findHome
 
 Fend
