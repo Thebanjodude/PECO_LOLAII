@@ -264,18 +264,11 @@ Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double,
 	Double rotY
 	
 	'rotate about the hole 
-	rotX = (-PanelHoleX(hole) * Cos(DegToRad(Theta))) - (-PanelHoleY(hole) * Sin(DegToRad(Theta)))
-	rotY = (-PanelHoleX(hole) * Sin(DegToRad(Theta))) + (-PanelHoleY(hole) * Cos(DegToRad(Theta)))
+'	rotX = (-PanelHoleX(hole) * Cos(DegToRad(Theta))) - (-PanelHoleY(hole) * Sin(DegToRad(Theta)))
+'	rotY = (-PanelHoleX(hole) * Sin(DegToRad(Theta))) + (-PanelHoleY(hole) * Cos(DegToRad(Theta)))
+	rotX = (PanelHoleX(hole) * Cos(DegToRad(Theta))) - (PanelHoleY(hole) * Sin(DegToRad(Theta)))
+	rotY = (PanelHoleX(hole) * Sin(DegToRad(Theta))) + (PanelHoleY(hole) * Cos(DegToRad(Theta)))
 
-'PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
-'	rotX = (PanelHoleX(hole) * Cos(DegToRad(Theta))) - (PanelHoleY(hole) * Sin(DegToRad(Theta)))
-'	rotY = (PanelHoleX(hole) * Sin(DegToRad(Theta))) + (PanelHoleY(hole) * Cos(DegToRad(Theta)))
-
-	
-	'add pickup err	
-	rotX = rotX + PanelPickupErrorX
-	rotY = rotY + PanelPickupErrorY
-	
 	' now put the quill at that point with the x,y offset to the hole
 	Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
 	Go XY(x + rotX, y + rotY, z, Theta) /L

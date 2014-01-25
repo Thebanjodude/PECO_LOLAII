@@ -17,6 +17,10 @@
 '	14 -  
 '	15 -  
 
+Global Real foo
+Global Real xd, yd
+Global Boolean blah
+
 ' System Global Vars and #defines
 Global Integer SystemSpeed, SystemAccel, mainCurrentState
 Global Boolean suctionCups, suctionCupsCC, holeDetected, maintMode
