@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/19 16:15:03:113,DS:0000023796,CS:26239,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/25 21:26:47:185,DS:0000023809,CS:06957,MA:00-0C-29-03-E6-C5,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=108
@@ -75,78 +75,6 @@ Point4 {
 	bSimVisible=False
 }
 Point5 {
-	nNumber=6
-	sLabel="MagIN_51010"
-	sDescription=""
-	rX=320.295
-	rY=417.812
-	rZ=-260.113
-	rU=142
-	rV=0
-	rW=0
-	nLocal=0
-	nHand=2
-	nElbow=1
-	nWrist=1
-	nJ4Flag=0
-	nJ6Flag=0
-	bSimVisible=False
-}
-Point6 {
-	nNumber=7
-	sLabel="CwdIN_51010"
-	sDescription=""
-	rX=-296.88
-	rY=-59
-	rZ=-89.246
-	rU=142
-	rV=0
-	rW=0
-	nLocal=0
-	nHand=2
-	nElbow=1
-	nWrist=1
-	nJ4Flag=0
-	nJ6Flag=0
-	bSimVisible=False
-}
-Point7 {
-	nNumber=8
-	sLabel="CwdOUT_51010"
-	sDescription=""
-	rX=-297.982
-	rY=-22.223
-	rZ=-98.703
-	rU=142
-	rV=0
-	rW=0
-	nLocal=0
-	nHand=2
-	nElbow=1
-	nWrist=1
-	nJ4Flag=0
-	nJ6Flag=0
-	bSimVisible=False
-}
-Point8 {
-	nNumber=9
-	sLabel="MagOUT_51010"
-	sDescription=""
-	rX=353.575
-	rY=-200.095
-	rZ=-198.886
-	rU=141.183
-	rV=0
-	rW=0
-	nLocal=0
-	nHand=2
-	nElbow=1
-	nWrist=1
-	nJ4Flag=0
-	nJ6Flag=0
-	bSimVisible=False
-}
-Point9 {
 	nNumber=11
 	sLabel="Laser"
 	sDescription=""
@@ -164,7 +92,7 @@ Point9 {
 	nJ6Flag=0
 	bSimVisible=False
 }
-Point10 {
+Point6 {
 	nNumber=12
 	sLabel="HotStake"
 	sDescription=""
@@ -172,6 +100,78 @@ Point10 {
 	rY=440
 	rZ=-10
 	rU=-45
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point7 {
+	nNumber=20
+	sLabel="MagOUT_51010"
+	sDescription=""
+	rX=353.575
+	rY=-200.095
+	rZ=-198.886
+	rU=141.183
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point8 {
+	nNumber=21
+	sLabel="MagIN_51010"
+	sDescription=""
+	rX=320.295
+	rY=417.812
+	rZ=-260.113
+	rU=55.689
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point9 {
+	nNumber=22
+	sLabel="CwdIN_51010"
+	sDescription=""
+	rX=-296.88
+	rY=-59
+	rZ=-89.246
+	rU=55.689
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point10 {
+	nNumber=23
+	sLabel="CwdOUT_51010"
+	sDescription=""
+	rX=-304.982
+	rY=-28.223
+	rZ=-98.703
+	rU=55.689
 	rV=0
 	rW=0
 	nLocal=0

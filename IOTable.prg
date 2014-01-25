@@ -849,18 +849,6 @@ Function iotransfer()
 		Print #201, "{", Chr$(&H22) + "erWrongPanelHoles" + Chr$(&H22), ":", Str$(erWrongPanelHoles), "}",
 		erWrongPanelHolesOld = erWrongPanelHoles
 	EndIf
-	If erModbusTimeout <> erModbusTimeoutOld Then
-		Print #201, "{", Chr$(&H22) + "erModbusTimeout" + Chr$(&H22), ":", Str$(erModbusTimeout), "}",
-		erModbusTimeoutOld = erModbusTimeout
-	EndIf
-	If erModbusPort <> erModbusPortOld Then
-		Print #201, "{", Chr$(&H22) + "erModbusPort" + Chr$(&H22), ":", Str$(erModbusPort), "}",
-		erModbusPortOld = erModbusPort
-	EndIf
-	If erModbusCommand <> erModbusCommandOld Then
-		Print #201, "{", Chr$(&H22) + "erModbusCommand" + Chr$(&H22), ":", Str$(erModbusCommand), "}",
-		erModbusCommandOld = erModbusCommand
-	EndIf
 	If hole0L <> hole0LOld Then
 		Print #201, "{", Chr$(&H22) + "hole0L" + Chr$(&H22), ":", Str$(hole0L), "}",
 		hole0LOld = hole0L

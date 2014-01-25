@@ -22,9 +22,11 @@
 '	14 -  
 '	15 -  
 
-Global Real foo
-Global Real xd, yd
-Global Boolean blah
+'<TESTING>
+'Global Real foo
+'Global Real xd, yd
+'Global Boolean blah
+'</TESTING>
 
 ' System Global Vars and #defines
 Global Integer SystemSpeed, SystemAccel, mainCurrentState
