@@ -12,18 +12,20 @@ Function HotStakePanel() As Integer
 	currentHSHole = 1 				' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 				' default to fail	
 	
-	If Not idle Then				' the PLC isn't in the correct state for entering the insertion program
+	' check to see if the PLC is in the correct state for entering the insertion program
+	If Not MemSw(m_idle) Then
 		GoTo exitHotStake
 	EndIf
 	
+	' Present panel to hot stake
 	If Not HomeCheck Then findHome
-	Jump PreHotStake LimZ zLimit 	' Present panel to hot stake
+	Jump PreHotStake LimZ zLimit
 	
-	gotoReadyCC = True				' Tell PLC to start the insertion process
+	' Tell PLC to start the insertion process
+	MBWrite(103, True, MBTypeCoil)
 	
-	Do Until ready					' ready signal from PLC
-		Wait .25
-	Loop
+	' ready signal from PLC
+	Wait MemSw(m_ready) = True
 
 	For i = recFirstHolePointHotStake To recLastHolePointHotStake
 
@@ -42,15 +44,18 @@ Function HotStakePanel() As Integer
 				JTran 3, -.5 					' Move only the z-axis downward in increments
 			Loop
 			
-			doInsertionCC = True
+			' Tell PLC to insert one part
+			MBWrite(105, True, MBTypeCoil)
 
-			'Wait insertingH
-			Wait Sw(3)
-
-			Do While inserting
-				Wait .5
-			Loop
-			doInsertionCC = False
+			' Wait for the PLC to start
+			Wait MemSw(m_inserting) = True
+			
+			' Reset the start insertion bit
+			MBWrite(105, False, MBTypeCoil)
+			
+			' Wait for the PLC to finsih
+			'Wait MemSw(m_inserting) = False
+			Wait MemSw(m_ready) = True
 
 			ZmaxTorque = 0
 			PTCLR (3)
@@ -60,13 +65,6 @@ Function HotStakePanel() As Integer
 		EndIf
 		
 		currentHSHole = currentHSHole + 1
-	
-		'Wait readyH								' give the PLC time to get back to ready state
-		Wait Sw(2)
-'		If Not ready Then						' something has gone wrong with the plc
-'			Exit For
-'		EndIf
-		
 	Next
 	
 	HotStakePanel = 0 							' HS station executed without a problem
@@ -82,14 +80,15 @@ exitHotStake:
 	SystemStatus = StateMoving
 
 	findHome
+	
+	' Tell the PLC to leave the inserting state
+	MBWrite(104, True, MBTypeCoil)
+	Wait MemSw(m_idle) = True
 
-	doneInsertingCC = True				' Tell the PLC to leave the inserting state
-	Do Until idle						' indication that the plc is idle
-		Wait .5
-	Loop
-	gotoReadyCC = False					' reset flag
-	doneInsertingCC = False				' reset flag
-		
+	' cleanup flags
+	MBWrite(103, False, MBTypeCoil)
+	MBWrite(104, False, MBTypeCoil)
+			
 Trap 2 ' disarm trap	
 
 Fend

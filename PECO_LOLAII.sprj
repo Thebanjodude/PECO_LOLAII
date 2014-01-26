@@ -1,12 +1,12 @@
-ENVT0100,LM:2014/01/26 22:40:59:006,DS:0000005594,CS:08017,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/26 23:13:02:514,DS:0000005597,CS:17259,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="1/26/2014 3:40:58 PM"
-	bBuildComplete=False
-	bRebuildRequired=False
+	sLastModified="1/26/2014 4:10:13 PM"
+	bBuildComplete=True
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMWKSSEHLERS"
@@ -36,7 +36,7 @@ ProgramFile2 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/26/2014 6:43:02 PM"
+	sTimeSavedInController="1/26/2014 10:51:05 PM"
 }
 ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
@@ -84,13 +84,13 @@ ProgramFile10 {
 	sName="HeatStake.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/8/2014 7:42:08 PM"
+	sTimeSavedInController="1/26/2014 11:10:01 PM"
 }
 ProgramFile11 {
 	sName="Startup.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/26/2014 8:32:17 PM"
+	sTimeSavedInController="1/26/2014 11:10:13 PM"
 }
 ProgramFile12 {
 	sName="MainStates.prg"
@@ -118,15 +118,15 @@ ProgramFile15 {
 }
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/26/2014 8:19:25 PM"
+	sTimeSavedInController="1/26/2014 10:40:58 PM"
 }
 nIncludeFileCount=5
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="1/26/2014 7:54:22 PM"
+	sTimeSavedInController="1/26/2014 11:10:13 PM"
 }
 IncludeFile2 {
 	sName="Defines.inc"

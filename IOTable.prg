@@ -45,12 +45,6 @@ Do While True
 	outMagUpLim = IOTableBooleans(Sw(outMagUpLimH), MemSw(outMagUpLimFV), MemSw(outMagUpLimF))
 	outMagUpLimN = IOTableBooleans(Sw(outMagUpLimNH), MemSw(outMagUpLimNFV), MemSw(outMagUpLimNF))
 	rightIntlock = IOTableBooleans(Sw(rightIntlockH), MemSw(rightIntlockFV), MemSw(rightIntlockF))
-	
-	bootDelay = IOTableBooleans(Sw(bootDelayH), MemSw(bootDelayFV), MemSw(bootDelayF))
-	idle = IOTableBooleans(Sw(idleH), MemSw(idleFV), MemSw(idleF))
-	ready = IOTableBooleans(Sw(readyH), MemSw(readyFV), MemSw(readyF))
-	inserting = IOTableBooleans(Sw(insertingH), MemSw(insertingFV), MemSw(insertingF))
-	dumping = IOTableBooleans(Sw(dumpingH), MemSw(dumpingFV), MemSw(dumpingF))
 Loop
 	errHandler:
 		
@@ -95,47 +89,6 @@ Do While True
 	    ReturnFlag = False
 	EndIf
 
-	boot = IOTableBooleans(bootCC, MemSw(bootFV), MemSw(bootF))
-	If boot = True Then
-			On (bootH)
-		Else
-			Off (bootH)
-		EndIf
-	    
-	gotoReady = IOTableBooleans(gotoReadyCC, MemSw(gotoReadyFV), MemSw(gotoReadyF))
-	If gotoReady = True Then
-			On (gotoReadyH)
-		Else
-			Off (gotoReadyH)
-		EndIf
-	    
-	doInsertion = IOTableBooleans(doInsertionCC, MemSw(doInsertionFV), MemSw(doInsertionF))
-	If doInsertion = True Then
-			On (doInsertionH)
-		Else
-			Off (doInsertionH)
-		EndIf
-	    
-	doneInserting = IOTableBooleans(doneInsertingCC, MemSw(doneInsertingFV), MemSw(doneInsertingF))
-	If DoneInserting = True Then
-			On (doneInsertingH)
-		Else
-			Off (doneInsertingH)
-		EndIf
-	    
-	startDump = IOTableBooleans(startDumpCC, MemSw(startDumpFV), MemSw(startDumpF))
-	If startDump = True Then
-			On (startDumpH)
-		Else
-			Off (startDumpH)
-		EndIf
-	    
-	doneDumping = IOTableBooleans(doneDumpingCC, MemSw(doneDumpingFV), MemSw(doneDumpingF))
-	If doneDumping = True Then
-			On (doneDumpingH)
-		Else
-			Off (doneDumpingH)
-		EndIf
 
 	'---------------------
 	debrisMtr = IOTableBooleans(debrisMtrCC, MemSw(debrisMtrFV), MemSw(debrisMtrF))
@@ -613,13 +566,13 @@ Function iotransfer()
 	'see if a 0.5 second has passed
 	TmReset 0
 	
-   	OnErr GoTo RetryConnection ' on any error retry connection
+  OnErr GoTo RetryConnection ' on any error retry connection
   
 	RetryConnection:
-      	If ChkNet(201) < 0 Then ' If port is not open
-      		Wait 2 'give things a chance to settle before opening the port
-            OpenNet #201 As Client
-            Print "Attempted Open TCP port to HMI"
+  	If ChkNet(201) < 0 Then ' If port is not open
+  		Wait 2 'give things a chance to settle before opening the port
+       OpenNet #201 As Client
+       Print "Attempted Open TCP port to HMI"
 		EndIf
 		
 	heartBeat = Not heartBeat

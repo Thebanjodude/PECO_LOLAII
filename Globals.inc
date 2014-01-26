@@ -81,9 +81,6 @@ Global Integer currentFlashHole
 
 'Heat Stake Global Vars
 Global Boolean hsPanelPresnt
-Global Boolean boot, gotoReady, doInsertion, DoneInserting, startDump, doneDumping
-Global Boolean bootCC, gotoReadyCC, doInsertionCC, doneInsertingCC, startDumpCC, doneDumpingCC
-Global Boolean bootDelay, idle, ready, inserting, dumping
 Global Integer currentHSHole
 Global Real PreInspectionArray(0, 0)
 

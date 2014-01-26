@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/26 20:33:05:695,DS:0000004371,CS:20770,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/26 23:13:05:419,DS:0000004371,CS:21029,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -6,8 +6,8 @@ ProgramFile1 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1151
-		nHeight=525
+		nWidth=1149
+		nHeight=521
 	}
 }
 ProgramFile2 {
@@ -17,8 +17,8 @@ ProgramFile2 {
 	Window {
 		nLeft=21
 		nTop=19
-		nWidth=965
-		nHeight=542
+		nWidth=964
+		nHeight=539
 	}
 }
 ProgramFile3 {
@@ -101,12 +101,12 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=100
 		nTop=100
-		nWidth=1159
-		nHeight=549
+		nWidth=1157
+		nHeight=545
 	}
 }
 ProgramFile11 {
@@ -116,19 +116,19 @@ ProgramFile11 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1047
-		nHeight=571
+		nWidth=1046
+		nHeight=567
 	}
 }
 ProgramFile12 {
 	sName="MainStates.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=50
 		nTop=50
-		nWidth=1156
-		nHeight=542
+		nWidth=1155
+		nHeight=539
 	}
 }
 ProgramFile13 {
@@ -171,8 +171,8 @@ ProgramFile16 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=813
-		nHeight=456
+		nWidth=811
+		nHeight=453
 	}
 }
 nIncludeFileCount=5
@@ -183,8 +183,8 @@ IncludeFile1 {
 	Window {
 		nLeft=248
 		nTop=196
-		nWidth=913
-		nHeight=504
+		nWidth=912
+		nHeight=501
 	}
 }
 IncludeFile2 {
@@ -194,8 +194,8 @@ IncludeFile2 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1058
-		nHeight=599
+		nWidth=1057
+		nHeight=595
 	}
 }
 IncludeFile3 {
@@ -274,14 +274,14 @@ CmdWindow {
 		nWidth=674
 		nHeight=358
 	}
-	nWinState=2
+	nWinState=0
 }
 RunWindow {
 	bOpened=False
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=2083
+		nWidth=2271
 		nHeight=1062
 	}
 }
@@ -293,7 +293,7 @@ IOLabelEditor {
 		nWidth=1057
 		nHeight=602
 	}
-	nWinState=2
+	nWinState=0
 }
 IOMonitor {
 	bOpened=False

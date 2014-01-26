@@ -12,13 +12,13 @@ Function PowerOnSequence()
 	Xqt 4, SystemMonitor, NoEmgAbort
 	Xqt 5, iotransfer, NoEmgAbort
 	Xqt 6, HmiListen, NoEmgAbort
-    Xqt 7, InmagControl, Normal
-    Xqt 8, OutMagControlRefactor(), Normal
+	Xqt 7, InmagControl, Normal
+	Xqt 8, OutMagControlRefactor(), Normal
     
-    'Xqt 9 -- Unused
-    'Xqt 10 -- Used in HeatStakeComms for MBCommandTask
-    
-    Call MBInitialize
+  'Xqt 9 -- Unused
+  'Xqt 10 -- Used in HeatStakeComms for MBCommandTask
+  
+	Call MBInitialize
     
 	' Start the PLC
 	' check to see if the PLC waiting to boot or has already booted
@@ -29,7 +29,7 @@ Function PowerOnSequence()
 	MBWrite(100, True, MBTypeCoil)
 
 	' Wait for the PLC to reach the idle state
-	Wait MemSw(m_idle)
+	Wait MemSw(m_idle) = True
 
 	ClearMemory() ' writes a zero to all the memIO
 	
