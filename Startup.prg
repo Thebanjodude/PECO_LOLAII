@@ -14,6 +14,14 @@ Function PowerOnSequence()
 	Xqt 6, HmiListen, NoEmgAbort
     Xqt 7, InmagControl, Normal
     Xqt 8, OutMagControlRefactor(), Normal
+    
+    'Xqt 9 -- Unused
+    'Xqt 10 -- Used in HeatStakeComms for MBCommandTask
+    
+    Call MBInitialize
+    
+    Call mbTest
+    
 
 	' Start the PLC
 	'Wait bootDelayH

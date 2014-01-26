@@ -7,7 +7,7 @@
 ' TMR-
 '	0  -  IOT (hmi comms) - iotransfer()
 '	1  -  Crowding open delay -- crowdingSequence()
-'	2  -  
+'	2  -  modbus delay -- MBCommandTask()
 '	3  -  dump delay (obsoleted)
 '	4  -  
 '	5  -  

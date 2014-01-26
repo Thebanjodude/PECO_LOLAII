@@ -92,4 +92,15 @@
 #define Joint4StatusMask &H100
 #define SafeGuardMask &H400000
 
+' modbus constants
+#define MBCmdReadCoil 1
+#define MBCmdReadInput 2
+#define MBCmdReadRegister 3
+#define MBCmdReadInputRegister 4
+#define MBCmdWriteCoil 5
+#define MBCmdWriteRegister 6
+#define MBTypeCoil 1
+#define MBType16 2
+#define MBType32 3
+#define MBWriteQueueSize 30
 
