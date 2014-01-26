@@ -64,7 +64,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = Value
+	MBQueueValue(MBQueueHead) = value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -186,9 +186,9 @@ Function MBCommandTask()
 			'read the data off of the PLC
 
 			'--TODO-- map plc memory & write read/write calls
-'			Print "reg 1000: ", modreadregister(1000)
-'			Print "reg 1098: ", modreadregister(1098)
-'			Print "reg 1099: ", modreadregister(1099)
+			Print "reg 1000: ", modbusreadregister(1000)
+			Print "reg 1098: ", modbusreadregister(1098)
+			Print "reg 1099: ", modbusreadregister(1099)
 
 '<OLD_PLC_SETUP>
 '			' start at modbus address 0x0014 (PLC memory location D20)
@@ -352,8 +352,9 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	'modResponse(1) = Transaction ID low - Same ID as request
 	'modResponse(2) = protocol id high
 	'modResponse(3) = protocol id low
-	'modResponse(4) = length
-	'modResponse(5) = unit id
+	'modResponse(4) = length high
+	'modResponse(5) = length low
+	'modResponse(6) = unit id 
 	'modResponse(7) = function. Should be 6 if no error
 	'modResponse(8) = Register address high byte
 	'modResponse(9) = Register address low byte
@@ -379,7 +380,8 @@ Function modbusReadRegister(regNum As Long) As Long
 	' Transaction ID low	0x??
 	' protocol id high		0x00
 	' protocol id low		0x00
-	' length				0x06
+	' length high			0x00
+	' length low			0x06
 	' unit id				0xff
 	' function code			0x03
 	' address high 			0x??
@@ -392,16 +394,17 @@ Function modbusReadRegister(regNum As Long) As Long
 	modMessage(1) = transactionID And &hFF
 	modMessage(2) = 0
 	modMessage(3) = 0
-	modMessage(4) = &h06
-	modMessage(5) = &hFF
-	modMessage(6) = MBCmdReadRegister ' function code
-	modMessage(7) = RShift(regNum, 8) ' high byte of address
-	modMessage(8) = regNum And &hFF ' low byte of address
-	modMessage(9) = 0 ' high byte of No. of regs is always zero 
-	modMessage(10) = 1 ' low byte of No. of regs is one i.e. read one register
+	modMessage(4) = 0
+	modMessage(5) = &h06
+	modMessage(6) = &hFF
+	modMessage(7) = MBCmdReadRegister ' function code
+	modMessage(8) = RShift(regNum, 8) ' high byte of address
+	modMessage(9) = regNum And &hFF ' low byte of address
+	modMessage(10) = 0 ' high byte of No. of regs is always zero 
+	modMessage(11) = 1 ' low byte of No. of regs is one i.e. read one register
 	
 	' send the message to the PLC
-	WriteBin #204, modMessage(), 11
+	WriteBin #204, modMessage(), 12
 
 	'process the response or timeout 
 	'wait for a predefinded period of time for the expected number of characters
@@ -409,8 +412,9 @@ Function modbusReadRegister(regNum As Long) As Long
 	'modResponse(1) = Transaction ID low - Same ID as request
 	'modResponse(2) = protocol id high
 	'modResponse(3) = protocol id low
-	'modResponse(4) = length
-	'modResponse(5) = unit id
+	'modResponse(4) = length high
+	'modResponse(5) = length low
+	'modResponse(6) = unit id
 	'modResponse(7) = function. Should be 3 if no error
 	'modResponse(8) = No. Bytes returned. Should be 2 for one 16 bit register
 	'modResponse(9) = value high byte
@@ -422,7 +426,7 @@ Function modbusReadRegister(regNum As Long) As Long
 		'exit function
 	EndIf
 
-	modbusReadRegister = LShift(modResponse(3), 8) + modResponse(4)
+	modbusReadRegister = LShift(modResponse(9), 8) + modResponse(10)
 
 Fend
 
