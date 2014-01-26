@@ -21,12 +21,15 @@ Function PowerOnSequence()
     Call MBInitialize
     
 	' Start the PLC
-	'Wait bootDelayH
-	Wait Sw(0)
-	bootCC = True 'Let the PLC know that it is safe to boot
-	'Wait idleH
-	Wait Sw(1)
-	bootCC = False 'PLC has booted, reset the boot flag
+	' check to see if the PLC waiting to boot or has already booted
+	'  if it has already booted, assume it was an e-stop
+	Wait MemSw(m_bootDelay) = True Or MemSw(m_bootDone) = True
+	' Let the PLC know that it is safe to boot, if it has already booted it will
+	'  ignore this bit.
+	MBWrite(100, True, MBTypeCoil)
+
+	' Wait for the PLC to reach the idle state
+	Wait MemSw(m_idle)
 
 	ClearMemory() ' writes a zero to all the memIO
 	
