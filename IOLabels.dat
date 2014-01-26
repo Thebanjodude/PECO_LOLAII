@@ -1,4 +1,4 @@
-ENVT0100,LM:2013/12/20 17:29:17:616,DS:0000016514,CS:02621,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/26 19:31:25:824,DS:0000017103,CS:31289,MA:00-0C-29-03-E6-C5,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=44
@@ -344,7 +344,7 @@ OutputWordLabels {
 	nNumberOfLabels=0
 }
 MemoryBitLabels {
-	nNumberOfLabels=158
+	nNumberOfLabels=166
 	Label1 {
 		nBit=0
 		sLabel="airPressLowF"
@@ -1131,6 +1131,46 @@ MemoryBitLabels {
 		sDescription=""
 	}
 	Label158 {
+		nBit=184
+		sLabel="mem_inserting"
+		sDescription=""
+	}
+	Label159 {
+		nBit=185
+		sLabel="mem_idle"
+		sDescription=""
+	}
+	Label160 {
+		nBit=186
+		sLabel="mem_bootDelay"
+		sDescription=""
+	}
+	Label161 {
+		nBit=187
+		sLabel="mem_bootDone"
+		sDescription=""
+	}
+	Label162 {
+		nBit=188
+		sLabel="mem_findingHome"
+		sDescription=""
+	}
+	Label163 {
+		nBit=189
+		sLabel="mem_dumpRunning"
+		sDescription=""
+	}
+	Label164 {
+		nBit=190
+		sLabel="mem_manualModeOn"
+		sDescription=""
+	}
+	Label165 {
+		nBit=191
+		sLabel="mem_ready"
+		sDescription=""
+	}
+	Label166 {
 		nBit=216
 		sLabel="WatlowDO"
 		sDescription=""

@@ -13,22 +13,60 @@ Integer MBQueueTail
 Integer transactionID
 
 String CRLF$
-Integer modMessage(256)
+'Integer modMessage(256)
 Integer modResponse(256)
 Integer modbusMessageID
 Boolean testcoil
 Boolean testinput
 
+
+' comms globals
+Boolean m_inserting
+Boolean m_idle
+Boolean m_ready
+Boolean m_bootDelay
+Boolean m_bootDone
+Boolean m_findingHOme
+Boolean m_dumprunning
+Boolean m_manualmodeon
+
+
 'testing
 Function mbTest()
 	Wait 3
 	Do While True
-		MBWrite(1099, transactionID, MBType16)
-		MBWrite(100, Int(Tmr(1)) Mod 2, MBTypeCoil)
+		'MBWrite(1099, transactionID, MBType16)
+		'MBWrite(100, Int(Tmr(1)) Mod 2, MBTypeCoil)
 		Wait 1
 	Loop
 Fend
+' <testing>
+Function set_m_inserting(var As Boolean)
+	m_inserting = var
+Fend
+Function set_m_idle(var As Boolean)
+	 m_idle = var
+Fend
+Function set_m_ready(var As Boolean)
+	 m_ready = var
+Fend
+Function set_m_bootDelay(var As Boolean)
+	 m_bootDelay = var
+Fend
+Function set_m_bootDone(var As Boolean)
+	 m_bootDone = var
+Fend
+Function set_m_findingHOme(var As Boolean)
+	 m_findingHOme = var
+Fend
+Function set_m_dumprunning(var As Boolean)
+	 m_dumprunning = var
+Fend
+Function set_m_manualmodeon(var As Boolean)
+	 m_manualmodeon = var
+Fend
 
+' </testing>
 
 Function MBInitialize()
 	
@@ -82,12 +120,21 @@ Fend
 ' and send commands to PLC
 Function MBCommandTask()
 	Boolean temp_bool
-	Integer portStatus
-	Integer count
-	Integer maxCount
+	Integer portStatus, i
+	Long inputs
 	
-	count = 0
-	maxCount = 12
+	
+' comms 
+Boolean l_inserting
+Boolean l_idle
+Boolean l_ready
+Boolean l_bootDelay
+Boolean l_bootDone
+Boolean l_findingHOme
+Boolean l_dumprunning
+Boolean l_manualmodeon
+	
+	
 	
 	' set up for the TCP port on the PLC
 	SetNet #204, "10.22.251.64", 502, CR, NONE, 0.2
@@ -174,9 +221,10 @@ Function MBCommandTask()
 		Else
 			'Read data from the PLC
 			'
-			' so it turns out that with the right setup we can read all of the data of interest in under 250ms
-			' ...the delay comes in when we try to process that data, so we are going to parcel the processing
-			' out a little bit, but do a full read each time since it has no impact on cycle time
+			' so it turns out that memory management on this guy is weird.
+			' ...the delay comes in when we try to process data that hits globals, there is a
+			' ~7-10 ms penalty for every global/modual memory access.
+			' That adds up fast when you are talking ~90 vars
 			
 			'Print "MODBUS: Time since last modbus read: ", Tmr(2)
 			
@@ -185,129 +233,125 @@ Function MBCommandTask()
 			TmReset 2
 
 			'read the data off of the PLC
-
+			TmReset 15
+			
 			'--TODO-- map plc memory & write read/write calls
-			Print "reg 1098: ", modbusReadRegister(1098)
-			Print "reg 1099: ", modbusReadRegister(1099)
-			Print "input 100:", modbusReadInput(100)
-			modbusReadMultipleRegister(1098, 2)
-			Print "reg 1098, 1099: ", LShift(modResponse(9), 8) + modResponse(10), ",", LShift(modResponse(11), 8) + modResponse(12)
-
-'<OLD_PLC_SETUP>
-'			' start at modbus address 0x0014 (PLC memory location D20)
-'			' and read the next 49 regs ending at modbus address 0x044 (inclusive)
-'			' (PLC memory location D68, inclusive)
-'			' the result will be stored in modResponse, us modGetResult to pull values
-'			' modbusReadMultipleRegister() returns true of the read was successfull
-'			If modbusReadMultipleRegister(&h0014, 49) Then
-'				
-'				'Print "MODBUS: Time to pull data from PLC: ", Tmr(1)
+			inputs = modbusReadMultipleInput(200, 8)
+			' parse
+			set_m_inserting(BTst(inputs, 0))
+			set_m_idle(BTst(inputs, 1))
+			set_m_ready(BTst(inputs, 2))
+			set_m_bootDelay(BTst(inputs, 3))
+			set_m_bootDone(BTst(inputs, 4))
+			set_m_findingHOme(BTst(inputs, 5))
+			set_m_dumprunning(BTst(inputs, 6))
+			set_m_manualmodeon(BTst(inputs, 7))
+			
+'			inputs = modbusReadMultipleInput(300, 2)
+'			' parse
 '
-'				'process the data
-'				' the results should be stored in modResponse()
-'				' so pull them out and map them to vars
-'				
-'				' these are the vars we want to update every cycle
-'				pasCrowding = BTst(modResponse(5), 7)
-'				pasMessageDB = LShift(modResponse(9), 8) + modResponse(10)
-'				pasVerticalLocation = (LShift((LShift(modResponse(17), 8) + modResponse(18)), 16) + ((LShift(modResponse(15), 8) + modResponse(15)) And &hFFFF)) * .000000762939
-'				pasHeadinsertPickupRetract = BTst(modResponse(7), 0)
-'				pasHeadinsertpickupextend = BTst(modResponse(7), 1)
-'				pasSlideExtend = BTst(modResponse(4), 7)
-'				pasInsertGripper = BTst(modResponse(3), 0)
-'				pas1inLoadInsertCylinder = BTst(modResponse(4), 1)
-'				pasBowlDumpOpen = BTst(modResponse(3), 2)
-'				pasVibTrack = BTst(modResponse(3), 3)
-'				pasBowlFeeder = BTst(modResponse(3), 4)
-'				pasBlowInsert = BTst(modResponse(3), 5)
-'				pasInsertDetected = BTst(modResponse(5), 0)
-'				pasSteelInsert = BTst(modResponse(5), 1)
-'				pasShuttleMidway = BTst(modResponse(5), 2)
-'				pasShuttleLoadPosition = BTst(modResponse(5), 3)
-'				pasShuttleNoLoad = BTst(modResponse(5), 4)
-'				pasShuttleExtend = BTst(modResponse(5), 5)
-'				pasInsertInShuttle = BTst(modResponse(5), 6)
-'				pasHome = BTst(modResponse(6), 2)
-'					
-'				'process the less time sensitive reads
-'				Select count
-'				Case 0
-'					pasPreHeatActual = (LShift(modResponse(66), 8) + modResponse(65)) * 0.1
-'					pasDwellActual = (LShift(modResponse(68), 8) + modResponse(67)) * 0.1
-'					pasCoolActual = (LShift(modResponse(70), 8) + modResponse(69)) * 0.1
-'                    pasSoftHome = (LShift((LShift(modResponse(37), 8) + modResponse(38)), 16) + ((LShift(modResponse(35), 8) + modResponse(36)) And &hFFFF)) * .000000762939
-'				Case 1
-'					pasInsertPosition = (LShift((LShift(modResponse(45), 8) + modResponse(46)), 16) + ((LShift(modResponse(43), 8) + modResponse(44)) And &hFFFF)) * .000000762939
-'					pasInsertDepth = (LShift((LShift(modResponse(21), 8) + modResponse(22)), 16) + ((LShift(modResponse(19), 8) + modResponse(20)) And &hFFFF)) * .000000762939
-'					pasSoftStop = (LShift((LShift(modResponse(13), 8) + modResponse(14)), 16) + ((LShift(modResponse(11), 8) + modResponse(12)) And &hFFFF)) * .000000762939
-'				Case 2
-'					pasHomeIPM = (LShift((LShift(modResponse(41), 8) + modResponse(42)), 16) + ((LShift(modResponse(39), 8) + modResponse(40)) And &hFFFF)) * .0000457764
-'					pasInsertPickupIPM = (LShift((LShift(modResponse(49), 8) + modResponse(50)), 16) + ((LShift(modResponse(47), 8) + modResponse(48)) And &hFFFF)) * .0000457764
-'					pasHeatStakingIPM = (LShift((LShift(modResponse(25), 8) + modResponse(26)), 16) + ((LShift(modResponse(23), 8) + modResponse(24)) And &hFFFF)) * .0000457764
-'				Case 3
-'					pasInsertEngageIPM = (LShift((LShift(modResponse(33), 8) + modResponse(34)), 16) + ((LShift(modResponse(31), 8) + modResponse(32)) And &hFFFF)) * .0000457764
-'					pasInsertEngage = (LShift((LShift(modResponse(29), 8) + modResponse(30)), 16) + ((LShift(modResponse(27), 8) + modResponse(28)) And &hFFFF)) * .000000762939
-'					pasSetTempZone1 = LShift(modResponse(59), 8) + modResponse(60)
-'					pasSetTempZone2 = LShift(modResponse(63), 8) + modResponse(64)
-'				Case 4
-'					pasActualTempZone1 = LShift(modResponse(57), 8) + modResponse(58)
-'					pasActualTempZone2 = LShift(modResponse(61), 8) + modResponse(62)
-'					pasPIDsetupMaxTempZone1 = LShift(modResponse(87), 8) + modResponse(88)
-'					pasPIDsetupMaxTempZone2 = LShift(modResponse(89), 8) + modResponse(90)
-'					pasPIDsetupInTempZone1 = LShift(modResponse(83), 8) + modResponse(84)
-'					pasPIDsetupInTempZone2 = LShift(modResponse(85), 8) + modResponse(86)
-'				Case 5
-'					pasPIDsetupOffsetZone1 = LShift(modResponse(91), 8) + modResponse(92)
-'					pasPIDsetupOffsetZone2 = LShift(modResponse(93), 8) + modResponse(94)
-'					pasPIDsetupPZone1 = LShift(modResponse(71), 8) + modResponse(72)
-'					pasPIDsetupIZone1 = LShift(modResponse(75), 8) + modResponse(76)
-'					pasPIDsetupDZone1 = LShift(modResponse(79), 8) + modResponse(80)
-'					pasPIDsetupPZone2 = LShift(modResponse(73), 8) + modResponse(74)
-'				Case 6
-'					pasPIDsetupIZone2 = LShift(modResponse(77), 8) + modResponse(78)
-'					pasPIDsetupDZone2 = LShift(modResponse(81), 8) + modResponse(82)
-'					pasInsertPreheat = (LShift(modResponse(95), 8) + modResponse(96)) * 0.1
-'					pasDwell = (LShift(modResponse(97), 8) + modResponse(98)) * 0.1
-'					pasCool = (LShift(modResponse(99), 8) + modResponse(100)) * 0.1
-'					pasJogSpeed = (LShift(modResponse(55), 8) + modResponse(56)) * 0.5
-'					pasMaxLoadmeter = (LShift(modResponse(53), 8) + modResponse(54)) * 0.1
-'				Case 7
-'					pasLoadMeter = (LShift(modResponse(51), 8) + modResponse(52)) * -0.1
-'					pasHighTempAlarm = BTst(modResponse(8), 1)
-'					pasInsertType = BTst(modResponse(6), 7)
-'					pasTempOnOff = BTst(modResponse(4), 4)
-'					pasMasterTemp = BTst(modResponse(8), 0)
-'					pasUpLimit = BTst(modResponse(6), 0)
-'					pasLowerlimit = BTst(modResponse(6), 1)
-'				Case 8
-'					pasOTAOnOffZone1 = BTst(modResponse(8), 2)
-'					pasOTAOnOffZone2 = BTst(modResponse(8), 3)
-'					pasOnOffZone1 = BTst(modResponse(6), 3)
-'					pasOnOffZone2 = BTst(modResponse(6), 4)
-'					pasMaxTempOnOffZone1 = BTst(modResponse(8), 4)
-'					pasMaxTempOnOffZone2 = BTst(modResponse(8), 5)
-'					pasMaxTempZone1 = BTst(modResponse(3), 6)
-'				Case 9
-'					pasMaxTempZone2 = BTst(modResponse(3), 7)
-'					pasPIDTuneDoneZone1 = BTst(modResponse(6), 5)
-'					pasPIDTuneDoneZone2 = BTst(modResponse(6), 6)
-'					pasPIDTuneFailZone1 = BTst(modResponse(6), 0)
-'					pasPIDTuneFailZone2 = BTst(modResponse(6), 1)
-'					pasInTempZone1 = BTst(modResponse(4), 2)
-'					pasInTempZone2 = BTst(modResponse(4), 3)
-'					pasHeadDown = BTst(modResponse(4), 5)
-'					pasHeadUp = BTst(modResponse(4), 6)
-'					pasMCREStop = BTst(modResponse(8), 6)
-'					pasStart = BTst(modResponse(8), 7)
-'				Send
-'				
-'				count = count + 1
-'				
-'				If count > maxCount Then
-'					count = 0
-'				EndIf
+'			inputs = modbusReadMultipleInput(400, 9)
+'			' parse
+'			
+'			inputs = modbusReadMultipleInput(500, 11)
+'			' parse
+
+			Print "Time to obtain data - function: ", Tmr(15)
+			
+			TmReset 15
+			inputs = modbusReadMultipleInput(200, 8)
+
+			g_inserting = BTst(inputs, 0)
+			g_idle = BTst(inputs, 1)
+			g_ready = BTst(inputs, 2)
+			g_bootDelay = BTst(inputs, 3)
+			g_bootDone = BTst(inputs, 4)
+			g_findingHOme = BTst(inputs, 5)
+			g_dumprunning = BTst(inputs, 6)
+			g_manualmodeon = BTst(inputs, 7)
+			
+			Print "Time to obtain data - global  : ", Tmr(15)
+			
+			
+			TmReset 15
+			inputs = modbusReadMultipleInput(200, 8)
+
+			l_inserting = BTst(inputs, 0)
+			l_idle = BTst(inputs, 1)
+			l_ready = BTst(inputs, 2)
+			l_bootDelay = BTst(inputs, 3)
+			l_bootDone = BTst(inputs, 4)
+			l_findingHOme = BTst(inputs, 5)
+			l_dumprunning = BTst(inputs, 6)
+			l_manualmodeon = BTst(inputs, 7)
+			
+			Print "Time to obtain data - local   : ", Tmr(15)
+			
+			
+			TmReset 15
+			inputs = modbusReadMultipleInput(200, 8)
+
+			' slow - same as using globals
+'			m_inserting = BTst(inputs, 0)
+'			m_idle = BTst(inputs, 1)
+'			m_ready = BTst(inputs, 2)
+'			m_bootDelay = BTst(inputs, 3)
+'			m_bootDone = BTst(inputs, 4)
+'			m_findingHOme = BTst(inputs, 5)
+'			m_dumprunning = BTst(inputs, 6)
+'			m_manualmodeon = BTst(inputs, 7)
+			
+			' Fast - pain to code
+'			If BTst(inputs, 0) Then
+'				MemOn (mem_inserting)
+'			Else
+'				MemOff (mem_inserting)
 '			EndIf
-'</OLD_PLC_SETUP>
+'			If BTst(inputs, 1) Then
+'				MemOn (mem_idle)
+'			Else
+'				MemOff (mem_idle)
+'			EndIf
+'			If BTst(inputs, 2) Then
+'				MemOn (mem_ready)
+'			Else
+'				MemOff (mem_ready)
+'			EndIf
+'			If BTst(inputs, 3) Then
+'				MemOn (mem_bootDelay)
+'			Else
+'				MemOff (mem_bootDelay)
+'			EndIf
+'			If BTst(inputs, 4) Then
+'				MemOn (mem_bootDone)
+'			Else
+'				MemOff (mem_bootDone)
+'			EndIf
+'			If BTst(inputs, 5) Then
+'				MemOn (mem_findingHome)
+'			Else
+'				MemOff (mem_findingHome)
+'			EndIf
+'			If BTst(inputs, 6) Then
+'				MemOn (mem_dumpRunning)
+'			Else
+'				MemOff (mem_dumpRunning)
+'			EndIf
+'			If BTst(inputs, 7) Then
+'				MemOn (mem_manualModeOn)
+'			Else
+'				MemOff (mem_manualModeOn)
+'			EndIf
+			
+			' fast -- pain to maintain
+			MemOut 23, inputs
+	
+			Print "Time to obtain data - memory   : ", Tmr(15)
+			
+			
+			'modbusReadMultipleRegister(1098, 2)
+			'Print "reg 1098, 1099: ", LShift(modResponse(9), 8) + modResponse(10), ",", LShift(modResponse(11), 8) + modResponse(12)
+
 		EndIf
 	Loop
 Fend
@@ -317,6 +361,7 @@ Fend
 ' It will then wait for a response and return a ??? for success or -1 for failure
 ' calling type and return value are "Long" 
 Function modbusWriteRegister(regNum As Long, value As Long) As Integer
+	Integer modMessage(256)
 	
 	'build the command and send it to PLC
 	' Transaction ID high	0x??
@@ -376,6 +421,7 @@ Fend
 ' It will build a valid Modbus RTU request and send it to the PLC
 ' It will then wait for a response from the PLC
 Function modbusReadRegister(regNum As Long) As Long
+	Integer modMessage(256)
 	
 	'build the command and send it to PLC
 	' Transaction ID high	0x??
@@ -436,6 +482,7 @@ Fend
 ' It will build a valid Modbus RTU request and send it to the PLC
 ' and then wait for a response from the PLC
 Function modbusReadInputRegister(regNum As Long) As Long
+	Integer modMessage(256)
 	
 	'build the command and send it to PLC
 	' Transaction ID high	0x??
@@ -501,6 +548,7 @@ Fend
 ' **********  It should only be called from the MBCommandTask()   ************
 ' ****************************************************************************
 Function modbusReadMultipleRegister(regNum As Long, numRegToRead As Long) As Boolean
+	Integer modMessage(256)
 	
 	'build the command and send it to PLC
 	' Transaction ID high	0x??
@@ -565,6 +613,7 @@ Fend
 ' It will build a valid Modbus RTU message and send it to the PLC
 ' It will then wait for a response and return a ??? for success or -1 for failure
 Function modbusWriteCoil(coilNum As Long, value As Boolean)
+	Integer modMessage(256)
 	
 	'build the command and send it to PLC
 	' Transaction ID high	0x??
@@ -625,10 +674,10 @@ Fend
 
 ' This function is for reading a single Modbus input on the PLC
 ' It will build a valid Modbus RTU message and send it to the PLC
-' using the HMI ethernet to serial dameon as a bridge
 ' It will then wait for a response and return the input status
-Function modbusReadInput(inputNum As Long)
-
+Function modbusReadInput(inputNum As Long) As Boolean
+	Integer modMessage(256)
+	
 	'build the command and send it to PLC
 	' Transaction ID high	0x??
 	' Transaction ID low	0x??
@@ -642,7 +691,6 @@ Function modbusReadInput(inputNum As Long)
 	' address low			0x??
 	' No. of coils high 	0x00
 	' No. of coils low		0x01
-	
 	transactionID = transactionID + 1
 	modMessage(0) = RShift(transactionID, 8)
 	modMessage(1) = transactionID And &hFF
@@ -654,8 +702,8 @@ Function modbusReadInput(inputNum As Long)
 	modMessage(7) = MBCmdReadInput ' function code
 	modMessage(8) = RShift(inputNum, 8) ' high byte of address
 	modMessage(9) = inputNum And &hFF ' low byte of address
-	modMessage(10) = 0;
-	modMessage(11) = 1; ' keep things simple by only allowing the read of one coil
+	modMessage(10) = 0
+	modMessage(11) = 1 ' keep things simple by only allowing the read of one coil
 
 	' send the message to the PLC
 	WriteBin #204, modMessage(), 12
@@ -685,6 +733,80 @@ Function modbusReadInput(inputNum As Long)
 
 Fend
 
+' This function is for reading multiple Modbus inputs on the PLC
+' It will build a valid Modbus RTU message and send it to the PLC
+' It will then wait for a response and return the input status
+Function modbusReadMultipleInput(inputNum As Long, numberCoils As Long) As Long
+	Integer modMessage(256)
+	Integer readNum, j
+
+	'build the command and send it to PLC
+	' Transaction ID high	0x??
+	' Transaction ID low	0x??
+	' protocol id high		0x00
+	' protocol id low		0x00
+	' length high			0x00
+	' length low			0x06
+	' unit id				0xff	
+	' function code			0x02
+	' address high 			0x??
+	' address low			0x??
+	' No. of coils high 	0x00
+	' No. of coils low		0x01 - 0x20
+	
+	transactionID = transactionID + 1
+	If numberCoils > 32 Or numberCoils < 1 Then
+		numberCoils = 32
+		Print "Attempted to read too many coils with modbusReadMultipleInput(), only reading first 32"
+	EndIf
+	
+	modMessage(0) = RShift(transactionID, 8)
+	modMessage(1) = transactionID And &hFF
+	modMessage(2) = 0
+	modMessage(3) = 0
+	modMessage(4) = 0
+	modMessage(5) = &h06
+	modMessage(6) = &hFF
+	modMessage(7) = MBCmdReadInput ' function code
+	modMessage(8) = RShift(inputNum, 8) ' high byte of address
+	modMessage(9) = inputNum And &hFF ' low byte of address
+	modMessage(10) = 0
+	modMessage(11) = numberCoils
+
+	' send the message to the PLC
+	WriteBin #204, modMessage(), 12
+
+	'modResponse(0) = Transaction ID high - Same ID as request
+	'modResponse(1) = Transaction ID low - Same ID as request
+	'modResponse(2) = protocol id high
+	'modResponse(3) = protocol id low
+	'modResponse(4) = length high
+	'modResponse(5) = length low
+	'modResponse(6) = unit id
+	'modResponse(7) = function. Should be 2 if no error
+	'modResponse(8) = byte count
+	'modResponse(9) = data byte
+	'...
+	'modResponse(numberCoils/8 - 1) = data byte
+	
+	readNum = Int(numberCoils / 8)
+	'and since everything on this robot seems to round down...
+	If (readNum * 8) < numberCoils Then
+		readNum = readNum + 1
+	EndIf
+	
+	If modbusReadPort(9 + readNum) = -1 Then
+		'we didn't get the response expected...
+		Print "MODBUS: failed to read plc input address: ", Hex$(inputNum)
+		'exit function
+	EndIf
+	
+	modbusReadMultipleInput = 0
+	For j = 9 To readNum + 8
+		modbusReadMultipleInput = modbusReadMultipleInput + LShift(modResponse(j), (j - 9) * 8)
+	Next
+Fend
+
 'this function will provide read support from the modbus port
 ' and return the number of bytes read
 ' or return -1 on error
@@ -696,7 +818,7 @@ Function modbusReadPort(length As Integer) As Integer
 	Redim modResponse(256)
 
 	'give the port a chance to transmit and the PLC a chance to respond
-	Wait 0.2
+'	Wait 0.2
 
 ' fall back solution
 '	Integer modByteRx(1)

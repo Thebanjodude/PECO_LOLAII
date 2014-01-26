@@ -1,63 +1,8 @@
 #include "Globals.INC"
 
-Function blah(num As Long)
-	Integer i, foo
-	
-'	Print "num: ", num, " --base2: ",
-	
-	For i = 31 To 0 Step -1
-		foo = BTst(num, i)
-'		If BTst(num, i) = 0 Then
-'			Print "0",
-'		Else
-'			Print "1",
-'		EndIf
-	Next
-	
-'	Print "."
-Fend
-Function blah2(num As Long)
-	Integer i, foo
-	
-'	Print "num: ", num, " --base2: ",
-	
-	For i = 31 To 0 Step -1
-		foo = RShift(num, i) And &h01
-'		If foo = 0 Then
-'			Print "0",
-'		Else
-'			Print "1",
-'		EndIf
-	Next
-	
-'	Print "."
-Fend
-
 Function main()
 	OnErr GoTo errHandler ' Define where to go when a controller error occurs	
-	
-	Integer j
-	
-	TmReset 1
-	For j = 0 To 300
-		Call blah(255)
-	Next
-	Print "Bst    Took: ", Tmr(1) / 300, " seconds"
-'	Print "Bst    Took: ", Tmr(1), " seconds"
 
-	TmReset 1
-	For j = 0 To 300
-		Call blah2(255)
-	Next
-	Print "Rshift Took: ", Tmr(1) / 300, " seconds"
-'	Print "Rshift Took: ", Tmr(1), " seconds"
-
-	Exit Function
-	
-		
-	
-	
-	
 	'Set system vars
 	recSuctionWaitTime = 1 'fake
 	zLimit = -12.5 'fake

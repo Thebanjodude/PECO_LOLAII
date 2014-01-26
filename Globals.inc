@@ -115,4 +115,13 @@ Global Double stepsize
 Global Double systemThetaError
 
 
+' comms globals
+Global Boolean g_inserting
+Global Boolean g_idle
+Global Boolean g_ready
+Global Boolean g_bootDelay
+Global Boolean g_bootDone
+Global Boolean g_findingHOme
+Global Boolean g_dumprunning
+Global Boolean g_manualmodeon
 
