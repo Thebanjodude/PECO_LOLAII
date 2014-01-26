@@ -6,67 +6,12 @@
 Integer MBQueueAddress(MBWriteQueueSize)
 Long MBQueueValue(MBWriteQueueSize)
 Byte MBQueueType(MBWriteQueueSize)
-Integer MBMessageID(MBWriteQueueSize)
 Integer MBQueueHead
 Integer MBQueueTail
 
 Integer transactionID
 
-String CRLF$
-'Integer modMessage(256)
 Integer modResponse(256)
-Integer modbusMessageID
-Boolean testcoil
-Boolean testinput
-
-
-' comms globals
-Boolean m_inserting
-Boolean m_idle
-Boolean m_ready
-Boolean m_bootDelay
-Boolean m_bootDone
-Boolean m_findingHOme
-Boolean m_dumprunning
-Boolean m_manualmodeon
-
-
-'testing
-Function mbTest()
-	Wait 3
-	Do While True
-		'MBWrite(1099, transactionID, MBType16)
-		'MBWrite(100, Int(Tmr(1)) Mod 2, MBTypeCoil)
-		Wait 1
-	Loop
-Fend
-' <testing>
-Function set_m_inserting(var As Boolean)
-	m_inserting = var
-Fend
-Function set_m_idle(var As Boolean)
-	 m_idle = var
-Fend
-Function set_m_ready(var As Boolean)
-	 m_ready = var
-Fend
-Function set_m_bootDelay(var As Boolean)
-	 m_bootDelay = var
-Fend
-Function set_m_bootDone(var As Boolean)
-	 m_bootDone = var
-Fend
-Function set_m_findingHOme(var As Boolean)
-	 m_findingHOme = var
-Fend
-Function set_m_dumprunning(var As Boolean)
-	 m_dumprunning = var
-Fend
-Function set_m_manualmodeon(var As Boolean)
-	 m_manualmodeon = var
-Fend
-
-' </testing>
 
 Function MBInitialize()
 	
@@ -103,7 +48,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = value
+	MBQueueValue(MBQueueHead) = Value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -122,20 +67,7 @@ Function MBCommandTask()
 	Boolean temp_bool
 	Integer portStatus, i
 	Long inputs
-	
-	
-' comms 
-Boolean l_inserting
-Boolean l_idle
-Boolean l_ready
-Boolean l_bootDelay
-Boolean l_bootDone
-Boolean l_findingHOme
-Boolean l_dumprunning
-Boolean l_manualmodeon
-	
-	
-	
+
 	' set up for the TCP port on the PLC
 	SetNet #204, "10.22.251.64", 502, CR, NONE, 0.2
 	'SetNet #204, "10.22.2.30", 502, CR, NONE, 0.2
@@ -225,6 +157,14 @@ Boolean l_manualmodeon
 			' ...the delay comes in when we try to process data that hits globals, there is a
 			' ~7-10 ms penalty for every global/modual memory access.
 			' That adds up fast when you are talking ~90 vars
+			'
+			' To get around this we are going to put the data that we are
+			' pulling off of the plc directly into memory using MemOut
+			' which allows us to write to memory 1 byte at a time, we can then
+			' pull from memory whenever we need to see a var.
+			'
+			' Something of a pain, but this directly affects the cycle time of 
+			' the system.
 			
 			'Print "MODBUS: Time since last modbus read: ", Tmr(2)
 			
@@ -233,125 +173,32 @@ Boolean l_manualmodeon
 			TmReset 2
 
 			'read the data off of the PLC
-			TmReset 15
-			
 			'--TODO-- map plc memory & write read/write calls
+
+			' obtain and parse
+			' starting at bit 184, write out the 8 bits we are pulling off of the PLC
 			inputs = modbusReadMultipleInput(200, 8)
-			' parse
-			set_m_inserting(BTst(inputs, 0))
-			set_m_idle(BTst(inputs, 1))
-			set_m_ready(BTst(inputs, 2))
-			set_m_bootDelay(BTst(inputs, 3))
-			set_m_bootDone(BTst(inputs, 4))
-			set_m_findingHOme(BTst(inputs, 5))
-			set_m_dumprunning(BTst(inputs, 6))
-			set_m_manualmodeon(BTst(inputs, 7))
+			MemOut 23, inputs And &hFF
+			MemOut 24, RShift(inputs, 8) And &hFF
 			
-'			inputs = modbusReadMultipleInput(300, 2)
-'			' parse
-'
-'			inputs = modbusReadMultipleInput(400, 9)
-'			' parse
-'			
-'			inputs = modbusReadMultipleInput(500, 11)
-'			' parse
-
-			Print "Time to obtain data - function: ", Tmr(15)
+			' obtain and parse
+			' starting at bit 200, write out the 2 bits we are pulling off of the PLC
+			inputs = modbusReadMultipleInput(300, 2)
+			MemOut 25, inputs And &hFF
 			
-			TmReset 15
-			inputs = modbusReadMultipleInput(200, 8)
-
-			g_inserting = BTst(inputs, 0)
-			g_idle = BTst(inputs, 1)
-			g_ready = BTst(inputs, 2)
-			g_bootDelay = BTst(inputs, 3)
-			g_bootDone = BTst(inputs, 4)
-			g_findingHOme = BTst(inputs, 5)
-			g_dumprunning = BTst(inputs, 6)
-			g_manualmodeon = BTst(inputs, 7)
+			' obtain and parse
+			' starting at bit 208, write out the 8 bits we are pulling off of the PLC
+			inputs = modbusReadMultipleInput(400, 9)
+			MemOut 26, inputs And &hFF
+			MemOut 27, RShift(inputs, 8) And &hFF
+			MemOut 28, RShift(inputs, 16) And &hFF
 			
-			Print "Time to obtain data - global  : ", Tmr(15)
-			
-			
-			TmReset 15
-			inputs = modbusReadMultipleInput(200, 8)
-
-			l_inserting = BTst(inputs, 0)
-			l_idle = BTst(inputs, 1)
-			l_ready = BTst(inputs, 2)
-			l_bootDelay = BTst(inputs, 3)
-			l_bootDone = BTst(inputs, 4)
-			l_findingHOme = BTst(inputs, 5)
-			l_dumprunning = BTst(inputs, 6)
-			l_manualmodeon = BTst(inputs, 7)
-			
-			Print "Time to obtain data - local   : ", Tmr(15)
-			
-			
-			TmReset 15
-			inputs = modbusReadMultipleInput(200, 8)
-
-			' slow - same as using globals
-'			m_inserting = BTst(inputs, 0)
-'			m_idle = BTst(inputs, 1)
-'			m_ready = BTst(inputs, 2)
-'			m_bootDelay = BTst(inputs, 3)
-'			m_bootDone = BTst(inputs, 4)
-'			m_findingHOme = BTst(inputs, 5)
-'			m_dumprunning = BTst(inputs, 6)
-'			m_manualmodeon = BTst(inputs, 7)
-			
-			' Fast - pain to code
-'			If BTst(inputs, 0) Then
-'				MemOn (mem_inserting)
-'			Else
-'				MemOff (mem_inserting)
-'			EndIf
-'			If BTst(inputs, 1) Then
-'				MemOn (mem_idle)
-'			Else
-'				MemOff (mem_idle)
-'			EndIf
-'			If BTst(inputs, 2) Then
-'				MemOn (mem_ready)
-'			Else
-'				MemOff (mem_ready)
-'			EndIf
-'			If BTst(inputs, 3) Then
-'				MemOn (mem_bootDelay)
-'			Else
-'				MemOff (mem_bootDelay)
-'			EndIf
-'			If BTst(inputs, 4) Then
-'				MemOn (mem_bootDone)
-'			Else
-'				MemOff (mem_bootDone)
-'			EndIf
-'			If BTst(inputs, 5) Then
-'				MemOn (mem_findingHome)
-'			Else
-'				MemOff (mem_findingHome)
-'			EndIf
-'			If BTst(inputs, 6) Then
-'				MemOn (mem_dumpRunning)
-'			Else
-'				MemOff (mem_dumpRunning)
-'			EndIf
-'			If BTst(inputs, 7) Then
-'				MemOn (mem_manualModeOn)
-'			Else
-'				MemOff (mem_manualModeOn)
-'			EndIf
-			
-			' fast -- pain to maintain
-			MemOut 23, inputs
-	
-			Print "Time to obtain data - memory   : ", Tmr(15)
-			
-			
-			'modbusReadMultipleRegister(1098, 2)
-			'Print "reg 1098, 1099: ", LShift(modResponse(9), 8) + modResponse(10), ",", LShift(modResponse(11), 8) + modResponse(12)
-
+			' obtain and parse
+			' starting at bit 232, write out the 8 bits we are pulling off of the PLC
+			inputs = modbusReadMultipleInput(500, 11)
+			MemOut 29, inputs And &hFF
+			MemOut 30, RShift(inputs, 8) And &hFF
+			MemOut 31, RShift(inputs, 16) And &hFF
 		EndIf
 	Loop
 Fend

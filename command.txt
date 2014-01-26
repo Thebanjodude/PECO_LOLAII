@@ -194,4 +194,18 @@
 !!Error: 3804, Specified command cannot be executed from the Command window.
 > foo = rshift(4,1)
 !!Error: 3100, Syntax error.
+> print int(32/4)
+ 8
+> print int(32/8)
+ 4
+> print int(31/8)
+ 3
+> print int(310/8)
+ 38
+> print 310/8
+ 38
+> print 31/8
+ 3
+> print 1/8
+ 0
 > 

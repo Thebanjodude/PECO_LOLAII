@@ -20,9 +20,6 @@ Function PowerOnSequence()
     
     Call MBInitialize
     
-    Call mbTest
-    
-
 	' Start the PLC
 	'Wait bootDelayH
 	Wait Sw(0)
