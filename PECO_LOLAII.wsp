@@ -1,6 +1,4 @@
-ENVT0100,LM:2014/01/25 22:43:11:551,DS:0000004420,CS:21343,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="HeatStakeComms.prg *"
-bMdiMaximized=True
+ENVT0100,LM:2014/01/26 03:24:55:988,DS:0000004370,CS:17677,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -19,8 +17,8 @@ ProgramFile2 {
 	Window {
 		nLeft=21
 		nTop=19
-		nWidth=972
-		nHeight=555
+		nWidth=967
+		nHeight=545
 	}
 }
 ProgramFile3 {
@@ -37,12 +35,12 @@ ProgramFile3 {
 ProgramFile4 {
 	sName="SystemMonitor.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=42
 		nTop=57
-		nWidth=1261
-		nHeight=573
+		nWidth=1260
+		nHeight=569
 	}
 }
 ProgramFile5 {
@@ -85,8 +83,8 @@ ProgramFile8 {
 	Window {
 		nLeft=71
 		nTop=103
-		nWidth=854
-		nHeight=431
+		nWidth=853
+		nHeight=427
 	}
 }
 ProgramFile9 {
@@ -102,8 +100,8 @@ ProgramFile9 {
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=100
 		nTop=100
@@ -113,13 +111,13 @@ ProgramFile10 {
 }
 ProgramFile11 {
 	sName="Startup.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1049
-		nHeight=578
+		nWidth=1048
+		nHeight=575
 	}
 }
 ProgramFile12 {
@@ -168,13 +166,13 @@ ProgramFile15 {
 }
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=816
+		nHeight=463
 	}
 }
 nIncludeFileCount=5
@@ -185,8 +183,8 @@ IncludeFile1 {
 	Window {
 		nLeft=248
 		nTop=196
-		nWidth=915
-		nHeight=511
+		nWidth=914
+		nHeight=507
 	}
 }
 IncludeFile2 {
@@ -196,8 +194,8 @@ IncludeFile2 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=605
+		nWidth=1059
+		nHeight=602
 	}
 }
 IncludeFile3 {
@@ -229,8 +227,8 @@ IncludeFile5 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1059
-		nHeight=602
+		nWidth=1057
+		nHeight=595
 	}
 }
 nPointFileCount=3
@@ -283,8 +281,8 @@ RunWindow {
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=1140
-		nHeight=646
+		nWidth=1608
+		nHeight=899
 	}
 }
 IOLabelEditor {

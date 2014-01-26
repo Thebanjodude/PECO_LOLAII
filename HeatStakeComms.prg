@@ -24,6 +24,7 @@ Function mbTest()
 	Wait 3
 	Do While True
 		MBWrite(1099, transactionID, MBType16)
+		MBWrite(100, Int(Tmr(1)) Mod 2, MBTypeCoil)
 		Wait 1
 	Loop
 Fend
@@ -154,7 +155,7 @@ Function MBCommandTask()
 			ElseIf MBQueueType(MBQueueTail) = MBTypeCoil Then
 				' set or clear MB coil
 				' any non-zero value will set coil
-				Print "writing type coil"
+				'Print "writing type coil"
 				If MBQueueValue(MBQueueTail) = 0 Then
 					temp_bool = False
 				Else
@@ -186,9 +187,11 @@ Function MBCommandTask()
 			'read the data off of the PLC
 
 			'--TODO-- map plc memory & write read/write calls
-			Print "reg 1000: ", modbusreadregister(1000)
-			Print "reg 1098: ", modbusreadregister(1098)
-			Print "reg 1099: ", modbusreadregister(1099)
+			Print "reg 1098: ", modbusReadRegister(1098)
+			Print "reg 1099: ", modbusReadRegister(1099)
+			Print "input 100:", modbusReadInput(100)
+			modbusReadMultipleRegister(1098, 2)
+			Print "reg 1098, 1099: ", LShift(modResponse(9), 8) + modResponse(10), ",", LShift(modResponse(11), 8) + modResponse(12)
 
 '<OLD_PLC_SETUP>
 '			' start at modbus address 0x0014 (PLC memory location D20)
@@ -371,7 +374,6 @@ Fend
 
 ' This function is for reading a single 16 bit Modbus register from the PLC
 ' It will build a valid Modbus RTU request and send it to the PLC
-' using the HMI ethernet to serial dameon as a bridge.
 ' It will then wait for a response from the PLC
 Function modbusReadRegister(regNum As Long) As Long
 	
@@ -430,57 +432,68 @@ Function modbusReadRegister(regNum As Long) As Long
 
 Fend
 
-' This function is for reading a single 16 bit Modbus inpur register from the PLC
+' This function is for reading a single 16 bit Modbus input register from the PLC
 ' It will build a valid Modbus RTU request and send it to the PLC
-' using the HMI ethernet to serial dameon as a bridge.
-' It will then wait for a response from the PLC
+' and then wait for a response from the PLC
 Function modbusReadInputRegister(regNum As Long) As Long
 	
-	Long CRC
-	
 	'build the command and send it to PLC
-	' function code		0x04
-	' address high 		0x00
-	' address low		0x02
-	' No. of Regs high 	0x00
-	' No. of Regs low	0x01
-'	modMessage(0) = MBMitsubishiAddress
-	modMessage(1) = MBCmdReadInputRegister ' function code
-	modMessage(2) = RShift(regNum, 8) ' high byte of address
-	modMessage(3) = regNum And &hFF ' low byte of address
-	modMessage(4) = 0 ' high byte of No. of regs is always zero 
-	modMessage(5) = 1 ' low byte of No. of regs is one i.e. read one register
-'	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
-	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
-	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
+	' Transaction ID high	0x??
+	' Transaction ID low	0x??
+	' protocol id high		0x00
+	' protocol id low		0x00
+	' length high			0x00
+	' length low			0x06
+	' unit id				0xff
+	' function code			0x04
+	' address high 			0x??
+	' address low			0x??
+	' No. of Regs high 		0x00
+	' No. of Regs low		0x01
+
+	transactionID = transactionID + 1
+	modMessage(0) = RShift(transactionID, 8)
+	modMessage(1) = transactionID And &hFF
+	modMessage(2) = 0
+	modMessage(3) = 0
+	modMessage(4) = 0
+	modMessage(5) = &h06
+	modMessage(6) = &hFF
+	modMessage(7) = MBCmdReadInputRegister ' function code
+	modMessage(8) = RShift(regNum, 8) ' high byte of address
+	modMessage(9) = regNum And &hFF ' low byte of address
+	modMessage(10) = 0 ' high byte of No. of regs is always zero 
+	modMessage(11) = 1 ' low byte of No. of regs is one i.e. read one register
 	
 	' send the message to the PLC
-	WriteBin #204, modMessage(), 8
+	WriteBin #204, modMessage(), 12
 
 	'process the response or timeout 
 	'wait for a predefinded period of time for the expected number of characters
-	'modResponse(0) = address of master
-	'modResponse(1) = function. Should be 4 if no error
-	'modResponse(2) = No. Bytes returned. Should be 2 for one 16 bit register
-	'modResponse(3) = value returned high byte
-	'modResponse(4) = value returned low byte
-	'modResponse(5) = CRC low byte
-	'modResponse(6) = CRC high byte
-	
-'	ReadBin #204, modResponse(), 7
-	If modbusReadPort(7) = -1 Then
+	'modResponse(0) = Transaction ID high - Same ID as request
+	'modResponse(1) = Transaction ID low - Same ID as request
+	'modResponse(2) = protocol id high
+	'modResponse(3) = protocol id low
+	'modResponse(4) = length high
+	'modResponse(5) = length low
+	'modResponse(6) = unit id
+	'modResponse(7) = function. Should be 4 if no error
+	'modResponse(8) = No. Bytes returned. Should be 2 for one 16 bit register
+	'modResponse(9) = value returned high byte
+	'modResponse(10) = value returned low byte
+
+	If modbusReadPort(11) = -1 Then
 		'we didn't get the response expected...
 		Print "MODBUS: failed to read plc register address: ", Hex$(regNum)
 		'exit function
 	EndIf
 
-	modbusReadInputRegister = LShift(modResponse(3), 8) + modResponse(4)
+	modbusReadInputRegister = LShift(modResponse(9), 8) + modResponse(10)
 
 Fend
 
 ' This function is for reading a multiple 16 bit Modbus registers from the PLC
 ' It will build a valid Modbus RTU request and send it to the PLC
-' using the HMI ethernet to serial dameon as a bridge.
 ' It will then wait for a response from the PLC
 ' 
 ' ****************************************************************************
@@ -489,46 +502,60 @@ Fend
 ' ****************************************************************************
 Function modbusReadMultipleRegister(regNum As Long, numRegToRead As Long) As Boolean
 	
-	Long CRC
-	
 	'build the command and send it to PLC
-	' function code		0x03
-	' address high 		0x00
-	' address low		0x14
-	' No. of Regs high 	0x00
-	' No. of Regs low	0x31
-'	modMessage(0) = MBMitsubishiAddress
-	modMessage(1) = MBCmdReadRegister ' function code
-	modMessage(2) = RShift(regNum, 8) ' high byte of address
-	modMessage(3) = regNum And &hFF ' low byte of address
-	modMessage(4) = RShift(numRegToRead, 8) ' high byte of No. of regs
-	modMessage(5) = numRegToRead And &hFF ' low byte of No. of regs
-'	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
-	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
-	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
+	' Transaction ID high	0x??
+	' Transaction ID low	0x??
+	' protocol id high		0x00
+	' protocol id low		0x00
+	' length high			0x00
+	' length low			0x06
+	' unit id				0xff
+	' function code			0x03
+	' address high 			0x00
+	' address low			0x14
+	' No. of Regs high 		0x00
+	' No. of Regs low		0x31
+		
+	transactionID = transactionID + 1
+	modMessage(0) = RShift(transactionID, 8)
+	modMessage(1) = transactionID And &hFF
+	modMessage(2) = 0
+	modMessage(3) = 0
+	modMessage(4) = 0
+	modMessage(5) = &h06
+	modMessage(6) = &hFF
+	modMessage(7) = MBCmdReadRegister ' function code
+	modMessage(8) = RShift(regNum, 8) ' high byte of address
+	modMessage(9) = regNum And &hFF ' low byte of address
+	modMessage(10) = RShift(numRegToRead, 8) ' high byte of No. of regs
+	modMessage(11) = numRegToRead And &hFF ' low byte of No. of regs
 	
 	' send the message to the PLC
-	WriteBin #204, modMessage(), 8
+	WriteBin #204, modMessage(), 12
 
 	'process the response or timeout 
 	'wait for a predefinded period of time for the expected number of characters
-	'modResponse(0) = address of master
-	'modResponse(1) = function. Should be 3 if no error
-	'modResponse(2) = No. Bytes returned. Should be 2 * numRegToRead
-	'modResponse(3) = first value returned high byte
-	'modResponse(4) = first value returned low byte
+	'modResponse(0) = Transaction ID high - Same ID as request
+	'modResponse(1) = Transaction ID low - Same ID as request
+	'modResponse(2) = protocol id high
+	'modResponse(3) = protocol id low
+	'modResponse(4) = length high
+	'modResponse(5) = length low
+	'modResponse(6) = unit id
+	'modResponse(7) = function. Should be 3 if no error
+	'modResponse(8) = No. Bytes returned. Should be 2 * numRegToRead
+	'modResponse(9) = first value returned high byte
+	'modResponse(10) = first value returned low byte
 	' ...
 	'modResponse(numRegToRead - 1) = last value returned high byte
 	'modResponse(numRegToRead    ) = last value returned low byte
-	'modResponse(numRegToRead + 4) = CRC low byte
-	'modResponse(numRegToRead + 5) = CRC high byte
 
-	'numRegToRead (16 bit) * 2 (mobus is 8 bit) + 6 (overhead)
-	If modbusReadPort(numRegToRead * 2 + 6) = -1 Then
+	'numRegToRead (16 bit) * 2 (mobus is 8 bit) + 9 (overhead)
+	If modbusReadPort(numRegToRead * 2 + 9) = -1 Then
 		'we didn't get the response expected...
-		'Print "MODBUS: failed to read plc register addresses: ", Hex$(regNum), " - ", Hex$(regNum + numRegToRead)
+		Print "MODBUS: failed to read plc register addresses: ", Hex$(regNum), " - ", Hex$(regNum + numRegToRead)
 		modbusReadMultipleRegister = False
-		Exit Function
+		'Exit Function
 	EndIf
 	modbusReadMultipleRegister = True
 Fend
@@ -536,91 +563,63 @@ Fend
 
 ' This function is for writing a single Modbus coil on the PLC
 ' It will build a valid Modbus RTU message and send it to the PLC
-' using the HMI ethernet to serial dameon as a bridge
 ' It will then wait for a response and return a ??? for success or -1 for failure
 Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	
-	Long CRC
-
 	'build the command and send it to PLC
-'	modMessage(0) = MBMitsubishiAddress 'PLC modbus address change to variable when integrated with rest of code TMH
-	modMessage(1) = MBCmdWriteCoil ' function code
-	modMessage(2) = RShift(coilNum, 8) ' high byte of address
-	modMessage(3) = coilNum And &hFF ' low byte of address
+	' Transaction ID high	0x??
+	' Transaction ID low	0x??
+	' protocol id high		0x00
+	' protocol id low		0x00
+	' length high			0x00
+	' length low			0x06
+	' unit id				0xff
+	' function code			0x05
+	' address high 			0x??
+	' address low			0x??
+	' Output value		 	0x00 or 0xFF
+	' Output value padding	0x00
+
+	transactionID = transactionID + 1
+	modMessage(0) = RShift(transactionID, 8)
+	modMessage(1) = transactionID And &hFF
+	modMessage(2) = 0
+	modMessage(3) = 0
+	modMessage(4) = 0
+	modMessage(5) = &h06
+	modMessage(6) = &hFF
+	modMessage(7) = MBCmdWriteCoil ' function code
+	modMessage(8) = RShift(coilNum, 8) ' high byte of address
+	modMessage(9) = coilNum And &hFF ' low byte of address
 	If value = True Then
-		modMessage(4) = &hFF; ' constant for setting coil on
-		modMessage(5) = 0;
-	ElseIf value = False Then
-		modMessage(4) = 0; ' constant for setting coil off
-		modMessage(5) = 0;
+		modMessage(10) = &hFF; ' constant for setting coil on
+	Else
+		modMessage(10) = 0; ' constant for setting coil off
 	EndIf
-'	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
-	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
-	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
+	modMessage(11) = 0;
 	
 	' send the message to the PLC
-	WriteBin #204, modMessage(), 8
+	WriteBin #204, modMessage(), 12
 	
 	' process the response or timeout
 	'wait for a predefinded period of time for the expected number of characters
-	'modResponse(0) = address of master
-	'modResponse(1) = function. Should be 5 if no error
-	'modResponse(2) = Register address high byte
-	'modResponse(3) = Register address low byte
-	'modResponse(4) = value high byte
-	'modResponse(5) = value low byte
-	'modResponse(6) = CRC low byte
-	'modResponse(7) = CRC high byte
-'	ReadBin #204, modResponse(), 8
-	If modbusReadPort(8) = -1 Then
+	'modResponse(0) = Transaction ID high - Same ID as request
+	'modResponse(1) = Transaction ID low - Same ID as request
+	'modResponse(2) = protocol id high
+	'modResponse(3) = protocol id low
+	'modResponse(4) = length high
+	'modResponse(5) = length low
+	'modResponse(6) = unit id
+	'modResponse(7) = function. Should be 5 if no error
+	'modResponse(8) = Register address high byte
+	'modResponse(9) = Register address low byte
+	'modResponse(10) = value high byte
+	'modResponse(11) = value low byte
+
+	If modbusReadPort(12) = -1 Then
 		'we didn't get the response expected...
 		Print "MODBUS: failed to read(after write) plc address: ", Hex$(coilNum)
 		'exit function
-	EndIf
-Fend
-
-' This function is for reading a single Modbus coil on the PLC
-' It will build a valid Modbus RTU message and send it to the PLC
-' using the HMI ethernet to serial dameon as a bridge
-' It will then wait for a response and return the coil status
-Function modbusReadCoil(coilNum As Long)
-	
-	Long CRC
-
-	'build the command and send it to PLC
-'	modMessage(0) = MBMitsubishiAddress 'PLC modbus address change to variable when integrated with rest of code TMH
-	modMessage(1) = MBCmdReadCoil ' function code
-	modMessage(2) = RShift(coilNum, 8) ' high byte of address
-	modMessage(3) = coilNum And &hFF ' low byte of address
-	modMessage(4) = 0;
-	modMessage(5) = 1; ' keep things simple by only allowing the read of one coil
-'	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
-	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
-	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
-	
-	' send the message to the PLC
-	WriteBin #204, modMessage(), 8
-	
-	' process the response or timeout
-	'wait for a predefinded period of time for the expected number of characters
-	'modResponse(0) = address of master
-	'modResponse(1) = function. Should be 1 if no error
-	'modResponse(2) = byte count should be 1 since we only read one coil
-	'modResponse(3) = data byte
-	'modResponse(4) = CRC low byte
-	'modResponse(5) = CRC high byte
-
-'	ReadBin #204, modResponse(), 6
-	If modbusReadPort(6) = -1 Then
-		'we didn't get the response expected...
-		Print "MODBUS: failed to read plc coil address: ", Hex$(coilNum)
-		'exit function
-	EndIf
-	
-	If modResponse(3) And &h01 Then
-		modbusReadCoil = True
-	Else
-		modbusReadCoil = False
 	EndIf
 Fend
 
@@ -629,38 +628,56 @@ Fend
 ' using the HMI ethernet to serial dameon as a bridge
 ' It will then wait for a response and return the input status
 Function modbusReadInput(inputNum As Long)
-	
-	Long CRC
-	
+
 	'build the command and send it to PLC
-'	modMessage(0) = MBMitsubishiAddress 'PLC modbus address change to variable when integrated with rest of code TMH
-	modMessage(1) = MBCmdReadInput ' function code
-	modMessage(2) = RShift(inputNum, 8) ' high byte of address
-	modMessage(3) = inputNum And &hFF ' low byte of address
-	modMessage(4) = 0;
-	modMessage(5) = 1; ' keep things simple by only allowing the read of one coil
-'	CRC = modbusCRC(6) ' get the CRC of these 6 bytes
-	modMessage(6) = CRC And &hFF ' low byte of CRC is first 
-	modMessage(7) = RShift(CRC, 8) ' then the high byte of the CRC
+	' Transaction ID high	0x??
+	' Transaction ID low	0x??
+	' protocol id high		0x00
+	' protocol id low		0x00
+	' length high			0x00
+	' length low			0x06
+	' unit id				0xff	
+	' function code			0x02
+	' address high 			0x??
+	' address low			0x??
+	' No. of coils high 	0x00
+	' No. of coils low		0x01
+	
+	transactionID = transactionID + 1
+	modMessage(0) = RShift(transactionID, 8)
+	modMessage(1) = transactionID And &hFF
+	modMessage(2) = 0
+	modMessage(3) = 0
+	modMessage(4) = 0
+	modMessage(5) = &h06
+	modMessage(6) = &hFF
+	modMessage(7) = MBCmdReadInput ' function code
+	modMessage(8) = RShift(inputNum, 8) ' high byte of address
+	modMessage(9) = inputNum And &hFF ' low byte of address
+	modMessage(10) = 0;
+	modMessage(11) = 1; ' keep things simple by only allowing the read of one coil
 
 	' send the message to the PLC
-	WriteBin #204, modMessage(), 8
+	WriteBin #204, modMessage(), 12
 
-	'modResponse(0) = address of master
-	'modResponse(1) = function. Should be 1 if no error
-	'modResponse(2) = byte count should be 1 since we only read one coil
-	'modResponse(3) = data byte
-	'modResponse(4) = CRC low byte
-	'modResponse(5) = CRC high byte
+	'modResponse(0) = Transaction ID high - Same ID as request
+	'modResponse(1) = Transaction ID low - Same ID as request
+	'modResponse(2) = protocol id high
+	'modResponse(3) = protocol id low
+	'modResponse(4) = length high
+	'modResponse(5) = length low
+	'modResponse(6) = unit id
+	'modResponse(7) = function. Should be 2 if no error
+	'modResponse(8) = byte count should be 1 since we only read one coil
+	'modResponse(9) = data byte
 	
-	'ReadBin #204, modResponse(), 6
-	If modbusReadPort(6) = -1 Then
+	If modbusReadPort(10) = -1 Then
 		'we didn't get the response expected...
 		Print "MODBUS: failed to read plc input address: ", Hex$(inputNum)
 		'exit function
 	EndIf
 
-	If modResponse(3) = 0 Then
+	If modResponse(9) = 0 Then
 		modbusReadInput = False
 	Else
 		modbusReadInput = True
@@ -712,7 +729,7 @@ Function modbusReadPort(length As Integer) As Integer
 	'Print "MODBUS: Time to read from PLC: ", Tmr(1)
 '-----------------------------------------------------
 
-	If i < 11 Then
+	If i < length Then
 		'we failed to rx a full modbus response -- bail
 		Print "MODBUS: failed to rx full modbus response packet, only ", i, " bytes rx'd, expected ", length, " bytes"
 		modbusReadPort = -1

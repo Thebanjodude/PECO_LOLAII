@@ -148,4 +148,34 @@
  6
 > print 23 /4 -1 
  4
+> tmr(1)
+!!Error: 3100, Syntax error.
+> print tmr(1)
+ 23985.591
+> print tmr(1)%2
+!!Error: 3100, Syntax error.
+> print mod(tmr(1),2)
+!!Error: 3207, Formula is missing.
+> print tmr(1) mod 2
+!!Error: 2245, Cannot execute this command with a floating point number.
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2
+ 0
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2print int(tmr(1)) mod 2
+!!Error: 3100, Syntax error.
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2
+ 0
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2
+ 0
 > 
