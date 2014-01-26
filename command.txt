@@ -178,4 +178,20 @@
  1
 > print int(tmr(1)) mod 2
  0
+> print rshift(4,1)
+ 2
+> print rshift(4,0)
+ 4
+> print rshift(4,2)
+ 1
+> print rshift(4,3)
+ 0
+> print rshift(4,2) and &h01
+ 1
+> print rshift(4,1) and $h01
+!!Error: 3100, Syntax error.
+> integer foo
+!!Error: 3804, Specified command cannot be executed from the Command window.
+> foo = rshift(4,1)
+!!Error: 3100, Syntax error.
 > 
