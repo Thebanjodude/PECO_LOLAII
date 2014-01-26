@@ -48,7 +48,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = Value
+	MBQueueValue(MBQueueHead) = value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -214,15 +214,15 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	' Transaction ID high	0x??
 	' Transaction ID low	0x??
 	' protocol id high		0x00
-	' protocol id low		0x00
-	' length high			0x00
-	' length low			0x06
-	' unit id				0xff
-	' function code			0x06
-	' address high 			0x??
-	' address low			0x??
-	' value high			0x??
-	' value low				0x??
+	' protocol id low			0x00
+	' length high					0x00
+	' length low					0x06
+	' unit id							0xff
+	' function code				0x06
+	' address high	 			0x??
+	' address low					0x??
+	' value high					0x??
+	' value low						0x??
 	
 	transactionID = transactionID + 1
 	modMessage(0) = RShift(transactionID, 8)
@@ -274,15 +274,15 @@ Function modbusReadRegister(regNum As Long) As Long
 	' Transaction ID high	0x??
 	' Transaction ID low	0x??
 	' protocol id high		0x00
-	' protocol id low		0x00
-	' length high			0x00
-	' length low			0x06
-	' unit id				0xff
-	' function code			0x03
-	' address high 			0x??
-	' address low			0x??
+	' protocol id low			0x00
+	' length high					0x00
+	' length low					0x06
+	' unit id							0xff
+	' function code				0x03
+	' address high 				0x??
+	' address low					0x??
 	' No. of Regs high 		0x00
-	' No. of Regs low		0x01
+	' No. of Regs low			0x01
 	
 	transactionID = transactionID + 1
 	modMessage(0) = RShift(transactionID, 8)
@@ -335,15 +335,15 @@ Function modbusReadInputRegister(regNum As Long) As Long
 	' Transaction ID high	0x??
 	' Transaction ID low	0x??
 	' protocol id high		0x00
-	' protocol id low		0x00
-	' length high			0x00
-	' length low			0x06
-	' unit id				0xff
-	' function code			0x04
-	' address high 			0x??
-	' address low			0x??
+	' protocol id low			0x00
+	' length high					0x00
+	' length low					0x06
+	' unit id							0xff
+	' function code				0x04
+	' address high 				0x??
+	' address low					0x??
 	' No. of Regs high 		0x00
-	' No. of Regs low		0x01
+	' No. of Regs low			0x01
 
 	transactionID = transactionID + 1
 	modMessage(0) = RShift(transactionID, 8)
@@ -401,15 +401,15 @@ Function modbusReadMultipleRegister(regNum As Long, numRegToRead As Long) As Boo
 	' Transaction ID high	0x??
 	' Transaction ID low	0x??
 	' protocol id high		0x00
-	' protocol id low		0x00
-	' length high			0x00
-	' length low			0x06
-	' unit id				0xff
-	' function code			0x03
-	' address high 			0x00
-	' address low			0x14
+	' protocol id low			0x00
+	' length high					0x00
+	' length low					0x06
+	' unit id							0xff
+	' function code				0x03
+	' address high 				0x00
+	' address low					0x14
 	' No. of Regs high 		0x00
-	' No. of Regs low		0x31
+	' No. of Regs low			0x31
 		
 	transactionID = transactionID + 1
 	modMessage(0) = RShift(transactionID, 8)
@@ -463,17 +463,17 @@ Function modbusWriteCoil(coilNum As Long, value As Boolean)
 	Integer modMessage(256)
 	
 	'build the command and send it to PLC
-	' Transaction ID high	0x??
-	' Transaction ID low	0x??
-	' protocol id high		0x00
-	' protocol id low		0x00
-	' length high			0x00
-	' length low			0x06
-	' unit id				0xff
-	' function code			0x05
-	' address high 			0x??
-	' address low			0x??
-	' Output value		 	0x00 or 0xFF
+	' Transaction ID high		0x??
+	' Transaction ID low		0x??
+	' protocol id high			0x00
+	' protocol id low				0x00
+	' length high						0x00
+	' length low						0x06
+	' unit id								0xff
+	' function code					0x05
+	' address high 					0x??
+	' address low						0x??
+	' Output value		 			0x00 or 0xFF
 	' Output value padding	0x00
 
 	transactionID = transactionID + 1
@@ -529,13 +529,13 @@ Function modbusReadInput(inputNum As Long) As Boolean
 	' Transaction ID high	0x??
 	' Transaction ID low	0x??
 	' protocol id high		0x00
-	' protocol id low		0x00
-	' length high			0x00
-	' length low			0x06
-	' unit id				0xff	
-	' function code			0x02
-	' address high 			0x??
-	' address low			0x??
+	' protocol id low			0x00
+	' length high					0x00
+	' length low					0x06
+	' unit id							0xff	
+	' function code				0x02
+	' address high	 			0x??
+	' address low					0x??
 	' No. of coils high 	0x00
 	' No. of coils low		0x01
 	transactionID = transactionID + 1
@@ -591,13 +591,13 @@ Function modbusReadMultipleInput(inputNum As Long, numberCoils As Long) As Long
 	' Transaction ID high	0x??
 	' Transaction ID low	0x??
 	' protocol id high		0x00
-	' protocol id low		0x00
-	' length high			0x00
-	' length low			0x06
-	' unit id				0xff	
-	' function code			0x02
-	' address high 			0x??
-	' address low			0x??
+	' protocol id low			0x00
+	' length high					0x00
+	' length low					0x06
+	' unit id							0xff	
+	' function code				0x02
+	' address high 				0x??
+	' address low					0x??
 	' No. of coils high 	0x00
 	' No. of coils low		0x01 - 0x20
 	

@@ -1,11 +1,11 @@
-ENVT0100,LM:2014/01/26 20:32:26:150,DS:0000005592,CS:14458,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/26 22:40:59:006,DS:0000005594,CS:08017,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="1/26/2014 1:32:17 PM"
-	bBuildComplete=True
+	sLastModified="1/26/2014 3:40:58 PM"
+	bBuildComplete=False
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
@@ -118,7 +118,7 @@ ProgramFile15 {
 }
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
 	sTimeSavedInController="1/26/2014 8:19:25 PM"
 }
