@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/26 23:13:05:419,DS:0000004371,CS:21029,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/26 23:46:02:973,DS:0000004370,CS:18439,MA:00-21-70-9F-9C-9E,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -13,7 +13,7 @@ ProgramFile1 {
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=21
 		nTop=19
@@ -101,7 +101,7 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=100
 		nTop=100
@@ -123,7 +123,7 @@ ProgramFile11 {
 ProgramFile12 {
 	sName="MainStates.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=50
 		nTop=50
@@ -145,7 +145,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=2
 		nTop=6
@@ -156,7 +156,7 @@ ProgramFile14 {
 ProgramFile15 {
 	sName="Test.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=37
 		nTop=8
@@ -167,7 +167,7 @@ ProgramFile15 {
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -179,7 +179,7 @@ nIncludeFileCount=5
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=248
 		nTop=196
@@ -190,7 +190,7 @@ IncludeFile1 {
 IncludeFile2 {
 	sName="Defines.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -281,8 +281,8 @@ RunWindow {
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=2271
-		nHeight=1062
+		nWidth=1292
+		nHeight=812
 	}
 }
 IOLabelEditor {
@@ -298,9 +298,9 @@ IOLabelEditor {
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=565
-		nTop=234
-		nWidth=520
+		nLeft=601
+		nTop=213
+		nWidth=478
 		nHeight=353
 	}
 }

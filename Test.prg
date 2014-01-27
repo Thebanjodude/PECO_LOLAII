@@ -20,20 +20,20 @@ Function runTest
 
 	Pause
 	
-	LoadPanelInfo
+	'LoadPanelInfo
 	
 	ChoosePointsTable()
 	PickupPanel
 	CrowdingSequence
 	
-	'clear existing pickup error
-	PanelPickupErrorX = 0
-	PanelPickupErrorY = 0
-	PanelPickupErrorTheta = 0
-
-'	Call changeSpeed(slow)
-
-	PanelFindPickupError
+'	'clear existing pickup error
+'	PanelPickupErrorX = 0
+'	PanelPickupErrorY = 0
+'	PanelPickupErrorTheta = 0
+'
+''	Call changeSpeed(slow)
+'
+'	PanelFindPickupError
 
 '<TESTING>
 '	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
@@ -50,7 +50,7 @@ Function runTest
 
 Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(CurPos), " u:", CU(CurPos)
 	Do While True
-		'Pause
+		Pause
 			
 		'move to location
 		For hole = 1 To PanelHoleCount

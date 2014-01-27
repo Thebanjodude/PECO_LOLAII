@@ -103,7 +103,7 @@ Function PanelFindPickupError
 	hole = 1
 	Do While count < 2
 		Print "hole:", hole
-		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), -90 - PanelHoleTangent(hole))
+		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), 90 - PanelHoleTangent(hole))
 
 		' TODO-- we might want to find the hole in robot space after we unwind from laser positioning
 		'	see the XY error detection code to see how to do this
@@ -114,8 +114,8 @@ Function PanelFindPickupError
 		realHoleY(count) = PanelFindYerror + PanelHoleY(hole)
 
 		' this should give us a hole less than 90deg away for better theta correction
-		'hole = PanelHoleCount /4 - 1
-		hole = 2
+		hole = PanelHoleCount /4 - 1
+		'hole = 2
 		If hole < 2 Then hole = 2
 
 		count = count + 1
@@ -158,20 +158,31 @@ Function PanelFindPickupError
 	Real negCos, negSin
 	Real laserTheta
 	
-	laserTheta = -90 - PanelHoleTangent(1)
+	laserTheta = 90 - PanelHoleTangent(1)
 	negCos = Cos(DegToRad(-laserTheta))
 	negSin = Sin(DegToRad(-laserTheta))
-	
+
 	PanelHoleToXYZT(1, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
 
 	PanelFindXerror
 	PanelFindYerror
 
-	correctedX = (-(CX(CurPos) - CX(laser)) * negCos) - (-(CY(CurPos) - CY(laser)) * negSin)
-	correctedY = (-(CX(CurPos) - CX(laser)) * negSin) + (-(CY(CurPos) - CY(laser)) * negCos)
+	' put the error into robot space
+	correctedX = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
+	correctedY = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
 
-	PanelPickupErrorX = correctedX
-	PanelPickupErrorY = correctedY
+	Print correctedX, ",", PanelHoleX(1)
+	Print correctedY, ",", PanelHoleY(1)
+	Print "cur xy:", CX(CurPos), ",", CY(CurPos)
+	Print "tan: ", PanelHoleTangent(1), ", laserTheta: ", laserTheta
+	Print "sin, cos: ", negSin, ",", negCos
+	
+	' find the error from the recipe in robot space (xy2rrt has to have been ran)
+	PanelPickupErrorX = correctedX - PanelHoleX(1)
+	PanelPickupErrorY = correctedY - PanelHoleY(1)
+
+'	PanelPickupErrorX = PanelFindXerror
+'	PanelPickupErrorY = PanelFindYerror
 
 	Print "done with error correction detection"
 	Print "------------------------"
