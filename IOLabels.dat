@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/26 23:39:58:800,DS:0000020713,CS:32372,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/27 00:41:57:801,DS:0000020232,CS:01060,MA:00-21-70-9F-9C-9E,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -205,108 +205,73 @@ InputWordLabels {
 	nNumberOfLabels=0
 }
 OutputBitLabels {
-	nNumberOfLabels=21
+	nNumberOfLabels=14
 	Label1 {
 		nBit=0
 		sLabel="eStopResetH"
 		sDescription=""
 	}
 	Label2 {
-		nBit=1
-		sLabel="bootH"
-		sDescription=""
-	}
-	Label3 {
-		nBit=2
-		sLabel="gotoReadyH"
-		sDescription=""
-	}
-	Label4 {
-		nBit=3
-		sLabel="doInsertionH"
-		sDescription=""
-	}
-	Label5 {
-		nBit=4
-		sLabel="doneInsertingH"
-		sDescription=""
-	}
-	Label6 {
-		nBit=5
-		sLabel="startDumpH"
-		sDescription=""
-	}
-	Label7 {
-		nBit=6
-		sLabel="doneDumpingH"
-		sDescription=""
-	}
-	Label8 {
-		nBit=8
-		sLabel="heatStakeGoH"
-		sDescription=""
-	}
-	Label9 {
 		nBit=96
 		sLabel="inMagMtrDirH"
 		sDescription=""
 	}
-	Label10 {
+	Label3 {
 		nBit=97
 		sLabel="inMagMtrH"
 		sDescription=""
 	}
-	Label11 {
+	Label4 {
 		nBit=98
 		sLabel="outMagMtrDirH"
 		sDescription=""
 	}
-	Label12 {
+	Label5 {
 		nBit=99
 		sLabel="outMagMtrH"
 		sDescription=""
 	}
-	Label13 {
+	Label6 {
 		nBit=102
 		sLabel="debrisMtrH"
 		sDescription=""
 	}
-	Label14 {
+	Label7 {
 		nBit=103
 		sLabel="suctionCupsH"
 		sDescription=""
 	}
-	Label15 {
+	Label8 {
 		nBit=104
 		sLabel="CrowdingH"
 		sDescription=""
 	}
-	Label16 {
+	Label9 {
 		nBit=105
 		sLabel="DrillGoH"
 		sDescription=""
 	}
-	Label17 {
+	Label10 {
 		nBit=106
 		sLabel="DrillReturnH"
 		sDescription=""
 	}
-	Label18 {
+	Label11 {
 		nBit=107
 		sLabel="stackLightRedH"
 		sDescription=""
 	}
-	Label19 {
+	Label12 {
 		nBit=108
 		sLabel="stackLightYelH"
 		sDescription=""
 	}
-	Label20 {
+	Label13 {
 		nBit=109
 		sLabel="stackLightGrnH"
 		sDescription=""
 	}
-	Label21 {
+	Label14 {
 		nBit=110
 		sLabel="stackLightAlrmH"
 		sDescription=""
