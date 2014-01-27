@@ -36,14 +36,16 @@ Function PowerOnSequence()
 	Motor On
 	Power High
 	
-	Speed SystemSpeed
-	Accel SystemAccel, SystemAccel 'Paramterize these numbers
-	SpeedS SystemSpeed
-	AccelS SystemAccel, SystemAccel
+'	Speed SystemSpeed
+'	Accel SystemAccel, SystemAccel 'Paramterize these numbers
+'	SpeedS SystemSpeed
+'	AccelS SystemAccel, SystemAccel
 	QP (On) ' turn On quick pausing	
 	
+	changeSpeed(slow)
 	findHome
 
+	changeSpeed(fast)
 Fend
 Function CheckInitialParameters() As Integer
 'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
