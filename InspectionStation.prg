@@ -23,11 +23,13 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	'if needed the profile will be changed by the inspection function
 	ChangeProfile("07")
 
-	For i = recFirstHolePointInspection To recLastHolePointInspection
+	'For i = recFirstHolePointInspection To recLastHolePointInspection
+	For i = 1 To PanelHoleCount
 		
 		' see if we can get away without using this
 		'Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
-		Go P(i)
+		'Go P(i)
+		PanelHoleToXYZT(i, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(i))
 		
 		If SelectRoutine = 1 Then
 
@@ -35,7 +37,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 
 			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
 			
-			Print "BossCrosssectionalArea: ", BossCrosssectionalArea
+			'Print "BossCrosssectionalArea: ", BossCrosssectionalArea
 			If BossCrosssectionalArea > recBossCrossArea Then ' There is already an insert so set skip flag
 				SkipHoleArray(currentPreinspectHole, 0) = 1
 				Print "Hole ", currentPreinspectHole, " is already populated"
@@ -50,7 +52,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			currentInspectHole = currentInspectHole + 1
 		EndIf
 			
-		Go P(i) :U(CU(Here)) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
+		'Go P(i) :U(CU(Here)) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
 	Next
 	
 	InspectPanel = 0 ' Inspection occured without errors

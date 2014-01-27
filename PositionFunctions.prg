@@ -237,6 +237,8 @@ Function PanelRecipeTranslate(x As Double, y As Double)
 		PanelHoleY(hole) = PanelHoleY(hole) + y
 	Next
 Fend
+
+
 ' Given a pre-populated array of x,y values for the holes in a panel and a number of holes
 '  this function will step through and calculate the radius and rotation from the center
 '  of the panel out to each hole and populate a coresponding radius and rotation value.
@@ -303,6 +305,8 @@ Function xy2RadiusRotationTangent()
 		EndIf
 	Next
 Fend
+
+
 ' This function will move a panel hole over an x,y coordinate in robot space with the specified rotation
 ' The rotation is relative to the hole i.e. the hole is the center of rotation
 Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double, Theta As Double)
@@ -317,7 +321,7 @@ Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double,
 	rotY = (PanelHoleX(hole) * Sin(DegToRad(Theta))) + (PanelHoleY(hole) * Cos(DegToRad(Theta)))
 
 	' now put the quill at that point with the x,y offset to the hole
-	Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
+	'Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
 	Go XY(x + rotX, y + rotY, z, Theta) /L
 
 Fend

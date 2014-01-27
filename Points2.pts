@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/20 01:11:48:898,DS:0000018067,CS:21513,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/27 03:46:24:669,DS:0000018058,CS:23870,MA:00-21-70-9F-9C-9E,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=82
@@ -96,8 +96,8 @@ Point6 {
 	nNumber=11
 	sLabel="HotStake"
 	sDescription=""
-	rX=-440
-	rY=440
+	rX=-450
+	rY=425
 	rZ=-10
 	rU=-45
 	rV=0
@@ -1466,8 +1466,8 @@ Point82 {
 	sDescription=""
 	rX=353.575
 	rY=-200.095
-	rZ=-198.886
-	rU=141.183
+	rZ=-260
+	rU=55
 	rV=0
 	rW=0
 	nLocal=0

@@ -13,7 +13,8 @@ Function HotStakePanel() As Integer
 	HotStakePanel = 2 				' default to fail	
 	
 	' check to see if the PLC is in the correct state for entering the insertion program
-	If Not MemSw(m_idle) Then
+	If MemSw(m_idle) = False Then
+		Print "HEAT STAKE: Error - PLC not ready"
 		GoTo exitHotStake
 	EndIf
 	
@@ -27,7 +28,8 @@ Function HotStakePanel() As Integer
 	' ready signal from PLC
 	Wait MemSw(m_ready) = True
 
-	For i = recFirstHolePointHotStake To recLastHolePointHotStake
+	'For i = recFirstHolePointHotStake To recLastHolePointHotStake
+	For i = 1 To PanelHoleCount
 
 		SkippedHole = False 							'Reset flag		
 		If SkipHoleArray(currentHSHole, 0) <> 0 Then 	' When nonzero, don't populate the hole because we want to skip it
@@ -35,9 +37,14 @@ Function HotStakePanel() As Integer
 			Print "Skipped Hole"
 		EndIf
 		
+		'testing	
+		SkippedHole = False
+		
 		If SkippedHole = False Then 			'If the flag is set then skip the hole
 		
-			Jump P(i) +Z(10) LimZ zLimit  		' Go to the next hole        
+			'Jump P(i) +Z(10) LimZ zLimit  		' Go to the next hole        
+			PanelHoleToXYZT(i, CX(hotstake), CY(hotstake), CZ(prehotstake) + 10, 135 - PanelHoleTangent(i))
+			
 			SFree 1, 2 							' free X and Y
 
 			Do While Sw(HSPanelPresntH) = False
@@ -61,6 +68,7 @@ Function HotStakePanel() As Integer
 			PTCLR (3)
 
 			SLock 1, 2, 3, 4 						' lock all the joints so we can move again
+			Go XY(CX(CurPos), CY(CurPos), CZ(prehotstake), CU(CurPos)) /L
 	
 		EndIf
 		

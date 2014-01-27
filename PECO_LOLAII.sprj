@@ -1,10 +1,10 @@
-ENVT0100,LM:2014/01/27 02:13:15:880,DS:0000005597,CS:25200,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/27 03:48:44:278,DS:0000005596,CS:03637,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="1/26/2014 7:13:11 PM"
+	sLastModified="1/26/2014 8:48:39 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/26/2014 8:58:25 PM"
+	sTimeSavedInController="1/27/2014 3:46:32 AM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
@@ -60,7 +60,7 @@ ProgramFile6 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/26/2014 8:58:13 PM"
+	sTimeSavedInController="1/27/2014 3:16:30 AM"
 }
 ProgramFile7 {
 	sName="CalibrationRoutines.prg"
@@ -84,7 +84,7 @@ ProgramFile10 {
 	sName="HeatStake.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/26/2014 11:19:47 PM"
+	sTimeSavedInController="1/27/2014 3:48:40 AM"
 }
 ProgramFile11 {
 	sName="Startup.prg"
@@ -108,7 +108,7 @@ ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/27/2014 2:06:08 AM"
+	sTimeSavedInController="1/27/2014 3:07:10 AM"
 }
 ProgramFile15 {
 	sName="Test.prg"
@@ -151,11 +151,11 @@ IncludeFile5 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="1/26/2014 8:58:25 PM"
+	sTimeSavedInController="1/27/2014 3:46:28 AM"
 }
 PointFile2 {
 	sName="Points2.pts"
-	sTimeSavedInController="1/26/2014 8:58:13 PM"
+	sTimeSavedInController="1/27/2014 3:46:24 AM"
 }
 PointFile3 {
 	sName="Points3.pts"

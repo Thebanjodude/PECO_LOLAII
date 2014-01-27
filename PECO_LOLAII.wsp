@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/26 23:46:02:973,DS:0000004370,CS:18439,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/27 04:11:23:498,DS:0000004370,CS:18949,MA:00-21-70-9F-9C-9E,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -57,7 +57,7 @@ ProgramFile5 {
 ProgramFile6 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=25
 		nTop=25
@@ -101,7 +101,7 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=100
 		nTop=100
@@ -112,7 +112,7 @@ ProgramFile10 {
 ProgramFile11 {
 	sName="Startup.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -167,7 +167,7 @@ ProgramFile15 {
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
