@@ -691,6 +691,11 @@ Function modbusReadPort(length As Integer) As Integer
 ' alt. solution
 	' get number of bytes available to read
 	portStatus = ChkNet(204)
+	If portStatus = 0 Then
+		'no response yet, give the PLC a chance to catch up
+		Wait 0.1
+		portStatus = ChkNet(204)
+	EndIf
 	' read said number of bytes
 	ReadBin #204, modResponse(), portStatus
 	' let the rest of the function know what to expect for num bytes read
