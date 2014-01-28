@@ -74,8 +74,11 @@ Fend
 
 Function GetLaserMeasurement(OutNumber$ As String) As Real
                 
-    Integer i, NumTokens
-    String Tokens$(0), response$, responceCR$
+  Integer i, NumTokens, waitCount, portstatus
+  String Tokens$(0), response$, bit$, chars$(0)
+  
+	erLaserScanner = False
+
     
 	If ChkNet(203) < 0 Then ' If port is not open
 		OpenNet #203 As Client
@@ -84,34 +87,57 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
                 
 	Print #203, "MS,0," + OutNumber$
 	
-	'TODO - update to read the full packet before leaving
+	i = 0
+	waitCount = 0
+	Redim chars$(0)
 	
-    i = ChkNet(203)
-	Do Until i > 0
-	    i = ChkNet(203)
-	    If i < 0 Then Exit Function 'port error
-	    Wait 0.05
+	Do While True
+		'only read off of the port what it has available
+		portstatus = ChkNet(203)
+
+		If portstatus > 0 Then
+			'data is available, put it into the response string
+			Redim Preserve chars$(UBound(chars$) + 1)
+			
+			Read #204, bit$, 1
+			chars$(i) = bit$
+			
+			i = i + 1
+			
+		ElseIf portstatus = 0 Then
+			'nothing on the port
+			waitCount = waitCount + 1
+			If waitCount > 5 Then
+				'we have all we are going to get, leave
+				Exit Do
+			EndIf
+			Wait 0.05
+		Else
+			'something went wrong
+			Print "LASER: laser port error: ", portstatus
+			GetLaserMeasurement = -1
+			Exit Function
+		EndIf
 	Loop
+	
+	For i = 0 To UBound(chars$)
+		response$ = response$ + chars$(i)
+	Next
+	
+	NumTokens = ParseStr(response$, Tokens$(), ",")
+	
+	If NumTokens <> 1 Then
+		'something went wrong
+		Print "LASER: error --full message: ", response$
+	EndIf
+	
+	If response$ = "MS" + Chr$(&hd) Then
+		' throw an error if we dont get the proper responce
+		erLaserScanner = True
+		Print "LASER: error - MS  ---full message: ", response$
+	EndIf
 
-    If i > 0 Then  'should be, but just in case...
-    	Read #203, response$, i
-      	NumTokens = ParseStr(response$, Tokens$(), ",")
-     	
-     	If response$ = "MS" + Chr$(&hd) Then ' throw an error if we dont get the proper responce
-      		erLaserScanner = True
-      		Print "Laser Scanner error"
-      	Else
-      		erLaserScanner = False
-      	EndIf
-
-      	GetLaserMeasurement = Val(Tokens$(1)) ' return value      	
-'      If NumTokens = 1 Then
-'      	GetLaserMeasurement = Val(Tokens$(1)) ' return value
-'      Else
-'      	'something went wrong
-'      	Print "Laser Scanner error"
-'    	EndIf
-    EndIf
+	GetLaserMeasurement = Val(Tokens$(1)) ' return value
 
 Fend
 
