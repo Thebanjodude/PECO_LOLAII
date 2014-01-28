@@ -26,14 +26,13 @@ Function runTest
 	PickupPanel
 	CrowdingSequence
 	
-'	'clear existing pickup error
-'	PanelPickupErrorX = 0
-'	PanelPickupErrorY = 0
-'	PanelPickupErrorTheta = 0
-'
-''	Call changeSpeed(slow)
-'
-'	PanelFindPickupError
+	'clear existing pickup error
+	PanelPickupErrorX = 0
+	PanelPickupErrorY = 0
+	PanelPickupErrorTheta = 0
+
+
+	PanelFindPickupError
 
 '<TESTING>
 '	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes

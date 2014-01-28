@@ -20,7 +20,7 @@ Function HotStakePanel() As Integer
 	
 	' Present panel to hot stake
 	If Not HomeCheck Then findHome
-	Jump PreHotStake LimZ zLimit
+	Jump PreHotStake 'LimZ zLimit
 	
 	' Tell PLC to start the insertion process
 	MBWrite(103, True, MBTypeCoil)

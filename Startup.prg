@@ -36,17 +36,13 @@ Function PowerOnSequence()
 	Motor On
 	Power High
 	
-'	Speed SystemSpeed
-'	Accel SystemAccel, SystemAccel 'Paramterize these numbers
-'	SpeedS SystemSpeed
-'	AccelS SystemAccel, SystemAccel
 	QP (On) ' turn On quick pausing	
 	
 	changeSpeed(slow)
 	findHome
-
-	changeSpeed(fast)
 Fend
+
+
 Function CheckInitialParameters() As Integer
 'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
 'check if the hmi has pushed all the parameter values to the controller, if not throw an error 
@@ -67,10 +63,10 @@ Function CheckInitialParameters() As Integer
 		CheckInitialParameters = 2
 		erRecEntryMissing = True
 		Print "0 < recPointsTable < 3"
-	ElseIf recSuctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Or zLimit = 0 Then
+	ElseIf recSuctionWaitTime = 0 Or zLimit = 0 Then
 		CheckInitialParameters = 2
 		erParamEntryMissing = True
-		Print "recSuctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Or zLimit = 0"
+		Print "recSuctionWaitTime = 0 Or zLimit = 0"
 	Else
 		CheckInitialParameters = 0
 		erRecEntryMissing = False

@@ -4,9 +4,13 @@
 Function InTomm(inches As Real) As Real
 	InTomm = inches * 25.4
 Fend
+
+
 Function mmToin(mm As Real) As Real
 	mmToin = mm * 0.0393701
 Fend
+
+
 Function ChoosePointsTable()
 	' Choose which points table to load
 
@@ -21,6 +25,8 @@ Function ChoosePointsTable()
 		Print "point Table is Unknown"
 	EndIf
 Fend
+
+
 Function SavePointsTable()
 	' Choose which points table to save
 
@@ -35,6 +41,8 @@ Function SavePointsTable()
 		Print "point Table is Unknown"
 	EndIf
 Fend
+
+
 Function HomeCheck() As Boolean
 	
 	Real distx, disty, distz, distance
@@ -59,6 +67,8 @@ Function HomeCheck() As Boolean
 	EndIf
 		
 Fend
+
+
 Function findHome
 	' return to the home position (PreScan)
 
@@ -87,28 +97,30 @@ Function findHome
 	Select quad
 		Case 0
 			posZ = CZ(PreFlash)
-            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go XY(posX, posY, posZ, CU(Here)) /L
 			Go PreFlash CP
 			Go PreHotStake CP
 			Go PreScan
 		Case 1
 			posZ = CZ(OutmagWaypoint)
-            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go XY(posX, posY, posZ, CU(Here)) /L
 			Go OutmagWaypoint CP
 			Go PreScan
 		Case 2
 			posZ = CZ(PreHotStake)
-            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go XY(posX, posY, posZ, CU(Here)) /L
 			Go PreHotStake CP
 			Go PreScan
 		Case 3
 			posZ = CZ(PreScan)
-            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go XY(posX, posY, posZ, CU(Here)) /L
 			Go PreScan
 	Send
 	
 	HomeCheck  'clears errors from not being at home
 Fend
+
+
 Function changeSpeed(gotoSpeed As Integer)
 	Select gotoSpeed
 		Case slow

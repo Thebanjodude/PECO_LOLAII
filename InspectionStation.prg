@@ -13,7 +13,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Redim PassFailArray(0, 0)   ' clear all the values in the PassFail Array
 	
 	Redim PassFailArray(23, 1) 		' Clear array, always 23 rows
-    Redim InspectionArray(23, 1)	' Clear array, always 23 rows
+  Redim InspectionArray(23, 1)	' Clear array, always 23 rows
 	
 	If Not HomeCheck Then findHome
 	
@@ -69,6 +69,9 @@ exitInspectPanel:
 	findHome
 	Trap 2 'disarm trap
 Fend
+
+
+
 Function GetLaserMeasurement(OutNumber$ As String) As Real
                 
     Integer i, NumTokens
@@ -80,6 +83,8 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
 	EndIf
                 
 	Print #203, "MS,0," + OutNumber$
+	
+	'TODO - update to read the full packet before leaving
 	
     i = ChkNet(203)
 	Do Until i > 0
@@ -98,11 +103,19 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
       	Else
       		erLaserScanner = False
       	EndIf
-      	
-  		GetLaserMeasurement = Val(Tokens$(1)) ' return value
+
+      	GetLaserMeasurement = Val(Tokens$(1)) ' return value      	
+'      If NumTokens = 1 Then
+'      	GetLaserMeasurement = Val(Tokens$(1)) ' return value
+'      Else
+'      	'something went wrong
+'      	Print "Laser Scanner error"
+'    	EndIf
     EndIf
 
 Fend
+
+
 Function MeasureInsertDepth(Index As Integer)
 	
 	'Get the Left Spot face measurement, see if it is in spec and save the data to two arrays. 
@@ -116,6 +129,8 @@ Function MeasureInsertDepth(Index As Integer)
 	PassFailArray(Index, RightSpotFace) = PassOrFail(InspectionArray(Index, RightSpotFace))
 	
 Fend
+
+
 Function ChangeProfile(ProfileNumber$ As String) As Boolean
 	
 'This function changes the active profile of the laser scanner. Just tell it which profile you want it to run. 
@@ -152,6 +167,8 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
 	EndIf
 	 
 Fend
+
+
 Function PassOrFail(measurement As Real) As Boolean 'Pass is True	
 	' Measurement is assumed to be inches
 	
@@ -169,6 +186,8 @@ Function PassOrFail(measurement As Real) As Boolean 'Pass is True
 	EndIf
 	
 Fend
+
+
 Function PrintPassFailArray()
 	
 	Integer n
@@ -180,6 +199,8 @@ Function PrintPassFailArray()
 	Next
 	
 Fend
+
+
 Function FakeLogging()
 
 	Integer i
@@ -212,6 +233,8 @@ Function FakeLogging()
 	jobDone = True
 	
 Fend
+
+
 Function UnpackInspectionArrays()
 	
 'Sending a JSON array is a pain so we are just unpacking the array into seperate vars\ 	

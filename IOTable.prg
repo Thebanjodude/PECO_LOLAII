@@ -1517,7 +1517,7 @@ Function setVars(response$ As String)
 	    EndIf
 	    'Print "jobStartBtn:", jobStartBtn
 	Case "leftInterlockACKBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        leftInterlockACKBtn = True
 	        leftInterlockACK = True
 	    Else
@@ -1525,7 +1525,7 @@ Function setVars(response$ As String)
 	    EndIf
 	    'Print "leftInterlockACKBtn:", leftInterlockACKBtn
 	Case "outMagGoHomeBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        outMagGoHomeBtn = True
 	        outMagGoHome = True
 	    Else
@@ -1533,7 +1533,7 @@ Function setVars(response$ As String)
 	    EndIf
 	    'Print "outMagGoHomeBtn:", outMagGoHomeBtn
 	Case "outMagIntLockAckBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        outMagIntLockAckBtn = True
 	        outMagIntLockAck = True
 	    Else
@@ -1541,7 +1541,7 @@ Function setVars(response$ As String)
 	    EndIf
 	    'Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 	Case "outMagUnloadedBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        outMagUnloadedBtn = True
 	        outMagUnloaded = True
 	    Else
@@ -1549,7 +1549,7 @@ Function setVars(response$ As String)
 	    EndIf
 	    'Print "outMagUnloadedBtn:", outMagUnloadedBtn
 	Case "panelDataTxACKBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        panelDataTxACKBtn = True
 	        panelDataTxACK = True
 	        MemOn (panelDataTxAckH)
@@ -2169,134 +2169,128 @@ Function setVars(response$ As String)
 	        MemOff (stackLightGrnF)
 	    EndIf
 	Case "stackLightGrnFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightGrnFV)
 	    Else
 	        MemOff (stackLightGrnFV)
 	    EndIf
 	Case "stackLightRedF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightRedF)
 	    Else
 	        MemOff (stackLightRedF)
 	    EndIf
 	Case "stackLightRedFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightRedFV)
 	    Else
 	        MemOff (stackLightRedFV)
 	    EndIf
 	Case "stackLightYelF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightYelF)
 	    Else
 	        MemOff (stackLightYelF)
 	    EndIf
 	Case "stackLightYelFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightYelFV)
 	    Else
 	        MemOff (stackLightYelFV)
 	    EndIf
 	Case "suctionCupsF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (suctionCupsF)
 	    Else
 	        MemOff (suctionCupsF)
 	    EndIf
 	Case "suctionCupsFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (suctionCupsFV)
 	    Else
 	        MemOff (suctionCupsFV)
 	    EndIf
 	Case "recTempProbe"
-	    recTempProbe = Val(tokens$(1))
+	    recTempProbe = Val(Tokens$(1))
 	    'Print "recTempProbe:", recTempProbe
 	Case "recTempTrack"
-	    recTempTrack = Val(tokens$(1))
+	    recTempTrack = Val(Tokens$(1))
 	    'Print "recTempTrack:", recTempTrack
 	Case "recFirstHolePointInspection"
-	    recFirstHolePointInspection = Val(tokens$(1))
+	    recFirstHolePointInspection = Val(Tokens$(1))
 	    'Print "recFirstHolePointInspection:", recFirstHolePointInspection
 	Case "recLastHolePointInspection"
-	    recLastHolePointInspection = Val(tokens$(1))
+	    recLastHolePointInspection = Val(Tokens$(1))
 	    'Print "recLastHolePointInspection:", recLastHolePointInspection
 	Case "recFirstHolePointHotStake"
-	    recFirstHolePointHotStake = Val(tokens$(1))
+	    recFirstHolePointHotStake = Val(Tokens$(1))
 	    'Print "recFirstHolePointHotStake:"
 	Case "recLastHolePointHotStake"
-	    recLastHolePointHotStake = Val(tokens$(1))
+	    recLastHolePointHotStake = Val(Tokens$(1))
 	    'Print "recLastHolePointHotStake:", recLastHolePointHotStake
 	Case "recFirstHolePointFlash"
-	    recFirstHolePointFlash = Val(tokens$(1))
+	    recFirstHolePointFlash = Val(Tokens$(1))
 	    'Print "recFirstHolePointFlash:", recFirstHolePointFlash
 	Case "recLastHolePointFlash"
-	    recLastHolePointFlash = Val(tokens$(1))
+	    recLastHolePointFlash = Val(Tokens$(1))
 	    'Print "recLastHolePointFlash:"
 	Case "recFlashDwellTime"
-	    recFlashDwellTime = Val(tokens$(1))
+	    recFlashDwellTime = Val(Tokens$(1))
 	    'Print "recFlashDwellTime:"
 	Case "recHeatStakeOffset"
-	    recHeatStakeOffset = Val(tokens$(1))
+	    recHeatStakeOffset = Val(Tokens$(1))
 	    'Print "recHeatStakeOffset:"
 	Case "recBossCrossArea"
-	    recBossCrossArea = Val(tokens$(1))
+	    recBossCrossArea = Val(Tokens$(1))
 	    'Print "recBossCrossArea:", recBossCrossArea
 	Case "recPointsTable"
-	    recPointsTable = Val(tokens$(1))
+	    recPointsTable = Val(Tokens$(1))
 	    'Print "recPointsTable:", recPointsTable
 	Case "recInmag"
-	    recInmag = Val(tokens$(1))
+	    recInmag = Val(Tokens$(1))
 	    'Print "recInmag:", recInmag
 	Case "recOutmag"
-	    recOutmag = Val(tokens$(1))
+	    recOutmag = Val(Tokens$(1))
 	    'Print "recOutmag:", recOutmag
 	Case "recCrowding"
-	    recCrowding = Val(tokens$(1))
+	    recCrowding = Val(Tokens$(1))
 	    'Print "recCrowding:", recCrowding
 	Case "recPreCrowding"
-	    recPreCrowding = Val(tokens$(1))
+	    recPreCrowding = Val(Tokens$(1))
 	    'Print "recPreCrowding:", recPreCrowding
 	Case "jobNumPanels"
-	    jobNumPanels = Val(tokens$(1))
+	    jobNumPanels = Val(Tokens$(1))
 	    'Print "jobNumPanels:", jobNumPanels
 	Case "recFlashRequired"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        recFlashRequired = True
 	    Else
 	        recFlashRequired = False
 	    EndIf
 	    'Print "recFlashRequired:", recFlashRequired
 	Case "recInmagPickupOffset"
-	    recInmagPickupOffset = Val(tokens$(1))
+	    recInmagPickupOffset = Val(Tokens$(1))
 	    'Print "recInmagPickupOffset:", recInmagPickupOffset
 	Case "recInsertDepth"
-	    recInsertDepth = Val(tokens$(1))
+	    recInsertDepth = Val(Tokens$(1))
 	    'Print "recInsertDepth:", recInsertDepth
 	Case "recFlashDwellTime"
-	    recFlashDwellTime = Val(tokens$(1))
+	    recFlashDwellTime = Val(Tokens$(1))
 	    'Print "recFlashDwellTime:", recFlashDwellTime
 	Case "recInsertType"
-	    recInsertType = Val(tokens$(1))
+	    recInsertType = Val(Tokens$(1))
 	    'Print "recInsertType:", recInsertType
 	Case "recNumberOfHoles"
-	    recNumberOfHoles = Val(tokens$(1))
+	    recNumberOfHoles = Val(Tokens$(1))
 	    'Print "recNumberOfHoles:", recNumberOfHoles
 	Case "recOutmagPickupOffset"
-	    recOutmagPickupOffset = Val(tokens$(1))
+	    recOutmagPickupOffset = Val(Tokens$(1))
 	    'Print "recOutmagPickupOffset:", recOutmagPickupOffset
 	Case "suctionWaitTime"
-	   recSuctionWaitTime = Val(tokens$(1))
+	   recSuctionWaitTime = Val(Tokens$(1))
 	    'Print "suctionWaitTime:", recSuctionWaitTime
-	Case "systemAccel"
-	    SystemAccel = Val(tokens$(1))
-	    'Print "systemAccel:", SystemAccel
-	Case "systemSpeed"
-	    SystemSpeed = Val(tokens$(1))
-	    'Print "systemSpeed:", SystemSpeed
 	Case "zlimit"
-	    zLimit = Val(tokens$(1))
+	    zLimit = Val(Tokens$(1))
 	    'Print "zlimit:", zLimit
 	Default
 		' TMH for now print come back and do something useful

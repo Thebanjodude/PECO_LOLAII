@@ -1,6 +1,5 @@
 
 ' System Global #defines
-#define ScanSpeed 35 ' Percent Speed the arm moves during the scanning process
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
 #define Preinspection 1
 #define Postinspection 2
