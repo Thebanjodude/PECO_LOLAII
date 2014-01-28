@@ -99,7 +99,7 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
 			'data is available, put it into the response string
 			Redim Preserve chars$(UBound(chars$) + 1)
 			
-			Read #204, bit$, 1
+			Read #203, bit$, 1
 			chars$(i) = bit$
 			
 			i = i + 1
@@ -126,7 +126,7 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
 	
 	NumTokens = ParseStr(response$, Tokens$(), ",")
 	
-	If NumTokens <> 1 Then
+	If NumTokens < 1 Then
 		'something went wrong
 		Print "LASER: error --full message: ", response$
 	EndIf
