@@ -1,9 +1,7 @@
-ENVT0100,LM:2014/01/28 21:07:47:057,DS:0000004413,CS:26117,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="Main.prg"
-bMdiMaximized=True
+ENVT0100,LM:2014/01/29 22:23:35:406,DS:0000004370,CS:19467,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=2
 	Window {
 		nLeft=0
@@ -58,8 +56,8 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=25
 		nTop=25
@@ -136,12 +134,12 @@ ProgramFile12 {
 ProgramFile13 {
 	sName="Crowding.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1057
-		nHeight=595
+		nWidth=1056
+		nHeight=591
 	}
 }
 ProgramFile14 {
@@ -292,10 +290,10 @@ IOLabelEditor {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1057
-		nHeight=602
+		nWidth=1056
+		nHeight=599
 	}
-	nWinState=0
+	nWinState=2
 }
 IOMonitor {
 	bOpened=False
