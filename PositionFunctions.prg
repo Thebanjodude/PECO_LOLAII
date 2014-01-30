@@ -125,8 +125,8 @@ Function PanelFindPickupError
 		PanelFindYerror
 	
 		' put the error into robot space
-		realholex(count) = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
-		realholey(count) = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
+		realHoleX(count) = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
+		realHoleY(count) = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
 		
 		
 		' find the real hole location
@@ -183,13 +183,13 @@ Function PanelFindPickupError
 	negSin = Sin(DegToRad(-laserTheta))
 
 	PanelHoleToXYZT(1, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
-'
-'	PanelFindXerror
-'	PanelFindYerror
-'
-'	' put the error into robot space
-'	correctedX = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
-'	correctedY = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
+
+	PanelFindXerror
+	PanelFindYerror
+
+	' put the error into robot space
+	correctedX = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
+	correctedY = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
 
 '	Print correctedX, ",", PanelHoleX(1)
 '	Print correctedY, ",", PanelHoleY(1)
@@ -200,9 +200,11 @@ Function PanelFindPickupError
 	' find the error from the recipe in robot space (xy2rrt has to have been ran)
 '	PanelPickupErrorX = -(correctedX - PanelHoleX(1))
 '	PanelPickupErrorY = -(correctedY - PanelHoleY(1))
+	PanelPickupErrorX = correctedX - PanelHoleX(1)
+	PanelPickupErrorY = correctedY - PanelHoleY(1)
 
-	PanelPickupErrorX = -PanelFindXerror
-	PanelPickupErrorY = -PanelFindYerror
+'	PanelPickupErrorX = -PanelFindXerror
+'	PanelPickupErrorY = -PanelFindYerror
 
 	Print "done with error correction detection"
 	Print "------------------------"
