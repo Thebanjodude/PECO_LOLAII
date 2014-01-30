@@ -83,6 +83,14 @@ Function PanelFindPickupError
 	Real recipeAngle, realAngle
 	Real realHoleX(2), realHoleY(2)
 	Integer hole, count
+	
+	
+	Real correctedX, correctedY
+	Real negCos, negSin
+	Real laserTheta
+	
+
+
 
 	ChangeProfile("00") ' Change profile on the laser
 	Call changeSpeed(slow)
@@ -103,15 +111,27 @@ Function PanelFindPickupError
 	hole = 1
 	Do While count < 2
 		Print "hole:", hole
-		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), 90 - PanelHoleTangent(hole))
+'		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), 90 - PanelHoleTangent(hole))
 
 		' TODO-- we might want to find the hole in robot space after we unwind from laser positioning
 		'	see the XY error detection code to see how to do this
+		laserTheta = 90 - PanelHoleTangent(hole)
+		negCos = Cos(DegToRad(-laserTheta))
+		negSin = Sin(DegToRad(-laserTheta))
+	
+		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
+	
+		PanelFindXerror
+		PanelFindYerror
+	
+		' put the error into robot space
+		realholex(count) = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
+		realholey(count) = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
 		
 		
 		' find the real hole location
-		realHoleX(count) = PanelFindXerror + PanelHoleX(hole)
-		realHoleY(count) = PanelFindYerror + PanelHoleY(hole)
+'		realHoleX(count) = PanelFindXerror + PanelHoleX(hole)
+'		realHoleY(count) = PanelFindYerror + PanelHoleY(hole)
 
 		' this should give us a hole less than 90deg away for better theta correction
 		hole = PanelHoleCount /4 - 1
@@ -154,9 +174,9 @@ Function PanelFindPickupError
 	' find XY error
 	Print "finding XY offsets"
 
-	Real correctedX, correctedY
-	Real negCos, negSin
-	Real laserTheta
+'	Real correctedX, correctedY
+'	Real negCos, negSin
+'	Real laserTheta
 	
 	laserTheta = 90 - PanelHoleTangent(1)
 	negCos = Cos(DegToRad(-laserTheta))
@@ -170,19 +190,19 @@ Function PanelFindPickupError
 '	' put the error into robot space
 '	correctedX = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
 '	correctedY = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
-'
+
 '	Print correctedX, ",", PanelHoleX(1)
 '	Print correctedY, ",", PanelHoleY(1)
 '	Print "cur xy:", CX(CurPos), ",", CY(CurPos)
 '	Print "tan: ", PanelHoleTangent(1), ", laserTheta: ", laserTheta
 '	Print "sin, cos: ", negSin, ",", negCos
-'	
-'	' find the error from the recipe in robot space (xy2rrt has to have been ran)
-'	PanelPickupErrorX = correctedX - PanelHoleX(1)
-'	PanelPickupErrorY = correctedY - PanelHoleY(1)
+	
+	' find the error from the recipe in robot space (xy2rrt has to have been ran)
+'	PanelPickupErrorX = -(correctedX - PanelHoleX(1))
+'	PanelPickupErrorY = -(correctedY - PanelHoleY(1))
 
-	PanelPickupErrorX = PanelFindXerror
-	PanelPickupErrorY = PanelFindYerror
+	PanelPickupErrorX = -PanelFindXerror
+	PanelPickupErrorY = -PanelFindYerror
 
 	Print "done with error correction detection"
 	Print "------------------------"
@@ -337,9 +357,10 @@ Function PanelFindXerror As Real
 	Do While Not foundCenter
 		Print ".",
 		' output 7 should return a + or - number indicating the magnitude of error from center
-		' move the panel on the x axis by 1/2 the error value until the error is within tolerance
+		' move the panel on the x axis by 1/4 the error value until the error is within tolerance
+		'		using a 1/4 instead of 1/2 should keep the seeking down
 		Go CurPos -X(tempx)
-		tempx = GetLaserMeasurement("07") / 2
+		tempx = GetLaserMeasurement("07") / 4
 		If tempx > -holeTolerance And tempx < holeTolerance Then foundCenter = True
 	Loop
 

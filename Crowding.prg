@@ -46,8 +46,13 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Off (CrowdingH) ' Open crowding
 	Wait 0.5 ' wait for the crowding to open
 	
-	Go XY(CX(PreFlash), CY(PreFlash), CZ(PreFlash), CU(CurPos)) /L
-	Go PreFlash
+	Call changeSpeed(slow)
+'	Go XY(CX(PreFlash), CY(PreFlash), CZ(PreFlash), CU(CurPos)) /L
+	Go XY(CX(CurPos), CY(CurPos), -10, CU(CurPos)) /L
+	Go XY(CX(PreFlash), CY(PreFlash), CZ(CurPos), CU(CurPos)) /L
+	Go XY(CX(PreHotStake), CY(PreHotStake), CZ(CurPos), CU(CurPos)) /L
+	Go PreHotStake
+	Call changeSpeed(fast)
 	
 	CrowdingSequence = 0
 	

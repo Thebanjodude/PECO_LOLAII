@@ -1,15 +1,15 @@
-ENVT0100,LM:2014/01/30 18:12:27:888,DS:0000005594,CS:14904,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/30 22:43:04:368,DS:0000005592,CS:09474,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="1/30/2014 11:12:16 AM"
+	sLastModified="1/30/2014 3:43:00 PM"
 	bBuildComplete=True
-	bRebuildRequired=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMWKSSEHLERS"
+	sComputerName="AMLAPFASTEK"
 }
 UserProperties {
 	sVersion=""
@@ -30,37 +30,37 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 2:17:18 PM"
+	sTimeSavedInController="1/30/2014 6:36:00 PM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 2:17:18 PM"
+	sTimeSavedInController="1/28/2014 5:50:24 AM"
 }
 ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 2:17:18 PM"
+	sTimeSavedInController="1/28/2014 5:59:12 AM"
 }
 ProgramFile4 {
 	sName="SystemMonitor.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/25/2014 10:56:40 PM"
+	sTimeSavedInController="1/26/2014 8:58:24 PM"
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 2:17:18 PM"
+	sTimeSavedInController="1/28/2014 6:40:58 AM"
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 9:14:21 PM"
+	sTimeSavedInController="1/28/2014 3:06:16 PM"
 }
 ProgramFile7 {
 	sName="CalibrationRoutines.prg"
@@ -72,90 +72,90 @@ ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/30/2014 6:12:16 PM"
+	sTimeSavedInController="1/30/2014 6:23:18 PM"
 }
 ProgramFile9 {
 	sName="FlashRemoval.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 2:17:18 PM"
+	sTimeSavedInController="1/28/2014 5:59:12 AM"
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 2:17:18 PM"
+	sTimeSavedInController="1/28/2014 5:59:12 AM"
 }
 ProgramFile11 {
 	sName="Startup.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 2:17:18 PM"
+	sTimeSavedInController="1/28/2014 5:50:06 AM"
 }
 ProgramFile12 {
 	sName="MainStates.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 2:17:18 PM"
+	sTimeSavedInController="1/28/2014 6:03:00 AM"
 }
 ProgramFile13 {
 	sName="Crowding.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/30/2014 6:05:45 PM"
+	sTimeSavedInController="1/30/2014 6:47:30 PM"
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/30/2014 6:12:16 PM"
+	sTimeSavedInController="1/30/2014 10:43:00 PM"
 }
 ProgramFile15 {
 	sName="Test.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/30/2014 6:12:16 PM"
+	sTimeSavedInController="1/30/2014 10:10:01 PM"
 }
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="1/27/2014 4:19:45 AM"
+	sTimeSavedInController="1/27/2014 1:32:14 AM"
 }
 nIncludeFileCount=5
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 2:17:18 PM"
+	sTimeSavedInController="1/28/2014 5:50:06 AM"
 }
 IncludeFile2 {
 	sName="Defines.inc"
 	bStoreInController=True
-	sTimeSavedInController="1/28/2014 2:17:18 PM"
+	sTimeSavedInController="1/28/2014 5:50:06 AM"
 }
 IncludeFile3 {
 	sName="HMI.inc"
 	bStoreInController=True
-	sTimeSavedInController="1/20/2014 2:07:54 AM"
+	sTimeSavedInController="1/26/2014 8:58:24 PM"
 }
 IncludeFile4 {
 	sName="Recipe.inc"
 	bStoreInController=True
-	sTimeSavedInController="1/20/2014 2:07:54 AM"
+	sTimeSavedInController="1/26/2014 8:58:24 PM"
 }
 IncludeFile5 {
 	sName="Error.inc"
 	bStoreInController=True
-	sTimeSavedInController="1/26/2014 12:01:10 AM"
+	sTimeSavedInController="1/26/2014 8:58:24 PM"
 }
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="1/27/2014 3:46:28 AM"
+	sTimeSavedInController="1/30/2014 7:02:24 PM"
 }
 PointFile2 {
 	sName="Points2.pts"
-	sTimeSavedInController="1/29/2014 11:19:48 PM"
+	sTimeSavedInController="1/30/2014 7:04:30 PM"
 }
 PointFile3 {
 	sName="Points3.pts"
