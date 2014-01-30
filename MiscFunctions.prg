@@ -47,7 +47,8 @@ Function HomeCheck() As Boolean
 	
 	Real distx, disty, distz, distance
 ' TODO: Parameterize these #defines?
-	#define startUpDistMax 150 '+/-150mm from home position
+'	#define startUpDistMax 150 '+/-150mm from home position
+	#define startUpDistMax 5 '+/-5mm from home position
 	
 	distx = Abs(CX(CurPos) - CX(PreScan))
 	disty = Abs(CY(CurPos) - CY(PreScan))

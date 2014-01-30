@@ -1,8 +1,8 @@
-ENVT0100,LM:2014/01/29 22:23:35:406,DS:0000004370,CS:19467,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/01/30 18:12:33:582,DS:0000004370,CS:16392,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -57,7 +57,7 @@ ProgramFile5 {
 ProgramFile6 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=25
 		nTop=25
@@ -79,12 +79,12 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=71
 		nTop=103
-		nWidth=853
-		nHeight=427
+		nWidth=852
+		nHeight=423
 	}
 }
 ProgramFile9 {
@@ -138,30 +138,30 @@ ProgramFile13 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1056
-		nHeight=591
+		nWidth=1055
+		nHeight=588
 	}
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=2
 		nTop=6
-		nWidth=945
-		nHeight=521
+		nWidth=943
+		nHeight=518
 	}
 }
 ProgramFile15 {
 	sName="Test.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=37
 		nTop=8
-		nWidth=997
-		nHeight=491
+		nWidth=995
+		nHeight=483
 	}
 }
 ProgramFile16 {
@@ -281,8 +281,8 @@ RunWindow {
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=1292
-		nHeight=812
+		nWidth=1408
+		nHeight=882
 	}
 }
 IOLabelEditor {
@@ -293,7 +293,7 @@ IOLabelEditor {
 		nWidth=1056
 		nHeight=599
 	}
-	nWinState=2
+	nWinState=0
 }
 IOMonitor {
 	bOpened=False

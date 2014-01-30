@@ -93,7 +93,7 @@ Function PanelFindPickupError
 	' this will allow us to move the holes close to where they need to be
 	' the system theta error is accounted for in panelRecipeRotate()
 	Print "precalculating...."
-    PanelRecipeRotate(PanelPickupErrorTheta)
+	PanelRecipeRotate(PanelPickupErrorTheta)
 	xy2RadiusRotationTangent
 
 	Print "finding two holes for error detection"
@@ -163,26 +163,26 @@ Function PanelFindPickupError
 	negSin = Sin(DegToRad(-laserTheta))
 
 	PanelHoleToXYZT(1, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
+'
+'	PanelFindXerror
+'	PanelFindYerror
+'
+'	' put the error into robot space
+'	correctedX = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
+'	correctedY = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
+'
+'	Print correctedX, ",", PanelHoleX(1)
+'	Print correctedY, ",", PanelHoleY(1)
+'	Print "cur xy:", CX(CurPos), ",", CY(CurPos)
+'	Print "tan: ", PanelHoleTangent(1), ", laserTheta: ", laserTheta
+'	Print "sin, cos: ", negSin, ",", negCos
+'	
+'	' find the error from the recipe in robot space (xy2rrt has to have been ran)
+'	PanelPickupErrorX = correctedX - PanelHoleX(1)
+'	PanelPickupErrorY = correctedY - PanelHoleY(1)
 
-	PanelFindXerror
-	PanelFindYerror
-
-	' put the error into robot space
-	correctedX = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
-	correctedY = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
-
-	Print correctedX, ",", PanelHoleX(1)
-	Print correctedY, ",", PanelHoleY(1)
-	Print "cur xy:", CX(CurPos), ",", CY(CurPos)
-	Print "tan: ", PanelHoleTangent(1), ", laserTheta: ", laserTheta
-	Print "sin, cos: ", negSin, ",", negCos
-	
-	' find the error from the recipe in robot space (xy2rrt has to have been ran)
-	PanelPickupErrorX = correctedX - PanelHoleX(1)
-	PanelPickupErrorY = correctedY - PanelHoleY(1)
-
-'	PanelPickupErrorX = PanelFindXerror
-'	PanelPickupErrorY = PanelFindYerror
+	PanelPickupErrorX = PanelFindXerror
+	PanelPickupErrorY = PanelFindYerror
 
 	Print "done with error correction detection"
 	Print "------------------------"

@@ -28,11 +28,11 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Jump cwdout_51010 +Z(30) ' Relese the suction cups and move them out of the way for crowding
 
 	' crowding sequence
-	On CrowdingXH
+	On crowdingXH
 	Wait 0.5
 	On CrowdingH
 	Wait 0.5
-	Off CrowdingXH
+	Off crowdingXH
 	Wait 0.5
 	
 '	Wait 3
@@ -44,7 +44,10 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Wait recSuctionWaitTime
 
 	Off (CrowdingH) ' Open crowding
-	Wait 0.5 ' wait for the crowding to open	
+	Wait 0.5 ' wait for the crowding to open
+	
+	Go XY(CX(PreFlash), CY(PreFlash), CZ(PreFlash), CU(CurPos)) /L
+	Go PreFlash
 	
 	CrowdingSequence = 0
 	

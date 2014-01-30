@@ -59,6 +59,8 @@ Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(C
 			'Pause
 			'Wait 1
 		Next
+		
+		Go PreScan
 
 '<TESTING>
 '		Pause
