@@ -101,7 +101,7 @@ Function PanelFindPickupError
 	' this will allow us to move the holes close to where they need to be
 	' the system theta error is accounted for in panelRecipeRotate()
 	Print "precalculating...."
-	PanelRecipeRotate(PanelPickupErrorTheta)
+	PanelRecipeRotate(PanelPickupErrorTheta + systemThetaError)
 	xy2RadiusRotationTangent
 
 
@@ -195,7 +195,7 @@ Function PanelFindPickupError
 	
 	PanelPickupErrorTheta = -errorTheta
 
-	PanelRecipeRotate(PanelPickupErrorTheta)
+	PanelRecipeRotate(PanelPickupErrorTheta + systemThetaError)
 	xy2RadiusRotationTangent
 
 	' find XY error
@@ -204,10 +204,11 @@ Function PanelFindPickupError
 '	Real correctedX, correctedY
 '	Real negCos, negSin
 '	Real laserTheta
-	
+		
+	' *** the crowding is only off by the magazine correction ***
 	laserTheta = 90 - PanelHoleTangent(1)
-	negCos = Cos(DegToRad(-laserTheta))
-	negSin = Sin(DegToRad(-laserTheta))
+	negCos = Cos(DegToRad(-magazineCorrection))
+	negSin = Sin(DegToRad(-magazineCorrection))
 
 	PanelHoleToXYZT(1, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
 
@@ -263,7 +264,7 @@ Function PanelRecipeRotate(Theta As Double)
 	Double newY
 	
 	'add in the offsets needed to put everything on the same cord system as the robot
-	newTheta = Theta + systemThetaError
+'	newTheta = Theta + systemThetaError
 		
 	'pre calculate these	
 	sinTheta = Sin(DegToRad(newTheta))
@@ -276,6 +277,7 @@ Function PanelRecipeRotate(Theta As Double)
 		PanelHoleY(hole) = newY
 	Next
 Fend
+
 ' shift the panel matrix by specific XY amount
 Function PanelRecipeTranslate(x As Double, y As Double)
 		
