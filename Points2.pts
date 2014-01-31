@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/30 19:04:30:640,DS:0000018043,CS:10864,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/31 17:19:15:141,DS:0000018043,CS:10871,MA:00-21-70-9F-9C-9E,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=82
@@ -150,7 +150,7 @@ Point9 {
 	nNumber=46
 	sLabel="CwdOUT_88555"
 	sDescription=""
-	rX=-311.116
+	rX=-316.116
 	rY=-15.076
 	rZ=-86.722
 	rU=142

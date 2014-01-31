@@ -174,18 +174,33 @@ Function PanelFindPickupError
 
 	PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
 
-	PanelFindXerror
-	PanelFindYerror
+'	PanelFindXerror
+'	PanelFindYerror
+
+	Real Xerror
+	Real Yerror
+	
+	Xerror = -PanelFindXerror
+	Yerror = -PanelFindYerror
 
 	' put the error into robot space
-	correctedX = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
-	correctedY = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
+'	correctedX = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
+'	correctedY = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
+	correctedX = (Xerror * negCos) - (Yerror * negSin)
+	correctedY = (Xerror * negSin) + (Yerror * negCos)
 
 	' find the error from the recipe in robot space (xy2rrt has to have been ran)
 '	PanelPickupErrorX = -(correctedX - PanelHoleX(1))
 '	PanelPickupErrorY = -(correctedY - PanelHoleY(1))
-	PanelPickupErrorX = correctedX - PanelHoleX(1)
-	PanelPickupErrorY = correctedY - PanelHoleY(1)
+'	PanelPickupErrorX = correctedX - PanelHoleX(hole)
+'	PanelPickupErrorY = correctedY - PanelHoleY(hole)
+	PanelPickupErrorX = correctedX
+	PanelPickupErrorY = correctedY
+
+
+'	' correct for panel rotation at the same time
+'	PanelPickupErrorX = PanelFindYerror
+'	PanelPickupErrorY = -PanelFindXerror
 
 	Print "done with error correction detection"
 	Print "------------------------"
@@ -218,6 +233,7 @@ Function PanelRecipeRotate(Theta As Double)
 	
 	'add in the offsets needed to put everything on the same cord system as the robot
 '	newTheta = Theta + systemThetaError
+	newTheta = Theta
 		
 	'pre calculate these	
 	sinTheta = Sin(DegToRad(newTheta))

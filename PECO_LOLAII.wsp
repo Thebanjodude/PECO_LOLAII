@@ -1,4 +1,6 @@
-ENVT0100,LM:2014/01/31 00:42:08:072,DS:0000004370,CS:17665,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/31 17:38:35:991,DS:0000004426,CS:30545,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="PositionFunctions.prg"
+bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -144,7 +146,7 @@ ProgramFile13 {
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=2
 	Window {
 		nLeft=2
@@ -156,7 +158,7 @@ ProgramFile14 {
 ProgramFile15 {
 	sName="Test.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=37
 		nTop=8
@@ -245,7 +247,7 @@ PointFile1 {
 }
 PointFile2 {
 	sName="Points2.pts"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=0
