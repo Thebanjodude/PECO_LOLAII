@@ -104,33 +104,6 @@ Function PanelFindPickupError
 	PanelRecipeRotate(PanelPickupErrorTheta + systemThetaError)
 	xy2RadiusRotationTangent
 
-
-'	Print "finding initial XY error"
-'	laserTheta = 90 - PanelHoleTangent(1)
-'	negCos = Cos(DegToRad(-laserTheta))
-'	negSin = Sin(DegToRad(-laserTheta))
-'
-'	PanelHoleToXYZT(1, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
-'
-'	PanelFindXerror
-'	PanelFindYerror
-'
-'	' put the error into robot space
-'	correctedX = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
-'	correctedY = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
-'
-'	' find the error from the recipe in robot space (xy2rrt has to have been ran)
-'	PanelPickupErrorX = correctedX - PanelHoleX(1)
-'	PanelPickupErrorY = correctedY - PanelHoleY(1)
-'
-'	Print "loading XY error correction values"
-'	PanelRecipeTranslate(PanelPickupErrorX, PanelPickupErrorY)
-'
-'	' recalculate with error correction applied
-'	Print "Applying error corrections..."
-'	xy2RadiusRotationTangent
-'
-
 	Print "finding two holes for error detection"
 	
 	'we want to run thru this code twice to find two holes
@@ -138,10 +111,7 @@ Function PanelFindPickupError
 	hole = 1
 	Do While count < 2
 		Print "hole:", hole
-'		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), 90 - PanelHoleTangent(hole))
 
-		' TODO-- we might want to find the hole in robot space after we unwind from laser positioning
-		'	see the XY error detection code to see how to do this
 		laserTheta = 90 - PanelHoleTangent(hole)
 		negCos = Cos(DegToRad(-laserTheta))
 		negSin = Sin(DegToRad(-laserTheta))
@@ -180,12 +150,6 @@ Function PanelFindPickupError
 	realAngle = RadToDeg(Atan((realHoleX(0) - realHoleX(1)) / (realHoleY(0) - realHoleY(1))))
 	errorTheta = recipeAngle - realAngle
 
-'	Print "panel hole 1 XY:", PanelHoleX(1), ",", PanelHoleY(1)
-'	Print "panel hole", hole, " XY:", PanelHoleX(hole), ",", PanelHoleY(hole)
-'	Print "real hole 1 XY:", realHoleX(0), ",", realHoleY(0)
-'	Print "real hole 2 XY:", realHoleX(1), ",", realHoleY(1)
-	
-
 	Print "recipe angle:", recipeAngle
 	Print "real angle: ", realAngle
 
@@ -201,16 +165,14 @@ Function PanelFindPickupError
 	' find XY error
 	Print "finding XY offsets"
 
-'	Real correctedX, correctedY
-'	Real negCos, negSin
-'	Real laserTheta
-		
+	hole = 1
+	
 	' *** the crowding is only off by the magazine correction ***
-	laserTheta = 90 - PanelHoleTangent(1)
+	laserTheta = 90 - PanelHoleTangent(hole)
 	negCos = Cos(DegToRad(-magazineCorrection))
 	negSin = Sin(DegToRad(-magazineCorrection))
 
-	PanelHoleToXYZT(1, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
+	PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
 
 	PanelFindXerror
 	PanelFindYerror
@@ -219,20 +181,11 @@ Function PanelFindPickupError
 	correctedX = ((CX(CurPos) - CX(laser)) * negCos) - ((CY(CurPos) - CY(laser)) * negSin)
 	correctedY = ((CX(CurPos) - CX(laser)) * negSin) + ((CY(CurPos) - CY(laser)) * negCos)
 
-'	Print correctedX, ",", PanelHoleX(1)
-'	Print correctedY, ",", PanelHoleY(1)
-'	Print "cur xy:", CX(CurPos), ",", CY(CurPos)
-'	Print "tan: ", PanelHoleTangent(1), ", laserTheta: ", laserTheta
-'	Print "sin, cos: ", negSin, ",", negCos
-	
 	' find the error from the recipe in robot space (xy2rrt has to have been ran)
 '	PanelPickupErrorX = -(correctedX - PanelHoleX(1))
 '	PanelPickupErrorY = -(correctedY - PanelHoleY(1))
 	PanelPickupErrorX = correctedX - PanelHoleX(1)
 	PanelPickupErrorY = correctedY - PanelHoleY(1)
-
-'	PanelPickupErrorX = -PanelFindXerror
-'	PanelPickupErrorY = -PanelFindYerror
 
 	Print "done with error correction detection"
 	Print "------------------------"
