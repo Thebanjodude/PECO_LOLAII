@@ -46,8 +46,11 @@ Function runTest
 
 	Call changeSpeed(slow)
 
-
-Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(CurPos), " u:", CU(CurPos)
+	
+	'Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(CurPos), " u:", CU(CurPos)
+	
+	Integer count
+	count = 0
 	Do While True
 		Pause
 			
@@ -60,7 +63,8 @@ Print "current pos:    ", "  --  x:", CX(CurPos), " y:", CY(CurPos), " z:", CZ(C
 			'Wait 1
 		Next
 		
-		Go PreScan
+		count = count + 1
+		If count > 3 Then Go PreScan
 
 '<TESTING>
 '		Pause
