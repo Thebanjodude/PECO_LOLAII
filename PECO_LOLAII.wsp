@@ -1,8 +1,8 @@
-ENVT0100,LM:2014/01/30 21:44:46:980,DS:0000004370,CS:17665,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/01/31 00:42:08:072,DS:0000004370,CS:17665,MA:00-21-70-9F-9C-9E,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -134,7 +134,7 @@ ProgramFile12 {
 ProgramFile13 {
 	sName="Crowding.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -145,7 +145,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=2
 		nTop=6
@@ -156,7 +156,7 @@ ProgramFile14 {
 ProgramFile15 {
 	sName="Test.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=37
 		nTop=8
