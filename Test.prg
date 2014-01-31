@@ -32,24 +32,24 @@ Function runTest
 	PanelPickupErrorTheta = 0
 
 
-	'PanelFindPickupError
+	PanelFindPickupError
 
 '<TESTING>
 '	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
 '	' this will allow us to move the holes close to where they need to be
 '	' the system theta error is accounted for in panelRecipeRotate()
-	Print "precalculating...."
-	LoadPanelInfo
-	PanelRecipeRotate(PanelPickupErrorTheta)
-	xy2RadiusRotationTangent
-
-	Do While True
-		Call changeSpeed(slow)
-		PanelHoleToXYZT(1, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(1))
-		Wait 3
-		Print GetLaserMeasurement("07")
-		CrowdingSequence
-	Loop
+'	Print "precalculating...."
+'	LoadPanelInfo
+'	PanelRecipeRotate(PanelPickupErrorTheta)
+'	xy2RadiusRotationTangent
+'
+'	Do While True
+'		Call changeSpeed(slow)
+'		PanelHoleToXYZT(1, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(1))
+'		Wait 3
+'		Print GetLaserMeasurement("07")
+'		CrowdingSequence
+'	Loop
 
 '</TESTING>
 
