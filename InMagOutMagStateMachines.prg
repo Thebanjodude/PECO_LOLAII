@@ -376,14 +376,14 @@ OutMagTorqueLim = -12345 ' Empirically define this limit
 	
 	If InMagTorqueLim > PTRQ(Zaxis) Then
 		Off (suctionCupsH) ' Stop attempt at picking up a panel
-		Jump PreScan LimZ zLimit ' Go to a safe place
+		Jump PreScan 'LimZ zLimit ' Go to a safe place
 		erInMagCrowding = True
 		' Get user ack before leaving ISR	
 	EndIf
 
 		If OutMagTorqueLim < PTRQ(Zaxis) Then
 		On (suctionCupsH) ' Double check suction cups are on
-		Jump PreScan LimZ zLimit ' Go to a safe place
+		Jump PreScan 'LimZ zLimit ' Go to a safe place
 		erOutMagCrowding = True
 		' Get user ack before leaving ISR	
 	EndIf

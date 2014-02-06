@@ -12,32 +12,37 @@ Function PowerOnSequence()
 	Xqt 4, SystemMonitor, NoEmgAbort
 	Xqt 5, iotransfer, NoEmgAbort
 	Xqt 6, HmiListen, NoEmgAbort
-    Xqt 7, InmagControl, Normal
-    Xqt 8, OutMagControlRefactor(), Normal
-
+	Xqt 7, InmagControl, Normal
+	Xqt 8, OutMagControlRefactor(), Normal
+    
+  'Xqt 9 -- Unused
+  'Xqt 10 -- Used in HeatStakeComms for MBCommandTask
+  
+	Call MBInitialize
+    
 	' Start the PLC
-	'Wait bootDelayH
-	Wait Sw(0)
-	bootCC = True 'Let the PLC know that it is safe to boot
-	'Wait idleH
-	Wait Sw(1)
-	bootCC = False 'PLC has booted, reset the boot flag
+	' check to see if the PLC waiting to boot or has already booted
+	'  if it has already booted, assume it was an e-stop
+	Wait MemSw(m_bootDelay) = True Or MemSw(m_bootDone) = True
+	' Let the PLC know that it is safe to boot, if it has already booted it will
+	'  ignore this bit.
+	MBWrite(100, True, MBTypeCoil)
+
+	' Wait for the PLC to reach the idle state
+	Wait MemSw(m_idle) = True
 
 	ClearMemory() ' writes a zero to all the memIO
 	
 	Motor On
 	Power High
 	
-	Speed SystemSpeed
-	Accel SystemAccel, SystemAccel 'Paramterize these numbers
-	SpeedS SystemSpeed
-	AccelS SystemAccel, SystemAccel
 	QP (On) ' turn On quick pausing	
 	
-	HomeCheck
+	changeSpeed(slow)
 	findHome
-
 Fend
+
+
 Function CheckInitialParameters() As Integer
 'check if the hmi has pushed all the recipe values to the controller, if not throw an error 	
 'check if the hmi has pushed all the parameter values to the controller, if not throw an error 
@@ -58,10 +63,10 @@ Function CheckInitialParameters() As Integer
 		CheckInitialParameters = 2
 		erRecEntryMissing = True
 		Print "0 < recPointsTable < 3"
-	ElseIf recSuctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Or zLimit = 0 Then
+	ElseIf recSuctionWaitTime = 0 Or zLimit = 0 Then
 		CheckInitialParameters = 2
 		erParamEntryMissing = True
-		Print "recSuctionWaitTime = 0 Or SystemSpeed = 0 Or SystemAccel = 0 Or zLimit = 0"
+		Print "recSuctionWaitTime = 0 Or zLimit = 0"
 	Else
 		CheckInitialParameters = 0
 		erRecEntryMissing = False
@@ -78,10 +83,12 @@ Function HotStakeTempRdy() As Boolean
 Fend
 Function ClearMemory()
 	
-	For x = 0 To 15
-		MemOutW x, 0 ' This writes 0 to all memory locations in word chunks
+	Integer i
+	
+	For i = 0 To 15
+		MemOutW i, 0 ' This writes 0 to all memory locations in word chunks
 	Next
-	x = 0
+	i = 0
 	
 Fend
 

@@ -16,7 +16,7 @@ Function FlashPanel(DwellTime As Real) As Integer
 	
 	For i = recFirstHolePointFlash To recLastHolePointFlash
 		
-		Jump P(i) LimZ zLimit
+    Jump P(i) 'LimZ zLimit
 		
 		On DrillGoH, 1 'Stroke Tool
 		

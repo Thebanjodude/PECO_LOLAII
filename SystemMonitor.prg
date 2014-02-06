@@ -283,7 +283,7 @@ Function ResetErrors()
   erInMagEmpty = False; erInMagOpenInterlock = False; erOutMagCrowding = False; erPanelUndefined = False
   erInMagCrowding = False; erOutMagFull = False; erOutMagOpenInterlock = False; erBadPressureSensor = False
   erLaserScanner = False; erDCPower = False; erDCPowerHeatStake = False; erHeatStakeTemp = False
-  erHeatStakeBreaker = False; erBowlFeederBreaker = False; erInMagBreaker = False ';erModbusPort;erModbusCommand,erModbusCommand
+  erHeatStakeBreaker = False; erBowlFeederBreaker = False; erInMagBreaker = False; erModbusPort = False; erModbusCommand = False; erModbusCommand = False
   erOutMagBreaker = False; erFlashBreaker = False; erDebrisRemovalBreaker = False
   erPnumaticsBreaker = False; erSafetySystemBreaker = False; erRC180 = False; erIllegalArmMove = False
   erUnknown = False; erEstop = False; erRecEntryMissing = False; erParamEntryMissing = False; erRobotNotAtHome = False

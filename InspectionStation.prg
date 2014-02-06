@@ -13,7 +13,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Redim PassFailArray(0, 0)   ' clear all the values in the PassFail Array
 	
 	Redim PassFailArray(23, 1) 		' Clear array, always 23 rows
-    Redim InspectionArray(23, 1)	' Clear array, always 23 rows
+  Redim InspectionArray(23, 1)	' Clear array, always 23 rows
 	
 	If Not HomeCheck Then findHome
 	
@@ -23,11 +23,13 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	'if needed the profile will be changed by the inspection function
 	ChangeProfile("07")
 
-	For i = recFirstHolePointInspection To recLastHolePointInspection
+	'For i = recFirstHolePointInspection To recLastHolePointInspection
+	For i = 1 To PanelHoleCount
 		
 		' see if we can get away without using this
 		'Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
-		Go P(i)
+		'Go P(i)
+		PanelHoleToXYZT(i, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(i))
 		
 		If SelectRoutine = 1 Then
 
@@ -35,7 +37,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 
 			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
 			
-			Print "BossCrosssectionalArea: ", BossCrosssectionalArea
+			'Print "BossCrosssectionalArea: ", BossCrosssectionalArea
 			If BossCrosssectionalArea > recBossCrossArea Then ' There is already an insert so set skip flag
 				SkipHoleArray(currentPreinspectHole, 0) = 1
 				Print "Hole ", currentPreinspectHole, " is already populated"
@@ -50,7 +52,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			currentInspectHole = currentInspectHole + 1
 		EndIf
 			
-		Go P(i) :U(CU(Here)) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
+		'Go P(i) :U(CU(Here)) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
 	Next
 	
 	InspectPanel = 0 ' Inspection occured without errors
@@ -67,10 +69,16 @@ exitInspectPanel:
 	findHome
 	Trap 2 'disarm trap
 Fend
+
+
+
 Function GetLaserMeasurement(OutNumber$ As String) As Real
                 
-    Integer i, NumTokens
-    String Tokens$(0), response$, responceCR$
+  Integer i, NumTokens, waitCount, portstatus
+  String Tokens$(0), response$, bit$, chars$(0)
+  
+	erLaserScanner = False
+
     
 	If ChkNet(203) < 0 Then ' If port is not open
 		OpenNet #203 As Client
@@ -79,26 +87,61 @@ Function GetLaserMeasurement(OutNumber$ As String) As Real
                 
 	Print #203, "MS,0," + OutNumber$
 	
-    i = ChkNet(203)
-	Do Until i > 0
-	    i = ChkNet(203)
-	    If i < 0 Then Exit Function 'port error
-	    Wait 0.05
-	Loop
+	i = 0
+	waitCount = 0
+	Redim chars$(0)
+	
+	Do While True
+		'only read off of the port what it has available
+		portstatus = ChkNet(203)
 
-    If i > 0 Then  'should be, but just in case...
-    	Read #203, response$, i
-      	NumTokens = ParseStr(response$, Tokens$(), ",")
-	     	If response$ = "MS" + Chr$(&hd) Then ' throw an error if we dont get the proper responce
-	      		erLaserScanner = True
-	      		Print "Laser Scanner error"
-	      	Else
-	      		erLaserScanner = False
-	      	EndIf
-  		GetLaserMeasurement = Val(Tokens$(1)) ' return value
-    EndIf
+		If portstatus > 0 Then
+			'data is available, put it into the response string
+			Redim Preserve chars$(UBound(chars$) + 1)
+			
+			Read #203, bit$, 1
+			chars$(i) = bit$
+			
+			i = i + 1
+			
+		ElseIf portstatus = 0 Then
+			'nothing on the port
+			waitCount = waitCount + 1
+			If waitCount > 5 Then
+				'we have all we are going to get, leave
+				Exit Do
+			EndIf
+			Wait 0.05
+		Else
+			'something went wrong
+			Print "LASER: laser port error: ", portstatus
+			GetLaserMeasurement = -1
+			Exit Function
+		EndIf
+	Loop
+	
+	For i = 0 To UBound(chars$)
+		response$ = response$ + chars$(i)
+	Next
+	
+	NumTokens = ParseStr(response$, Tokens$(), ",")
+	
+	If NumTokens < 1 Then
+		'something went wrong
+		Print "LASER: error --full message: ", response$
+	EndIf
+	
+	If response$ = "MS" + Chr$(&hd) Then
+		' throw an error if we dont get the proper responce
+		erLaserScanner = True
+		Print "LASER: error - MS  ---full message: ", response$
+	EndIf
+
+	GetLaserMeasurement = Val(Tokens$(1)) ' return value
 
 Fend
+
+
 Function MeasureInsertDepth(Index As Integer)
 	
 	'Get the Left Spot face measurement, see if it is in spec and save the data to two arrays. 
@@ -112,6 +155,8 @@ Function MeasureInsertDepth(Index As Integer)
 	PassFailArray(Index, RightSpotFace) = PassOrFail(InspectionArray(Index, RightSpotFace))
 	
 Fend
+
+
 Function ChangeProfile(ProfileNumber$ As String) As Boolean
 	
 'This function changes the active profile of the laser scanner. Just tell it which profile you want it to run. 
@@ -137,16 +182,19 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
 
     If i > 0 Then  'should be, but just in case...
     	Read #203, response$, i
+
     	'Print response$
-    		If response$ = "PW" + Chr$(&hd) Then
-				erLaserScanner = False
-	      	Else
-	      		erLaserScanner = True
-	      		Print "Laser Scanner error"
-	      	EndIf
+		If response$ = "PW" + Chr$(&hd) Then
+			erLaserScanner = False
+      	Else
+      		erLaserScanner = True
+      		Print "Laser Scanner error"
+      	EndIf
 	EndIf
 	 
 Fend
+
+
 Function PassOrFail(measurement As Real) As Boolean 'Pass is True	
 	' Measurement is assumed to be inches
 	
@@ -164,6 +212,8 @@ Function PassOrFail(measurement As Real) As Boolean 'Pass is True
 	EndIf
 	
 Fend
+
+
 Function PrintPassFailArray()
 	
 	Integer n
@@ -175,6 +225,8 @@ Function PrintPassFailArray()
 	Next
 	
 Fend
+
+
 Function FakeLogging()
 
 	Integer i
@@ -207,6 +259,8 @@ Function FakeLogging()
 	jobDone = True
 	
 Fend
+
+
 Function UnpackInspectionArrays()
 	
 'Sending a JSON array is a pain so we are just unpacking the array into seperate vars\ 	

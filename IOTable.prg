@@ -45,12 +45,6 @@ Do While True
 	outMagUpLim = IOTableBooleans(Sw(outMagUpLimH), MemSw(outMagUpLimFV), MemSw(outMagUpLimF))
 	outMagUpLimN = IOTableBooleans(Sw(outMagUpLimNH), MemSw(outMagUpLimNFV), MemSw(outMagUpLimNF))
 	rightIntlock = IOTableBooleans(Sw(rightIntlockH), MemSw(rightIntlockFV), MemSw(rightIntlockF))
-	
-	bootDelay = IOTableBooleans(Sw(bootDelayH), MemSw(bootDelayFV), MemSw(bootDelayF))
-	idle = IOTableBooleans(Sw(idleH), MemSw(idleFV), MemSw(idleF))
-	ready = IOTableBooleans(Sw(readyH), MemSw(readyFV), MemSw(readyF))
-	inserting = IOTableBooleans(Sw(insertingH), MemSw(insertingFV), MemSw(insertingF))
-	dumping = IOTableBooleans(Sw(dumpingH), MemSw(dumpingFV), MemSw(dumpingF))
 Loop
 	errHandler:
 		
@@ -95,47 +89,6 @@ Do While True
 	    ReturnFlag = False
 	EndIf
 
-	boot = IOTableBooleans(bootCC, MemSw(bootFV), MemSw(bootF))
-	If boot = True Then
-			On (bootH)
-		Else
-			Off (bootH)
-		EndIf
-	    
-	gotoReady = IOTableBooleans(gotoReadyCC, MemSw(gotoReadyFV), MemSw(gotoReadyF))
-	If gotoReady = True Then
-			On (gotoReadyH)
-		Else
-			Off (gotoReadyH)
-		EndIf
-	    
-	doInsertion = IOTableBooleans(doInsertionCC, MemSw(doInsertionFV), MemSw(doInsertionF))
-	If doInsertion = True Then
-			On (doInsertionH)
-		Else
-			Off (doInsertionH)
-		EndIf
-	    
-	doneInserting = IOTableBooleans(doneInsertingCC, MemSw(doneInsertingFV), MemSw(doneInsertingF))
-	If DoneInserting = True Then
-			On (doneInsertingH)
-		Else
-			Off (doneInsertingH)
-		EndIf
-	    
-	startDump = IOTableBooleans(startDumpCC, MemSw(startDumpFV), MemSw(startDumpF))
-	If startDump = True Then
-			On (startDumpH)
-		Else
-			Off (startDumpH)
-		EndIf
-	    
-	doneDumping = IOTableBooleans(doneDumpingCC, MemSw(doneDumpingFV), MemSw(doneDumpingF))
-	If doneDumping = True Then
-			On (doneDumpingH)
-		Else
-			Off (doneDumpingH)
-		EndIf
 
 	'---------------------
 	debrisMtr = IOTableBooleans(debrisMtrCC, MemSw(debrisMtrFV), MemSw(debrisMtrF))
@@ -289,6 +242,313 @@ Function iotransfer()
     ' this will need to be cleaned up, currently it is just a copy of all the global vars
     ' To recreate this list:  `awk '{ gsub("," ,"\n"$1);  print}' vars | awk '{sub(/$/, "Old");print}' -  | sort > varsNew` where vars is a list of vars without any #defines or blank lines or comments or so forth...  (and no arrays)
    
+	Boolean abortJobBtnOld
+	Boolean abortjobOld
+	Boolean airPressHighOld
+	Boolean airPressLowOld
+	Boolean alarmMuteBtnOld
+	Boolean alarmMuteOld
+	Boolean alarmTogOld
+	Boolean backInterlockACKBtnOld
+	Boolean backInterlockACKOld
+	Boolean backIntlock1Old
+	Boolean backIntlock2Old
+	Boolean cbMonDebrisRmvOld
+	Boolean cbMonHeatStakeOld
+	Boolean cbMonInMagOld
+	Boolean cbMonOutMagOld
+	Boolean cbMonPAS24vdcOld
+	Boolean cbMonSafetyOld
+	Boolean dc24vOKOld
+	Boolean debrisMtrCCOld
+	Boolean debrisMtrOld
+	Boolean drillGoCCOld
+	Boolean drillGoOld
+	Boolean drillReturnCCOld
+	Boolean drillReturnOld
+	Boolean edgeDetectGoOld
+	Boolean edgeDetectHiOld
+	Boolean edgeDetectLoOld
+	Boolean flashHomeNCOld
+	Boolean erBackSafetyFrameOpenOld
+	Boolean erBadPressureSensorOld
+	Boolean erBowlFeederBreakerOld
+	Boolean erDCPowerHeatStakeOld
+	Boolean erDCPowerOld
+	Boolean erDebrisRemovalBreakerOld
+	Boolean erEstopOld
+	Boolean erFlashBreakerOld
+	Boolean erFlashStationOld
+	Boolean erFrontSafetyFrameOpenOld
+	Boolean erHeatStakeBreakerOld
+	Boolean erHeatStakeTempOld
+	Boolean erHighPressureOld
+	Boolean erHMICommunicationOld
+	Boolean erHmiDataAckOld
+	Boolean erIllegalArmMoveOld
+	Boolean erInMagBreakerOld
+	Boolean erInMagCrowdingOld
+	Boolean erInMagEmptyOld
+	Boolean erInMagLowSensorBadOld
+	Boolean erInMagOpenInterlockOld
+	Boolean erInMagUpSensorBadOld
+	Boolean erLaserScannerOld
+	Boolean erLeftSafetyFrameOpenOld
+	Boolean erLowPressureOld
+	Boolean erModbusCommandOld
+	Boolean erModbusPortOld
+	Boolean erModbusTimeoutOld
+	Boolean erOutMagBreakerOld
+	Boolean erOutMagCrowdingOld
+	Boolean erOutMagFullOld
+	Boolean erOutMagLowSensorBadOld
+	Boolean erOutMagOpenInterlockOld
+	Boolean erOutMagUpSensorBadOld
+	Boolean erPanelFailedInspectionOld
+	Boolean erPanelStatusUnknownOld
+	Boolean erPanelUndefinedOld
+	Boolean erParamEntryMissingOld
+	Boolean erPnumaticsBreakerOld
+	Boolean erRC180Old
+	Boolean erRecEntryMissingOld
+	Boolean erRightSafetyFrameOpenOld
+	Boolean erRobotNotAtHomeOld
+	Boolean errorStatusOld
+	Boolean erSafetySystemBreakerOld
+	Boolean erUnknownOld
+	Boolean erWrongPanelDimsOld
+	Boolean erWrongPanelHolesOld
+	Boolean erWrongPanelInsertOld
+	Boolean erWrongPanelOld
+	Boolean eStopResetCCOld
+	Boolean eStopResetOld
+	Boolean eStopStatusOld
+	Boolean FlashHomeCCOld
+	Boolean flashHomeNOOld
+	Boolean flashPanelPresntOld
+	Boolean FlashPnlPrsntOld
+	Boolean frontInterlockACKBtnOld
+	Boolean frontInterlockACKOld
+	Boolean frontIntlock1Old
+	Boolean frontIntlock2Old
+	Boolean GoFlagOld
+	Boolean heartBeatOld
+	Boolean heatStakeGoCCOld
+	Boolean heatStakeGoOld
+	Boolean hole0PFOld
+	Boolean hole10PFOld
+	Boolean hole11PFOld
+	Boolean hole12PFOld
+	Boolean hole13PFOld
+	Boolean hole14PFOld
+	Boolean hole15PFOld
+	Boolean hole16PFOld
+	Boolean hole17PFOld
+	Boolean hole18PFOld
+	Boolean hole19PFOld
+	Boolean hole1PFOld
+	Boolean hole20PFOld
+	Boolean hole21PFOld
+	Boolean hole22PFOld
+	Boolean hole23PFOld
+	Boolean hole2PFOld
+	Boolean hole3PFOld
+	Boolean hole4PFOld
+	Boolean hole5PFOld
+	Boolean hole6PFOld
+	Boolean hole7PFOld
+	Boolean hole8PFOld
+	Boolean hole9PFOld
+	Boolean holeDetectedOld
+	Boolean homePositionStatusOld
+	Boolean hsInstallInsrtOld
+	Boolean hsPanelPresntOld
+	Boolean inMagGoHomeBtnOld
+	Boolean inMagGoHomeOld
+	Boolean inMagInterlockOld
+	Boolean inMagIntLockAckBtnOld
+	Boolean inMagIntLockAckOld
+	Boolean inMagLoadedBtnOld
+	Boolean inMagLoadedOld
+	Boolean inMagLowLimNOld
+	Boolean inMagLowLimOld
+	Boolean inMagMtrCCOld
+	Boolean inMagMtrDirCCOld
+	Boolean inMagMtrDirOld
+	Boolean inMagMtrOld
+	Boolean InMagPickUpSignalOld
+	Boolean inMagPnlRdyOld
+	Boolean InMagRobotClearSignalOld
+	Boolean inMagUpLimNOld
+	Boolean inMagUpLimOld
+	Boolean jobAbortBtnOld
+	Boolean jobDoneOld
+	Boolean jobPauseBtnOld
+	Boolean jobPauseOld
+	Boolean jobResumeBtnOld
+	Boolean jobResumeOld
+	Boolean jobStartBtnOld
+	Boolean jobStartOld
+	Boolean jobStopBtnOld
+	Boolean jobStopOld
+	Boolean joint1StatusOld
+	Boolean joint2StatusOld
+	Boolean joint3StatusOld
+	Boolean joint4StatusOld
+	Boolean leftInterlockACKBtnOld
+	Boolean leftInterlockACKOld
+	Boolean leftIntlock1Old
+	Boolean leftIntlock2Old
+	Boolean maintModeOld
+	Boolean monEstop1Old
+	Boolean monEstop2Old
+	Boolean motorOnStatusOld
+	Boolean motorPowerStatusOld
+	Boolean OutMagDropOffSignalOld
+	Boolean outMagGoHomeBtnOld
+	Boolean outMagGoHomeOld
+	Boolean outMagIntLockAckBtnOld
+	Boolean outMagIntLockAckOld
+	Boolean outMagIntOld
+	Boolean outMagLowLimNOld
+	Boolean outMagLowLimOld
+	Boolean outMagMtrCCOld
+	Boolean outMagMtrDirCCOld
+	Boolean outMagMtrDirOld
+	Boolean outMagMtrOld
+	Boolean outMagPanelRdyOld
+	Boolean OutMagRobotClearSignalOld
+	Boolean outMagUnloadedBtnOld
+	Boolean outMagUnloadedOld
+	Boolean outMagUpLimNOld
+	Boolean outMagUpLimOld
+	Boolean OutputMagSignalOld
+	Boolean panelDataTxACKBtnOld
+	Boolean panelDataTxACKOld
+	Boolean panelDataTxRdyOld
+	Boolean PanelPassedInspectionOld
+	Boolean ParamEntryMissingOld
+	Boolean pauseFlagOld
+	Boolean pauseStatusOld
+	Boolean RecEntryMissingOld
+	Boolean recFlashRequiredOld
+	Boolean ReturnFlagOld
+	Boolean rightInterlockACKBtnOld
+	Boolean rightInterlockACKOld
+	Boolean rightIntlockOld
+	Boolean RobotPlacedPanelOld
+	Boolean safeGuardInputOld
+	Boolean sftyFrmIlockAckBtnOld
+	Boolean sftyFrmIlockAckOld
+	Boolean stackLightAlrmCCOld
+	Boolean stackLightAlrmOld
+	Boolean stackLightGrnCCOld
+	Boolean stackLightGrnOld
+	Boolean stackLightRedCCOld
+	Boolean stackLightRedOld
+	Boolean stackLightYelCCOld
+	Boolean stackLightYelOld
+	Boolean suctionCupsCCOld
+	Boolean suctionCupsOld
+	Boolean tasksRunningStatusOld
+	Boolean teachModeStatusOld
+	Double recPartNumberOld
+	Integer CrowdingOld
+	Integer ctrlrErrAxisNumberOld
+	Integer ctrlrErrorNumOld
+	Integer ctrlrLineNumberOld
+	Integer ctrlrTaskNumberOld
+	Integer currentFlashHoleOld
+	Integer currentHSHoleOld
+	Integer currentInspectHoleOld
+	Integer currentPreinspectHoleOld
+	Integer FirstHolePointFlashOld
+	Integer FirstHolePointHotStakeOld
+	Integer FirstHolePointInspectionOld
+	Integer inMagCurrentStateOld
+	Integer jobAbortOld
+	Integer jobNumPanelsDoneOld
+	Integer jobNumPanelsOld
+	Integer LastHolePointFlashOld
+	Integer LastHolePointHotStakeOld
+	Integer LastHolePointInspectionOld
+	Integer mainCurrentStateOld
+	Integer outMagCurrentStateOld
+	Integer OutmagLastStateOld
+	Integer recCrowdingOld
+	Integer recInmagOld
+	Integer recInsertTypeOld
+	Integer recNumberOfHolesOld
+	Integer recOutmagOld
+	Integer recPreCrowdingOld
+	Integer SystemAccelOld
+	Integer SystemSpeedOld
+	Integer systemStatusOld
+	Integer xOld
+	Integer zOld
+	Real hole0LOld
+	Real hole0ROld
+	Real hole10LOld
+	Real hole10ROld
+	Real hole11LOld
+	Real hole11ROld
+	Real hole12LOld
+	Real hole12ROld
+	Real hole13LOld
+	Real hole13ROld
+	Real hole14LOld
+	Real hole14ROld
+	Real hole15LOld
+	Real hole15ROld
+	Real hole16LOld
+	Real hole16ROld
+	Real hole17LOld
+	Real hole17ROld
+	Real hole18LOld
+	Real hole18ROld
+	Real hole19LOld
+	Real hole19ROld
+	Real hole1LOld
+	Real hole1ROld
+	Real hole20LOld
+	Real hole20ROld
+	Real hole21LOld
+	Real hole21ROld
+	Real hole22LOld
+	Real hole22ROld
+	Real hole23LOld
+	Real hole23ROld
+	Real hole2LOld
+	Real hole2ROld
+	Real hole3LOld
+	Real hole3ROld
+	Real hole4LOld
+	Real hole4ROld
+	Real hole5LOld
+	Real hole5ROld
+	Real hole6LOld
+	Real hole6ROld
+	Real hole7LOld
+	Real hole7ROld
+	Real hole8LOld
+	Real hole8ROld
+	Real hole9LOld
+	Real hole9ROld
+	Real InMagTorqueLimOld
+	Real insertDepthToleranceOld
+	Real OutMagTorqueLimOld
+	Real recFlashDwellTimeOld
+	Real recInmagPickupOffsetOld
+	Real recInsertDepthOld
+	Real recOutmagPickupOffsetOld
+	Real recPanelThicknessOld
+	Real recTempProbeOld
+	Real recTempTrackOld
+	Real recSuctionWaitTimeOld
+	Real zLimitOld
+	Real ZmaxTorqueOld
+	String ctrlrErrMsgOld$
+   
     ' define the connection to the HMI
     SetNet #201, "10.22.251.171", 1502, CRLF, NONE, 0
 
@@ -306,13 +566,13 @@ Function iotransfer()
 	'see if a 0.5 second has passed
 	TmReset 0
 	
-   	OnErr GoTo RetryConnection ' on any error retry connection
+  OnErr GoTo RetryConnection ' on any error retry connection
   
 	RetryConnection:
-      	If ChkNet(201) < 0 Then ' If port is not open
-      		Wait 2 'give things a chance to settle before opening the port
-            OpenNet #201 As Client
-            Print "Attempted Open TCP port to HMI"
+  	If ChkNet(201) < 0 Then ' If port is not open
+  		Wait 2 'give things a chance to settle before opening the port
+       OpenNet #201 As Client
+       Print "Attempted Open TCP port to HMI"
 		EndIf
 		
 	heartBeat = Not heartBeat
@@ -541,18 +801,6 @@ Function iotransfer()
 	If erWrongPanelHoles <> erWrongPanelHolesOld Then
 		Print #201, "{", Chr$(&H22) + "erWrongPanelHoles" + Chr$(&H22), ":", Str$(erWrongPanelHoles), "}",
 		erWrongPanelHolesOld = erWrongPanelHoles
-	EndIf
-	If erModbusTimeout <> erModbusTimeoutOld Then
-		Print #201, "{", Chr$(&H22) + "erModbusTimeout" + Chr$(&H22), ":", Str$(erModbusTimeout), "}",
-		erModbusTimeoutOld = erModbusTimeout
-	EndIf
-	If erModbusPort <> erModbusPortOld Then
-		Print #201, "{", Chr$(&H22) + "erModbusPort" + Chr$(&H22), ":", Str$(erModbusPort), "}",
-		erModbusPortOld = erModbusPort
-	EndIf
-	If erModbusCommand <> erModbusCommandOld Then
-		Print #201, "{", Chr$(&H22) + "erModbusCommand" + Chr$(&H22), ":", Str$(erModbusCommand), "}",
-		erModbusCommandOld = erModbusCommand
 	EndIf
 	If hole0L <> hole0LOld Then
 		Print #201, "{", Chr$(&H22) + "hole0L" + Chr$(&H22), ":", Str$(hole0L), "}",
@@ -1201,7 +1449,7 @@ Function setVars(response$ As String)
 	   Else
 	       jobAbortBtn = False
 	   EndIf
-	   Print "jobAbortBtn:", jobAbortBtn
+	   'Print "jobAbortBtn:", jobAbortBtn
 	'__________________
 	
 	Case "alarmMuteBtn"
@@ -1211,7 +1459,7 @@ Function setVars(response$ As String)
 	    Else
 	        alarmMuteBtn = False
 	    EndIf
-	    Print "alarmMuteBtn:", alarmMuteBtn
+	    'Print "alarmMuteBtn:", alarmMuteBtn
 	Case "backInterlockACKBtn"
 	    If tokens$(1) = "true" Then
 	        backInterlockACKBtn = True
@@ -1219,7 +1467,7 @@ Function setVars(response$ As String)
 	    Else
 	        backInterlockACKBtn = False
 	    EndIf
-	    Print "backInterlockACKBtn:", backInterlockACKBtn
+	    'Print "backInterlockACKBtn:", backInterlockACKBtn
 	Case "frontInterlockACKBtn"
 	    If tokens$(1) = "true" Then
 	        frontInterlockACKBtn = True
@@ -1227,7 +1475,7 @@ Function setVars(response$ As String)
 	    Else
 	        frontInterlockACKBtn = False
 	    EndIf
-	    Print "frontInterlockACKBtn:", frontInterlockACKBtn
+	    'Print "frontInterlockACKBtn:", frontInterlockACKBtn
 	Case "inMagGoHomeBtn"
 	    If tokens$(1) = "true" Then
 	        inMagGoHomeBtn = True
@@ -1235,7 +1483,7 @@ Function setVars(response$ As String)
 	    Else
 	        inMagGoHomeBtn = False
 	    EndIf
-	    Print "inMagGoHomeBtn:", inMagGoHomeBtn
+	    'Print "inMagGoHomeBtn:", inMagGoHomeBtn
 	Case "inMagIntLockAckBtn"
 	    If tokens$(1) = "true" Then
 	        inMagIntLockAckBtn = True
@@ -1243,7 +1491,7 @@ Function setVars(response$ As String)
 	    Else
 	        inMagIntLockAckBtn = False
 	    EndIf
-	    Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
+	    'Print "inMagIntLockAckBtn:", inMagIntLockAckBtn
 	Case "inMagLoadedBtn"
 	    If tokens$(1) = "true" Then
 	        inMagLoadedBtn = True
@@ -1251,7 +1499,7 @@ Function setVars(response$ As String)
 	    Else
 	        inMagLoadedBtn = False
 	    EndIf
-	    Print "inMagLoadedBtn:", inMagLoadedBtn
+	    'Print "inMagLoadedBtn:", inMagLoadedBtn
 	Case "jobAbortBtn"
 	    If tokens$(1) = "true" Then
 	        jobAbortBtn = True
@@ -1259,7 +1507,7 @@ Function setVars(response$ As String)
 	    Else
 	        jobAbortBtn = False
 	    EndIf
-	    Print "jobAbortBtn:", jobAbortBtn
+	    'Print "jobAbortBtn:", jobAbortBtn
 	Case "jobStartBtn"
 	    If tokens$(1) = "true" Then
 	        jobStartBtn = True
@@ -1267,41 +1515,41 @@ Function setVars(response$ As String)
 	    Else
 	        jobStartBtn = False
 	    EndIf
-	    Print "jobStartBtn:", jobStartBtn
+	    'Print "jobStartBtn:", jobStartBtn
 	Case "leftInterlockACKBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        leftInterlockACKBtn = True
 	        leftInterlockACK = True
 	    Else
 	        leftInterlockACKBtn = False
 	    EndIf
-	    Print "leftInterlockACKBtn:", leftInterlockACKBtn
+	    'Print "leftInterlockACKBtn:", leftInterlockACKBtn
 	Case "outMagGoHomeBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        outMagGoHomeBtn = True
 	        outMagGoHome = True
 	    Else
 	        outMagGoHomeBtn = False
 	    EndIf
-	    Print "outMagGoHomeBtn:", outMagGoHomeBtn
+	    'Print "outMagGoHomeBtn:", outMagGoHomeBtn
 	Case "outMagIntLockAckBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        outMagIntLockAckBtn = True
 	        outMagIntLockAck = True
 	    Else
 	        outMagIntLockAckBtn = False
 	    EndIf
-	    Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
+	    'Print "outMagIntLockAckBtn:", outMagIntLockAckBtn
 	Case "outMagUnloadedBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        outMagUnloadedBtn = True
 	        outMagUnloaded = True
 	    Else
 	        outMagUnloadedBtn = False
 	    EndIf
-	    Print "outMagUnloadedBtn:", outMagUnloadedBtn
+	    'Print "outMagUnloadedBtn:", outMagUnloadedBtn
 	Case "panelDataTxACKBtn"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        panelDataTxACKBtn = True
 	        panelDataTxACK = True
 	        MemOn (panelDataTxAckH)
@@ -1309,7 +1557,7 @@ Function setVars(response$ As String)
 	        panelDataTxACKBtn = False
 	        MemOff (panelDataTxAckH)
 	    EndIf
-	    Print "panelDataTxACKBtn:", panelDataTxACKBtn
+	    'Print "panelDataTxACKBtn:", panelDataTxACKBtn
 	Case "rightInterlockACKBtn"
 	    If tokens$(1) = "true" Then
 	        rightInterlockACKBtn = True
@@ -1317,7 +1565,7 @@ Function setVars(response$ As String)
 	    Else
 	        rightInterlockACKBtn = False
 	    EndIf
-	    Print "rightInterlockACKBtn:", rightInterlockACKBtn
+	    'Print "rightInterlockACKBtn:", rightInterlockACKBtn
 	Case "sftyFrmIlockAckBtn"
 	    If tokens$(1) = "true" Then
 	        sftyFrmIlockAckBtn = True
@@ -1325,7 +1573,7 @@ Function setVars(response$ As String)
 	    Else
 	        sftyFrmIlockAckBtn = False
 	    EndIf
-	    Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
+	    'Print "sftyFrmIlockAckBtn:", sftyFrmIlockAckBtn
 	Case "airPressHighF"
 	    If tokens$(1) = "true" Then
 	        MemOn (airPressHighF)
@@ -1921,135 +2169,129 @@ Function setVars(response$ As String)
 	        MemOff (stackLightGrnF)
 	    EndIf
 	Case "stackLightGrnFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightGrnFV)
 	    Else
 	        MemOff (stackLightGrnFV)
 	    EndIf
 	Case "stackLightRedF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightRedF)
 	    Else
 	        MemOff (stackLightRedF)
 	    EndIf
 	Case "stackLightRedFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightRedFV)
 	    Else
 	        MemOff (stackLightRedFV)
 	    EndIf
 	Case "stackLightYelF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightYelF)
 	    Else
 	        MemOff (stackLightYelF)
 	    EndIf
 	Case "stackLightYelFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (stackLightYelFV)
 	    Else
 	        MemOff (stackLightYelFV)
 	    EndIf
 	Case "suctionCupsF"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (suctionCupsF)
 	    Else
 	        MemOff (suctionCupsF)
 	    EndIf
 	Case "suctionCupsFV"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        MemOn (suctionCupsFV)
 	    Else
 	        MemOff (suctionCupsFV)
 	    EndIf
 	Case "recTempProbe"
-	    recTempProbe = Val(tokens$(1))
-	    Print "recTempProbe:", recTempProbe
+	    recTempProbe = Val(Tokens$(1))
+	    'Print "recTempProbe:", recTempProbe
 	Case "recTempTrack"
-	    recTempTrack = Val(tokens$(1))
-	    Print "recTempTrack:", recTempTrack
+	    recTempTrack = Val(Tokens$(1))
+	    'Print "recTempTrack:", recTempTrack
 	Case "recFirstHolePointInspection"
-	    recFirstHolePointInspection = Val(tokens$(1))
-	    Print "recFirstHolePointInspection:", recFirstHolePointInspection
+	    recFirstHolePointInspection = Val(Tokens$(1))
+	    'Print "recFirstHolePointInspection:", recFirstHolePointInspection
 	Case "recLastHolePointInspection"
-	    recLastHolePointInspection = Val(tokens$(1))
-	    Print "recLastHolePointInspection:", recLastHolePointInspection
+	    recLastHolePointInspection = Val(Tokens$(1))
+	    'Print "recLastHolePointInspection:", recLastHolePointInspection
 	Case "recFirstHolePointHotStake"
-	    recFirstHolePointHotStake = Val(tokens$(1))
-	    Print "recFirstHolePointHotStake:"
+	    recFirstHolePointHotStake = Val(Tokens$(1))
+	    'Print "recFirstHolePointHotStake:"
 	Case "recLastHolePointHotStake"
-	    recLastHolePointHotStake = Val(tokens$(1))
-	    Print "recLastHolePointHotStake:", recLastHolePointHotStake
+	    recLastHolePointHotStake = Val(Tokens$(1))
+	    'Print "recLastHolePointHotStake:", recLastHolePointHotStake
 	Case "recFirstHolePointFlash"
-	    recFirstHolePointFlash = Val(tokens$(1))
-	    Print "recFirstHolePointFlash:", recFirstHolePointFlash
+	    recFirstHolePointFlash = Val(Tokens$(1))
+	    'Print "recFirstHolePointFlash:", recFirstHolePointFlash
 	Case "recLastHolePointFlash"
-	    recLastHolePointFlash = Val(tokens$(1))
-	    Print "recLastHolePointFlash:"
+	    recLastHolePointFlash = Val(Tokens$(1))
+	    'Print "recLastHolePointFlash:"
 	Case "recFlashDwellTime"
-	    recFlashDwellTime = Val(tokens$(1))
-	    Print "recFlashDwellTime:"
+	    recFlashDwellTime = Val(Tokens$(1))
+	    'Print "recFlashDwellTime:"
 	Case "recHeatStakeOffset"
-	    recHeatStakeOffset = Val(tokens$(1))
-	    Print "recHeatStakeOffset:"
+	    recHeatStakeOffset = Val(Tokens$(1))
+	    'Print "recHeatStakeOffset:"
 	Case "recBossCrossArea"
-	    recBossCrossArea = Val(tokens$(1))
-	    Print "recBossCrossArea:", recBossCrossArea
+	    recBossCrossArea = Val(Tokens$(1))
+	    'Print "recBossCrossArea:", recBossCrossArea
 	Case "recPointsTable"
-	    recPointsTable = Val(tokens$(1))
-	    Print "recPointsTable:", recPointsTable
+	    recPointsTable = Val(Tokens$(1))
+	    'Print "recPointsTable:", recPointsTable
 	Case "recInmag"
-	    recInmag = Val(tokens$(1))
-	    Print "recInmag:", recInmag
+	    recInmag = Val(Tokens$(1))
+	    'Print "recInmag:", recInmag
 	Case "recOutmag"
-	    recOutmag = Val(tokens$(1))
-	    Print "recOutmag:", recOutmag
+	    recOutmag = Val(Tokens$(1))
+	    'Print "recOutmag:", recOutmag
 	Case "recCrowding"
-	    recCrowding = Val(tokens$(1))
-	    Print "recCrowding:", recCrowding
+	    recCrowding = Val(Tokens$(1))
+	    'Print "recCrowding:", recCrowding
 	Case "recPreCrowding"
-	    recPreCrowding = Val(tokens$(1))
-	    Print "recPreCrowding:", recPreCrowding
+	    recPreCrowding = Val(Tokens$(1))
+	    'Print "recPreCrowding:", recPreCrowding
 	Case "jobNumPanels"
-	    jobNumPanels = Val(tokens$(1))
-	    Print "jobNumPanels:", jobNumPanels
+	    jobNumPanels = Val(Tokens$(1))
+	    'Print "jobNumPanels:", jobNumPanels
 	Case "recFlashRequired"
-	    If tokens$(1) = "true" Then
+	    If Tokens$(1) = "true" Then
 	        recFlashRequired = True
 	    Else
 	        recFlashRequired = False
 	    EndIf
-	    Print "recFlashRequired:", recFlashRequired
+	    'Print "recFlashRequired:", recFlashRequired
 	Case "recInmagPickupOffset"
-	    recInmagPickupOffset = Val(tokens$(1))
-	    Print "recInmagPickupOffset:", recInmagPickupOffset
+	    recInmagPickupOffset = Val(Tokens$(1))
+	    'Print "recInmagPickupOffset:", recInmagPickupOffset
 	Case "recInsertDepth"
-	    recInsertDepth = Val(tokens$(1))
-	    Print "recInsertDepth:", recInsertDepth
+	    recInsertDepth = Val(Tokens$(1))
+	    'Print "recInsertDepth:", recInsertDepth
 	Case "recFlashDwellTime"
-	    recFlashDwellTime = Val(tokens$(1))
-	    Print "recFlashDwellTime:", recFlashDwellTime
+	    recFlashDwellTime = Val(Tokens$(1))
+	    'Print "recFlashDwellTime:", recFlashDwellTime
 	Case "recInsertType"
-	    recInsertType = Val(tokens$(1))
-	    Print "recInsertType:", recInsertType
+	    recInsertType = Val(Tokens$(1))
+	    'Print "recInsertType:", recInsertType
 	Case "recNumberOfHoles"
-	    recNumberOfHoles = Val(tokens$(1))
-	    Print "recNumberOfHoles:", recNumberOfHoles
+	    recNumberOfHoles = Val(Tokens$(1))
+	    'Print "recNumberOfHoles:", recNumberOfHoles
 	Case "recOutmagPickupOffset"
-	    recOutmagPickupOffset = Val(tokens$(1))
-	    Print "recOutmagPickupOffset:", recOutmagPickupOffset
+	    recOutmagPickupOffset = Val(Tokens$(1))
+	    'Print "recOutmagPickupOffset:", recOutmagPickupOffset
 	Case "suctionWaitTime"
-	   recSuctionWaitTime = Val(tokens$(1))
-	    Print "suctionWaitTime:", recSuctionWaitTime
-	Case "systemAccel"
-	    SystemAccel = Val(tokens$(1))
-	    Print "systemAccel:", SystemAccel
-	Case "systemSpeed"
-	    SystemSpeed = Val(tokens$(1))
-	    Print "systemSpeed:", SystemSpeed
+	   recSuctionWaitTime = Val(Tokens$(1))
+	    'Print "suctionWaitTime:", recSuctionWaitTime
 	Case "zlimit"
-	    zLimit = Val(tokens$(1))
-	    Print "zlimit:", zLimit
+	    zLimit = Val(Tokens$(1))
+	    'Print "zlimit:", zLimit
 	Default
 		' TMH for now print come back and do something useful
 		Print "Invalid Token received"

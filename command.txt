@@ -6,6 +6,206 @@
 !!Error: 3804, Specified command cannot be executed from the Command window.
 > jump PreScan
 !!Error: 1037, Cannot execute in Remote Ethernet enable except from the Remote Ethernet.
+!!Error: 3100, Syntax error.
+> 
 > homeset Pls(1), Pls(2), Pls(3), Pls(4)
 
+> PanelPickupErrorY = 12.5
+>PanelPickupErrorY = 0 
+> print panelPickupErrorY
+ 0
+> PanelPickupErrorY = 12.4
+> PanelPickupErrorY = 12.5
+> PanelPickupErrorY = 6
+> PanelPickupErrorTheata = 15
+!!Error: 3100, Syntax error.
+> PanelPickupErrorTheta = 15
+> PanelPickupErrorTheta = 135 + 15
+> PanelPickupErrorTheta = 135 -7
+> PanelPickupErrorTheta = 0
+> PanelPickupErrorY = 0
+> 
+> 
+> PanelPickupErrorTheta = 320
+> 
+> PanelPickupErrorTheta = 310
+> PanelPickupErrorTheata = 315 - 3.821 'crowding error
+!!Error: 3100, Syntax error.
+> PanelPickupErrorTheta = 315 - 3.821 ' crowding error
+> 
+> 
+> 
+> print PanelPickupErrorThetat
+!!Error: 2513, Specified point label is not defined.
+> print PanelPickupErrorTheta
+ 311.179
+> PanelPickupErrorY = 1.5
+> 
+> 
+> 
+> 
+> 
+> PanelPickupErrorTheta = 311.179
+> PanelPickupErrorY = 3.3
+> PanelPickupErrorX = 0.65
+> 
+> PanelPickupErrorTheta = 313
+> PanelPickupErrorTheta = 318
+> PanelPickupErrorTheta = 314
+> PanelPickupErrorTheta = 315
+> PanelPickupErrorY=5
+> PanelPickupErrorx=3
+> PanelPickupErrorX=-3
+> PanelPickupErrorTheta = 311
+> PanelPickupErrorTheta = 312
+> PanelPickupErrorTheta = 313
+> PanelPickupErrorY = 10
+> print panelholex(1)
+ 151.44925160464
+> print sin(degtorad(90))
+ 1
+> print cos(degtorad(90))
+ 6.1230317691119E-017
+> print sin(90)
+ 0.89399666360056
+> asin(0.89399666360056)
+!!Error: 3100, Syntax error.
+> print asin(0.89399666360056)
+ 1.106186954104pri
+> print asin(0.7122)
+ 0.79262725525526
+> print radtodeg(asin(0.7122))
+ 45.414196453165
+> print cos(90)
+ -0.44807361612917
+> print cos(degtorad(90))
+ 6.1230317691119E-017p
+> print inchtomm(8.0)
+!!Error: 3207, Formula is missing.
+> print intomm(9)
+!!Error: 2305, Cannot execute a Call statement from tprinthe command window.
+> print 8.85 * 25.4
+ 224.79
+> print 8.35 * 25.4
+ 212.09
+> print -1.95 * 25.4
+ -49.53sin(degtorad(38-90))
+!!Error: 3100, Syntax error.
+> 
+> 
+> print sin(degtorad(38-90))
+ -0.78801075360672
+> print cos(degtorad(38-90))
+ 0.61566147532566
+> print (224.79 * 0.616) 
+ 138.47064
+> print (224.79 * -0.788)
+ -177.13452
+> print (212.09 * 0.616) - (-49.53 * -0.788)
+ 91.6178
+> print (212.09*-0.788) + (-49.53*0.616)
+ -197.6374
+> panelpickuperrortheta = 3
+> panelpickuperrory = 8
+> panelpickuperrorx = -7
+> print -85.5469 - -84.7439
+ -0.803
+> print -78.0417 - -77.9739
+ -0.067800000000005
+> print 180-90-14.3814
+ 75.6186
+> print 308 - 294.85
+ 13.15
+> print 180-90-75.6185
+ 14.3815
+> recipeAngle = RadToDeg(Atan((PanelHoleX(2) - PanelHoleX(1)) / (PanelHoleY(2) - PanelHoleY(1))))
+!!Error: 3100, Syntax error.
+> print RadToDeg(Atan((PanelHoleX(2) - PanelHoleX(1)) / (PanelHoleY(2) - PanelHoleY(1))))
+!!Error: 2242, Zero '0' was used as a divisor.
+> print cos(degtorad(-218))
+ -0.78801075360672
+> print sin(degtorad(-218))
+ 0.61566147532566
+> print 36.617-30
+ 6.617
+> print 392.715-385.21
+ 7.505
+> print (6.617 * -0.788) - (7.505 * 0.61555)
+ -9.83389875
+> print (36.61 * -0.788) - (392.715 * 0.61566)
+ -270.6275969
+> print sin(degtorad(315-218))
+ 0.99254615164132
+> print cos(degtorad(315-218))
+ -0.12186934340515
+> print (6.617 * -0.12186934340515) - (7.505 *0.99254615164132)
+ -8.25546831338p
+> print (36.6107 * -0.12186934340515) - (392.715 *0.99254615164132)
+ -394.24948391242
+> print 28.2282 - 6.5
+ 21.7282
+> print 23 /4 + 1
+ 6
+> print 23 /4 -1 
+ 4
+> tmr(1)
+!!Error: 3100, Syntax error.
+> print tmr(1)
+ 23985.591
+> print tmr(1)%2
+!!Error: 3100, Syntax error.
+> print mod(tmr(1),2)
+!!Error: 3207, Formula is missing.
+> print tmr(1) mod 2
+!!Error: 2245, Cannot execute this command with a floating point number.
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2
+ 0
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2print int(tmr(1)) mod 2
+!!Error: 3100, Syntax error.
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2
+ 0
+> print int(tmr(1)) mod 2
+ 1
+> print int(tmr(1)) mod 2
+ 0
+> print rshift(4,1)
+ 2
+> print rshift(4,0)
+ 4
+> print rshift(4,2)
+ 1
+> print rshift(4,3)
+ 0
+> print rshift(4,2) and &h01
+ 1
+> print rshift(4,1) and $h01
+!!Error: 3100, Syntax error.
+> integer foo
+!!Error: 3804, Specified command cannot be executed from the Command window.
+> foo = rshift(4,1)
+!!Error: 3100, Syntax error.
+> print int(32/4)
+ 8
+> print int(32/8)
+ 4
+> print int(31/8)
+ 3
+> print int(310/8)
+ 38
+> print 310/8
+ 38
+> print 31/8
+ 3
+> print 1/8
+ 0
 > 

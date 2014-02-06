@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/08 22:04:17:317,DS:0000003392,CS:07012,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/02/06 17:27:31:859,DS:0000004370,CS:17667,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -6,19 +6,19 @@ ProgramFile1 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1161
-		nHeight=552
+		nWidth=1149
+		nHeight=521
 	}
 }
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
-		nLeft=18
-		nTop=128
-		nWidth=1288
-		nHeight=643
+		nLeft=21
+		nTop=19
+		nWidth=964
+		nHeight=539
 	}
 }
 ProgramFile3 {
@@ -28,7 +28,7 @@ ProgramFile3 {
 	Window {
 		nLeft=51
 		nTop=43
-		nWidth=1341
+		nWidth=1292
 		nHeight=743
 	}
 }
@@ -39,19 +39,19 @@ ProgramFile4 {
 	Window {
 		nLeft=42
 		nTop=57
-		nWidth=1261
-		nHeight=573
+		nWidth=1260
+		nHeight=569
 	}
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=17
 		nTop=9
-		nWidth=832
-		nHeight=684
+		nWidth=830
+		nHeight=677
 	}
 }
 ProgramFile6 {
@@ -61,8 +61,8 @@ ProgramFile6 {
 	Window {
 		nLeft=25
 		nTop=25
-		nWidth=1161
-		nHeight=552
+		nWidth=1156
+		nHeight=542
 	}
 }
 ProgramFile7 {
@@ -72,19 +72,19 @@ ProgramFile7 {
 	Window {
 		nLeft=65
 		nTop=96
-		nWidth=1274
-		nHeight=684
+		nWidth=1273
+		nHeight=681
 	}
 }
 ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
-		nLeft=6
-		nTop=321
-		nWidth=857
-		nHeight=442
+		nLeft=71
+		nTop=103
+		nWidth=852
+		nHeight=423
 	}
 }
 ProgramFile9 {
@@ -94,8 +94,8 @@ ProgramFile9 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=613
+		nWidth=1059
+		nHeight=610
 	}
 }
 ProgramFile10 {
@@ -105,19 +105,19 @@ ProgramFile10 {
 	Window {
 		nLeft=100
 		nTop=100
-		nWidth=1165
-		nHeight=563
+		nWidth=1157
+		nHeight=545
 	}
 }
 ProgramFile11 {
 	sName="Startup.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1056
-		nHeight=591
+		nWidth=1046
+		nHeight=567
 	}
 }
 ProgramFile12 {
@@ -127,31 +127,108 @@ ProgramFile12 {
 	Window {
 		nLeft=50
 		nTop=50
-		nWidth=1159
-		nHeight=549
+		nWidth=1155
+		nHeight=539
 	}
 }
 ProgramFile13 {
 	sName="Crowding.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1059
-		nHeight=602
+		nWidth=1055
+		nHeight=588
 	}
 }
-nIncludeFileCount=1
-IncludeFile1 {
-	sName="Globals.inc"
+ProgramFile14 {
+	sName="PositionFunctions.prg"
 	bOpened=False
 	nWinState=2
 	Window {
-		nLeft=75
-		nTop=75
-		nWidth=1163
-		nHeight=555
+		nLeft=2
+		nTop=6
+		nWidth=943
+		nHeight=518
+	}
+}
+ProgramFile15 {
+	sName="Test.prg"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=37
+		nTop=8
+		nWidth=995
+		nHeight=483
+	}
+}
+ProgramFile16 {
+	sName="HeatStakeComms.prg"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=809
+		nHeight=449
+	}
+}
+nIncludeFileCount=5
+IncludeFile1 {
+	sName="Globals.inc"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=248
+		nTop=196
+		nWidth=912
+		nHeight=501
+	}
+}
+IncludeFile2 {
+	sName="Defines.inc"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1057
+		nHeight=595
+	}
+}
+IncludeFile3 {
+	sName="HMI.inc"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=605
+	}
+}
+IncludeFile4 {
+	sName="Recipe.inc"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1060
+		nHeight=605
+	}
+}
+IncludeFile5 {
+	sName="Error.inc"
+	bOpened=False
+	nWinState=0
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1057
+		nHeight=595
 	}
 }
 nPointFileCount=3
@@ -160,21 +237,21 @@ PointFile1 {
 	bOpened=False
 	nWinState=0
 	Window {
-		nLeft=746
-		nTop=7
-		nWidth=664
-		nHeight=464
+		nLeft=265
+		nTop=37
+		nWidth=659
+		nHeight=446
 	}
 }
 PointFile2 {
 	sName="Points2.pts"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=143
+		nHeight=38
 	}
 }
 PointFile3 {
@@ -192,20 +269,20 @@ sActiveWindow="main.prg"
 CmdWindow {
 	bOpened=False
 	Window {
-		nLeft=11
-		nTop=114
-		nWidth=1240
-		nHeight=599
+		nLeft=337
+		nTop=16
+		nWidth=674
+		nHeight=358
 	}
 	nWinState=0
 }
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=98
-		nTop=54
-		nWidth=1291
-		nHeight=707
+		nLeft=52
+		nTop=22
+		nWidth=1292
+		nHeight=812
 	}
 }
 IOLabelEditor {
@@ -213,27 +290,27 @@ IOLabelEditor {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1059
-		nHeight=610
+		nWidth=1056
+		nHeight=599
 	}
 	nWinState=0
 }
 IOMonitor {
 	bOpened=False
 	Window {
-		nLeft=565
-		nTop=234
-		nWidth=520
+		nLeft=601
+		nTop=213
+		nWidth=478
 		nHeight=353
 	}
 }
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=383
+		nTop=258
+		nWidth=855
+		nHeight=312
 	}
 }
 Macros {
@@ -250,8 +327,8 @@ RobotMgr {
 	Window {
 		nLeft=56
 		nTop=111
-		nWidth=751
-		nHeight=485
+		nWidth=689
+		nHeight=451
 	}
 }
 UserErrorEditor {

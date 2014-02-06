@@ -39,7 +39,7 @@ Function popPanelState(currentState As Integer) As Integer
 			currentState = StatePopPanel
 			Print "Waiting for Interlock"
 		Case 2								' Go to idle because there was an error 
-			Jump PreScan LimZ zLimit 		' go back home
+			Jump PreScan 'LimZ zLimit 		' go back home
 			currentState = StateIdle
 			Print "Pickup failed"
 		Default								' Unknown return value, return to idle
@@ -50,6 +50,8 @@ Function popPanelState(currentState As Integer) As Integer
 	popPanelStateEnd:
 	popPanelState = currentState
 Fend
+
+
 Function crowdingState(currentState As Integer) As Integer
 	'This state Moves a panel from the home location, crowds it, then presents it to the laser scanner for pre-inspection
 
@@ -65,6 +67,8 @@ Function crowdingState(currentState As Integer) As Integer
 	crowdingStateEnd:
 	crowdingState = currentState
 Fend
+
+
 Function preinspectionState(currentState As Integer) As Integer
 	' This state uses the laser scanner to find pre-installed inserts and attempts
 	' to check if the correct panel has been put into the magazine.
@@ -87,10 +91,12 @@ Function preinspectionState(currentState As Integer) As Integer
 	preinspectionStateEnd:
 	preinspectionState = currentState
 Fend
+
+
 Function insertionState(currentState As Integer) As Integer
 	' This state iterates through each hole and installs all inserts
 	If recHotStakePanelRequired = False Then 		'Check if we want to skip this state
-		currentState = StatePushPanel
+		currentState = StateInspection
 		GoTo insertionStateEnd
 	EndIf
 	
@@ -111,6 +117,8 @@ Function insertionState(currentState As Integer) As Integer
 	insertionStateEnd:
 	insertionState = currentState
 Fend
+
+
 Function flashRemovalState(currentState As Integer) As Integer
 	' This state performs flash removal
 	If recFlashRequired = False Then 'Check if we want to skip this state
@@ -130,6 +138,8 @@ Function flashRemovalState(currentState As Integer) As Integer
 	flashRemovalStateEnd:
 	flashRemovalState = currentState
 Fend
+
+
 Function inspectionState(currentState As Integer) As Integer
 	' This state uses the laser scanner to measure and log the depths of each insert at two places
 	' No matter the result of the InspectPanel() routine it always pushes a panel, but we need to know why
@@ -153,6 +163,8 @@ Function inspectionState(currentState As Integer) As Integer
 	inspectionStateEnd:
 	inspectionState = currentState
 Fend
+
+
 Function pushPanelState(currentState As Integer) As Integer
 	' This state drops off a panel into the output magazine. 		
 				 
@@ -182,6 +194,8 @@ Function pushPanelState(currentState As Integer) As Integer
 	pushPanelStateEnd:
 	pushPanelState = currentState
 Fend
+
+
 Function dumpState(currentState As Integer) As Integer
 	' This is handled by the PLC, we will set a bit to start and another when done
 	' Once the PLC is done, we will be able to leave this state

@@ -12,7 +12,7 @@ Function DropOffPanel() As Integer
 	EndIf
 	
 	If Not HomeCheck Then findHome
-	Jump OutmagWaypoint LimZ zLimit
+	Jump OutmagWaypoint 'LimZ zLimit
 	
 	Do Until OutMagDropOffSignal = True
 		Wait .25 ' wait until the output magazine is ready
@@ -28,24 +28,30 @@ Function DropOffPanel() As Integer
 	If TW = True Then ' catch that the HMI timed out without acking
 		erHmiDataAck = True
 		Print "no data ack from hmi"
-		Pause
+		'Pause
 	EndIf
 	
 	Xqt OutputMagTorqueSense, NoPause ' during this jump check if we hit anything
-	Jump P(recOutmag) LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
+
+	changeSpeed(slow)
+	
+	' see if we can use a global point
+	'Jump P(recOutmag) LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
+	Jump MagOUT_51010 'LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
 		If JS = True Then
 			Pause ' we hit somthing so pause
 		EndIf
 	MemOff (outmagOvrTorq) ' reset bit
 	Quit OutputMagTorqueSense
 
+	changeSpeed(fast)
+
 '	Off suctionCupsH ' fake
 	suctionCupsCC = False
 	Wait recSuctionWaitTime ' Allow time for cups to unseal
 	RobotPlacedPanel = True ' Tell the output magazine we put a panel into it
 
-Speed 25
-findHome
+	findHome
 	'Jump OutmagWaypoint LimZ zLimit
 
 	OutputMagSignal = True ' Give permission for output magazine to dequeue next panel	
@@ -61,14 +67,17 @@ findHome
 	erPanelFailedInspection = False
 	erHmiDataAck = False
 	
-If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-	jobAbort = True ' set flag
-	MemOff (jobAbortH) ' reset flag		
-EndIf
+	If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
+		jobAbort = True ' set flag
+		MemOff (jobAbortH) ' reset flag		
+	EndIf
 
-findHome
+	findHome
 
 Fend
+
+
+
 Function PickupPanel() As Integer 'byte me
 	
 Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
@@ -93,11 +102,15 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	Loop
 	
 	InMagRobotClearSignal = False ' the robot is about to visit the magazine.
-	Jump P(recInmag) +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
+		
+	' see if we can use a global point to pickup panels
+	'Jump P(recInmag) +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
+	'Jump magin_51010 +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
+	Jump magin_51010 +Z(5) Sense Sw(inMagInterlockH)
 	
 	If JS = True Then ' Its possible to open an interock during the jump so check if it was opened
 		PickupPanel = 1 ' Interlock is open
-		Jump PreScan LimZ zLimit ' Go home
+		Jump PreScan 'LimZ zLimit ' Go home
 		Exit Function
 	EndIf
 
@@ -116,7 +129,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	
 	suctionCupsCC = True ' Turn on the cups because we have engaged a panel
 	Wait recSuctionWaitTime ' Allow time for cups to seal on panel	
-	Jump PreScan LimZ zLimit ' Go home		
+	Jump PreScan 'LimZ zLimit ' Go home		
 	
 	PickupPanel = 0 ' We successfully picked up a panel
 
@@ -131,19 +144,19 @@ EndIf
 Trap 2 'disarm trap
 
 Fend
+
+
+
 Function OutputMagTorqueSense
 	
 	PTCLR ' clear
-	
-Do While True
-	
-	Print "Outmag Placement Torque: ", PTRQ(3)
-	If PTRQ(3) > 0.3 Then
-		'MemOn (outmagOvrTorq)
-		'erOutMagCrowding = True
-	EndIf
-
-Loop
-
+		
+	Do While True
+		'Print "Outmag Placement Torque: ", PTRQ(3)
+		If PTRQ(3) > 0.3 Then
+			'MemOn (outmagOvrTorq)
+			'erOutMagCrowding = True
+		EndIf
+	Loop
 Fend
 

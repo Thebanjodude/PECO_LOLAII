@@ -4,16 +4,13 @@
 Function InTomm(inches As Real) As Real
 	InTomm = inches * 25.4
 Fend
-Function exp(num As Real, exponent As Integer) As Real
-	' since x^0 == 1
-	exp = 1.0
-	For x = 0 To exponent - 1 Step 1
-		exp = exp * num
-	Next x
-Fend
+
+
 Function mmToin(mm As Real) As Real
 	mmToin = mm * 0.0393701
 Fend
+
+
 Function ChoosePointsTable()
 	' Choose which points table to load
 
@@ -28,6 +25,8 @@ Function ChoosePointsTable()
 		Print "point Table is Unknown"
 	EndIf
 Fend
+
+
 Function SavePointsTable()
 	' Choose which points table to save
 
@@ -42,30 +41,35 @@ Function SavePointsTable()
 		Print "point Table is Unknown"
 	EndIf
 Fend
+
+
 Function HomeCheck() As Boolean
 	
 	Real distx, disty, distz, distance
 ' TODO: Parameterize these #defines?
-	#define startUpDistMax 150 '+/-150mm from home position
+'	#define startUpDistMax 150 '+/-150mm from home position
+	#define startUpDistMax 5 '+/-5mm from home position
 	
 	distx = Abs(CX(CurPos) - CX(PreScan))
 	disty = Abs(CY(CurPos) - CY(PreScan))
 	
-	distance = Sqr(exp(distx, 2) + exp(disty, 2))
+	distance = Sqr(distx ** 2 + disty ** 2)
 	
-	Print "distance away from home: ", distance
+'	Print "distance away from home: ", distance
 
 	If distance > startUpDistMax Or Hand(Here) = 1 Then  'Check is the position is close to home. If not throw error
 		erRobotNotAtHome = True
 		HomeCheck = False
-		Print "Distance NOT OK Or Arm Orientation NOT OK"
+'		Print "Distance NOT OK Or Arm Orientation NOT OK"
 	Else
 		erRobotNotAtHome = False
 		HomeCheck = True
-		Print "Distance OK and Arm Orientation OK"
+'		Print "Distance OK and Arm Orientation OK"
 	EndIf
 		
 Fend
+
+
 Function findHome
 	' return to the home position (PreScan)
 
@@ -94,26 +98,45 @@ Function findHome
 	Select quad
 		Case 0
 			posZ = CZ(PreFlash)
-            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go XY(posX, posY, posZ, CU(Here)) /L
 			Go PreFlash CP
 			Go PreHotStake CP
 			Go PreScan
 		Case 1
 			posZ = CZ(OutmagWaypoint)
-            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go XY(posX, posY, posZ, CU(Here)) /L
 			Go OutmagWaypoint CP
 			Go PreScan
 		Case 2
 			posZ = CZ(PreHotStake)
-            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go XY(posX, posY, posZ, CU(Here)) /L
 			Go PreHotStake CP
 			Go PreScan
 		Case 3
 			posZ = CZ(PreScan)
-            Go XY(posX, posY, posZ, CU(Here)) /L
+			Go XY(posX, posY, posZ, CU(Here)) /L
 			Go PreScan
 	Send
 	
 	HomeCheck  'clears errors from not being at home
+Fend
+
+
+Function changeSpeed(gotoSpeed As Integer)
+	Select gotoSpeed
+		Case slow
+			Accel 20, 20
+			AccelS 20, 20
+			Speed 10
+			SpeedS 10
+		Case fast
+			Accel 50, 50
+			AccelS 50, 50
+			Speed 100
+			SpeedS 100
+		Default
+			Print "error selecting speed, defaulting to slow"
+			Call changeSpeed(slow)
+	Send
 Fend
 

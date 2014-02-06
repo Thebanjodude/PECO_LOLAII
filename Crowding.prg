@@ -15,22 +15,44 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Do Until Tmr(1) > 0.5
 		Wait 0.1
 	Loop
-	Jump P(recPreCrowding)
+	
+	' lets see if we can use a global point
+	'Jump P(recPreCrowding)
+	Jump cwdin_51010
 	
 	suctionCupsCC = False ' Turn off suction cups
 	Wait recSuctionWaitTime ' wait for cups to release
-	Jump P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
 
-	On (CrowdingH) ' Close crowding
+	' lets see if we can use a global point
+	'Jump P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
+	Jump cwdout_51010 +Z(30) ' Relese the suction cups and move them out of the way for crowding
+
+	' crowding sequence
+	On crowdingXH
+	Wait 0.5
+	On CrowdingH
+	Wait 0.5
+	Off crowdingXH
+	Wait 0.5
 	
-	Wait 3 ' wait for the crowd to take place
+'	Wait 3
 	
-	Go P(recCrowding)
+	' lets see if we can use a global point
+	'Go P(recCrowding)
+	Go cwdout_51010
 	suctionCupsCC = True ' Turn on cups
 	Wait recSuctionWaitTime
 
 	Off (CrowdingH) ' Open crowding
-	Wait 0.5 ' wait for the crowding to open	
+	Wait 0.5 ' wait for the crowding to open
+	
+	Call changeSpeed(slow)
+'	Go XY(CX(PreFlash), CY(PreFlash), CZ(PreFlash), CU(CurPos)) /L
+	Go XY(CX(CurPos), CY(CurPos), -10, CU(CurPos)) /L
+	Go XY(CX(PreFlash), CY(PreFlash), CZ(CurPos), CU(CurPos)) /L
+	Go XY(CX(PreHotStake), CY(PreHotStake), CZ(CurPos), CU(CurPos)) /L
+	Go PreHotStake
+	Call changeSpeed(fast)
 	
 	CrowdingSequence = 0
 	
