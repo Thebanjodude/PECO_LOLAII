@@ -48,7 +48,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = value
+	MBQueueValue(MBQueueHead) = Value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -176,26 +176,26 @@ Function MBCommandTask()
 			'--TODO-- map plc memory & write read/write calls
 
 			' obtain and parse
-			' starting at bit 184, write out the 8 bits we are pulling off of the PLC
-			inputs = modbusReadMultipleInput(200, 8)
+			' starting at bit 184, write out the 16 bits we are pulling off of the PLC
+			inputs = modbusReadMultipleInput(200, 16)
 			MemOut 23, inputs And &hFF
 			MemOut 24, RShift(inputs, 8) And &hFF
 			
 			' obtain and parse
-			' starting at bit 200, write out the 2 bits we are pulling off of the PLC
-			inputs = modbusReadMultipleInput(300, 2)
+			' starting at bit 200, write out the 8 bits we are pulling off of the PLC
+			inputs = modbusReadMultipleInput(300, 8)
 			MemOut 25, inputs And &hFF
 			
 			' obtain and parse
-			' starting at bit 208, write out the 8 bits we are pulling off of the PLC
-			inputs = modbusReadMultipleInput(400, 9)
+			' starting at bit 208, write out the 24 bits we are pulling off of the PLC
+			inputs = modbusReadMultipleInput(400, 24)
 			MemOut 26, inputs And &hFF
 			MemOut 27, RShift(inputs, 8) And &hFF
 			MemOut 28, RShift(inputs, 16) And &hFF
 			
 			' obtain and parse
-			' starting at bit 232, write out the 8 bits we are pulling off of the PLC
-			inputs = modbusReadMultipleInput(500, 11)
+			' starting at bit 232, write out the 42 bits we are pulling off of the PLC
+			inputs = modbusReadMultipleInput(500, 24)
 			MemOut 29, inputs And &hFF
 			MemOut 30, RShift(inputs, 8) And &hFF
 			MemOut 31, RShift(inputs, 16) And &hFF
