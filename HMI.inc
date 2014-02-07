@@ -3,7 +3,7 @@
 Global Boolean jobDone
 Global Integer jobNumPanels, jobNumPanelsDone, jobAbortBtn
 Global Boolean backInterlockACKBtn, frontInterlockACKBtn
-Global Boolean inMagGoHomeBtn, inMagIntLockAckBtn, inMagLoadedBtn
+Global Boolean inMagGoHomeBtn, inMagLoadedBtn
 Global Boolean jobPauseBtn, jobResumeBtn, jobStartBtn, abortJobBtn
 Global Boolean jobStopBtn, leftInterlockACKBtn, outMagGoHomeBtn
 Global Boolean outMagIntLockAckBtn, outMagUnloadedBtn, rightInterlockACKBtn, sftyFrmIlockAckBtn

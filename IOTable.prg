@@ -381,8 +381,6 @@ Function iotransfer()
 	Boolean inMagGoHomeBtnOld
 	Boolean inMagGoHomeOld
 	Boolean inMagInterlockOld
-	Boolean inMagIntLockAckBtnOld
-	Boolean inMagIntLockAckOld
 	Boolean inMagLoadedBtnOld
 	Boolean inMagLoadedOld
 	Boolean inMagLowLimNOld
@@ -619,10 +617,6 @@ Function iotransfer()
 		If inMagGoHome <> inMagGoHomeOld Then
 			Print #201, "{", Chr$(&H22) + "inMagGoHome" + Chr$(&H22), ":", Str$(inMagGoHome), "}",
 			inMagGoHomeOld = inMagGoHome
-		EndIf
-		If inMagIntLockAck <> inMagIntLockAckOld Then
-			Print #201, "{", Chr$(&H22) + "inMagIntLockAck" + Chr$(&H22), ":", Str$(inMagIntLockAck), "}",
-			inMagIntLockAckOld = inMagIntLockAck
 		EndIf
 		If inMagLoaded <> inMagLoadedOld Then
 			Print #201, "{", Chr$(&H22) + "inMagLoaded" + Chr$(&H22), ":", Str$(inMagLoaded), "}",
@@ -1483,13 +1477,6 @@ Function setVars(response$ As String)
 			inMagGoHome = True
 		Else
 			inMagGoHomeBtn = False
-		EndIf
-	Case "inMagIntLockAckBtn"
-		If tokens$(1) = "true" Then
-			inMagIntLockAckBtn = True
-			inMagIntLockAck = True
-		Else
-			inMagIntLockAckBtn = False
 		EndIf
 	Case "inMagLoadedBtn"
 		If tokens$(1) = "true" Then

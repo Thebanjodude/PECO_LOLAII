@@ -44,7 +44,7 @@ Global Boolean GoFlag, ReturnFlag 'flags to make sure we dont break the drill
 
 ' Input Magazine Global Vars
 Global Boolean inMagGoHome, inMagLoaded, inMagPnlRdy, inMagMtr, inMagMtrDir ' DIO to run intput the magazine
-Global Boolean inMagLowLim, inMagUpLim, inMagInterlock, inMagIntLockAck
+Global Boolean inMagLowLim, inMagUpLim, inMagInterlock
 Global Boolean inMagLowLimN, inMagUpLimN
 Global Real InMagTorqueLim
 Global Integer inMagCurrentState
