@@ -31,18 +31,14 @@ Function DropOffPanel() As Integer
 		'Pause
 	EndIf
 	
-	Xqt OutputMagTorqueSense, NoPause ' during this jump check if we hit anything
-
 	changeSpeed(slow)
 	
 	' see if we can use a global point
 	'Jump P(recOutmag) LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
-	Jump MagOUT_51010 'LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
+	Jump MagOUT_51010
 		If JS = True Then
 			Pause ' we hit somthing so pause
 		EndIf
-	MemOff (outmagOvrTorq) ' reset bit
-	Quit OutputMagTorqueSense
 
 	changeSpeed(fast)
 
@@ -143,20 +139,5 @@ EndIf
 
 Trap 2 'disarm trap
 
-Fend
-
-
-
-Function OutputMagTorqueSense
-	
-	PTCLR ' clear
-		
-	Do While True
-		'Print "Outmag Placement Torque: ", PTRQ(3)
-		If PTRQ(3) > 0.3 Then
-			'MemOn (outmagOvrTorq)
-			'erOutMagCrowding = True
-		EndIf
-	Loop
 Fend
 
