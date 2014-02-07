@@ -227,40 +227,6 @@ Function PrintPassFailArray()
 Fend
 
 
-Function FakeLogging()
-
-	Integer i
-	recNumberOfHoles = 23
-	Redim InspectionArray(recNumberOfHoles - 1, 1)
-	
-	For i = 0 To recNumberOfHoles - 1
-		InspectionArray(i, LeftSpotFace) = i
-		InspectionArray(i, RightSpotFace) = i
-	Next
-
-	PrintInspectionArray()
-	UnpackInspectionArrays()
-	UnpackPassFailArray()
-
-	panelDataTxRdy = True ' Tell HMI to readout hole data
-	
-'	MemOn (panelDataTxAckH) ' fake
-	
-' this is for hmi logging
-	Wait MemSw(panelDataTxAckH) = True, 3
-	If TW = True Then ' catch that the HMI timed out without acking
-		erHmiDataAck = True
-		Print "no data ack from hmi"
-	EndIf
-
-	panelDataTxRdy = False ' reset flag
-	MemOff (panelDataTxAckH) ' reset flag
-	Print "ending log"
-	jobDone = True
-	
-Fend
-
-
 Function UnpackInspectionArrays()
 	
 'Sending a JSON array is a pain so we are just unpacking the array into seperate vars\ 	
