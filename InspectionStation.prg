@@ -2,7 +2,6 @@
 
 Function InspectPanel(SelectRoutine As Integer) As Integer
 
-	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
 	SystemStatus = StateInspection
 	InspectPanel = 2 ' default to fail 
 	Integer i
@@ -56,14 +55,6 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Next
 	
 	InspectPanel = 0 ' Inspection occured without errors
-
-exitInspectPanel:
-
-	If MemSw(jobAbortH) = True Then
-		Go PreScan :U(CU(Here)) ' Pull away from the laser WITHOUT spinning (may hit laser)
-		jobAbort = True
-		MemOff (jobAbortH)
-	EndIf
 
 	SystemStatus = StateMoving
 	findHome

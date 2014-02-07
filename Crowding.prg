@@ -2,8 +2,6 @@
 
 Function CrowdingSequence() As Integer
 
-Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
-
 	' Make sure the crowding is open
 	Off (CrowdingH)
 	TmReset 1
@@ -56,14 +54,6 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	
 	CrowdingSequence = 0
 	
-exitCrowding:
-	
-If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-	jobAbort = True
-	MemOff (jobAbortH) ' reset membit
-	Off (CrowdingH) ' Open crowding	
-EndIf
-
 	findHome
 	
 Trap 2 ' Disarm trap

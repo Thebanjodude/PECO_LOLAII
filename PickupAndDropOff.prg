@@ -71,11 +71,6 @@ Function DropOffPanel() As Integer
 
 	erPanelFailedInspection = False
 	erHmiDataAck = False
-	
-	If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-		jobAbort = True ' set flag
-		MemOff (jobAbortH) ' reset flag		
-	EndIf
 
 	findHome
 
@@ -85,8 +80,6 @@ Fend
 
 Function PickupPanel() As Integer 'byte me
 	
-Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
-
 	Integer TorqueCounter
 	PickupPanel = 2 ' Default to fail	
 	TorqueCounter = 0 ' reset counter
@@ -138,15 +131,8 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	
 	PickupPanel = 0 ' We successfully picked up a panel
 
-exitPopPanel:
-If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-	jobAbort = True
-	MemOff (jobAbortH)
-EndIf
 	InMagRobotClearSignal = True ' Give permission for input magazine to queue up next panel
 	SystemStatus = StateMoving
-
-Trap 2 'disarm trap
 
 Fend
 

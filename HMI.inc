@@ -1,7 +1,7 @@
 
 'Commands from HMI
 Global Boolean jobDone
-Global Integer jobNumPanels, jobNumPanelsDone, jobAbort
+Global Integer jobNumPanels, jobNumPanelsDone, jobAbortBtn
 Global Boolean backInterlockACKBtn, frontInterlockACKBtn
 Global Boolean inMagGoHomeBtn, inMagIntLockAckBtn, inMagLoadedBtn
 Global Boolean jobPauseBtn, jobResumeBtn, jobStartBtn, abortJobBtn

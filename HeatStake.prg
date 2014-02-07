@@ -2,8 +2,6 @@
 
 Function HotStakePanel() As Integer
 
-	Trap 2, MemSw(jobAbortH) = True GoTo exitHotStake ' arm trap
-
 	SystemStatus = StateHotStakePanel
 	
 	Integer i
@@ -15,7 +13,7 @@ Function HotStakePanel() As Integer
 	' check to see if the PLC is in the correct state for entering the insertion program
 	If MemSw(m_idle) = False Then
 		Print "HEAT STAKE: Error - PLC not ready"
-		GoTo exitHotStake
+		Pause
 	EndIf
 	
 	' Present panel to hot stake
@@ -76,14 +74,6 @@ Function HotStakePanel() As Integer
 	Next
 	
 	HotStakePanel = 0 							' HS station executed without a problem
-		
-exitHotStake:
-
-	If MemSw(jobAbortH) = True Then 	'Check if the operator wants to abort the job
-		jobAbort = True
-		SLock 1, 2, 3, 4 				' lock all the joints so we can move again
-		MemOff (jobAbortH) 				' turn off abort bit
-	EndIf
 		
 	SystemStatus = StateMoving
 

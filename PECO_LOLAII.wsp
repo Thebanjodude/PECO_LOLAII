@@ -1,8 +1,8 @@
-ENVT0100,LM:2014/02/06 17:27:31:859,DS:0000004370,CS:17667,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/07 19:17:37:639,DS:0000004370,CS:19727,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -13,12 +13,12 @@ ProgramFile1 {
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=21
 		nTop=19
-		nWidth=964
-		nHeight=539
+		nWidth=961
+		nHeight=528
 	}
 }
 ProgramFile3 {
@@ -35,34 +35,34 @@ ProgramFile3 {
 ProgramFile4 {
 	sName="SystemMonitor.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=42
 		nTop=57
-		nWidth=1260
-		nHeight=569
+		nWidth=1259
+		nHeight=566
 	}
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=17
 		nTop=9
-		nWidth=830
-		nHeight=677
+		nWidth=828
+		nHeight=671
 	}
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=25
 		nTop=25
-		nWidth=1156
-		nHeight=542
+		nWidth=1155
+		nHeight=539
 	}
 }
 ProgramFile7 {
@@ -101,12 +101,12 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=100
 		nTop=100
-		nWidth=1157
-		nHeight=545
+		nWidth=1156
+		nHeight=542
 	}
 }
 ProgramFile11 {
@@ -145,7 +145,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=2
 		nTop=6
@@ -179,12 +179,12 @@ nIncludeFileCount=5
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=248
 		nTop=196
-		nWidth=912
-		nHeight=501
+		nWidth=907
+		nHeight=491
 	}
 }
 IncludeFile2 {
@@ -223,12 +223,12 @@ IncludeFile4 {
 IncludeFile5 {
 	sName="Error.inc"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1057
-		nHeight=595
+		nWidth=1056
+		nHeight=591
 	}
 }
 nPointFileCount=3
@@ -246,7 +246,7 @@ PointFile1 {
 PointFile2 {
 	sName="Points2.pts"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -281,8 +281,8 @@ RunWindow {
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=1292
-		nHeight=812
+		nWidth=1535
+		nHeight=959
 	}
 }
 IOLabelEditor {
@@ -290,10 +290,10 @@ IOLabelEditor {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1056
-		nHeight=599
+		nWidth=1053
+		nHeight=591
 	}
-	nWinState=0
+	nWinState=2
 }
 IOMonitor {
 	bOpened=False

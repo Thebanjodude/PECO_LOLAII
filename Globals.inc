@@ -37,7 +37,7 @@ Global Real ZmaxTorque ' Monitors Z torque
 Global Integer Crowding
 
 'Global Integer NextState
-Global Boolean monEstop1, monEstop2, jobAbortBtn, alarmMute, alarmTog, alarmMuteBtn
+Global Boolean monEstop1, monEstop2, jobAbort, alarmMute, alarmTog, alarmMuteBtn
 Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
 Global Boolean panelDataTxACKBtn, eStopReset, eStopResetCC
 Global Boolean GoFlag, ReturnFlag 'flags to make sure we dont break the drill
