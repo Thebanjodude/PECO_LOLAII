@@ -23,7 +23,7 @@ Function DropOffPanel() As Integer
 	' --TODO-- Add panel fail code here
 	
 	panelDataTxRdy = True ' Tell HMI to readout hole data
-	Wait MemSw(panelDataTxAckH) = True, 10
+	Wait MemSw(panelDataTxACK) = True, 10
 	panelDataTxRdy = False ' reset flag	
 	If TW = True Then ' catch that the HMI timed out without acking
 		erHmiDataAck = True
