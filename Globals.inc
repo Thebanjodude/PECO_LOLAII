@@ -56,7 +56,7 @@ Global Integer InmagLastState
 ' Output Magazine Global Vars
 Global Boolean outMagGoHome, outMagUnloaded, OutputMagSignal, outMagMtr 'DIO to run the output magazine
 Global Boolean outMagPanelRdy, outMagMtrDir, outMagUpLim, outMagUpLimN
-Global Boolean outMagLowLim, outMagLowLimN, outMagInt, outMagIntLockAck
+Global Boolean outMagLowLim, outMagLowLimN, outMagInt
 Global Real OutMagTorqueLim, recOutmagPickupOffset
 Global Boolean OutMagDropOffSignal ' Signal robot it can Drop Off a panel to outmag
 Global Boolean OutMagRobotClearSignal  ' Signal robot is out of the way,OK to move outmag

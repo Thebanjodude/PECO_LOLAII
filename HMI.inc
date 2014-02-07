@@ -6,7 +6,7 @@ Global Boolean backInterlockACKBtn, frontInterlockACKBtn
 Global Boolean inMagGoHomeBtn, inMagLoadedBtn
 Global Boolean jobPauseBtn, jobResumeBtn, jobStartBtn, abortJobBtn
 Global Boolean jobStopBtn, leftInterlockACKBtn, outMagGoHomeBtn
-Global Boolean outMagIntLockAckBtn, outMagUnloadedBtn, rightInterlockACKBtn, sftyFrmIlockAckBtn
+Global Boolean outMagUnloadedBtn, rightInterlockACKBtn, sftyFrmIlockAckBtn
 Global Boolean backInterlockACK, frontInterlockACK
 Global Boolean jobPause, jobResume, jobStart
 Global Boolean jobStop, leftInterlockACK

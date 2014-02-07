@@ -420,8 +420,6 @@ Function iotransfer()
 	Boolean OutMagDropOffSignalOld
 	Boolean outMagGoHomeBtnOld
 	Boolean outMagGoHomeOld
-	Boolean outMagIntLockAckBtnOld
-	Boolean outMagIntLockAckOld
 	Boolean outMagIntOld
 	Boolean outMagLowLimNOld
 	Boolean outMagLowLimOld
@@ -637,10 +635,6 @@ Function iotransfer()
 		If outMagGoHome <> outMagGoHomeOld Then
 			Print #201, "{", Chr$(&H22) + "outMagGoHome" + Chr$(&H22), ":", Str$(outMagGoHome), "}",
 			outMagGoHomeOld = outMagGoHome
-		EndIf
-		If outMagIntLockAck <> outMagIntLockAckOld Then
-			Print #201, "{", Chr$(&H22) + "outMagIntLockAck" + Chr$(&H22), ":", Str$(outMagIntLockAck), "}",
-			outMagIntLockAckOld = outMagIntLockAck
 		EndIf
 		If outMagUnloaded <> outMagUnloadedOld Then
 			Print #201, "{", Chr$(&H22) + "outMagUnloaded" + Chr$(&H22), ":", Str$(outMagUnloaded), "}",
@@ -1451,84 +1445,77 @@ Function setVars(response$ As String)
 	'Rx from HMI:
 
 	Case "alarmMuteBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			alarmMuteBtn = True
 			alarmMute = True
 		Else
 			alarmMuteBtn = False
 		EndIf
 	Case "backInterlockACKBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			backInterlockACKBtn = True
 			backInterlockACK = True
 		Else
 			backInterlockACKBtn = False
 		EndIf
 	Case "frontInterlockACKBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			frontInterlockACKBtn = True
 			frontInterlockACK = True
 		Else
 			frontInterlockACKBtn = False
 		EndIf
 	Case "inMagGoHomeBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			inMagGoHomeBtn = True
 			inMagGoHome = True
 		Else
 			inMagGoHomeBtn = False
 		EndIf
 	Case "inMagLoadedBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			inMagLoadedBtn = True
 			inMagLoaded = True
 		Else
 			inMagLoadedBtn = False
 		EndIf
 	Case "jobAbortBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			jobAbortBtn = True
 			jobAbort = True
 		Else
 			jobAbortBtn = False
 		EndIf
 	Case "jobStartBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			jobStartBtn = True
 			jobStart = True
 		Else
 			jobStartBtn = False
 		EndIf
 	Case "leftInterlockACKBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			leftInterlockACKBtn = True
 			leftInterlockACK = True
 		Else
 			leftInterlockACKBtn = False
 		EndIf
 	Case "outMagGoHomeBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			outMagGoHomeBtn = True
 			outMagGoHome = True
 		Else
 			outMagGoHomeBtn = False
 		EndIf
-	Case "outMagIntLockAckBtn"
-		If tokens$(1) = "true" Then
-			outMagIntLockAckBtn = True
-			outMagIntLockAck = True
-		Else
-			outMagIntLockAckBtn = False
-		EndIf
 	Case "outMagUnloadedBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			outMagUnloadedBtn = True
 			outMagUnloaded = True
 		Else
 			outMagUnloadedBtn = False
 		EndIf
 	Case "panelDataTxACKBtn"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			panelDataTxACKBtn = True
 			panelDataTxACK = True
 		Else
@@ -1867,79 +1854,79 @@ Function setVars(response$ As String)
 			MemOff (inMagUpLimNF)
 		EndIf
 	Case "inMagUpLimNFV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (inMagUpLimNFV)
 		Else
 			MemOff (inMagUpLimNFV)
 		EndIf
 	Case "leftIntlock1F"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (leftIntlock1F)
 		Else
 			MemOff (leftIntlock1F)
 		EndIf
 	Case "leftIntlock1FV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (leftIntlock1FV)
 		Else
 			MemOff (leftIntlock1FV)
 		EndIf
 	Case "leftIntlock2F"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (leftIntlock2F)
 		Else
 			MemOff (leftIntlock2F)
 		EndIf
 	Case "leftIntlock2FV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (leftIntlock2FV)
 		Else
 			MemOff (leftIntlock2FV)
 		EndIf
 	Case "maintModeF"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (maintModeF)
 		Else
 			MemOff (maintModeF)
 		EndIf
 	Case "maintModeFV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (maintModeFV)
 		Else
 			MemOff (maintModeFV)
 		EndIf
 	Case "monEstop1F"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (monEstop1F)
 		Else
 			MemOff (monEstop1F)
 		EndIf
 	Case "monEstop1FV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (monEstop1FV)
 		Else
 			MemOff (monEstop1FV)
 		EndIf
 	Case "monEstop2F"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (monEstop2F)
 		Else
 			MemOff (monEstop2F)
 		EndIf
 	Case "monEstop2FV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (monEstop2FV)
 		Else
 			MemOff (monEstop2FV)
 		EndIf
 	Case "outMagIntF"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (outMagIntF)
 		Else
 			MemOff (outMagIntF)
 		EndIf
 	Case "outMagIntFV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (outMagIntFV)
 		Else
 			MemOff (outMagIntFV)
