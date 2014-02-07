@@ -349,8 +349,6 @@ Function iotransfer()
 	Boolean frontIntlock2Old
 	Boolean GoFlagOld
 	Boolean heartBeatOld
-	Boolean heatStakeGoCCOld
-	Boolean heatStakeGoOld
 	Boolean hole0PFOld
 	Boolean hole10PFOld
 	Boolean hole11PFOld
@@ -1986,97 +1984,85 @@ Function setVars(response$ As String)
 			MemOff (outMagUpLimNF)
 		EndIf
 	Case "outMagUpLimNFV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (outMagUpLimNFV)
 		Else
 			MemOff (outMagUpLimNFV)
 		EndIf
 	Case "rightIntlockF"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (rightIntlockF)
 		Else
 			MemOff (rightIntlockF)
 		EndIf
 	Case "rightIntlockFV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (rightIntlockFV)
 		Else
 			MemOff (rightIntlockFV)
 		EndIf
 	Case "debrisMtrF"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (debrisMtrF)
 		Else
 			MemOff (debrisMtrF)
 		EndIf
 	Case "debrisMtrFV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (debrisMtrFV)
 		Else
 			MemOff (debrisMtrFV)
 		EndIf
 	Case "drillGoF"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (drillGoF)
 		Else
 			MemOff (drillGoF)
 		EndIf
 	Case "drillGoFV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (drillGoFV)
 		Else
 			MemOff (drillGoFV)
 		EndIf
 	Case "drillReturnF"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (drillReturnF)
 		Else
 			MemOff (drillReturnF)
 		EndIf
 	Case "drillReturnFV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (drillReturnFV)
 		Else
 			MemOff (drillReturnFV)
 		EndIf
 	Case "eStopResetF"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (eStopResetF)
 		Else
 			MemOff (eStopResetF)
 		EndIf
 	Case "eStopResetFV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (eStopResetFV)
 		Else
 			MemOff (eStopResetFV)
 		EndIf
-	Case "heatStakeGoF"
-		If tokens$(1) = "true" Then
-			MemOn (heatStakeGoF)
-		Else
-			MemOff (heatStakeGoF)
-		EndIf
-	Case "heatStakeGoFV"
-		If tokens$(1) = "true" Then
-			MemOn (heatStakeGoFV)
-		Else
-			MemOff (heatStakeGoFV)
-		EndIf
 	Case "inMagMtrF"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (inMagMtrF)
 		Else
 			MemOff (inMagMtrF)
 		EndIf
 	Case "inMagMtrFV"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (inMagMtrFV)
 		Else
 			MemOff (inMagMtrFV)
 		EndIf
 	Case "inMagMtrDirF"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MemOn (inMagMtrDirF)
 		Else
 			MemOff (inMagMtrDirF)
