@@ -1,11 +1,11 @@
-ENVT0100,LM:2014/02/07 23:44:07:289,DS:0000005571,CS:20263,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/07 23:56:45:230,DS:0000005570,CS:09761,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="2/7/2014 4:43:05 PM"
-	bBuildComplete=False
+	sLastModified="2/7/2014 4:56:25 PM"
+	bBuildComplete=True
 	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
@@ -36,7 +36,7 @@ ProgramFile2 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="2/7/2014 11:40:22 PM"
+	sTimeSavedInController="2/7/2014 11:56:18 PM"
 }
 ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
@@ -126,7 +126,7 @@ nIncludeFileCount=5
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="2/7/2014 11:28:02 PM"
+	sTimeSavedInController="2/7/2014 11:56:25 PM"
 }
 IncludeFile2 {
 	sName="Defines.inc"

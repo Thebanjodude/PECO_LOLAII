@@ -172,6 +172,20 @@ Function IOTableOutputs()
 		Else
 			Off (suctionCupsH)
 		EndIf
+		
+		crowding = IOTableBooleans(crowdingCC, MemSw(crowdingFV), MemSw(crowdingF))
+		If crowding = True Then
+			On CrowdingH
+		Else
+			Off CrowdingH
+		EndIf
+		
+		crowdingX = IOTableBooleans(crowdingXCC, MemSw(crowdingXFV), MemSw(crowdingXF))
+		If crowdingX = True Then
+			On crowdingXH
+		Else
+			Off crowdingXH
+		EndIf
 	Loop
 
 errHandler:
@@ -460,7 +474,6 @@ Function iotransfer()
 	Boolean tasksRunningStatusOld
 	Boolean teachModeStatusOld
 	Double recPartNumberOld
-	Integer CrowdingOld
 	Integer ctrlrErrAxisNumberOld
 	Integer ctrlrErrorNumOld
 	Integer ctrlrLineNumberOld

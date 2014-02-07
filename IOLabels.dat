@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/02/07 23:44:07:208,DS:0000018272,CS:14664,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/07 23:50:38:053,DS:0000018556,CS:04193,MA:00-0C-29-03-E6-C5,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -289,7 +289,7 @@ OutputWordLabels {
 	nNumberOfLabels=0
 }
 MemoryBitLabels {
-	nNumberOfLabels=180
+	nNumberOfLabels=184
 	Label1 {
 		nBit=0
 		sLabel="airPressLowF"
@@ -831,361 +831,381 @@ MemoryBitLabels {
 		sDescription=""
 	}
 	Label109 {
+		nBit=108
+		sLabel="crowdingF"
+		sDescription=""
+	}
+	Label110 {
+		nBit=109
+		sLabel="crowdingFV"
+		sDescription=""
+	}
+	Label111 {
+		nBit=110
+		sLabel="crowdingXF"
+		sDescription=""
+	}
+	Label112 {
+		nBit=111
+		sLabel="crowdingXFV"
+		sDescription=""
+	}
+	Label113 {
 		nBit=184
 		sLabel="m_inserting"
 		sDescription="Reserved for modbus"
 	}
-	Label110 {
+	Label114 {
 		nBit=185
 		sLabel="m_idle"
 		sDescription="Reserved for modbus"
 	}
-	Label111 {
+	Label115 {
 		nBit=186
 		sLabel="m_ready"
 		sDescription="Reserved for modbus"
 	}
-	Label112 {
+	Label116 {
 		nBit=187
 		sLabel="m_bootDelay"
 		sDescription="Reserved for modbus"
 	}
-	Label113 {
+	Label117 {
 		nBit=188
 		sLabel="m_bootDone"
 		sDescription="Reserved for modbus"
 	}
-	Label114 {
+	Label118 {
 		nBit=189
 		sLabel="m_findingHome"
 		sDescription="Reserved for modbus"
 	}
-	Label115 {
+	Label119 {
 		nBit=190
 		sLabel="m_dumpRunning"
 		sDescription="Reserved for modbus"
 	}
-	Label116 {
+	Label120 {
 		nBit=191
 		sLabel="m_manualModeOn"
 		sDescription="Reserved for modbus"
 	}
-	Label117 {
+	Label121 {
 		nBit=192
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label118 {
+	Label122 {
 		nBit=193
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label119 {
+	Label123 {
 		nBit=194
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label120 {
+	Label124 {
 		nBit=195
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label121 {
+	Label125 {
 		nBit=196
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label122 {
+	Label126 {
 		nBit=197
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label123 {
+	Label127 {
 		nBit=198
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label124 {
+	Label128 {
 		nBit=199
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label125 {
+	Label129 {
 		nBit=200
 		sLabel="m_erInsertTemp"
 		sDescription="Reserved for modbus"
 	}
-	Label126 {
+	Label130 {
 		nBit=201
 		sLabel="m_erServoNotRdy"
 		sDescription="Reserved for modbus"
 	}
-	Label127 {
+	Label131 {
 		nBit=202
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label128 {
+	Label132 {
 		nBit=203
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label129 {
+	Label133 {
 		nBit=204
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label130 {
+	Label134 {
 		nBit=205
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label131 {
+	Label135 {
 		nBit=206
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label132 {
+	Label136 {
 		nBit=207
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label133 {
+	Label137 {
 		nBit=208
 		sLabel="m_HeaterMCROn"
 		sDescription="Reserved for modbus"
 	}
-	Label134 {
+	Label138 {
 		nBit=209
 		sLabel="m_BowlFeederOn"
 		sDescription="Reserved for modbus"
 	}
-	Label135 {
+	Label139 {
 		nBit=210
 		sLabel="m_VibTrackOn"
 		sDescription="Reserved for modbus"
 	}
-	Label136 {
+	Label140 {
 		nBit=211
 		sLabel="m_LoadInsert"
 		sDescription="Reserved for modbus"
 	}
-	Label137 {
+	Label141 {
 		nBit=212
 		sLabel="m_ExtendShuttle"
 		sDescription="Reserved for modbus"
 	}
-	Label138 {
+	Label142 {
 		nBit=213
 		sLabel="m_ActiveCoolling"
 		sDescription="Reserved for modbus"
 	}
-	Label139 {
+	Label143 {
 		nBit=214
 		sLabel="m_InsertGripper"
 		sDescription="Reserved for modbus"
 	}
-	Label140 {
+	Label144 {
 		nBit=215
 		sLabel="m_InsertDischarg"
 		sDescription="Reserved for modbus"
 	}
-	Label141 {
+	Label145 {
 		nBit=216
 		sLabel="m_InsertReject"
 		sDescription="Reserved for modbus"
 	}
-	Label142 {
+	Label146 {
 		nBit=217
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label143 {
+	Label147 {
 		nBit=218
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label144 {
+	Label148 {
 		nBit=219
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label145 {
+	Label149 {
 		nBit=220
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label146 {
+	Label150 {
 		nBit=221
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label147 {
+	Label151 {
 		nBit=222
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label148 {
+	Label152 {
 		nBit=223
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label149 {
+	Label153 {
 		nBit=224
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label150 {
+	Label154 {
 		nBit=225
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label151 {
+	Label155 {
 		nBit=226
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label152 {
+	Label156 {
 		nBit=227
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label153 {
+	Label157 {
 		nBit=228
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label154 {
+	Label158 {
 		nBit=229
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label155 {
+	Label159 {
 		nBit=230
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label156 {
+	Label160 {
 		nBit=231
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label157 {
+	Label161 {
 		nBit=232
 		sLabel="m_EmgStop"
 		sDescription="Reserved for modbus"
 	}
-	Label158 {
+	Label162 {
 		nBit=233
 		sLabel="m_ShuttleParked"
 		sDescription="Reserved for modbus"
 	}
-	Label159 {
+	Label163 {
 		nBit=234
 		sLabel="m_ShuttlePickup"
 		sDescription="Reserved for modbus"
 	}
-	Label160 {
+	Label164 {
 		nBit=235
 		sLabel="m_ShuttlePI"
 		sDescription="Reserved for modbus"
 	}
-	Label161 {
+	Label165 {
 		nBit=236
 		sLabel="m_ShuttleNPI"
 		sDescription="Reserved for modbus"
 	}
-	Label162 {
+	Label166 {
 		nBit=237
 		sLabel="m_InsertOnShuttl"
 		sDescription="Reserved for modbus"
 	}
-	Label163 {
+	Label167 {
 		nBit=238
 		sLabel="m_InsertDetected"
 		sDescription="Reserved for modbus"
 	}
-	Label164 {
+	Label168 {
 		nBit=239
 		sLabel="m_InsertDetAlu"
 		sDescription="Reserved for modbus"
 	}
-	Label165 {
+	Label169 {
 		nBit=240
 		sLabel="m_InsertAtTemp"
 		sDescription="Reserved for modbus"
 	}
-	Label166 {
+	Label170 {
 		nBit=241
 		sLabel="m_GripperEarsOut"
 		sDescription="Reserved for modbus"
 	}
-	Label167 {
+	Label171 {
 		nBit=242
 		sLabel="m_GripperEarsIn"
 		sDescription="Reserved for modbus"
 	}
-	Label168 {
+	Label172 {
 		nBit=243
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label169 {
+	Label173 {
 		nBit=244
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label170 {
+	Label174 {
 		nBit=245
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label171 {
+	Label175 {
 		nBit=246
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label172 {
+	Label176 {
 		nBit=247
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label173 {
+	Label177 {
 		nBit=248
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label174 {
+	Label178 {
 		nBit=249
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label175 {
+	Label179 {
 		nBit=250
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label176 {
+	Label180 {
 		nBit=251
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label177 {
+	Label181 {
 		nBit=252
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label178 {
+	Label182 {
 		nBit=253
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label179 {
+	Label183 {
 		nBit=254
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label180 {
+	Label184 {
 		nBit=255
 		sLabel=""
 		sDescription="Reserved for modbus"

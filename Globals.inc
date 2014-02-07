@@ -34,7 +34,6 @@ Global Boolean suctionCups, suctionCupsCC, holeDetected, maintMode
 Global Integer systemStatus ' Integer that tells opperator what state the sytem is in-see State tab in IOT
 Global Real zLimit ' the highest the EOAT can move without hitting periphials
 Global Real ZmaxTorque ' Monitors Z torque
-Global Integer Crowding
 
 'Global Integer NextState
 Global Boolean monEstop1, monEstop2, jobAbort, alarmMute, alarmTog, alarmMuteBtn
@@ -42,7 +41,11 @@ Global Boolean edgeDetectGo, edgeDetectHi, edgeDetectLo, pauseFlag
 Global Boolean panelDataTxACKBtn, eStopReset, eStopResetCC
 Global Boolean GoFlag, ReturnFlag 'flags to make sure we dont break the drill
 
-' Input Magazine Global Vars
+'Crowding Global Vars
+Global Boolean crowding, crowdingX
+Global Boolean crowdingCC, crowdingXCC
+
+'Input Magazine Global Vars
 Global Boolean inMagGoHome, inMagLoaded, inMagPnlRdy, inMagMtr, inMagMtrDir ' DIO to run intput the magazine
 Global Boolean inMagLowLim, inMagUpLim, inMagInterlock
 Global Boolean inMagLowLimN, inMagUpLimN
@@ -53,7 +56,7 @@ Global Boolean InMagRobotClearSignal  ' Signal robot is out of the way,OK to mov
 Global Boolean InMagPickUpSignal  ' Signal robot it can pick up a panel from inmag
 Global Integer InmagLastState
 
-' Output Magazine Global Vars
+'Output Magazine Global Vars
 Global Boolean outMagGoHome, outMagUnloaded, OutputMagSignal, outMagMtr 'DIO to run the output magazine
 Global Boolean outMagPanelRdy, outMagMtrDir, outMagUpLim, outMagUpLimN
 Global Boolean outMagLowLim, outMagLowLimN, outMagInt
