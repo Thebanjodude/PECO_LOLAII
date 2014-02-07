@@ -2,6 +2,8 @@
 
 Function DropOffPanel() As Integer
 
+	Integer count
+	
 	DropOffPanel = 2 ' default to fail
 	SystemStatus = StatePushPanel
 	PanelPassedInspection = True ' fake it for testing	
@@ -23,13 +25,20 @@ Function DropOffPanel() As Integer
 	' --TODO-- Add panel fail code here
 	
 	panelDataTxRdy = True ' Tell HMI to readout hole data
-	Wait MemSw(panelDataTxACK) = True, 10
+
+	count = 0
+	Do While panelDataTxACK = False
+		count = count + 1
+		If count > 10 Then
+			erHmiDataAck = True
+			Print "no data ack from hmi"
+			Pause
+			Exit Do
+		EndIf
+		Wait 1
+	Loop
+
 	panelDataTxRdy = False ' reset flag	
-	If TW = True Then ' catch that the HMI timed out without acking
-		erHmiDataAck = True
-		Print "no data ack from hmi"
-		'Pause
-	EndIf
 	
 	changeSpeed(slow)
 	
