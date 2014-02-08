@@ -3,7 +3,7 @@
 Function CrowdingSequence() As Integer
 
 	' Make sure the crowding is open
-	Off (CrowdingH)
+	crowdingCC = False
 	TmReset 1
 	
 	' make sure we start from home
@@ -26,14 +26,12 @@ Function CrowdingSequence() As Integer
 	Jump cwdout_51010 +Z(30) ' Relese the suction cups and move them out of the way for crowding
 
 	' crowding sequence
-	On crowdingXH
+	crowdingXCC = True
 	Wait 0.5
-	On CrowdingH
+	crowdingCC = True
 	Wait 0.5
-	Off crowdingXH
+	crowdingX = False
 	Wait 0.5
-	
-'	Wait 3
 	
 	' lets see if we can use a global point
 	'Go P(recCrowding)
@@ -41,7 +39,7 @@ Function CrowdingSequence() As Integer
 	suctionCupsCC = True ' Turn on cups
 	Wait recSuctionWaitTime
 
-	Off (CrowdingH) ' Open crowding
+	crowdingCC = False
 	Wait 0.5 ' wait for the crowding to open
 	
 	Call changeSpeed(slow)
