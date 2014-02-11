@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/02/07 23:50:38:053,DS:0000018556,CS:04193,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/11 00:43:23:052,DS:0000018555,CS:03603,MA:00-0C-29-03-E6-C5,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -997,7 +997,7 @@ MemoryBitLabels {
 	}
 	Label142 {
 		nBit=213
-		sLabel="m_ActiveCoolling"
+		sLabel="m_ActiveCooling"
 		sDescription="Reserved for modbus"
 	}
 	Label143 {
