@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/01/29 22:23:33:319,DS:0000020302,CS:29456,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/11 00:43:23:052,DS:0000018555,CS:03603,MA:00-0C-29-03-E6-C5,EI:           
 sRCNGVersion="5.4.4"
 InputBitLabels {
 	nNumberOfLabels=39
@@ -289,7 +289,7 @@ OutputWordLabels {
 	nNumberOfLabels=0
 }
 MemoryBitLabels {
-	nNumberOfLabels=207
+	nNumberOfLabels=184
 	Label1 {
 		nBit=0
 		sLabel="airPressLowF"
@@ -351,976 +351,861 @@ MemoryBitLabels {
 		sDescription=""
 	}
 	Label13 {
-		nBit=13
-		sLabel="hsInstallInsrtF"
-		sDescription=""
-	}
-	Label14 {
-		nBit=14
-		sLabel="hsInstallInsrtFV"
-		sDescription=""
-	}
-	Label15 {
-		nBit=15
+		nBit=12
 		sLabel="inMagMtrF"
 		sDescription=""
 	}
-	Label16 {
-		nBit=16
+	Label14 {
+		nBit=13
 		sLabel="inMagMtrFV"
 		sDescription=""
 	}
-	Label17 {
-		nBit=18
-		sLabel="outmagOvrTorq"
-		sDescription=""
-	}
-	Label18 {
-		nBit=20
-		sLabel="panelDataTxAckH"
-		sDescription=""
-	}
-	Label19 {
-		nBit=22
-		sLabel="jobAbortH"
-		sDescription=""
-	}
-	Label20 {
-		nBit=24
+	Label15 {
+		nBit=14
 		sLabel="FlashPnlPrsntF"
 		sDescription=""
 	}
-	Label21 {
-		nBit=25
+	Label16 {
+		nBit=15
 		sLabel="FlashPnlPrsntFV"
 		sDescription=""
 	}
-	Label22 {
-		nBit=26
+	Label17 {
+		nBit=16
 		sLabel="cbMonHeatStakeF"
 		sDescription=""
 	}
-	Label23 {
-		nBit=27
+	Label18 {
+		nBit=17
 		sLabel="cbMonHeatStakeFV"
 		sDescription=""
 	}
-	Label24 {
-		nBit=28
+	Label19 {
+		nBit=18
 		sLabel="cbMonSafetyF"
 		sDescription=""
 	}
-	Label25 {
-		nBit=29
+	Label20 {
+		nBit=19
 		sLabel="cbMonSafetyFV"
 		sDescription=""
 	}
-	Label26 {
-		nBit=30
+	Label21 {
+		nBit=20
 		sLabel="cbMonInMagF"
 		sDescription=""
 	}
-	Label27 {
-		nBit=31
+	Label22 {
+		nBit=21
 		sLabel="cbMonInMagFV"
 		sDescription=""
 	}
-	Label28 {
-		nBit=32
+	Label23 {
+		nBit=22
 		sLabel="cbMonOutMagF"
 		sDescription=""
 	}
-	Label29 {
-		nBit=33
+	Label24 {
+		nBit=23
 		sLabel="cbMonOutMagFV"
 		sDescription=""
 	}
-	Label30 {
-		nBit=34
+	Label25 {
+		nBit=24
 		sLabel="cbMonPAS24vdcFV"
 		sDescription=""
 	}
-	Label31 {
-		nBit=35
+	Label26 {
+		nBit=25
 		sLabel="cbMonPAS24vdcF"
 		sDescription=""
 	}
-	Label32 {
-		nBit=36
+	Label27 {
+		nBit=26
 		sLabel="cbMonDebrisRmvF"
 		sDescription=""
 	}
-	Label33 {
-		nBit=37
+	Label28 {
+		nBit=27
 		sLabel="cbMonDebrisRmvFV"
 		sDescription=""
 	}
-	Label34 {
-		nBit=39
+	Label29 {
+		nBit=28
 		sLabel="monEstop1FV"
 		sDescription=""
 	}
-	Label35 {
-		nBit=40
+	Label30 {
+		nBit=29
 		sLabel="monEstop1F"
 		sDescription=""
 	}
-	Label36 {
-		nBit=41
+	Label31 {
+		nBit=30
 		sLabel="monEstop2FV"
 		sDescription=""
 	}
-	Label37 {
-		nBit=42
+	Label32 {
+		nBit=31
 		sLabel="monEstop2F"
 		sDescription=""
 	}
-	Label38 {
-		nBit=44
+	Label33 {
+		nBit=32
 		sLabel="dc24vOKFV"
 		sDescription=""
 	}
-	Label39 {
-		nBit=45
+	Label34 {
+		nBit=33
 		sLabel="dc24vOKF"
 		sDescription=""
 	}
-	Label40 {
-		nBit=48
-		sLabel="outMagLowerLimFV"
-		sDescription=""
-	}
-	Label41 {
-		nBit=49
-		sLabel="outMagLowerLimF"
-		sDescription=""
-	}
-	Label42 {
-		nBit=50
+	Label35 {
+		nBit=34
 		sLabel="hsPanelPresntFV"
 		sDescription=""
 	}
-	Label43 {
-		nBit=51
+	Label36 {
+		nBit=35
 		sLabel="hsPanelPresntF"
 		sDescription=""
 	}
-	Label44 {
-		nBit=53
+	Label37 {
+		nBit=36
 		sLabel="inMagMtrDirFV"
 		sDescription=""
 	}
-	Label45 {
-		nBit=54
+	Label38 {
+		nBit=37
 		sLabel="inMagMtrDirF"
 		sDescription=""
 	}
-	Label46 {
-		nBit=56
+	Label39 {
+		nBit=38
 		sLabel="outMagMtrFV"
 		sDescription=""
 	}
-	Label47 {
-		nBit=57
+	Label40 {
+		nBit=39
 		sLabel="outMagMtrF"
 		sDescription=""
 	}
-	Label48 {
-		nBit=58
+	Label41 {
+		nBit=40
 		sLabel="outMagMtrDirFV"
 		sDescription=""
 	}
-	Label49 {
-		nBit=59
+	Label42 {
+		nBit=41
 		sLabel="outMagMtrDirF"
 		sDescription=""
 	}
-	Label50 {
-		nBit=61
+	Label43 {
+		nBit=42
 		sLabel="drillReturnFV"
 		sDescription=""
 	}
-	Label51 {
-		nBit=62
+	Label44 {
+		nBit=43
 		sLabel="drillReturnF"
 		sDescription=""
 	}
-	Label52 {
-		nBit=63
+	Label45 {
+		nBit=44
 		sLabel="drillGoFV"
 		sDescription=""
 	}
-	Label53 {
-		nBit=64
+	Label46 {
+		nBit=45
 		sLabel="drillGoF"
 		sDescription=""
 	}
-	Label54 {
-		nBit=66
-		sLabel="outMagIntlockFV"
-		sDescription=""
-	}
-	Label55 {
-		nBit=67
-		sLabel="outMagIntlockF"
-		sDescription=""
-	}
-	Label56 {
-		nBit=69
-		sLabel="outMagUpperLimFV"
-		sDescription=""
-	}
-	Label57 {
-		nBit=70
-		sLabel="outMagUpperLimF"
-		sDescription=""
-	}
-	Label58 {
-		nBit=71
+	Label47 {
+		nBit=46
 		sLabel="outMagPanelRdyFV"
 		sDescription=""
 	}
-	Label59 {
-		nBit=72
+	Label48 {
+		nBit=47
 		sLabel="outMagPanelRdyF"
 		sDescription=""
 	}
-	Label60 {
-		nBit=74
+	Label49 {
+		nBit=48
 		sLabel="inMagInterlockFV"
 		sDescription=""
 	}
-	Label61 {
-		nBit=75
+	Label50 {
+		nBit=49
 		sLabel="inMagInterlockF"
 		sDescription=""
 	}
-	Label62 {
-		nBit=77
+	Label51 {
+		nBit=50
 		sLabel="inMagLowerLimFV"
 		sDescription=""
 	}
-	Label63 {
-		nBit=78
+	Label52 {
+		nBit=51
 		sLabel="inMagLowerLimF"
 		sDescription=""
 	}
-	Label64 {
-		nBit=79
+	Label53 {
+		nBit=52
 		sLabel="inMagUpperLimFV"
 		sDescription=""
 	}
-	Label65 {
-		nBit=80
+	Label54 {
+		nBit=53
 		sLabel="inMagUpperLimF"
 		sDescription=""
 	}
-	Label66 {
-		nBit=81
+	Label55 {
+		nBit=54
 		sLabel="inMagPnlRdyFV"
 		sDescription=""
 	}
-	Label67 {
-		nBit=82
+	Label56 {
+		nBit=55
 		sLabel="inMagPnlRdyF"
 		sDescription=""
 	}
-	Label68 {
-		nBit=84
+	Label57 {
+		nBit=56
 		sLabel="suctionCupsFV"
 		sDescription=""
 	}
-	Label69 {
-		nBit=85
+	Label58 {
+		nBit=57
 		sLabel="suctionCupsF"
 		sDescription=""
 	}
-	Label70 {
-		nBit=87
-		sLabel="outMagPartRdyF"
-		sDescription=""
-	}
-	Label71 {
-		nBit=88
-		sLabel="outMagPartRdyFV"
-		sDescription=""
-	}
-	Label72 {
-		nBit=90
+	Label59 {
+		nBit=58
 		sLabel="debrisMtrF"
 		sDescription=""
 	}
-	Label73 {
-		nBit=91
+	Label60 {
+		nBit=59
 		sLabel="debrisMtrFV"
 		sDescription=""
 	}
-	Label74 {
-		nBit=93
-		sLabel="frontIntlockFV"
-		sDescription=""
-	}
-	Label75 {
-		nBit=94
-		sLabel="frontIntlockF"
-		sDescription=""
-	}
-	Label76 {
-		nBit=95
+	Label61 {
+		nBit=60
 		sLabel="rightIntlockFV"
 		sDescription=""
 	}
-	Label77 {
-		nBit=96
+	Label62 {
+		nBit=61
 		sLabel="rightIntlockF"
 		sDescription=""
 	}
-	Label78 {
-		nBit=97
-		sLabel="leftIntlockFV"
-		sDescription=""
-	}
-	Label79 {
-		nBit=98
-		sLabel="leftIntlockF"
-		sDescription=""
-	}
-	Label80 {
-		nBit=99
-		sLabel="backIntlockFV"
-		sDescription=""
-	}
-	Label81 {
-		nBit=100
-		sLabel="backIntlockF"
-		sDescription=""
-	}
-	Label82 {
-		nBit=102
+	Label63 {
+		nBit=62
 		sLabel="holeDetectedF"
 		sDescription=""
 	}
-	Label83 {
-		nBit=103
+	Label64 {
+		nBit=63
 		sLabel="holeDetectedFV"
 		sDescription=""
 	}
-	Label84 {
-		nBit=104
+	Label65 {
+		nBit=64
 		sLabel="inMagLowLimNF"
 		sDescription=""
 	}
-	Label85 {
-		nBit=105
+	Label66 {
+		nBit=65
 		sLabel="inMagLowLimNFV"
 		sDescription=""
 	}
-	Label86 {
-		nBit=106
+	Label67 {
+		nBit=66
 		sLabel="inMagUpLimNF"
 		sDescription=""
 	}
-	Label87 {
-		nBit=107
+	Label68 {
+		nBit=67
 		sLabel="inMagUpLimNFV"
 		sDescription=""
 	}
-	Label88 {
-		nBit=108
+	Label69 {
+		nBit=68
 		sLabel="leftIntlock1FV"
 		sDescription=""
 	}
-	Label89 {
-		nBit=109
+	Label70 {
+		nBit=69
 		sLabel="leftIntlock1F"
 		sDescription=""
 	}
-	Label90 {
-		nBit=110
+	Label71 {
+		nBit=70
 		sLabel="leftIntlock2FV"
 		sDescription=""
 	}
-	Label91 {
-		nBit=111
+	Label72 {
+		nBit=71
 		sLabel="leftIntlock2F"
 		sDescription=""
 	}
-	Label92 {
-		nBit=112
+	Label73 {
+		nBit=72
 		sLabel="maintModeF"
 		sDescription=""
 	}
-	Label93 {
-		nBit=113
+	Label74 {
+		nBit=73
 		sLabel="maintModeFV"
 		sDescription=""
 	}
-	Label94 {
-		nBit=114
+	Label75 {
+		nBit=74
 		sLabel="inMagLowLimF"
 		sDescription=""
 	}
-	Label95 {
-		nBit=115
+	Label76 {
+		nBit=75
 		sLabel="inMagLowLimFV"
 		sDescription=""
 	}
-	Label96 {
-		nBit=116
+	Label77 {
+		nBit=76
 		sLabel="inMagUpLimFV"
 		sDescription=""
 	}
-	Label97 {
-		nBit=117
+	Label78 {
+		nBit=77
 		sLabel="inMagUpLimF"
 		sDescription=""
 	}
-	Label98 {
-		nBit=118
+	Label79 {
+		nBit=78
 		sLabel="outMagLowLimFV"
 		sDescription=""
 	}
-	Label99 {
-		nBit=119
+	Label80 {
+		nBit=79
 		sLabel="outMagLowLimF"
 		sDescription=""
 	}
-	Label100 {
-		nBit=120
+	Label81 {
+		nBit=80
 		sLabel="outMagLowLimNFV"
 		sDescription=""
 	}
-	Label101 {
-		nBit=121
+	Label82 {
+		nBit=81
 		sLabel="outMagLowLimNF"
 		sDescription=""
 	}
-	Label102 {
-		nBit=122
+	Label83 {
+		nBit=82
 		sLabel="outMagUpLimFV"
 		sDescription=""
 	}
-	Label103 {
-		nBit=123
+	Label84 {
+		nBit=83
 		sLabel="outMagUpLimF"
 		sDescription=""
 	}
-	Label104 {
-		nBit=124
+	Label85 {
+		nBit=84
 		sLabel="outMagUpLimNFV"
 		sDescription=""
 	}
-	Label105 {
-		nBit=125
+	Label86 {
+		nBit=85
 		sLabel="outMagUpLimNF"
 		sDescription=""
 	}
-	Label106 {
-		nBit=126
-		sLabel="removeFlashFV"
-		sDescription=""
-	}
-	Label107 {
-		nBit=127
-		sLabel="removeFlashF"
-		sDescription=""
-	}
-	Label108 {
-		nBit=128
+	Label87 {
+		nBit=86
 		sLabel="edgeDetectGoFV"
 		sDescription=""
 	}
-	Label109 {
-		nBit=129
+	Label88 {
+		nBit=87
 		sLabel="edgeDetectGoF"
 		sDescription=""
 	}
-	Label110 {
-		nBit=130
+	Label89 {
+		nBit=88
 		sLabel="edgeDetectLoFV"
 		sDescription=""
 	}
-	Label111 {
-		nBit=131
+	Label90 {
+		nBit=89
 		sLabel="edgeDetectLoF"
 		sDescription=""
 	}
-	Label112 {
-		nBit=132
-		sLabel="inMagIntlockFV"
-		sDescription=""
-	}
-	Label113 {
-		nBit=133
-		sLabel="inMagIntlockF"
-		sDescription=""
-	}
-	Label114 {
-		nBit=134
+	Label91 {
+		nBit=90
 		sLabel="outMagIntFV"
 		sDescription=""
 	}
-	Label115 {
-		nBit=135
+	Label92 {
+		nBit=91
 		sLabel="outMagIntF"
 		sDescription=""
 	}
-	Label116 {
-		nBit=136
+	Label93 {
+		nBit=92
 		sLabel="backIntlock1FV"
 		sDescription=""
 	}
-	Label117 {
-		nBit=137
+	Label94 {
+		nBit=93
 		sLabel="backIntlock1F"
 		sDescription=""
 	}
-	Label118 {
-		nBit=138
+	Label95 {
+		nBit=94
 		sLabel="backIntlock2FV"
 		sDescription=""
 	}
-	Label119 {
-		nBit=139
+	Label96 {
+		nBit=95
 		sLabel="backIntlock2F"
 		sDescription=""
 	}
-	Label120 {
-		nBit=140
+	Label97 {
+		nBit=96
 		sLabel="edgeDetectHiF"
 		sDescription=""
 	}
-	Label121 {
-		nBit=141
+	Label98 {
+		nBit=97
 		sLabel="edgeDetectHiFV"
 		sDescription=""
 	}
-	Label122 {
-		nBit=142
+	Label99 {
+		nBit=98
 		sLabel="frontIntlock2FV"
 		sDescription=""
 	}
-	Label123 {
-		nBit=143
+	Label100 {
+		nBit=99
 		sLabel="frontIntlock2F"
 		sDescription=""
 	}
-	Label124 {
-		nBit=144
+	Label101 {
+		nBit=100
 		sLabel="frontIntlock1FV"
 		sDescription=""
 	}
-	Label125 {
-		nBit=145
+	Label102 {
+		nBit=101
 		sLabel="frontIntlock1F"
 		sDescription=""
 	}
-	Label126 {
-		nBit=146
-		sLabel="flashHomeF"
-		sDescription=""
-	}
-	Label127 {
-		nBit=147
-		sLabel="flashHomeFV"
-		sDescription=""
-	}
-	Label128 {
-		nBit=148
-		sLabel="heatStakeGoF"
-		sDescription=""
-	}
-	Label129 {
-		nBit=149
-		sLabel="heatStakeGoFV"
-		sDescription=""
-	}
-	Label130 {
-		nBit=150
+	Label103 {
+		nBit=102
 		sLabel="eStopResetFV"
 		sDescription=""
 	}
-	Label131 {
-		nBit=151
+	Label104 {
+		nBit=103
 		sLabel="eStopResetF"
 		sDescription=""
 	}
-	Label132 {
-		nBit=152
+	Label105 {
+		nBit=104
 		sLabel="flashHomeNOFV"
 		sDescription=""
 	}
-	Label133 {
-		nBit=153
+	Label106 {
+		nBit=105
 		sLabel="flashHomeNOF"
 		sDescription=""
 	}
-	Label134 {
-		nBit=154
+	Label107 {
+		nBit=106
 		sLabel="flashHomeNCFV"
 		sDescription=""
 	}
-	Label135 {
-		nBit=155
+	Label108 {
+		nBit=107
 		sLabel="flashHomeNCF"
 		sDescription=""
 	}
-	Label136 {
+	Label109 {
+		nBit=108
+		sLabel="crowdingF"
+		sDescription=""
+	}
+	Label110 {
+		nBit=109
+		sLabel="crowdingFV"
+		sDescription=""
+	}
+	Label111 {
+		nBit=110
+		sLabel="crowdingXF"
+		sDescription=""
+	}
+	Label112 {
+		nBit=111
+		sLabel="crowdingXFV"
+		sDescription=""
+	}
+	Label113 {
 		nBit=184
 		sLabel="m_inserting"
 		sDescription="Reserved for modbus"
 	}
-	Label137 {
+	Label114 {
 		nBit=185
 		sLabel="m_idle"
 		sDescription="Reserved for modbus"
 	}
-	Label138 {
+	Label115 {
 		nBit=186
 		sLabel="m_ready"
 		sDescription="Reserved for modbus"
 	}
-	Label139 {
+	Label116 {
 		nBit=187
 		sLabel="m_bootDelay"
 		sDescription="Reserved for modbus"
 	}
-	Label140 {
+	Label117 {
 		nBit=188
 		sLabel="m_bootDone"
 		sDescription="Reserved for modbus"
 	}
-	Label141 {
+	Label118 {
 		nBit=189
 		sLabel="m_findingHome"
 		sDescription="Reserved for modbus"
 	}
-	Label142 {
+	Label119 {
 		nBit=190
 		sLabel="m_dumpRunning"
 		sDescription="Reserved for modbus"
 	}
-	Label143 {
+	Label120 {
 		nBit=191
 		sLabel="m_manualModeOn"
 		sDescription="Reserved for modbus"
 	}
-	Label144 {
+	Label121 {
 		nBit=192
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label145 {
+	Label122 {
 		nBit=193
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label146 {
+	Label123 {
 		nBit=194
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label147 {
+	Label124 {
 		nBit=195
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label148 {
+	Label125 {
 		nBit=196
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label149 {
+	Label126 {
 		nBit=197
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label150 {
+	Label127 {
 		nBit=198
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label151 {
+	Label128 {
 		nBit=199
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label152 {
+	Label129 {
 		nBit=200
 		sLabel="m_erInsertTemp"
 		sDescription="Reserved for modbus"
 	}
-	Label153 {
+	Label130 {
 		nBit=201
 		sLabel="m_erServoNotRdy"
 		sDescription="Reserved for modbus"
 	}
-	Label154 {
+	Label131 {
 		nBit=202
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label155 {
+	Label132 {
 		nBit=203
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label156 {
+	Label133 {
 		nBit=204
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label157 {
+	Label134 {
 		nBit=205
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label158 {
+	Label135 {
 		nBit=206
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label159 {
+	Label136 {
 		nBit=207
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label160 {
+	Label137 {
 		nBit=208
 		sLabel="m_HeaterMCROn"
 		sDescription="Reserved for modbus"
 	}
-	Label161 {
+	Label138 {
 		nBit=209
 		sLabel="m_BowlFeederOn"
 		sDescription="Reserved for modbus"
 	}
-	Label162 {
+	Label139 {
 		nBit=210
 		sLabel="m_VibTrackOn"
 		sDescription="Reserved for modbus"
 	}
-	Label163 {
+	Label140 {
 		nBit=211
 		sLabel="m_LoadInsert"
 		sDescription="Reserved for modbus"
 	}
-	Label164 {
+	Label141 {
 		nBit=212
 		sLabel="m_ExtendShuttle"
 		sDescription="Reserved for modbus"
 	}
-	Label165 {
+	Label142 {
 		nBit=213
-		sLabel="m_ActiveCoolling"
+		sLabel="m_ActiveCooling"
 		sDescription="Reserved for modbus"
 	}
-	Label166 {
+	Label143 {
 		nBit=214
 		sLabel="m_InsertGripper"
 		sDescription="Reserved for modbus"
 	}
-	Label167 {
+	Label144 {
 		nBit=215
 		sLabel="m_InsertDischarg"
 		sDescription="Reserved for modbus"
 	}
-	Label168 {
+	Label145 {
 		nBit=216
 		sLabel="m_InsertReject"
 		sDescription="Reserved for modbus"
 	}
-	Label169 {
+	Label146 {
 		nBit=217
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label170 {
+	Label147 {
 		nBit=218
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label171 {
+	Label148 {
 		nBit=219
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label172 {
+	Label149 {
 		nBit=220
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label173 {
+	Label150 {
 		nBit=221
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label174 {
+	Label151 {
 		nBit=222
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label175 {
+	Label152 {
 		nBit=223
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label176 {
+	Label153 {
 		nBit=224
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label177 {
+	Label154 {
 		nBit=225
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label178 {
+	Label155 {
 		nBit=226
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label179 {
+	Label156 {
 		nBit=227
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label180 {
+	Label157 {
 		nBit=228
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label181 {
+	Label158 {
 		nBit=229
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label182 {
+	Label159 {
 		nBit=230
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label183 {
+	Label160 {
 		nBit=231
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label184 {
+	Label161 {
 		nBit=232
 		sLabel="m_EmgStop"
 		sDescription="Reserved for modbus"
 	}
-	Label185 {
+	Label162 {
 		nBit=233
 		sLabel="m_ShuttleParked"
 		sDescription="Reserved for modbus"
 	}
-	Label186 {
+	Label163 {
 		nBit=234
 		sLabel="m_ShuttlePickup"
 		sDescription="Reserved for modbus"
 	}
-	Label187 {
+	Label164 {
 		nBit=235
 		sLabel="m_ShuttlePI"
 		sDescription="Reserved for modbus"
 	}
-	Label188 {
+	Label165 {
 		nBit=236
 		sLabel="m_ShuttleNPI"
 		sDescription="Reserved for modbus"
 	}
-	Label189 {
+	Label166 {
 		nBit=237
 		sLabel="m_InsertOnShuttl"
 		sDescription="Reserved for modbus"
 	}
-	Label190 {
+	Label167 {
 		nBit=238
 		sLabel="m_InsertDetected"
 		sDescription="Reserved for modbus"
 	}
-	Label191 {
+	Label168 {
 		nBit=239
 		sLabel="m_InsertDetAlu"
 		sDescription="Reserved for modbus"
 	}
-	Label192 {
+	Label169 {
 		nBit=240
 		sLabel="m_InsertAtTemp"
 		sDescription="Reserved for modbus"
 	}
-	Label193 {
+	Label170 {
 		nBit=241
 		sLabel="m_GripperEarsOut"
 		sDescription="Reserved for modbus"
 	}
-	Label194 {
+	Label171 {
 		nBit=242
 		sLabel="m_GripperEarsIn"
 		sDescription="Reserved for modbus"
 	}
-	Label195 {
+	Label172 {
 		nBit=243
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label196 {
+	Label173 {
 		nBit=244
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label197 {
+	Label174 {
 		nBit=245
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label198 {
+	Label175 {
 		nBit=246
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label199 {
+	Label176 {
 		nBit=247
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label200 {
+	Label177 {
 		nBit=248
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label201 {
+	Label178 {
 		nBit=249
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label202 {
+	Label179 {
 		nBit=250
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label203 {
+	Label180 {
 		nBit=251
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label204 {
+	Label181 {
 		nBit=252
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label205 {
+	Label182 {
 		nBit=253
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label206 {
+	Label183 {
 		nBit=254
 		sLabel=""
 		sDescription="Reserved for modbus"
 	}
-	Label207 {
+	Label184 {
 		nBit=255
 		sLabel=""
 		sDescription="Reserved for modbus"

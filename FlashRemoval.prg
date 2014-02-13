@@ -1,7 +1,6 @@
 #include "Globals.INC"
 
 Function FlashPanel(DwellTime As Real) As Integer
-	Trap 2, MemSw(jobAbortH) = True GoTo exitFlash ' arm trap
 	SystemStatus = StateFlashRemoval
 	
 	Integer i
@@ -54,19 +53,6 @@ Function FlashPanel(DwellTime As Real) As Integer
 		
 	Next
 	
-exitFlash:
-
-	If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-		jobAbort = True ' Set flag
-		Off (DrillGoH)
-		Wait .1
-		On (DrillReturnH)
-		Do Until flashHomeNO = False ' wait for drill to get home before we move
-			Wait .1
-		Loop
-		Off (DrillReturnH)
-		MemOff (jobAbortH) 'reset bit
-	EndIf
 	
 '	Off debrisMtrH 'Turn off Vacuum
 	debrisMtrCC = False

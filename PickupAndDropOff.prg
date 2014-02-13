@@ -2,6 +2,8 @@
 
 Function DropOffPanel() As Integer
 
+	Integer count
+	
 	DropOffPanel = 2 ' default to fail
 	SystemStatus = StatePushPanel
 	PanelPassedInspection = True ' fake it for testing	
@@ -23,13 +25,20 @@ Function DropOffPanel() As Integer
 	' --TODO-- Add panel fail code here
 	
 	panelDataTxRdy = True ' Tell HMI to readout hole data
-	Wait MemSw(panelDataTxAckH) = True, 10
+
+	count = 0
+	Do While panelDataTxACK = False
+		count = count + 1
+		If count > 10 Then
+			erHmiDataAck = True
+			Print "no data ack from hmi"
+			Pause
+			Exit Do
+		EndIf
+		Wait 1
+	Loop
+
 	panelDataTxRdy = False ' reset flag	
-	If TW = True Then ' catch that the HMI timed out without acking
-		erHmiDataAck = True
-		Print "no data ack from hmi"
-		'Pause
-	EndIf
 	
 	changeSpeed(slow)
 	
@@ -62,11 +71,6 @@ Function DropOffPanel() As Integer
 
 	erPanelFailedInspection = False
 	erHmiDataAck = False
-	
-	If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-		jobAbort = True ' set flag
-		MemOff (jobAbortH) ' reset flag		
-	EndIf
 
 	findHome
 
@@ -76,8 +80,6 @@ Fend
 
 Function PickupPanel() As Integer 'byte me
 	
-Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
-
 	Integer TorqueCounter
 	PickupPanel = 2 ' Default to fail	
 	TorqueCounter = 0 ' reset counter
@@ -129,15 +131,8 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitPopPanel ' arm trap
 	
 	PickupPanel = 0 ' We successfully picked up a panel
 
-exitPopPanel:
-If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-	jobAbort = True
-	MemOff (jobAbortH)
-EndIf
 	InMagRobotClearSignal = True ' Give permission for input magazine to queue up next panel
 	SystemStatus = StateMoving
-
-Trap 2 'disarm trap
 
 Fend
 

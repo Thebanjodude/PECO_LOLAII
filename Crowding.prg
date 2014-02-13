@@ -2,10 +2,8 @@
 
 Function CrowdingSequence() As Integer
 
-Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
-
 	' Make sure the crowding is open
-	Off (CrowdingH)
+	crowdingCC = False
 	TmReset 1
 	
 	' make sure we start from home
@@ -28,14 +26,12 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	Jump cwdout_51010 +Z(30) ' Relese the suction cups and move them out of the way for crowding
 
 	' crowding sequence
-	On crowdingXH
+	crowdingXCC = True
 	Wait 0.5
-	On CrowdingH
+	crowdingCC = True
 	Wait 0.5
-	Off crowdingXH
+	crowdingX = False
 	Wait 0.5
-	
-'	Wait 3
 	
 	' lets see if we can use a global point
 	'Go P(recCrowding)
@@ -43,7 +39,7 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	suctionCupsCC = True ' Turn on cups
 	Wait recSuctionWaitTime
 
-	Off (CrowdingH) ' Open crowding
+	crowdingCC = False
 	Wait 0.5 ' wait for the crowding to open
 	
 	Call changeSpeed(slow)
@@ -56,14 +52,6 @@ Trap 2, MemSw(jobAbortH) = True GoTo exitCrowding ' arm trap
 	
 	CrowdingSequence = 0
 	
-exitCrowding:
-	
-If MemSw(jobAbortH) = True Then 'Check if the operator wants to abort the job
-	jobAbort = True
-	MemOff (jobAbortH) ' reset membit
-	Off (CrowdingH) ' Open crowding	
-EndIf
-
 	findHome
 	
 Trap 2 ' Disarm trap

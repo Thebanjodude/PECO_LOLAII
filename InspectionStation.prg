@@ -2,7 +2,6 @@
 
 Function InspectPanel(SelectRoutine As Integer) As Integer
 
-	Trap 2, MemSw(jobAbortH) = True GoTo exitInspectPanel ' arm trap
 	SystemStatus = StateInspection
 	InspectPanel = 2 ' default to fail 
 	Integer i
@@ -56,14 +55,6 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	Next
 	
 	InspectPanel = 0 ' Inspection occured without errors
-
-exitInspectPanel:
-
-	If MemSw(jobAbortH) = True Then
-		Go PreScan :U(CU(Here)) ' Pull away from the laser WITHOUT spinning (may hit laser)
-		jobAbort = True
-		MemOff (jobAbortH)
-	EndIf
 
 	SystemStatus = StateMoving
 	findHome
@@ -223,40 +214,6 @@ Function PrintPassFailArray()
 	For n = 1 To recNumberOfHoles
 		Print Str$(n) + " " + Str$(PassFailArray(n, LeftSpotFace)) + " " + Str$(PassFailArray(n, RightSpotFace))
 	Next
-	
-Fend
-
-
-Function FakeLogging()
-
-	Integer i
-	recNumberOfHoles = 23
-	Redim InspectionArray(recNumberOfHoles - 1, 1)
-	
-	For i = 0 To recNumberOfHoles - 1
-		InspectionArray(i, LeftSpotFace) = i
-		InspectionArray(i, RightSpotFace) = i
-	Next
-
-	PrintInspectionArray()
-	UnpackInspectionArrays()
-	UnpackPassFailArray()
-
-	panelDataTxRdy = True ' Tell HMI to readout hole data
-	
-'	MemOn (panelDataTxAckH) ' fake
-	
-' this is for hmi logging
-	Wait MemSw(panelDataTxAckH) = True, 3
-	If TW = True Then ' catch that the HMI timed out without acking
-		erHmiDataAck = True
-		Print "no data ack from hmi"
-	EndIf
-
-	panelDataTxRdy = False ' reset flag
-	MemOff (panelDataTxAckH) ' reset flag
-	Print "ending log"
-	jobDone = True
 	
 Fend
 
