@@ -2386,6 +2386,279 @@ Function setVars(response$ As String)
 		recSuctionWaitTime = Val(tokens$(1))
 	Case "zlimit"
 		zLimit = Val(tokens$(1))
+		
+	' PLC Comms
+	Case "PLC_Delay_BlowOffTime"
+		MBWrite(1000, Val(tokens$(1)), MBType16)
+	Case "PLC_Delay_InsertLoad"
+		MBWrite(1001, Val(tokens$(1)), MBType16)
+	Case "PLC_Speed_TorqueMode"
+		MBWrite(1002, Val(tokens$(1)), MBType16)
+	Case "PLC_Torque_TorqueMode"
+		MBWrite(1004, Val(tokens$(1)), MBType16)
+	Case "PLC_Delay_RejectBlowOff"
+		MBWrite(1005, Val(tokens$(1)), MBType16)
+	Case "PLC_Delay_FindHome"
+		MBWrite(1006, Val(tokens$(1)), MBType16)
+	Case "PLC_Delay_ActiveCooling"
+		MBWrite(1007, Val(tokens$(1)), MBType16)
+	Case "PLC_Delay_TorqueDwell"
+		MBWrite(1008, Val(tokens$(1)), MBType16)
+	Case "PLC_Delay_Gripper"
+		MBWrite(1009, Val(tokens$(1)), MBType16)
+	Case "PLC_Delay_PanelContact"
+		MBWrite(1010, Val(tokens$(1)), MBType16)
+	Case "PLC_Delay_ShuttleExtended"
+		MBWrite(1011, Val(tokens$(1)), MBType16)
+	Case "PLC_InsertType"
+		MBWrite(1020, Val(tokens$(1)), MBType16)
+	Case "PLC_PanelContactTorque"
+		MBWrite(1021, Val(tokens$(1)), MBType16)
+	Case "PLC_InsertTempOkBand"
+		MBWrite(1022, Val(tokens$(1)), MBType16)
+	Case "PLC_HeaterMCROn_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(434, True, MBTypeCoil)
+		Else
+			MBWrite(434, False, MBTypeCoil)
+		EndIf
+	Case "PLC_HeaterMCROn_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(435, True, MBTypeCoil)
+		Else
+			MBWrite(435, False, MBTypeCoil)
+		EndIf
+	Case "PLC_BowlFeederOn_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(436, True, MBTypeCoil)
+		Else
+			MBWrite(436, False, MBTypeCoil)
+		EndIf
+	Case "PLC_BowlFeederOn_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(437, True, MBTypeCoil)
+		Else
+			MBWrite(437, False, MBTypeCoil)
+		EndIf
+	Case "PLC_VibTrackOn_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(438, True, MBTypeCoil)
+		Else
+			MBWrite(438, False, MBTypeCoil)
+		EndIf
+	Case "PLC_VibTrackOn_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(439, True, MBTypeCoil)
+		Else
+			MBWrite(439, False, MBTypeCoil)
+		EndIf
+	Case "PLC_LoadInsert_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(440, True, MBTypeCoil)
+		Else
+			MBWrite(440, False, MBTypeCoil)
+		EndIf
+	Case "PLC_LoadInsert_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(441, True, MBTypeCoil)
+		Else
+			MBWrite(441, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ExtendShuttle_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(442, True, MBTypeCoil)
+		Else
+			MBWrite(442, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ExtendShuttle_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(443, True, MBTypeCoil)
+		Else
+			MBWrite(443, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ActiveCoolingOn_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(444, True, MBTypeCoil)
+		Else
+			MBWrite(444, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ActiveCoolingOn_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(445, True, MBTypeCoil)
+		Else
+			MBWrite(445, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertGripperOn_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(446, True, MBTypeCoil)
+		Else
+			MBWrite(446, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertGripperOn_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(447, True, MBTypeCoil)
+		Else
+			MBWrite(447, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertDischargeOn_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(448, True, MBTypeCoil)
+		Else
+			MBWrite(448, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertDischargeOn_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(449, True, MBTypeCoil)
+		Else
+			MBWrite(449, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertRejectOn_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(450, True, MBTypeCoil)
+		Else
+			MBWrite(450, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertRejectOn_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(451, True, MBTypeCoil)
+		Else
+			MBWrite(451, False, MBTypeCoil)
+		EndIf
+	Case "PLC_EmgStop_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(534, True, MBTypeCoil)
+		Else
+			MBWrite(534, False, MBTypeCoil)
+		EndIf
+	Case "PLC_EmgStop_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(535, True, MBTypeCoil)
+		Else
+			MBWrite(535, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ShuttleParked_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(536, True, MBTypeCoil)
+		Else
+			MBWrite(536, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ShuttleParked_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(537, True, MBTypeCoil)
+		Else
+			MBWrite(537, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ShuttlePickupPos_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(538, True, MBTypeCoil)
+		Else
+			MBWrite(538, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ShuttlePickupPos_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(539, True, MBTypeCoil)
+		Else
+			MBWrite(539, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ShuttlePlaceInsert_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(540, True, MBTypeCoil)
+		Else
+			MBWrite(540, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ShuttlePlaceInsert_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(541, True, MBTypeCoil)
+		Else
+			MBWrite(541, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ShuttleNearPlaceInsert_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(542, True, MBTypeCoil)
+		Else
+			MBWrite(542, False, MBTypeCoil)
+		EndIf
+	Case "PLC_ShuttleNearPlaceInsert_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(543, True, MBTypeCoil)
+		Else
+			MBWrite(543, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertOnShuttle_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(544, True, MBTypeCoil)
+		Else
+			MBWrite(544, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertOnShuttle_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(545, True, MBTypeCoil)
+		Else
+			MBWrite(545, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertDetected_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(546, True, MBTypeCoil)
+		Else
+			MBWrite(546, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertDetected_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(547, True, MBTypeCoil)
+		Else
+			MBWrite(547, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertDetectedAluOnly_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(548, True, MBTypeCoil)
+		Else
+			MBWrite(548, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertDetectedAluOnly_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(549, True, MBTypeCoil)
+		Else
+			MBWrite(549, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertAtTemp_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(550, True, MBTypeCoil)
+		Else
+			MBWrite(550, False, MBTypeCoil)
+		EndIf
+	Case "PLC_InsertAtTemp_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(551, True, MBTypeCoil)
+		Else
+			MBWrite(551, False, MBTypeCoil)
+		EndIf
+	Case "PLC_GripperEarsOut_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(552, True, MBTypeCoil)
+		Else
+			MBWrite(552, False, MBTypeCoil)
+		EndIf
+	Case "PLC_GripperEarsOut_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(553, True, MBTypeCoil)
+		Else
+			MBWrite(553, False, MBTypeCoil)
+		EndIf
+	Case "PLC_GripperEarsIn_MM"
+		If tokens$(1) = "true" Then
+			MBWrite(554, True, MBTypeCoil)
+		Else
+			MBWrite(554, False, MBTypeCoil)
+		EndIf
+	Case "PLC_GripperEarsIn_VALUE"
+		If tokens$(1) = "true" Then
+			MBWrite(555, True, MBTypeCoil)
+		Else
+			MBWrite(555, False, MBTypeCoil)
+		EndIf
+
+
+	' /end PLC comms
 	Default
 		' TMH for now print come back and do something useful
 		Print "Invalid Token received"
