@@ -80,6 +80,11 @@ Function IOTableOutputs()
 				ReturnFlag = True
 			Else
 				drillReturnCC = False
+				' ************************************************************
+				' *********                                          *********
+				' *********  Why are we fiddling with forced values? *********
+				' *********                                          *********
+				' ************************************************************
 				MemOff (drillReturnFV)
 				ReturnFlag = False
 			EndIf
@@ -473,6 +478,38 @@ Function iotransfer()
 	Boolean suctionCupsOld
 	Boolean tasksRunningStatusOld
 	Boolean teachModeStatusOld
+
+	Boolean m_insertingOld
+	Boolean m_idleOld
+	Boolean m_readyOld
+	Boolean m_bootDelayOld
+	Boolean m_bootDoneOld
+	Boolean m_findingHomeOld
+	Boolean m_dumpRunningOld
+	Boolean m_manualModeOnOld
+	Boolean m_erInsertTempOld
+	Boolean m_erServoNotRdyOld
+	Boolean m_HeaterMCROnOld
+	Boolean m_BowlFeederOnOld
+	Boolean m_VibTrackOnOld
+	Boolean m_LoadInsertOld
+	Boolean m_ExtendShuttleOld
+	Boolean m_ActiveCoolingOld
+	Boolean m_InsertGripperOld
+	Boolean m_InsertDischargOld
+	Boolean m_InsertRejectOld
+	Boolean m_EmgStopOld
+	Boolean m_ShuttleParkedOld
+	Boolean m_ShuttlePickupOld
+	Boolean m_ShuttlePIOld
+	Boolean m_ShuttleNPIOld
+	Boolean m_InsertOnShuttlOld
+	Boolean m_InsertdetectedOld
+	Boolean m_InsertDetAluOld
+	Boolean m_InsertAtTempOld
+	Boolean m_GripperEarsOutOld
+	Boolean m_GripperEarsInOld
+
 	Double recPartNumberOld
 	Integer ctrlrErrAxisNumberOld
 	Integer ctrlrErrorNumOld
@@ -1435,6 +1472,129 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "panelDataTxRdy" + Chr$(&H22), ":", Str$(panelDataTxRdy), "}",
 			panelDataTxRdyOld = panelDataTxRdy
 		EndIf
+
+
+		'PLC values of interest
+		If MemSw(m_inserting) <> m_insertingOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_inserting" + Chr$(&H22), ":", Str$(m_inserting), "}",
+			m_insertingOld = MemSw(m_inserting)
+		EndIf
+		If MemSw(m_idle) <> m_idleOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_idle" + Chr$(&H22), ":", Str$(m_idle), "}",
+			m_idleOld = MemSw(m_idle)
+		EndIf
+		If MemSw(m_ready) <> m_readyOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_ready" + Chr$(&H22), ":", Str$(m_ready), "}",
+			m_readyOld = MemSw(m_ready)
+		EndIf
+		If MemSw(m_bootDelay) <> m_bootDelayOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_bootDelay" + Chr$(&H22), ":", Str$(m_bootDelay), "}",
+			m_bootDelayOld = MemSw(m_bootDelay)
+		EndIf
+		If MemSw(m_bootDone) <> m_bootDoneOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_bootDone" + Chr$(&H22), ":", Str$(m_bootDone), "}",
+			m_bootDoneOld = MemSw(m_bootDone)
+		EndIf
+		If MemSw(m_findingHome) <> m_findingHomeOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_findingHome" + Chr$(&H22), ":", Str$(m_findingHome), "}",
+			m_findingHomeOld = MemSw(m_findingHome)
+		EndIf
+		If MemSw(m_dumpRunning) <> m_dumpRunningOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_dumpRunning" + Chr$(&H22), ":", Str$(m_dumpRunning), "}",
+			m_dumpRunningOld = MemSw(m_dumpRunning)
+		EndIf
+		If MemSw(m_manualModeOn) <> m_manualModeOnOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_manualModeOn" + Chr$(&H22), ":", Str$(m_manualModeOn), "}",
+			m_manualModeOnOld = MemSw(m_manualModeOn)
+		EndIf
+		If MemSw(m_erInsertTemp) <> m_erInsertTempOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_erInsertTemp" + Chr$(&H22), ":", Str$(m_erInsertTemp), "}",
+			m_erInsertTempOld = MemSw(m_erInsertTemp)
+		EndIf
+		If MemSw(m_erServoNotRdy) <> m_erServoNotRdyOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_erServoNotRdy" + Chr$(&H22), ":", Str$(m_erServoNotRdy), "}",
+			m_erServoNotRdyOld = MemSw(m_erServoNotRdy)
+		EndIf
+		If MemSw(m_HeaterMCROn) <> m_HeaterMCROnOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_HeaterMCROn" + Chr$(&H22), ":", Str$(m_HeaterMCROn), "}",
+			m_HeaterMCROnOld = MemSw(m_HeaterMCROn)
+		EndIf
+		If MemSw(m_BowlFeederOn) <> m_BowlFeederOnOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_BowlFeederOn" + Chr$(&H22), ":", Str$(m_BowlFeederOn), "}",
+			m_BowlFeederOnOld = MemSw(m_BowlFeederOn)
+		EndIf
+		If MemSw(m_VibTrackOn) <> m_VibTrackOnOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_VibTrackOn" + Chr$(&H22), ":", Str$(m_VibTrackOn), "}",
+			m_VibTrackOnOld = MemSw(m_VibTrackOn)
+		EndIf
+		If MemSw(m_LoadInsert) <> m_LoadInsertOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_LoadInsert" + Chr$(&H22), ":", Str$(m_LoadInsert), "}",
+			m_LoadInsertOld = MemSw(m_LoadInsert)
+		EndIf
+		If MemSw(m_ExtendShuttle) <> m_ExtendShuttleOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_ExtendShuttle" + Chr$(&H22), ":", Str$(m_ExtendShuttle), "}",
+			m_ExtendShuttleOld = MemSw(m_ExtendShuttle)
+		EndIf
+		If MemSw(m_ActiveCooling) <> m_ActiveCoolingOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_ActiveCooling" + Chr$(&H22), ":", Str$(m_ActiveCooling), "}",
+			m_ActiveCoolingOld = MemSw(m_ActiveCooling)
+		EndIf
+		If MemSw(m_InsertGripper) <> m_InsertGripperOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_InsertGripper" + Chr$(&H22), ":", Str$(m_InsertGripper), "}",
+			m_InsertGripperOld = MemSw(m_InsertGripper)
+		EndIf
+		If MemSw(m_InsertDischarg) <> m_InsertDischargOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_InsertDischarg" + Chr$(&H22), ":", Str$(m_InsertDischarg), "}",
+			m_InsertDischargOld = MemSw(m_InsertDischarg)
+		EndIf
+		If MemSw(m_InsertReject) <> m_InsertRejectOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_InsertReject" + Chr$(&H22), ":", Str$(m_InsertReject), "}",
+			m_InsertRejectOld = MemSw(m_InsertReject)
+		EndIf
+		If MemSw(m_EmgStop) <> m_EmgStopOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_EmgStop" + Chr$(&H22), ":", Str$(m_EmgStop), "}",
+			m_EmgStopOld = MemSw(m_EmgStop)
+		EndIf
+		If MemSw(m_ShuttleParked) <> m_ShuttleParkedOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_ShuttleParked" + Chr$(&H22), ":", Str$(m_ShuttleParked), "}",
+			m_ShuttleParkedOld = MemSw(m_ShuttleParked)
+		EndIf
+		If MemSw(m_ShuttlePickup) <> m_ShuttlePickupOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_ShuttlePickup" + Chr$(&H22), ":", Str$(m_ShuttlePickup), "}",
+			m_ShuttlePickupOld = MemSw(m_ShuttlePickup)
+		EndIf
+		If MemSw(m_ShuttlePI) <> m_ShuttlePIOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_ShuttlePI" + Chr$(&H22), ":", Str$(m_ShuttlePI), "}",
+			m_ShuttlePIOld = MemSw(m_ShuttlePI)
+		EndIf
+		If MemSw(m_ShuttleNPI) <> m_ShuttleNPIOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_ShuttleNPI" + Chr$(&H22), ":", Str$(m_ShuttleNPI), "}",
+			m_ShuttleNPIOld = MemSw(m_ShuttleNPI)
+		EndIf
+		If MemSw(m_InsertOnShuttl) <> m_InsertOnShuttlOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_InsertOnShuttl" + Chr$(&H22), ":", Str$(m_InsertOnShuttl), "}",
+			m_InsertOnShuttlOld = MemSw(m_InsertOnShuttl)
+		EndIf
+		If MemSw(m_InsertDetected) <> m_InsertdetectedOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Insertdetected" + Chr$(&H22), ":", Str$(m_InsertDetected), "}",
+			m_InsertdetectedOld = MemSw(m_InsertDetected)
+		EndIf
+		If MemSw(m_InsertDetAlu) <> m_InsertDetAluOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_InsertDetAlu" + Chr$(&H22), ":", Str$(m_InsertDetAlu), "}",
+			m_InsertDetAluOld = MemSw(m_InsertDetAlu)
+		EndIf
+		If MemSw(m_InsertAtTemp) <> m_InsertAtTempOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_InsertAtTemp" + Chr$(&H22), ":", Str$(m_InsertAtTemp), "}",
+			m_InsertAtTempOld = MemSw(m_InsertAtTemp)
+		EndIf
+		If MemSw(m_GripperEarsOut) <> m_GripperEarsOutOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_GripperEarsOut" + Chr$(&H22), ":", Str$(m_GripperEarsOut), "}",
+			m_GripperEarsOutOld = MemSw(m_GripperEarsOut)
+		EndIf
+		If MemSw(m_GripperEarsIn) <> m_GripperEarsInOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_GripperEarsIn" + Chr$(&H22), ":", Str$(m_GripperEarsIn), "}",
+			m_GripperEarsInOld = MemSw(m_GripperEarsIn)
+		EndIf
 	Loop
 Fend
 
@@ -1456,77 +1616,77 @@ Function setVars(response$ As String)
 	'Rx from HMI:
 
 	Case "alarmMuteBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			alarmMuteBtn = True
 			alarmMute = True
 		Else
 			alarmMuteBtn = False
 		EndIf
 	Case "backInterlockACKBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			backInterlockACKBtn = True
 			backInterlockACK = True
 		Else
 			backInterlockACKBtn = False
 		EndIf
 	Case "frontInterlockACKBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			frontInterlockACKBtn = True
 			frontInterlockACK = True
 		Else
 			frontInterlockACKBtn = False
 		EndIf
 	Case "inMagGoHomeBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			inMagGoHomeBtn = True
 			inMagGoHome = True
 		Else
 			inMagGoHomeBtn = False
 		EndIf
 	Case "inMagLoadedBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			inMagLoadedBtn = True
 			inMagLoaded = True
 		Else
 			inMagLoadedBtn = False
 		EndIf
 	Case "jobAbortBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			jobAbortBtn = True
 			jobAbort = True
 		Else
 			jobAbortBtn = False
 		EndIf
 	Case "jobStartBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			jobStartBtn = True
 			jobStart = True
 		Else
 			jobStartBtn = False
 		EndIf
 	Case "leftInterlockACKBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			leftInterlockACKBtn = True
 			leftInterlockACK = True
 		Else
 			leftInterlockACKBtn = False
 		EndIf
 	Case "outMagGoHomeBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			outMagGoHomeBtn = True
 			outMagGoHome = True
 		Else
 			outMagGoHomeBtn = False
 		EndIf
 	Case "outMagUnloadedBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			outMagUnloadedBtn = True
 			outMagUnloaded = True
 		Else
 			outMagUnloadedBtn = False
 		EndIf
 	Case "panelDataTxACKBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			panelDataTxACKBtn = True
 			panelDataTxACK = True
 		Else
@@ -1865,79 +2025,79 @@ Function setVars(response$ As String)
 			MemOff (inMagUpLimNF)
 		EndIf
 	Case "inMagUpLimNFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (inMagUpLimNFV)
 		Else
 			MemOff (inMagUpLimNFV)
 		EndIf
 	Case "leftIntlock1F"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (leftIntlock1F)
 		Else
 			MemOff (leftIntlock1F)
 		EndIf
 	Case "leftIntlock1FV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (leftIntlock1FV)
 		Else
 			MemOff (leftIntlock1FV)
 		EndIf
 	Case "leftIntlock2F"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (leftIntlock2F)
 		Else
 			MemOff (leftIntlock2F)
 		EndIf
 	Case "leftIntlock2FV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (leftIntlock2FV)
 		Else
 			MemOff (leftIntlock2FV)
 		EndIf
 	Case "maintModeF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (maintModeF)
 		Else
 			MemOff (maintModeF)
 		EndIf
 	Case "maintModeFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (maintModeFV)
 		Else
 			MemOff (maintModeFV)
 		EndIf
 	Case "monEstop1F"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (monEstop1F)
 		Else
 			MemOff (monEstop1F)
 		EndIf
 	Case "monEstop1FV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (monEstop1FV)
 		Else
 			MemOff (monEstop1FV)
 		EndIf
 	Case "monEstop2F"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (monEstop2F)
 		Else
 			MemOff (monEstop2F)
 		EndIf
 	Case "monEstop2FV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (monEstop2FV)
 		Else
 			MemOff (monEstop2FV)
 		EndIf
 	Case "outMagIntF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (outMagIntF)
 		Else
 			MemOff (outMagIntF)
 		EndIf
 	Case "outMagIntFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (outMagIntFV)
 		Else
 			MemOff (outMagIntFV)
@@ -1997,85 +2157,85 @@ Function setVars(response$ As String)
 			MemOff (outMagUpLimNF)
 		EndIf
 	Case "outMagUpLimNFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (outMagUpLimNFV)
 		Else
 			MemOff (outMagUpLimNFV)
 		EndIf
 	Case "rightIntlockF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (rightIntlockF)
 		Else
 			MemOff (rightIntlockF)
 		EndIf
 	Case "rightIntlockFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (rightIntlockFV)
 		Else
 			MemOff (rightIntlockFV)
 		EndIf
 	Case "debrisMtrF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (debrisMtrF)
 		Else
 			MemOff (debrisMtrF)
 		EndIf
 	Case "debrisMtrFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (debrisMtrFV)
 		Else
 			MemOff (debrisMtrFV)
 		EndIf
 	Case "drillGoF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (drillGoF)
 		Else
 			MemOff (drillGoF)
 		EndIf
 	Case "drillGoFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (drillGoFV)
 		Else
 			MemOff (drillGoFV)
 		EndIf
 	Case "drillReturnF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (drillReturnF)
 		Else
 			MemOff (drillReturnF)
 		EndIf
 	Case "drillReturnFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (drillReturnFV)
 		Else
 			MemOff (drillReturnFV)
 		EndIf
 	Case "eStopResetF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (eStopResetF)
 		Else
 			MemOff (eStopResetF)
 		EndIf
 	Case "eStopResetFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (eStopResetFV)
 		Else
 			MemOff (eStopResetFV)
 		EndIf
 	Case "inMagMtrF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (inMagMtrF)
 		Else
 			MemOff (inMagMtrF)
 		EndIf
 	Case "inMagMtrFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (inMagMtrFV)
 		Else
 			MemOff (inMagMtrFV)
 		EndIf
 	Case "inMagMtrDirF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (inMagMtrDirF)
 		Else
 			MemOff (inMagMtrDirF)
