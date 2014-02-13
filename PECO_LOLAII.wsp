@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/02/13 19:28:00:355,DS:0000004371,CS:22822,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/13 19:32:09:205,DS:0000004371,CS:23334,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -13,7 +13,7 @@ ProgramFile1 {
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=21
 		nTop=19
@@ -112,7 +112,7 @@ ProgramFile10 {
 ProgramFile11 {
 	sName="Startup.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -167,7 +167,7 @@ ProgramFile15 {
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -190,7 +190,7 @@ IncludeFile1 {
 IncludeFile2 {
 	sName="Defines.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -293,7 +293,7 @@ IOLabelEditor {
 		nWidth=1051
 		nHeight=588
 	}
-	nWinState=2
+	nWinState=0
 }
 IOMonitor {
 	bOpened=False
