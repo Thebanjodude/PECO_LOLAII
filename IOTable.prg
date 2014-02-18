@@ -543,6 +543,25 @@ Function iotransfer()
 	Integer systemStatusOld
 	Integer xOld
 	Integer zOld
+	
+	Integer PLC_Delay_BlowOffTimeOld
+	Integer PLC_Delay_InsertLoadOld
+	Integer PLC_Speed_TorqueModeOld
+	Integer PLC_Torque_TorqueModeOld
+	Integer PLC_Delay_RejectBlowOffOld
+	Integer PLC_Delay_FindHomeOld
+	Integer PLC_Delay_ActiveCoolingOld
+	Integer PLC_Delay_TorqueDwellOld
+	Integer PLC_Delay_GripperOld
+	Integer PLC_Delay_PanelContactOld
+	Integer PLC_Delay_ShuttleExtendedOld
+	Integer PLC_InsertTypeOld
+	Integer PLC_PanelContactTorqueOld
+	Integer PLC_InsertTempOkBandOld
+	Integer PLC_PID_SetValueOld
+	Integer PLC_PID_ProcessValueOld
+	Integer PLC_ServoMotorCurrentValueOld
+	
 	Real hole0LOld
 	Real hole0ROld
 	Real hole10LOld
@@ -1595,6 +1614,77 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "PLC_GripperEarsIn" + Chr$(&H22), ":", Str$(m_GripperEarsIn), "}",
 			m_GripperEarsInOld = MemSw(m_GripperEarsIn)
 		EndIf
+		
+		
+		If PLC_Delay_BlowOffTime <> PLC_Delay_BlowOffTimeOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Delay_BlowOffTime" + Chr$(&H22), ":", Str$(PLC_Delay_BlowOffTime), "}",
+			PLC_Delay_BlowOffTimeOld = PLC_Delay_BlowOffTime
+		EndIf
+		If PLC_Delay_InsertLoad <> PLC_Delay_InsertLoadOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Delay_InsertLoad" + Chr$(&H22), ":", Str$(PLC_Delay_InsertLoad), "}",
+			PLC_Delay_InsertLoadOld = PLC_Delay_InsertLoad
+		EndIf
+		If PLC_Speed_TorqueMode <> PLC_Speed_TorqueModeOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Speed_TorqueMode" + Chr$(&H22), ":", Str$(PLC_Speed_TorqueMode), "}",
+			PLC_Speed_TorqueModeOld = PLC_Speed_TorqueMode
+		EndIf
+		If PLC_Torque_TorqueMode <> PLC_Torque_TorqueModeOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Torque_TorqueMode" + Chr$(&H22), ":", Str$(PLC_Torque_TorqueMode), "}",
+			PLC_Torque_TorqueModeOld = PLC_Torque_TorqueMode
+		EndIf
+		If PLC_Delay_RejectBlowOff <> PLC_Delay_RejectBlowOffOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Delay_RejectBlowOff" + Chr$(&H22), ":", Str$(PLC_Delay_RejectBlowOff), "}",
+			PLC_Delay_RejectBlowOffOld = PLC_Delay_RejectBlowOff
+		EndIf
+		If PLC_Delay_FindHome <> PLC_Delay_FindHomeOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Delay_FindHome" + Chr$(&H22), ":", Str$(PLC_Delay_FindHome), "}",
+			PLC_Delay_FindHomeOld = PLC_Delay_FindHome
+		EndIf
+		If PLC_Delay_ActiveCooling <> PLC_Delay_ActiveCoolingOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Delay_ActiveCooling" + Chr$(&H22), ":", Str$(PLC_Delay_ActiveCooling), "}",
+			PLC_Delay_ActiveCoolingOld = PLC_Delay_ActiveCooling
+		EndIf
+		If PLC_Delay_TorqueDwell <> PLC_Delay_TorqueDwellOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Delay_TorqueDwell" + Chr$(&H22), ":", Str$(PLC_Delay_TorqueDwell), "}",
+			PLC_Delay_TorqueDwellOld = PLC_Delay_TorqueDwell
+		EndIf
+		If PLC_Delay_Gripper <> PLC_Delay_GripperOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Delay_Gripper" + Chr$(&H22), ":", Str$(PLC_Delay_Gripper), "}",
+			PLC_Delay_GripperOld = PLC_Delay_Gripper
+		EndIf
+		If PLC_Delay_PanelContact <> PLC_Delay_PanelContactOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Delay_PanelContact" + Chr$(&H22), ":", Str$(PLC_Delay_PanelContact), "}",
+			PLC_Delay_PanelContactOld = PLC_Delay_PanelContact
+		EndIf
+		If PLC_Delay_ShuttleExtended <> PLC_Delay_ShuttleExtendedOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_Delay_ShuttleExtended" + Chr$(&H22), ":", Str$(PLC_Delay_ShuttleExtended), "}",
+			PLC_Delay_ShuttleExtendedOld = PLC_Delay_ShuttleExtended
+		EndIf
+		If PLC_InsertType <> PLC_InsertTypeOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_InsertType" + Chr$(&H22), ":", Str$(PLC_InsertType), "}",
+			PLC_InsertTypeOld = PLC_InsertType
+		EndIf
+		If PLC_PanelContactTorque <> PLC_PanelContactTorqueOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_PanelContactTorque" + Chr$(&H22), ":", Str$(PLC_PanelContactTorque), "}",
+			PLC_PanelContactTorqueOld = PLC_PanelContactTorque
+		EndIf
+		If PLC_InsertTempOkBand <> PLC_InsertTempOkBandOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_InsertTempOkBand" + Chr$(&H22), ":", Str$(PLC_InsertTempOkBand), "}",
+			PLC_InsertTempOkBandOld = PLC_InsertTempOkBand
+		EndIf
+		If PLC_PID_SetValue <> PLC_PID_SetValueOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_PID_SetValue" + Chr$(&H22), ":", Str$(PLC_PID_SetValue), "}",
+			PLC_PID_SetValueOld = PLC_PID_SetValue
+		EndIf
+		If PLC_PID_ProcessValue <> PLC_PID_ProcessValueOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_PID_ProcessValue" + Chr$(&H22), ":", Str$(PLC_PID_ProcessValue), "}",
+			PLC_PID_ProcessValueOld = PLC_PID_ProcessValue
+		EndIf
+		If PLC_ServoMotorCurrentValue <> PLC_ServoMotorCurrentValueOld Then
+			Print #201, "{", Chr$(&H22) + "PLC_ServoMotorCurrentValue" + Chr$(&H22), ":", Str$(PLC_ServoMotorCurrentValue), "}",
+			PLC_ServoMotorCurrentValueOld = PLC_ServoMotorCurrentValue
+		EndIf
+
 	Loop
 Fend
 
@@ -2393,7 +2483,7 @@ Function setVars(response$ As String)
 	Case "PLC_Delay_InsertLoad"
 		MBWrite(1001, Val(tokens$(1)), MBType16)
 	Case "PLC_Speed_TorqueMode"
-		MBWrite(1002, Val(tokens$(1)), MBType16)
+		MBWrite(1002, Val(tokens$(1)), MBType32)
 	Case "PLC_Torque_TorqueMode"
 		MBWrite(1004, Val(tokens$(1)), MBType16)
 	Case "PLC_Delay_RejectBlowOff"
@@ -2416,6 +2506,8 @@ Function setVars(response$ As String)
 		MBWrite(1021, Val(tokens$(1)), MBType16)
 	Case "PLC_InsertTempOkBand"
 		MBWrite(1022, Val(tokens$(1)), MBType16)
+	Case "PLC_PID_SetValue"
+		MBWrite(1130, Val(tokens$(1)), MBType16)
 	Case "PLC_HeaterMCROn_MM"
 		If tokens$(1) = "true" Then
 			MBWrite(434, True, MBTypeCoil)

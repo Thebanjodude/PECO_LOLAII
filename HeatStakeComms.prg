@@ -48,7 +48,7 @@ Function MBWrite(Address As Integer, Value As Long, Type As Byte) As Boolean
 	
 	' queue the request
 	MBQueueAddress(MBQueueHead) = Address
-	MBQueueValue(MBQueueHead) = Value
+	MBQueueValue(MBQueueHead) = value
 	MBQueueType(MBQueueHead) = Type
 	MBQueueHead = MBQueueHead + 1
 	
@@ -199,6 +199,25 @@ Function MBCommandTask()
 			MemOut 29, inputs And &hFF
 			MemOut 30, RShift(inputs, 8) And &hFF
 			MemOut 31, RShift(inputs, 16) And &hFF
+			
+			' obtain and parse the integers of interest from the PLC
+			PLC_PID_SetValue = modbusReadRegister(1030)
+			PLC_PID_ProcessValue = modbusReadRegister(1031)
+			PLC_ServoMotorCurrentValue = modbusReadRegister(1032)
+			PLC_Delay_BlowOffTime = modbusReadRegister(1000)
+			PLC_Delay_InsertLoad = modbusReadRegister(1001)
+			PLC_Torque_TorqueMode = modbusReadRegister(1004)
+			PLC_Delay_RejectBlowOff = modbusReadRegister(1005)
+			PLC_Delay_FindHome = modbusReadRegister(1006)
+			PLC_Delay_ActiveCooling = modbusReadRegister(1007)
+			PLC_Delay_TorqueDwell = modbusReadRegister(1008)
+			PLC_Delay_Gripper = modbusReadRegister(1009)
+			PLC_Delay_PanelContact = modbusReadRegister(1010)
+			PLC_Delay_ShuttleExtended = modbusReadRegister(1011)
+			PLC_InsertType = modbusReadRegister(1020)
+			PLC_PanelContactTorque = modbusReadRegister(1021)
+			PLC_InsertTempOkBand = modbusReadRegister(1022)
+			PLC_Speed_TorqueMode = RShift(modbusReadRegister(1002), 16) And modbusReadRegister(1003)
 		EndIf
 	Loop
 Fend

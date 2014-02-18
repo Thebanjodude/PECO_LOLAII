@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/02/13 19:32:09:205,DS:0000004371,CS:23334,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/18 20:33:27:291,DS:0000004504,CS:05649,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -13,12 +13,12 @@ ProgramFile1 {
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=21
 		nTop=19
-		nWidth=960
-		nHeight=525
+		nWidth=959
+		nHeight=521
 	}
 }
 ProgramFile3 {
@@ -145,46 +145,46 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=2
 		nTop=6
-		nWidth=943
-		nHeight=518
+		nWidth=941
+		nHeight=515
 	}
 }
 ProgramFile15 {
 	sName="Test.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=37
 		nTop=8
-		nWidth=995
-		nHeight=483
+		nWidth=993
+		nHeight=480
 	}
 }
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=808
-		nHeight=446
+		nWidth=807
+		nHeight=443
 	}
 }
-nIncludeFileCount=5
+nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=248
 		nTop=196
-		nWidth=907
-		nHeight=491
+		nWidth=904
+		nHeight=483
 	}
 }
 IncludeFile2 {
@@ -201,12 +201,12 @@ IncludeFile2 {
 IncludeFile3 {
 	sName="HMI.inc"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1060
-		nHeight=605
+		nWidth=1059
+		nHeight=602
 	}
 }
 IncludeFile4 {
@@ -223,12 +223,23 @@ IncludeFile4 {
 IncludeFile5 {
 	sName="Error.inc"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1056
-		nHeight=591
+		nWidth=1055
+		nHeight=588
+	}
+}
+IncludeFile6 {
+	sName="PLC.inc"
+	bOpened=False
+	nWinState=2
+	Window {
+		nLeft=0
+		nTop=0
+		nWidth=1059
+		nHeight=602
 	}
 }
 nPointFileCount=3

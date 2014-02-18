@@ -2,6 +2,7 @@
 #include "HMI.inc"
 #include "Recipe.inc"
 #include "Error.inc"
+#include "PLC.inc"
 
 ' Used Timers
 ' TMR-
