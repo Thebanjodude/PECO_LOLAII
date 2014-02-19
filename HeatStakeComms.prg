@@ -9,7 +9,7 @@ Byte MBQueueType(MBWriteQueueSize)
 Integer MBQueueHead
 Integer MBQueueTail
 
-Integer transactionID
+Long transactionID
 
 Integer modResponse(256)
 
@@ -100,11 +100,18 @@ Function MBCommandTask()
 			EndIf
 		EndIf
 
+		'Keep transactionID from rolling over... well breaking, since it seems unable to rollover.
+		' there are about 20-something activities incrementing transactionID, so leave some headroom
+		' ...or we could just reset it to 0 every time we restart the loop, we are not really using
+		' the tranactionID for anything.
+		transactionID = 0
+
+		
 		'perform reads not more than twice per second, giving priority to writes
 		Do While Tmr(2) < 0.5
 			If MBQueueHead <> MBQueueTail Then
 				'a write command has shown up, give it priority
-                Exit Do
+				Exit Do
 			EndIf
 			Wait 0.05
 		Loop
@@ -112,44 +119,49 @@ Function MBCommandTask()
 		'if the queue isn't empty there is something to do
 		If MBQueueHead <> MBQueueTail Then
 			'Print "MODBUS: something in the queue!"
-			If MBQueueType(MBQueueTail) = MBType16 Then
-				' send one MB word command
-				modbusWriteRegister(MBQueueAddress(MBQueueTail), MBQueueValue(MBQueueTail))
-				' advance pointer and check for wrap around
-				MBQueueTail = MBQueueTail + 1
-				If MBQueueTail > MBWriteQueueSize Then
-					MBQueueTail = 0
-				EndIf
-					
-			ElseIf MBQueueType(MBQueueTail) = MBType32 Then
-				' send two MB word command
-				' write the two 16bit words
-				modbusWriteRegister(MBQueueAddress(MBQueueTail), (MBQueueValue(MBQueueTail) And &hFFFF))
-				modbusWriteRegister(MBQueueAddress(MBQueueTail) + 1, RShift(MBQueueValue(MBQueueTail), 16))
-				' advance pointer and check for wrap around
-				MBQueueTail = MBQueueTail + 1
-				If MBQueueTail > MBWriteQueueSize Then
-					MBQueueTail = 0
-				EndIf
-			ElseIf MBQueueType(MBQueueTail) = MBTypeCoil Then
-				' set or clear MB coil
-				' any non-zero value will set coil
-				'Print "writing type coil"
-				If MBQueueValue(MBQueueTail) = 0 Then
-					temp_bool = False
-				Else
-					temp_bool = True
-				EndIf
-				modbusWriteCoil(MBQueueAddress(MBQueueTail), temp_bool)
-				' advance pointer and check for wrap around
-				MBQueueTail = MBQueueTail + 1
-				If MBQueueTail > MBWriteQueueSize Then
-					MBQueueTail = 0
-				EndIf
-			Else
-				'invalid type
-				Print "MODBUS: error with write, invalid MBQueueType"
-			EndIf
+			Select MBQueueType(MBQueueTail)
+				Case MBType16
+				'If MBQueueType(MBQueueTail) = MBType16 Then
+					' send one MB word command
+					modbusWriteRegister(MBQueueAddress(MBQueueTail), MBQueueValue(MBQueueTail))
+					' advance pointer and check for wrap around
+					MBQueueTail = MBQueueTail + 1
+					If MBQueueTail > MBWriteQueueSize Then
+						MBQueueTail = 0
+					EndIf
+				Case MBType32
+				'ElseIf MBQueueType(MBQueueTail) = MBType32 Then
+					' send two MB word command
+					' write the two 16bit words
+					modbusWriteRegister(MBQueueAddress(MBQueueTail), (MBQueueValue(MBQueueTail) And &hFFFF))
+					modbusWriteRegister(MBQueueAddress(MBQueueTail) + 1, RShift(MBQueueValue(MBQueueTail), 16))
+					' advance pointer and check for wrap around
+					MBQueueTail = MBQueueTail + 1
+					If MBQueueTail > MBWriteQueueSize Then
+						MBQueueTail = 0
+					EndIf
+				Case MBTypeCoil
+				'ElseIf MBQueueType(MBQueueTail) = MBTypeCoil Then
+					' set or clear MB coil
+					' any non-zero value will set coil
+					'Print "writing type coil"
+					If MBQueueValue(MBQueueTail) = 0 Then
+						temp_bool = False
+					Else
+						temp_bool = True
+					EndIf
+					modbusWriteCoil(MBQueueAddress(MBQueueTail), temp_bool)
+					' advance pointer and check for wrap around
+					MBQueueTail = MBQueueTail + 1
+					If MBQueueTail > MBWriteQueueSize Then
+						MBQueueTail = 0
+					EndIf
+				Default
+				'Else
+					'invalid type
+					Print "MODBUS: error with write, invalid MBQueueType"
+				Send
+				'EndIf
 		Else
 			'Read data from the PLC
 			'
@@ -217,7 +229,7 @@ Function MBCommandTask()
 			PLC_InsertType = modbusReadRegister(1020)
 			PLC_PanelContactTorque = modbusReadRegister(1021)
 			PLC_InsertTempOkBand = modbusReadRegister(1022)
-			PLC_Speed_TorqueMode = RShift(modbusReadRegister(1002), 16) And modbusReadRegister(1003)
+			PLC_Speed_TorqueMode = LShift(modbusReadRegister(1003), 16) + modbusReadRegister(1002)
 		EndIf
 	Loop
 Fend
@@ -244,7 +256,7 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	' value low						0x??
 	
 	transactionID = transactionID + 1
-	modMessage(0) = RShift(transactionID, 8)
+  modMessage(0) = RShift(transactionID, 8)
 	modMessage(1) = transactionID And &hFF
 	modMessage(2) = 0
 	modMessage(3) = 0
