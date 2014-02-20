@@ -240,7 +240,7 @@ Function IOTableIntegers(CtrlCodeValue As Integer, HMIForceValue As Integer, HMI
 		Value = HMIForceValue ' Take forced value from HMI, overwrite control code
 	EndIf
 	
-	IOTableIntegers = value ' Return Value
+	IOTableIntegers = Value ' Return Value
 	
 Fend
 
@@ -1495,125 +1495,126 @@ Function iotransfer()
 
 		'PLC values of interest
 		If MemSw(m_inserting) <> m_insertingOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_inserting" + Chr$(&H22), ":", Str$(m_inserting), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_inserting" + Chr$(&H22), ":", Str$(MemSw(m_inserting)), "}",
 			m_insertingOld = MemSw(m_inserting)
 		EndIf
 		If MemSw(m_idle) <> m_idleOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_idle" + Chr$(&H22), ":", Str$(m_idle), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_idle" + Chr$(&H22), ":", Str$(MemSw(m_idle)), "}",
 			m_idleOld = MemSw(m_idle)
 		EndIf
 		If MemSw(m_ready) <> m_readyOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_ready" + Chr$(&H22), ":", Str$(m_ready), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_ready" + Chr$(&H22), ":", Str$(MemSw(m_ready)), "}",
 			m_readyOld = MemSw(m_ready)
 		EndIf
 		If MemSw(m_bootDelay) <> m_bootDelayOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_bootDelay" + Chr$(&H22), ":", Str$(m_bootDelay), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_bootDelay" + Chr$(&H22), ":", Str$(MemSw(m_bootDelay)), "}",
 			m_bootDelayOld = MemSw(m_bootDelay)
 		EndIf
 		If MemSw(m_bootDone) <> m_bootDoneOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_bootDone" + Chr$(&H22), ":", Str$(m_bootDone), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_bootDone" + Chr$(&H22), ":", Str$(MemSw(m_bootDone)), "}",
 			m_bootDoneOld = MemSw(m_bootDone)
 		EndIf
 		If MemSw(m_findingHome) <> m_findingHomeOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_findingHome" + Chr$(&H22), ":", Str$(m_findingHome), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_findingHome" + Chr$(&H22), ":", Str$(MemSw(m_findingHome)), "}",
 			m_findingHomeOld = MemSw(m_findingHome)
 		EndIf
 		If MemSw(m_dumpRunning) <> m_dumpRunningOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_dumpRunning" + Chr$(&H22), ":", Str$(m_dumpRunning), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_dumpRunning" + Chr$(&H22), ":", Str$(MemSw(m_dumpRunning)), "}",
 			m_dumpRunningOld = MemSw(m_dumpRunning)
 		EndIf
 		If MemSw(m_manualModeOn) <> m_manualModeOnOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_manualModeOn" + Chr$(&H22), ":", Str$(m_manualModeOn), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_manualModeOn" + Chr$(&H22), ":", Str$(MemSw(m_manualModeOn)), "}",
 			m_manualModeOnOld = MemSw(m_manualModeOn)
 		EndIf
 		If MemSw(m_erInsertTemp) <> m_erInsertTempOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_erInsertTemp" + Chr$(&H22), ":", Str$(m_erInsertTemp), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_erInsertTemp" + Chr$(&H22), ":", Str$(MemSw(m_erInsertTemp)), "}",
 			m_erInsertTempOld = MemSw(m_erInsertTemp)
 		EndIf
 		If MemSw(m_erServoNotRdy) <> m_erServoNotRdyOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_erServoNotRdy" + Chr$(&H22), ":", Str$(m_erServoNotRdy), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_erServoNotRdy" + Chr$(&H22), ":", Str$(MemSw(m_erServoNotRdy)), "}",
 			m_erServoNotRdyOld = MemSw(m_erServoNotRdy)
 		EndIf
 		If MemSw(m_HeaterMCROn) <> m_HeaterMCROnOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_HeaterMCROn" + Chr$(&H22), ":", Str$(m_HeaterMCROn), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_HeaterMCROn" + Chr$(&H22), ":", Str$(MemSw(m_HeaterMCROn)), "}",
 			m_HeaterMCROnOld = MemSw(m_HeaterMCROn)
 		EndIf
 		If MemSw(m_BowlFeederOn) <> m_BowlFeederOnOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_BowlFeederOn" + Chr$(&H22), ":", Str$(m_BowlFeederOn), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_BowlFeederOn" + Chr$(&H22), ":", Str$(MemSw(m_BowlFeederOn)), "}",
 			m_BowlFeederOnOld = MemSw(m_BowlFeederOn)
 		EndIf
 		If MemSw(m_VibTrackOn) <> m_VibTrackOnOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_VibTrackOn" + Chr$(&H22), ":", Str$(m_VibTrackOn), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_VibTrackOn" + Chr$(&H22), ":", Str$(MemSw(m_VibTrackOn)), "}",
 			m_VibTrackOnOld = MemSw(m_VibTrackOn)
 		EndIf
 		If MemSw(m_LoadInsert) <> m_LoadInsertOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_LoadInsert" + Chr$(&H22), ":", Str$(m_LoadInsert), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_LoadInsert" + Chr$(&H22), ":", Str$(MemSw(m_LoadInsert)), "}",
 			m_LoadInsertOld = MemSw(m_LoadInsert)
 		EndIf
 		If MemSw(m_ExtendShuttle) <> m_ExtendShuttleOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_ExtendShuttle" + Chr$(&H22), ":", Str$(m_ExtendShuttle), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_ExtendShuttle" + Chr$(&H22), ":", Str$(MemSw(m_ExtendShuttle)), "}",
 			m_ExtendShuttleOld = MemSw(m_ExtendShuttle)
 		EndIf
 		If MemSw(m_ActiveCooling) <> m_ActiveCoolingOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_ActiveCooling" + Chr$(&H22), ":", Str$(m_ActiveCooling), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_ActiveCooling" + Chr$(&H22), ":", Str$(MemSw(m_ActiveCooling)), "}",
 			m_ActiveCoolingOld = MemSw(m_ActiveCooling)
 		EndIf
 		If MemSw(m_InsertGripper) <> m_InsertGripperOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_InsertGripper" + Chr$(&H22), ":", Str$(m_InsertGripper), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_InsertGripper" + Chr$(&H22), ":", Str$(MemSw(m_InsertGripper)), "}",
 			m_InsertGripperOld = MemSw(m_InsertGripper)
 		EndIf
 		If MemSw(m_InsertDischarg) <> m_InsertDischargOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_InsertDischarg" + Chr$(&H22), ":", Str$(m_InsertDischarg), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_InsertDischarg" + Chr$(&H22), ":", Str$(MemSw(m_InsertDischarg)), "}",
 			m_InsertDischargOld = MemSw(m_InsertDischarg)
 		EndIf
 		If MemSw(m_InsertReject) <> m_InsertRejectOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_InsertReject" + Chr$(&H22), ":", Str$(m_InsertReject), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_InsertReject" + Chr$(&H22), ":", Str$(MemSw(m_InsertReject)), "}",
 			m_InsertRejectOld = MemSw(m_InsertReject)
 		EndIf
 		If MemSw(m_EmgStop) <> m_EmgStopOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_EmgStop" + Chr$(&H22), ":", Str$(m_EmgStop), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_EmgStop" + Chr$(&H22), ":", Str$(MemSw(m_EmgStop)), "}",
 			m_EmgStopOld = MemSw(m_EmgStop)
 		EndIf
 		If MemSw(m_ShuttleParked) <> m_ShuttleParkedOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_ShuttleParked" + Chr$(&H22), ":", Str$(m_ShuttleParked), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_ShuttleParked" + Chr$(&H22), ":", Str$(MemSw(m_ShuttleParked)), "}",
 			m_ShuttleParkedOld = MemSw(m_ShuttleParked)
 		EndIf
 		If MemSw(m_ShuttlePickup) <> m_ShuttlePickupOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_ShuttlePickup" + Chr$(&H22), ":", Str$(m_ShuttlePickup), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_ShuttlePickup" + Chr$(&H22), ":", Str$(MemSw(m_ShuttlePickup)), "}",
 			m_ShuttlePickupOld = MemSw(m_ShuttlePickup)
 		EndIf
 		If MemSw(m_ShuttlePI) <> m_ShuttlePIOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_ShuttlePI" + Chr$(&H22), ":", Str$(m_ShuttlePI), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_ShuttlePI" + Chr$(&H22), ":", Str$(MemSw(m_ShuttlePI)), "}",
 			m_ShuttlePIOld = MemSw(m_ShuttlePI)
 		EndIf
 		If MemSw(m_ShuttleNPI) <> m_ShuttleNPIOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_ShuttleNPI" + Chr$(&H22), ":", Str$(m_ShuttleNPI), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_ShuttleNPI" + Chr$(&H22), ":", Str$(MemSw(m_ShuttleNPI)), "}",
 			m_ShuttleNPIOld = MemSw(m_ShuttleNPI)
 		EndIf
 		If MemSw(m_InsertOnShuttl) <> m_InsertOnShuttlOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_InsertOnShuttl" + Chr$(&H22), ":", Str$(m_InsertOnShuttl), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_InsertOnShuttl" + Chr$(&H22), ":", Str$(MemSw(m_InsertOnShuttl)), "}",
 			m_InsertOnShuttlOld = MemSw(m_InsertOnShuttl)
 		EndIf
 		If MemSw(m_InsertDetected) <> m_InsertdetectedOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_Insertdetected" + Chr$(&H22), ":", Str$(m_InsertDetected), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_Insertdetected" + Chr$(&H22), ":", Str$(MemSw(m_InsertDetected)), "}",
 			m_InsertdetectedOld = MemSw(m_InsertDetected)
 		EndIf
 		If MemSw(m_InsertDetAlu) <> m_InsertDetAluOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_InsertDetAlu" + Chr$(&H22), ":", Str$(m_InsertDetAlu), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_InsertDetAlu" + Chr$(&H22), ":", Str$(MemSw(m_InsertDetAlu)), "}",
 			m_InsertDetAluOld = MemSw(m_InsertDetAlu)
 		EndIf
 		If MemSw(m_InsertAtTemp) <> m_InsertAtTempOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_InsertAtTemp" + Chr$(&H22), ":", Str$(m_InsertAtTemp), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_InsertAtTemp" + Chr$(&H22), ":", Str$(MemSw(m_InsertAtTemp)), "}",
 			m_InsertAtTempOld = MemSw(m_InsertAtTemp)
 		EndIf
 		If MemSw(m_GripperEarsOut) <> m_GripperEarsOutOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_GripperEarsOut" + Chr$(&H22), ":", Str$(m_GripperEarsOut), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_GripperEarsOut" + Chr$(&H22), ":", Str$(MemSw(m_GripperEarsOut)), "}",
 			m_GripperEarsOutOld = MemSw(m_GripperEarsOut)
 		EndIf
 		If MemSw(m_GripperEarsIn) <> m_GripperEarsInOld Then
-			Print #201, "{", Chr$(&H22) + "PLC_GripperEarsIn" + Chr$(&H22), ":", Str$(m_GripperEarsIn), "}",
+			Print #201, "{", Chr$(&H22) + "PLC_GripperEarsIn" + Chr$(&H22), ":", Str$(MemSw(m_GripperEarsIn)), "}",
 			m_GripperEarsInOld = MemSw(m_GripperEarsIn)
 		EndIf
+
 		
 		
 		If PLC_Delay_BlowOffTime <> PLC_Delay_BlowOffTimeOld Then

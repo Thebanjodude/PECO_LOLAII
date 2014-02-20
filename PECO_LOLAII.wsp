@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/02/20 01:24:46:493,DS:0000004504,CS:06929,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/20 20:22:29:440,DS:0000004504,CS:07700,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -17,8 +17,8 @@ ProgramFile2 {
 	Window {
 		nLeft=21
 		nTop=19
-		nWidth=804
-		nHeight=435
+		nWidth=803
+		nHeight=432
 	}
 }
 ProgramFile3 {
@@ -167,7 +167,7 @@ ProgramFile15 {
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -190,7 +190,7 @@ IncludeFile1 {
 IncludeFile2 {
 	sName="Defines.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -285,14 +285,14 @@ CmdWindow {
 		nWidth=673
 		nHeight=354
 	}
-	nWinState=2
+	nWinState=0
 }
 RunWindow {
 	bOpened=False
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=3063
+		nWidth=3340
 		nHeight=1062
 	}
 }
