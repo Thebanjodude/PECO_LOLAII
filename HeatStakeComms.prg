@@ -119,6 +119,7 @@ Function MBCommandTask()
 		'if the queue isn't empty there is something to do
 		If MBQueueHead <> MBQueueTail Then
 			'Print "MODBUS: something in the queue!"
+			'Print "MODBUS: [Address:Value]  ", MBQueueAddress(MBQueueTail), ":", MBQueueValue(MBQueueTail)
 			Select MBQueueType(MBQueueTail)
 				Case MBType16
 				'If MBQueueType(MBQueueTail) = MBType16 Then
@@ -215,10 +216,10 @@ Function MBCommandTask()
 			' obtain and parse the integers of interest from the PLC
 			PLC_PID_SetValue = modbusReadRegister(1030)
 			PLC_PID_ProcessValue = modbusReadRegister(1031)
-			PLC_ServoMotorCurrentValue = modbusReadRegister(1032)
+			PLC_ServoMotorCurrentValue = modbusReadSignedRegister(1032)
 			PLC_Delay_BlowOffTime = modbusReadRegister(1000)
 			PLC_Delay_InsertLoad = modbusReadRegister(1001)
-			PLC_Torque_TorqueMode = modbusReadRegister(1004)
+			PLC_Torque_TorqueMode = modbusReadSignedRegister(1004)
 			PLC_Delay_RejectBlowOff = modbusReadRegister(1005)
 			PLC_Delay_FindHome = modbusReadRegister(1006)
 			PLC_Delay_ActiveCooling = modbusReadRegister(1007)
@@ -227,7 +228,7 @@ Function MBCommandTask()
 			PLC_Delay_PanelContact = modbusReadRegister(1010)
 			PLC_Delay_ShuttleExtended = modbusReadRegister(1011)
 			PLC_InsertType = modbusReadRegister(1020)
-			PLC_PanelContactTorque = modbusReadRegister(1021)
+			PLC_PanelContactTorque = modbusReadSignedRegister(1021)
 			PLC_InsertTempOkBand = modbusReadRegister(1022)
 			PLC_Speed_TorqueMode = LShift(modbusReadRegister(1003), 16) + modbusReadRegister(1002)
 		EndIf
@@ -264,10 +265,16 @@ Function modbusWriteRegister(regNum As Long, value As Long) As Integer
 	modMessage(5) = &h06
 	modMessage(6) = &hFF
 	modMessage(7) = MBCmdWriteRegister
-	modMessage(8) = RShift(regNum, 8) ' high byte of address
-	modMessage(9) = regNum And &hFF ' low byte of address
-	modMessage(10) = RShift(value, 8) ' high byte of value
-	modMessage(11) = value And &hFF ' low byte of value
+	modMessage(8) = RShift(regNum, 8) 						' high byte of address
+	modMessage(9) = regNum And &hFF 							' low byte of address
+		'value is a long, so if it it a
+		'neg number, rshift just removes
+		'the 31st bit signifying a neg number
+		'and then you are left with a really
+		'large number that will not fit into
+		'a 16bit integer.  Feh.
+	modMessage(10) = RShift(value And &hFF00, 8) 	' high byte of value
+	modMessage(11) = value And &hFF 							' low byte of value
 	
 	' send the message to the PLC
 	WriteBin #204, modMessage(), 12
@@ -787,4 +794,20 @@ Function modbusReadPort(length As Integer) As Integer
 	modbusReadPort = i
 Fend
 
+
+' this function will read a modbus register and account for the broken (-) numbers
+Function modbusReadSignedRegister(reg As Long) As Long
+	Long temp_int, returnVar
+
+	temp_int = modbusReadRegister(reg)
+
+	If BTst(temp_int, 15) = 0 Then
+		returnVar = temp_int
+	Else
+		' invert, add one, and let the robot know that it is a negative number
+		returnVar = -1 * (((Not temp_int) And &h7fff) + 1)
+	EndIf
+	'sign * ((temp_int And &h7fff) + offset)
+	modbusReadSignedRegister = returnVar
+Fend
 

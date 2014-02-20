@@ -1,10 +1,10 @@
-ENVT0100,LM:2014/02/19 00:24:53:869,DS:0000005691,CS:20492,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/20 01:24:39:768,DS:0000005689,CS:11391,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="2/18/2014 5:24:50 PM"
+	sLastModified="2/19/2014 6:24:30 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -36,7 +36,7 @@ ProgramFile2 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="2/19/2014 12:24:16 AM"
+	sTimeSavedInController="2/20/2014 1:24:30 AM"
 }
 ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
@@ -120,7 +120,7 @@ ProgramFile16 {
 	sName="HeatStakeComms.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="2/19/2014 12:24:50 AM"
+	sTimeSavedInController="2/20/2014 1:24:28 AM"
 }
 nIncludeFileCount=6
 IncludeFile1 {

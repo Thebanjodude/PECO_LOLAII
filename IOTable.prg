@@ -240,7 +240,7 @@ Function IOTableIntegers(CtrlCodeValue As Integer, HMIForceValue As Integer, HMI
 		Value = HMIForceValue ' Take forced value from HMI, overwrite control code
 	EndIf
 	
-	IOTableIntegers = Value ' Return Value
+	IOTableIntegers = value ' Return Value
 	
 Fend
 
@@ -1748,116 +1748,116 @@ Function setVars(response$ As String)
 			jobAbortBtn = False
 		EndIf
 	Case "jobStartBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			jobStartBtn = True
 			jobStart = True
 		Else
 			jobStartBtn = False
 		EndIf
 	Case "leftInterlockACKBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			leftInterlockACKBtn = True
 			leftInterlockACK = True
 		Else
 			leftInterlockACKBtn = False
 		EndIf
 	Case "outMagGoHomeBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			outMagGoHomeBtn = True
 			outMagGoHome = True
 		Else
 			outMagGoHomeBtn = False
 		EndIf
 	Case "outMagUnloadedBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			outMagUnloadedBtn = True
 			outMagUnloaded = True
 		Else
 			outMagUnloadedBtn = False
 		EndIf
 	Case "panelDataTxACKBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			panelDataTxACKBtn = True
 			panelDataTxACK = True
 		Else
 			panelDataTxACKBtn = False
 		EndIf
 	Case "rightInterlockACKBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			rightInterlockACKBtn = True
 			rightInterlockACK = True
 		Else
 			rightInterlockACKBtn = False
 		EndIf
 	Case "sftyFrmIlockAckBtn"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			sftyFrmIlockAckBtn = True
 			sftyFrmIlockAck = True
 		Else
 			sftyFrmIlockAckBtn = False
 		EndIf
 	Case "airPressHighF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (airPressHighF)
 		Else
 			MemOff (airPressHighF)
 		EndIf
 	Case "airPressHighFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (airPressHighFV)
 		Else
 			MemOff (airPressHighFV)
 		EndIf
 	Case "airPressLowF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (airPressLowF)
 		Else
 			MemOff (airPressLowF)
 		EndIf
 	Case "airPressLowFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (airPressLowFV)
 		Else
 			MemOff (airPressLowFV)
 		EndIf
 	Case "backIntlock1F"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (backIntlock1F)
 		Else
 			MemOff (backIntlock1F)
 		EndIf
 	Case "backIntlock1FV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (backIntlock1FV)
 		Else
 			MemOff (backIntlock1FV)
 		EndIf
 	Case "backIntlock2F"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (backIntlock2F)
 		Else
 			MemOff (backIntlock2F)
 		EndIf
 	Case "backIntlock2FV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (backIntlock2FV)
 		Else
 			MemOff (backIntlock2FV)
 		EndIf
 	Case "cbMonDebrisRmvF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (cbMonDebrisRmvF)
 		Else
 			MemOff (cbMonDebrisRmvF)
 		EndIf
 	Case "cbMonDebrisRmvFV"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (cbMonDebrisRmvFV)
 		Else
 			MemOff (cbMonDebrisRmvFV)
 		EndIf
 	Case "cbMonHeatStakeF"
-		If Tokens$(1) = "true" Then
+		If tokens$(1) = "true" Then
 			MemOn (cbMonHeatStakeF)
 		Else
 			MemOff (cbMonHeatStakeF)
@@ -2461,67 +2461,68 @@ Function setVars(response$ As String)
 			recFlashRequired = False
 		EndIf
 	Case "recInmagPickupOffset"
-		recInmagPickupOffset = Val(tokens$(1))
+		recInmagPickupOffset = Val(Tokens$(1))
 	Case "recInsertDepth"
-		recInsertDepth = Val(tokens$(1))
+		recInsertDepth = Val(Tokens$(1))
 	Case "recFlashDwellTime"
-		recFlashDwellTime = Val(tokens$(1))
+		recFlashDwellTime = Val(Tokens$(1))
 	Case "recInsertType"
-		recInsertType = Val(tokens$(1))
+		recInsertType = Val(Tokens$(1))
 	Case "recNumberOfHoles"
-		recNumberOfHoles = Val(tokens$(1))
+		recNumberOfHoles = Val(Tokens$(1))
 	Case "recOutmagPickupOffset"
-		recOutmagPickupOffset = Val(tokens$(1))
+		recOutmagPickupOffset = Val(Tokens$(1))
 	Case "suctionWaitTime"
-		recSuctionWaitTime = Val(tokens$(1))
+		recSuctionWaitTime = Val(Tokens$(1))
 	Case "zlimit"
-		zLimit = Val(tokens$(1))
+		zLimit = Val(Tokens$(1))
 		
 	' PLC Comms
 	Case "PLC_Delay_BlowOffTime"
-		MBWrite(1000, Val(tokens$(1)), MBType16)
+		Print "put write request into queue"
+		MBWrite(1000, Val(Tokens$(1)), MBType16)
 	Case "PLC_Delay_InsertLoad"
-		MBWrite(1001, Val(tokens$(1)), MBType16)
+		MBWrite(1001, Val(Tokens$(1)), MBType16)
 	Case "PLC_Speed_TorqueMode"
 		MBWrite(1002, Val(Tokens$(1)), MBType32)
 	Case "PLC_Torque_TorqueMode"
-		MBWrite(1004, Val(tokens$(1)), MBType16)
+		MBWrite(1004, Val(Tokens$(1)), MBType16)
 	Case "PLC_Delay_RejectBlowOff"
-		MBWrite(1005, Val(tokens$(1)), MBType16)
+		MBWrite(1005, Val(Tokens$(1)), MBType16)
 	Case "PLC_Delay_FindHome"
-		MBWrite(1006, Val(tokens$(1)), MBType16)
+		MBWrite(1006, Val(Tokens$(1)), MBType16)
 	Case "PLC_Delay_ActiveCooling"
-		MBWrite(1007, Val(tokens$(1)), MBType16)
+		MBWrite(1007, Val(Tokens$(1)), MBType16)
 	Case "PLC_Delay_TorqueDwell"
-		MBWrite(1008, Val(tokens$(1)), MBType16)
+		MBWrite(1008, Val(Tokens$(1)), MBType16)
 	Case "PLC_Delay_Gripper"
-		MBWrite(1009, Val(tokens$(1)), MBType16)
+		MBWrite(1009, Val(Tokens$(1)), MBType16)
 	Case "PLC_Delay_PanelContact"
-		MBWrite(1010, Val(tokens$(1)), MBType16)
+		MBWrite(1010, Val(Tokens$(1)), MBType16)
 	Case "PLC_Delay_ShuttleExtended"
-		MBWrite(1011, Val(tokens$(1)), MBType16)
+		MBWrite(1011, Val(Tokens$(1)), MBType16)
 	Case "PLC_InsertType"
-		MBWrite(1020, Val(tokens$(1)), MBType16)
+		MBWrite(1020, Val(Tokens$(1)), MBType16)
 	Case "PLC_PanelContactTorque"
-		MBWrite(1021, Val(tokens$(1)), MBType16)
+		MBWrite(1021, Val(Tokens$(1)), MBType16)
 	Case "PLC_InsertTempOkBand"
-		MBWrite(1022, Val(tokens$(1)), MBType16)
+		MBWrite(1022, Val(Tokens$(1)), MBType16)
 	Case "PLC_PID_SetValue"
-		MBWrite(1130, Val(tokens$(1)), MBType16)
+		MBWrite(1130, Val(Tokens$(1)), MBType16)
 	Case "PLC_HeaterMCROn_MM"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MBWrite(434, True, MBTypeCoil)
 		Else
 			MBWrite(434, False, MBTypeCoil)
 		EndIf
 	Case "PLC_HeaterMCROn_VALUE"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MBWrite(435, True, MBTypeCoil)
 		Else
 			MBWrite(435, False, MBTypeCoil)
 		EndIf
 	Case "PLC_BowlFeederOn_MM"
-		If tokens$(1) = "true" Then
+		If Tokens$(1) = "true" Then
 			MBWrite(436, True, MBTypeCoil)
 		Else
 			MBWrite(436, False, MBTypeCoil)

@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/02/18 20:33:27:291,DS:0000004504,CS:05649,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/20 01:24:46:493,DS:0000004504,CS:06929,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -17,8 +17,8 @@ ProgramFile2 {
 	Window {
 		nLeft=21
 		nTop=19
-		nWidth=959
-		nHeight=521
+		nWidth=804
+		nHeight=435
 	}
 }
 ProgramFile3 {
@@ -145,7 +145,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=2
 		nTop=6
@@ -156,7 +156,7 @@ ProgramFile14 {
 ProgramFile15 {
 	sName="Test.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=37
 		nTop=8
@@ -171,15 +171,15 @@ ProgramFile16 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=807
-		nHeight=443
+		nWidth=368
+		nHeight=199
 	}
 }
 nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=248
 		nTop=196
@@ -190,18 +190,18 @@ IncludeFile1 {
 IncludeFile2 {
 	sName="Defines.inc"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1056
-		nHeight=591
+		nWidth=1055
+		nHeight=588
 	}
 }
 IncludeFile3 {
 	sName="HMI.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -223,7 +223,7 @@ IncludeFile4 {
 IncludeFile5 {
 	sName="Error.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -234,7 +234,7 @@ IncludeFile5 {
 IncludeFile6 {
 	sName="PLC.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -282,18 +282,18 @@ CmdWindow {
 	Window {
 		nLeft=337
 		nTop=16
-		nWidth=674
-		nHeight=358
+		nWidth=673
+		nHeight=354
 	}
-	nWinState=0
+	nWinState=2
 }
 RunWindow {
 	bOpened=False
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=1673
-		nHeight=1043
+		nWidth=3063
+		nHeight=1062
 	}
 }
 IOLabelEditor {
@@ -318,10 +318,10 @@ IOMonitor {
 TaskMgr {
 	bOpened=False
 	Window {
-		nLeft=383
-		nTop=258
-		nWidth=855
-		nHeight=312
+		nLeft=741
+		nTop=109
+		nWidth=854
+		nHeight=309
 	}
 }
 Macros {

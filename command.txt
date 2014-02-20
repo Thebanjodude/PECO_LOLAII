@@ -208,4 +208,26 @@
  3
 > print 1/8
  0
+> print PLC_Speed_TorqueMode
+ 0
+> print PLC_Speed_TorqueMode
+ 0
+> print foo
+!!Error: 2513, Specified point label is not defined.
+> print PLC_Speed_TorqueMode
+ 0
+> print PLC_Speed_TorqueMode
+ 20000
+> print plc_speed_torquemode
+ 20000
+> print PLC_Speed_TorqueMode
+ 20000
+> print torque_torqueMode
+!!Error: 2513, Specified point label is not defined.
+> print PLC_Torque_TorqueMode
+ 0
+> print PLC_PanelContactTorque
+ 65486
+> print PLC_torque_torquemode
+ -450
 > 
