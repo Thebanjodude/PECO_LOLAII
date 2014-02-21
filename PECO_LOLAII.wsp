@@ -1,15 +1,15 @@
-ENVT0100,LM:2014/02/21 15:07:53:070,DS:0000004561,CS:29040,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="PositionFunctions.prg"
+ENVT0100,LM:2014/02/21 22:32:30:620,DS:0000004550,CS:02431,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="HeatStake.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1149
-		nHeight=521
+		nWidth=1147
+		nHeight=518
 	}
 }
 ProgramFile2 {
@@ -102,13 +102,13 @@ ProgramFile9 {
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=2
 	Window {
 		nLeft=100
 		nTop=100
-		nWidth=1156
-		nHeight=542
+		nWidth=1155
+		nHeight=539
 	}
 }
 ProgramFile11 {
@@ -147,12 +147,12 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=True
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=2
 		nTop=6
-		nWidth=941
-		nHeight=515
+		nWidth=940
+		nHeight=511
 	}
 }
 ProgramFile15 {
@@ -247,13 +247,13 @@ IncludeFile6 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=265
 		nTop=37
-		nWidth=659
-		nHeight=446
+		nWidth=657
+		nHeight=443
 	}
 }
 PointFile2 {
@@ -294,8 +294,8 @@ RunWindow {
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=3340
-		nHeight=1062
+		nWidth=3376
+		nHeight=1066
 	}
 }
 IOLabelEditor {

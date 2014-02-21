@@ -36,7 +36,7 @@ Function HotStakePanel() As Integer
 		EndIf
 		
 		'testing	
-		SkippedHole = False
+		SkippedHole = True
 		
 		If SkippedHole = False Then 			'If the flag is set then skip the hole
 		
