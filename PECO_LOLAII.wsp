@@ -1,4 +1,6 @@
-ENVT0100,LM:2014/02/20 20:22:29:440,DS:0000004504,CS:07700,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/21 15:07:53:070,DS:0000004561,CS:29040,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="PositionFunctions.prg"
+bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -13,7 +15,7 @@ ProgramFile1 {
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=21
 		nTop=19
@@ -144,8 +146,8 @@ ProgramFile13 {
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=2
 	Window {
 		nLeft=2
 		nTop=6
