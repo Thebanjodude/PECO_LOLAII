@@ -30,7 +30,7 @@ Function CrowdingSequence() As Integer
 	Wait 0.5
 	crowdingCC = True
 	Wait 0.5
-	crowdingX = False
+	crowdingXCC = False
 	Wait 0.5
 	
 	' lets see if we can use a global point
