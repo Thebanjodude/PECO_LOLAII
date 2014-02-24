@@ -23,6 +23,13 @@ Function main()
 	jobDone = False ' reset flag
 	jobStart = False ' reset flag
 	
+	' the EOAT is XXXdeg off of zero and the panel recipes are YYYdeg off
+	' sorta, its really panels are placed into the magazine 90deg off counterclockwise
+	' and the eoat is ... well... yeah
+	EOATcorrection = -45 ' - 4.78
+	magazineCorrection = -90
+	systemThetaError = EOATcorrection + magazineCorrection
+	
 	'TeachPointsUnderLaser() ' prototype teaching code (get it close and hone in on it)
 	Call runTest()
 	Exit Function
