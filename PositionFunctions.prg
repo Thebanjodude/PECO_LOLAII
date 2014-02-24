@@ -245,16 +245,20 @@ Fend
 'moves the panel away from the laser and walks it in to ensure that the error
 ' measurement routines work
 Function PanelFindHole
+	Integer count
 	Real value
-	
+
 	Go CurPos -Y(30) /L
 	
 	'A hole should be ~0.765in(~19.43mm) in diameter
-	' anything larger than that is not a hole we are off target
-	value = GetLaserMeasurement("07")
-	Do While value > 20
+	' anything larger than that is not a hole; we are off target
+	'
+	'Keep stepping in until we are past the edge of the hole
+	Do While count < 12
+		If Abs(GetLaserMeasurement("07")) < 20.0 Then
+			count = count + 1
+		EndIf
 		Go CurPos +Y(1) /L
-		value = GetLaserMeasurement("07")
 	Loop
 Fend
 
@@ -264,13 +268,18 @@ Function PanelFindXerror As Real
 	
 	xShouldBe = CX(CurPos)
 
-	tempx = GetLaserMeasurement("07") / 2
+	tempx = GetLaserMeasurement("07") / 4
 	Print "finding X",
 	Do While Not foundCenter
 		Print ".",
 		' output 7 should return a + or - number indicating the magnitude of error from center
 		' move the panel on the x axis by 1/4 the error value until the error is within tolerance
 		'		using a 1/4 instead of 1/2 should keep the seeking down
+		' output 7 will return -999 if there is a problem with the measurement, so check for that
+		' a hole should be less than 20mm in diameter 
+		If tempx > 20 Then
+			tempx = 20
+		EndIf
 		Go CurPos -X(tempx)
 		tempx = GetLaserMeasurement("07") / 4
 		If tempx > -holeTolerance And tempx < holeTolerance Then foundCenter = True
