@@ -103,6 +103,7 @@ Function PanelFindPickupError
 		
 		PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
 	
+		PanelFindHole
 		PanelFindXerror
 		PanelFindYerror
 		
@@ -239,6 +240,22 @@ Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double,
 	'Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
 	Go XY(x + rotX, y + rotY, z, Theta) /L
 
+Fend
+
+'moves the panel away from the laser and walks it in to ensure that the error
+' measurement routines work
+Function PanelFindHole
+	Real value
+	
+	Go CurPos -Y(30) /L
+	
+	'A hole should be ~0.765in(~19.43mm) in diameter
+	' anything larger than that is not a hole we are off target
+	value = GetLaserMeasurement("07")
+	Do While value > 20
+		Go CurPos +Y(1) /L
+		value = GetLaserMeasurement("07")
+	Loop
 Fend
 
 Function PanelFindXerror As Real

@@ -1,15 +1,15 @@
-ENVT0100,LM:2014/02/24 16:25:15:002,DS:0000004545,CS:14658,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="Main.prg"
+ENVT0100,LM:2014/02/24 21:52:16:977,DS:0000004558,CS:03381,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="PositionFunctions.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1147
-		nHeight=518
+		nWidth=1145
+		nHeight=515
 	}
 }
 ProgramFile2 {
@@ -135,7 +135,7 @@ ProgramFile12 {
 }
 ProgramFile13 {
 	sName="Crowding.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
@@ -146,13 +146,13 @@ ProgramFile13 {
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=2
 	Window {
 		nLeft=2
 		nTop=6
-		nWidth=940
-		nHeight=511
+		nWidth=938
+		nHeight=504
 	}
 }
 ProgramFile15 {
@@ -294,8 +294,8 @@ RunWindow {
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=1292
-		nHeight=812
+		nWidth=1535
+		nHeight=959
 	}
 }
 IOLabelEditor {
