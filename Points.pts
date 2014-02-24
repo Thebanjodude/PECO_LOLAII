@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/02/21 17:23:14:240,DS:0000027467,CS:31860,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/24 16:15:24:535,DS:0000027465,CS:20288,MA:00-21-70-9F-9C-9E,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=127
@@ -81,7 +81,7 @@ Point5 {
 	rX=30
 	rY=610
 	rZ=-20
-	rU=135
+	rU=0
 	rV=0
 	rW=0
 	nLocal=0

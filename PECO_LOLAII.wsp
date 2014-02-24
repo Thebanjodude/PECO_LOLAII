@@ -1,10 +1,10 @@
-ENVT0100,LM:2014/02/24 15:53:07:214,DS:0000004548,CS:32106,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="Points2.pts"
+ENVT0100,LM:2014/02/24 16:25:15:002,DS:0000004545,CS:14658,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="Main.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -135,7 +135,7 @@ ProgramFile12 {
 }
 ProgramFile13 {
 	sName="Crowding.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=0
@@ -247,7 +247,7 @@ IncludeFile6 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=265
@@ -258,8 +258,8 @@ PointFile1 {
 }
 PointFile2 {
 	sName="Points2.pts"
-	bOpened=True
-	nWinState=2
+	bOpened=False
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -294,8 +294,8 @@ RunWindow {
 	Window {
 		nLeft=52
 		nTop=22
-		nWidth=3376
-		nHeight=1066
+		nWidth=1292
+		nHeight=812
 	}
 }
 IOLabelEditor {
