@@ -267,7 +267,7 @@ Fend
 Function PanelFindYerror As Real
 	Real width, widthPrevious
 	Real yShouldBe
-	Boolean foundCenter
+	Boolean foundCenter, outsideHole
 	Integer count
 
 	yShouldBe = CY(CurPos)
@@ -276,7 +276,8 @@ Function PanelFindYerror As Real
 	widthPrevious = 0
 
 	' attempt to ensure that we start on the outside of the panel
-	Go CurPos -Y(3) /L
+	Go CurPos -Y(4) /L
+	outsideHole = False
 	
 	Print "finding Y",
 	Do While Not foundCenter
@@ -292,12 +293,20 @@ Function PanelFindYerror As Real
 			'we might have had a false positive, remove it
 			count = count - 1
 			If count < 0 Then count = 0
+			outsideHole = True
 		EndIf
 		
 		If count > 6 Then
-			'we have passed the center of the hole, move back to center
-			Go CurPos -Y(stepsize * 6) /L
-			foundCenter = True
+			'check to see if we started on the correct side of the hole
+			If outsideHole = True Then
+				'we have passed the center of the hole, move back to center
+				Go CurPos -Y(stepsize * 6) /L
+				foundCenter = True
+			Else
+				'we started on the wrong side of the hole, do over
+				Go CurPos -Y(stepsize * 18) /L
+				count = 0
+			EndIf
 		Else
 			'step in one more time
 			Go CurPos +Y(stepsize) /L

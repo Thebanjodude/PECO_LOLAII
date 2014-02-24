@@ -12,9 +12,9 @@ Function runTest
 ' the EOAT is XXXdeg off of zero and the panel recipes are YYYdeg off
 ' sorta, its really panels are placed into the magazine 90deg off counterclockwise
 ' and the eoat is ... well... yeah
-	EOATcorrection = -45 - 10.6885
-	magazineCorrection = -90
-	systemThetaError = EOATcorrection + magazineCorrection
+'	EOATcorrection = -45 ' - 11.585
+'	magazineCorrection = -90
+'	systemThetaError = EOATcorrection + magazineCorrection
 
 	Call changeSpeed(fast)
 
