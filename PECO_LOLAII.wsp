@@ -1,5 +1,5 @@
-ENVT0100,LM:2014/02/24 13:50:45:882,DS:0000004557,CS:12115,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="Run - Remote Console"
+ENVT0100,LM:2014/02/24 15:53:07:214,DS:0000004548,CS:32106,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="Points2.pts"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -113,7 +113,7 @@ ProgramFile10 {
 }
 ProgramFile11 {
 	sName="Startup.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
@@ -147,7 +147,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=2
 		nTop=6
@@ -247,23 +247,23 @@ IncludeFile6 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=265
 		nTop=37
-		nWidth=655
-		nHeight=439
+		nWidth=653
+		nHeight=435
 	}
 }
 PointFile2 {
 	sName="Points2.pts"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=143
+		nWidth=141
 		nHeight=38
 	}
 }
@@ -290,7 +290,7 @@ CmdWindow {
 	nWinState=0
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=52
 		nTop=22
