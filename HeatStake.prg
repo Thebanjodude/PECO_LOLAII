@@ -36,7 +36,7 @@ Function HotStakePanel() As Integer
 		EndIf
 		
 		'testing	
-		SkippedHole = True
+		'SkippedHole = True
 		
 		If SkippedHole = False Then 			'If the flag is set then skip the hole
 		
@@ -59,8 +59,9 @@ Function HotStakePanel() As Integer
 			MBWrite(105, False, MBTypeCoil)
 			
 			' Wait for the PLC to finsih
-			'Wait MemSw(m_inserting) = False
 			Wait MemSw(m_ready) = True
+			
+'			Wait 3
 
 			ZmaxTorque = 0
 			PTCLR (3)

@@ -1,15 +1,15 @@
-ENVT0100,LM:2014/02/25 00:33:44:371,DS:0000005722,CS:29712,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/02/25 23:30:05:345,DS:0000005719,CS:08457,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="2/24/2014 5:32:42 PM"
-	bBuildComplete=False
+	sLastModified="2/25/2014 4:30:00 PM"
+	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMWKSSEHLERS"
+	sComputerName="AMLAPFASTEK"
 }
 UserProperties {
 	sVersion=""
@@ -28,9 +28,9 @@ UserErrorsFile {
 nProgramFileCount=16
 ProgramFile1 {
 	sName="Main.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="2/24/2014 4:20:23 PM"
+	sTimeSavedInController="2/25/2014 7:05:20 PM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
@@ -84,7 +84,7 @@ ProgramFile10 {
 	sName="HeatStake.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="2/21/2014 10:41:25 PM"
+	sTimeSavedInController="2/25/2014 11:30:00 PM"
 }
 ProgramFile11 {
 	sName="Startup.prg"
