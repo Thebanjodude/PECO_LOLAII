@@ -1,15 +1,15 @@
-ENVT0100,LM:2014/02/24 22:41:27:884,DS:0000005719,CS:08713,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/02/25 00:33:44:371,DS:0000005722,CS:29712,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="2/24/2014 3:41:23 PM"
-	bBuildComplete=True
+	sLastModified="2/24/2014 5:32:42 PM"
+	bBuildComplete=False
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMLAPFASTEK"
+	sComputerName="AMWKSSEHLERS"
 }
 UserProperties {
 	sVersion=""
@@ -28,7 +28,7 @@ UserErrorsFile {
 nProgramFileCount=16
 ProgramFile1 {
 	sName="Main.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
 	sTimeSavedInController="2/24/2014 4:20:23 PM"
 }

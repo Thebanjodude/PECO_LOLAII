@@ -30,9 +30,9 @@ Function main()
 	magazineCorrection = -90
 	systemThetaError = EOATcorrection + magazineCorrection
 	
-	'TeachPointsUnderLaser() ' prototype teaching code (get it close and hone in on it)
-	Call runTest()
-	Exit Function
+	'TeachPointsUnderLaser() ' prototype teaching code (get it close and home in on it)
+'	Call runTest()
+'	Exit Function
 	
 	
 	Call changeSpeed(fast)

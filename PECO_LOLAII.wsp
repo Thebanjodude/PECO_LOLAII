@@ -1,10 +1,10 @@
-ENVT0100,LM:2014/02/24 23:12:44:844,DS:0000004557,CS:08566,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="PositionFunctions.prg"
+ENVT0100,LM:2014/02/25 00:33:44:394,DS:0000004558,CS:21352,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="InspectionStation.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -59,7 +59,7 @@ ProgramFile5 {
 ProgramFile6 {
 	sName="InspectionStation.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=25
 		nTop=25
@@ -107,8 +107,8 @@ ProgramFile10 {
 	Window {
 		nLeft=100
 		nTop=100
-		nWidth=1154
-		nHeight=535
+		nWidth=1153
+		nHeight=531
 	}
 }
 ProgramFile11 {
@@ -147,12 +147,12 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=True
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=2
 		nTop=6
-		nWidth=938
-		nHeight=504
+		nWidth=937
+		nHeight=501
 	}
 }
 ProgramFile15 {
