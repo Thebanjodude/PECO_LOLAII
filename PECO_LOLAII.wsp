@@ -1,5 +1,5 @@
-ENVT0100,LM:2014/02/25 23:36:07:842,DS:0000004550,CS:19047,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="HeatStake.prg"
+ENVT0100,LM:2014/02/26 00:18:33:062,DS:0000004545,CS:24367,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="Points.pts"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -103,7 +103,7 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=True
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=100
 		nTop=100
@@ -247,8 +247,8 @@ IncludeFile6 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=2
 	Window {
 		nLeft=265
 		nTop=37
@@ -258,7 +258,7 @@ PointFile1 {
 }
 PointFile2 {
 	sName="Points2.pts"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=0
