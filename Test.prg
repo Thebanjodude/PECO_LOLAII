@@ -98,3 +98,32 @@ Function runTest
 	Loop
 Fend
 
+
+' test the pickup error from the crowding sequence
+Function testCrowding
+	Integer errorX, errorY, count
+	
+	count = 0
+	
+	ChoosePointsTable()
+	PickupPanel
+	Do While True
+		count = count + 1
+
+		CrowdingSequence
+
+		For hole = 1 To PanelHoleCount
+			laserTheta = 90 - PanelHoleTangent(hole)
+
+			PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
+		
+			errorX = PanelFindXerror
+			errorY = PanelFindYerror
+			
+			Print "Pass-", count, " Error X:Y = ", errorX, ":", errorY
+		Next
+		
+		Call findHome
+	Loop
+Fend
+

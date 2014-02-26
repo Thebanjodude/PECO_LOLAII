@@ -33,6 +33,10 @@ Function main()
 	'TeachPointsUnderLaser() ' prototype teaching code (get it close and home in on it)
 '	Call runTest()
 '	Exit Function
+	
+	'test the repeatability of the crowding sequence
+	Call testCrowding
+	Exit Function
 
 
 	Call PanelPrintRecipe
