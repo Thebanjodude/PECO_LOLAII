@@ -33,7 +33,9 @@ Function main()
 	'TeachPointsUnderLaser() ' prototype teaching code (get it close and home in on it)
 '	Call runTest()
 '	Exit Function
-	
+
+
+	Call PanelPrintRecipe
 	
 	Call changeSpeed(fast)
 	

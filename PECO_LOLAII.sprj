@@ -1,10 +1,10 @@
-ENVT0100,LM:2014/02/26 00:18:23:091,DS:0000005720,CS:10085,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/02/26 01:35:12:791,DS:0000005719,CS:22826,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="2/25/2014 5:17:49 PM"
+	sLastModified="2/25/2014 6:34:50 PM"
 	bBuildComplete=True
 	bRebuildRequired=True
 	bClearControllerProject=False
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="2/25/2014 7:05:20 PM"
+	sTimeSavedInController="2/26/2014 1:34:28 AM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
@@ -108,7 +108,7 @@ ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="2/24/2014 10:41:23 PM"
+	sTimeSavedInController="2/26/2014 1:34:50 AM"
 }
 ProgramFile15 {
 	sName="Test.prg"

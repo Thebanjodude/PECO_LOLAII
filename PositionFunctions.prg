@@ -77,6 +77,16 @@ Function LoadRecipe
 	
 Fend
 
+'print out the recipe values
+Function PanelPrintRecipe
+	Integer hole
+	Print "  X  ,  Y  "
+	Print "-----------"
+	For hole = 1 To PanelHoleCount
+		Print PanelHoleX(hole), ",", PanelHoleY(hole)
+	Next
+Fend
+
 ' attempt to find the xyTheta pickup error
 Function PanelFindPickupError
 	Integer hole
