@@ -101,21 +101,23 @@ Fend
 
 ' test the pickup error from the crowding sequence
 Function testCrowding
-	Integer errorX, errorY, count
+	Integer count, hole
+	Real errorX, errorY
 	
 	count = 0
+	holeTolerance = 0.01
+	stepsize = 0.25
 	
 	ChoosePointsTable()
 	PickupPanel
+	ChangeProfile("00")
 	Do While True
 		count = count + 1
 
 		CrowdingSequence
 
 		For hole = 1 To PanelHoleCount
-			laserTheta = 90 - PanelHoleTangent(hole)
-
-			PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), laserTheta)
+			PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), 90 - PanelHoleTangent(hole))
 		
 			errorX = PanelFindXerror
 			errorY = PanelFindYerror

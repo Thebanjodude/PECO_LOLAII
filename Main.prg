@@ -35,6 +35,7 @@ Function main()
 '	Exit Function
 	
 	'test the repeatability of the crowding sequence
+	Pause
 	Call testCrowding
 	Exit Function
 

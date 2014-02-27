@@ -230,4 +230,6 @@
  65486
 > print PLC_torque_torquemode
  -450
+> print holetolerance
+ 0
 > 
