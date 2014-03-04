@@ -59,7 +59,7 @@ Function LoadRecipe
 	PanelHoleY(14) = InToMM(4.654)
 	PanelHoleX(15) = InToMM(5.543)
 	PanelHoleY(15) = InToMM(4.066)
-	PanelHoleX(16) = InToMM(0)
+	PanelHoleX(16) = InToMM(7.897)
 	PanelHoleY(16) = InToMM(2.593)
 	PanelHoleX(17) = InToMM(0)
 	PanelHoleY(17) = InToMM(0)
