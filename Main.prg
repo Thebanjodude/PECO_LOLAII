@@ -31,8 +31,8 @@ Function main()
 	systemThetaError = EOATcorrection + magazineCorrection
 	
 	'TeachPointsUnderLaser() ' prototype teaching code (get it close and home in on it)
-'	Call runTest()
-'	Exit Function
+	Call runTest()
+	Exit Function
 	
 	'test the repeatability of the crowding sequence
 '	Pause

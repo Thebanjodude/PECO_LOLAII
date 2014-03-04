@@ -104,7 +104,10 @@ Function PickupPanel() As Integer 'byte me
 	' see if we can use a global point to pickup panels
 	'Jump P(recInmag) +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
 	'Jump magin_51010 +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
-	Jump magin_51010 +Z(5) Sense Sw(inMagInterlockH)
+
+'TODO -- FIX THIS
+	'Jump magin_51010 +Z(5) Sense Sw(inMagInterlockH)
+	Jump P(recInmag) +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
 	
 	If JS = True Then ' Its possible to open an interock during the jump so check if it was opened
 		PickupPanel = 1 ' Interlock is open

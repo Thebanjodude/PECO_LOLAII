@@ -16,14 +16,18 @@ Function CrowdingSequence() As Integer
 	
 	' lets see if we can use a global point
 	'Jump P(recPreCrowding)
-	Jump cwdin_51010
+'TODO -- FIX THIS
+'	Jump cwdin_51010
+	Jump P(recPreCrowding)
 	
 	suctionCupsCC = False ' Turn off suction cups
 	Wait recSuctionWaitTime ' wait for cups to release
 
 	' lets see if we can use a global point
 	'Jump P(recCrowding) +Z(30) ' Relese the suction cups and move them out of the way for crowding
-	Jump cwdout_51010 +Z(30) ' Relese the suction cups and move them out of the way for crowding
+'TODO -- FIX THIS
+'	Jump cwdout_51010 +Z(30) ' Relese the suction cups and move them out of the way for crowding
+	Jump P(recCrowding) +Z(30)
 
 	' crowding sequence
 	crowdingXCC = True
@@ -35,7 +39,10 @@ Function CrowdingSequence() As Integer
 	
 	' lets see if we can use a global point
 	'Go P(recCrowding)
-	Go cwdout_51010
+'TODO -- FIX THIS
+'	Go cwdout_51010
+	Go P(recCrowding)
+
 	suctionCupsCC = True ' Turn on cups
 	Wait recSuctionWaitTime
 
