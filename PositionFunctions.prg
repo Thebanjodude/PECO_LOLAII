@@ -316,7 +316,7 @@ Function PanelFindHole
 	' anything larger than that is not a hole; we are off target
 	'
 	'Keep stepping in until we are past the edge of the hole
-	Do While count < 12
+	Do While count < 9
 		If Abs(GetLaserMeasurement("07")) < 20.0 Then
 			count = count + 1
 		EndIf

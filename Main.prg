@@ -30,14 +30,15 @@ Function main()
 	magazineCorrection = -90
 	systemThetaError = EOATcorrection + magazineCorrection
 	
-	'TeachPointsUnderLaser() ' prototype teaching code (get it close and home in on it)
-	Call runTest()
-	Exit Function
+'	'TeachPointsUnderLaser() ' prototype teaching code (get it close and home in on it)
+'	Call runTest()
+'	Exit Function
 	
 	'test the repeatability of the crowding sequence
-'	Pause
-'	Call testCrowding
-'	Exit Function
+	Pause
+	Call PanelPrintRecipe
+	Call testCrowding
+	Exit Function
 
 
 	Call PanelPrintRecipe

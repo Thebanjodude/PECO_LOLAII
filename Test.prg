@@ -111,10 +111,11 @@ Function testCrowding
 	ChoosePointsTable()
 	PickupPanel
 	ChangeProfile("00")
+	
+	Call CrowdingSequence
+	
 	Do While True
 		count = count + 1
-
-		CrowdingSequence
 
 		For hole = 1 To PanelHoleCount
 			PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), 90 - PanelHoleTangent(hole))
@@ -126,6 +127,7 @@ Function testCrowding
 		Next
 		
 		Call findHome
+		Call CrowdingSequence_forTest
 	Loop
 Fend
 
