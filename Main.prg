@@ -34,11 +34,11 @@ Function main()
 '	Call runTest()
 '	Exit Function
 	
-	'test the repeatability of the crowding sequence
-	Pause
-	Call PanelPrintRecipe
-	Call testCrowding
-	Exit Function
+'	'test the repeatability of the crowding sequence
+'	Pause
+'	Call PanelPrintRecipe
+'	Call testCrowding
+'	Exit Function
 
 
 	Call PanelPrintRecipe

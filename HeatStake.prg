@@ -4,11 +4,12 @@ Function HotStakePanel() As Integer
 
 	SystemStatus = StateHotStakePanel
 	
-	Integer i
+	Integer i, count
 	Real RobotZOnAnvil
 	Boolean SkippedHole
 	currentHSHole = 1 				' Start at 1 (we are skipping the 0 index in the array)
 	HotStakePanel = 2 				' default to fail	
+	count = 0
 	
 	' check to see if the PLC is in the correct state for entering the insertion program
 	If MemSw(m_idle) = False Then
@@ -39,7 +40,19 @@ Function HotStakePanel() As Integer
 		'SkippedHole = True
 		
 		If SkippedHole = False Then 			'If the flag is set then skip the hole
-		
+			
+			'*****************************************************
+			'*****************************************************
+			'<testing>
+			' for testing only do four holes at a time
+			count = count + 1
+			If count >= 4 Then
+				Exit For
+			EndIf
+			'</testing>
+			'*****************************************************
+			'*****************************************************
+			
 			'Jump P(i) +Z(10) LimZ zLimit  		' Go to the next hole        
 			PanelHoleToXYZT(i, CX(hotstake), CY(hotstake), CZ(prehotstake) + 10, 135 - PanelHoleTangent(i))
 			
