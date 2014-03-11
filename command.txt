@@ -232,4 +232,30 @@
  -450
 > print holetolerance
  0
+> print skippedholearray(1)
+!!Error: 3207, Formula is missing.
+> print skippedholearray(1,0)
+!!Error: 3207, Formula is missing.
+> print ha
+!!Error: 2513, Specified point label is not defined.
+> print skippedhole
+!!Error: 2513, Specified point label is not defined.
+> print true
+ -1
+> print SkipHoleArray(currentPreinspectHole, 0)
+ 0
+> print skipholearray(1,0)
+!!Error: 2240, Array subscript is out of user defined range. Cannot access or update beyond array bounds.
+> print currentPreinspectHole
+ 0
+> print SkipHoleArray(2,0)
+!!Error: 2240, Array subscript is out of user defined range. Cannot access or update beyond array bounds.
+> print skipholearray
+!!Error: 3116, Array number of dimensions does not match the declaration.
+> print skipholearray(1,0)
+ -1
+> skipholearray(1,0) = 0
+> skipholearray(2,0) = 0
+> skipholearray(3,0) = 0
+> skipholearray(4,0) = 0
 > 
