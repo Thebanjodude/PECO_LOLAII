@@ -27,6 +27,10 @@ Function HotStakePanel() As Integer
 	' ready signal from PLC
 	Wait MemSw(m_ready) = True
 
+	' allows us to update SkipHoleArray
+	Pause
+	
+	
 	'For i = recFirstHolePointHotStake To recLastHolePointHotStake
 	For i = 1 To PanelHoleCount
 
