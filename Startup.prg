@@ -19,7 +19,17 @@ Function PowerOnSequence()
   'Xqt 10 -- Used in HeatStakeComms for MBCommandTask
   
 	Call MBInitialize
-    
+  
+	ClearMemory() ' writes a zero to all the memIO
+	
+	Motor On
+	Power Low
+	
+	' Find home before we start the PLC
+	'  This will move the robot out of the way of the heat stake before it moves
+	changeSpeed(slow)
+	findHome
+	
 	' Start the PLC
 	' check to see if the PLC waiting to boot or has already booted
 	'  if it has already booted, assume it was an e-stop
@@ -31,15 +41,9 @@ Function PowerOnSequence()
 	' Wait for the PLC to reach the idle state
 	Wait MemSw(m_idle) = True
 
-	ClearMemory() ' writes a zero to all the memIO
-	
-	Motor On
 	Power High
 	
 	QP (On) ' turn On quick pausing	
-	
-	changeSpeed(slow)
-	findHome
 Fend
 
 
