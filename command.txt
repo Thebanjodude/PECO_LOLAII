@@ -258,4 +258,134 @@
 > skipholearray(2,0) = 0
 > skipholearray(3,0) = 0
 > skipholearray(4,0) = 0
+> skipholearray(2,0) = 0
+> skipholearray(3,0) = 0
+> skipholearray(4,0) = 0
+> skipholearray(5,0) = 0
+> skipholearray(2,0) = 0
+> skipholearray(3,0) = 0
+> skipholearray(4,0) = 0
+> skipholearray(5,0) =0
+> skipholearray(6,0) = 0
+> skipholearray(7,0) = 0
+> skipholearray(8,0) = 0
+> skipholearray(7,0) = 0
+> skipholearray(8,0) = 0
+> skipholearray(9,0) = 0
+> 
+> 
+> skipholearray(11,0) = 0
+> skipholearray(12,0) = 0
+> 
+> skipholearray(11,0) = 0
+> skipholearray(12,0) = 0
+> 
+> skipholearray(13,0) = 0
+> skipholearray(14,0) = 0
+> 
+> skipholearray(14,0) = 0
+> skipholearray(15,0) = 0
+> 
+> skipholearray(1,0) = 0
+> skipholearray(2,0) = 0
+> 
+> skipholearray(3,0) = 0
+
+> 
+> skipholearray(3,0) = 0
+> skipholearray(4,0) = 0
+> 
+> skipholearray(5,0) = 0
+> skipholearray(6,0) = 0
+> 
+> skipholearray(7,0) = 0
+> skipholearray(8,0) = 0
+> 
+> skipholearray(9,0) = 0
+> skipholearray(10,0) = 0
+> 
+> skipholearray(11,0) = 0
+> skipholearray(12,0) = 0
+> 
+> skipholearray(13,0) = 0
+> skipholearray(14,0) = 0
+> 
+> skipholearray(14,0) = 0
+> skipholearray(15,0) = 0
+> skipholearray(16,0) = 0
+> 
+> skipholearray(1,0) = 0
+> skipholearray(2,0) = 0
+> 
+> skipholearray(1,0) = 0
+> skipholearray(2,0) = 0
+> 
+> skipholearray(1,0) = 0
+> skipholearray(2,0) = 0
+> skipholearray(3,0) = 0
+> skipholearray(4,0) = 0
+> 
+> skipholearray(1,0) = 0
+> skipholearray(2,0) = 0
+> skipholearray(3,0) = 0
+> skipholearray(4,0) = 0
+> 
+> skipholearray(1,0) = 0
+> skipholearray(4,0) = 0
+> skipholearray(5,0) = 0
+> skipholearray(6,0) = 0
+> 
+> skipholearray(7,0) = 0
+> skipholearray(8,0) = 0
+> skipholearray(9,0) = 0
+> skipholearray(10,0) = 0
+> 
+> skipholearray(10,0) = 0
+> skipholearray(11,0) = 0
+> skipholearray(12,0) = 0
+> skipholearray(13,0) = 0
+> 
+> skipholearray(13,0) = 0
+> skipholearray(14,0) = 0
+> skipholearray(15,0) = 0
+> skipholearray(16,0) = 0
+> 
+> skipholearray(0,0) = 0
+> skipholearray(1,0) = 0
+> skipholearray(2,0) = 0
+> skipholearray(3,0) = 0
+> skipholearray(4,0) = 0
+> skipholearray(5,0) = 0
+> skipholearray(6,0) = 0
+> skipholearray(7,0) = 0
+> skipholearray(8,0) = 0
+> skipholearray(9,0) = 0
+> skipholearray(10,0) = 0
+> skipholearray(11,0) = 0
+> skipholearray(12,0) = 0
+> skipholearray(13,0) = 0
+> skipholearray(14,0) = 0
+> skipholearray(15,0) = 0
+> skipholearray(16,0) = 0
+> skipholearray(17,0) = 0
+!!Error: 2240, Array subscript is out of user defined range. Cannot access or update beyond array bounds.
+> 
+> 
+> 
+> skipholearray(4,0) = 0
+skipholearray(5,0) = 0
+skipholearray(6,0) = 0
+skipholearray(7,0) = 0
+skipholearray(8,0) = 0
+skipholearray(9,0) = 0
+skipholearray(10,0) = 0
+skipholearray(11,0) = 0
+skipholearray(12,0) = 0
+skipholearray(13,0) = 0
+skipholearray(14,0) = 0
+skipholearray(15,0) = 0
+skipholearray(16,0) = 0
+skipholearray(17,0) = 0
+
+
 > 

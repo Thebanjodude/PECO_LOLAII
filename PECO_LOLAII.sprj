@@ -1,10 +1,10 @@
-ENVT0100,LM:2014/03/11 21:04:57:416,DS:0000005711,CS:06953,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/03/17 18:18:41:046,DS:0000005713,CS:05950,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="3/11/2014 3:03:51 PM"
+	sLastModified="3/17/2014 12:18:36 PM"
 	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/7/2014 10:41:49 PM"
+	sTimeSavedInController="3/17/2014 6:18:36 PM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
@@ -84,7 +84,7 @@ ProgramFile10 {
 	sName="HeatStake.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/8/2014 12:26:53 AM"
+	sTimeSavedInController="3/17/2014 4:51:19 PM"
 }
 ProgramFile11 {
 	sName="Startup.prg"
@@ -114,7 +114,7 @@ ProgramFile15 {
 	sName="Test.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/5/2014 9:20:00 PM"
+	sTimeSavedInController="3/17/2014 6:18:36 PM"
 }
 ProgramFile16 {
 	sName="HeatStakeComms.prg"

@@ -6,8 +6,8 @@ Function runTest
 	Integer hole
 			
 	holeTolerance = 0.01
-	'stepsize = 0.1
-	stepsize = 0.25
+	stepsize = 0.01
+	'stepsize = 0.25
 	
 ' the EOAT is XXXdeg off of zero and the panel recipes are YYYdeg off
 ' sorta, its really panels are placed into the magazine 90deg off counterclockwise
