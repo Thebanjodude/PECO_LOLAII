@@ -103,3 +103,8 @@
 #define MBType32 3
 #define MBWriteQueueSize 30
 
+'panel position math constants
+#define holeDiameter 19.4
+#define holeRadius 9.7
+
+

@@ -1,12 +1,12 @@
-ENVT0100,LM:2014/03/20 19:20:45:256,DS:0000005715,CS:00596,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/04/01 16:01:05:316,DS:0000005715,CS:04694,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="3/20/2014 1:20:45 PM"
+	sLastModified="4/1/2014 10:01:05 AM"
 	bBuildComplete=False
-	bRebuildRequired=False
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMWKSSEHLERS"
@@ -106,7 +106,7 @@ ProgramFile13 {
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
 	sTimeSavedInController="3/5/2014 8:16:56 PM"
 }

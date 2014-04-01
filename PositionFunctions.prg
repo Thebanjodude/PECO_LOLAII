@@ -352,57 +352,44 @@ Function PanelFindXerror As Real
 	PanelFindXerror = CX(CurPos) - xShouldBe
 Fend
 
+
+
 ' find the y pickup error
+'
+' The diameter of the hole is known (0.765in/19.4mm), so the radius is 9.7mm
+' The measured width of the hole is parallel to diameter
+' Yerror is perpendicular to the measured width
 Function PanelFindYerror As Real
-	Real width, widthPrevious
+	Real width
 	Real yShouldBe
-	Boolean foundCenter, outsideHole
-	Integer count
-
-	yShouldBe = CY(CurPos)
-	foundCenter = False
-	width = 0
-	widthPrevious = 0
-
-	' attempt to ensure that we start on the outside of the panel
-	Go CurPos -Y(4) /L
-	outsideHole = False
+	Real C, A, Yerror
 	
-'	Print "finding Y",
-	Do While Not foundCenter
-'		Print ".",
-		widthPrevious = width
+	yShouldBe = CY(CurPos)
+	width = 0
+	
+	Do While True
 		width = -GetLaserMeasurement("04") + GetLaserMeasurement("03")
 
-		If width < widthPrevious Then
-			'we might have passed the center
-			'increment counter, we want to be 6 steps past the center
-			count = count + 1
-		Else
-			'we might have had a false positive, remove it
-			count = count - 1
-			If count < 0 Then count = 0
-			outsideHole = True
-		EndIf
+		' find the angle between Yerror and the radius from the center to where 
+		'		the width measurement touches the side of the hole
+		'		C = sin-1 (c/b)
+		C = RadToDeg(Asin(DegToRad((0.5 * width) / holeRadius)))
 		
-		If count > 6 Then
-			'check to see if we started on the correct side of the hole
-			If outsideHole = True Then
-				'we have passed the center of the hole, move back to center
-				Go CurPos -Y(stepsize * 6) /L
-				foundCenter = True
-			Else
-				'we started on the wrong side of the hole, do over
-				Go CurPos -Y(stepsize * 18) /L
-				count = 0
-			EndIf
-		Else
-			'step in one more time
-			Go CurPos +Y(stepsize) /L
-		EndIf
+		'	find the angle between the radius from the center and measured width
+		'		all angles added up to 180, so 180 - 90 - C = A
+		A = 90 - C
+		
+		' sovle for Yerror
+		'		Yerror = radius * sin(A)
+		'		/4 is to reduce dithering, the robot will only move by 1/4 of the error
+		'			until we are within tolerance
+		Yerror = holdRadius * Sin(DegToRad(A)) / 4
+		
+		If Yerror > -holeTolerance And Yerror < holeTolerance Then Exit Do
+		
+		Go CurPos -Y(Yerror)
 	Loop
 	
-'	Print " found!"
 	PanelFindYerror = CY(CurPos) - yShouldBe
 Fend
 
