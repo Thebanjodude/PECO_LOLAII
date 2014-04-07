@@ -24,7 +24,7 @@ Function MBInitialize()
 	MBQueueTail = 0
 	
 	' kick off the command processing task
-	Xqt 10, MBCommandTask, NoEmgAbort
+	Xqt 10, MBCommandTask, Normal
 	
 Fend
 
