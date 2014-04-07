@@ -1,15 +1,15 @@
-ENVT0100,LM:2014/04/01 16:01:05:316,DS:0000005715,CS:04694,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/04/07 14:25:46:954,DS:0000005709,CS:05232,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="4/1/2014 10:01:05 AM"
-	bBuildComplete=False
+	sLastModified="4/7/2014 8:25:19 AM"
+	bBuildComplete=True
 	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMWKSSEHLERS"
+	sComputerName="AMLAPFASTEK"
 }
 UserProperties {
 	sVersion=""
@@ -28,9 +28,9 @@ UserErrorsFile {
 nProgramFileCount=16
 ProgramFile1 {
 	sName="Main.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/18/2014 6:59:47 PM"
+	sTimeSavedInController="4/6/2014 10:42:31 PM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
@@ -106,9 +106,9 @@ ProgramFile13 {
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/5/2014 8:16:56 PM"
+	sTimeSavedInController="4/7/2014 2:25:19 PM"
 }
 ProgramFile15 {
 	sName="Test.prg"
@@ -131,7 +131,7 @@ IncludeFile1 {
 IncludeFile2 {
 	sName="Defines.inc"
 	bStoreInController=True
-	sTimeSavedInController="2/21/2014 10:41:25 PM"
+	sTimeSavedInController="4/6/2014 10:42:31 PM"
 }
 IncludeFile3 {
 	sName="HMI.inc"

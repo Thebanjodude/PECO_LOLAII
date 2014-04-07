@@ -383,7 +383,7 @@ Function PanelFindYerror As Real
 		'		Yerror = radius * sin(A)
 		'		/4 is to reduce dithering, the robot will only move by 1/4 of the error
 		'			until we are within tolerance
-		Yerror = holdRadius * Sin(DegToRad(A)) / 4
+		Yerror = holeRadius * Sin(DegToRad(A)) / 4
 		
 		If Yerror > -holeTolerance And Yerror < holeTolerance Then Exit Do
 		
