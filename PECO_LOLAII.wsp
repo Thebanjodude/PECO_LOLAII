@@ -1,5 +1,5 @@
-ENVT0100,LM:2014/03/19 15:57:23:765,DS:0000004547,CS:03912,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="HeatStake.prg"
+ENVT0100,LM:2014/04/07 17:38:01:444,DS:0000004553,CS:19220,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="PositionFunctions.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -103,7 +103,7 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=True
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=100
 		nTop=100
@@ -147,7 +147,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=2
 		nTop=6
@@ -191,7 +191,7 @@ IncludeFile1 {
 }
 IncludeFile2 {
 	sName="Defines.inc"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=0
@@ -247,7 +247,7 @@ IncludeFile6 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=265

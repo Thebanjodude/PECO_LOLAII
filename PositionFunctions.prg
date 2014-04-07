@@ -384,10 +384,11 @@ Function PanelFindYerror As Real
 		'		/4 is to reduce dithering, the robot will only move by 1/4 of the error
 		'			until we are within tolerance
 		Yerror = holeRadius * Sin(DegToRad(A)) / 4
+		Print "Yerror = ", Yerror, ", width = ", width, " C = ", C, " A = ", A
 		
 		If Yerror > -holeTolerance And Yerror < holeTolerance Then Exit Do
 		
-		Go CurPos -Y(Yerror)
+		Go CurPos +Y(Yerror)
 	Loop
 	
 	PanelFindYerror = CY(CurPos) - yShouldBe

@@ -35,10 +35,10 @@ Function main()
 '	Exit Function
 	
 '	'test the repeatability of the crowding sequence
-'	Pause
-'	Call PanelPrintRecipe
-'	Call testCrowding
-'	Exit Function
+	Pause
+	Call PanelPrintRecipe
+	Call testCrowding
+	Exit Function
 
 
 	Call PanelPrintRecipe
