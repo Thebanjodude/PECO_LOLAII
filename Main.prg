@@ -3,6 +3,9 @@
 Function main()
 	OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
+	'enable or disable debugging
+	DEBUG = DEBUG Or DEBUG_Panel
+
 	'Set system vars
 	recSuctionWaitTime = 1 'fake
 	zLimit = -1 'fake

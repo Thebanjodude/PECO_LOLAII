@@ -1,12 +1,12 @@
-ENVT0100,LM:2014/04/07 17:32:13:243,DS:0000005709,CS:20090,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/04/08 14:47:03:307,DS:0000005704,CS:29219,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="4/7/2014 11:32:08 AM"
+	sLastModified="4/8/2014 8:46:40 AM"
 	bBuildComplete=True
-	bRebuildRequired=False
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMLAPFASTEK"
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/7/2014 5:01:11 PM"
+	sTimeSavedInController="4/7/2014 11:36:10 PM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
@@ -108,30 +108,30 @@ ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/7/2014 5:32:08 PM"
+	sTimeSavedInController="4/8/2014 2:46:40 PM"
 }
 ProgramFile15 {
 	sName="Test.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/17/2014 6:18:36 PM"
+	sTimeSavedInController="4/7/2014 11:49:05 PM"
 }
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="2/21/2014 10:41:25 PM"
+	sTimeSavedInController="4/7/2014 8:10:37 PM"
 }
 nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="2/21/2014 10:41:25 PM"
+	sTimeSavedInController="4/7/2014 11:36:11 PM"
 }
 IncludeFile2 {
 	sName="Defines.inc"
 	bStoreInController=True
-	sTimeSavedInController="4/6/2014 10:42:31 PM"
+	sTimeSavedInController="4/8/2014 2:46:40 PM"
 }
 IncludeFile3 {
 	sName="HMI.inc"
@@ -156,7 +156,7 @@ IncludeFile6 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="4/7/2014 5:11:17 PM"
+	sTimeSavedInController="4/8/2014 2:37:19 PM"
 }
 PointFile2 {
 	sName="Points2.pts"

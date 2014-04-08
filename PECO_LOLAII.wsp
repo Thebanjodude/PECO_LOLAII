@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/04/07 17:38:01:444,DS:0000004553,CS:19220,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/04/08 15:05:11:691,DS:0000004552,CS:21567,MA:00-21-70-9F-9C-9E,EI:           
 sActiveChild="PositionFunctions.prg"
 bMdiMaximized=True
 ProgramFile1 {
@@ -47,7 +47,7 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=17
@@ -102,8 +102,8 @@ ProgramFile9 {
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=100
 		nTop=100
@@ -149,10 +149,10 @@ ProgramFile14 {
 	bOpened=True
 	nWinState=2
 	Window {
-		nLeft=2
-		nTop=6
-		nWidth=935
-		nHeight=494
+		nLeft=0
+		nTop=553
+		nWidth=123
+		nHeight=34
 	}
 }
 ProgramFile15 {
@@ -180,7 +180,7 @@ ProgramFile16 {
 nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=248
@@ -280,7 +280,7 @@ PointFile3 {
 }
 sActiveWindow="main.prg"
 CmdWindow {
-	bOpened=False
+	bOpened=True
 	Window {
 		nLeft=337
 		nTop=16

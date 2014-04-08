@@ -30,6 +30,7 @@
 '</TESTING>
 
 ' System Global Vars and #defines
+Global Integer DEBUG
 Global Integer SystemSpeed, System, mainCurrentState
 Global Boolean suctionCups, suctionCupsCC, holeDetected, maintMode
 Global Integer systemStatus ' Integer that tells opperator what state the sytem is in-see State tab in IOT

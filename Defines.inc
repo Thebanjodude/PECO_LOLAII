@@ -1,3 +1,5 @@
+' System debug flags
+#define DEBUG_PANEL &H001
 
 ' System Global #defines
 #define Zaxis 3 ' The z axis is address by "3" (x,y,z,theta)
@@ -106,5 +108,4 @@
 'panel position math constants
 #define holeDiameter 19.4
 #define holeRadius 9.7
-
-
+'#define holeRadius 10

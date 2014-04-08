@@ -5,7 +5,8 @@
 Function runTest
 	Integer hole
 			
-	holeTolerance = 0.01
+	'holeTolerance = 0.01
+	holeTolerance = 0.1
 	stepsize = 0.01
 	'stepsize = 0.25
 	

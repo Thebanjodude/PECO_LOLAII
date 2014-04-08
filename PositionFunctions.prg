@@ -363,17 +363,33 @@ Function PanelFindYerror As Real
 	Real width
 	Real yShouldBe
 	Real C, A, Yerror
-	
+	Real littleC, c_over_b
+	Real YerrorOld
+	Real Ymove
+	Boolean verbose
+
+	' init vars
+	YerrorOld = 20
 	yShouldBe = CY(CurPos)
 	width = 0
+	If DEBUG And DEBUG_Panel Then verbose = True
 	
+	If verbose Then Print "littleC, yerror, ymove, width, C, A"
+
 	Do While True
 		width = -GetLaserMeasurement("04") + GetLaserMeasurement("03")
+		If Abs(width) > 20 Then width = 15
 
 		' find the angle between Yerror and the radius from the center to where 
 		'		the width measurement touches the side of the hole
 		'		C = sin-1 (c/b)
-		C = RadToDeg(Asin(DegToRad((0.5 * width) / holeRadius)))
+		littleC = 0.5 * width
+		c_over_b = littleC / holeRadius
+
+		If c_over_b >= 1 Then c_over_b = 0.999999
+
+		If verbose Then Print littleC,
+		C = RadToDeg(Asin(c_over_b))
 		
 		'	find the angle between the radius from the center and measured width
 		'		all angles added up to 180, so 180 - 90 - C = A
@@ -383,12 +399,22 @@ Function PanelFindYerror As Real
 		'		Yerror = radius * sin(A)
 		'		/4 is to reduce dithering, the robot will only move by 1/4 of the error
 		'			until we are within tolerance
-		Yerror = holeRadius * Sin(DegToRad(A)) / 4
-		Print "Yerror = ", Yerror, ", width = ", width, " C = ", C, " A = ", A
+		Yerror = holeRadius * Sin(DegToRad(A))
+		Ymove = Yerror /8
+
+		If verbose Then Print Yerror, ",", Ymove, ",", width, ",", C, ",", A
 		
-		If Yerror > -holeTolerance And Yerror < holeTolerance Then Exit Do
+		'If Yerror > -holeTolerance And Yerror < holeTolerance Then Exit Do
+		If Yerror < 0.25 Then Exit Do
 		
-		Go CurPos +Y(Yerror)
+		If YerrorOld + 0.5 < Yerror Then
+			Go CurPos -Y(5)
+			Print "missed center of hole"
+			YerrorOld = 20
+		Else
+			Go CurPos +Y(Ymove)
+			YerrorOld = Yerror
+		EndIf
 	Loop
 	
 	PanelFindYerror = CY(CurPos) - yShouldBe

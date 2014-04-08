@@ -388,4 +388,6 @@ skipholearray(16,0) = 0
 skipholearray(17,0) = 0
 
 
+> print holeradius
+!!Error: 2513, Specified point label is not defined.
 > 
