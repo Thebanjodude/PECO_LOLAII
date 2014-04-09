@@ -378,7 +378,13 @@ Function PanelFindYerror As Real
 
 	Do While True
 		width = -GetLaserMeasurement("04") + GetLaserMeasurement("03")
-		If Abs(width) > 20 Then width = 15
+   
+		'check to see if we are at the center of the hole
+		If (holeDiameter - width) < 0.25 Then Exit Do
+		
+		' check for out of bounds width measurements, and force a step if the 
+		'    measurement is too large (hole is ~20mm)
+		If Abs(width) > 20 Then width = 1
 
 		' find the angle between Yerror and the radius from the center to where 
 		'		the width measurement touches the side of the hole
@@ -405,7 +411,7 @@ Function PanelFindYerror As Real
 		If verbose Then Print Yerror, ",", Ymove, ",", width, ",", C, ",", A
 		
 		'If Yerror > -holeTolerance And Yerror < holeTolerance Then Exit Do
-		If Yerror < 0.25 Then Exit Do
+		'If Yerror < 0.25 Then Exit Do
 		
 		If YerrorOld + 0.5 < Yerror Then
 			Go CurPos -Y(5)

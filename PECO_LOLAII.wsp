@@ -1,10 +1,10 @@
-ENVT0100,LM:2014/04/08 15:05:11:691,DS:0000004552,CS:21567,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/04/09 23:07:36:109,DS:0000004561,CS:20831,MA:00-0C-29-03-E6-C5,EI:           
 sActiveChild="PositionFunctions.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -47,8 +47,8 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=17
 		nTop=9
@@ -103,7 +103,7 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=100
 		nTop=100
@@ -113,8 +113,8 @@ ProgramFile10 {
 }
 ProgramFile11 {
 	sName="Startup.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -151,14 +151,14 @@ ProgramFile14 {
 	Window {
 		nLeft=0
 		nTop=553
-		nWidth=123
-		nHeight=34
+		nWidth=143
+		nHeight=38
 	}
 }
 ProgramFile15 {
 	sName="Test.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=37
 		nTop=8
@@ -168,8 +168,8 @@ ProgramFile15 {
 }
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -180,8 +180,8 @@ ProgramFile16 {
 nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=248
 		nTop=196
@@ -191,8 +191,8 @@ IncludeFile1 {
 }
 IncludeFile2 {
 	sName="Defines.inc"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -247,13 +247,13 @@ IncludeFile6 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=265
 		nTop=37
-		nWidth=653
-		nHeight=435
+		nWidth=652
+		nHeight=432
 	}
 }
 PointFile2 {
@@ -280,14 +280,14 @@ PointFile3 {
 }
 sActiveWindow="main.prg"
 CmdWindow {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=337
 		nTop=16
 		nWidth=673
 		nHeight=354
 	}
-	nWinState=0
+	nWinState=2
 }
 RunWindow {
 	bOpened=False
