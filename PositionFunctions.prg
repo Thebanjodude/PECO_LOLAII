@@ -341,7 +341,12 @@ Function PanelFindXerror As Real
 		' a hole should be less than 20mm in diameter 
 		If Abs(tempx) > 20 Then
 			'fail... somehow
-			tempx = 20
+			If tempx > 0 Then
+				tempx = 1
+			Else
+				tempx = -1
+			EndIf
+			'tempx = 20
 		EndIf
 		Go CurPos -X(tempx)
 		tempx = GetLaserMeasurement("07") / 4
@@ -372,19 +377,20 @@ Function PanelFindYerror As Real
 	YerrorOld = 20
 	yShouldBe = CY(CurPos)
 	width = 0
-	If DEBUG And DEBUG_Panel Then verbose = True
+	'If DEBUG And DEBUG_Panel Then verbose = True
+	verbose = False
 	
 	If verbose Then Print "littleC, yerror, ymove, width, C, A"
 
 	Do While True
 		width = -GetLaserMeasurement("04") + GetLaserMeasurement("03")
-   
-		'check to see if we are at the center of the hole
-		If (holeDiameter - width) < 0.25 Then Exit Do
 		
 		' check for out of bounds width measurements, and force a step if the 
 		'    measurement is too large (hole is ~20mm)
 		If Abs(width) > 20 Then width = 1
+		
+		'check to see if we are at the center of the hole
+		If (holeDiameter - width) < 0.25 Then Exit Do
 
 		' find the angle between Yerror and the radius from the center to where 
 		'		the width measurement touches the side of the hole
@@ -415,7 +421,7 @@ Function PanelFindYerror As Real
 		
 		If YerrorOld + 0.5 < Yerror Then
 			Go CurPos -Y(5)
-			Print "missed center of hole"
+			If verbose Then Print "missed center of hole"
 			YerrorOld = 20
 		Else
 			Go CurPos +Y(Ymove)
