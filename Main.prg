@@ -4,7 +4,7 @@ Function main()
 	OnErr GoTo errHandler ' Define where to go when a controller error occurs	
 
 	'enable or disable debugging
-	DEBUG = DEBUG Or DEBUG_Panel
+	'DEBUG = DEBUG Or DEBUG_Panel
 
 	'Set system vars
 	recSuctionWaitTime = 1 'fake
@@ -38,10 +38,10 @@ Function main()
 '	Exit Function
 	
 '	'test the repeatability of the crowding sequence
-	Pause
-	Call PanelPrintRecipe
-	Call testCrowding
-	Exit Function
+'	Pause
+'	Call PanelPrintRecipe
+'	Call testCrowding
+'	Exit Function
 
 
 	Call PanelPrintRecipe

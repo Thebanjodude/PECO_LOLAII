@@ -1,15 +1,15 @@
-ENVT0100,LM:2014/04/09 23:07:32:484,DS:0000005706,CS:18223,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/04/10 13:17:42:435,DS:0000005711,CS:10573,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="4/9/2014 5:07:26 PM"
-	bBuildComplete=False
+	sLastModified="4/10/2014 7:17:20 AM"
+	bBuildComplete=True
 	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMWKSSEHLERS"
+	sComputerName="AMLAPFASTEK"
 }
 UserProperties {
 	sVersion=""
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/7/2014 11:36:10 PM"
+	sTimeSavedInController="4/10/2014 1:17:20 PM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
@@ -54,7 +54,7 @@ ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="3/3/2014 9:37:59 PM"
+	sTimeSavedInController="4/9/2014 10:16:27 PM"
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
@@ -108,30 +108,30 @@ ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/8/2014 2:46:40 PM"
+	sTimeSavedInController="4/10/2014 12:44:44 PM"
 }
 ProgramFile15 {
 	sName="Test.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/7/2014 11:49:05 PM"
+	sTimeSavedInController="4/9/2014 10:16:27 PM"
 }
 ProgramFile16 {
 	sName="HeatStakeComms.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/7/2014 8:10:37 PM"
+	sTimeSavedInController="4/9/2014 10:16:27 PM"
 }
 nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="4/7/2014 11:36:11 PM"
+	sTimeSavedInController="4/9/2014 10:16:27 PM"
 }
 IncludeFile2 {
 	sName="Defines.inc"
 	bStoreInController=True
-	sTimeSavedInController="4/8/2014 2:46:40 PM"
+	sTimeSavedInController="4/9/2014 10:16:27 PM"
 }
 IncludeFile3 {
 	sName="HMI.inc"
@@ -156,7 +156,7 @@ IncludeFile6 {
 nPointFileCount=3
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="4/8/2014 2:37:19 PM"
+	sTimeSavedInController="4/9/2014 10:16:27 PM"
 }
 PointFile2 {
 	sName="Points2.pts"
