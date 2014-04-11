@@ -30,18 +30,20 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		'Go P(i)
 		PanelHoleToXYZT(i, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(i))
 		
+		Wait 0.5
+		
 		If SelectRoutine = 1 Then
 
 			' The following code block detects if an insert is in the hole already.			
 
 			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
 			
-			Print "BossCrosssectionalArea: ", BossCrosssectionalArea
+			Print "BossCrosssectionalArea: ", BossCrosssectionalArea, "  Recipe: ", recBossCrossArea
 			If BossCrosssectionalArea > recBossCrossArea Then ' There is already an insert so set skip flag
 				SkipHoleArray(currentPreinspectHole, 0) = 1
 				Print "Hole ", currentPreinspectHole, " is already populated"
 			EndIf
-			
+
 			currentPreinspectHole = currentPreinspectHole + 1
 			
 		ElseIf SelectRoutine = 2 Then
@@ -59,6 +61,10 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	SystemStatus = StateMoving
 	findHome
 	Trap 2 'disarm trap
+	
+	' TESTING
+	Pause
+	
 Fend
 
 

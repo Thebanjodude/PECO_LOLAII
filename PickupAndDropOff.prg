@@ -44,7 +44,8 @@ Function DropOffPanel() As Integer
 	
 	' see if we can use a global point
 	'Jump P(recOutmag) LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
-	Jump MagOUT_51010
+	'Jump MagOUT_51010
+	Jump MagOUT_88556
 		If JS = True Then
 			Pause ' we hit somthing so pause
 		EndIf

@@ -390,4 +390,26 @@ skipholearray(17,0) = 0
 
 > print holeradius
 !!Error: 2513, Specified point label is not defined.
+> sin(3.2)
+!!Error: 3100, Syntax error.
+> print sin(3.2)
+ -0.05837414342758
+> print degtorad(45)
+ 0.78539816339745
+> print sin(0.7853)
+ 0.7070373657758
+> print sin(45)
+ 0.85090352453412
+> skipholearray(1,0) = 1
+> skipholearray(0,0) = 1
+> skipholearray(1,0) = 1
+> skipholearray(1,0) = 1
+> skipholearray(1,0) = 1
+> skipholearray(3,0) = 1
+> skipholearray(1,0) = 1
+> skipholearray(1,0) = 1
+> skipholearray(2,0) = 0
+> skipholearray(2,0) = 1
+> skipholearray(3,0) = 1
+> skipholearray(4,0) = 1
 > 

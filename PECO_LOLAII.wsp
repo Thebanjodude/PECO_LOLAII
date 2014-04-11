@@ -1,12 +1,10 @@
-ENVT0100,LM:2014/04/10 13:17:55:232,DS:0000004547,CS:01058,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="Main.prg"
-bMdiMaximized=True
+ENVT0100,LM:2014/04/11 01:26:04:955,DS:0000004515,CS:16992,MA:00-21-70-9F-9C-9E,EI:           
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=2
 	Window {
-		nLeft=0
+		nLeft=-304
 		nTop=0
 		nWidth=1144
 		nHeight=511
@@ -26,7 +24,7 @@ ProgramFile2 {
 ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=51
 		nTop=43
@@ -48,7 +46,7 @@ ProgramFile4 {
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=17
 		nTop=9
@@ -59,9 +57,9 @@ ProgramFile5 {
 ProgramFile6 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
-		nLeft=25
+		nLeft=-279
 		nTop=25
 		nWidth=1155
 		nHeight=539
@@ -103,7 +101,7 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=100
 		nTop=100
@@ -114,7 +112,7 @@ ProgramFile10 {
 ProgramFile11 {
 	sName="Startup.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -125,9 +123,9 @@ ProgramFile11 {
 ProgramFile12 {
 	sName="MainStates.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
-		nLeft=50
+		nLeft=-254
 		nTop=50
 		nWidth=1155
 		nHeight=539
@@ -146,10 +144,10 @@ ProgramFile13 {
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
-		nLeft=0
+		nLeft=-304
 		nTop=553
 		nWidth=143
 		nHeight=38
@@ -158,7 +156,7 @@ ProgramFile14 {
 ProgramFile15 {
 	sName="Test.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=37
 		nTop=8
@@ -282,17 +280,17 @@ sActiveWindow="main.prg"
 CmdWindow {
 	bOpened=False
 	Window {
-		nLeft=337
+		nLeft=33
 		nTop=16
 		nWidth=673
 		nHeight=354
 	}
-	nWinState=0
+	nWinState=2
 }
 RunWindow {
 	bOpened=False
 	Window {
-		nLeft=52
+		nLeft=-252
 		nTop=22
 		nWidth=1292
 		nHeight=812

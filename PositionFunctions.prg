@@ -367,19 +367,21 @@ Fend
 Function PanelFindYerror As Real
 	Real width
 	Real yShouldBe
-	Real C, A, Yerror
+	Real C, A
+	Double Yerror
 	Real littleC, c_over_b
 	Real YerrorOld
-	Real Ymove
+	Double Ymove
 	Boolean verbose
 
 	' init vars
 	YerrorOld = 20
 	yShouldBe = CY(CurPos)
 	width = 0
-	'If DEBUG And DEBUG_Panel Then verbose = True
-	verbose = False
-	
+
+	'verbose = False
+	verbose = True
+
 	If verbose Then Print "littleC, yerror, ymove, width, C, A"
 
 	Do While True
@@ -387,10 +389,13 @@ Function PanelFindYerror As Real
 		
 		' check for out of bounds width measurements, and force a step if the 
 		'    measurement is too large (hole is ~20mm)
-		If Abs(width) > 20 Then width = 1
+		If Abs(width) > holeDiameter Then width = 1
 		
 		'check to see if we are at the center of the hole
-		If (holeDiameter - width) < 0.25 Then Exit Do
+		If (holeDiameter - width) < 0.01 Then
+			If verbose Then Print "Width: ", width
+			Exit Do
+		EndIf
 
 		' find the angle between Yerror and the radius from the center to where 
 		'		the width measurement touches the side of the hole
@@ -398,6 +403,7 @@ Function PanelFindYerror As Real
 		littleC = 0.5 * width
 		c_over_b = littleC / holeRadius
 
+		' ensure that we don't feed arcsin a value that's too large
 		If c_over_b >= 1 Then c_over_b = 0.999999
 
 		If verbose Then Print littleC,
