@@ -117,11 +117,6 @@ Do While True
 		erDCPowerHeatStake = False
 	EndIf
 	
-	'Heat stake temp checking 
-	If HotStakeTempRdy = False Then
-'		Pause
-	EndIf
-	
 	If EStopOn = True Then
 		erEstop = True
 	Else
@@ -170,13 +165,7 @@ Do While True
 	If erOutMagCrowding = True Then
 	'	Pause
 	EndIf
-	
-	If HotStakeTempRdy = False Then
-		erHeatStakeTemp = True
-	Else
-		erHeatStakeTemp = False
-	EndIf
-	
+
 	If flashHomeNO = False And flashHomeNC = False Then
 		erFlashStation = True
 	ElseIf flashHomeNO = True And flashHomeNC = True Then

@@ -23,7 +23,6 @@ Function PowerOnSequence()
 	ClearMemory() ' writes a zero to all the memIO
 	
 	Motor On
-	'Power Low
 	Power High
 	
 	' Find home before we start the PLC
@@ -65,13 +64,8 @@ Function CheckInitialParameters() As Integer
 	EndIf
 
 Fend
-Function HotStakeTempRdy() As Boolean
-	
-	' TODO - once code is done in PLC communicate it back to the robot
-		HotStakeTempRdy = True ' ready to start job
-'		HotStakeTempRdy = False ' Temperature is not in range
-	
-Fend
+
+
 Function ClearMemory()
 	
 	Integer i
