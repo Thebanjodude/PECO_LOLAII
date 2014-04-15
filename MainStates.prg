@@ -6,20 +6,28 @@ Function idleState(currentState As Integer) As Integer
 	' to the idle state and waits for an operator.
 
 	If jobStart = True Then
-		' the And contstruct doesn't short circuit when the first boolean fails...
-		'   which means lots and lots of failure messages until the HMI pushes recipies values.
-		'   So, lets check for the initial parameters after we start our first job.
+		' Lets check for the initial parameters after we start our first job.
 		If CheckInitialParameters = 0 Then
 			currentState = StatePopPanel
-			ChoosePointsTable() 			' Change to the correct points table for the selected panel
-			jobAbort = False 				' reset flag
+			jobAbort = False 					' reset flag
 			jobNumPanelsDone = 0 			' reset panel counter
-			panelDataTxRdy = False 			' make sure var is set to false so it changes when we want HMI to read out data
+			panelDataTxRdy = False 		' make sure var is set to false so it changes when we want HMI to read out data
+		Else
+			'set jobstart to false and throw and error
+			' TODO --
 		EndIf
+	ElseIf startLearning = True Then
+		' jump to learning routine...
 	Else
 		Wait 0.5
 	EndIf
 	idleState = currentState				' update the state value
+Fend
+
+Function learnPanelState(currentState As Integer) As Integer
+	'  This state is used for the robot to learn a panels actual hole locations from
+	'  	the drawing values
+	
 Fend
 
 Function popPanelState(currentState As Integer) As Integer

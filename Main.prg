@@ -5,18 +5,12 @@ Function main()
 
 	'enable or disable debugging
 	'DEBUG = DEBUG Or DEBUG_Panel
-
-	'Set system vars
-	recSuctionWaitTime = 1 'fake
-	zLimit = -1 'fake
-	insertDepthTolerance = .010
-	recPointsTable = 1
 	
 	'Testing Area for State skipping
 	recPopPanelRequired = True
 	recCrowdingRequired = True
 	recPreinspectionRequired = True
-	'recFlashRequired = True ' this is actually a recipe variable
+	recFlashRequired = True
 	recHotStakePanelRequired = True
 	recInspectionRequired = True
 	recPushPanelRequired = True
@@ -33,18 +27,12 @@ Function main()
 	magazineCorrection = -90
 	systemThetaError = EOATcorrection + magazineCorrection
 	
-'	'TeachPointsUnderLaser() ' prototype teaching code (get it close and home in on it)
 '	Call runTest()
-'	Exit Function
 	
 '	'test the repeatability of the crowding sequence
 '	Pause
 '	Call PanelPrintRecipe
 '	Call testCrowding
-'	Exit Function
-
-
-	Call PanelPrintRecipe
 	
 	Call changeSpeed(fast)
 	

@@ -23,6 +23,7 @@
 #define StatePushPanel 9
 #define StateCrowding 10
 #define StateEmptyingBowlandTrack 11
+#define StateLearnPanel 12
 
 'Inmag States
 #define StateInMagUnknown 0
