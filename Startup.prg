@@ -54,18 +54,6 @@ Function CheckInitialParameters() As Integer
 		CheckInitialParameters = 2
 		erRecEntryMissing = True
 		Print " recBossCrossArea = 0" 'recNumberOfHoles = 0 Or recInsertType = 0 Or
-	ElseIf recInmag = 0 Or recOutmag = 0 Or recCrowding = 0 Or recPreCrowding = 0 Then
-		CheckInitialParameters = 2
-		erRecEntryMissing = True
-		Print "recInmag = 0 Or recOutmag = 0 Or recCrowding = 0 Or recPreCrowding = "
-	ElseIf recFirstHolePointInspection = 0 Or recLastHolePointInspection = 0 Or recFirstHolePointHotStake = 0 Or recLastHolePointHotStake = 0 Or recFirstHolePointFlash = 0 Or recLastHolePointFlash = 0 Then
-		CheckInitialParameters = 2
-		erRecEntryMissing = True
-		Print "recFirstHolePointInspection = 0 Or recLastHolePointInspection = 0 Or recFirstHolePointHotStake = 0 Or recLastHolePointHotStake = 0 Or recFirstHolePointFlash = 0 Or recLastHolePointFlash = 0"
-	ElseIf recPointsTable > 3 Or recPointsTable = 0 Then
-		CheckInitialParameters = 2
-		erRecEntryMissing = True
-		Print "0 < recPointsTable < 3"
 	ElseIf recSuctionWaitTime = 0 Or zLimit = 0 Then
 		CheckInitialParameters = 2
 		erParamEntryMissing = True
