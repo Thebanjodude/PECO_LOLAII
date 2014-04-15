@@ -42,23 +42,18 @@ Function DropOffPanel() As Integer
 	
 	changeSpeed(slow)
 	
-	' see if we can use a global point
-	'Jump P(recOutmag) LimZ zLimit ' Sense MemSw(outmagOvrTorq) = True
-	'Jump MagOUT_51010
-	Jump MagOUT_88556
-		If JS = True Then
-			Pause ' we hit somthing so pause
-		EndIf
+	Jump MagOUT
+	If JS = True Then
+		Pause ' we hit somthing so pause
+	EndIf
 
 	changeSpeed(fast)
 
-'	Off suctionCupsH ' fake
 	suctionCupsCC = False
 	Wait recSuctionWaitTime ' Allow time for cups to unseal
 	RobotPlacedPanel = True ' Tell the output magazine we put a panel into it
 
 	findHome
-	'Jump OutmagWaypoint LimZ zLimit
 
 	OutputMagSignal = True ' Give permission for output magazine to dequeue next panel	
 
@@ -102,13 +97,7 @@ Function PickupPanel() As Integer 'byte me
 	
 	InMagRobotClearSignal = False ' the robot is about to visit the magazine.
 		
-	' see if we can use a global point to pickup panels
-	'Jump P(recInmag) +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
-	'Jump magin_51010 +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
-
-'TODO -- FIX THIS
-	'Jump magin_51010 +Z(5) Sense Sw(inMagInterlockH)
-	Jump P(14) +Z(5) LimZ zLimit Sense Sw(inMagInterlockH)
+	Jump MagIN +Z(10) LimZ zLimit Sense Sw(inMagInterlockH)
 	
 	If JS = True Then ' Its possible to open an interock during the jump so check if it was opened
 		PickupPanel = 1 ' Interlock is open
@@ -120,14 +109,8 @@ Function PickupPanel() As Integer 'byte me
 	ZmaxTorque = 0
 	Do While ZmaxTorque <= .3 'Or TorqueCounter > 25 ' Approach the panel slowly until we hit a torque limit
 		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
-'		TorqueCounter = TorqueCounter + 1
 		ZmaxTorque = PTRQ(3)
 	Loop
-	
-'	If TorqueCounter > 25 Then
-'		PickupPanel = 2 ' Failed to pick up panel
-'		Exit Function
-'	EndIf
 	
 	suctionCupsCC = True ' Turn on the cups because we have engaged a panel
 	Wait recSuctionWaitTime ' Allow time for cups to seal on panel	
