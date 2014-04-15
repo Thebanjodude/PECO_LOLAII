@@ -22,12 +22,8 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	'if needed the profile will be changed by the inspection function
 	ChangeProfile("07")
 
-	'For i = recFirstHolePointInspection To recLastHolePointInspection
 	For i = 1 To PanelHoleCount
 		
-		' see if we can get away without using this
-		'Go PreScan :U(CU(P(i))) ' Stay in prescan but rotate the panel to its final U position before we move under
-		'Go P(i)
 		PanelHoleToXYZT(i, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(i))
 		
 		Wait 0.5
@@ -53,7 +49,6 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			currentInspectHole = currentInspectHole + 1
 		EndIf
 			
-		'Go P(i) :U(CU(Here)) -Y(50) ' Pull back from laser scanner then rotate so we dont endanger it
 	Next
 	
 	InspectPanel = 0 ' Inspection occured without errors
@@ -61,9 +56,6 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 	SystemStatus = StateMoving
 	findHome
 	Trap 2 'disarm trap
-	
-	' TESTING
-	Pause
 	
 Fend
 
@@ -180,7 +172,6 @@ Function ChangeProfile(ProfileNumber$ As String) As Boolean
     If i > 0 Then  'should be, but just in case...
     	Read #203, response$, i
 
-    	'Print response$
 		If response$ = "PW" + Chr$(&hd) Then
 			erLaserScanner = False
       	Else
@@ -200,7 +191,6 @@ Function PassOrFail(measurement As Real) As Boolean 'Pass is True
 	DepthInsertError = recInsertDepth - measurement
 	Print "DepthInsertError:", DepthInsertError
 	
-' TODO: make the tolerance a variable and make it adjustable via the hmi, we have .006 but theirs is more loose	
 	If (Abs(DepthInsertError) < insertDepthTolerance) Then
 		PassOrFail = True ' Passed
 	Else
@@ -226,68 +216,59 @@ Fend
 
 Function UnpackInspectionArrays()
 	
-'Sending a JSON array is a pain so we are just unpacking the array into seperate vars\ 	
-hole0R = InspectionArray(0, RightSpotFace)
-hole0L = InspectionArray(0, LeftSpotFace)
-hole1R = InspectionArray(1, RightSpotFace)
-hole1L = InspectionArray(1, LeftSpotFace)
-hole2R = InspectionArray(2, RightSpotFace)
-hole2L = InspectionArray(2, LeftSpotFace)
-hole3R = InspectionArray(3, RightSpotFace)
-hole3L = InspectionArray(3, LeftSpotFace)
-hole4R = InspectionArray(4, RightSpotFace)
-hole4L = InspectionArray(4, LeftSpotFace)
-hole5R = InspectionArray(5, RightSpotFace)
-hole5L = InspectionArray(5, LeftSpotFace)
-hole6R = InspectionArray(6, RightSpotFace)
-hole6L = InspectionArray(6, LeftSpotFace)
-hole7R = InspectionArray(7, RightSpotFace)
-hole7L = InspectionArray(7, LeftSpotFace)
-hole8R = InspectionArray(8, RightSpotFace)
-hole8L = InspectionArray(8, LeftSpotFace)
-hole9R = InspectionArray(9, RightSpotFace)
-hole9L = InspectionArray(9, LeftSpotFace)
-hole10R = InspectionArray(10, RightSpotFace)
-hole10L = InspectionArray(10, LeftSpotFace)
-hole11R = InspectionArray(11, RightSpotFace)
-hole11L = InspectionArray(11, LeftSpotFace)
-hole12R = InspectionArray(12, RightSpotFace)
-hole12L = InspectionArray(12, LeftSpotFace)
-hole13R = InspectionArray(13, RightSpotFace)
-hole13L = InspectionArray(13, LeftSpotFace)
-hole14R = InspectionArray(14, RightSpotFace)
-hole14L = InspectionArray(14, LeftSpotFace)
-hole15R = InspectionArray(15, RightSpotFace)
-hole15L = InspectionArray(15, LeftSpotFace)
-hole16R = InspectionArray(16, RightSpotFace)
-hole16L = InspectionArray(16, LeftSpotFace)
-hole17R = InspectionArray(17, RightSpotFace)
-hole17L = InspectionArray(17, LeftSpotFace)
-hole18R = InspectionArray(18, RightSpotFace)
-hole18L = InspectionArray(18, LeftSpotFace)
-hole19R = InspectionArray(19, RightSpotFace)
-hole19L = InspectionArray(19, LeftSpotFace)
-hole20R = InspectionArray(20, RightSpotFace)
-hole20L = InspectionArray(20, LeftSpotFace)
-hole21R = InspectionArray(21, RightSpotFace)
-hole21L = InspectionArray(21, LeftSpotFace)
-hole22R = InspectionArray(22, RightSpotFace)
-hole22L = InspectionArray(22, LeftSpotFace)
-hole23L = InspectionArray(23, LeftSpotFace)
-hole23R = InspectionArray(23, RightSpotFace)
-
-Integer n
-
-'For n = 0 To recNumberOfHoles - 1
-'		
-'	'comment this out during integration
-'	If PassFailArray(n, LeftSpotFace) = False Or PassFailArray(n, RightSpotFace) = False Then
-'		Print "hole " + Str$(n) + " failed!"
-'	EndIf
-'	
-'Next
+	'Sending a JSON array is a pain so we are just unpacking the array into seperate vars
+	hole0R = InspectionArray(0, RightSpotFace)
+	hole0L = InspectionArray(0, LeftSpotFace)
+	hole1R = InspectionArray(1, RightSpotFace)
+	hole1L = InspectionArray(1, LeftSpotFace)
+	hole2R = InspectionArray(2, RightSpotFace)
+	hole2L = InspectionArray(2, LeftSpotFace)
+	hole3R = InspectionArray(3, RightSpotFace)
+	hole3L = InspectionArray(3, LeftSpotFace)
+	hole4R = InspectionArray(4, RightSpotFace)
+	hole4L = InspectionArray(4, LeftSpotFace)
+	hole5R = InspectionArray(5, RightSpotFace)
+	hole5L = InspectionArray(5, LeftSpotFace)
+	hole6R = InspectionArray(6, RightSpotFace)
+	hole6L = InspectionArray(6, LeftSpotFace)
+	hole7R = InspectionArray(7, RightSpotFace)
+	hole7L = InspectionArray(7, LeftSpotFace)
+	hole8R = InspectionArray(8, RightSpotFace)
+	hole8L = InspectionArray(8, LeftSpotFace)
+	hole9R = InspectionArray(9, RightSpotFace)
+	hole9L = InspectionArray(9, LeftSpotFace)
+	hole10R = InspectionArray(10, RightSpotFace)
+	hole10L = InspectionArray(10, LeftSpotFace)
+	hole11R = InspectionArray(11, RightSpotFace)
+	hole11L = InspectionArray(11, LeftSpotFace)
+	hole12R = InspectionArray(12, RightSpotFace)
+	hole12L = InspectionArray(12, LeftSpotFace)
+	hole13R = InspectionArray(13, RightSpotFace)
+	hole13L = InspectionArray(13, LeftSpotFace)
+	hole14R = InspectionArray(14, RightSpotFace)
+	hole14L = InspectionArray(14, LeftSpotFace)
+	hole15R = InspectionArray(15, RightSpotFace)
+	hole15L = InspectionArray(15, LeftSpotFace)
+	hole16R = InspectionArray(16, RightSpotFace)
+	hole16L = InspectionArray(16, LeftSpotFace)
+	hole17R = InspectionArray(17, RightSpotFace)
+	hole17L = InspectionArray(17, LeftSpotFace)
+	hole18R = InspectionArray(18, RightSpotFace)
+	hole18L = InspectionArray(18, LeftSpotFace)
+	hole19R = InspectionArray(19, RightSpotFace)
+	hole19L = InspectionArray(19, LeftSpotFace)
+	hole20R = InspectionArray(20, RightSpotFace)
+	hole20L = InspectionArray(20, LeftSpotFace)
+	hole21R = InspectionArray(21, RightSpotFace)
+	hole21L = InspectionArray(21, LeftSpotFace)
+	hole22R = InspectionArray(22, RightSpotFace)
+	hole22L = InspectionArray(22, LeftSpotFace)
+	hole23L = InspectionArray(23, LeftSpotFace)
+	hole23R = InspectionArray(23, RightSpotFace)
 	
 Fend
+
+
 Function UnpackPassFailArray()
 	'If either spotface fails then the hole fails	
 	
@@ -317,6 +298,8 @@ Function UnpackPassFailArray()
 	hole23PF = PassFailArray(23, LeftSpotFace) Or PassFailArray(23, RightSpotFace)
 	
 Fend
+
+
 Function PrintInspectionArray()
 	
 	Integer n
@@ -328,6 +311,8 @@ Function PrintInspectionArray()
 	Next
 
 Fend
+
+
 Function PrintPreInspectionArray()
 	
 	Integer n
@@ -339,6 +324,8 @@ Function PrintPreInspectionArray()
 	Next
 
 Fend
+
+
 Function PrintSkipArray()
 	
 	Integer n
@@ -350,129 +337,11 @@ Function PrintSkipArray()
 	Next
 	
 Fend
+
+
 Function MicroMetersToInches(um As Real) As Real
 		MicroMetersToInches = um * .00003937
 Fend
-Function TeachPointsUnderLaser()
-' This function will only work in the operator aligns the hole with minimal error in all 3 axis's
-On suctionCupsH
-suctionCupsCC = True
-Pause
 
-' all tolerances are +/- mm
-#define Xtolerance .5
-#define Ytolerance .5
-#define Ztolerance 5
 
-Real XLaserError, XLaserTolerance
-Real YLaserError, YLaserTolerance
-Real ZLaserError, ZLaserTolerance
-Real tempY1, tempY2
-Integer i
-
-recFirstHolePointInspection = 6
-recLastHolePointInspection = 6
-recPointsTable = 3
-
-Motor On
-Power Low
-
-ChoosePointsTable() ' load correct points table
-ChangeProfile("00") ' Change profile on the laser
-
-For i = recFirstHolePointInspection To recLastHolePointInspection
-' add checks for laser out of range (-9999's)
-
-	SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
-	Pause ' wait for operator to continue
-	SLock 1, 2, 3, 4 ' lock motors
-	
-redoZ:
-	ZLaserError = GetLaserMeasurement("06")
-	Print "ZLaserError: ", ZLaserError
-	If ZLaserError = -999.999 Then
-		Print "Laser Z not in range, please adjust"
-		SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
-		Pause ' wait for operator to continue
-		GoTo redoZ
-	EndIf
-	
-	If Abs(ZLaserError) > ZLaserTolerance Then
-	
-'	Do While Abs(ZLaserError) > ZLaserTolerance
-		JTran 3, -1 * ZLaserError
-		Wait .25
-		ZLaserError = GetLaserMeasurement("06")
-		Print "ZLaserError: ", ZLaserError
-'	Loop
-	EndIf
-	
-	Print "Z is done"
-	P(i) = Here ' save the point 
-	
-redoY:
-	YLaserError = GetLaserMeasurement("05")
-	Print "YLaserError: ", YLaserError
-	If YLaserError = -999.999 Then
-		Print "Laser Y not in range, please adjust"
-		SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
-		Pause ' wait for operator to continue
-		GoTo redoY
-	EndIf
-	
-' the problem with this is that I can't determine which way to correct (becuase it's a circle).	
-' the problem with this method is if we cross the diameter with our .1mm move	
-
-	tempY1 = GetLaserMeasurement("05")
-	Print "tempY1", tempY1
-	Move P(i) +Y(0.1) ' move a little to see if we are 
-	tempY2 = GetLaserMeasurement("05")
-	Print "tempY2", tempY2
-	
-	YLaserError = GetLaserMeasurement("05")
-	If Abs(YLaserError) > YLaserTolerance Then
-	
-'	Do While Abs(YLaserError) > YLaserTolerance
-		If tempY1 < tempY2 Then
-			Move P(i) +Y(-1 * YLaserError)
-		Else
-			Move P(i) +Y(YLaserError)
-		EndIf
-'	Loop
-	EndIf
-	
-	Wait .25
-	YLaserError = GetLaserMeasurement("05")
-	Print "YLaserError: ", YLaserError
-	
-	Print "Y is done"
-	P(i) = Here ' save the point 
-	
-redoX:
-	XLaserError = GetLaserMeasurement("07")
-	Print "XLaserError: ", XLaserError
-	If XLaserError = -999.999 Then
-		Print "Laser X not in range, please adjust"
-		SFree 1, 2, 3, 4 ' unlock motors, allows operator to roughly place hole
-		Pause ' wait for operator to continue
-		GoTo redoX
-	EndIf
-	
-	If Abs(XLaserError) > XLaserTolerance Then
-'	Do While Abs(XLaserError) < XLaserTolerance
-		Move P(i) +X(-1 * XLaserError / 2)
-		Wait .25
-		XLaserError = GetLaserMeasurement("07")
-		Print "XLaserError: ", XLaserError
-'	Loop
-	EndIf
-	
-	Print "X is done"
-	P(i) = Here ' save the point 
-	
-Next
-
-	SFree 1, 2, 3, 4
-	SavePointsTable() ' save the points table
-Fend
 
