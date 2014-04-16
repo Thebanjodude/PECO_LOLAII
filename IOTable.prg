@@ -6,45 +6,84 @@ Function IOTableInputs()
 	
 	Do While True
 		'Inputs
-		airPressHigh = IOTableBooleans(Sw(AirPressHighH), MemSw(airPressHighFV), MemSw(airPressHighF))
-		airPressLow = IOTableBooleans(Sw(AirPressLowH), MemSw(airPressLowFV), MemSw(airPressLowF))
-		backIntlock1 = IOTableBooleans(Sw(backIntlock1H), MemSw(backIntlock1FV), MemSw(backIntlock1F))
-		backIntlock2 = IOTableBooleans(Sw(backIntlock2H), MemSw(backIntlock2FV), MemSw(backIntlock2F))
-		cbMonDebrisRmv = IOTableBooleans(Sw(cbMonDebrisRmvH), MemSw(cbMonDebrisRmvFV), MemSw(cbMonDebrisRmvF))
-		cbMonHeatStake = IOTableBooleans(Sw(cbMonHeatStakeH), MemSw(cbMonHeatStakeFV), MemSw(cbMonHeatStakeF))
-		cbMonInMag = IOTableBooleans(Sw(cbMonInMagH), MemSw(cbMonInMagFV), MemSw(cbMonInMagF))
-		cbMonOutMag = IOTableBooleans(Sw(cbMonOutMagH), MemSw(cbMonOutMagFV), MemSw(cbMonOutMagF))
-		cbMonPAS24vdc = IOTableBooleans(Sw(cbMonPAS24vdcH), MemSw(cbMonPAS24vdcFV), MemSw(cbMonPAS24vdcF))
-		cbMonSafety = IOTableBooleans(Sw(cbMonSafetyH), MemSw(cbMonSafetyFV), MemSw(cbMonSafetyF))
-		dc24vOK = IOTableBooleans(Sw(dc24vOKH), MemSw(dc24vOKFV), MemSw(dc24vOKF))
-		edgeDetectGo = IOTableBooleans(Sw(edgeDetectGoH), MemSw(edgeDetectGoFV), MemSw(edgeDetectGoF))
-		edgeDetectHi = IOTableBooleans(Sw(edgeDetectHiH), MemSw(edgeDetectHiFV), MemSw(edgeDetectHiF))
-		edgeDetectLo = IOTableBooleans(Sw(edgeDetectLoH), MemSw(edgeDetectLoFV), MemSw(edgeDetectLoF))
-		flashHomeNC = IOTableBooleans(Sw(FlashHomeNCH), MemSw(flashHomeNCFV), MemSw(flashHomeNCF))
-		flashHomeNO = IOTableBooleans(Sw(FlashHomeNOH), MemSw(flashHomeNOFV), MemSw(flashHomeNOF))
-		flashPnlPrsnt = IOTableBooleans(Sw(FlashPnlPrsntH), MemSw(FlashPnlPrsntFV), MemSw(FlashPnlPrsntF))
-		frontIntlock1 = IOTableBooleans(Sw(frontIntlock1H), MemSw(frontIntlock1FV), MemSw(frontIntlock1F))
-		frontIntlock2 = IOTableBooleans(Sw(frontIntlock2H), MemSw(frontIntlock2FV), MemSw(frontIntlock2F))
-		holeDetected = IOTableBooleans(Sw(holeDetectedH), MemSw(holeDetectedFV), MemSw(holeDetectedF))
-		hsPanelPresnt = IOTableBooleans(Sw(HSPanelPresntH), MemSw(hsPanelPresntFV), MemSw(hsPanelPresntF))
-		inMagInterlock = IOTableBooleans(Sw(inMagInterlockH), MemSw(inMagInterlockFV), MemSw(inMagInterlockF))
-		inMagLowLim = IOTableBooleans(Sw(inMagLowLimH), MemSw(inMagLowLimFV), MemSw(inMagLowLimF))
-		inMagLowLimN = IOTableBooleans(Sw(inMagLowLimNH), MemSw(inMagLowLimNFV), MemSw(inMagLowLimNF))
-		inMagPnlRdy = IOTableBooleans(Sw(inMagPnlRdyH), MemSw(inMagPnlRdyFV), MemSw(inMagPnlRdyF))
-		inMagUpLim = IOTableBooleans(Sw(inMagUpLimH), MemSw(inMagUpLimFV), MemSw(inMagUpLimF))
-		inMagUpLimN = IOTableBooleans(Sw(inMagUpLimNH), MemSw(inMagUpLimNFV), MemSw(inMagUpLimNF))
-		leftIntlock1 = IOTableBooleans(Sw(leftIntlock1H), MemSw(leftIntlock1FV), MemSw(leftIntlock1F))
-		leftIntlock2 = IOTableBooleans(Sw(leftIntlock2H), MemSw(leftIntlock2FV), MemSw(leftIntlock2F))
-		maintMode = IOTableBooleans(Sw(MaintModeH), MemSw(maintModeFV), MemSw(maintModeF))
-		monEstop1 = IOTableBooleans(Sw(monEstop1H), MemSw(monEstop1FV), MemSw(monEstop1F))
-		monEstop2 = IOTableBooleans(Sw(monEstop2H), MemSw(monEstop2FV), MemSw(monEstop2F))
-		outMagInt = IOTableBooleans(Sw(outMagIntH), MemSw(outMagIntFV), MemSw(outMagIntF))
-		outMagLowLim = IOTableBooleans(Sw(outMagLowLimH), MemSw(outMagLowLimFV), MemSw(outMagLowLimF))
-		outMagLowLimN = IOTableBooleans(Sw(outMagLowLimNH), MemSw(outMagLowLimNFV), MemSw(outMagLowLimNF))
-		outMagPanelRdy = IOTableBooleans(Sw(outMagPanelRdyH), MemSw(outMagPanelRdyFV), MemSw(outMagPanelRdyF))
-		outMagUpLim = IOTableBooleans(Sw(outMagUpLimH), MemSw(outMagUpLimFV), MemSw(outMagUpLimF))
-		outMagUpLimN = IOTableBooleans(Sw(outMagUpLimNH), MemSw(outMagUpLimNFV), MemSw(outMagUpLimNF))
-		rightIntlock = IOTableBooleans(Sw(rightIntlockH), MemSw(rightIntlockFV), MemSw(rightIntlockF))
+		
+ airPressHigh = IOTableBooleans(Sw(AirPressHighH), MemSw(airPressHighFV), MemSw(airPressHighF))
+		
+ airPressLow = IOTableBooleans(Sw(AirPressLowH), MemSw(airPressLowFV), MemSw(airPressLowF))
+		
+ backIntlock1 = IOTableBooleans(Sw(backIntlock1H), MemSw(backIntlock1FV), MemSw(backIntlock1F))
+		
+ backIntlock2 = IOTableBooleans(Sw(backIntlock2H), MemSw(backIntlock2FV), MemSw(backIntlock2F))
+		
+ cbMonDebrisRmv = IOTableBooleans(Sw(cbMonDebrisRmvH), MemSw(cbMonDebrisRmvFV), MemSw(cbMonDebrisRmvF))
+		
+ cbMonHeatStake = IOTableBooleans(Sw(cbMonHeatStakeH), MemSw(cbMonHeatStakeFV), MemSw(cbMonHeatStakeF))
+		
+ cbMonInMag = IOTableBooleans(Sw(cbMonInMagH), MemSw(cbMonInMagFV), MemSw(cbMonInMagF))
+		
+ cbMonOutMag = IOTableBooleans(Sw(cbMonOutMagH), MemSw(cbMonOutMagFV), MemSw(cbMonOutMagF))
+		
+ cbMonPAS24vdc = IOTableBooleans(Sw(cbMonPAS24vdcH), MemSw(cbMonPAS24vdcFV), MemSw(cbMonPAS24vdcF))
+		
+ cbMonSafety = IOTableBooleans(Sw(cbMonSafetyH), MemSw(cbMonSafetyFV), MemSw(cbMonSafetyF))
+		
+ dc24vOK = IOTableBooleans(Sw(dc24vOKH), MemSw(dc24vOKFV), MemSw(dc24vOKF))
+		
+ edgeDetectGo = IOTableBooleans(Sw(edgeDetectGoH), MemSw(edgeDetectGoFV), MemSw(edgeDetectGoF))
+		
+ edgeDetectHi = IOTableBooleans(Sw(edgeDetectHiH), MemSw(edgeDetectHiFV), MemSw(edgeDetectHiF))
+		
+ edgeDetectLo = IOTableBooleans(Sw(edgeDetectLoH), MemSw(edgeDetectLoFV), MemSw(edgeDetectLoF))
+		
+ flashHomeNC = IOTableBooleans(Sw(FlashHomeNCH), MemSw(flashHomeNCFV), MemSw(flashHomeNCF))
+		
+ flashHomeNO = IOTableBooleans(Sw(FlashHomeNOH), MemSw(flashHomeNOFV), MemSw(flashHomeNOF))
+		
+ flashPnlPrsnt = IOTableBooleans(Sw(FlashPnlPrsntH), MemSw(FlashPnlPrsntFV), MemSw(FlashPnlPrsntF))
+		
+ frontIntlock1 = IOTableBooleans(Sw(frontIntlock1H), MemSw(frontIntlock1FV), MemSw(frontIntlock1F))
+		
+ frontIntlock2 = IOTableBooleans(Sw(frontIntlock2H), MemSw(frontIntlock2FV), MemSw(frontIntlock2F))
+		
+ holeDetected = IOTableBooleans(Sw(holeDetectedH), MemSw(holeDetectedFV), MemSw(holeDetectedF))
+		
+ hsPanelPresnt = IOTableBooleans(Sw(HSPanelPresntH), MemSw(hsPanelPresntFV), MemSw(hsPanelPresntF))
+		
+ inMagInterlock = IOTableBooleans(Sw(inMagInterlockH), MemSw(inMagInterlockFV), MemSw(inMagInterlockF))
+		
+ inMagLowLim = IOTableBooleans(Sw(inMagLowLimH), MemSw(inMagLowLimFV), MemSw(inMagLowLimF))
+		
+ inMagLowLimN = IOTableBooleans(Sw(inMagLowLimNH), MemSw(inMagLowLimNFV), MemSw(inMagLowLimNF))
+		
+ inMagPnlRdy = IOTableBooleans(Sw(inMagPnlRdyH), MemSw(inMagPnlRdyFV), MemSw(inMagPnlRdyF))
+		
+ inMagUpLim = IOTableBooleans(Sw(inMagUpLimH), MemSw(inMagUpLimFV), MemSw(inMagUpLimF))
+		
+ inMagUpLimN = IOTableBooleans(Sw(inMagUpLimNH), MemSw(inMagUpLimNFV), MemSw(inMagUpLimNF))
+		
+ leftIntlock1 = IOTableBooleans(Sw(leftIntlock1H), MemSw(leftIntlock1FV), MemSw(leftIntlock1F))
+		
+ leftIntlock2 = IOTableBooleans(Sw(leftIntlock2H), MemSw(leftIntlock2FV), MemSw(leftIntlock2F))
+		
+ maintMode = IOTableBooleans(Sw(MaintModeH), MemSw(maintModeFV), MemSw(maintModeF))
+		
+ monEstop1 = IOTableBooleans(Sw(monEstop1H), MemSw(monEstop1FV), MemSw(monEstop1F))
+		
+ monEstop2 = IOTableBooleans(Sw(monEstop2H), MemSw(monEstop2FV), MemSw(monEstop2F))
+		
+ outMagInt = IOTableBooleans(Sw(outMagIntH), MemSw(outMagIntFV), MemSw(outMagIntF))
+		
+ outMagLowLim = IOTableBooleans(Sw(outMagLowLimH), MemSw(outMagLowLimFV), MemSw(outMagLowLimF))
+		
+ outMagLowLimN = IOTableBooleans(Sw(outMagLowLimNH), MemSw(outMagLowLimNFV), MemSw(outMagLowLimNF))
+		
+ outMagPanelRdy = IOTableBooleans(Sw(outMagPanelRdyH), MemSw(outMagPanelRdyFV), MemSw(outMagPanelRdyF))
+		
+ outMagUpLim = IOTableBooleans(Sw(outMagUpLimH), MemSw(outMagUpLimFV), MemSw(outMagUpLimF))
+		
+ outMagUpLimN = IOTableBooleans(Sw(outMagUpLimNH), MemSw(outMagUpLimNFV), MemSw(outMagUpLimNF))
+		
+ rightIntlock = IOTableBooleans(Sw(rightIntlockH), MemSw(rightIntlockFV), MemSw(rightIntlockF))
 	Loop
 
 errHandler:
@@ -93,104 +132,97 @@ Function IOTableOutputs()
 			ReturnFlag = False
 		EndIf
 		'---------------------
-
+		'Outputs
 		debrisMtr = IOTableBooleans(debrisMtrCC, MemSw(debrisMtrFV), MemSw(debrisMtrF))
-			If debrisMtr = True Then
-				On (debrisMtrH)
-			Else
-				Off (debrisMtrH)
-			EndIf
-
+		If debrisMtr = True Then
+		        On (debrisMtrH)
+		    Else
+		        Off (debrisMtrH)
+		    EndIf
 		drillGo = IOTableBooleans(drillGoCC, MemSw(drillGoFV), MemSw(drillGoF))
 		If drillGo = True Then
-			On (DrillGoH)
-		Else
-			Off (DrillGoH)
-		EndIf
-
+		        On (DrillGoH)
+		    Else
+		        Off (DrillGoH)
+		    EndIf
+		drillReturn = IOTableBooleans(drillReturnCC, MemSw(drillReturnFV), MemSw(drillReturnF))
+		If drillReturn = True Then
+		        On (DrillReturnH)
+		    Else
+		        Off (DrillReturnH)
+		    EndIf
 		eStopReset = IOTableBooleans(eStopResetCC, MemSw(eStopResetFV), MemSw(eStopResetF))
 		If eStopReset = True Then
-			On (eStopResetH)
-		Else
-			Off (eStopResetH)
-		EndIf
-
+		        On (eStopResetH)
+		    Else
+		        Off (eStopResetH)
+		    EndIf
 		inMagMtr = IOTableBooleans(inMagMtrCC, MemSw(inMagMtrFV), MemSw(inMagMtrF))
 		If inMagMtr = True Then
-			On (inMagMtrH)
-		Else
-			Off (inMagMtrH)
-		EndIf
-
+		        On (inMagMtrH)
+		    Else
+		        Off (inMagMtrH)
+		    EndIf
 		inMagMtrDir = IOTableBooleans(inMagMtrDirCC, MemSw(inMagMtrDirFV), MemSw(inMagMtrDirF))
 		If inMagMtrDir = True Then
-			On (inMagMtrDirH)
-		Else
-			Off (inMagMtrDirH)
-		EndIf
-
+		        On (inMagMtrDirH)
+		    Else
+		        Off (inMagMtrDirH)
+		    EndIf
 		outMagMtr = IOTableBooleans(outMagMtrCC, MemSw(outMagMtrFV), MemSw(outMagMtrF))
 		If outMagMtr = True Then
-			On (outMagMtrH)
-		Else
-			Off (outMagMtrH)
-		EndIf
-
+		        On (outMagMtrH)
+		    Else
+		        Off (outMagMtrH)
+		    EndIf
 		outMagMtrDir = IOTableBooleans(outMagMtrDirCC, MemSw(outMagMtrDirFV), MemSw(outMagMtrDirF))
 		If outMagMtrDir = True Then
-			On (outMagMtrDirH)
-		Else
-			Off (outMagMtrDirH)
-		EndIf
-
+		        On (outMagMtrDirH)
+		    Else
+		        Off (outMagMtrDirH)
+		    EndIf
 		stackLightAlrm = IOTableBooleans(stackLightAlrmCC, MemSw(stackLightAlrmFV), MemSw(stackLightAlrmF))
 		If stackLightAlrm = True Then
-			On (stackLightAlrmH)
-		Else
-			Off (stackLightAlrmH)
-		EndIf
-
+		        On (stackLightAlrmH)
+		    Else
+		        Off (stackLightAlrmH)
+		    EndIf
 		stackLightGrn = IOTableBooleans(stackLightGrnCC, MemSw(stackLightGrnFV), MemSw(stackLightGrnF))
 		If stackLightGrn = True Then
-			On (stackLightGrnH)
-		Else
-			Off (stackLightGrnH)
-		EndIf
-
+		        On (stackLightGrnH)
+		    Else
+		        Off (stackLightGrnH)
+		    EndIf
 		stackLightRed = IOTableBooleans(stackLightRedCC, MemSw(stackLightRedFV), MemSw(stackLightRedF))
 		If stackLightRed = True Then
-			On (stackLightRedH)
-		Else
-			Off (stackLightRedH)
-		EndIf
-
+		        On (stackLightRedH)
+		    Else
+		        Off (stackLightRedH)
+		    EndIf
 		stackLightYel = IOTableBooleans(stackLightYelCC, MemSw(stackLightYelFV), MemSw(stackLightYelF))
 		If stackLightYel = True Then
-			On (stackLightYelH)
-		Else
-			Off (stackLightYelH)
-		EndIf
-
+		        On (stackLightYelH)
+		    Else
+		        Off (stackLightYelH)
+		    EndIf
 		suctionCups = IOTableBooleans(suctionCupsCC, MemSw(suctionCupsFV), MemSw(suctionCupsF))
 		If suctionCups = True Then
-			On (suctionCupsH)
-		Else
-			Off (suctionCupsH)
-		EndIf
-		
+		        On (suctionCupsH)
+		    Else
+		        Off (suctionCupsH)
+		    EndIf
 		crowding = IOTableBooleans(crowdingCC, MemSw(crowdingFV), MemSw(crowdingF))
 		If crowding = True Then
-			On CrowdingH
-		Else
-			Off CrowdingH
-		EndIf
-		
+		        On (CrowdingH)
+		    Else
+		        Off (CrowdingH)
+		    EndIf
 		crowdingX = IOTableBooleans(crowdingXCC, MemSw(crowdingXFV), MemSw(crowdingXF))
 		If crowdingX = True Then
-			On crowdingXH
-		Else
-			Off crowdingXH
-		EndIf
+		        On (crowdingXH)
+		    Else
+		        Off (crowdingXH)
+		    EndIf
 	Loop
 
 errHandler:
@@ -510,7 +542,6 @@ Function iotransfer()
 	Boolean m_GripperEarsOutOld
 	Boolean m_GripperEarsInOld
 
-	Double recPartNumberOld
 	Integer ctrlrErrAxisNumberOld
 	Integer ctrlrErrorNumOld
 	Integer ctrlrLineNumberOld
@@ -623,6 +654,10 @@ Function iotransfer()
 	Real recSuctionWaitTimeOld
 	Real zLimitOld
 	Real ZmaxTorqueOld
+
+	Double panelHoleXOld(25)
+	Double panelHoleYOld(25)
+
 	String ctrlrErrMsgOld$
    
 	' define the connection to the HMI
@@ -659,6 +694,8 @@ Function iotransfer()
 		' ===========================================================================
 
 		'Tx to HMI:
+		
+		'!!!!!!!!!!!!!!CHECK FOR DON'T DELETE BLOCKS!!!!!!!!!!!!!!!!!!!!!!!!
 
 		'_Don' replace when updating robot.txt_____________
 		If ctrlrErrMsg$ <> ctrlrErrMsgOld$ Then
@@ -667,6 +704,7 @@ Function iotransfer()
 		EndIf
 		'_____________
 	
+		'Tx to HMI:
 		If alarmMute <> alarmMuteOld Then
 			Print #201, "{", Chr$(&H22) + "alarmMute" + Chr$(&H22), ":", Str$(alarmMute), "}",
 			alarmMuteOld = alarmMute
@@ -683,6 +721,10 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "inMagGoHome" + Chr$(&H22), ":", Str$(inMagGoHome), "}",
 			inMagGoHomeOld = inMagGoHome
 		EndIf
+		If inMagIntLockAck <> inMagIntLockAckOld Then
+			Print #201, "{", Chr$(&H22) + "inMagIntLockAck" + Chr$(&H22), ":", Str$(inMagIntLockAck), "}",
+			inMagIntLockAckOld = inMagIntLockAck
+		EndIf
 		If inMagLoaded <> inMagLoadedOld Then
 			Print #201, "{", Chr$(&H22) + "inMagLoaded" + Chr$(&H22), ":", Str$(inMagLoaded), "}",
 			inMagLoadedOld = inMagLoaded
@@ -695,6 +737,10 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "jobStart" + Chr$(&H22), ":", Str$(jobStart), "}",
 			jobStartOld = jobStart
 		EndIf
+		If startLearning <> startLearningOld Then
+			Print #201, "{", Chr$(&H22) + "startLearning" + Chr$(&H22), ":", Str$(startLearning), "}",
+			startLearningOld = startLearning
+		EndIf
 		If leftInterlockACK <> leftInterlockACKOld Then
 			Print #201, "{", Chr$(&H22) + "leftInterlockACK" + Chr$(&H22), ":", Str$(leftInterlockACK), "}",
 			leftInterlockACKOld = leftInterlockACK
@@ -702,6 +748,10 @@ Function iotransfer()
 		If outMagGoHome <> outMagGoHomeOld Then
 			Print #201, "{", Chr$(&H22) + "outMagGoHome" + Chr$(&H22), ":", Str$(outMagGoHome), "}",
 			outMagGoHomeOld = outMagGoHome
+		EndIf
+		If outMagIntLockAck <> outMagIntLockAckOld Then
+			Print #201, "{", Chr$(&H22) + "outMagIntLockAck" + Chr$(&H22), ":", Str$(outMagIntLockAck), "}",
+			outMagIntLockAckOld = outMagIntLockAck
 		EndIf
 		If outMagUnloaded <> outMagUnloadedOld Then
 			Print #201, "{", Chr$(&H22) + "outMagUnloaded" + Chr$(&H22), ":", Str$(outMagUnloaded), "}",
@@ -767,10 +817,6 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "erHmiDataAck" + Chr$(&H22), ":", Str$(erHmiDataAck), "}",
 			erHmiDataAckOld = erHmiDataAck
 		EndIf
-		If erPanelUndefined <> erPanelUndefinedOld Then
-			Print #201, "{", Chr$(&H22) + "erPanelUndefined" + Chr$(&H22), ":", Str$(erPanelUndefined), "}",
-			erPanelUndefinedOld = erPanelUndefined
-		EndIf
 		If erIllegalArmMove <> erIllegalArmMoveOld Then
 			Print #201, "{", Chr$(&H22) + "erIllegalArmMove" + Chr$(&H22), ":", Str$(erIllegalArmMove), "}",
 			erIllegalArmMoveOld = erIllegalArmMove
@@ -811,6 +857,18 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "erLowPressure" + Chr$(&H22), ":", Str$(erLowPressure), "}",
 			erLowPressureOld = erLowPressure
 		EndIf
+		If erModbusCommand <> erModbusCommandOld Then
+			Print #201, "{", Chr$(&H22) + "erModbusCommand" + Chr$(&H22), ":", Str$(erModbusCommand), "}",
+			erModbusCommandOld = erModbusCommand
+		EndIf
+		If erModbusPort <> erModbusPortOld Then
+			Print #201, "{", Chr$(&H22) + "erModbusPort" + Chr$(&H22), ":", Str$(erModbusPort), "}",
+			erModbusPortOld = erModbusPort
+		EndIf
+		If erModbusTimeout <> erModbusTimeoutOld Then
+			Print #201, "{", Chr$(&H22) + "erModbusTimeout" + Chr$(&H22), ":", Str$(erModbusTimeout), "}",
+			erModbusTimeoutOld = erModbusTimeout
+		EndIf
 		If erOutMagBreaker <> erOutMagBreakerOld Then
 			Print #201, "{", Chr$(&H22) + "erOutMagBreaker" + Chr$(&H22), ":", Str$(erOutMagBreaker), "}",
 			erOutMagBreakerOld = erOutMagBreaker
@@ -842,6 +900,10 @@ Function iotransfer()
 		If erPanelStatusUnknown <> erPanelStatusUnknownOld Then
 			Print #201, "{", Chr$(&H22) + "erPanelStatusUnknown" + Chr$(&H22), ":", Str$(erPanelStatusUnknown), "}",
 			erPanelStatusUnknownOld = erPanelStatusUnknown
+		EndIf
+		If erPanelUndefined <> erPanelUndefinedOld Then
+			Print #201, "{", Chr$(&H22) + "erPanelUndefined" + Chr$(&H22), ":", Str$(erPanelUndefined), "}",
+			erPanelUndefinedOld = erPanelUndefined
 		EndIf
 		If erParamEntryMissing <> erParamEntryMissingOld Then
 			Print #201, "{", Chr$(&H22) + "erParamEntryMissing" + Chr$(&H22), ":", Str$(erParamEntryMissing), "}",
@@ -995,8 +1057,6 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "hole22R" + Chr$(&H22), ":", Str$(hole22R), "}",
 			hole22ROld = hole22R
 		EndIf
-	
-	'why was this missing????
 		If hole23L <> hole23LOld Then
 			Print #201, "{", Chr$(&H22) + "hole23L" + Chr$(&H22), ":", Str$(hole23L), "}",
 			hole23LOld = hole23L
@@ -1005,8 +1065,6 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "hole23R" + Chr$(&H22), ":", Str$(hole23R), "}",
 			hole23ROld = hole23R
 		EndIf
-	'end of missing code----------------------------------
-	
 		If hole2L <> hole2LOld Then
 			Print #201, "{", Chr$(&H22) + "hole2L" + Chr$(&H22), ":", Str$(hole2L), "}",
 			hole2LOld = hole2L
@@ -1279,9 +1337,224 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "suctionCups" + Chr$(&H22), ":", Str$(suctionCups), "}",
 			suctionCupsOld = suctionCups
 		EndIf
+		If crowding <> crowdingOld Then
+			Print #201, "{", Chr$(&H22) + "crowding" + Chr$(&H22), ":", Str$(crowding), "}",
+			crowdingOld = crowding
+		EndIf
+		If crowdingX <> crowdingXOld Then
+			Print #201, "{", Chr$(&H22) + "crowdingX" + Chr$(&H22), ":", Str$(crowdingX), "}",
+			crowdingXOld = crowdingX
+		EndIf
+		
+		
+		'================================================================
+		'================================================================
+		' Dont delete this when updating, unless the autogen script has been updated to include these changes
+		'================================================================
+		'================================================================
+
+
+		If PanelHoleX(01) <> panelHoleXOld(01) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact01" + Chr$(&H22), ":", Str$(recHoleXact01), "}",
+			panelHoleXOld(01) = PanelHoleX(01)
+		EndIf
+		If PanelHoleY(01) <> panelHoleYOld(01) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact01" + Chr$(&H22), ":", Str$(recHoleYact01), "}",
+			panelHoleYOld(01) = PanelHoleY(01)
+		EndIf
+		If PanelHoleX(02) <> panelHoleXOld(02) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact02" + Chr$(&H22), ":", Str$(recHoleXact02), "}",
+			panelHoleXOld(02) = PanelHoleX(02)
+		EndIf
+		If PanelHoleY(02) <> panelHoleYOld(02) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact02" + Chr$(&H22), ":", Str$(recHoleYact02), "}",
+			panelHoleYOld(02) = PanelHoleY(02)
+		EndIf
+		If PanelHoleX(03) <> panelHoleXOld(03) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact03" + Chr$(&H22), ":", Str$(recHoleXact03), "}",
+			panelHoleXOld(03) = PanelHoleX(03)
+		EndIf
+		If PanelHoleY(03) <> panelHoleYOld(03) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact03" + Chr$(&H22), ":", Str$(recHoleYact03), "}",
+			panelHoleYOld(03) = PanelHoleY(03)
+		EndIf
+		If PanelHoleX(04) <> panelHoleXOld(04) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact04" + Chr$(&H22), ":", Str$(recHoleXact04), "}",
+			panelHoleXOld(04) = PanelHoleX(04)
+		EndIf
+		If PanelHoleY(04) <> panelHoleYOld(04) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact04" + Chr$(&H22), ":", Str$(recHoleYact04), "}",
+			panelHoleYOld(04) = PanelHoleY(04)
+		EndIf
+		If PanelHoleX(05) <> panelHoleXOld(05) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact05" + Chr$(&H22), ":", Str$(recHoleXact05), "}",
+			panelHoleXOld(05) = PanelHoleX(05)
+		EndIf
+		If PanelHoleY(05) <> panelHoleYOld(05) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact05" + Chr$(&H22), ":", Str$(recHoleYact05), "}",
+			panelHoleYOld(05) = PanelHoleY(05)
+		EndIf
+		If PanelHoleX(06) <> panelHoleXOld(06) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact06" + Chr$(&H22), ":", Str$(recHoleXact06), "}",
+			panelHoleXOld(06) = PanelHoleX(06)
+		EndIf
+		If PanelHoleY(06) <> panelHoleYOld(06) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact06" + Chr$(&H22), ":", Str$(recHoleYact06), "}",
+			panelHoleYOld(06) = PanelHoleY(06)
+		EndIf
+		If PanelHoleX(07) <> panelHoleXOld(07) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact07" + Chr$(&H22), ":", Str$(recHoleXact07), "}",
+			panelHoleXOld(07) = PanelHoleX(07)
+		EndIf
+		If PanelHoleY(07) <> panelHoleYOld(07) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact07" + Chr$(&H22), ":", Str$(recHoleYact07), "}",
+			panelHoleYOld(07) = PanelHoleY(07)
+		EndIf
+		If PanelHoleX(08) <> panelHoleXOld(08) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact08" + Chr$(&H22), ":", Str$(recHoleXact08), "}",
+			panelHoleXOld(08) = PanelHoleX(08)
+		EndIf
+		If PanelHoleY(08) <> panelHoleYOld(08) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact08" + Chr$(&H22), ":", Str$(recHoleYact08), "}",
+			panelHoleYOld(08) = PanelHoleY(08)
+		EndIf
+		If PanelHoleX(09) <> panelHoleXOld(09) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact09" + Chr$(&H22), ":", Str$(recHoleXact09), "}",
+			panelHoleXOld(09) = PanelHoleX(09)
+		EndIf
+		If PanelHoleY(09) <> panelHoleYOld(09) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact09" + Chr$(&H22), ":", Str$(recHoleYact09), "}",
+			panelHoleYOld(09) = PanelHoleY(09)
+		EndIf
+		If PanelHoleX(10) <> panelHoleXOld(10) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact10" + Chr$(&H22), ":", Str$(recHoleXact10), "}",
+			panelHoleXOld(10) = PanelHoleX(10)
+		EndIf
+		If PanelHoleY(10) <> panelHoleYOld(10) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact10" + Chr$(&H22), ":", Str$(recHoleYact10), "}",
+			panelHoleYOld(10) = PanelHoleY(10)
+		EndIf
+		If PanelHoleX(11) <> panelHoleXOld(11) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact11" + Chr$(&H22), ":", Str$(recHoleXact11), "}",
+			panelHoleXOld(11) = PanelHoleX(11)
+		EndIf
+		If PanelHoleY(11) <> panelHoleYOld(11) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact11" + Chr$(&H22), ":", Str$(recHoleYact11), "}",
+			panelHoleYOld(11) = PanelHoleY(11)
+		EndIf
+		If PanelHoleX(12) <> panelHoleXOld(12) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact12" + Chr$(&H22), ":", Str$(recHoleXact12), "}",
+			panelHoleXOld(12) = PanelHoleX(12)
+		EndIf
+		If PanelHoleY(12) <> panelHoleYOld(12) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact12" + Chr$(&H22), ":", Str$(recHoleYact12), "}",
+			panelHoleYOld(12) = PanelHoleY(12)
+		EndIf
+		If PanelHoleX(13) <> panelHoleXOld(13) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact13" + Chr$(&H22), ":", Str$(recHoleXact13), "}",
+			panelHoleXOld(13) = PanelHoleX(13)
+		EndIf
+		If PanelHoleY(13) <> panelHoleYOld(13) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact13" + Chr$(&H22), ":", Str$(recHoleYact13), "}",
+			panelHoleYOld(13) = PanelHoleY(13)
+		EndIf
+		If PanelHoleX(14) <> panelHoleXOld(14) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact14" + Chr$(&H22), ":", Str$(recHoleXact14), "}",
+			panelHoleXOld(14) = PanelHoleX(14)
+		EndIf
+		If PanelHoleY(14) <> panelHoleYOld(14) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact14" + Chr$(&H22), ":", Str$(recHoleYact14), "}",
+			panelHoleYOld(14) = PanelHoleY(14)
+		EndIf
+		If PanelHoleX(15) <> panelHoleXOld(15) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact15" + Chr$(&H22), ":", Str$(recHoleXact15), "}",
+			panelHoleXOld(15) = PanelHoleX(15)
+		EndIf
+		If PanelHoleY(15) <> panelHoleYOld(15) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact15" + Chr$(&H22), ":", Str$(recHoleYact15), "}",
+			panelHoleYOld(15) = PanelHoleY(15)
+		EndIf
+		If PanelHoleX(16) <> panelHoleXOld(16) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact16" + Chr$(&H22), ":", Str$(recHoleXact16), "}",
+			panelHoleXOld(16) = PanelHoleX(16)
+		EndIf
+		If PanelHoleY(16) <> panelHoleYOld(16) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact16" + Chr$(&H22), ":", Str$(recHoleYact16), "}",
+			panelHoleYOld(16) = PanelHoleY(16)
+		EndIf
+		If PanelHoleX(17) <> panelHoleXOld(17) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact17" + Chr$(&H22), ":", Str$(recHoleXact17), "}",
+			panelHoleXOld(17) = PanelHoleX(17)
+		EndIf
+		If PanelHoleY(17) <> panelHoleYOld(17) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact17" + Chr$(&H22), ":", Str$(recHoleYact17), "}",
+			panelHoleYOld(17) = PanelHoleY(17)
+		EndIf
+		If PanelHoleX(18) <> panelHoleXOld(18) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact18" + Chr$(&H22), ":", Str$(recHoleXact18), "}",
+			panelHoleXOld(18) = PanelHoleX(18)
+		EndIf
+		If PanelHoleY(18) <> panelHoleYOld(18) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact18" + Chr$(&H22), ":", Str$(recHoleYact18), "}",
+			panelHoleYOld(18) = PanelHoleY(18)
+		EndIf
+		If PanelHoleX(19) <> panelHoleXOld(19) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact19" + Chr$(&H22), ":", Str$(recHoleXact19), "}",
+			panelHoleXOld(19) = PanelHoleX(19)
+		EndIf
+		If PanelHoleY(19) <> panelHoleYOld(19) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact19" + Chr$(&H22), ":", Str$(recHoleYact19), "}",
+			panelHoleYOld(19) = PanelHoleY(19)
+		EndIf
+		If PanelHoleX(20) <> panelHoleXOld(20) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact20" + Chr$(&H22), ":", Str$(recHoleXact20), "}",
+			panelHoleXOld(20) = PanelHoleX(20)
+		EndIf
+		If PanelHoleY(20) <> panelHoleYOld(20) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact20" + Chr$(&H22), ":", Str$(recHoleYact20), "}",
+			panelHoleYOld(20) = PanelHoleY(20)
+		EndIf
+		If PanelHoleX(21) <> panelHoleXOld(21) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact21" + Chr$(&H22), ":", Str$(recHoleXact21), "}",
+			panelHoleXOld(21) = PanelHoleX(21)
+		EndIf
+		If PanelHoleY(21) <> panelHoleYOld(21) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact21" + Chr$(&H22), ":", Str$(recHoleYact21), "}",
+			panelHoleYOld(21) = PanelHoleY(21)
+		EndIf
+		If PanelHoleX(22) <> panelHoleXOld(22) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact22" + Chr$(&H22), ":", Str$(recHoleXact22), "}",
+			panelHoleXOld(22) = PanelHoleX(22)
+		EndIf
+		If PanelHoleY(22) <> panelHoleYOld(22) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact22" + Chr$(&H22), ":", Str$(recHoleYact22), "}",
+			panelHoleYOld(22) = PanelHoleY(22)
+		EndIf
+		If PanelHoleX(23) <> panelHoleXOld(23) Then
+			Print #201, "{", Chr$(&H22) + "recHoleXact23" + Chr$(&H22), ":", Str$(recHoleXact23), "}",
+			panelHoleXOld(23) = PanelHoleX(23)
+		EndIf
+		If PanelHoleY(23) <> panelHoleYOld(23) Then
+			Print #201, "{", Chr$(&H22) + "recHoleYact23" + Chr$(&H22), ":", Str$(recHoleYact23), "}",
+			panelHoleYOld(23) = PanelHoleY(23)
+		EndIf
+
+
+
+		
+		'================================================================		
+		'================================================================
+		' End of don't delete block
+		'================================================================
+		'================================================================		
+		
 		If ctrlrErrAxisNumber <> ctrlrErrAxisNumberOld Then
 			Print #201, "{", Chr$(&H22) + "ctrlrErrAxisNumber" + Chr$(&H22), ":", Str$(ctrlrErrAxisNumber), "}",
 			ctrlrErrAxisNumberOld = ctrlrErrAxisNumber
+		EndIf
+		If ctrlrErrMsg <> ctrlrErrMsgOld Then
+			Print #201, "{", Chr$(&H22) + "ctrlrErrMsg" + Chr$(&H22), ":", Str$(ctrlrErrMsg), "}",
+			ctrlrErrMsgOld = ctrlrErrMsg
 		EndIf
 		If ctrlrErrorNum <> ctrlrErrorNumOld Then
 			Print #201, "{", Chr$(&H22) + "ctrlrErrorNum" + Chr$(&H22), ":", Str$(ctrlrErrorNum), "}",
@@ -1427,14 +1700,10 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "hole22PF" + Chr$(&H22), ":", Str$(hole22PF), "}",
 			hole22PFOld = hole22PF
 		EndIf
-	
-	
 		If hole23PF <> hole23PFOld Then
 			Print #201, "{", Chr$(&H22) + "hole23PF" + Chr$(&H22), ":", Str$(hole23PF), "}",
 			hole23PFOld = hole23PF
 		EndIf
-	
-	
 		If hole2PF <> hole2PFOld Then
 			Print #201, "{", Chr$(&H22) + "hole2PF" + Chr$(&H22), ":", Str$(hole2PF), "}",
 			hole2PFOld = hole2PF
@@ -1704,1055 +1973,1219 @@ Function setVars(response$ As String)
 	EndIf
 	
 	Select tokens$(0)
-	'Rx from HMI:
 
-	Case "alarmMuteBtn"
-		If tokens$(1) = "true" Then
-			alarmMuteBtn = True
-			alarmMute = True
-		Else
-			alarmMuteBtn = False
-		EndIf
-	Case "backInterlockACKBtn"
-		If tokens$(1) = "true" Then
-			backInterlockACKBtn = True
-			backInterlockACK = True
-		Else
-			backInterlockACKBtn = False
-		EndIf
-	Case "frontInterlockACKBtn"
-		If tokens$(1) = "true" Then
-			frontInterlockACKBtn = True
-			frontInterlockACK = True
-		Else
-			frontInterlockACKBtn = False
-		EndIf
-	Case "inMagGoHomeBtn"
-		If tokens$(1) = "true" Then
-			inMagGoHomeBtn = True
-			inMagGoHome = True
-		Else
-			inMagGoHomeBtn = False
-		EndIf
-	Case "inMagLoadedBtn"
-		If tokens$(1) = "true" Then
-			inMagLoadedBtn = True
-			inMagLoaded = True
-		Else
-			inMagLoadedBtn = False
-		EndIf
-	Case "jobAbortBtn"
-		If tokens$(1) = "true" Then
-			jobAbortBtn = True
-			jobAbort = True
-		Else
-			jobAbortBtn = False
-		EndIf
-	Case "jobStartBtn"
-		If tokens$(1) = "true" Then
-			jobStartBtn = True
-			jobStart = True
-		Else
-			jobStartBtn = False
-		EndIf
-	Case "leftInterlockACKBtn"
-		If tokens$(1) = "true" Then
-			leftInterlockACKBtn = True
-			leftInterlockACK = True
-		Else
-			leftInterlockACKBtn = False
-		EndIf
-	Case "outMagGoHomeBtn"
-		If tokens$(1) = "true" Then
-			outMagGoHomeBtn = True
-			outMagGoHome = True
-		Else
-			outMagGoHomeBtn = False
-		EndIf
-	Case "outMagUnloadedBtn"
-		If tokens$(1) = "true" Then
-			outMagUnloadedBtn = True
-			outMagUnloaded = True
-		Else
-			outMagUnloadedBtn = False
-		EndIf
-	Case "panelDataTxACKBtn"
-		If tokens$(1) = "true" Then
-			panelDataTxACKBtn = True
-			panelDataTxACK = True
-		Else
-			panelDataTxACKBtn = False
-		EndIf
-	Case "rightInterlockACKBtn"
-		If tokens$(1) = "true" Then
-			rightInterlockACKBtn = True
-			rightInterlockACK = True
-		Else
-			rightInterlockACKBtn = False
-		EndIf
-	Case "sftyFrmIlockAckBtn"
-		If tokens$(1) = "true" Then
-			sftyFrmIlockAckBtn = True
-			sftyFrmIlockAck = True
-		Else
-			sftyFrmIlockAckBtn = False
-		EndIf
-	Case "airPressHighF"
-		If tokens$(1) = "true" Then
-			MemOn (airPressHighF)
-		Else
-			MemOff (airPressHighF)
-		EndIf
-	Case "airPressHighFV"
-		If tokens$(1) = "true" Then
-			MemOn (airPressHighFV)
-		Else
-			MemOff (airPressHighFV)
-		EndIf
-	Case "airPressLowF"
-		If tokens$(1) = "true" Then
-			MemOn (airPressLowF)
-		Else
-			MemOff (airPressLowF)
-		EndIf
-	Case "airPressLowFV"
-		If tokens$(1) = "true" Then
-			MemOn (airPressLowFV)
-		Else
-			MemOff (airPressLowFV)
-		EndIf
-	Case "backIntlock1F"
-		If tokens$(1) = "true" Then
-			MemOn (backIntlock1F)
-		Else
-			MemOff (backIntlock1F)
-		EndIf
-	Case "backIntlock1FV"
-		If tokens$(1) = "true" Then
-			MemOn (backIntlock1FV)
-		Else
-			MemOff (backIntlock1FV)
-		EndIf
-	Case "backIntlock2F"
-		If tokens$(1) = "true" Then
-			MemOn (backIntlock2F)
-		Else
-			MemOff (backIntlock2F)
-		EndIf
-	Case "backIntlock2FV"
-		If tokens$(1) = "true" Then
-			MemOn (backIntlock2FV)
-		Else
-			MemOff (backIntlock2FV)
-		EndIf
-	Case "cbMonDebrisRmvF"
-		If tokens$(1) = "true" Then
-			MemOn (cbMonDebrisRmvF)
-		Else
-			MemOff (cbMonDebrisRmvF)
-		EndIf
-	Case "cbMonDebrisRmvFV"
-		If tokens$(1) = "true" Then
-			MemOn (cbMonDebrisRmvFV)
-		Else
-			MemOff (cbMonDebrisRmvFV)
-		EndIf
-	Case "cbMonHeatStakeF"
-		If tokens$(1) = "true" Then
-			MemOn (cbMonHeatStakeF)
-		Else
-			MemOff (cbMonHeatStakeF)
-		EndIf
-	Case "cbMonHeatStakeFV"
-		If Tokens$(1) = "true" Then
-			MemOn (cbMonHeatStakeFV)
-		Else
-			MemOff (cbMonHeatStakeFV)
-		EndIf
-	Case "cbMonInMagF"
-		If Tokens$(1) = "true" Then
-			MemOn (cbMonInMagF)
-		Else
-			MemOff (cbMonInMagF)
-		EndIf
-	Case "cbMonInMagFV"
-		If Tokens$(1) = "true" Then
-			MemOn (cbMonInMagFV)
-		Else
-			MemOff (cbMonInMagFV)
-		EndIf
-	Case "cbMonOutMagF"
-		If Tokens$(1) = "true" Then
-			MemOn (cbMonOutMagF)
-		Else
-			MemOff (cbMonOutMagF)
-		EndIf
-	Case "cbMonOutMagFV"
-		If Tokens$(1) = "true" Then
-			MemOn (cbMonOutMagFV)
-		Else
-			MemOff (cbMonOutMagFV)
-		EndIf
-	Case "cbMonPAS24vdcF"
-		If Tokens$(1) = "true" Then
-			MemOn (cbMonPAS24vdcF)
-		Else
-			MemOff (cbMonPAS24vdcF)
-		EndIf
-	Case "cbMonPAS24vdcFV"
-		If Tokens$(1) = "true" Then
-			MemOn (cbMonPAS24vdcFV)
-		Else
-			MemOff (cbMonPAS24vdcFV)
-		EndIf
-	Case "cbMonSafetyF"
-		If Tokens$(1) = "true" Then
-			MemOn (cbMonSafetyF)
-		Else
-			MemOff (cbMonSafetyF)
-		EndIf
-	Case "cbMonSafetyFV"
-		If Tokens$(1) = "true" Then
-			MemOn (cbMonSafetyFV)
-		Else
-			MemOff (cbMonSafetyFV)
-		EndIf
-	Case "dc24vOKF"
-		If Tokens$(1) = "true" Then
-			MemOn (dc24vOKF)
-		Else
-			MemOff (dc24vOKF)
-		EndIf
-	Case "dc24vOKFV"
-		If Tokens$(1) = "true" Then
-			MemOn (dc24vOKFV)
-		Else
-			MemOff (dc24vOKFV)
-		EndIf
-	Case "edgeDetectGoF"
-		If Tokens$(1) = "true" Then
-			MemOn (edgeDetectGoF)
-		Else
-			MemOff (edgeDetectGoF)
-		EndIf
-	Case "edgeDetectGoFV"
-		If Tokens$(1) = "true" Then
-			MemOn (edgeDetectGoFV)
-		Else
-			MemOff (edgeDetectGoFV)
-		EndIf
-	Case "edgeDetectHiF"
-		If Tokens$(1) = "true" Then
-			MemOn (edgeDetectHiF)
-		Else
-			MemOff (edgeDetectHiF)
-		EndIf
-	Case "edgeDetectHiFV"
-		If Tokens$(1) = "true" Then
-			MemOn (edgeDetectHiFV)
-		Else
-			MemOff (edgeDetectHiFV)
-		EndIf
-	Case "edgeDetectLoF"
-		If Tokens$(1) = "true" Then
-			MemOn (edgeDetectLoF)
-		Else
-			MemOff (edgeDetectLoF)
-		EndIf
-	Case "edgeDetectLoFV"
-		If Tokens$(1) = "true" Then
-			MemOn (edgeDetectLoFV)
-		Else
-			MemOff (edgeDetectLoFV)
-		EndIf
-	Case "flashHomeNCF"
-		If Tokens$(1) = "true" Then
-			MemOn (flashHomeNCF)
-		Else
-			MemOff (flashHomeNCF)
-		EndIf
-	Case "flashHomeNCFV"
-		If Tokens$(1) = "true" Then
-			MemOn (flashHomeNCFV)
-		Else
-			MemOff (flashHomeNCFV)
-		EndIf
-	Case "flashHomeNOF"
-		If Tokens$(1) = "true" Then
-			MemOn (flashHomeNOF)
-		Else
-			MemOff (flashHomeNOF)
-		EndIf
-	Case "flashHomeNOFV"
-		If Tokens$(1) = "true" Then
-			MemOn (flashHomeNOFV)
-		Else
-			MemOff (flashHomeNOFV)
-		EndIf
-	Case "flashPnlPrsntF"
-		If Tokens$(1) = "true" Then
-			MemOn (FlashPnlPrsntF)
-		Else
-			MemOff (FlashPnlPrsntF)
-		EndIf
-	Case "flashPnlPrsntFV"
-		If Tokens$(1) = "true" Then
-			MemOn (FlashPnlPrsntFV)
-		Else
-			MemOff (FlashPnlPrsntFV)
-		EndIf
-	Case "frontIntlock1F"
-		If Tokens$(1) = "true" Then
-			MemOn (frontIntlock1F)
-		Else
-			MemOff (frontIntlock1F)
-		EndIf
-	Case "frontIntlock1FV"
-		If Tokens$(1) = "true" Then
-			MemOn (frontIntlock1FV)
-		Else
-			MemOff (frontIntlock1FV)
-		EndIf
-	Case "frontIntlock2F"
-		If Tokens$(1) = "true" Then
-			MemOn (frontIntlock2F)
-		Else
-			MemOff (frontIntlock2F)
-		EndIf
-	Case "frontIntlock2FV"
-		If Tokens$(1) = "true" Then
-			MemOn (frontIntlock2FV)
-		Else
-			MemOff (frontIntlock2FV)
-		EndIf
-	Case "holeDetectedF"
-		If Tokens$(1) = "true" Then
-			MemOn (holeDetectedF)
-		Else
-			MemOff (holeDetectedF)
-		EndIf
-	Case "holeDetectedFV"
-		If Tokens$(1) = "true" Then
-			MemOn (holeDetectedFV)
-		Else
-			MemOff (holeDetectedFV)
-		EndIf
-	Case "hsPanelPresntF"
-		If Tokens$(1) = "true" Then
-			MemOn (hsPanelPresntF)
-		Else
-			MemOff (hsPanelPresntF)
-		EndIf
-	Case "hsPanelPresntFV"
-		If Tokens$(1) = "true" Then
-			MemOn (hsPanelPresntFV)
-		Else
-			MemOff (hsPanelPresntFV)
-		EndIf
-	Case "inMagInterlockF"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagInterlockF)
-		Else
-			MemOff (inMagInterlockF)
-		EndIf
-	Case "inMagInterlockFV"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagInterlockFV)
-		Else
-			MemOff (inMagInterlockFV)
-		EndIf
-	Case "inMagLowLimF"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagLowLimF)
-		Else
-			MemOff (inMagLowLimF)
-		EndIf
-	Case "inMagLowLimFV"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagLowLimFV)
-		Else
-			MemOff (inMagLowLimFV)
-		EndIf
-	Case "inMagLowLimNF"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagLowLimNF)
-		Else
-			MemOff (inMagLowLimNF)
-		EndIf
-	Case "inMagLowLimNFV"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagLowLimNFV)
-		Else
-			MemOff (inMagLowLimNFV)
-		EndIf
-	Case "inMagPnlRdyF"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagPnlRdyF)
-		Else
-			MemOff (inMagPnlRdyF)
-		EndIf
-	Case "inMagPnlRdyFV"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagPnlRdyFV)
-		Else
-			MemOff (inMagPnlRdyFV)
-		EndIf
-	Case "inMagUpLimF"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagUpLimF)
-		Else
-			MemOff (inMagUpLimF)
-		EndIf
-	Case "inMagUpLimFV"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagUpLimFV)
-		Else
-			MemOff (inMagUpLimFV)
-		EndIf
-	Case "inMagUpLimNF"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagUpLimNF)
-		Else
-			MemOff (inMagUpLimNF)
-		EndIf
-	Case "inMagUpLimNFV"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagUpLimNFV)
-		Else
-			MemOff (inMagUpLimNFV)
-		EndIf
-	Case "leftIntlock1F"
-		If Tokens$(1) = "true" Then
-			MemOn (leftIntlock1F)
-		Else
-			MemOff (leftIntlock1F)
-		EndIf
-	Case "leftIntlock1FV"
-		If Tokens$(1) = "true" Then
-			MemOn (leftIntlock1FV)
-		Else
-			MemOff (leftIntlock1FV)
-		EndIf
-	Case "leftIntlock2F"
-		If Tokens$(1) = "true" Then
-			MemOn (leftIntlock2F)
-		Else
-			MemOff (leftIntlock2F)
-		EndIf
-	Case "leftIntlock2FV"
-		If Tokens$(1) = "true" Then
-			MemOn (leftIntlock2FV)
-		Else
-			MemOff (leftIntlock2FV)
-		EndIf
-	Case "maintModeF"
-		If Tokens$(1) = "true" Then
-			MemOn (maintModeF)
-		Else
-			MemOff (maintModeF)
-		EndIf
-	Case "maintModeFV"
-		If Tokens$(1) = "true" Then
-			MemOn (maintModeFV)
-		Else
-			MemOff (maintModeFV)
-		EndIf
-	Case "monEstop1F"
-		If Tokens$(1) = "true" Then
-			MemOn (monEstop1F)
-		Else
-			MemOff (monEstop1F)
-		EndIf
-	Case "monEstop1FV"
-		If Tokens$(1) = "true" Then
-			MemOn (monEstop1FV)
-		Else
-			MemOff (monEstop1FV)
-		EndIf
-	Case "monEstop2F"
-		If Tokens$(1) = "true" Then
-			MemOn (monEstop2F)
-		Else
-			MemOff (monEstop2F)
-		EndIf
-	Case "monEstop2FV"
-		If Tokens$(1) = "true" Then
-			MemOn (monEstop2FV)
-		Else
-			MemOff (monEstop2FV)
-		EndIf
-	Case "outMagIntF"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagIntF)
-		Else
-			MemOff (outMagIntF)
-		EndIf
-	Case "outMagIntFV"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagIntFV)
-		Else
-			MemOff (outMagIntFV)
-		EndIf
-	Case "outMagLowLimF"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagLowLimF)
-		Else
-			MemOff (outMagLowLimF)
-		EndIf
-	Case "outMagLowLimFV"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagLowLimFV)
-		Else
-			MemOff (outMagLowLimFV)
-		EndIf
-	Case "outMagLowLimNF"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagLowLimNF)
-		Else
-			MemOff (outMagLowLimNF)
-		EndIf
-	Case "outMagLowLimNFV"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagLowLimNFV)
-		Else
-			MemOff (outMagLowLimNFV)
-		EndIf
-	Case "outMagPanelRdyF"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagPanelRdyF)
-		Else
-			MemOff (outMagPanelRdyF)
-		EndIf
-	Case "outMagPanelRdyFV"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagPanelRdyFV)
-		Else
-			MemOff (outMagPanelRdyFV)
-		EndIf
-	Case "outMagUpLimF"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagUpLimF)
-		Else
-			MemOff (outMagUpLimF)
-		EndIf
-	Case "outMagUpLimFV"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagUpLimFV)
-		Else
-			MemOff (outMagUpLimFV)
-		EndIf
-	Case "outMagUpLimNF"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagUpLimNF)
-		Else
-			MemOff (outMagUpLimNF)
-		EndIf
-	Case "outMagUpLimNFV"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagUpLimNFV)
-		Else
-			MemOff (outMagUpLimNFV)
-		EndIf
-	Case "rightIntlockF"
-		If Tokens$(1) = "true" Then
-			MemOn (rightIntlockF)
-		Else
-			MemOff (rightIntlockF)
-		EndIf
-	Case "rightIntlockFV"
-		If Tokens$(1) = "true" Then
-			MemOn (rightIntlockFV)
-		Else
-			MemOff (rightIntlockFV)
-		EndIf
-	Case "debrisMtrF"
-		If Tokens$(1) = "true" Then
-			MemOn (debrisMtrF)
-		Else
-			MemOff (debrisMtrF)
-		EndIf
-	Case "debrisMtrFV"
-		If Tokens$(1) = "true" Then
-			MemOn (debrisMtrFV)
-		Else
-			MemOff (debrisMtrFV)
-		EndIf
-	Case "drillGoF"
-		If Tokens$(1) = "true" Then
-			MemOn (drillGoF)
-		Else
-			MemOff (drillGoF)
-		EndIf
-	Case "drillGoFV"
-		If Tokens$(1) = "true" Then
-			MemOn (drillGoFV)
-		Else
-			MemOff (drillGoFV)
-		EndIf
-	Case "drillReturnF"
-		If Tokens$(1) = "true" Then
-			MemOn (drillReturnF)
-		Else
-			MemOff (drillReturnF)
-		EndIf
-	Case "drillReturnFV"
-		If Tokens$(1) = "true" Then
-			MemOn (drillReturnFV)
-		Else
-			MemOff (drillReturnFV)
-		EndIf
-	Case "eStopResetF"
-		If Tokens$(1) = "true" Then
-			MemOn (eStopResetF)
-		Else
-			MemOff (eStopResetF)
-		EndIf
-	Case "eStopResetFV"
-		If Tokens$(1) = "true" Then
-			MemOn (eStopResetFV)
-		Else
-			MemOff (eStopResetFV)
-		EndIf
-	Case "inMagMtrF"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagMtrF)
-		Else
-			MemOff (inMagMtrF)
-		EndIf
-	Case "inMagMtrFV"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagMtrFV)
-		Else
-			MemOff (inMagMtrFV)
-		EndIf
-	Case "inMagMtrDirF"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagMtrDirF)
-		Else
-			MemOff (inMagMtrDirF)
-		EndIf
-	Case "inMagMtrDirFV"
-		If Tokens$(1) = "true" Then
-			MemOn (inMagMtrDirFV)
-		Else
-			MemOff (inMagMtrDirFV)
-		EndIf
-	Case "outMagMtrF"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagMtrF)
-		Else
-			MemOff (outMagMtrF)
-		EndIf
-	Case "outMagMtrFV"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagMtrFV)
-		Else
-			MemOff (outMagMtrFV)
-		EndIf
-	Case "outMagMtrDirF"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagMtrDirF)
-		Else
-			MemOff (outMagMtrDirF)
-		EndIf
-	Case "outMagMtrDirFV"
-		If Tokens$(1) = "true" Then
-			MemOn (outMagMtrDirFV)
-		Else
-			MemOff (outMagMtrDirFV)
-		EndIf
-	Case "stackLightAlrmF"
-		If Tokens$(1) = "true" Then
-			MemOn (stackLightAlrmF)
-		Else
-			MemOff (stackLightAlrmF)
-		EndIf
-	Case "stackLightAlrmFV"
-		If Tokens$(1) = "true" Then
-			MemOn (stackLightAlrmFV)
-		Else
-			MemOff (stackLightAlrmFV)
-		EndIf
-	Case "stackLightGrnF"
-		If Tokens$(1) = "true" Then
-			MemOn (stackLightGrnF)
-		Else
-			MemOff (stackLightGrnF)
-		EndIf
-	Case "stackLightGrnFV"
-		If Tokens$(1) = "true" Then
-			MemOn (stackLightGrnFV)
-		Else
-			MemOff (stackLightGrnFV)
-		EndIf
-	Case "stackLightRedF"
-		If Tokens$(1) = "true" Then
-			MemOn (stackLightRedF)
-		Else
-			MemOff (stackLightRedF)
-		EndIf
-	Case "stackLightRedFV"
-		If Tokens$(1) = "true" Then
-			MemOn (stackLightRedFV)
-		Else
-			MemOff (stackLightRedFV)
-		EndIf
-	Case "stackLightYelF"
-		If Tokens$(1) = "true" Then
-			MemOn (stackLightYelF)
-		Else
-			MemOff (stackLightYelF)
-		EndIf
-	Case "stackLightYelFV"
-		If Tokens$(1) = "true" Then
-			MemOn (stackLightYelFV)
-		Else
-			MemOff (stackLightYelFV)
-		EndIf
-	Case "suctionCupsF"
-		If Tokens$(1) = "true" Then
-			MemOn (suctionCupsF)
-		Else
-			MemOff (suctionCupsF)
-		EndIf
-	Case "suctionCupsFV"
-		If Tokens$(1) = "true" Then
-			MemOn (suctionCupsFV)
-		Else
-			MemOff (suctionCupsFV)
-		EndIf
-	Case "recTempProbe"
-		recTempProbe = Val(Tokens$(1))
-	Case "recTempTrack"
-		recTempTrack = Val(Tokens$(1))
-	Case "recFirstHolePointInspection"
-		recFirstHolePointInspection = Val(Tokens$(1))
-	Case "recLastHolePointInspection"
-		recLastHolePointInspection = Val(Tokens$(1))
-	Case "recFirstHolePointHotStake"
-		recFirstHolePointHotStake = Val(Tokens$(1))
-	Case "recLastHolePointHotStake"
-		recLastHolePointHotStake = Val(Tokens$(1))
-	Case "recFirstHolePointFlash"
-		recFirstHolePointFlash = Val(Tokens$(1))
-	Case "recLastHolePointFlash"
-		recLastHolePointFlash = Val(Tokens$(1))
-	Case "recFlashDwellTime"
-		recFlashDwellTime = Val(Tokens$(1))
-	Case "recHeatStakeOffset"
-		recHeatStakeOffset = Val(Tokens$(1))
-	Case "recBossCrossArea"
-		recBossCrossArea = Val(Tokens$(1))
-	Case "recPointsTable"
-		recPointsTable = Val(Tokens$(1))
-	Case "recInmag"
-		recInmag = Val(Tokens$(1))
-	Case "recOutmag"
-		recOutmag = Val(Tokens$(1))
-	Case "recCrowding"
-		recCrowding = Val(Tokens$(1))
-	Case "recPreCrowding"
-		recPreCrowding = Val(Tokens$(1))
-	Case "jobNumPanels"
-		jobNumPanels = Val(Tokens$(1))
-	Case "recFlashRequired"
-		If Tokens$(1) = "true" Then
-			recFlashRequired = True
-		Else
-			recFlashRequired = False
-		EndIf
-	Case "recInmagPickupOffset"
-		recInmagPickupOffset = Val(Tokens$(1))
-	Case "recInsertDepth"
-		recInsertDepth = Val(Tokens$(1))
-	Case "recFlashDwellTime"
-		recFlashDwellTime = Val(Tokens$(1))
-	Case "recInsertType"
-		recInsertType = Val(Tokens$(1))
-	Case "recNumberOfHoles"
-		recNumberOfHoles = Val(Tokens$(1))
-	Case "recOutmagPickupOffset"
-		recOutmagPickupOffset = Val(Tokens$(1))
-	Case "suctionWaitTime"
-		recSuctionWaitTime = Val(Tokens$(1))
-	Case "zlimit"
-		zLimit = Val(Tokens$(1))
+		'!!!!!!!!!!!!!!CHECK FOR DON'T DELETE BLOCKS!!!!!!!!!!!!!!!!!!!!!!!!
+
+		'Rx from HMI:
+		Case "alarmMuteBtn"
+		    If tokens$(1) = "true" Then
+		        alarmMuteBtn = True
+		        alarmMute = True
+		    Else
+		        alarmMuteBtn = False
+		    EndIf
+		Case "backInterlockACKBtn"
+		    If tokens$(1) = "true" Then
+		        backInterlockACKBtn = True
+		        backInterlockACK = True
+		    Else
+		        backInterlockACKBtn = False
+		    EndIf
+		Case "frontInterlockACKBtn"
+		    If tokens$(1) = "true" Then
+		        frontInterlockACKBtn = True
+		        frontInterlockACK = True
+		    Else
+		        frontInterlockACKBtn = False
+		    EndIf
+		Case "inMagGoHomeBtn"
+		    If tokens$(1) = "true" Then
+		        inMagGoHomeBtn = True
+		        inMagGoHome = True
+		    Else
+		        inMagGoHomeBtn = False
+		    EndIf
+		Case "inMagIntLockAckBtn"
+		    If tokens$(1) = "true" Then
+		        inMagIntLockAckBtn = True
+		        inMagIntLockAck = True
+		    Else
+		        inMagIntLockAckBtn = False
+		    EndIf
+		Case "inMagLoadedBtn"
+		    If tokens$(1) = "true" Then
+		        inMagLoadedBtn = True
+		        inMagLoaded = True
+		    Else
+		        inMagLoadedBtn = False
+		    EndIf
+		Case "jobAbortBtn"
+		    If tokens$(1) = "true" Then
+		        jobAbortBtn = True
+		        jobAbort = True
+		    Else
+		        jobAbortBtn = False
+		    EndIf
+		Case "jobStartBtn"
+		    If tokens$(1) = "true" Then
+		        jobStartBtn = True
+		        jobStart = True
+		    Else
+		        jobStartBtn = False
+		    EndIf
+		Case "startLearningBtn"
+		    If tokens$(1) = "true" Then
+		        startLearningBtn = True
+		        startLearning = True
+		    Else
+		        startLearningBtn = False
+		    EndIf
+		Case "leftInterlockACKBtn"
+		    If tokens$(1) = "true" Then
+		        leftInterlockACKBtn = True
+		        leftInterlockACK = True
+		    Else
+		        leftInterlockACKBtn = False
+		    EndIf
+		Case "outMagGoHomeBtn"
+		    If tokens$(1) = "true" Then
+		        outMagGoHomeBtn = True
+		        outMagGoHome = True
+		    Else
+		        outMagGoHomeBtn = False
+		    EndIf
+		Case "outMagIntLockAckBtn"
+		    If tokens$(1) = "true" Then
+		        outMagIntLockAckBtn = True
+		        outMagIntLockAck = True
+		    Else
+		        outMagIntLockAckBtn = False
+		    EndIf
+		Case "outMagUnloadedBtn"
+		    If tokens$(1) = "true" Then
+		        outMagUnloadedBtn = True
+		        outMagUnloaded = True
+		    Else
+		        outMagUnloadedBtn = False
+		    EndIf
+		Case "panelDataTxACKBtn"
+		    If tokens$(1) = "true" Then
+		        panelDataTxACKBtn = True
+		        panelDataTxACK = True
+		    Else
+		        panelDataTxACKBtn = False
+		    EndIf
+		Case "rightInterlockACKBtn"
+		    If tokens$(1) = "true" Then
+		        rightInterlockACKBtn = True
+		        rightInterlockACK = True
+		    Else
+		        rightInterlockACKBtn = False
+		    EndIf
+		Case "sftyFrmIlockAckBtn"
+		    If tokens$(1) = "true" Then
+		        sftyFrmIlockAckBtn = True
+		        sftyFrmIlockAck = True
+		    Else
+		        sftyFrmIlockAckBtn = False
+		    EndIf
+		Case "airPressHighF"
+		    If tokens$(1) = "true" Then
+		        MemOn (airPressHighF)
+		    Else
+		        MemOff (airPressHighF)
+		    EndIf
+		Case "airPressHighFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (airPressHighFV)
+		    Else
+		        MemOff (airPressHighFV)
+		    EndIf
+		Case "airPressLowF"
+		    If tokens$(1) = "true" Then
+		        MemOn (airPressLowF)
+		    Else
+		        MemOff (airPressLowF)
+		    EndIf
+		Case "airPressLowFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (airPressLowFV)
+		    Else
+		        MemOff (airPressLowFV)
+		    EndIf
+		Case "backIntlock1F"
+		    If tokens$(1) = "true" Then
+		        MemOn (backIntlock1F)
+		    Else
+		        MemOff (backIntlock1F)
+		    EndIf
+		Case "backIntlock1FV"
+		    If tokens$(1) = "true" Then
+		        MemOn (backIntlock1FV)
+		    Else
+		        MemOff (backIntlock1FV)
+		    EndIf
+		Case "backIntlock2F"
+		    If tokens$(1) = "true" Then
+		        MemOn (backIntlock2F)
+		    Else
+		        MemOff (backIntlock2F)
+		    EndIf
+		Case "backIntlock2FV"
+		    If tokens$(1) = "true" Then
+		        MemOn (backIntlock2FV)
+		    Else
+		        MemOff (backIntlock2FV)
+		    EndIf
+		Case "cbMonDebrisRmvF"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonDebrisRmvF)
+		    Else
+		        MemOff (cbMonDebrisRmvF)
+		    EndIf
+		Case "cbMonDebrisRmvFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonDebrisRmvFV)
+		    Else
+		        MemOff (cbMonDebrisRmvFV)
+		    EndIf
+		Case "cbMonHeatStakeF"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonHeatStakeF)
+		    Else
+		        MemOff (cbMonHeatStakeF)
+		    EndIf
+		Case "cbMonHeatStakeFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonHeatStakeFV)
+		    Else
+		        MemOff (cbMonHeatStakeFV)
+		    EndIf
+		Case "cbMonInMagF"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonInMagF)
+		    Else
+		        MemOff (cbMonInMagF)
+		    EndIf
+		Case "cbMonInMagFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonInMagFV)
+		    Else
+		        MemOff (cbMonInMagFV)
+		    EndIf
+		Case "cbMonOutMagF"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonOutMagF)
+		    Else
+		        MemOff (cbMonOutMagF)
+		    EndIf
+		Case "cbMonOutMagFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonOutMagFV)
+		    Else
+		        MemOff (cbMonOutMagFV)
+		    EndIf
+		Case "cbMonPAS24vdcF"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonPAS24vdcF)
+		    Else
+		        MemOff (cbMonPAS24vdcF)
+		    EndIf
+		Case "cbMonPAS24vdcFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonPAS24vdcFV)
+		    Else
+		        MemOff (cbMonPAS24vdcFV)
+		    EndIf
+		Case "cbMonSafetyF"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonSafetyF)
+		    Else
+		        MemOff (cbMonSafetyF)
+		    EndIf
+		Case "cbMonSafetyFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (cbMonSafetyFV)
+		    Else
+		        MemOff (cbMonSafetyFV)
+		    EndIf
+		Case "dc24vOKF"
+		    If tokens$(1) = "true" Then
+		        MemOn (dc24vOKF)
+		    Else
+		        MemOff (dc24vOKF)
+		    EndIf
+		Case "dc24vOKFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (dc24vOKFV)
+		    Else
+		        MemOff (dc24vOKFV)
+		    EndIf
+		Case "edgeDetectGoF"
+		    If tokens$(1) = "true" Then
+		        MemOn (edgeDetectGoF)
+		    Else
+		        MemOff (edgeDetectGoF)
+		    EndIf
+		Case "edgeDetectGoFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (edgeDetectGoFV)
+		    Else
+		        MemOff (edgeDetectGoFV)
+		    EndIf
+		Case "edgeDetectHiF"
+		    If tokens$(1) = "true" Then
+		        MemOn (edgeDetectHiF)
+		    Else
+		        MemOff (edgeDetectHiF)
+		    EndIf
+		Case "edgeDetectHiFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (edgeDetectHiFV)
+		    Else
+		        MemOff (edgeDetectHiFV)
+		    EndIf
+		Case "edgeDetectLoF"
+		    If tokens$(1) = "true" Then
+		        MemOn (edgeDetectLoF)
+		    Else
+		        MemOff (edgeDetectLoF)
+		    EndIf
+		Case "edgeDetectLoFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (edgeDetectLoFV)
+		    Else
+		        MemOff (edgeDetectLoFV)
+		    EndIf
+		Case "flashHomeNCF"
+		    If tokens$(1) = "true" Then
+		        MemOn (flashHomeNCF)
+		    Else
+		        MemOff (flashHomeNCF)
+		    EndIf
+		Case "flashHomeNCFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (flashHomeNCFV)
+		    Else
+		        MemOff (flashHomeNCFV)
+		    EndIf
+		Case "flashHomeNOF"
+		    If tokens$(1) = "true" Then
+		        MemOn (flashHomeNOF)
+		    Else
+		        MemOff (flashHomeNOF)
+		    EndIf
+		Case "flashHomeNOFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (flashHomeNOFV)
+		    Else
+		        MemOff (flashHomeNOFV)
+		    EndIf
+		Case "flashPnlPrsntF"
+		    If tokens$(1) = "true" Then
+		        MemOn (FlashPnlPrsntF)
+		    Else
+		        MemOff (FlashPnlPrsntF)
+		    EndIf
+		Case "flashPnlPrsntFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (FlashPnlPrsntFV)
+		    Else
+		        MemOff (FlashPnlPrsntFV)
+		    EndIf
+		Case "frontIntlock1F"
+		    If tokens$(1) = "true" Then
+		        MemOn (frontIntlock1F)
+		    Else
+		        MemOff (frontIntlock1F)
+		    EndIf
+		Case "frontIntlock1FV"
+		    If tokens$(1) = "true" Then
+		        MemOn (frontIntlock1FV)
+		    Else
+		        MemOff (frontIntlock1FV)
+		    EndIf
+		Case "frontIntlock2F"
+		    If tokens$(1) = "true" Then
+		        MemOn (frontIntlock2F)
+		    Else
+		        MemOff (frontIntlock2F)
+		    EndIf
+		Case "frontIntlock2FV"
+		    If tokens$(1) = "true" Then
+		        MemOn (frontIntlock2FV)
+		    Else
+		        MemOff (frontIntlock2FV)
+		    EndIf
+		Case "holeDetectedF"
+		    If tokens$(1) = "true" Then
+		        MemOn (holeDetectedF)
+		    Else
+		        MemOff (holeDetectedF)
+		    EndIf
+		Case "holeDetectedFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (holeDetectedFV)
+		    Else
+		        MemOff (holeDetectedFV)
+		    EndIf
+		Case "hsPanelPresntF"
+		    If tokens$(1) = "true" Then
+		        MemOn (hsPanelPresntF)
+		    Else
+		        MemOff (hsPanelPresntF)
+		    EndIf
+		Case "hsPanelPresntFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (hsPanelPresntFV)
+		    Else
+		        MemOff (hsPanelPresntFV)
+		    EndIf
+		Case "inMagInterlockF"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagInterlockF)
+		    Else
+		        MemOff (inMagInterlockF)
+		    EndIf
+		Case "inMagInterlockFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagInterlockFV)
+		    Else
+		        MemOff (inMagInterlockFV)
+		    EndIf
+		Case "inMagLowLimF"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagLowLimF)
+		    Else
+		        MemOff (inMagLowLimF)
+		    EndIf
+		Case "inMagLowLimFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagLowLimFV)
+		    Else
+		        MemOff (inMagLowLimFV)
+		    EndIf
+		Case "inMagLowLimNF"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagLowLimNF)
+		    Else
+		        MemOff (inMagLowLimNF)
+		    EndIf
+		Case "inMagLowLimNFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagLowLimNFV)
+		    Else
+		        MemOff (inMagLowLimNFV)
+		    EndIf
+		Case "inMagPnlRdyF"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagPnlRdyF)
+		    Else
+		        MemOff (inMagPnlRdyF)
+		    EndIf
+		Case "inMagPnlRdyFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagPnlRdyFV)
+		    Else
+		        MemOff (inMagPnlRdyFV)
+		    EndIf
+		Case "inMagUpLimF"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagUpLimF)
+		    Else
+		        MemOff (inMagUpLimF)
+		    EndIf
+		Case "inMagUpLimFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagUpLimFV)
+		    Else
+		        MemOff (inMagUpLimFV)
+		    EndIf
+		Case "inMagUpLimNF"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagUpLimNF)
+		    Else
+		        MemOff (inMagUpLimNF)
+		    EndIf
+		Case "inMagUpLimNFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagUpLimNFV)
+		    Else
+		        MemOff (inMagUpLimNFV)
+		    EndIf
+		Case "leftIntlock1F"
+		    If tokens$(1) = "true" Then
+		        MemOn (leftIntlock1F)
+		    Else
+		        MemOff (leftIntlock1F)
+		    EndIf
+		Case "leftIntlock1FV"
+		    If tokens$(1) = "true" Then
+		        MemOn (leftIntlock1FV)
+		    Else
+		        MemOff (leftIntlock1FV)
+		    EndIf
+		Case "leftIntlock2F"
+		    If tokens$(1) = "true" Then
+		        MemOn (leftIntlock2F)
+		    Else
+		        MemOff (leftIntlock2F)
+		    EndIf
+		Case "leftIntlock2FV"
+		    If tokens$(1) = "true" Then
+		        MemOn (leftIntlock2FV)
+		    Else
+		        MemOff (leftIntlock2FV)
+		    EndIf
+		Case "maintModeF"
+		    If tokens$(1) = "true" Then
+		        MemOn (maintModeF)
+		    Else
+		        MemOff (maintModeF)
+		    EndIf
+		Case "maintModeFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (maintModeFV)
+		    Else
+		        MemOff (maintModeFV)
+		    EndIf
+		Case "monEstop1F"
+		    If tokens$(1) = "true" Then
+		        MemOn (monEstop1F)
+		    Else
+		        MemOff (monEstop1F)
+		    EndIf
+		Case "monEstop1FV"
+		    If tokens$(1) = "true" Then
+		        MemOn (monEstop1FV)
+		    Else
+		        MemOff (monEstop1FV)
+		    EndIf
+		Case "monEstop2F"
+		    If tokens$(1) = "true" Then
+		        MemOn (monEstop2F)
+		    Else
+		        MemOff (monEstop2F)
+		    EndIf
+		Case "monEstop2FV"
+		    If tokens$(1) = "true" Then
+		        MemOn (monEstop2FV)
+		    Else
+		        MemOff (monEstop2FV)
+		    EndIf
+		Case "outMagIntF"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagIntF)
+		    Else
+		        MemOff (outMagIntF)
+		    EndIf
+		Case "outMagIntFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagIntFV)
+		    Else
+		        MemOff (outMagIntFV)
+		    EndIf
+		Case "outMagLowLimF"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagLowLimF)
+		    Else
+		        MemOff (outMagLowLimF)
+		    EndIf
+		Case "outMagLowLimFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagLowLimFV)
+		    Else
+		        MemOff (outMagLowLimFV)
+		    EndIf
+		Case "outMagLowLimNF"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagLowLimNF)
+		    Else
+		        MemOff (outMagLowLimNF)
+		    EndIf
+		Case "outMagLowLimNFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagLowLimNFV)
+		    Else
+		        MemOff (outMagLowLimNFV)
+		    EndIf
+		Case "outMagPanelRdyF"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagPanelRdyF)
+		    Else
+		        MemOff (outMagPanelRdyF)
+		    EndIf
+		Case "outMagPanelRdyFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagPanelRdyFV)
+		    Else
+		        MemOff (outMagPanelRdyFV)
+		    EndIf
+		Case "outMagUpLimF"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagUpLimF)
+		    Else
+		        MemOff (outMagUpLimF)
+		    EndIf
+		Case "outMagUpLimFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagUpLimFV)
+		    Else
+		        MemOff (outMagUpLimFV)
+		    EndIf
+		Case "outMagUpLimNF"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagUpLimNF)
+		    Else
+		        MemOff (outMagUpLimNF)
+		    EndIf
+		Case "outMagUpLimNFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagUpLimNFV)
+		    Else
+		        MemOff (outMagUpLimNFV)
+		    EndIf
+		Case "rightIntlockF"
+		    If tokens$(1) = "true" Then
+		        MemOn (rightIntlockF)
+		    Else
+		        MemOff (rightIntlockF)
+		    EndIf
+		Case "rightIntlockFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (rightIntlockFV)
+		    Else
+		        MemOff (rightIntlockFV)
+		    EndIf
+		Case "debrisMtrF"
+		    If tokens$(1) = "true" Then
+		        MemOn (debrisMtrF)
+		    Else
+		        MemOff (debrisMtrF)
+		    EndIf
+		Case "debrisMtrFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (debrisMtrFV)
+		    Else
+		        MemOff (debrisMtrFV)
+		    EndIf
+		Case "drillGoF"
+		    If tokens$(1) = "true" Then
+		        MemOn (drillGoF)
+		    Else
+		        MemOff (drillGoF)
+		    EndIf
+		Case "drillGoFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (drillGoFV)
+		    Else
+		        MemOff (drillGoFV)
+		    EndIf
+		Case "drillReturnF"
+		    If tokens$(1) = "true" Then
+		        MemOn (drillReturnF)
+		    Else
+		        MemOff (drillReturnF)
+		    EndIf
+		Case "drillReturnFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (drillReturnFV)
+		    Else
+		        MemOff (drillReturnFV)
+		    EndIf
+		Case "eStopResetF"
+		    If tokens$(1) = "true" Then
+		        MemOn (eStopResetF)
+		    Else
+		        MemOff (eStopResetF)
+		    EndIf
+		Case "eStopResetFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (eStopResetFV)
+		    Else
+		        MemOff (eStopResetFV)
+		    EndIf
+		Case "inMagMtrF"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagMtrF)
+		    Else
+		        MemOff (inMagMtrF)
+		    EndIf
+		Case "inMagMtrFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagMtrFV)
+		    Else
+		        MemOff (inMagMtrFV)
+		    EndIf
+		Case "inMagMtrDirF"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagMtrDirF)
+		    Else
+		        MemOff (inMagMtrDirF)
+		    EndIf
+		Case "inMagMtrDirFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (inMagMtrDirFV)
+		    Else
+		        MemOff (inMagMtrDirFV)
+		    EndIf
+		Case "outMagMtrF"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagMtrF)
+		    Else
+		        MemOff (outMagMtrF)
+		    EndIf
+		Case "outMagMtrFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagMtrFV)
+		    Else
+		        MemOff (outMagMtrFV)
+		    EndIf
+		Case "outMagMtrDirF"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagMtrDirF)
+		    Else
+		        MemOff (outMagMtrDirF)
+		    EndIf
+		Case "outMagMtrDirFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (outMagMtrDirFV)
+		    Else
+		        MemOff (outMagMtrDirFV)
+		    EndIf
+		Case "stackLightAlrmF"
+		    If tokens$(1) = "true" Then
+		        MemOn (stackLightAlrmF)
+		    Else
+		        MemOff (stackLightAlrmF)
+		    EndIf
+		Case "stackLightAlrmFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (stackLightAlrmFV)
+		    Else
+		        MemOff (stackLightAlrmFV)
+		    EndIf
+		Case "stackLightGrnF"
+		    If tokens$(1) = "true" Then
+		        MemOn (stackLightGrnF)
+		    Else
+		        MemOff (stackLightGrnF)
+		    EndIf
+		Case "stackLightGrnFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (stackLightGrnFV)
+		    Else
+		        MemOff (stackLightGrnFV)
+		    EndIf
+		Case "stackLightRedF"
+		    If tokens$(1) = "true" Then
+		        MemOn (stackLightRedF)
+		    Else
+		        MemOff (stackLightRedF)
+		    EndIf
+		Case "stackLightRedFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (stackLightRedFV)
+		    Else
+		        MemOff (stackLightRedFV)
+		    EndIf
+		Case "stackLightYelF"
+		    If tokens$(1) = "true" Then
+		        MemOn (stackLightYelF)
+		    Else
+		        MemOff (stackLightYelF)
+		    EndIf
+		Case "stackLightYelFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (stackLightYelFV)
+		    Else
+		        MemOff (stackLightYelFV)
+		    EndIf
+		Case "suctionCupsF"
+		    If tokens$(1) = "true" Then
+		        MemOn (suctionCupsF)
+		    Else
+		        MemOff (suctionCupsF)
+		    EndIf
+		Case "suctionCupsFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (suctionCupsFV)
+		    Else
+		        MemOff (suctionCupsFV)
+		    EndIf
+		Case "crowdingF"
+		    If tokens$(1) = "true" Then
+		        MemOn (crowdingF)
+		    Else
+		        MemOff (crowdingF)
+		    EndIf
+		Case "crowdingFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (crowdingFV)
+		    Else
+		        MemOff (crowdingFV)
+		    EndIf
+		Case "crowdingXF"
+		    If tokens$(1) = "true" Then
+		        MemOn (crowdingXF)
+		    Else
+		        MemOff (crowdingXF)
+		    EndIf
+		Case "crowdingXFV"
+		    If tokens$(1) = "true" Then
+		        MemOn (crowdingXFV)
+		    Else
+		        MemOff (crowdingXFV)
+		    EndIf
+		Case "heatStakeOffset"
+		    heatStakeOffset = Val(tokens$(1))
+		Case "insertDepthTolerance"
+		    insertDepthTolerance = Val(tokens$(1))
+		Case "jobNumPanels"
+		    jobNumPanels = Val(tokens$(1))
+		Case "recBossCrossArea"
+		    recBossCrossArea = Val(tokens$(1))
+		Case "recFlashRequired"
+		    If tokens$(1) = "true" Then
+		        recFlashRequired = True
+		    Else
+		        recFlashRequired = False
+		    EndIf
+		Case "recPopPanelRequired"
+		    If tokens$(1) = "true" Then
+		        recPopPanelRequired = True
+		    Else
+		        recPopPanelRequired = False
+		    EndIf
+		Case "recPreinspectionRequired"
+		    If tokens$(1) = "true" Then
+		        recPreinspectionRequired = True
+		    Else
+		        recPreinspectionRequired = False
+		    EndIf
+		Case "recCrowdingRequired"
+		    If tokens$(1) = "true" Then
+		        recCrowdingRequired = True
+		    Else
+		        recCrowdingRequired = False
+		    EndIf
+		Case "recHotStakePanelRequired"
+		    If tokens$(1) = "true" Then
+		        recHotStakePanelRequired = True
+		    Else
+		        recHotStakePanelRequired = False
+		    EndIf
+		Case "recInspectionRequired"
+		    If tokens$(1) = "true" Then
+		        recInspectionRequired = True
+		    Else
+		        recInspectionRequired = False
+		    EndIf
+		Case "recPushPanelRequired"
+		    If tokens$(1) = "true" Then
+		        recPushPanelRequired = True
+		    Else
+		        recPushPanelRequired = False
+		    EndIf
+		Case "recInsertType"
+		    recInsertType = Val(tokens$(1))
+		Case "recNumberOfHoles"
+		    recNumberOfHoles = Val(tokens$(1))
+		Case "recSuctionWaitTime"
+		    recSuctionWaitTime = Val(tokens$(1))
+		Case "panelLearned"
+		    If tokens$(1) = "true" Then
+		        panelLearned = True
+		    Else
+		        panelLearned = False
+		    EndIf
+
+		'================================================================
+		'================================================================
+		' Dont delete this when updating, unless the autogen script has been updated to include these changes
+		'================================================================
+		'================================================================
+
+		Case "recHoleXact01"
+		    PanelHoleX(01) = Val(tokens$(1))
+		Case "recHoleYact01"
+		    PanelHoleY(01) = Val(tokens$(1))
+		Case "recHoleXact02"
+		    PanelHoleX(02) = Val(tokens$(1))
+		Case "recHoleYact02"
+		    PanelHoleY(02) = Val(tokens$(1))
+		Case "recHoleXact03"
+		    PanelHoleX(03) = Val(tokens$(1))
+		Case "recHoleYact03"
+		    PanelHoleY(03) = Val(tokens$(1))
+		Case "recHoleXact04"
+		    PanelHoleX(04) = Val(tokens$(1))
+		Case "recHoleYact04"
+		    PanelHoleY(04) = Val(tokens$(1))
+		Case "recHoleXact05"
+		    PanelHoleX(05) = Val(tokens$(1))
+		Case "recHoleYact05"
+		    PanelHoleY(05) = Val(tokens$(1))
+		Case "recHoleXact06"
+		    PanelHoleX(06) = Val(tokens$(1))
+		Case "recHoleYact06"
+		    PanelHoleY(06) = Val(tokens$(1))
+		Case "recHoleXact07"
+		    PanelHoleX(07) = Val(tokens$(1))
+		Case "recHoleYact07"
+		    PanelHoleY(07) = Val(tokens$(1))
+		Case "recHoleXact08"
+		    PanelHoleX(08) = Val(tokens$(1))
+		Case "recHoleYact08"
+		    PanelHoleY(08) = Val(tokens$(1))
+		Case "recHoleXact09"
+		    PanelHoleX(09) = Val(tokens$(1))
+		Case "recHoleYact09"
+		    PanelHoleY(09) = Val(tokens$(1))
+		Case "recHoleXact10"
+		    PanelHoleX(10) = Val(tokens$(1))
+		Case "recHoleYact10"
+		    PanelHoleY(10) = Val(tokens$(1))
+		Case "recHoleXact11"
+		    PanelHoleX(11) = Val(tokens$(1))
+		Case "recHoleYact11"
+		    PanelHoleY(11) = Val(tokens$(1))
+		Case "recHoleXact12"
+		    PanelHoleX(12) = Val(tokens$(1))
+		Case "recHoleYact12"
+		    PanelHoleY(12) = Val(tokens$(1))
+		Case "recHoleXact13"
+		    PanelHoleX(13) = Val(tokens$(1))
+		Case "recHoleYact13"
+		    PanelHoleY(13) = Val(tokens$(1))
+		Case "recHoleXact14"
+		    PanelHoleX(14) = Val(tokens$(1))
+		Case "recHoleYact14"
+		    PanelHoleY(14) = Val(tokens$(1))
+		Case "recHoleXact15"
+		    PanelHoleX(15) = Val(tokens$(1))
+		Case "recHoleYact15"
+		    PanelHoleY(15) = Val(tokens$(1))
+		Case "recHoleXact16"
+		    PanelHoleX(16) = Val(tokens$(1))
+		Case "recHoleYact16"
+		    PanelHoleY(16) = Val(tokens$(1))
+		Case "recHoleXact17"
+		    PanelHoleX(17) = Val(tokens$(1))
+		Case "recHoleYact17"
+		    PanelHoleY(17) = Val(tokens$(1))
+		Case "recHoleXact18"
+		    PanelHoleX(18) = Val(tokens$(1))
+		Case "recHoleYact18"
+		    PanelHoleY(18) = Val(tokens$(1))
+		Case "recHoleXact19"
+		    PanelHoleX(19) = Val(tokens$(1))
+		Case "recHoleYact19"
+		    PanelHoleY(19) = Val(tokens$(1))
+		Case "recHoleXact20"
+		    PanelHoleX(20) = Val(tokens$(1))
+		Case "recHoleYact20"
+		    PanelHoleY(20) = Val(tokens$(1))
+		Case "recHoleXact21"
+		    PanelHoleX(21) = Val(tokens$(1))
+		Case "recHoleYact21"
+		    PanelHoleY(21) = Val(tokens$(1))
+		Case "recHoleXact22"
+		    PanelHoleX(22) = Val(tokens$(1))
+		Case "recHoleYact22"
+		    PanelHoleY(22) = Val(tokens$(1))
+		Case "recHoleXact23"
+		    PanelHoleX(23) = Val(tokens$(1))
+		Case "recHoleYact23"
+		    PanelHoleY(23) = Val(tokens$(1))
+
+
 		
-	' PLC Comms
-	Case "PLC_Delay_BlowOffTime"
-		Print "put write request into queue"
-		MBWrite(1000, Val(Tokens$(1)), MBType16)
-	Case "PLC_Delay_InsertLoad"
-		MBWrite(1001, Val(Tokens$(1)), MBType16)
-	Case "PLC_Speed_TorqueMode"
-		MBWrite(1002, Val(Tokens$(1)), MBType32)
-	Case "PLC_Torque_TorqueMode"
-		MBWrite(1004, Val(Tokens$(1)), MBType16)
-	Case "PLC_Delay_RejectBlowOff"
-		MBWrite(1005, Val(Tokens$(1)), MBType16)
-	Case "PLC_Delay_FindHome"
-		MBWrite(1006, Val(Tokens$(1)), MBType16)
-	Case "PLC_Delay_ActiveCooling"
-		MBWrite(1007, Val(Tokens$(1)), MBType16)
-	Case "PLC_Delay_TorqueDwell"
-		MBWrite(1008, Val(Tokens$(1)), MBType16)
-	Case "PLC_Delay_Gripper"
-		MBWrite(1009, Val(Tokens$(1)), MBType16)
-	Case "PLC_Delay_PanelContact"
-		MBWrite(1010, Val(Tokens$(1)), MBType16)
-	Case "PLC_Delay_ShuttleExtended"
-		MBWrite(1011, Val(Tokens$(1)), MBType16)
-	Case "PLC_InsertType"
-		MBWrite(1020, Val(Tokens$(1)), MBType16)
-	Case "PLC_PanelContactTorque"
-		MBWrite(1021, Val(Tokens$(1)), MBType16)
-	Case "PLC_InsertTempOkBand"
-		MBWrite(1022, Val(Tokens$(1)), MBType16)
-	Case "PLC_PID_SetValue"
-		MBWrite(1130, Val(Tokens$(1)), MBType16)
-	Case "PLC_HeaterMCROn_MM"
-		If Tokens$(1) = "true" Then
-			MBWrite(434, True, MBTypeCoil)
-		Else
-			MBWrite(434, False, MBTypeCoil)
-		EndIf
-	Case "PLC_HeaterMCROn_VALUE"
-		If Tokens$(1) = "true" Then
-			MBWrite(435, True, MBTypeCoil)
-		Else
-			MBWrite(435, False, MBTypeCoil)
-		EndIf
-	Case "PLC_BowlFeederOn_MM"
-		If Tokens$(1) = "true" Then
-			MBWrite(436, True, MBTypeCoil)
-		Else
-			MBWrite(436, False, MBTypeCoil)
-		EndIf
-	Case "PLC_BowlFeederOn_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(437, True, MBTypeCoil)
-		Else
-			MBWrite(437, False, MBTypeCoil)
-		EndIf
-	Case "PLC_VibTrackOn_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(438, True, MBTypeCoil)
-		Else
-			MBWrite(438, False, MBTypeCoil)
-		EndIf
-	Case "PLC_VibTrackOn_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(439, True, MBTypeCoil)
-		Else
-			MBWrite(439, False, MBTypeCoil)
-		EndIf
-	Case "PLC_LoadInsert_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(440, True, MBTypeCoil)
-		Else
-			MBWrite(440, False, MBTypeCoil)
-		EndIf
-	Case "PLC_LoadInsert_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(441, True, MBTypeCoil)
-		Else
-			MBWrite(441, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ExtendShuttle_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(442, True, MBTypeCoil)
-		Else
-			MBWrite(442, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ExtendShuttle_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(443, True, MBTypeCoil)
-		Else
-			MBWrite(443, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ActiveCoolingOn_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(444, True, MBTypeCoil)
-		Else
-			MBWrite(444, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ActiveCoolingOn_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(445, True, MBTypeCoil)
-		Else
-			MBWrite(445, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertGripperOn_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(446, True, MBTypeCoil)
-		Else
-			MBWrite(446, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertGripperOn_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(447, True, MBTypeCoil)
-		Else
-			MBWrite(447, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertDischargeOn_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(448, True, MBTypeCoil)
-		Else
-			MBWrite(448, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertDischargeOn_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(449, True, MBTypeCoil)
-		Else
-			MBWrite(449, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertRejectOn_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(450, True, MBTypeCoil)
-		Else
-			MBWrite(450, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertRejectOn_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(451, True, MBTypeCoil)
-		Else
-			MBWrite(451, False, MBTypeCoil)
-		EndIf
-	Case "PLC_EmgStop_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(534, True, MBTypeCoil)
-		Else
-			MBWrite(534, False, MBTypeCoil)
-		EndIf
-	Case "PLC_EmgStop_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(535, True, MBTypeCoil)
-		Else
-			MBWrite(535, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ShuttleParked_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(536, True, MBTypeCoil)
-		Else
-			MBWrite(536, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ShuttleParked_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(537, True, MBTypeCoil)
-		Else
-			MBWrite(537, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ShuttlePickupPos_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(538, True, MBTypeCoil)
-		Else
-			MBWrite(538, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ShuttlePickupPos_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(539, True, MBTypeCoil)
-		Else
-			MBWrite(539, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ShuttlePlaceInsert_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(540, True, MBTypeCoil)
-		Else
-			MBWrite(540, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ShuttlePlaceInsert_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(541, True, MBTypeCoil)
-		Else
-			MBWrite(541, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ShuttleNearPlaceInsert_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(542, True, MBTypeCoil)
-		Else
-			MBWrite(542, False, MBTypeCoil)
-		EndIf
-	Case "PLC_ShuttleNearPlaceInsert_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(543, True, MBTypeCoil)
-		Else
-			MBWrite(543, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertOnShuttle_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(544, True, MBTypeCoil)
-		Else
-			MBWrite(544, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertOnShuttle_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(545, True, MBTypeCoil)
-		Else
-			MBWrite(545, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertDetected_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(546, True, MBTypeCoil)
-		Else
-			MBWrite(546, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertDetected_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(547, True, MBTypeCoil)
-		Else
-			MBWrite(547, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertDetectedAluOnly_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(548, True, MBTypeCoil)
-		Else
-			MBWrite(548, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertDetectedAluOnly_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(549, True, MBTypeCoil)
-		Else
-			MBWrite(549, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertAtTemp_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(550, True, MBTypeCoil)
-		Else
-			MBWrite(550, False, MBTypeCoil)
-		EndIf
-	Case "PLC_InsertAtTemp_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(551, True, MBTypeCoil)
-		Else
-			MBWrite(551, False, MBTypeCoil)
-		EndIf
-	Case "PLC_GripperEarsOut_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(552, True, MBTypeCoil)
-		Else
-			MBWrite(552, False, MBTypeCoil)
-		EndIf
-	Case "PLC_GripperEarsOut_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(553, True, MBTypeCoil)
-		Else
-			MBWrite(553, False, MBTypeCoil)
-		EndIf
-	Case "PLC_GripperEarsIn_MM"
-		If tokens$(1) = "true" Then
-			MBWrite(554, True, MBTypeCoil)
-		Else
-			MBWrite(554, False, MBTypeCoil)
-		EndIf
-	Case "PLC_GripperEarsIn_VALUE"
-		If tokens$(1) = "true" Then
-			MBWrite(555, True, MBTypeCoil)
-		Else
-			MBWrite(555, False, MBTypeCoil)
-		EndIf
+		'================================================================		
+		'================================================================
+		' End of don't delete block
+		'================================================================
+		'================================================================		
 
 
-	' /end PLC comms
+		Case "zlimit"
+		    zLimit = Val(tokens$(1))
+		
+		' PLC Comms
+		Case "PLC_Delay_BlowOffTime"
+			Print "put write request into queue"
+			MBWrite(1000, Val(tokens$(1)), MBType16)
+		Case "PLC_Delay_InsertLoad"
+			MBWrite(1001, Val(tokens$(1)), MBType16)
+		Case "PLC_Speed_TorqueMode"
+			MBWrite(1002, Val(tokens$(1)), MBType32)
+		Case "PLC_Torque_TorqueMode"
+			MBWrite(1004, Val(tokens$(1)), MBType16)
+		Case "PLC_Delay_RejectBlowOff"
+			MBWrite(1005, Val(tokens$(1)), MBType16)
+		Case "PLC_Delay_FindHome"
+			MBWrite(1006, Val(tokens$(1)), MBType16)
+		Case "PLC_Delay_ActiveCooling"
+			MBWrite(1007, Val(tokens$(1)), MBType16)
+		Case "PLC_Delay_TorqueDwell"
+			MBWrite(1008, Val(tokens$(1)), MBType16)
+		Case "PLC_Delay_Gripper"
+			MBWrite(1009, Val(tokens$(1)), MBType16)
+		Case "PLC_Delay_PanelContact"
+			MBWrite(1010, Val(tokens$(1)), MBType16)
+		Case "PLC_Delay_ShuttleExtended"
+			MBWrite(1011, Val(tokens$(1)), MBType16)
+		Case "PLC_InsertType"
+			MBWrite(1020, Val(tokens$(1)), MBType16)
+		Case "PLC_PanelContactTorque"
+			MBWrite(1021, Val(tokens$(1)), MBType16)
+		Case "PLC_InsertTempOkBand"
+			MBWrite(1022, Val(tokens$(1)), MBType16)
+		Case "PLC_PID_SetValue"
+			MBWrite(1130, Val(tokens$(1)), MBType16)
+		Case "PLC_HeaterMCROn_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(434, True, MBTypeCoil)
+			Else
+				MBWrite(434, False, MBTypeCoil)
+			EndIf
+		Case "PLC_HeaterMCROn_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(435, True, MBTypeCoil)
+			Else
+				MBWrite(435, False, MBTypeCoil)
+			EndIf
+		Case "PLC_BowlFeederOn_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(436, True, MBTypeCoil)
+			Else
+				MBWrite(436, False, MBTypeCoil)
+			EndIf
+		Case "PLC_BowlFeederOn_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(437, True, MBTypeCoil)
+			Else
+				MBWrite(437, False, MBTypeCoil)
+			EndIf
+		Case "PLC_VibTrackOn_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(438, True, MBTypeCoil)
+			Else
+				MBWrite(438, False, MBTypeCoil)
+			EndIf
+		Case "PLC_VibTrackOn_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(439, True, MBTypeCoil)
+			Else
+				MBWrite(439, False, MBTypeCoil)
+			EndIf
+		Case "PLC_LoadInsert_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(440, True, MBTypeCoil)
+			Else
+				MBWrite(440, False, MBTypeCoil)
+			EndIf
+		Case "PLC_LoadInsert_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(441, True, MBTypeCoil)
+			Else
+				MBWrite(441, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ExtendShuttle_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(442, True, MBTypeCoil)
+			Else
+				MBWrite(442, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ExtendShuttle_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(443, True, MBTypeCoil)
+			Else
+				MBWrite(443, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ActiveCoolingOn_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(444, True, MBTypeCoil)
+			Else
+				MBWrite(444, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ActiveCoolingOn_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(445, True, MBTypeCoil)
+			Else
+				MBWrite(445, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertGripperOn_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(446, True, MBTypeCoil)
+			Else
+				MBWrite(446, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertGripperOn_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(447, True, MBTypeCoil)
+			Else
+				MBWrite(447, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertDischargeOn_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(448, True, MBTypeCoil)
+			Else
+				MBWrite(448, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertDischargeOn_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(449, True, MBTypeCoil)
+			Else
+				MBWrite(449, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertRejectOn_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(450, True, MBTypeCoil)
+			Else
+				MBWrite(450, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertRejectOn_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(451, True, MBTypeCoil)
+			Else
+				MBWrite(451, False, MBTypeCoil)
+			EndIf
+		Case "PLC_EmgStop_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(534, True, MBTypeCoil)
+			Else
+				MBWrite(534, False, MBTypeCoil)
+			EndIf
+		Case "PLC_EmgStop_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(535, True, MBTypeCoil)
+			Else
+				MBWrite(535, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ShuttleParked_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(536, True, MBTypeCoil)
+			Else
+				MBWrite(536, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ShuttleParked_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(537, True, MBTypeCoil)
+			Else
+				MBWrite(537, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ShuttlePickupPos_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(538, True, MBTypeCoil)
+			Else
+				MBWrite(538, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ShuttlePickupPos_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(539, True, MBTypeCoil)
+			Else
+				MBWrite(539, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ShuttlePlaceInsert_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(540, True, MBTypeCoil)
+			Else
+				MBWrite(540, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ShuttlePlaceInsert_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(541, True, MBTypeCoil)
+			Else
+				MBWrite(541, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ShuttleNearPlaceInsert_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(542, True, MBTypeCoil)
+			Else
+				MBWrite(542, False, MBTypeCoil)
+			EndIf
+		Case "PLC_ShuttleNearPlaceInsert_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(543, True, MBTypeCoil)
+			Else
+				MBWrite(543, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertOnShuttle_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(544, True, MBTypeCoil)
+			Else
+				MBWrite(544, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertOnShuttle_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(545, True, MBTypeCoil)
+			Else
+				MBWrite(545, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertDetected_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(546, True, MBTypeCoil)
+			Else
+				MBWrite(546, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertDetected_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(547, True, MBTypeCoil)
+			Else
+				MBWrite(547, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertDetectedAluOnly_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(548, True, MBTypeCoil)
+			Else
+				MBWrite(548, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertDetectedAluOnly_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(549, True, MBTypeCoil)
+			Else
+				MBWrite(549, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertAtTemp_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(550, True, MBTypeCoil)
+			Else
+				MBWrite(550, False, MBTypeCoil)
+			EndIf
+		Case "PLC_InsertAtTemp_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(551, True, MBTypeCoil)
+			Else
+				MBWrite(551, False, MBTypeCoil)
+			EndIf
+		Case "PLC_GripperEarsOut_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(552, True, MBTypeCoil)
+			Else
+				MBWrite(552, False, MBTypeCoil)
+			EndIf
+		Case "PLC_GripperEarsOut_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(553, True, MBTypeCoil)
+			Else
+				MBWrite(553, False, MBTypeCoil)
+			EndIf
+		Case "PLC_GripperEarsIn_MM"
+			If tokens$(1) = "true" Then
+				MBWrite(554, True, MBTypeCoil)
+			Else
+				MBWrite(554, False, MBTypeCoil)
+			EndIf
+		Case "PLC_GripperEarsIn_VALUE"
+			If tokens$(1) = "true" Then
+				MBWrite(555, True, MBTypeCoil)
+			Else
+				MBWrite(555, False, MBTypeCoil)
+			EndIf
+	
+	
+		' /end PLC comms
 	Default
 		' TMH for now print come back and do something useful
 		Print "Invalid Token received"
