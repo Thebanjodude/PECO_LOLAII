@@ -471,6 +471,11 @@ Function iotransfer()
 	Boolean suctionCupsOld
 	Boolean tasksRunningStatusOld
 	Boolean teachModeStatusOld
+	Boolean startLearningOld
+	Boolean crowdingOld
+	Boolean crowdingXold
+	Boolean inMagIntLockAckOld
+	Boolean outMagIntLockAckOld
 
 	Boolean m_insertingOld
 	Boolean m_idleOld
@@ -1302,7 +1307,7 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "crowding" + Chr$(&H22), ":", Str$(crowding), "}",
 			crowdingOld = crowding
 		EndIf
-		If crowdingX <> crowdingXOld Then
+		If crowdingX <> crowdingXold Then
 			Print #201, "{", Chr$(&H22) + "crowdingX" + Chr$(&H22), ":", Str$(crowdingX), "}",
 			crowdingXOld = crowdingX
 		EndIf
@@ -1316,189 +1321,190 @@ Function iotransfer()
 
 
 		If PanelHoleX(01) <> panelHoleXOld(01) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact01" + Chr$(&H22), ":", Str$(recHoleXact01), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact01" + Chr$(&H22), ":", Str$(PanelHoleX(01)), "}",
 			panelHoleXOld(01) = PanelHoleX(01)
 		EndIf
 		If PanelHoleY(01) <> panelHoleYOld(01) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact01" + Chr$(&H22), ":", Str$(recHoleYact01), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact01" + Chr$(&H22), ":", Str$(PanelHoleY(01)), "}",
 			panelHoleYOld(01) = PanelHoleY(01)
 		EndIf
 		If PanelHoleX(02) <> panelHoleXOld(02) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact02" + Chr$(&H22), ":", Str$(recHoleXact02), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact02" + Chr$(&H22), ":", Str$(PanelHoleX(02)), "}",
 			panelHoleXOld(02) = PanelHoleX(02)
 		EndIf
 		If PanelHoleY(02) <> panelHoleYOld(02) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact02" + Chr$(&H22), ":", Str$(recHoleYact02), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact02" + Chr$(&H22), ":", Str$(PanelHoleY(02)), "}",
 			panelHoleYOld(02) = PanelHoleY(02)
 		EndIf
 		If PanelHoleX(03) <> panelHoleXOld(03) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact03" + Chr$(&H22), ":", Str$(recHoleXact03), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact03" + Chr$(&H22), ":", Str$(PanelHoleX(03)), "}",
 			panelHoleXOld(03) = PanelHoleX(03)
 		EndIf
 		If PanelHoleY(03) <> panelHoleYOld(03) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact03" + Chr$(&H22), ":", Str$(recHoleYact03), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact03" + Chr$(&H22), ":", Str$(PanelHoleY(03)), "}",
 			panelHoleYOld(03) = PanelHoleY(03)
 		EndIf
 		If PanelHoleX(04) <> panelHoleXOld(04) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact04" + Chr$(&H22), ":", Str$(recHoleXact04), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact04" + Chr$(&H22), ":", Str$(PanelHoleX(04)), "}",
 			panelHoleXOld(04) = PanelHoleX(04)
 		EndIf
 		If PanelHoleY(04) <> panelHoleYOld(04) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact04" + Chr$(&H22), ":", Str$(recHoleYact04), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact04" + Chr$(&H22), ":", Str$(PanelHoleY(04)), "}",
 			panelHoleYOld(04) = PanelHoleY(04)
 		EndIf
 		If PanelHoleX(05) <> panelHoleXOld(05) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact05" + Chr$(&H22), ":", Str$(recHoleXact05), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact05" + Chr$(&H22), ":", Str$(PanelHoleX(05)), "}",
 			panelHoleXOld(05) = PanelHoleX(05)
 		EndIf
 		If PanelHoleY(05) <> panelHoleYOld(05) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact05" + Chr$(&H22), ":", Str$(recHoleYact05), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact05" + Chr$(&H22), ":", Str$(PanelHoleY(05)), "}",
 			panelHoleYOld(05) = PanelHoleY(05)
 		EndIf
 		If PanelHoleX(06) <> panelHoleXOld(06) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact06" + Chr$(&H22), ":", Str$(recHoleXact06), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact06" + Chr$(&H22), ":", Str$(PanelHoleX(06)), "}",
 			panelHoleXOld(06) = PanelHoleX(06)
 		EndIf
 		If PanelHoleY(06) <> panelHoleYOld(06) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact06" + Chr$(&H22), ":", Str$(recHoleYact06), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact06" + Chr$(&H22), ":", Str$(PanelHoleY(06)), "}",
 			panelHoleYOld(06) = PanelHoleY(06)
 		EndIf
 		If PanelHoleX(07) <> panelHoleXOld(07) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact07" + Chr$(&H22), ":", Str$(recHoleXact07), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact07" + Chr$(&H22), ":", Str$(PanelHoleX(07)), "}",
 			panelHoleXOld(07) = PanelHoleX(07)
 		EndIf
 		If PanelHoleY(07) <> panelHoleYOld(07) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact07" + Chr$(&H22), ":", Str$(recHoleYact07), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact07" + Chr$(&H22), ":", Str$(PanelHoleY(07)), "}",
 			panelHoleYOld(07) = PanelHoleY(07)
 		EndIf
 		If PanelHoleX(08) <> panelHoleXOld(08) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact08" + Chr$(&H22), ":", Str$(recHoleXact08), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact08" + Chr$(&H22), ":", Str$(PanelHoleX(08)), "}",
 			panelHoleXOld(08) = PanelHoleX(08)
 		EndIf
 		If PanelHoleY(08) <> panelHoleYOld(08) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact08" + Chr$(&H22), ":", Str$(recHoleYact08), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact08" + Chr$(&H22), ":", Str$(PanelHoleY(08)), "}",
 			panelHoleYOld(08) = PanelHoleY(08)
 		EndIf
 		If PanelHoleX(09) <> panelHoleXOld(09) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact09" + Chr$(&H22), ":", Str$(recHoleXact09), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact09" + Chr$(&H22), ":", Str$(PanelHoleX(09)), "}",
 			panelHoleXOld(09) = PanelHoleX(09)
 		EndIf
 		If PanelHoleY(09) <> panelHoleYOld(09) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact09" + Chr$(&H22), ":", Str$(recHoleYact09), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact09" + Chr$(&H22), ":", Str$(PanelHoleY(09)), "}",
 			panelHoleYOld(09) = PanelHoleY(09)
 		EndIf
 		If PanelHoleX(10) <> panelHoleXOld(10) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact10" + Chr$(&H22), ":", Str$(recHoleXact10), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact10" + Chr$(&H22), ":", Str$(PanelHoleX(10)), "}",
 			panelHoleXOld(10) = PanelHoleX(10)
 		EndIf
 		If PanelHoleY(10) <> panelHoleYOld(10) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact10" + Chr$(&H22), ":", Str$(recHoleYact10), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact10" + Chr$(&H22), ":", Str$(PanelHoleY(10)), "}",
 			panelHoleYOld(10) = PanelHoleY(10)
 		EndIf
 		If PanelHoleX(11) <> panelHoleXOld(11) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact11" + Chr$(&H22), ":", Str$(recHoleXact11), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact11" + Chr$(&H22), ":", Str$(PanelHoleX(11)), "}",
 			panelHoleXOld(11) = PanelHoleX(11)
 		EndIf
 		If PanelHoleY(11) <> panelHoleYOld(11) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact11" + Chr$(&H22), ":", Str$(recHoleYact11), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact11" + Chr$(&H22), ":", Str$(PanelHoleY(11)), "}",
 			panelHoleYOld(11) = PanelHoleY(11)
 		EndIf
 		If PanelHoleX(12) <> panelHoleXOld(12) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact12" + Chr$(&H22), ":", Str$(recHoleXact12), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact12" + Chr$(&H22), ":", Str$(PanelHoleX(12)), "}",
 			panelHoleXOld(12) = PanelHoleX(12)
 		EndIf
 		If PanelHoleY(12) <> panelHoleYOld(12) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact12" + Chr$(&H22), ":", Str$(recHoleYact12), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact12" + Chr$(&H22), ":", Str$(PanelHoleY(12)), "}",
 			panelHoleYOld(12) = PanelHoleY(12)
 		EndIf
 		If PanelHoleX(13) <> panelHoleXOld(13) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact13" + Chr$(&H22), ":", Str$(recHoleXact13), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact13" + Chr$(&H22), ":", Str$(PanelHoleX(13)), "}",
 			panelHoleXOld(13) = PanelHoleX(13)
 		EndIf
 		If PanelHoleY(13) <> panelHoleYOld(13) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact13" + Chr$(&H22), ":", Str$(recHoleYact13), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact13" + Chr$(&H22), ":", Str$(PanelHoleY(13)), "}",
 			panelHoleYOld(13) = PanelHoleY(13)
 		EndIf
 		If PanelHoleX(14) <> panelHoleXOld(14) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact14" + Chr$(&H22), ":", Str$(recHoleXact14), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact14" + Chr$(&H22), ":", Str$(PanelHoleX(14)), "}",
 			panelHoleXOld(14) = PanelHoleX(14)
 		EndIf
 		If PanelHoleY(14) <> panelHoleYOld(14) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact14" + Chr$(&H22), ":", Str$(recHoleYact14), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact14" + Chr$(&H22), ":", Str$(PanelHoleY(14)), "}",
 			panelHoleYOld(14) = PanelHoleY(14)
 		EndIf
 		If PanelHoleX(15) <> panelHoleXOld(15) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact15" + Chr$(&H22), ":", Str$(recHoleXact15), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact15" + Chr$(&H22), ":", Str$(PanelHoleX(15)), "}",
 			panelHoleXOld(15) = PanelHoleX(15)
 		EndIf
 		If PanelHoleY(15) <> panelHoleYOld(15) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact15" + Chr$(&H22), ":", Str$(recHoleYact15), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact15" + Chr$(&H22), ":", Str$(PanelHoleY(15)), "}",
 			panelHoleYOld(15) = PanelHoleY(15)
 		EndIf
 		If PanelHoleX(16) <> panelHoleXOld(16) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact16" + Chr$(&H22), ":", Str$(recHoleXact16), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact16" + Chr$(&H22), ":", Str$(PanelHoleX(16)), "}",
 			panelHoleXOld(16) = PanelHoleX(16)
 		EndIf
 		If PanelHoleY(16) <> panelHoleYOld(16) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact16" + Chr$(&H22), ":", Str$(recHoleYact16), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact16" + Chr$(&H22), ":", Str$(PanelHoleY(16)), "}",
 			panelHoleYOld(16) = PanelHoleY(16)
 		EndIf
 		If PanelHoleX(17) <> panelHoleXOld(17) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact17" + Chr$(&H22), ":", Str$(recHoleXact17), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact17" + Chr$(&H22), ":", Str$(PanelHoleX(17)), "}",
 			panelHoleXOld(17) = PanelHoleX(17)
 		EndIf
 		If PanelHoleY(17) <> panelHoleYOld(17) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact17" + Chr$(&H22), ":", Str$(recHoleYact17), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact17" + Chr$(&H22), ":", Str$(PanelHoleY(17)), "}",
 			panelHoleYOld(17) = PanelHoleY(17)
 		EndIf
 		If PanelHoleX(18) <> panelHoleXOld(18) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact18" + Chr$(&H22), ":", Str$(recHoleXact18), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact18" + Chr$(&H22), ":", Str$(PanelHoleX(18)), "}",
 			panelHoleXOld(18) = PanelHoleX(18)
 		EndIf
 		If PanelHoleY(18) <> panelHoleYOld(18) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact18" + Chr$(&H22), ":", Str$(recHoleYact18), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact18" + Chr$(&H22), ":", Str$(PanelHoleY(18)), "}",
 			panelHoleYOld(18) = PanelHoleY(18)
 		EndIf
 		If PanelHoleX(19) <> panelHoleXOld(19) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact19" + Chr$(&H22), ":", Str$(recHoleXact19), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact19" + Chr$(&H22), ":", Str$(PanelHoleX(19)), "}",
 			panelHoleXOld(19) = PanelHoleX(19)
 		EndIf
 		If PanelHoleY(19) <> panelHoleYOld(19) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact19" + Chr$(&H22), ":", Str$(recHoleYact19), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact19" + Chr$(&H22), ":", Str$(PanelHoleY(19)), "}",
 			panelHoleYOld(19) = PanelHoleY(19)
 		EndIf
 		If PanelHoleX(20) <> panelHoleXOld(20) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact20" + Chr$(&H22), ":", Str$(recHoleXact20), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact20" + Chr$(&H22), ":", Str$(PanelHoleX(20)), "}",
 			panelHoleXOld(20) = PanelHoleX(20)
 		EndIf
 		If PanelHoleY(20) <> panelHoleYOld(20) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact20" + Chr$(&H22), ":", Str$(recHoleYact20), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact20" + Chr$(&H22), ":", Str$(PanelHoleY(20)), "}",
 			panelHoleYOld(20) = PanelHoleY(20)
 		EndIf
 		If PanelHoleX(21) <> panelHoleXOld(21) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact21" + Chr$(&H22), ":", Str$(recHoleXact21), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact21" + Chr$(&H22), ":", Str$(PanelHoleX(21)), "}",
 			panelHoleXOld(21) = PanelHoleX(21)
 		EndIf
 		If PanelHoleY(21) <> panelHoleYOld(21) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact21" + Chr$(&H22), ":", Str$(recHoleYact21), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact21" + Chr$(&H22), ":", Str$(PanelHoleY(21)), "}",
 			panelHoleYOld(21) = PanelHoleY(21)
 		EndIf
 		If PanelHoleX(22) <> panelHoleXOld(22) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact22" + Chr$(&H22), ":", Str$(recHoleXact22), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact22" + Chr$(&H22), ":", Str$(PanelHoleX(22)), "}",
 			panelHoleXOld(22) = PanelHoleX(22)
 		EndIf
 		If PanelHoleY(22) <> panelHoleYOld(22) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact22" + Chr$(&H22), ":", Str$(recHoleYact22), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact22" + Chr$(&H22), ":", Str$(PanelHoleY(22)), "}",
 			panelHoleYOld(22) = PanelHoleY(22)
 		EndIf
 		If PanelHoleX(23) <> panelHoleXOld(23) Then
-			Print #201, "{", Chr$(&H22) + "recHoleXact23" + Chr$(&H22), ":", Str$(recHoleXact23), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleXact23" + Chr$(&H22), ":", Str$(PanelHoleX(23)), "}",
 			panelHoleXOld(23) = PanelHoleX(23)
 		EndIf
 		If PanelHoleY(23) <> panelHoleYOld(23) Then
-			Print #201, "{", Chr$(&H22) + "recHoleYact23" + Chr$(&H22), ":", Str$(recHoleYact23), "}",
+			Print #201, "{", Chr$(&H22) + "recHoleYact23" + Chr$(&H22), ":", Str$(PanelHoleY(23)), "}",
 			panelHoleYOld(23) = PanelHoleY(23)
 		EndIf
+
 
 
 
@@ -1513,9 +1519,9 @@ Function iotransfer()
 			Print #201, "{", Chr$(&H22) + "ctrlrErrAxisNumber" + Chr$(&H22), ":", Str$(ctrlrErrAxisNumber), "}",
 			ctrlrErrAxisNumberOld = ctrlrErrAxisNumber
 		EndIf
-		If ctrlrErrMsg <> ctrlrErrMsgOld Then
-			Print #201, "{", Chr$(&H22) + "ctrlrErrMsg" + Chr$(&H22), ":", Str$(ctrlrErrMsg), "}",
-			ctrlrErrMsgOld = ctrlrErrMsg
+		If ctrlrErrMsg$ <> ctrlrErrMsgOld$ Then
+			Print #201, "{", Chr$(&H22) + "ctrlrErrMsg" + Chr$(&H22), ":", Chr$(&H22) + ctrlrErrMsg$ + Chr$(&H22), "}",
+			ctrlrErrMsgOld$ = ctrlrErrMsg$
 		EndIf
 		If ctrlrErrorNum <> ctrlrErrorNumOld Then
 			Print #201, "{", Chr$(&H22) + "ctrlrErrorNum" + Chr$(&H22), ":", Str$(ctrlrErrorNum), "}",
@@ -1966,13 +1972,13 @@ Function setVars(response$ As String)
 		    Else
 		        inMagGoHomeBtn = False
 		    EndIf
-		Case "inMagIntLockAckBtn"
-		    If tokens$(1) = "true" Then
-		        inMagIntLockAckBtn = True
-		        inMagIntLockAck = True
-		    Else
-		        inMagIntLockAckBtn = False
-		    EndIf
+'		Case "inMagIntLockAckBtn"
+'		    If tokens$(1) = "true" Then
+'		        inMagIntLockAckBtn = True
+'						inMagIntLockAck = True
+'		    Else
+'		        inMagIntLockAckBtn = False
+'		    EndIf
 		Case "inMagLoadedBtn"
 		    If tokens$(1) = "true" Then
 		        inMagLoadedBtn = True
@@ -2015,13 +2021,13 @@ Function setVars(response$ As String)
 		    Else
 		        outMagGoHomeBtn = False
 		    EndIf
-		Case "outMagIntLockAckBtn"
-		    If tokens$(1) = "true" Then
-		        outMagIntLockAckBtn = True
-		        outMagIntLockAck = True
-		    Else
-		        outMagIntLockAckBtn = False
-		    EndIf
+'		Case "outMagIntLockAckBtn"
+'		    If tokens$(1) = "true" Then
+'		        outMagIntLockAckBtn = True
+'		        outMagIntLockAck = True
+'		    Else
+'		        outMagIntLockAckBtn = False
+'		    EndIf
 		Case "outMagUnloadedBtn"
 		    If tokens$(1) = "true" Then
 		        outMagUnloadedBtn = True
@@ -2698,8 +2704,8 @@ Function setVars(response$ As String)
 		    Else
 		        MemOff (crowdingXFV)
 		    EndIf
-		Case "heatStakeOffset"
-		    heatStakeOffset = Val(tokens$(1))
+'		Case "heatStakeOffset"
+'		    heatStakeOffset = Val(tokens$(1))
 		Case "insertDepthTolerance"
 		    insertDepthTolerance = Val(tokens$(1))
 		Case "jobNumPanels"
@@ -2754,12 +2760,12 @@ Function setVars(response$ As String)
 		    recNumberOfHoles = Val(tokens$(1))
 		Case "recSuctionWaitTime"
 		    recSuctionWaitTime = Val(tokens$(1))
-		Case "panelLearned"
-		    If tokens$(1) = "true" Then
-		        panelLearned = True
-		    Else
-		        panelLearned = False
-		    EndIf
+'		Case "panelLearned"
+'		    If tokens$(1) = "true" Then
+'		        panelLearned = True
+'		    Else
+'		        panelLearned = False
+'		    EndIf
 
 		'================================================================
 		'================================================================
