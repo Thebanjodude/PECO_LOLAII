@@ -116,3 +116,9 @@ Global Double magazineCorrection
 Global Double stepsize
 Global Double systemThetaError
 
+
+'Learning panel vars
+Global Boolean startLearning
+Global Boolean startLearningBtn
+
+

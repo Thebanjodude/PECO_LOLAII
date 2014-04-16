@@ -23,7 +23,6 @@ Function runTest
 	
 	'LoadPanelInfo
 	
-	ChoosePointsTable()
 	PickupPanel
 	CrowdingSequence
 	
@@ -109,7 +108,6 @@ Function testCrowding
 	holeTolerance = 0.01
 	stepsize = 0.25
 	
-	ChoosePointsTable()
 	PickupPanel
 	ChangeProfile("00")
 	

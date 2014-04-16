@@ -13,7 +13,7 @@ Function FlashPanel(DwellTime As Real) As Integer
 	'On debrisMtrH 'Turn on Vacuum
 	debrisMtrCC = True
 	
-	For i = recFirstHolePointFlash To recLastHolePointFlash
+	For i = 1 To panelHoleCount
 		
     Jump P(i) 'LimZ zLimit
 		

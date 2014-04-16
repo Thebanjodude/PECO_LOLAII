@@ -11,38 +11,6 @@ Function mmToin(mm As Real) As Real
 Fend
 
 
-Function ChoosePointsTable()
-	' Choose which points table to load
-
-	If recPointsTable = 1 Then
-		LoadPoints "points.pts"
-	ElseIf recPointsTable = 2 Then
-		LoadPoints "points2.pts"
-	ElseIf recPointsTable = 3 Then
-		LoadPoints "points3.pts"
-	Else
-		erUnknown = True
-		Print "point Table is Unknown"
-	EndIf
-Fend
-
-
-Function SavePointsTable()
-	' Choose which points table to save
-
-	If recPointsTable = 1 Then
-		SavePoints "points.pts"
-	ElseIf recPointsTable = 2 Then
-		SavePoints "points2.pts"
-	ElseIf recPointsTable = 3 Then
-		SavePoints "points3.pts"
-	Else
-		erUnknown = True
-		Print "point Table is Unknown"
-	EndIf
-Fend
-
-
 Function HomeCheck() As Boolean
 	
 	Real distx, disty, distz, distance
