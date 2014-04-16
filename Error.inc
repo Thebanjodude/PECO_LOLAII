@@ -22,7 +22,7 @@ Global Boolean erPnumaticsBreaker, erSafetySystemBreaker, erRC180, erIllegalArmM
 Global Boolean erUnknown, erEstop, erRecEntryMissing, erParamEntryMissing, erRobotNotAtHome
 Global Boolean RecEntryMissing, ParamEntryMissing, erHMICommunication, erFlashStation
 Global Boolean erInMagLowSensorBad, erInMagUpSensorBad, erOutMagLowSensorBad, erOutMagUpSensorBad
-Global Boolean erModbusPort, erModbusCommand
+Global Boolean erModbusPort, erModbusCommand, erModbusTimeout
 
 'State of Health Global Vars
 Global String ctrlrErrMsg$
