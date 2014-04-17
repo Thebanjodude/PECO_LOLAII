@@ -10,7 +10,7 @@ Function main()
 	recPopPanelRequired = True
 	recCrowdingRequired = True
 	recPreinspectionRequired = True
-	recFlashRequired = True
+	recFlashRequired = False
 	recHotStakePanelRequired = True
 	recInspectionRequired = True
 	recPushPanelRequired = True
