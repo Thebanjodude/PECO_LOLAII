@@ -22,23 +22,28 @@ Function DropOffPanel() As Integer
 	Loop
 
 
-	' --TODO-- Add panel fail code here
+	If startlearning = False Then
+		' Only log data if we are not learning a new panel... this logging functionality
+		'  should be moved to a different function
+		
+		' --TODO-- Add panel fail code here
+		
+		panelDataTxRdy = True ' Tell HMI to readout hole data
 	
-	panelDataTxRdy = True ' Tell HMI to readout hole data
-
-	count = 0
-	Do While panelDataTxACK = False
-		count = count + 1
-		If count > 10 Then
-			erHmiDataAck = True
-			Print "no data ack from hmi"
-			Pause
-			Exit Do
-		EndIf
-		Wait 1
-	Loop
-
-	panelDataTxRdy = False ' reset flag	
+		count = 0
+		Do While panelDataTxACK = False
+			count = count + 1
+			If count > 10 Then
+				erHmiDataAck = True
+				Print "no data ack from hmi"
+				Pause
+				Exit Do
+			EndIf
+			Wait 1
+		Loop
+	
+		panelDataTxRdy = False ' reset flag	
+	EndIf
 	
 	changeSpeed(slow)
 	

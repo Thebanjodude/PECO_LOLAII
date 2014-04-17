@@ -29,6 +29,7 @@ Function learnPanelState(currentState As Integer) As Integer
 	'  This state is used for the robot to learn a panels actual hole locations from
 	'  	the drawing values
 	Call StartLearnPanel
+	Call DropOffPanel
 	startLearning = False
 	learnPanelState = StateIdle
 Fend
