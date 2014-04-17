@@ -1939,34 +1939,34 @@ Function setVars(response$ As String)
 		Print "error---", response$, " -- ", numTokens
 	EndIf
 	
-	Select tokens$(0)
+	Select Tokens$(0)
 
 		'!!!!!!!!!!!!!!CHECK FOR DON'T DELETE BLOCKS!!!!!!!!!!!!!!!!!!!!!!!!
 
 		'Rx from HMI:
 		Case "alarmMuteBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        alarmMuteBtn = True
 		        alarmMute = True
 		    Else
 		        alarmMuteBtn = False
 		    EndIf
 		Case "backInterlockACKBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        backInterlockACKBtn = True
 		        backInterlockACK = True
 		    Else
 		        backInterlockACKBtn = False
 		    EndIf
 		Case "frontInterlockACKBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        frontInterlockACKBtn = True
 		        frontInterlockACK = True
 		    Else
 		        frontInterlockACKBtn = False
 		    EndIf
 		Case "inMagGoHomeBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        inMagGoHomeBtn = True
 		        inMagGoHome = True
 		    Else
@@ -1980,35 +1980,40 @@ Function setVars(response$ As String)
 '		        inMagIntLockAckBtn = False
 '		    EndIf
 		Case "inMagLoadedBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        inMagLoadedBtn = True
 		        inMagLoaded = True
 		    Else
 		        inMagLoadedBtn = False
 		    EndIf
 		Case "jobAbortBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        jobAbortBtn = True
 		        jobAbort = True
 		    Else
 		        jobAbortBtn = False
 		    EndIf
 		Case "jobStartBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        jobStartBtn = True
 		        jobStart = True
 		    Else
 		        jobStartBtn = False
 		    EndIf
 		Case "startLearningBtn"
-		    If tokens$(1) = "true" Then
+			'===================================
+			'TODO - startLearning implies that we are entering into a specific state, but there is no
+			'	state checking at this point.  The HMI will lock up until the state is removed...
+			'	So... this needs to be fixed
+			'===================================
+		    If Tokens$(1) = "true" Then
 		        startLearningBtn = True
 		        startLearning = True
 		    Else
 		        startLearningBtn = False
 		    EndIf
 		Case "leftInterlockACKBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        leftInterlockACKBtn = True
 		        leftInterlockACK = True
 		    Else
