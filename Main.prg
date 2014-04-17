@@ -27,8 +27,9 @@ Function main()
 	magazineCorrection = -90
 	systemThetaError = EOATcorrection + magazineCorrection
 	
-'	Call runTest()
-	
+	holeTolerance = 0.01
+	stepsize = 0.01
+
 '	'test the repeatability of the crowding sequence
 '	Pause
 '	Call PanelPrintRecipe
@@ -77,6 +78,10 @@ Function main()
 			Case StateEmptyingBowlandTrack
 			' This state dumps inserts out of the system
 				mainCurrentState = dumpState(mainCurrentState)
+				
+			Case StateLearnPanel
+			' This state translates a drawing of a panel into a series of points that the robot can use
+				mainCurrentState = learnPanelState(mainCurrentState)
 				
 		Send
 		

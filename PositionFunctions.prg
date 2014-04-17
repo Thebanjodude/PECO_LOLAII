@@ -1,134 +1,5 @@
 #include "Globals.INC"
 
-
-' ------------MOCK------------
-' ---------TODO--Replace with recipe values-------
-Function LoadPanelInfo()
-	' load the following vars with the corrected values
-	'  this might be pulled into LoadRecipe
-	'  --Just remember that the recipe values need to be translated to robot space....
-
-'	Global Preserve Integer PanelHoleCount
-'	Global Preserve Double PanelHoleX(25)
-'	Global Preserve Double PanelHoleY(25)
-'	Global Preserve Double PanelHoleTangent(25)
-'	Global Preserve Double PanelPickupErrorX
-'	Global Preserve Double PanelPickupErrorY
-'	Global Preserve Double PanelPickupErrorTheta
-	
-	'for now
-	Call LoadRecipe
-	
-Fend
-
-' ------------MOCK------------
-' ---------TODO--Replace with recipe values from HMI-------
-Function LoadRecipe
-	
-	
-	' panel PN:  88556
-	PanelHoleCount = 16
-	
-	PanelHoleX(1) = InToMM(8.8)
-	PanelHoleY(1) = InToMM(0)
-	PanelHoleX(2) = InToMM(7.897)
-	PanelHoleY(2) = InToMM(-2.593)
-	PanelHoleX(3) = InToMM(5.543)
-	PanelHoleY(3) = InToMM(-4.066)
-	PanelHoleX(4) = InToMM(2.803)
-	PanelHoleY(4) = InToMM(-4.654)
-	PanelHoleX(5) = InToMM(0)
-	PanelHoleY(5) = InToMM(-4.8)
-	PanelHoleX(6) = InToMM(-2.803)
-	PanelHoleY(6) = InToMM(-4.654)
-	PanelHoleX(7) = InToMM(-5.543)
-	PanelHoleY(7) = InToMM(-4.066)
-	PanelHoleX(8) = InToMM(-7.897)
-	PanelHoleY(8) = InToMM(-2.593)
-	PanelHoleX(9) = InToMM(-8.8)
-	PanelHoleY(9) = InToMM(0)
-	PanelHoleX(10) = InToMM(-7.897)
-	PanelHoleY(10) = InToMM(2.593)
-	PanelHoleX(11) = InToMM(-5.543)
-	PanelHoleY(11) = InToMM(4.066)
-	PanelHoleX(12) = InToMM(-2.803)
-	PanelHoleY(12) = InToMM(4.654)
-	PanelHoleX(13) = InToMM(0)
-	PanelHoleY(13) = InToMM(4.8)
-	PanelHoleX(14) = InToMM(2.803)
-	PanelHoleY(14) = InToMM(4.654)
-	PanelHoleX(15) = InToMM(5.543)
-	PanelHoleY(15) = InToMM(4.066)
-	PanelHoleX(16) = InToMM(7.897)
-	PanelHoleY(16) = InToMM(2.593)
-	PanelHoleX(17) = InToMM(0)
-	PanelHoleY(17) = InToMM(0)
-	PanelHoleX(18) = InToMM(0)
-	PanelHoleY(18) = InToMM(0)
-	PanelHoleX(19) = InToMM(0)
-	PanelHoleY(19) = InToMM(0)
-	PanelHoleX(20) = InToMM(0)
-	PanelHoleY(20) = InToMM(0)
-	PanelHoleX(21) = InToMM(0)
-	PanelHoleY(21) = InToMM(0)
-	PanelHoleX(22) = InToMM(0)
-	PanelHoleY(22) = InToMM(0)
-	PanelHoleX(23) = InToMM(0)
-	PanelHoleY(23) = InToMM(0)
-
-		
-'	' panel pn:  51010
-'	PanelHoleCount = 23
-'	
-'	PanelHoleX(1) = InTomm(8.850)
-'	PanelHoleY(1) = InTomm(0.000)
-'	PanelHoleX(2) = InTomm(8.350)
-'	PanelHoleY(2) = InTomm(-1.950)
-'	PanelHoleX(3) = InTomm(7.090)
-'	PanelHoleY(3) = InTomm(-3.360)
-'	PanelHoleX(4) = InTomm(5.320)
-'	PanelHoleY(4) = InTomm(-4.190)
-'	PanelHoleX(5) = InTomm(3.410)
-'	PanelHoleY(5) = InTomm(-4.629)
-'	PanelHoleX(6) = InTomm(1.460)
-'	PanelHoleY(6) = InTomm(-4.814)
-'	PanelHoleX(7) = InTomm(-0.460)
-'	PanelHoleY(7) = InTomm(-4.846)
-'	PanelHoleX(8) = InTomm(-2.420)
-'	PanelHoleY(8) = InTomm(-4.744)
-'	PanelHoleX(9) = InTomm(-4.350)
-'	PanelHoleY(9) = InTomm(-4.450)
-'	PanelHoleX(10) = InTomm(-6.200)
-'	PanelHoleY(10) = InTomm(-3.854)
-'	PanelHoleX(11) = InTomm(-7.800)
-'	PanelHoleY(11) = InTomm(-2.764)
-'	PanelHoleX(12) = InTomm(-8.740)
-'	PanelHoleY(12) = InTomm(-1.021)
-'	PanelHoleX(13) = InTomm(-8.740)
-'	PanelHoleY(13) = InTomm(1.021)
-'	PanelHoleX(14) = InTomm(-7.800)
-'	PanelHoleY(14) = InTomm(2.764)
-'	PanelHoleX(15) = InTomm(-6.200)
-'	PanelHoleY(15) = InTomm(3.854)
-'	PanelHoleX(16) = InTomm(-4.350)
-'	PanelHoleY(16) = InTomm(4.450)
-'	PanelHoleX(17) = InTomm(-2.420)
-'	PanelHoleY(17) = InTomm(4.744)
-'	PanelHoleX(18) = InTomm(-0.460)
-'	PanelHoleY(18) = InTomm(4.846)
-'	PanelHoleX(19) = InTomm(1.460)
-'	PanelHoleY(19) = InTomm(4.814)
-'	PanelHoleX(20) = InTomm(3.410)
-'	PanelHoleY(20) = InTomm(4.629)
-'	PanelHoleX(21) = InTomm(5.320)
-'	PanelHoleY(21) = InTomm(4.190)
-'	PanelHoleX(22) = InTomm(7.090)
-'	PanelHoleY(22) = InTomm(3.360)
-'	PanelHoleX(23) = InTomm(8.350)
-'	PanelHoleY(23) = InTomm(1.950)
-	
-Fend
-
 'print out the recipe values
 Function PanelPrintRecipe
 	Integer hole
@@ -146,9 +17,7 @@ Function PanelFindPickupError
 
 	ChangeProfile("00") ' Change profile on the laser
 	Call changeSpeed(slow)
-	
-	LoadRecipe
-	
+		
 	'precalculate radius to holes, rotation to holes along radius and tangent angle to holes
 	' this will allow us to move the holes close to where they need to be
 	' the system theta error is accounted for in panelRecipeRotate()
@@ -302,6 +171,20 @@ Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double,
 	'Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
 	Go XY(x + rotX, y + rotY, z, Theta) /L
 
+Fend
+
+'	Grab a panel, clear existing error offsets and learn the new hole positions
+Function StartLearnPanel
+	PickupPanel
+	CrowdingSequence
+	
+	'clear existing pickup error
+	PanelPickupErrorX = 0
+	PanelPickupErrorY = 0
+	PanelPickupErrorTheta = 0
+
+
+	PanelFindPickupError
 Fend
 
 'moves the panel away from the laser and walks it in to ensure that the error

@@ -17,7 +17,8 @@ Function idleState(currentState As Integer) As Integer
 			' TODO --
 		EndIf
 	ElseIf startLearning = True Then
-		' jump to learning routine...
+		' jump to learning state
+		currentState = StateLearnPanel
 	Else
 		Wait 0.5
 	EndIf
@@ -27,7 +28,9 @@ Fend
 Function learnPanelState(currentState As Integer) As Integer
 	'  This state is used for the robot to learn a panels actual hole locations from
 	'  	the drawing values
-	
+	Call StartLearnPanel
+	startLearning = False
+	learnPanelState = StateIdle
 Fend
 
 Function popPanelState(currentState As Integer) As Integer
