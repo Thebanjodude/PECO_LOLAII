@@ -1,31 +1,29 @@
-ENVT0100,LM:2014/04/15 17:10:43:886,DS:0000004562,CS:09217,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="InspectionStation.prg"
-bMdiMaximized=True
+ENVT0100,LM:2014/04/17 14:52:59:576,DS:0000004252,CS:00533,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=-304
 		nTop=0
-		nWidth=1144
-		nHeight=511
+		nWidth=1143
+		nHeight=507
 	}
 }
 ProgramFile2 {
 	sName="IOTable.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=21
 		nTop=19
-		nWidth=803
-		nHeight=432
+		nWidth=801
+		nHeight=429
 	}
 }
 ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=51
@@ -47,7 +45,7 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=17
@@ -58,13 +56,13 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=-279
 		nTop=25
-		nWidth=1155
-		nHeight=539
+		nWidth=1154
+		nHeight=535
 	}
 }
 ProgramFile7 {
@@ -113,7 +111,7 @@ ProgramFile10 {
 }
 ProgramFile11 {
 	sName="Startup.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
@@ -124,18 +122,18 @@ ProgramFile11 {
 }
 ProgramFile12 {
 	sName="MainStates.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=-254
 		nTop=50
-		nWidth=1155
-		nHeight=539
+		nWidth=1154
+		nHeight=535
 	}
 }
 ProgramFile13 {
 	sName="Crowding.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
@@ -147,23 +145,23 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=-304
 		nTop=553
-		nWidth=143
+		nWidth=141
 		nHeight=38
 	}
 }
 ProgramFile15 {
 	sName="Test.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=37
 		nTop=8
-		nWidth=991
-		nHeight=477
+		nWidth=989
+		nHeight=473
 	}
 }
 ProgramFile16 {
@@ -180,7 +178,7 @@ ProgramFile16 {
 nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=248
@@ -192,12 +190,12 @@ IncludeFile1 {
 IncludeFile2 {
 	sName="Defines.inc"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1055
-		nHeight=588
+		nWidth=1051
+		nHeight=581
 	}
 }
 IncludeFile3 {
@@ -213,7 +211,7 @@ IncludeFile3 {
 }
 IncludeFile4 {
 	sName="Recipe.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
@@ -244,38 +242,16 @@ IncludeFile6 {
 		nHeight=602
 	}
 }
-nPointFileCount=3
+nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=265
 		nTop=37
-		nWidth=652
-		nHeight=432
-	}
-}
-PointFile2 {
-	sName="Points2.pts"
-	bOpened=False
-	nWinState=0
-	Window {
-		nLeft=0
-		nTop=0
-		nWidth=141
-		nHeight=38
-	}
-}
-PointFile3 {
-	sName="Points3.pts"
-	bOpened=False
-	nWinState=0
-	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nWidth=648
+		nHeight=419
 	}
 }
 sActiveWindow="main.prg"
