@@ -256,11 +256,13 @@ Function PanelFindYerror As Real
 	Real YerrorOld
 	Double Ymove
 	Boolean verbose
+	Integer missedCenterCount
 
 	' init vars
 	YerrorOld = 20
 	yShouldBe = CY(CurPos)
 	width = 0
+	missedCenterCount = 0
 
 	'verbose = False
 	verbose = True
@@ -311,6 +313,12 @@ Function PanelFindYerror As Real
 		If YerrorOld + 0.5 < Yerror Then
 			Go CurPos -Y(5)
 			If verbose Then Print "missed center of hole"
+			missedCenterCount = missedCenterCount + 1
+			If missedCenterCount > 3 Then
+				If verbose Then Print "refinding X due to gross y error"
+				PanelFindXerror
+				missedCenterCount = 0
+			EndIf
 			YerrorOld = 20
 		Else
 			Go CurPos +Y(Ymove)
