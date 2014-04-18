@@ -311,13 +311,14 @@ Function PanelFindYerror As Real
 		'If Yerror < 0.25 Then Exit Do
 		
 		If YerrorOld + 0.5 < Yerror Then
-			Go CurPos -Y(5)
-			If verbose Then Print "missed center of hole"
 			missedCenterCount = missedCenterCount + 1
 			If missedCenterCount > 3 Then
 				If verbose Then Print "refinding X due to gross y error"
 				PanelFindXerror
 				missedCenterCount = 0
+			Else
+				Go CurPos -Y(5)
+				If verbose Then Print "missed center of hole"
 			EndIf
 			YerrorOld = 20
 		Else
