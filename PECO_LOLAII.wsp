@@ -1,9 +1,9 @@
-ENVT0100,LM:2014/04/17 20:46:00:289,DS:0000004291,CS:21283,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="Main.prg"
+ENVT0100,LM:2014/04/18 00:10:58:702,DS:0000004306,CS:17266,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="PositionFunctions.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=2
 	Window {
 		nLeft=-304
@@ -91,8 +91,8 @@ ProgramFile8 {
 }
 ProgramFile9 {
 	sName="FlashRemoval.prg"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
@@ -125,7 +125,7 @@ ProgramFile11 {
 ProgramFile12 {
 	sName="MainStates.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=-254
 		nTop=50
@@ -147,7 +147,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=521
