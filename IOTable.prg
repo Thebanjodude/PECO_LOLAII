@@ -219,7 +219,7 @@ Function IOTableBooleans(CtrlCodeValue As Boolean, HMIForceValue As Boolean, HMI
 		Value = HMIForceValue ' Take forced value from HMI, overwrite control code
 	EndIf
 	
-	IOTableBooleans = Value ' Return Value
+	IOTableBooleans = value ' Return Value
 	
 Fend
 
@@ -476,6 +476,30 @@ Function iotransfer()
 	Boolean crowdingXold
 	Boolean inMagIntLockAckOld
 	Boolean outMagIntLockAckOld
+
+	Boolean insertPresent01Old
+	Boolean insertPresent02Old
+	Boolean insertPresent03Old
+	Boolean insertPresent04Old
+	Boolean insertPresent05Old
+	Boolean insertPresent06Old
+	Boolean insertPresent07Old
+	Boolean insertPresent08Old
+	Boolean insertPresent09Old
+	Boolean insertPresent10Old
+	Boolean insertPresent11Old
+	Boolean insertPresent12Old
+	Boolean insertPresent13Old
+	Boolean insertPresent14Old
+	Boolean insertPresent15Old
+	Boolean insertPresent16Old
+	Boolean insertPresent17Old
+	Boolean insertPresent18Old
+	Boolean insertPresent19Old
+	Boolean insertPresent20Old
+	Boolean insertPresent21Old
+	Boolean insertPresent22Old
+	Boolean insertPresent23Old
 
 	Boolean m_insertingOld
 	Boolean m_idleOld
@@ -1094,6 +1118,98 @@ Function iotransfer()
 		If hole9R <> hole9ROld Then
 			Print #201, "{", Chr$(&H22) + "hole9R" + Chr$(&H22), ":", Str$(hole9R), "}",
 			hole9ROld = hole9R
+		EndIf
+		If insertPresent01 <> insertPresent01Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent01" + Chr$(&H22), ":", Str$(insertPresent01), "}",
+			insertPresent01Old = insertPresent01
+		EndIf
+		If insertPresent02 <> insertPresent02Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent02" + Chr$(&H22), ":", Str$(insertPresent02), "}",
+			insertPresent02Old = insertPresent02
+		EndIf
+		If insertPresent03 <> insertPresent03Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent03" + Chr$(&H22), ":", Str$(insertPresent03), "}",
+			insertPresent03Old = insertPresent03
+		EndIf
+		If insertPresent04 <> insertPresent04Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent04" + Chr$(&H22), ":", Str$(insertPresent04), "}",
+			insertPresent04Old = insertPresent04
+		EndIf
+		If insertPresent05 <> insertPresent05Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent05" + Chr$(&H22), ":", Str$(insertPresent05), "}",
+			insertPresent05Old = insertPresent05
+		EndIf
+		If insertPresent06 <> insertPresent06Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent06" + Chr$(&H22), ":", Str$(insertPresent06), "}",
+			insertPresent06Old = insertPresent06
+		EndIf
+		If insertPresent07 <> insertPresent07Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent07" + Chr$(&H22), ":", Str$(insertPresent07), "}",
+			insertPresent07Old = insertPresent07
+		EndIf
+		If insertPresent08 <> insertPresent08Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent08" + Chr$(&H22), ":", Str$(insertPresent08), "}",
+			insertPresent08Old = insertPresent08
+		EndIf
+		If insertPresent09 <> insertPresent09Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent09" + Chr$(&H22), ":", Str$(insertPresent09), "}",
+			insertPresent09Old = insertPresent09
+		EndIf
+		If insertPresent10 <> insertPresent10Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent10" + Chr$(&H22), ":", Str$(insertPresent10), "}",
+			insertPresent10Old = insertPresent10
+		EndIf
+		If insertPresent11 <> insertPresent11Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent11" + Chr$(&H22), ":", Str$(insertPresent11), "}",
+			insertPresent11Old = insertPresent11
+		EndIf
+		If insertPresent12 <> insertPresent12Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent12" + Chr$(&H22), ":", Str$(insertPresent12), "}",
+			insertPresent12Old = insertPresent12
+		EndIf
+		If insertPresent13 <> insertPresent13Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent13" + Chr$(&H22), ":", Str$(insertPresent13), "}",
+			insertPresent13Old = insertPresent13
+		EndIf
+		If insertPresent14 <> insertPresent14Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent14" + Chr$(&H22), ":", Str$(insertPresent14), "}",
+			insertPresent14Old = insertPresent14
+		EndIf
+		If insertPresent15 <> insertPresent15Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent15" + Chr$(&H22), ":", Str$(insertPresent15), "}",
+			insertPresent15Old = insertPresent15
+		EndIf
+		If insertPresent16 <> insertPresent16Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent16" + Chr$(&H22), ":", Str$(insertPresent16), "}",
+			insertPresent16Old = insertPresent16
+		EndIf
+		If insertPresent17 <> insertPresent17Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent17" + Chr$(&H22), ":", Str$(insertPresent17), "}",
+			insertPresent17Old = insertPresent17
+		EndIf
+		If insertPresent18 <> insertPresent18Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent18" + Chr$(&H22), ":", Str$(insertPresent18), "}",
+			insertPresent18Old = insertPresent18
+		EndIf
+		If insertPresent19 <> insertPresent19Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent19" + Chr$(&H22), ":", Str$(insertPresent19), "}",
+			insertPresent19Old = insertPresent19
+		EndIf
+		If insertPresent20 <> insertPresent20Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent20" + Chr$(&H22), ":", Str$(insertPresent20), "}",
+			insertPresent20Old = insertPresent20
+		EndIf
+		If insertPresent21 <> insertPresent21Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent21" + Chr$(&H22), ":", Str$(insertPresent21), "}",
+			insertPresent21Old = insertPresent21
+		EndIf
+		If insertPresent22 <> insertPresent22Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent22" + Chr$(&H22), ":", Str$(insertPresent22), "}",
+			insertPresent22Old = insertPresent22
+		EndIf
+		If insertPresent23 <> insertPresent23Old Then
+			Print #201, "{", Chr$(&H22) + "insertPresent23" + Chr$(&H22), ":", Str$(insertPresent23), "}",
+			insertPresent23Old = insertPresent23
 		EndIf
 		If airPressHigh <> airPressHighOld Then
 			Print #201, "{", Chr$(&H22) + "airPressHigh" + Chr$(&H22), ":", Str$(airPressHigh), "}",
@@ -1939,34 +2055,34 @@ Function setVars(response$ As String)
 		Print "error---", response$, " -- ", numTokens
 	EndIf
 	
-	Select Tokens$(0)
+	Select tokens$(0)
 
 		'!!!!!!!!!!!!!!CHECK FOR DON'T DELETE BLOCKS!!!!!!!!!!!!!!!!!!!!!!!!
 
 		'Rx from HMI:
 		Case "alarmMuteBtn"
-		    If Tokens$(1) = "true" Then
+		    If tokens$(1) = "true" Then
 		        alarmMuteBtn = True
 		        alarmMute = True
 		    Else
 		        alarmMuteBtn = False
 		    EndIf
 		Case "backInterlockACKBtn"
-		    If Tokens$(1) = "true" Then
+		    If tokens$(1) = "true" Then
 		        backInterlockACKBtn = True
 		        backInterlockACK = True
 		    Else
 		        backInterlockACKBtn = False
 		    EndIf
 		Case "frontInterlockACKBtn"
-		    If Tokens$(1) = "true" Then
+		    If tokens$(1) = "true" Then
 		        frontInterlockACKBtn = True
 		        frontInterlockACK = True
 		    Else
 		        frontInterlockACKBtn = False
 		    EndIf
 		Case "inMagGoHomeBtn"
-		    If Tokens$(1) = "true" Then
+		    If tokens$(1) = "true" Then
 		        inMagGoHomeBtn = True
 		        inMagGoHome = True
 		    Else
@@ -1980,21 +2096,21 @@ Function setVars(response$ As String)
 '		        inMagIntLockAckBtn = False
 '		    EndIf
 		Case "inMagLoadedBtn"
-		    If Tokens$(1) = "true" Then
+		    If tokens$(1) = "true" Then
 		        inMagLoadedBtn = True
 		        inMagLoaded = True
 		    Else
 		        inMagLoadedBtn = False
 		    EndIf
 		Case "jobAbortBtn"
-		    If Tokens$(1) = "true" Then
+		    If tokens$(1) = "true" Then
 		        jobAbortBtn = True
 		        jobAbort = True
 		    Else
 		        jobAbortBtn = False
 		    EndIf
 		Case "jobStartBtn"
-		    If Tokens$(1) = "true" Then
+		    If tokens$(1) = "true" Then
 		        jobStartBtn = True
 		        jobStart = True
 		    Else
@@ -2006,14 +2122,14 @@ Function setVars(response$ As String)
 			'	state checking at this point.  The HMI will lock up until the state is removed...
 			'	So... this needs to be fixed
 			'===================================
-		    If Tokens$(1) = "true" Then
+		    If tokens$(1) = "true" Then
 		        startLearningBtn = True
 		        startLearning = True
 		    Else
 		        startLearningBtn = False
 		    EndIf
 		Case "leftInterlockACKBtn"
-		    If Tokens$(1) = "true" Then
+		    If tokens$(1) = "true" Then
 		        leftInterlockACKBtn = True
 		        leftInterlockACK = True
 		    Else
@@ -3155,7 +3271,19 @@ Function setVars(response$ As String)
 			Else
 				MBWrite(555, False, MBTypeCoil)
 			EndIf
-	
+		Case "PLC_Dump"
+	    If tokens$(1) = "true" Then
+				MBWrite(102, True, MBTypeCoil)
+	    Else
+	    	MBWrite(102, False, MBTypeCoil)
+	    EndIf
+		Case "PLC_DoneDumping"
+	    If tokens$(1) = "true" Then
+	    	MBWrite(106, True, MBTypeCoil)
+	    Else
+	    	MBWrite(106, False, MBTypeCoil)
+	    EndIf
+
 	
 		' /end PLC comms
 	Default

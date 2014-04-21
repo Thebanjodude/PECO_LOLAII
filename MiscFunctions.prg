@@ -108,3 +108,82 @@ Function changeSpeed(gotoSpeed As Integer)
 	Send
 Fend
 
+
+Function sendInsertPresent(holeNum As Integer)
+	Select holeNum
+		Case 0
+			'reset all insertPresent vars
+			insertPresent01 = False;
+			insertPresent02 = False;
+			insertPresent03 = False;
+			insertPresent04 = False;
+			insertPresent05 = False;
+			insertPresent06 = False;
+			insertPresent07 = False;
+			insertPresent08 = False;
+			insertPresent09 = False;
+			insertPresent10 = False;
+			insertPresent11 = False;
+			insertPresent12 = False;
+			insertPresent13 = False;
+			insertPresent14 = False;
+			insertPresent15 = False;
+			insertPresent16 = False;
+			insertPresent17 = False;
+			insertPresent18 = False;
+			insertPresent19 = False;
+			insertPresent20 = False;
+			insertPresent21 = False;
+			insertPresent22 = False;
+			insertPresent23 = False;
+		Case 1
+			insertPresent01 = True;
+		Case 2
+			insertPresent02 = True;
+		Case 03
+			insertPresent03 = True;
+		Case 04
+			insertPresent04 = True;
+		Case 05
+			insertPresent05 = True;
+		Case 06
+			insertPresent06 = True;
+		Case 07
+			insertPresent07 = True;
+		Case 08
+			insertPresent08 = True;
+		Case 09
+			insertPresent09 = True;
+		Case 10
+			insertPresent10 = True;
+		Case 11
+			insertPresent11 = True;
+		Case 12
+			insertPresent12 = True;
+		Case 13
+			insertPresent13 = True;
+		Case 14
+			insertPresent14 = True;
+		Case 15
+			insertPresent15 = True;
+		Case 16
+			insertPresent16 = True;
+		Case 17
+			insertPresent17 = True;
+		Case 18
+			insertPresent18 = True;
+		Case 19
+			insertPresent19 = True;
+		Case 20
+			insertPresent20 = True;
+		Case 21
+			insertPresent21 = True;
+		Case 22
+			insertPresent22 = True;
+		Case 23
+			insertPresent23 = True;
+		Default
+			' do nothing
+	Send
+Fend
+

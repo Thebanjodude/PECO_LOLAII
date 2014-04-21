@@ -21,35 +21,38 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 
 	'if needed the profile will be changed by the inspection function
 	ChangeProfile("07")
+	
+	
+	If SelectRoutine = 1 Then
+		' The following code block detects if an insert is in the hole already.			
 
-	For i = 1 To PanelHoleCount
-		
-		PanelHoleToXYZT(i, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(i))
-		
-		Wait 0.5
-		
-		If SelectRoutine = 1 Then
-
-			' The following code block detects if an insert is in the hole already.			
+		' reset insert present vars
+		Call sendInsertPresent(0);
+	
+		For i = 1 To PanelHoleCount
+			PanelHoleToXYZT(i, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(i))
+			Wait 0.5
 
 			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
 			
-			Print "BossCrosssectionalArea: ", BossCrosssectionalArea, "  Recipe: ", recBossCrossArea
+			'Print "BossCrosssectionalArea: ", BossCrosssectionalArea, "  Recipe: ", recBossCrossArea
 			If BossCrosssectionalArea > recBossCrossArea Then ' There is already an insert so set skip flag
 				SkipHoleArray(currentPreinspectHole, 0) = 1
-				Print "Hole ", currentPreinspectHole, " is already populated"
+				'Print "Hole ", currentPreinspectHole, " is already populated"
+				Call sendInsertPresent(i)
 			EndIf
-
 			currentPreinspectHole = currentPreinspectHole + 1
-			
-		ElseIf SelectRoutine = 2 Then
-			
+		Next
+	ElseIf SelectRoutine = 2 Then
+		For i = 1 To PanelHoleCount
+			PanelHoleToXYZT(i, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(i))
+			Wait 0.5
+
 			MeasureInsertDepth(currentInspectHole) ' Measures each spot face, left and right, then populates inspection array with measurements in inches
 			UnpackInspectionArrays()
 			currentInspectHole = currentInspectHole + 1
-		EndIf
-			
-	Next
+		Next
+	EndIf
 	
 	InspectPanel = 0 ' Inspection occured without errors
 
