@@ -1,5 +1,5 @@
-ENVT0100,LM:2014/04/21 20:36:38:353,DS:0000004296,CS:02570,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="IOTable.prg"
+ENVT0100,LM:2014/04/24 21:59:39:345,DS:0000004306,CS:06439,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="InspectionStation.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -14,7 +14,7 @@ ProgramFile1 {
 }
 ProgramFile2 {
 	sName="IOTable.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=2
 	Window {
 		nLeft=21
@@ -58,7 +58,7 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=2
 	Window {
 		nLeft=-279
@@ -81,7 +81,7 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=71
 		nTop=103
@@ -147,7 +147,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=521
@@ -203,7 +203,7 @@ IncludeFile2 {
 IncludeFile3 {
 	sName="HMI.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0

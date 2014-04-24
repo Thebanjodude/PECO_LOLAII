@@ -1,12 +1,12 @@
-ENVT0100,LM:2014/04/21 20:36:03:468,DS:0000005530,CS:28175,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/04/24 21:59:22:529,DS:0000005529,CS:22867,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="4/21/2014 2:35:58 PM"
+	sLastModified="4/24/2014 3:59:00 PM"
 	bBuildComplete=True
-	bRebuildRequired=False
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMWKSSEHLERS"
@@ -60,7 +60,7 @@ ProgramFile6 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/21/2014 4:32:53 PM"
+	sTimeSavedInController="4/24/2014 9:59:00 PM"
 }
 ProgramFile7 {
 	sName="CalibrationRoutines.prg"

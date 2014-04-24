@@ -35,10 +35,9 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 
 			BossCrosssectionalArea = GetLaserMeasurement("01") ' This measurement checks for pre-existing inserts
 			
-			'Print "BossCrosssectionalArea: ", BossCrosssectionalArea, "  Recipe: ", recBossCrossArea
 			If BossCrosssectionalArea > recBossCrossArea Then ' There is already an insert so set skip flag
-				SkipHoleArray(currentPreinspectHole, 0) = 1
-				'Print "Hole ", currentPreinspectHole, " is already populated"
+				' TODO ----- this is for testing, uncomment when done	
+				'SkipHoleArray(currentPreinspectHole, 0) = 1
 				Call sendInsertPresent(i)
 			EndIf
 			currentPreinspectHole = currentPreinspectHole + 1
