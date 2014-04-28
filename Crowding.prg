@@ -29,7 +29,13 @@ Function CrowdingSequence() As Integer
 	crowdingXCC = False
 	Wait 0.5
 	
-	Go CwdOut
+'	Go CwdOut
+	PTCLR (3)
+	ZmaxTorque = 0
+	Do While ZmaxTorque <= .3 'Or TorqueCounter > 25 ' Approach the panel slowly until we hit a torque limit
+		JTran 3, -.5 ' Move only the z-axis downward in .5mm increments
+		ZmaxTorque = PTRQ(3)
+	Loop
 
 	suctionCupsCC = True ' Turn on cups
 	Wait recSuctionWaitTime
