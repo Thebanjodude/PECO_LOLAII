@@ -1,5 +1,5 @@
-ENVT0100,LM:2014/04/28 17:14:12:189,DS:0000004295,CS:15182,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="Crowding.prg"
+ENVT0100,LM:2014/04/29 15:16:54:217,DS:0000004305,CS:24889,MA:00-0C-29-03-E6-C5,EI:           
+sActiveChild="PositionFunctions.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -47,7 +47,7 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=17
@@ -58,7 +58,7 @@ ProgramFile5 {
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=-279
@@ -135,8 +135,8 @@ ProgramFile12 {
 }
 ProgramFile13 {
 	sName="Crowding.prg"
-	bOpened=True
-	nWinState=2
+	bOpened=False
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -146,8 +146,8 @@ ProgramFile13 {
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=521
@@ -247,13 +247,13 @@ IncludeFile6 {
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=265
 		nTop=37
-		nWidth=648
-		nHeight=419
+		nWidth=647
+		nHeight=415
 	}
 }
 sActiveWindow="main.prg"

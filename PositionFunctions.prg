@@ -183,6 +183,11 @@ Function StartLearnPanel
 	PanelPickupErrorY = 0
 	PanelPickupErrorTheta = 0
 
+	Print "x,y -- recipe at start learn panel"
+	Integer i
+	For i = 1 To PanelHoleCount
+		Print PanelHoleX(i), ",", PanelHoleY(i)
+	Next
 
 	PanelFindPickupError
 Fend
