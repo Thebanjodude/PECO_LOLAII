@@ -1,12 +1,12 @@
-ENVT0100,LM:2014/04/29 14:29:58:431,DS:0000005532,CS:07523,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/05/13 01:13:18:849,DS:0000005528,CS:21612,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="4/28/2014 11:05:24 AM"
+	sLastModified="5/12/2014 7:12:35 PM"
 	bBuildComplete=True
-	bRebuildRequired=False
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMWKSSEHLERS"
@@ -108,7 +108,7 @@ ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/28/2014 10:11:34 PM"
+	sTimeSavedInController="5/13/2014 1:12:35 AM"
 }
 ProgramFile15 {
 	sName="Test.prg"
@@ -126,7 +126,7 @@ nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="4/17/2014 3:51:46 PM"
+	sTimeSavedInController="5/8/2014 2:00:17 AM"
 }
 IncludeFile2 {
 	sName="Defines.inc"

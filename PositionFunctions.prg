@@ -3,10 +3,10 @@
 'print out the recipe values
 Function PanelPrintRecipe
 	Integer hole
-	Print "  X  ,  Y  "
-	Print "-----------"
+	Print "  X  ,  Y  ,  Theta"
+	Print "-------------------------"
 	For hole = 1 To PanelHoleCount
-		Print PanelHoleX(hole), ",", PanelHoleY(hole)
+		Print PanelHoleX(hole), ",", PanelHoleY(hole), ",", PanelHoleTangent(hole)
 	Next
 Fend
 
@@ -168,7 +168,7 @@ Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double,
 	rotY = (PanelHoleX(hole) * Sin(DegToRad(Theta))) + (PanelHoleY(hole) * Cos(DegToRad(Theta)))
 
 	' now put the quill at that point with the x,y offset to the hole
-	'Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
+	Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
 	Go XY(x + rotX, y + rotY, z, Theta) /L
 
 Fend

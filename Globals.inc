@@ -94,22 +94,24 @@ Global Real PreInspectionArray(0, 0)
 '--TODO-- replace the preserve vars with code to pull the values from the HMI
 '-------<MOCK>-----------------
 
-Global Preserve Integer PanelHoleCount
-Global Preserve Double PanelHoleX(25)
-Global Preserve Double PanelHoleY(25)
-Global Preserve Double PanelHoleTangent(25)
-Global Preserve Double PanelPickupErrorX
-Global Preserve Double PanelPickupErrorY
-Global Preserve Double PanelPickupErrorTheta
+'Global Preserve Integer PanelHoleCount
+'Global Preserve Double PanelHoleX(25)
+'Global Preserve Double PanelHoleY(25)
+'Global Preserve Double PanelHoleTangent(25)
+'Global Preserve Double PanelPickupErrorX
+'Global Preserve Double PanelPickupErrorY
+'Global Preserve Double PanelPickupErrorTheta
 
-'Global Integer PanelHoleCount
-'Global Double PanelHoleX(25)
-'Global Double PanelHoleY(25)
-'Global Double PanelHoleTangent(25)
-'Global Double PanelPickupErrorX
-'Global Double PanelPickupErrorY
-'Global Double PanelPickupErrorTheta
+Global Integer PanelHoleCount
+Global Double PanelHoleX(25)
+Global Double PanelHoleY(25)
+Global Double PanelHoleTangent(25)
+Global Double PanelPickupErrorX
+Global Double PanelPickupErrorY
+Global Double PanelPickupErrorTheta
+
 '-----</MOCK>-------------------
+
 Global Double holeTolerance '+/- mm to center of hole
 Global Double EOATcorrection
 Global Double magazineCorrection
