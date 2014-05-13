@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/05/13 01:13:18:849,DS:0000005528,CS:21612,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/05/13 02:33:59:875,DS:0000005529,CS:07740,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
@@ -6,10 +6,10 @@ SystemProperties {
 	sCreated="1/25/2013 7:23:00 AM"
 	sLastModified="5/12/2014 7:12:35 PM"
 	bBuildComplete=True
-	bRebuildRequired=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMWKSSEHLERS"
+	sComputerName="AMLAPFASTEK"
 }
 UserProperties {
 	sVersion=""
@@ -42,7 +42,7 @@ ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/17/2014 3:51:46 PM"
+	sTimeSavedInController="4/17/2014 3:51:47 PM"
 }
 ProgramFile4 {
 	sName="SystemMonitor.prg"
@@ -54,13 +54,13 @@ ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/17/2014 4:30:18 PM"
+	sTimeSavedInController="4/17/2014 4:30:19 PM"
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/24/2014 10:07:06 PM"
+	sTimeSavedInController="4/24/2014 10:07:07 PM"
 }
 ProgramFile7 {
 	sName="CalibrationRoutines.prg"
@@ -78,7 +78,7 @@ ProgramFile9 {
 	sName="FlashRemoval.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/17/2014 3:51:46 PM"
+	sTimeSavedInController="4/17/2014 3:51:47 PM"
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
@@ -108,7 +108,7 @@ ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="5/13/2014 1:12:35 AM"
+	sTimeSavedInController="5/13/2014 1:41:43 AM"
 }
 ProgramFile15 {
 	sName="Test.prg"
@@ -120,18 +120,18 @@ ProgramFile16 {
 	sName="HeatStakeComms.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/9/2014 10:16:26 PM"
+	sTimeSavedInController="4/9/2014 10:16:27 PM"
 }
 nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
 	bStoreInController=True
-	sTimeSavedInController="5/8/2014 2:00:17 AM"
+	sTimeSavedInController="5/13/2014 1:41:43 AM"
 }
 IncludeFile2 {
 	sName="Defines.inc"
 	bStoreInController=True
-	sTimeSavedInController="4/17/2014 3:51:46 PM"
+	sTimeSavedInController="4/17/2014 3:51:47 PM"
 }
 IncludeFile3 {
 	sName="HMI.inc"
@@ -146,17 +146,17 @@ IncludeFile4 {
 IncludeFile5 {
 	sName="Error.inc"
 	bStoreInController=True
-	sTimeSavedInController="4/17/2014 3:51:46 PM"
+	sTimeSavedInController="4/17/2014 3:51:47 PM"
 }
 IncludeFile6 {
 	sName="PLC.inc"
 	bStoreInController=True
-	sTimeSavedInController="2/21/2014 10:41:24 PM"
+	sTimeSavedInController="2/21/2014 10:41:25 PM"
 }
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="4/22/2014 3:47:52 PM"
+	sTimeSavedInController="4/22/2014 3:47:53 PM"
 }
 OperatorSettings {
 	OperatorWindow {

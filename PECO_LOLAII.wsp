@@ -1,9 +1,9 @@
-ENVT0100,LM:2014/05/13 01:14:47:591,DS:0000004282,CS:12150,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="Run"
+ENVT0100,LM:2014/05/13 02:46:55:036,DS:0000004297,CS:19053,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="Run - Remote Console"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=-304
@@ -80,7 +80,7 @@ ProgramFile7 {
 }
 ProgramFile8 {
 	sName="MiscFunctions.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=71
@@ -124,7 +124,7 @@ ProgramFile11 {
 }
 ProgramFile12 {
 	sName="MainStates.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=-254
@@ -180,8 +180,8 @@ ProgramFile16 {
 nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
-	bOpened=True
-	nWinState=0
+	bOpened=False
+	nWinState=2
 	Window {
 		nLeft=248
 		nTop=196
@@ -265,7 +265,7 @@ CmdWindow {
 		nWidth=673
 		nHeight=354
 	}
-	nWinState=0
+	nWinState=2
 }
 RunWindow {
 	bOpened=True

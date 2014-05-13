@@ -412,4 +412,28 @@ skipholearray(17,0) = 0
 > skipholearray(2,0) = 1
 > skipholearray(3,0) = 1
 > skipholearray(4,0) = 1
+> print recPopPanelRequired
+ -1
+> print true
+ -1
+> print false
+ 0
+> print panelHoleCount
+ 0
+> panelHoleCount = 18
+> print panelHoleCount
+ 18
+> print panelholecount
+ 0
+> panelHoleCount = 23
+> print panelHoleCount
+ 23
+> print panelholecount
+ 0
+> panleholecount = 23
+!!Error: 3100, Syntax error.
+> panelholecount = 23
+> panelholecount = 23
+> print panelholecount 
+ 23
 > 
