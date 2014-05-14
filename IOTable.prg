@@ -647,6 +647,7 @@ Function iotransfer()
 
 	Double panelHoleXOld(25)
 	Double panelHoleYOld(25)
+	Double panelHoleTangentOld(25)
 
 	String ctrlrErrMsgOld$
    
@@ -1619,6 +1620,98 @@ Function iotransfer()
 		If PanelHoleY(23) <> panelHoleYOld(23) Then
 			Print #201, "{", Chr$(&H22) + "recHoleYact23" + Chr$(&H22), ":", Str$(PanelHoleY(23)), "}",
 			panelHoleYOld(23) = PanelHoleY(23)
+		EndIf
+		If PanelHoleTangent(01) <> PanelHoleTangentOld(01) Then
+			Print #201, "{", Chr$(&H22) + "recTangent01" + Chr$(&H22), ":", Str$(PanelHoleTangent(01)), "}",
+			PanelHoleTangentOld(01) = PanelHoleTangent(01)
+		EndIf
+		If PanelHoleTangent(02) <> PanelHoleTangentOld(02) Then
+			Print #201, "{", Chr$(&H22) + "recTangent02" + Chr$(&H22), ":", Str$(PanelHoleTangent(02)), "}",
+			PanelHoleTangentOld(02) = PanelHoleTangent(02)
+		EndIf
+		If PanelHoleTangent(03) <> PanelHoleTangentOld(03) Then
+			Print #201, "{", Chr$(&H22) + "recTangent03" + Chr$(&H22), ":", Str$(PanelHoleTangent(03)), "}",
+			PanelHoleTangentOld(03) = PanelHoleTangent(03)
+		EndIf
+		If PanelHoleTangent(04) <> PanelHoleTangentOld(04) Then
+			Print #201, "{", Chr$(&H22) + "recTangent04" + Chr$(&H22), ":", Str$(PanelHoleTangent(04)), "}",
+			PanelHoleTangentOld(04) = PanelHoleTangent(04)
+		EndIf
+		If PanelHoleTangent(05) <> PanelHoleTangentOld(05) Then
+			Print #201, "{", Chr$(&H22) + "recTangent05" + Chr$(&H22), ":", Str$(PanelHoleTangent(05)), "}",
+			PanelHoleTangentOld(05) = PanelHoleTangent(05)
+		EndIf
+		If PanelHoleTangent(06) <> PanelHoleTangentOld(06) Then
+			Print #201, "{", Chr$(&H22) + "recTangent06" + Chr$(&H22), ":", Str$(PanelHoleTangent(06)), "}",
+			PanelHoleTangentOld(06) = PanelHoleTangent(06)
+		EndIf
+		If PanelHoleTangent(07) <> PanelHoleTangentOld(07) Then
+			Print #201, "{", Chr$(&H22) + "recTangent07" + Chr$(&H22), ":", Str$(PanelHoleTangent(07)), "}",
+			PanelHoleTangentOld(07) = PanelHoleTangent(07)
+		EndIf
+		If PanelHoleTangent(08) <> PanelHoleTangentOld(08) Then
+			Print #201, "{", Chr$(&H22) + "recTangent08" + Chr$(&H22), ":", Str$(PanelHoleTangent(08)), "}",
+			PanelHoleTangentOld(08) = PanelHoleTangent(08)
+		EndIf
+		If PanelHoleTangent(09) <> PanelHoleTangentOld(09) Then
+			Print #201, "{", Chr$(&H22) + "recTangent09" + Chr$(&H22), ":", Str$(PanelHoleTangent(09)), "}",
+			PanelHoleTangentOld(09) = PanelHoleTangent(09)
+		EndIf
+		If PanelHoleTangent(10) <> PanelHoleTangentOld(10) Then
+			Print #201, "{", Chr$(&H22) + "recTangent10" + Chr$(&H22), ":", Str$(PanelHoleTangent(10)), "}",
+			PanelHoleTangentOld(10) = PanelHoleTangent(10)
+		EndIf
+		If PanelHoleTangent(11) <> PanelHoleTangentOld(11) Then
+			Print #201, "{", Chr$(&H22) + "recTangent11" + Chr$(&H22), ":", Str$(PanelHoleTangent(11)), "}",
+			PanelHoleTangentOld(11) = PanelHoleTangent(11)
+		EndIf
+		If PanelHoleTangent(12) <> PanelHoleTangentOld(12) Then
+			Print #201, "{", Chr$(&H22) + "recTangent12" + Chr$(&H22), ":", Str$(PanelHoleTangent(12)), "}",
+			PanelHoleTangentOld(12) = PanelHoleTangent(12)
+		EndIf
+		If PanelHoleTangent(13) <> PanelHoleTangentOld(13) Then
+			Print #201, "{", Chr$(&H22) + "recTangent13" + Chr$(&H22), ":", Str$(PanelHoleTangent(13)), "}",
+			PanelHoleTangentOld(13) = PanelHoleTangent(13)
+		EndIf
+		If PanelHoleTangent(14) <> PanelHoleTangentOld(14) Then
+			Print #201, "{", Chr$(&H22) + "recTangent14" + Chr$(&H22), ":", Str$(PanelHoleTangent(14)), "}",
+			PanelHoleTangentOld(14) = PanelHoleTangent(14)
+		EndIf
+		If PanelHoleTangent(15) <> PanelHoleTangentOld(15) Then
+			Print #201, "{", Chr$(&H22) + "recTangent15" + Chr$(&H22), ":", Str$(PanelHoleTangent(15)), "}",
+			PanelHoleTangentOld(15) = PanelHoleTangent(15)
+		EndIf
+		If PanelHoleTangent(16) <> PanelHoleTangentOld(16) Then
+			Print #201, "{", Chr$(&H22) + "recTangent16" + Chr$(&H22), ":", Str$(PanelHoleTangent(16)), "}",
+			PanelHoleTangentOld(16) = PanelHoleTangent(16)
+		EndIf
+		If PanelHoleTangent(17) <> PanelHoleTangentOld(17) Then
+			Print #201, "{", Chr$(&H22) + "recTangent17" + Chr$(&H22), ":", Str$(PanelHoleTangent(17)), "}",
+			PanelHoleTangentOld(17) = PanelHoleTangent(17)
+		EndIf
+		If PanelHoleTangent(18) <> PanelHoleTangentOld(18) Then
+			Print #201, "{", Chr$(&H22) + "recTangent18" + Chr$(&H22), ":", Str$(PanelHoleTangent(18)), "}",
+			PanelHoleTangentOld(18) = PanelHoleTangent(18)
+		EndIf
+		If PanelHoleTangent(19) <> PanelHoleTangentOld(19) Then
+			Print #201, "{", Chr$(&H22) + "recTangent19" + Chr$(&H22), ":", Str$(PanelHoleTangent(19)), "}",
+			PanelHoleTangentOld(19) = PanelHoleTangent(19)
+		EndIf
+		If PanelHoleTangent(20) <> PanelHoleTangentOld(20) Then
+			Print #201, "{", Chr$(&H22) + "recTangent20" + Chr$(&H22), ":", Str$(PanelHoleTangent(20)), "}",
+			PanelHoleTangentOld(20) = PanelHoleTangent(20)
+		EndIf
+		If PanelHoleTangent(21) <> PanelHoleTangentOld(21) Then
+			Print #201, "{", Chr$(&H22) + "recTangent21" + Chr$(&H22), ":", Str$(PanelHoleTangent(21)), "}",
+			PanelHoleTangentOld(21) = PanelHoleTangent(21)
+		EndIf
+		If PanelHoleTangent(22) <> PanelHoleTangentOld(22) Then
+			Print #201, "{", Chr$(&H22) + "recTangent22" + Chr$(&H22), ":", Str$(PanelHoleTangent(22)), "}",
+			PanelHoleTangentOld(22) = PanelHoleTangent(22)
+		EndIf
+		If PanelHoleTangent(23) <> PanelHoleTangentOld(23) Then
+			Print #201, "{", Chr$(&H22) + "recTangent23" + Chr$(&H22), ":", Str$(PanelHoleTangent(23)), "}",
+			PanelHoleTangentOld(23) = PanelHoleTangent(23)
 		EndIf
 
 
@@ -2921,72 +3014,117 @@ Function setVars(response$ As String)
 		Case "recHoleXact07"
 		    PanelHoleX(07) = Val(Tokens$(1))
 		Case "recHoleYact07"
-		    PanelHoleY(07) = Val(tokens$(1))
+		    PanelHoleY(07) = Val(Tokens$(1))
 		Case "recHoleXact08"
-		    PanelHoleX(08) = Val(tokens$(1))
+		    PanelHoleX(08) = Val(Tokens$(1))
 		Case "recHoleYact08"
-		    PanelHoleY(08) = Val(tokens$(1))
+		    PanelHoleY(08) = Val(Tokens$(1))
 		Case "recHoleXact09"
-		    PanelHoleX(09) = Val(tokens$(1))
+		    PanelHoleX(09) = Val(Tokens$(1))
 		Case "recHoleYact09"
-		    PanelHoleY(09) = Val(tokens$(1))
+		    PanelHoleY(09) = Val(Tokens$(1))
 		Case "recHoleXact10"
-		    PanelHoleX(10) = Val(tokens$(1))
+		    PanelHoleX(10) = Val(Tokens$(1))
 		Case "recHoleYact10"
-		    PanelHoleY(10) = Val(tokens$(1))
+		    PanelHoleY(10) = Val(Tokens$(1))
 		Case "recHoleXact11"
-		    PanelHoleX(11) = Val(tokens$(1))
+		    PanelHoleX(11) = Val(Tokens$(1))
 		Case "recHoleYact11"
-		    PanelHoleY(11) = Val(tokens$(1))
+		    PanelHoleY(11) = Val(Tokens$(1))
 		Case "recHoleXact12"
-		    PanelHoleX(12) = Val(tokens$(1))
+		    PanelHoleX(12) = Val(Tokens$(1))
 		Case "recHoleYact12"
-		    PanelHoleY(12) = Val(tokens$(1))
+		    PanelHoleY(12) = Val(Tokens$(1))
 		Case "recHoleXact13"
-		    PanelHoleX(13) = Val(tokens$(1))
+		    PanelHoleX(13) = Val(Tokens$(1))
 		Case "recHoleYact13"
-		    PanelHoleY(13) = Val(tokens$(1))
+		    PanelHoleY(13) = Val(Tokens$(1))
 		Case "recHoleXact14"
-		    PanelHoleX(14) = Val(tokens$(1))
+		    PanelHoleX(14) = Val(Tokens$(1))
 		Case "recHoleYact14"
-		    PanelHoleY(14) = Val(tokens$(1))
+		    PanelHoleY(14) = Val(Tokens$(1))
 		Case "recHoleXact15"
-		    PanelHoleX(15) = Val(tokens$(1))
+		    PanelHoleX(15) = Val(Tokens$(1))
 		Case "recHoleYact15"
-		    PanelHoleY(15) = Val(tokens$(1))
+		    PanelHoleY(15) = Val(Tokens$(1))
 		Case "recHoleXact16"
-		    PanelHoleX(16) = Val(tokens$(1))
+		    PanelHoleX(16) = Val(Tokens$(1))
 		Case "recHoleYact16"
-		    PanelHoleY(16) = Val(tokens$(1))
+		    PanelHoleY(16) = Val(Tokens$(1))
 		Case "recHoleXact17"
-		    PanelHoleX(17) = Val(tokens$(1))
+		    PanelHoleX(17) = Val(Tokens$(1))
 		Case "recHoleYact17"
-		    PanelHoleY(17) = Val(tokens$(1))
+		    PanelHoleY(17) = Val(Tokens$(1))
 		Case "recHoleXact18"
-		    PanelHoleX(18) = Val(tokens$(1))
+		    PanelHoleX(18) = Val(Tokens$(1))
 		Case "recHoleYact18"
-		    PanelHoleY(18) = Val(tokens$(1))
+		    PanelHoleY(18) = Val(Tokens$(1))
 		Case "recHoleXact19"
-		    PanelHoleX(19) = Val(tokens$(1))
+		    PanelHoleX(19) = Val(Tokens$(1))
 		Case "recHoleYact19"
-		    PanelHoleY(19) = Val(tokens$(1))
+		    PanelHoleY(19) = Val(Tokens$(1))
 		Case "recHoleXact20"
-		    PanelHoleX(20) = Val(tokens$(1))
+		    PanelHoleX(20) = Val(Tokens$(1))
 		Case "recHoleYact20"
-		    PanelHoleY(20) = Val(tokens$(1))
+		    PanelHoleY(20) = Val(Tokens$(1))
 		Case "recHoleXact21"
-		    PanelHoleX(21) = Val(tokens$(1))
+		    PanelHoleX(21) = Val(Tokens$(1))
 		Case "recHoleYact21"
-		    PanelHoleY(21) = Val(tokens$(1))
+		    PanelHoleY(21) = Val(Tokens$(1))
 		Case "recHoleXact22"
-		    PanelHoleX(22) = Val(tokens$(1))
+		    PanelHoleX(22) = Val(Tokens$(1))
 		Case "recHoleYact22"
-		    PanelHoleY(22) = Val(tokens$(1))
+		    PanelHoleY(22) = Val(Tokens$(1))
 		Case "recHoleXact23"
-		    PanelHoleX(23) = Val(tokens$(1))
+		    PanelHoleX(23) = Val(Tokens$(1))
 		Case "recHoleYact23"
-		    PanelHoleY(23) = Val(tokens$(1))
-
+		    PanelHoleY(23) = Val(Tokens$(1))
+		Case "recTangent01"
+		    PanelHoleTangent(01) = Val(Tokens$(1))
+		Case "recTangent02"
+		    PanelHoleTangent(02) = Val(Tokens$(1))
+		Case "recTangent03"
+		    PanelHoleTangent(03) = Val(Tokens$(1))
+		Case "recTangent04"
+		    PanelHoleTangent(04) = Val(Tokens$(1))
+		Case "recTangent05"
+		    PanelHoleTangent(05) = Val(Tokens$(1))
+		Case "recTangent06"
+		    PanelHoleTangent(06) = Val(Tokens$(1))
+		Case "recTangent07"
+		    PanelHoleTangent(07) = Val(Tokens$(1))
+		Case "recTangent08"
+		    PanelHoleTangent(08) = Val(Tokens$(1))
+		Case "recTangent09"
+		    PanelHoleTangent(09) = Val(Tokens$(1))
+		Case "recTangent10"
+		    PanelHoleTangent(10) = Val(Tokens$(1))
+		Case "recTangent11"
+		    PanelHoleTangent(11) = Val(Tokens$(1))
+		Case "recTangent12"
+		    PanelHoleTangent(12) = Val(Tokens$(1))
+		Case "recTangent13"
+		    PanelHoleTangent(13) = Val(Tokens$(1))
+		Case "recTangent14"
+		    PanelHoleTangent(14) = Val(Tokens$(1))
+		Case "recTangent15"
+		    PanelHoleTangent(15) = Val(Tokens$(1))
+		Case "recTangent16"
+		    PanelHoleTangent(16) = Val(Tokens$(1))
+		Case "recTangent17"
+		    PanelHoleTangent(17) = Val(Tokens$(1))
+		Case "recTangent18"
+		    PanelHoleTangent(18) = Val(Tokens$(1))
+		Case "recTangent19"
+		    PanelHoleTangent(19) = Val(Tokens$(1))
+		Case "recTangent20"
+		    PanelHoleTangent(20) = Val(Tokens$(1))
+		Case "recTangent21"
+		    PanelHoleTangent(21) = Val(Tokens$(1))
+		Case "recTangent22"
+		    PanelHoleTangent(22) = Val(Tokens$(1))
+		Case "recTangent23"
+		    PanelHoleTangent(23) = Val(Tokens$(1))
 
 		
 		'================================================================		
@@ -2997,20 +3135,20 @@ Function setVars(response$ As String)
 
 
 		Case "zlimit"
-		    zLimit = Val(tokens$(1))
+		    zLimit = Val(Tokens$(1))
 		
 		' PLC Comms
 		Case "PLC_Delay_BlowOffTime"
 			Print "put write request into queue"
-			MBWrite(1000, Val(tokens$(1)), MBType16)
+			MBWrite(1000, Val(Tokens$(1)), MBType16)
 		Case "PLC_Delay_InsertLoad"
-			MBWrite(1001, Val(tokens$(1)), MBType16)
+			MBWrite(1001, Val(Tokens$(1)), MBType16)
 		Case "PLC_Speed_TorqueMode"
-			MBWrite(1002, Val(tokens$(1)), MBType32)
+			MBWrite(1002, Val(Tokens$(1)), MBType32)
 		Case "PLC_Torque_TorqueMode"
-			MBWrite(1004, Val(tokens$(1)), MBType16)
+			MBWrite(1004, Val(Tokens$(1)), MBType16)
 		Case "PLC_Delay_RejectBlowOff"
-			MBWrite(1005, Val(tokens$(1)), MBType16)
+			MBWrite(1005, Val(Tokens$(1)), MBType16)
 		Case "PLC_Delay_FindHome"
 			MBWrite(1006, Val(tokens$(1)), MBType16)
 		Case "PLC_Delay_ActiveCooling"
