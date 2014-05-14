@@ -31,7 +31,7 @@ Function HotStakePanel() As Integer
 	
 	
 	'For i = recFirstHolePointHotStake To recLastHolePointHotStake
-	For i = 1 To PanelHoleCount
+	For i = 1 To recNumberOfHoles
 
 		SkippedHole = False 							'Reset flag		
 		If SkipHoleArray(currentHSHole, 0) <> 0 Then 	' When nonzero, don't populate the hole because we want to skip it

@@ -29,7 +29,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 		' reset insert present vars
 		Call sendInsertPresent(0);
 	
-		For i = 1 To PanelHoleCount
+		For i = 1 To recNumberOfHoles
 			PanelHoleToXYZT(i, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(i))
 			Wait 0.5
 
@@ -43,7 +43,7 @@ Function InspectPanel(SelectRoutine As Integer) As Integer
 			currentPreinspectHole = currentPreinspectHole + 1
 		Next
 	ElseIf SelectRoutine = 2 Then
-		For i = 1 To PanelHoleCount
+		For i = 1 To recNumberOfHoles
 			PanelHoleToXYZT(i, CX(laser), CY(laser), CZ(PreScan), 90 - PanelHoleTangent(i))
 			Wait 0.5
 

@@ -2820,7 +2820,7 @@ Function setVars(response$ As String)
 		        MemOff (crowdingXF)
 		    EndIf
 		Case "crowdingXFV"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        MemOn (crowdingXFV)
 		    Else
 		        MemOff (crowdingXFV)
@@ -2828,59 +2828,59 @@ Function setVars(response$ As String)
 '		Case "heatStakeOffset"
 '		    heatStakeOffset = Val(tokens$(1))
 		Case "insertDepthTolerance"
-		    insertDepthTolerance = Val(tokens$(1))
+		    insertDepthTolerance = Val(Tokens$(1))
 		Case "jobNumPanels"
-		    jobNumPanels = Val(tokens$(1))
+		    jobNumPanels = Val(Tokens$(1))
 		Case "recBossCrossArea"
-		    recBossCrossArea = Val(tokens$(1))
+		    recBossCrossArea = Val(Tokens$(1))
 		Case "recFlashRequired"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        recFlashRequired = True
 		    Else
 		        recFlashRequired = False
 		    EndIf
 		Case "recPopPanelRequired"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        recPopPanelRequired = True
 		    Else
 		        recPopPanelRequired = False
 		    EndIf
 		Case "recPreinspectionRequired"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        recPreinspectionRequired = True
 		    Else
 		        recPreinspectionRequired = False
 		    EndIf
 		Case "recCrowdingRequired"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        recCrowdingRequired = True
 		    Else
 		        recCrowdingRequired = False
 		    EndIf
 		Case "recHotStakePanelRequired"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        recHotStakePanelRequired = True
 		    Else
 		        recHotStakePanelRequired = False
 		    EndIf
 		Case "recInspectionRequired"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        recInspectionRequired = True
 		    Else
 		        recInspectionRequired = False
 		    EndIf
 		Case "recPushPanelRequired"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        recPushPanelRequired = True
 		    Else
 		        recPushPanelRequired = False
 		    EndIf
 		Case "recInsertType"
-		    recInsertType = Val(tokens$(1))
+		    recInsertType = Val(Tokens$(1))
 		Case "recNumberOfHoles"
-		    recNumberOfHoles = Val(tokens$(1))
+		    recNumberOfHoles = Val(Tokens$(1))
 		Case "recSuctionWaitTime"
-		    recSuctionWaitTime = Val(tokens$(1))
+		    recSuctionWaitTime = Val(Tokens$(1))
 '		Case "panelLearned"
 '		    If tokens$(1) = "true" Then
 '		        panelLearned = True
@@ -2895,31 +2895,31 @@ Function setVars(response$ As String)
 		'================================================================
 
 		Case "recHoleXact01"
-		    PanelHoleX(01) = Val(tokens$(1))
+		    PanelHoleX(01) = Val(Tokens$(1))
 		Case "recHoleYact01"
-		    PanelHoleY(01) = Val(tokens$(1))
+		    PanelHoleY(01) = Val(Tokens$(1))
 		Case "recHoleXact02"
-		    PanelHoleX(02) = Val(tokens$(1))
+		    PanelHoleX(02) = Val(Tokens$(1))
 		Case "recHoleYact02"
-		    PanelHoleY(02) = Val(tokens$(1))
+		    PanelHoleY(02) = Val(Tokens$(1))
 		Case "recHoleXact03"
-		    PanelHoleX(03) = Val(tokens$(1))
+		    PanelHoleX(03) = Val(Tokens$(1))
 		Case "recHoleYact03"
-		    PanelHoleY(03) = Val(tokens$(1))
+		    PanelHoleY(03) = Val(Tokens$(1))
 		Case "recHoleXact04"
-		    PanelHoleX(04) = Val(tokens$(1))
+		    PanelHoleX(04) = Val(Tokens$(1))
 		Case "recHoleYact04"
-		    PanelHoleY(04) = Val(tokens$(1))
+		    PanelHoleY(04) = Val(Tokens$(1))
 		Case "recHoleXact05"
-		    PanelHoleX(05) = Val(tokens$(1))
+		    PanelHoleX(05) = Val(Tokens$(1))
 		Case "recHoleYact05"
-		    PanelHoleY(05) = Val(tokens$(1))
+		    PanelHoleY(05) = Val(Tokens$(1))
 		Case "recHoleXact06"
-		    PanelHoleX(06) = Val(tokens$(1))
+		    PanelHoleX(06) = Val(Tokens$(1))
 		Case "recHoleYact06"
-		    PanelHoleY(06) = Val(tokens$(1))
+		    PanelHoleY(06) = Val(Tokens$(1))
 		Case "recHoleXact07"
-		    PanelHoleX(07) = Val(tokens$(1))
+		    PanelHoleX(07) = Val(Tokens$(1))
 		Case "recHoleYact07"
 		    PanelHoleY(07) = Val(tokens$(1))
 		Case "recHoleXact08"

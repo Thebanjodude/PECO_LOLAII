@@ -5,7 +5,7 @@ Function PanelPrintRecipe
 	Integer hole
 	Print "  X  ,  Y  ,  Theta"
 	Print "-------------------------"
-	For hole = 1 To PanelHoleCount
+	For hole = 1 To recNumberOfHoles
 		Print PanelHoleX(hole), ",", PanelHoleY(hole), ",", PanelHoleTangent(hole)
 	Next
 Fend
@@ -27,7 +27,7 @@ Function PanelFindPickupError
 
 
 	'Find the real hole location and then save that point
-	For hole = 1 To PanelHoleCount
+	For hole = 1 To recNumberOfHoles
 		laserTheta = 90 - PanelHoleTangent(hole)
 		negCos = Cos(DegToRad(-laserTheta))
 		negSin = Sin(DegToRad(-laserTheta))
@@ -66,7 +66,7 @@ Function PanelRecipeRotate(Theta As Double)
 	sinTheta = Sin(DegToRad(newTheta))
 	cosTheta = Cos(DegToRad(newTheta))
 	
-	For hole = 1 To PanelHoleCount
+	For hole = 1 To recNumberOfHoles
 		newX = (PanelHoleX(hole) * cosTheta) - (PanelHoleY(hole) * sinTheta)
 		newY = (PanelHoleX(hole) * sinTheta) + (PanelHoleY(hole) * cosTheta)
 		PanelHoleX(hole) = newX
@@ -79,7 +79,7 @@ Function PanelRecipeTranslate(x As Double, y As Double)
 		
 	Integer hole
 
-	For hole = 1 To PanelHoleCount
+	For hole = 1 To recNumberOfHoles
 		PanelHoleX(hole) = PanelHoleX(hole) + x
 		PanelHoleY(hole) = PanelHoleY(hole) + y
 	Next
@@ -101,15 +101,15 @@ Function xy2RadiusRotationTangent()
 
 	' to make wrap around easier store a copy for the highest number hole values in array postion zero
 	'  and a copy of the lowest number hole (always 1) in the array postion one higher than the hole count
-	PanelHoleX(0) = PanelHoleX(PanelHoleCount)
-	PanelHoleY(0) = PanelHoleY(PanelHoleCount)
-	PanelHoleX(PanelHoleCount + 1) = PanelHoleX(1)
-	PanelHoleY(PanelHoleCount + 1) = PanelHoleY(1)
+	PanelHoleX(0) = PanelHoleX(recNumberOfHoles)
+	PanelHoleY(0) = PanelHoleY(recNumberOfHoles)
+	PanelHoleX(recNumberOfHoles + 1) = PanelHoleX(1)
+	PanelHoleY(recNumberOfHoles + 1) = PanelHoleY(1)
 	
 	'just to be safe
 	PanelHoleTangent(0) = 360
 	
-	For hole = 1 To PanelHoleCount
+	For hole = 1 To recNumberOfHoles
 
 		' the approximate tangent is the angle perpendicular to the line connecting the two adjacent holes
 		' first find the angle relative to the x-axis of the line connecting the adjacent holes
@@ -185,7 +185,7 @@ Function StartLearnPanel
 
 	Print "x,y -- recipe at start learn panel"
 	Integer i
-	For i = 1 To PanelHoleCount
+	For i = 1 To recNumberOfHoles
 		Print PanelHoleX(i), ",", PanelHoleY(i)
 	Next
 

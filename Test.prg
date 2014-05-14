@@ -19,7 +19,7 @@ Function testCrowding
 	Do While True
 		count = count + 1
 
-		For hole = 1 To PanelHoleCount
+		For hole = 1 To recNumberOfHoles
 			PanelHoleToXYZT(hole, CX(Laser), CY(Laser), CZ(PreScan), 90 - PanelHoleTangent(hole))
 		
 			errorX = PanelFindXerror
