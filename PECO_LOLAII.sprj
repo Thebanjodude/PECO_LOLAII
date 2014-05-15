@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/05/14 23:49:12:778,DS:0000005535,CS:16670,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/05/15 22:23:43:038,DS:0000005534,CS:18556,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
@@ -6,7 +6,7 @@ SystemProperties {
 	sCreated="1/25/2013 7:23:00 AM"
 	sLastModified="5/14/2014 5:49:02 PM"
 	bBuildComplete=True
-	bRebuildRequired=False
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMWKSSEHLERS"

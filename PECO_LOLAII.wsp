@@ -1,8 +1,8 @@
-ENVT0100,LM:2014/05/14 23:50:42:567,DS:0000004249,CS:24419,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/05/15 22:25:11:172,DS:0000004249,CS:23907,MA:00-0C-29-03-E6-C5,EI:           
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=-304
 		nTop=0
@@ -13,7 +13,7 @@ ProgramFile1 {
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=21
 		nTop=19
@@ -57,7 +57,7 @@ ProgramFile5 {
 ProgramFile6 {
 	sName="InspectionStation.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=-279
 		nTop=25
@@ -79,7 +79,7 @@ ProgramFile7 {
 ProgramFile8 {
 	sName="MiscFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=71
 		nTop=103
@@ -90,7 +90,7 @@ ProgramFile8 {
 ProgramFile9 {
 	sName="FlashRemoval.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -101,7 +101,7 @@ ProgramFile9 {
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=100
 		nTop=100
@@ -112,7 +112,7 @@ ProgramFile10 {
 ProgramFile11 {
 	sName="Startup.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -123,7 +123,7 @@ ProgramFile11 {
 ProgramFile12 {
 	sName="MainStates.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=-254
 		nTop=50
@@ -145,7 +145,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=521
@@ -156,7 +156,7 @@ ProgramFile14 {
 ProgramFile15 {
 	sName="Test.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=37
 		nTop=8
@@ -179,7 +179,7 @@ nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=248
 		nTop=196
@@ -190,7 +190,7 @@ IncludeFile1 {
 IncludeFile2 {
 	sName="Defines.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -212,7 +212,7 @@ IncludeFile3 {
 IncludeFile4 {
 	sName="Recipe.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
