@@ -436,4 +436,12 @@ skipholearray(17,0) = 0
 > panelholecount = 23
 > print panelholecount 
  23
+> print panelTangent[1]
+!!Error: 3207, Formula is missing.
+> print panelTangent(1)
+!!Error: 3207, Formula is missing.
+> print panelholetangent(1)
+ 37.2
+> print panelholetangent(4)
+ -33.128
 > 

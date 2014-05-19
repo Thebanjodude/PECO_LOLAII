@@ -1,4 +1,6 @@
-ENVT0100,LM:2014/05/15 22:25:11:172,DS:0000004249,CS:23907,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/05/19 22:18:26:961,DS:0000004298,CS:23559,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="Command"
+bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
@@ -256,17 +258,17 @@ PointFile1 {
 }
 sActiveWindow="main.prg"
 CmdWindow {
-	bOpened=False
+	bOpened=True
 	Window {
 		nLeft=33
 		nTop=16
 		nWidth=673
 		nHeight=354
 	}
-	nWinState=0
+	nWinState=2
 }
 RunWindow {
-	bOpened=False
+	bOpened=True
 	Window {
 		nLeft=-252
 		nTop=22
@@ -303,12 +305,12 @@ TaskMgr {
 	}
 }
 Macros {
-	bOpened=False
+	bOpened=True
 	Window {
-		nLeft=0
-		nTop=0
-		nWidth=0
-		nHeight=0
+		nLeft=401
+		nTop=174
+		nWidth=478
+		nHeight=422
 	}
 }
 RobotMgr {
