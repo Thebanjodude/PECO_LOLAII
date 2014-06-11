@@ -1,5 +1,5 @@
-ENVT0100,LM:2014/05/19 22:18:26:961,DS:0000004298,CS:23559,MA:00-21-70-9F-9C-9E,EI:           
-sActiveChild="Command"
+ENVT0100,LM:2014/06/11 15:28:06:226,DS:0000004304,CS:02567,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="IOTable.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -14,8 +14,8 @@ ProgramFile1 {
 }
 ProgramFile2 {
 	sName="IOTable.prg"
-	bOpened=False
-	nWinState=0
+	bOpened=True
+	nWinState=2
 	Window {
 		nLeft=21
 		nTop=19
@@ -26,7 +26,7 @@ ProgramFile2 {
 ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=51
 		nTop=43
@@ -48,7 +48,7 @@ ProgramFile4 {
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=17
 		nTop=9
@@ -125,7 +125,7 @@ ProgramFile11 {
 ProgramFile12 {
 	sName="MainStates.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=-254
 		nTop=50
@@ -181,7 +181,7 @@ nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=248
 		nTop=196
@@ -258,7 +258,7 @@ PointFile1 {
 }
 sActiveWindow="main.prg"
 CmdWindow {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=33
 		nTop=16
@@ -268,7 +268,7 @@ CmdWindow {
 	nWinState=2
 }
 RunWindow {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=-252
 		nTop=22
@@ -305,7 +305,7 @@ TaskMgr {
 	}
 }
 Macros {
-	bOpened=True
+	bOpened=False
 	Window {
 		nLeft=401
 		nTop=174

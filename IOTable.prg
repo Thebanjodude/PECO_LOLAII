@@ -2168,14 +2168,14 @@ Function setVars(response$ As String)
 		        backInterlockACKBtn = False
 		    EndIf
 		Case "frontInterlockACKBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        frontInterlockACKBtn = True
 		        frontInterlockACK = True
 		    Else
 		        frontInterlockACKBtn = False
 		    EndIf
 		Case "inMagGoHomeBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        inMagGoHomeBtn = True
 		        inMagGoHome = True
 		    Else
@@ -2189,21 +2189,21 @@ Function setVars(response$ As String)
 '		        inMagIntLockAckBtn = False
 '		    EndIf
 		Case "inMagLoadedBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        inMagLoadedBtn = True
 		        inMagLoaded = True
 		    Else
 		        inMagLoadedBtn = False
 		    EndIf
 		Case "jobAbortBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        jobAbortBtn = True
 		        jobAbort = True
 		    Else
 		        jobAbortBtn = False
 		    EndIf
 		Case "jobStartBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        jobStartBtn = True
 		        jobStart = True
 		    Else
@@ -2215,21 +2215,21 @@ Function setVars(response$ As String)
 			'	state checking at this point.  The HMI will lock up until the state is removed...
 			'	So... this needs to be fixed
 			'===================================
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        startLearningBtn = True
 		        startLearning = True
 		    Else
 		        startLearningBtn = False
 		    EndIf
 		Case "leftInterlockACKBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        leftInterlockACKBtn = True
 		        leftInterlockACK = True
 		    Else
 		        leftInterlockACKBtn = False
 		    EndIf
 		Case "outMagGoHomeBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        outMagGoHomeBtn = True
 		        outMagGoHome = True
 		    Else
@@ -2243,35 +2243,47 @@ Function setVars(response$ As String)
 '		        outMagIntLockAckBtn = False
 '		    EndIf
 		Case "outMagUnloadedBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        outMagUnloadedBtn = True
 		        outMagUnloaded = True
 		    Else
 		        outMagUnloadedBtn = False
 		    EndIf
+
+'==========================================================
+'==========================================================
+'======Don't delete until IO gen script is fixed
+'======And the HMI has a delay between ack state changes
+'==========================================================
 		Case "panelDataTxACKBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        panelDataTxACKBtn = True
 		        panelDataTxACK = True
 		    Else
 		        panelDataTxACKBtn = False
+		        Wait 1
+		        panelDataTxACK = False
 		    EndIf
+'==========================================================
+'==========================================================
+'==========================================================
+'==========================================================
 		Case "rightInterlockACKBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        rightInterlockACKBtn = True
 		        rightInterlockACK = True
 		    Else
 		        rightInterlockACKBtn = False
 		    EndIf
 		Case "sftyFrmIlockAckBtn"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        sftyFrmIlockAckBtn = True
 		        sftyFrmIlockAck = True
 		    Else
 		        sftyFrmIlockAckBtn = False
 		    EndIf
 		Case "airPressHighF"
-		    If tokens$(1) = "true" Then
+		    If Tokens$(1) = "true" Then
 		        MemOn (airPressHighF)
 		    Else
 		        MemOff (airPressHighF)

@@ -1,12 +1,12 @@
-ENVT0100,LM:2014/05/19 21:43:00:801,DS:0000005526,CS:00832,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/06/11 15:16:03:161,DS:0000005527,CS:31042,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="5/14/2014 5:49:02 PM"
+	sLastModified="6/11/2014 9:14:56 AM"
 	bBuildComplete=True
-	bRebuildRequired=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMLAPFASTEK"
@@ -36,7 +36,7 @@ ProgramFile2 {
 	sName="IOTable.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="5/19/2014 9:40:13 PM"
+	sTimeSavedInController="6/11/2014 3:14:56 PM"
 }
 ProgramFile3 {
 	sName="InMagOutMagStateMachines.prg"
