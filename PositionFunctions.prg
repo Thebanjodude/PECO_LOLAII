@@ -168,7 +168,7 @@ Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double,
 	rotY = (PanelHoleX(hole) * Sin(DegToRad(Theta))) + (PanelHoleY(hole) * Cos(DegToRad(Theta)))
 
 	' now put the quill at that point with the x,y offset to the hole
-	Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
+	'Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
 	Go XY(x + rotX, y + rotY, z, Theta) /L
 
 Fend
@@ -269,8 +269,8 @@ Function PanelFindYerror As Real
 	width = 0
 	missedCenterCount = 0
 
-	'verbose = False
-	verbose = True
+	verbose = False
+	'verbose = True
 
 	If verbose Then Print "littleC, yerror, ymove, width, C, A"
 

@@ -1,12 +1,12 @@
-ENVT0100,LM:2014/06/11 15:16:03:161,DS:0000005527,CS:31042,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/07/14 15:52:41:608,DS:0000005526,CS:02389,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="6/11/2014 9:14:56 AM"
+	sLastModified="7/14/2014 9:52:20 AM"
 	bBuildComplete=True
-	bRebuildRequired=False
+	bRebuildRequired=True
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
 	sComputerName="AMLAPFASTEK"
@@ -30,7 +30,7 @@ ProgramFile1 {
 	sName="Main.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/17/2014 8:43:04 PM"
+	sTimeSavedInController="7/14/2014 3:14:17 PM"
 }
 ProgramFile2 {
 	sName="IOTable.prg"
@@ -108,7 +108,7 @@ ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="5/19/2014 9:40:13 PM"
+	sTimeSavedInController="6/20/2014 3:36:46 PM"
 }
 ProgramFile15 {
 	sName="Test.prg"
@@ -156,7 +156,7 @@ IncludeFile6 {
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="4/22/2014 3:47:53 PM"
+	sTimeSavedInController="7/14/2014 3:52:24 PM"
 }
 OperatorSettings {
 	OperatorWindow {

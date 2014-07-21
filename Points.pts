@@ -1,7 +1,7 @@
-ENVT0100,LM:2014/04/15 18:46:31:493,DS:0000002465,CS:20536,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/07/14 15:52:24:514,DS:0000002681,CS:23922,MA:00-21-70-9F-9C-9E,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
-nNumberOfPoints=11
+nNumberOfPoints=12
 Point1 {
 	nNumber=1
 	sLabel="PreScan"
@@ -96,8 +96,8 @@ Point6 {
 	nNumber=12
 	sLabel="HotStake"
 	sDescription=""
-	rX=-453.542
-	rY=424.342
+	rX=-451.577
+	rY=422.882
 	rZ=-10
 	rU=-45
 	rV=0
@@ -188,6 +188,24 @@ Point11 {
 	sDescription=""
 	rX=-450.24
 	rY=421.555
+	rZ=-10
+	rU=-45
+	rV=0
+	rW=0
+	nLocal=0
+	nHand=2
+	nElbow=1
+	nWrist=1
+	nJ4Flag=0
+	nJ6Flag=0
+	bSimVisible=False
+}
+Point12 {
+	nNumber=22
+	sLabel="HotStake_old2"
+	sDescription=""
+	rX=-453.542
+	rY=424.342
 	rZ=-10
 	rU=-45
 	rV=0
