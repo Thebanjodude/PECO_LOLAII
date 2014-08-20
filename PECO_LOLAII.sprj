@@ -1,15 +1,15 @@
-ENVT0100,LM:2014/08/20 15:08:03:463,DS:0000005528,CS:00373,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/08/20 22:00:49:360,DS:0000005528,CS:03095,MA:00-23-4D-36-FA-AE,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="8/20/2014 9:05:32 AM"
-	bBuildComplete=False
-	bRebuildRequired=True
+	sLastModified="8/20/2014 4:00:25 PM"
+	bBuildComplete=True
+	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMWKSSEHLERS"
+	sComputerName="AMLAPFASTEK"
 }
 UserProperties {
 	sVersion=""
@@ -102,7 +102,7 @@ ProgramFile13 {
 	sName="Crowding.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/28/2014 5:05:24 PM"
+	sTimeSavedInController="8/20/2014 3:56:45 PM"
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
@@ -156,7 +156,7 @@ IncludeFile6 {
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="7/14/2014 3:52:24 PM"
+	sTimeSavedInController="8/20/2014 10:00:31 PM"
 }
 OperatorSettings {
 	OperatorWindow {

@@ -1,5 +1,5 @@
-ENVT0100,LM:2014/08/20 15:08:08:278,DS:0000004304,CS:22848,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="Crowding.prg"
+ENVT0100,LM:2014/08/20 22:35:12:959,DS:0000004301,CS:04451,MA:00-23-4D-36-FA-AE,EI:           
+sActiveChild="Points.pts"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
@@ -247,7 +247,7 @@ IncludeFile6 {
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	bOpened=False
+	bOpened=True
 	nWinState=2
 	Window {
 		nLeft=265
