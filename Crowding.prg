@@ -22,12 +22,12 @@ Function CrowdingSequence() As Integer
 	Jump CwdOUT +Z(30)
 
 	' crowding sequence
-	crowdingXCC = True
-	Wait 0.5
+'	crowdingXCC = True
+'	Wait 0.5
 	crowdingCC = True
 	Wait 0.5
-	crowdingXCC = False
-	Wait 0.5
+'	crowdingXCC = False
+'	Wait 0.5
 	
 '	Go CwdOut
 	PTCLR (3)
@@ -41,7 +41,8 @@ Function CrowdingSequence() As Integer
 	Wait recSuctionWaitTime
 
 	crowdingCC = False
-	Wait 0.5 ' wait for the crowding to open
+'	Wait 0.5 ' wait for the crowding to open
+	Wait 1
 	
 	Call changeSpeed(slow)
 	Go XY(CX(CurPos), CY(CurPos), -10, CU(CurPos)) /L
