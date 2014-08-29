@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/08/20 22:00:31:875,DS:0000002670,CS:06677,MA:00-23-4D-36-FA-AE,EI:           
+ENVT0100,LM:2014/08/22 19:48:14:511,DS:0000002656,CS:11834,MA:00-23-4D-36-FA-AE,EI:           
 sVersion="1.0.0"
 nDisplayMode=2
 nNumberOfPoints=12
@@ -8,7 +8,7 @@ Point1 {
 	sDescription=""
 	rX=28.09
 	rY=340.107
-	rZ=-17
+	rZ=-10
 	rU=135
 	rV=0
 	rW=0
@@ -26,7 +26,7 @@ Point2 {
 	sDescription=""
 	rX=-257.154
 	rY=248.127
-	rZ=-13
+	rZ=-10
 	rU=181.098
 	rV=0
 	rW=0
@@ -44,7 +44,7 @@ Point3 {
 	sDescription=""
 	rX=-347.651
 	rY=-68.259
-	rZ=-21.444
+	rZ=-10
 	rU=270
 	rV=0
 	rW=0
@@ -62,7 +62,7 @@ Point4 {
 	sDescription=""
 	rX=330.184
 	rY=178.558
-	rZ=-21.596
+	rZ=-10
 	rU=135
 	rV=0
 	rW=0
@@ -80,7 +80,7 @@ Point5 {
 	sDescription=""
 	rX=30
 	rY=610
-	rZ=-20
+	rZ=-10
 	rU=0
 	rV=0
 	rW=0
@@ -117,7 +117,7 @@ Point7 {
 	rX=320.295
 	rY=417.812
 	rZ=-260.113
-	rU=52.8
+	rU=45
 	rV=0
 	rW=0
 	nLocal=0
@@ -134,8 +134,8 @@ Point8 {
 	sDescription=""
 	rX=-490
 	rY=-100
-	rZ=-75
-	rU=140
+	rZ=-65
+	rU=135
 	rV=0
 	rW=0
 	nLocal=0
@@ -150,10 +150,10 @@ Point9 {
 	nNumber=16
 	sLabel="CwdOUT"
 	sDescription=""
-	rX=-501.5
-	rY=-86.5
-	rZ=-80.703
-	rU=142.5
+	rX=-503.5
+	rY=-92.5
+	rZ=-70.703
+	rU=137
 	rV=0
 	rW=0
 	nLocal=0
@@ -171,7 +171,7 @@ Point10 {
 	rX=353.575
 	rY=-200.095
 	rZ=-230
-	rU=52.8
+	rU=45
 	rV=0
 	rW=0
 	nLocal=0

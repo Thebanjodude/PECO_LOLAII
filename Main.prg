@@ -23,7 +23,8 @@ Function main()
 	' the EOAT is XXXdeg off of zero and the panel recipes are YYYdeg off
 	' sorta, its really panels are placed into the magazine 90deg off counterclockwise
 	' and the eoat is ... well... yeah
-	EOATcorrection = -45 - 7.8
+	'EOATcorrection = -45 - 7.8
+	EOATcorrection = -45 - 4
 	magazineCorrection = -90
 	systemThetaError = EOATcorrection + magazineCorrection
 	
