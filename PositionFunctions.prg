@@ -282,7 +282,7 @@ Function PanelFindYerror As Real
 		If Abs(width) > holeDiameter Then width = 1
 		
 		'check to see if we are at the center of the hole
-		If (holeDiameter - width) < 0.01 Then
+		If (holeDiameter - width) < 0.1 Then
 			If verbose Then Print "Width: ", width
 			Exit Do
 		EndIf
