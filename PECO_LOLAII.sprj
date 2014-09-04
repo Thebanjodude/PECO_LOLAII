@@ -1,15 +1,15 @@
-ENVT0100,LM:2014/09/04 18:11:02:310,DS:0000005529,CS:30069,MA:00-0C-29-03-E6-C5,EI:           
+ENVT0100,LM:2014/09/04 19:38:37:865,DS:0000005522,CS:10290,MA:00-21-70-9F-9C-9E,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="9/4/2014 12:10:58 PM"
-	bBuildComplete=False
+	sLastModified="9/4/2014 1:38:25 PM"
+	bBuildComplete=True
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMWKSSEHLERS"
+	sComputerName="AMLAPFASTEK"
 }
 UserProperties {
 	sVersion=""
@@ -52,9 +52,9 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="4/17/2014 4:30:19 PM"
+	sTimeSavedInController="9/4/2014 6:54:32 PM"
 }
 ProgramFile6 {
 	sName="InspectionStation.prg"
@@ -84,7 +84,7 @@ ProgramFile10 {
 	sName="HeatStake.prg"
 	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="5/19/2014 9:40:13 PM"
+	sTimeSavedInController="9/4/2014 7:38:25 PM"
 }
 ProgramFile11 {
 	sName="Startup.prg"
@@ -106,9 +106,9 @@ ProgramFile13 {
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
-	bCompiled=False
+	bCompiled=True
 	bStoreInController=True
-	sTimeSavedInController="9/3/2014 5:13:57 PM"
+	sTimeSavedInController="9/4/2014 6:54:32 PM"
 }
 ProgramFile15 {
 	sName="Test.prg"
@@ -156,7 +156,7 @@ IncludeFile6 {
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	sTimeSavedInController="9/3/2014 5:19:12 PM"
+	sTimeSavedInController="9/4/2014 6:54:32 PM"
 }
 OperatorSettings {
 	OperatorWindow {

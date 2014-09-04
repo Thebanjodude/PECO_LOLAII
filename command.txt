@@ -444,4 +444,9 @@ skipholearray(17,0) = 0
  37.2
 > print panelholetangent(4)
  -33.128
+> limz
+l
+!!Error: 3100, Syntax error.
+> limz
+	    0.000
 > 

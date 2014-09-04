@@ -45,7 +45,8 @@ Function HotStakePanel() As Integer
 		
 		If SkippedHole = False Then 			'If the flag is set then skip the hole
 			
-			'Jump P(i) +Z(10) LimZ zLimit  		' Go to the next hole        
+			'Jump P(i) +Z(10) LimZ zLimit  		' Go to the next hole
+			LimZ 20.0
 			PanelHoleToXYZT(i, CX(hotstake), CY(hotstake), CZ(prehotstake) + 10, 135 - PanelHoleTangent(i))
 			
 			SFree 1, 2 							' free X and Y

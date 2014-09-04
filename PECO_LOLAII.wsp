@@ -1,10 +1,10 @@
-ENVT0100,LM:2014/09/04 18:11:02:338,DS:0000004302,CS:02584,MA:00-0C-29-03-E6-C5,EI:           
-sActiveChild="Points.pts"
+ENVT0100,LM:2014/09/04 23:11:41:650,DS:0000004305,CS:32055,MA:00-21-70-9F-9C-9E,EI:           
+sActiveChild="HeatStake.prg"
 bMdiMaximized=True
 ProgramFile1 {
 	sName="Main.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=-304
 		nTop=0
@@ -15,7 +15,7 @@ ProgramFile1 {
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=21
 		nTop=19
@@ -70,7 +70,7 @@ ProgramFile6 {
 ProgramFile7 {
 	sName="CalibrationRoutines.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=65
 		nTop=96
@@ -102,7 +102,7 @@ ProgramFile9 {
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=2
 	Window {
 		nLeft=100
@@ -114,7 +114,7 @@ ProgramFile10 {
 ProgramFile11 {
 	sName="Startup.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=0
@@ -125,7 +125,7 @@ ProgramFile11 {
 ProgramFile12 {
 	sName="MainStates.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=-254
 		nTop=50
@@ -146,7 +146,7 @@ ProgramFile13 {
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
-	bOpened=False
+	bOpened=True
 	nWinState=0
 	Window {
 		nLeft=0
@@ -181,7 +181,7 @@ nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=248
 		nTop=196
@@ -191,7 +191,7 @@ IncludeFile1 {
 }
 IncludeFile2 {
 	sName="Defines.inc"
-	bOpened=True
+	bOpened=False
 	nWinState=0
 	Window {
 		nLeft=0
@@ -247,8 +247,8 @@ IncludeFile6 {
 nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
-	bOpened=True
-	nWinState=2
+	bOpened=False
+	nWinState=0
 	Window {
 		nLeft=265
 		nTop=37
@@ -318,8 +318,8 @@ RobotMgr {
 	Window {
 		nLeft=56
 		nTop=111
-		nWidth=689
-		nHeight=451
+		nWidth=687
+		nHeight=449
 	}
 }
 UserErrorEditor {
