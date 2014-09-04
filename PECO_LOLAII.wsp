@@ -1,4 +1,4 @@
-ENVT0100,LM:2014/09/03 17:22:00:169,DS:0000004302,CS:02327,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/09/04 18:11:02:338,DS:0000004302,CS:02584,MA:00-0C-29-03-E6-C5,EI:           
 sActiveChild="Points.pts"
 bMdiMaximized=True
 ProgramFile1 {
@@ -15,12 +15,12 @@ ProgramFile1 {
 ProgramFile2 {
 	sName="IOTable.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=21
 		nTop=19
-		nWidth=796
-		nHeight=419
+		nWidth=795
+		nHeight=415
 	}
 }
 ProgramFile3 {
@@ -48,12 +48,12 @@ ProgramFile4 {
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=17
 		nTop=9
-		nWidth=827
-		nHeight=667
+		nWidth=825
+		nHeight=663
 	}
 }
 ProgramFile6 {
@@ -70,12 +70,12 @@ ProgramFile6 {
 ProgramFile7 {
 	sName="CalibrationRoutines.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=65
 		nTop=96
-		nWidth=1273
-		nHeight=681
+		nWidth=1272
+		nHeight=677
 	}
 }
 ProgramFile8 {
@@ -92,45 +92,45 @@ ProgramFile8 {
 ProgramFile9 {
 	sName="FlashRemoval.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1058
-		nHeight=606
+		nWidth=1057
+		nHeight=602
 	}
 }
 ProgramFile10 {
 	sName="HeatStake.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=100
 		nTop=100
-		nWidth=1149
-		nHeight=521
+		nWidth=1145
+		nHeight=515
 	}
 }
 ProgramFile11 {
 	sName="Startup.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1043
-		nHeight=557
+		nWidth=1041
+		nHeight=554
 	}
 }
 ProgramFile12 {
 	sName="MainStates.prg"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=-254
 		nTop=50
-		nWidth=1154
-		nHeight=535
+		nWidth=1153
+		nHeight=531
 	}
 }
 ProgramFile13 {
@@ -147,7 +147,7 @@ ProgramFile13 {
 ProgramFile14 {
 	sName="PositionFunctions.prg"
 	bOpened=False
-	nWinState=2
+	nWinState=0
 	Window {
 		nLeft=0
 		nTop=521
@@ -181,12 +181,12 @@ nIncludeFileCount=6
 IncludeFile1 {
 	sName="Globals.inc"
 	bOpened=False
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=248
 		nTop=196
-		nWidth=901
-		nHeight=473
+		nWidth=900
+		nHeight=470
 	}
 }
 IncludeFile2 {
@@ -196,8 +196,8 @@ IncludeFile2 {
 	Window {
 		nLeft=0
 		nTop=0
-		nWidth=1049
-		nHeight=578
+		nWidth=1048
+		nHeight=575
 	}
 }
 IncludeFile3 {
@@ -248,12 +248,12 @@ nPointFileCount=1
 PointFile1 {
 	sName="Points.pts"
 	bOpened=True
-	nWinState=0
+	nWinState=2
 	Window {
 		nLeft=265
 		nTop=37
-		nWidth=645
-		nHeight=411
+		nWidth=641
+		nHeight=405
 	}
 }
 sActiveWindow="main.prg"

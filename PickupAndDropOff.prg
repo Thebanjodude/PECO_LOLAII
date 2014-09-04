@@ -22,7 +22,7 @@ Function DropOffPanel() As Integer
 	Loop
 
 
-	If startlearning = False Then
+	If startLearning = False Then
 		' Only log data if we are not learning a new panel... this logging functionality
 		'  should be moved to a different function
 		
@@ -102,7 +102,8 @@ Function PickupPanel() As Integer 'byte me
 	
 	InMagRobotClearSignal = False ' the robot is about to visit the magazine.
 		
-	Jump MagIN +Z(10) LimZ zLimit Sense Sw(inMagInterlockH)
+	'Jump MagIN +Z(10) LimZ zLimit Sense Sw(inMagInterlockH)
+	Jump MagIN +Z(10) Sense Sw(inMagInterlockH)
 	
 	If JS = True Then ' Its possible to open an interock during the jump so check if it was opened
 		PickupPanel = 1 ' Interlock is open

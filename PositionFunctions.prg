@@ -169,7 +169,8 @@ Function PanelHoleToXYZT(hole As Integer, x As Double, y As Double, z As Double,
 
 	' now put the quill at that point with the x,y offset to the hole
 	'Print "  --  x:", x + rotX, " y:", y + rotY, " z:", z, " u:", Theta
-	Go XY(x + rotX, y + rotY, z, Theta) /L
+	'Go XY(x + rotX, y + rotY, z, Theta) /L
+	Jump XY(x + rotX, y + rotY, z, Theta) /L
 
 Fend
 

@@ -1,15 +1,15 @@
-ENVT0100,LM:2014/09/03 17:19:31:775,DS:0000005525,CS:22368,MA:00-21-70-9F-9C-9E,EI:           
+ENVT0100,LM:2014/09/04 18:11:02:310,DS:0000005529,CS:30069,MA:00-0C-29-03-E6-C5,EI:           
 SystemProperties {
 	sRC50Version="5.4.4"
 	sGUID="2dc4fa10-b0a8-49d2-9fc7-b822dd8b00f0"
 	bSimple=False
 	sCreated="1/25/2013 7:23:00 AM"
-	sLastModified="9/3/2014 11:18:53 AM"
-	bBuildComplete=True
+	sLastModified="9/4/2014 12:10:58 PM"
+	bBuildComplete=False
 	bRebuildRequired=False
 	bClearControllerProject=False
 	bClearGlobalPreserves=False
-	sComputerName="AMLAPFASTEK"
+	sComputerName="AMWKSSEHLERS"
 }
 UserProperties {
 	sVersion=""
@@ -52,7 +52,7 @@ ProgramFile4 {
 }
 ProgramFile5 {
 	sName="PickupAndDropOff.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
 	sTimeSavedInController="4/17/2014 4:30:19 PM"
 }
@@ -106,7 +106,7 @@ ProgramFile13 {
 }
 ProgramFile14 {
 	sName="PositionFunctions.prg"
-	bCompiled=True
+	bCompiled=False
 	bStoreInController=True
 	sTimeSavedInController="9/3/2014 5:13:57 PM"
 }
